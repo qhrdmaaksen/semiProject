@@ -17,7 +17,7 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-@WebServlet(urlPatterns = {"/"},
+@WebServlet(urlPatterns = {"/dodamdodma"},
         initParams = {
                 @WebInitParam(name="configFile", value="/WEB-INF/todolist.txt"),
                 @WebInitParam(name="debugMode", value="false")

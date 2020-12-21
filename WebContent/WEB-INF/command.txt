@@ -1,5 +1,5 @@
 #### Main Section ####################################
-
+index=common.IndexController
 #### Member Section ##################################
 
 #### CS-Center Section ###############################
