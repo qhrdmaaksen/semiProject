@@ -1,5 +1,15 @@
 <%@ page language="java" contentType="text/html;charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%	
+	int twelve = 12 ; 
+	int myoffset = 2;
+	int mywidth = twelve - 2 * myoffset;
+	int formleft = 3;
+	int formright = twelve - formleft;
+	int mysearch = 2;
+	//int label = 3 ; //양식의 왼쪽에 보여지는 라벨의 너비 
+	//int content = twelve - label ; //우측의 내용 입력(input, select, textarea)의 너비
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -47,10 +57,11 @@
 		}
 	</script>
 	<script>
-		function testInnerHTML(){
+		function regularInnerHTML(){
 			var str = " ";
 	
 			str +=  "<table>";
+			str +=  "<div id='regular-display'>";
 			str +=  "<tr>";
 			str +=  "<td>";
 			str +=  "<button type='button'>1개월 정기</button>"; 
@@ -74,17 +85,29 @@
 			str +=  "<button type='button'>6개월 정기</button>"; 
 			str +=  "</td>";
 			str +=  "</tr>";
+			str +=  "</div>";
 			str +=  "</table>";
 	
 			document.getElementById("inHere").innerHTML = str;
 		};
 	</script>
 	<style type="text/css">
+		#regular-display{
+			display: none;
+		}
+	</style>
+	<style type="text/css">
 		#prod-contents{
 			position: absolute; 
 			top: 62px ; 
 			left: 150px ; 
 			width: 550px ; 
+		}
+		#prod-tab-menu{
+			font-size: 30px;
+		}
+		#gojung.gojung2{
+			position: fixed;
 		}
 	</style>
 </head>
@@ -130,11 +153,11 @@
 							</tr>
 						<tr>
 							<td align="center" class="list-group-item">
-								<input type="radio" name="Delivery" value="1회 구매 10,000 원" checked="checked">1회 구매 10,000 원
+								<input type="radio" name="delivery" value="단품 구매" checked="checked">&nbsp;&nbsp;단품 구매 : 10,000 원
 							</td>
 						<tr>	
 							<td align="center">
-								<input type="button" name="delivery" value="정기 배송" onclick="testInnerHTML();">
+								<input type="radio" name="delivery" value="정기 배송" onclick="regularInnerHTML();">&nbsp;&nbsp;정기 배송 선택
 								<div id="inHere"></div>
 							</td>
 						</tr>
@@ -152,25 +175,42 @@
 		</div>
 	</div>
 	<div class="container">
-			<ul class="nav nav-tabs" style="background: #f0f0f5">
-			    <li class="active"><a data-toggle="tab" href="#prod-detail">상품 상세 보기</a></li>
-			    &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-			    <li><a data-toggle="tab" href="#prod-review">상품평</a></li>
-			    &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-			    <li><a data-toggle="tab" href="#cs-main">상품 문의</a></li>
-	  		</ul>
+		<nav id="prod-tab-menu">
+			<div class="nav nav-tabs" id="nav-tab" role="tablist">
+				<a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab"
+					aria-controls="nav-home" aria-selected="true">상품 상세 보기
+				</a>
+				<a
+					class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab"
+					href="#nav-profile" role="tab" aria-controls="nav-profile"
+					aria-selected="false">상품평
+				</a> 
+				<a class="nav-item nav-link"
+					id="nav-contact-tab" data-toggle="tab" href="#nav-contact"
+					role="tab" aria-controls="nav-contact" aria-selected="false">상품 문의
+				</a>
+			</div>
+		</nav>
+		<div class="tab-content" id="nav-tabContent">
+			<div class="tab-pane fade show active" id="nav-home" role="tabpanel"
+				aria-labelledby="nav-home-tab">...</div>
+			<div class="tab-pane fade" id="prod-review" role="tabpanel"
+				aria-labelledby="nav-profile-tab">...</div>
+			<div class="tab-pane fade" id="cs-main" role="tabpanel"
+				aria-labelledby="nav-contact-tab">...</div>
+		</div>
 	</div>
 	<br><br><br><br><br><br><br>
 	<div align="center">
-		<button id="prod-moreView" style="width: 60%; font-size: 30px; color: blue; background: white;">상품 상세 내용 보기 ▼</button>
-	</div>
-	<div align="center" id="prod-images" style="display: none;" >
-		 <img id="img0" title="홍삼" width="50%" height="50%" src="./../images/bottle.png" alt="bottle.png">  <br>
-		 	면역력 증진·피로개선·지구력 증진에 도움을 줄 수 있는
+	 <img id="img0" title="홍삼" width="50%" height="50%" src="./../images/bottle.png" alt="bottle.png">  <br>
+	 		면역력 증진·피로개선·지구력 증진에 도움을 줄 수 있는
 			면역력 증진·피로개선·기억력개선에 도움을 줄 수 있음<br>
 			쌀의 배아, 현미, 사탕수수 등에서 찾을 수 있는 옥타코사놀은 지구력 증진에 도움을 줄 수 있습니다.<br>
-			천연소재 비타민E는 유해산소로부터 단백질의 산화를 방지하고, <br>
+			천연소재 비타민E는 유해산소로부터 단백질의 산화를 방지하고,
 			DNA의 손상을 억제하여 세포를 보호하는데 필요합니다.
+		<button id="prod-moreView" style="width: 60%; font-size: 20px; color: blue; background: white;">상품 상세 내용 보기 ▼</button>
+	</div>
+	<div align="center" id="prod-images" style="display: none;" >
 		 <img id="img1" title="홍삼1" width="50%" height="50%" src="./../images/point.jpg" alt="point.jpg">    <br>
 		 	필리 홍삼 옥타코사놀 포인트
 			01
@@ -193,8 +233,104 @@
 			홍삼농축액분말(홍삼: 국내산 / 6년근 / 원료삼배합비율: 홍삼근70%, 미삼류30%), 옥타코사놀(독일산), D-알파-토코페롤혼합제제(d-a-토코페롤, 대두유)
 			부원료: 대두유(외국산: 미국, 태국, 벨기에 등),<br> 밀납, 대두레시틴
 			캡슐기제: 젤라틴(돈피) 글리세린, 카카오색소(카카오색소, 덱스트린)
-		 <br><br><br>
-		 <button id="prod-moreView-remove" style="width: 60%; font-size: 30px; color: blue; background: white;">상 품 상세 보기 접기 ▲</button>
+		 <br><br><br><br>
+		 <button id="prod-moreView-remove" style="width: 60%; font-size: 20px; color: blue; background: white;">상 품 상세 보기 접기 ▲</button>
+		  <br><br><br> <br><br><br>
 	</div>
+	<nav id="gojung" class="navbar navbar-light bg-light justify-content-between">
+		<a class="navbar-brand"></a>
+		<form class="form-inline">
+			<button class="gojung2" class="btn btn-outline-success my-2 my-sm-0" type="submit">위로 이동</button>
+		</form>
+	</nav>
+	<div class="container col-sm-offset-<%=myoffset%> col-sm-<%=mywidth%>">
+		<div class="panel panel-default panel-primary">
+			<div class="panel-heading">
+				<form class="form-inline" role="form">
+					<h3>리뷰 목록</h3>
+				</form>
+			</div>
+			<table class="table table-striped table-hover">
+				<thead>
+					<tr>
+						<!-- <th>글 번호</th> -->
+						<th>작성자</th>						
+						<th>글 내용</th>
+						<th>조회수</th>
+						<th>작성 일자</th>
+						<th>수정</th>
+						<th>삭제</th>
+						<th>답글</th>
+					</tr>
+				</thead>
+				<tr align="right">
+					<td colspan="10">
+						<form class="form-inline" role="form" name="myform" action="" method="get">
+							<input type="hidden" name="command" value="boList">
+							<button class="btn btn-default btn-info" type="button"
+								onclick="writeForm();">글 쓰기</button>
+								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+								<p class="form-control-static">${requestScope.pagingStatus}</p>
+						</form>
+					</td>
+				</tr>
+				<c:forEach var="bean" items="${requestScope.lists}">
+					<tr>
+						<%-- <td>${bean.no}</td> --%>						
+						<td>
+							<c:forEach var="cnt" begin="1" end="${bean.depth}">
+								<span class="badge re">re</span>
+							</c:forEach>
+							<a href="boDetailView&no=${bean.no}&${requestScope.parameters}">
+								${bean.subject}
+							</a>
+						</td>
+						<td>${bean.writer}</td>
+						<td>${bean.password}</td>
+						<td>${bean.content}</td>
+						<td>${bean.readhit}</td>
+						<td>${bean.regdate}</td>
+						<td>
+							<c:if test="${sessionScope.loginfo.id == bean.writer}">
+								<a href="boUpdate&no=${bean.no}&${requestScope.parameters}">
+									수정
+								</a>
+							</c:if>
+							<c:if test="${sessionScope.loginfo.id != bean.writer}">
+								수정
+							</c:if>
+						</td>
+						<td>
+							<c:if test="${sessionScope.loginfo.id == bean.writer}">
+								<a href="boDelete&no=${bean.no}&${requestScope.parameters}">
+									삭제
+								</a>
+							</c:if>
+							<c:if test="${sessionScope.loginfo.id != bean.writer}">
+								삭제
+							</c:if>
+						</td>
+						<td>
+							<c:if test="${bean.depth <3 }">
+								<a href="boReply&no=${bean.no}&${requestScope.parameters}&groupno=${bean.groupno}&orderno=${bean.orderno}&depth=${bean.depth}">
+									답글 
+								</a>
+							</c:if>
+							<c:if test="${bean.depth >= 3 }">
+								답글
+							</c:if>
+						</td>
+						<td>
+							${bean.remark}
+						</td>
+					</tr>
+				</c:forEach>
+			</table>
+		</div>
+		<div align="center">
+			<footer>${requestScope.pagingHtml}</footer>			
+		</div>		
+	</div>
+	<br><br><br><br>
 </body>
 </html>
