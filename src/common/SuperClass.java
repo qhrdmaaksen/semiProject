@@ -40,7 +40,7 @@ public class SuperClass implements SuperController, Validator {
 
     public void setErrorMessage(String message) {
         // request 영역에 "errmsg"이라는 이름으로 오류 메시지를 바인딩합니다.
-        // 오류 메시지는 common.jsp 파일의 하단에서 보여 줍니다.
+        // 오류 메시지는 nav.jsp 파일의 하단에서 보여 줍니다.
         this.request.setAttribute("errmsg", message);
     }
 
