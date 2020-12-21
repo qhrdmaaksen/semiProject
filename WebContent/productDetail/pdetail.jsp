@@ -53,30 +53,31 @@
 			str +=  "<table>";
 			str +=  "<tr>";
 			str +=  "<td>";
-			str +=  "<button type="button">1개월 정기</button>"; 
+			str +=  "<button type='button'>1개월 정기</button>"; 
 			str +=  "</td>";
 			str +=  "<td>";
-			str +=  "<button type="button">2개월 정기</button>"; 
+			str +=  "<button type='button'>2개월 정기</button>"; 
 			str +=  "</td>";
 			str +=  "<td>";
-			str +=  "<button type="button">3개월 정기</button>"; 
+			str +=  "<button type='button'>3개월 정기</button>"; 
 			str +=  "</td>";
 			str +=  "</td>";
 			str +=  "</tr>";
 			str +=  "<tr>";
 			str +=  "<td>";
-			str +=  "<button type="button">4개월 정기</button>"; 
+			str +=  "<button type='button'>4개월 정기</button>"; 
 			str +=  "</td>";
 			str +=  "<td>";
-			str +=  "<button type="button">5개월 정기</button>"; 
+			str +=  "<button type='button'>5개월 정기</button>"; 
 			str +=  "</td>";
 			str +=  "<td>";
-			str +=  "<button type="button">6개월 정기</button>"; 
+			str +=  "<button type='button'>6개월 정기</button>"; 
 			str +=  "</td>";
 			str +=  "</tr>";
 			str +=  "</table>";
 	
 			document.getElementById("inHere").innerHTML = str;
+		};
 	</script>
 	<style type="text/css">
 		#prod-contents{
@@ -119,21 +120,11 @@
 							<td class="list-group-item">일반 회원 판매 가격 : 10,000 원</td>
 							<td class="list-group-item">구독 회원 가격 : 9,000 원</td>
 							<td class="list-group-item">내일 토요일 12-19 도착 예정</td>
-							<td class="list-group-item">
-								<label for="prod-amount"></label>
-								 <select name="selectOption" id="prod-amount" style="background: #f0f0f5">
-								 	<option value="">--- 구매 수량을 선택해주세요 ---</option>
-								 	<option value="5개5만원">5개5만원</option>
-								 	<option value="10개10만원">10개10만원</option>
-								 	<option value="20개20만원">20개20만원</option>
-								 	<option value="30개30만원">30개30만원</option>
-								 </select>
-							</td>
 							<tr align="center">
 								<td>
 									<div class="form-group col-sm-4">
 										<label>구매 수량</label>
-										<input class="form-control mypopover" title="수량 입력란" data-content="구매하고자 하는 수량을 정수로 입력하세요." >
+										<input type="number" class="form-control mypopover" title="수량 입력란" data-content="구매하고자 하는 수량을 정수로 입력하세요." >
 									</div><!--data-trigger 자동으로-->
 								</td>
 							</tr>
@@ -143,7 +134,7 @@
 							</td>
 						<tr>	
 							<td align="center">
-								<input type="button" name="delivery" value="정기 배송" onclick="javascript:testInnerHTML();">
+								<input type="button" name="delivery" value="정기 배송" onclick="testInnerHTML();">
 								<div id="inHere"></div>
 							</td>
 						</tr>
@@ -159,6 +150,15 @@
 				</div>
 			</div>
 		</div>
+	</div>
+	<div class="container">
+			<ul class="nav nav-tabs" style="background: #f0f0f5">
+			    <li class="active"><a data-toggle="tab" href="#prod-detail">상품 상세 보기</a></li>
+			    &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+			    <li><a data-toggle="tab" href="#prod-review">상품평</a></li>
+			    &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+			    <li><a data-toggle="tab" href="#cs-main">상품 문의</a></li>
+	  		</ul>
 	</div>
 	<br><br><br><br><br><br><br>
 	<div align="center">

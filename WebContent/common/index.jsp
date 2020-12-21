@@ -8,7 +8,7 @@
 <!DOCTYPE html>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1">
-<%@ include file="./../common/nav.jsp"%>
+<%@ include file="nav.jsp"%>
 <html>
 <head>
     <title>도담도담, 보충제 구독 사이트</title>
