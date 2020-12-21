@@ -19,7 +19,7 @@ import java.util.Map;
 
 @WebServlet(urlPatterns = {"/dodamdodma"},
         initParams = {
-                @WebInitParam(name="configFile", value="/WEB-INF/todolist.txt"),
+                @WebInitParam(name="configFile", value="/WEB-INF/command.txt"),
                 @WebInitParam(name="debugMode", value="false")
         })
 public class Controller extends HttpServlet {
