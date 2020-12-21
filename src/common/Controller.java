@@ -17,7 +17,7 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-@WebServlet(urlPatterns = {"/dodamdodma"},
+@WebServlet(urlPatterns = {"/dodamdodam"},
         initParams = {
                 @WebInitParam(name="configFile", value="/WEB-INF/command.txt"),
                 @WebInitParam(name="debugMode", value="false")
