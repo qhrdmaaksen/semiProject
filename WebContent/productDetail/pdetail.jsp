@@ -17,6 +17,7 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<%@ include file="./../common/nav.jsp"%>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 	<script src="./../js/jquery.zoom.min.js"></script>
 	<style>
 		body{
@@ -29,16 +30,14 @@
 		}
 	</style>
 	<script type="text/javascript">
-		$(document).ready(function() {
-			/* button 태그를 클릭하게 되면 현재 요소의 다음 요소에 대하여 src 속성을 제거한다 */
-			/* 즉, 이문제에서는 img 태그의 src 속성이 사라진다 */
+	/* 	$(document).ready(function() {
 			$('button#prod-moreView').click(function() {
 				$("#prod-images").css("display","block");
 			});
-			$('button#prod-moreView-remove').click(function() {//remove Attribute 버튼 클릭 시 이미지 삭제
+			$('button#prod-moreView-remove').click(function() {
 				$("#prod-images").css("display","none");
 			});
-		});
+		}); */
 		function imageZoom() {
 			$("#myarea").zoom();
 		}
@@ -111,6 +110,7 @@
 			position: fixed;
 		}
 	</style>
+	
 </head>
 <body>
 	<div class="container">
@@ -201,31 +201,57 @@
 		</div>
 	</div>
 	<div class="container mt-3">
-		<h1 style="color: white">.......</h1>
-		<br>
-		<ul class="nav nav-tabs">
-			<li class="nav-item"><a class="nav-link active"
-				data-toggle="tab" href="#prod-detail">상품 정보</a></li>
-			<li class="nav-item"><a class="nav-link" data-toggle="tab"
-				href="#prod-review">상품 리뷰</a></li>
-			<li class="nav-item"><a class="nav-link" data-toggle="tab"
-				href="#cs-main">고객 문의</a></li>
-			<li class="nav-item"><a class="nav-link" data-toggle="tab"
-			href="#delivery-info">배송/교환/반품 안내</a></li>
+		<h1 style="color: white">.</h1>
+		<br><br><br>
+		<ul class="nav nav-tabs" id="myTab" role="tablist">
+			<li class="nav-item">
+				<a id="prod-contents01" class="nav-link active" data-toggle="tab" href="#prod-detail" aria-controls="상품 정보"  aria-selected="true">상품 정보</a>
+			</li>
+			<li class="nav-item">
+				<a id="prod-review01" class="nav-link" data-toggle="tab" href="#prod-review" role="tab" aria-controls="상품 리뷰"  aria-selected="false">상품 리뷰</a>
+			</li>
+			<li class="nav-item">
+				<a id="cs-tab01" class="nav-link" data-toggle="tab" href="#cs-main" role="tab" aria-controls="고객 문의"  aria-selected="false">고객 문의</a>
+			</li>
+			<li class="nav-item">
+				<a id="delivery-info-tab" class="nav-link" data-toggle="tab" href="#delivery-info" role="tab" aria-controls="배송/교환/반품 안내"  aria-selected="false">배송/교환/반품 안내</a>
+			</li>
 		</ul>
 	</div>
 		<div class="tab-content">
-			<div id="prod-detail" align="center" class="container tab-pane active">
-			<img id="img0" title="홍삼" width="50%" height="50%"
-				src="./../images/bottle.png" alt="bottle.png"> <br> 면역력
-			증진·피로개선·지구력 증진에 도움을 줄 수 있는 면역력 증진·피로개선·기억력개선에 도움을 줄 수 있음<br> 쌀의
-			배아, 현미, 사탕수수 등에서 찾을 수 있는 옥타코사놀은 지구력 증진에 도움을 줄 수 있습니다.<br> 천연소재
-			비타민E는 유해산소로부터 단백질의 산화를 방지하고, DNA의 손상을 억제하여 세포를 보호하는데 필요합니다.
-			<button id="prod-moreView"
-				style="width: 60%; font-size: 20px; color: blue; background: white;">상품
-				정보 상세 보기 ▼</button>
+			<div id="prod-detail" align="center" class="container tab-pane active" role="tabpanel" aria-labelledby="prod-contents01">
+				<img id="img0" title="홍삼" width="50%" height="50%"
+					src="./../images/bottle.png" alt="bottle.png">
+				<!-- <button id="prod-moreView"
+					style="width: 60%; font-size: 20px; color: blue; background: white;">상품
+					정보 상세 보기 ▼</button> -->
+					<img id="img1" title="홍삼1" width="50%" height="50%"
+						src="./../images/point.jpg" alt="point.jpg"> 
+					<img id="img2" title="홍삼2"	width="50%" height="50%" src="./../images/point01.jpg"
+						alt="point01.jpg">
+					<img id="img3" title="홍삼3"	width="50%" height="50%" src="./../images/point02.jpg"
+						alt="point02.jpg"><br> 
+					<img id="img4" title="홍삼4" width="50%" height="50%" src="./../images/point03.jpg"
+						alt="point03.jpg"><br>
+						면역력
+					증진·피로개선·지구력 증진에 도움을 줄 수 있는 면역력 증진·피로개선·기억력개선에 도움을 줄 수 있음<br> 쌀의
+					배아, 현미, 사탕수수 등에서 찾을 수 있는 옥타코사놀은 지구력 증진에 도움을 줄 수 있습니다.
+					03 비타민E 함유 미국 BASF의 식물성 오일에서 추출한
+					비타민E(d-α-토코페롤)를 하루 3.3 mg 섭취할 수 있습니다.<br> <br> 02 지구력 증진을 위한 옥타코사놀 함유 사탕수수에서 추출한
+					독일산 옥타코사놀을 하루 10 mg 섭취할 수 있습니다.<br> <br> 필리 홍삼
+					옥타코사놀 포인트 01 국내산 6년근 홍삼 사용 국내산 6년근 홍삼분말을 사용하여 진세노사이드(Rg1, Rb1 및 Rg3의
+					합)를 하루 3.4 mg 섭취할 수 있습니다.<br> <br> 천연소재
+					비타민E는 유해산소로부터 단백질의 산화를 방지하고, DNA의 손상을 억제하여 세포를 보호하는데 필요합니다. 제품설명 필리 홍삼 옥타코사놀 제품형태 이렇게 드세요 33
+					g (550 mg x 60캡슐), 30일분<br> 필리 홍삼 옥타코사놀 섭취방법 홍삼농축액분말(홍삼: 국내산 /
+					6년근 / 원료삼배합비율: 홍삼근70%, 미삼류30%), 옥타코사놀(독일산), D-알파-토코페롤혼합제제(d-a-토코페롤,
+					대두유) 부원료: 대두유(외국산: 미국, 태국, 벨기에 등),<br> 밀납, 대두레시틴 캡슐기제: 젤라틴(돈피)
+					글리세린, 카카오색소(카카오색소, 덱스트린)
+					<!-- <button id="prod-moreView-remove"
+					style="width: 60%; font-size: 20px; color: blue; background: white;">상
+					품 상세 보기 접기 ▲</button> -->
+					<br> <br> <br> <br>
 			</div>
-		<div id="prod-review" class="container tab-pane fade">
+		<div id="prod-review" class="container tab-pane fade" role="tabpanel" aria-labelledby="prod-review01">
 			<div
 				class="container col-sm-offset-<%=myoffset%> col-sm-<%=mywidth%>">
 				<div class="panel panel-default panel-primary">
@@ -301,9 +327,9 @@
 				</div>
 			</div>
 		</div>
-		<div id="cs-main" class="container tab-pane fade">
+		<div id="cs-go" class="container tab-pane fade"	role="tabpanel" aria-labelledby="cs-tab01">
 			</div>
-			<div id="delivery-info" class="container tab-pane fade" align="center">
+			<div id="delivery-info" class="container tab-pane fade" align="center" role="tabpanel" aria-labelledby="delivery-info-tab">
 				<li class="product-etc">
 					<h5 class="prod-delivery-return-policy-title">배송정보</h5>
 					<table class="prod-delivery-return-policy-table" border="1">
@@ -401,35 +427,6 @@
 					</div>
 				</li>
 			</div>
-			</div>
-		<div align="center" id="prod-images" style="display: none;">
-			<img id="img1" title="홍삼1" width="50%" height="50%"
-				src="./../images/point.jpg" alt="point.jpg"> <br> 필리 홍삼
-			옥타코사놀 포인트 01 국내산 6년근 홍삼 사용 국내산 6년근 홍삼분말을 사용하여 진세노사이드(Rg1, Rb1 및 Rg3의
-			합)를 하루 3.4 mg 섭취할 수 있습니다.<br> <img id="img2" title="홍삼2"
-				width="50%" height="50%" src="./../images/point01.jpg"
-				alt="point01.jpg"><br> 02 지구력 증진을 위한 옥타코사놀 함유 사탕수수에서 추출한
-			독일산 옥타코사놀을 하루 10 mg 섭취할 수 있습니다.<br> <img id="img3" title="홍삼3"
-				width="50%" height="50%" src="./../images/point02.jpg"
-				alt="point02.jpg"><br> 03 비타민E 함유 미국 BASF의 식물성 오일에서 추출한
-			비타민E(d-α-토코페롤)를 하루 3.3 mg 섭취할 수 있습니다.<br> <img id="img4"
-				title="홍삼4" width="50%" height="50%" src="./../images/point03.jpg"
-				alt="point03.jpg"><br> 제품설명 필리 홍삼 옥타코사놀 제품형태 이렇게 드세요 33 g
-			(550 mg x 60캡슐), 30일분<br> 필리 홍삼 옥타코사놀 섭취방법 홍삼농축액분말(홍삼: 국내산 / 6년근
-			/ 원료삼배합비율: 홍삼근70%, 미삼류30%), 옥타코사놀(독일산), D-알파-토코페롤혼합제제(d-a-토코페롤, 대두유)
-			부원료: 대두유(외국산: 미국, 태국, 벨기에 등),<br> 밀납, 대두레시틴 캡슐기제: 젤라틴(돈피) 글리세린,
-			카카오색소(카카오색소, 덱스트린) <br>
-			<br>
-			<br>
-			<br>
-			<button id="prod-moreView-remove"
-				style="width: 60%; font-size: 20px; color: blue; background: white;">상
-				품 상세 보기 접기 ▲</button>
-			<br>
-			<br>
-			<br> <br>
-			<br>
-			<br>
 		</div>
 		<nav id="gojung"
 			class="navbar navbar-light bg-light justify-content-between">
