@@ -1,6 +1,6 @@
-package mypkg.bean;
+package VO;
 
-public class Member {
+public class MemberVO {
 	
 	private String id ;
 	private String password ;
@@ -12,7 +12,7 @@ public class Member {
 	private int point ;
 	private String picture  ;
 	
-	public Member() {
+	public MemberVO() {
 		
 		
 		

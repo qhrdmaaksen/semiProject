@@ -1,4 +1,4 @@
-package mypkg.dao;
+package DAO;
 
 public class MemberDao {
 
