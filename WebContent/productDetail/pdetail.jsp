@@ -54,45 +54,17 @@
 			target.innerHTML = imgInfo;
 			imageZoom();
 		}
-		
-	</script>
-	<script>
-		function regularInnerHTML(){
-			var str = " ";
-	
-			str +=  "<table>";
-			str +=  "<tr>";
-			str +=  "<td>";
-			str +=  "<button type='button'>1개월 정기</button>"; 
-			str +=  "</td>";
-			str +=  "<td>";
-			str +=  "<button type='button'>2개월 정기</button>"; 
-			str +=  "</td>";
-			str +=  "<td>";
-			str +=  "<button type='button'>3개월 정기</button>"; 
-			str +=  "</td>";
-			str +=  "</tr>";
-			str +=  "<tr>";
-			str +=  "<td>";
-			str +=  "<button type='button'>4개월 정기</button>"; 
-			str +=  "</td>";
-			str +=  "<td>";
-			str +=  "<button type='button'>5개월 정기</button>"; 
-			str +=  "</td>";
-			str +=  "<td>";
-			str +=  "<button type='button'>6개월 정기</button>"; 
-			str +=  "</td>";
-			str +=  "</tr>";
-			str +=  "</table>";
-	
-			document.getElementById("inHere").innerHTML = str;
-		};
 	</script>
 	<script type="text/javascript">
 		$(document).ready(function() {
-			$('radio#delivery-select').click(function(){
-				$("#inHere").css("display","inline");
-			});
+			$("input[name='delivery']").click(function() {
+				var thisValue = $(this).val();
+				if(thisValue == "정기 배송"){
+					$("#inHere").css("display","block");
+				}else {
+					$("#inHere").css("display","none");
+				}
+			})
 		})
 	</script>
 	<style type="text/css">
@@ -110,7 +82,6 @@
 			position: fixed;
 		}
 	</style>
-	
 </head>
 <body>
 	<div class="container">
@@ -158,7 +129,7 @@
 							</td>
 						<tr>	
 							<td align="center">
-								<input id="delivery-select" type="radio" name="delivery" value="정기 배송" onclick="regularInnerHTML();">&nbsp;&nbsp;정기 배송 선택
+								<input id="delivery-select" type="radio" name="delivery" value="정기 배송" >&nbsp;&nbsp;정기 배송 선택
 								<div id="inHere" style="display: none;">
 									<table>
 										<tr>
@@ -201,9 +172,7 @@
 		</div>
 	</div>
 	<div class="container mt-3">
-		<h1 style="color: white">.</h1>
-		<br><br><br>
-		<ul class="nav nav-tabs" id="myTab" role="tablist">
+		<ul class="nav nav-tabs" id="myTab" role="tablist" style="margin-top: 15%;">
 			<li class="nav-item">
 				<a id="prod-contents01" class="nav-link active" data-toggle="tab" href="#prod-detail" aria-controls="상품 정보"  aria-selected="true">상품 정보</a>
 			</li>
@@ -253,7 +222,7 @@
 			</div>
 		<div id="prod-review" class="container tab-pane fade" role="tabpanel" aria-labelledby="prod-review01">
 			<div
-				class="container col-sm-offset-<%=myoffset%> col-sm-<%=mywidth%>">
+				class=" ">
 				<div class="panel panel-default panel-primary">
 					<div class="panel-heading">
 						<form class="form-inline" role="form">
@@ -321,6 +290,73 @@
 							</tr>
 						</c:forEach>
 					</table>
+					<div class="col-sm-offset-<%=myoffset%> col-sm-<%=mywidth%>" style="display: inline;">
+						<div class="panel panel-default panel-primary">
+							<div class="panel-heading">
+								<h4>리뷰 등록</h4>
+							</div>
+							<div class="panel-body">
+								<form class="form-horizontal" role="form" action="<%=YesForm%>"
+									method="post">
+									<input type="hidden" name="command" value="boInsert">
+									<div class="row">
+										<div class="form-group col-sm-6">
+											<label class="control-label col-sm-<%=formleft%>" for="writer">작성자</label>
+											<div class="col-sm-12">
+												<input type="text" class="form-control" name="fakewriter" id="fakewriter"
+													placeholder="작성자" value="${sessionScope.loginfo.name}(${sessionScope.loginfo.id})" disabled="disabled">
+												<input type="hidden" name="writer" id="writer"
+													value="${sessionScope.loginfo.id}">
+											</div>
+											<label class="control-label col-sm-12" for="subject">
+												글 제목
+											</label>
+											<div class="col-sm-12">
+												<input type="text" class="form-control" name="subject"
+													id="subject" placeholder="글 제목" value="${bean.subject}"> 
+												<span class="err">${errsubject}</span>
+											</div>
+											<label class="control-label col-sm-<%=formleft%>" for="regdate">
+												작성 일자
+											</label>
+											<div class="col-sm-12">
+												<input type="datetime" class="form-control" name="regdate"
+													id="regdate" placeholder="작성 일자" value="${bean.regdate}"> <span
+													class="err">${errregdate}</span>
+											</div>
+											
+										</div>
+										<div class="form-group col-sm-6">
+											<label class="control-label col-sm-12" for="content">
+												글 내용</label>
+											<div class="col-sm-12">
+												<textarea name="content" id="content" rows="5" cols=""
+													placeholder="글 내용" class="form-control">${bean.content}</textarea>
+												<span class="err">${errcontent}</span>
+											</div><br>
+											<div align="center" class="col-sm-offset-3 col-sm-12 row">
+												<div class="col-sm-6">
+													<button class="btn btn-outline-primary" type="submit">글 등록</button>
+												</div>
+												<div class="col-sm-6">
+													<button class="btn btn-outline-danger" type="reset">취소</button>
+												</div>
+											</div>
+										</div>
+									</div>
+									<%-- <div class="form-group">
+										<label class="control-label col-sm-<%=formleft%>" for="password">비밀
+											번호</label>
+										<div class="col-sm-<%=formright%>">
+											<input type="password" class="form-control" name="password"
+												id="password" placeholder="비밀 번호를 넣어 주셔용^^" value="${bean.password}">
+												<span class="err">${errpassword}</span>
+										</div>
+									</div> --%>
+								</form>
+							</div>
+						</div>
+					</div>
 				</div>
 				<div align="center">
 					<footer>${requestScope.pagingHtml}</footer>
@@ -440,5 +476,6 @@
 		<br>
 		<br>
 		<br>
+		
 </body>
 </html>
