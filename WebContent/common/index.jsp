@@ -8,10 +8,10 @@
 <!DOCTYPE html>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1">
-<%@ include file="./../common/nav.jsp"%>
+<%@ include file="nav.jsp"%>
 <html>
 <head>
-    <title>도담도담, 보충제 구독 사이트</title>
+    <title>도담도담, 영양제 구독 사이트</title>
     <style>
         /* Make the image fully responsive */
         .carousel-inner img {
@@ -70,7 +70,7 @@
     </div>
     <div class="jumbotron text-center">
         <h1>건강 검진으로 필요한 영상소를 체크해보세요.</h1>
-        <button id="go-survey" type="button" class="btn btn-primary" onclick="location.href='/dodamdodma?command=survey';">검진 시작</button>
+        <button id="go-survey" type="button" class="btn btn-primary" onclick="location.href='/dodamdodam?command=survey';">검진 시작</button>
     </div>
 </body>
 </html>
