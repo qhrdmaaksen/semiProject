@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+ 
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -37,9 +38,12 @@
   	
   	
   	.spanlogin{
-  		font-size: 20px;
+  		font-size: 15px;
   		margin-top : 10%;
-  		margin-left: 7%;
+  		margin-left: 3%;
+  		background-color: yellow;
+  		color: black;
+  		
   	}
   	
   	
@@ -81,20 +85,28 @@
     <div class="form-group">
     <div class="container-fluid">
     <div class="col-sm-8" >
-      <input type="email" class="form-control" id="아이디" placeholder="아이디,이메일,전화번호" name="id">
+      		<input type="text" class="form-control" name="id" id="id"
+								data-toggle="tooltip" data-placement="top" 
+								title="아이디,이메일,전화번호"
+								placeholder="아이디,이메일,전화번호를 입력하세요." value="${requestScope.id}">
+			<span class="err">${errid}</span>
      </div>
     </div>
     </div>
     <div class="form-group">
     <div class="container-fluid">
     <div class="col-sm-8">
-      <input type="password" class="form-control" id="비밀번호" placeholder="비밀번호를 입력하세요" name="password">
+    <input type="password" class="form-control" name="password"
+						id="password" placeholder="비밀번호를 입력하세요" value="${requestScope.password}">
+						<span class="err">${errpassword}</span>
       </div>
     </div>
     </div>
-    <div class="spanlogin">
-     <button type="button" class="btn btn-warning" >로그인</button>
-    </div>
+		<div class="form-group">
+		<div align="center" class="col-sm-offset-3 col-sm-3">
+			<button class="btn btn-default" type="submit">로그인</button>
+		</div>
+    	</div>			
      <div class="container-fluid">
     <div class="row" >
     <div class="col-sm-3" >
@@ -115,3 +127,5 @@
 
 </body>
 </html>
+
+   <%@ include file="./../common/footer.jsp"%>
