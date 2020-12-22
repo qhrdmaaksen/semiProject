@@ -309,22 +309,28 @@
 													value="${sessionScope.loginfo.id}">
 											</div>
 											<label class="control-label col-sm-12" for="subject">
-												글 제목
 											</label>
 											<div class="col-sm-12">
 												<input type="text" class="form-control" name="subject"
 													id="subject" placeholder="글 제목" value="${bean.subject}"> 
 												<span class="err">${errsubject}</span>
 											</div>
+											<div class="form-group">
+												<label class="control-label col-sm-<%=formleft%>"
+													for="image"></label>
+												<div class="col-sm-<%=formright%>">
+													<input type="file" class="form-control" name="image"
+														id="image" placeholder="이미지를 넣어 주셔용^^"><span
+														class="err form-control-static">${errimage}</span>
+												</div>
+											</div>
 											<label class="control-label col-sm-<%=formleft%>" for="regdate">
-												작성 일자
 											</label>
-											<div class="col-sm-12">
+										<%-- 	<div class="col-sm-12">
 												<input type="datetime" class="form-control" name="regdate"
 													id="regdate" placeholder="작성 일자" value="${bean.regdate}"> <span
 													class="err">${errregdate}</span>
-											</div>
-											
+											</div> --%>
 										</div>
 										<div class="form-group col-sm-6">
 											<label class="control-label col-sm-12" for="content">
