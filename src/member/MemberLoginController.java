@@ -1,4 +1,4 @@
-package mypkg.member;
+package member;
 
 public class MemberLoginController {
 

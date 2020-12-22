@@ -15,7 +15,7 @@
 </head>
 <body>
 <%
-  String imsi = request.getContextPath() + "/dodamdodma?command=index" ;
+  String imsi = request.getContextPath() + "/dodamdodam?command=index" ;
   response.sendRedirect(imsi) ;
 %>
 </body>
