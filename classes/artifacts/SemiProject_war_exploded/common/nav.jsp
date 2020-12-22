@@ -22,7 +22,7 @@
 %>
 <%
     String contextPath = request.getContextPath() ;
-    String mappingName = "/Shopping"; //서블릿에 정의되어 있슴
+    String mappingName = "/dodamdodam"; //서블릿에 정의되어 있슴
 
     //폼 태그에서 사용할 변수
     YesForm = contextPath + mappingName ;
