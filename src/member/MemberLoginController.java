@@ -6,7 +6,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import DAO.MemberDao;
+import DAO.MemberDAO;
 import VO.MemberVO;
 import common.SuperClass;
 
@@ -49,7 +49,7 @@ public class MemberLoginController extends SuperClass{
 		
 		if(this.validate(request)==true) {
 			
-			MemberDao dao = new MemberDao();
+			MemberDAO dao = new MemberDAO();
 			
 			MemberVO member =  dao.Insertdate(id,password);
 			

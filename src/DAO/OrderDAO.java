@@ -2,31 +2,30 @@ package DAO;
 
 import VO.ProductVO;
 
-import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
-public class OrderDAO extends SuperDao{
+public class OrderDAO extends SuperDAO {
     // index에서 사용할 판매량 가장많은 4개 상품을 출력
     public List<ProductVO> SelectTop4Lists(){
         PreparedStatement pstmt = null ;
         ResultSet rs = null ;
 
-        String sql = "";
-        sql += "SELECT * FROM " ;
+        String sql = "SELECT * FROM ";
         sql += "(SELECT \"productcode\", \"SUM\", DENSE_RANK() over (ORDER BY \"SUM\") AS \"RANK\" FROM ";
         sql += "(SELECT \"productcode\", SUM(\"SUM\") AS SUM FROM( ";
         sql += "SELECT \"productcode\",SUM(\"qty\") AS \"SUM\" FROM DETAIL_REGULAR_ORDER WHERE \"ordernumber\" IN ";
         sql += "(SELECT \"ordernumber\" FROM REGULAR_ORDER WHERE \"orderdate\" BETWEEN ";
-        sql += "(SELECT TRUNC(SYSDATE, 'MM') FROM DUAL) AND (SELECT TRUNC(LAST_DAY(SYSDATE)+1, 'MM')-1 FROM DUAL)) ";
+        sql += "(SELECT TRUNC(TRUNC(SYSDATE, 'MM')-1, 'MM') FROM DUAL) AND (SELECT TRUNC(SYSDATE, 'MM')-1 FROM DUAL)) ";
         sql += "GROUP BY \"productcode\" UNION ";
         sql += "SELECT \"productcode\",SUM(\"qty\") AS \"SUM\" FROM DETAIL_ORDER WHERE \"ordernumber\" IN ";
         sql += "(SELECT \"ordernumber\" FROM ORDERS WHERE \"orderdate\" BETWEEN ";
-        sql += "(SELECT TRUNC(SYSDATE, 'MM') FROM DUAL) AND (SELECT TRUNC(LAST_DAY(SYSDATE)+1, 'MM')-1 FROM DUAL)) ";
+        sql += "(SELECT TRUNC(TRUNC(SYSDATE, 'MM')-1, 'MM') FROM DUAL) AND (SELECT TRUNC(SYSDATE, 'MM')-1 FROM DUAL)) ";
         sql += "GROUP BY \"productcode\") GROUP BY \"productcode\")) ";
         sql += "WHERE RANK < 5";
+
         List<ProductVO> lists = new ArrayList<ProductVO>();
 
         try {
@@ -36,9 +35,7 @@ public class OrderDAO extends SuperDao{
             rs = pstmt.executeQuery() ;
             while (lists.size()<4){
                 rs.next();
-                System.out.println(rs.getInt("productCode"));
                 ProductVO product = SelectProduct(rs.getInt("productCode"));
-
                 lists.add(product);
             }
         } catch (Exception e) {
@@ -69,7 +66,6 @@ public class OrderDAO extends SuperDao{
         ResultSet rs = null ;
 
         try {
-            System.out.println("productcode : " + productcode);
             conn = super.getConnection() ;
             pstmt = conn.prepareStatement(sql) ;
 
