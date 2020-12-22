@@ -77,7 +77,7 @@
 
 <div class="container">
   <form action="/action_page.php" class="totallogin">
-
+		<form class="form-horizontal" role="form" action="<%= %>" method="post" >
 	<div class="borderclass ">
 	<div class="logo">
   	 <h2>도담도담</h2>
@@ -122,7 +122,9 @@
   </div>
     </div>
     </div>
+    </form>
   </form>
+  
 </div>
 
 </body>
