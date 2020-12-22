@@ -9,4 +9,4 @@ index=common.IndexController
 #### Product Section #################################
 
 #### Login Section ############
-melogin=member.MeLogin
+melogin=member.MemberLoginController

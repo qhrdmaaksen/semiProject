@@ -33,11 +33,11 @@
     </schema>
     <schema id="11" parent="1" name="LOMUE">
       <ObjectId>48</ObjectId>
-      <CreatedTimestamp>2020-12-22.23:44:32</CreatedTimestamp>
-      <ModifiedTimestamp>2020-12-22.23:44:46</ModifiedTimestamp>
+      <CreatedTimestamp>2020-12-23.03:03:44</CreatedTimestamp>
+      <ModifiedTimestamp>2020-12-23.03:04:02</ModifiedTimestamp>
       <IntrospectionVersion>200820</IntrospectionVersion>
-      <IntrospectionTimestamp>2020-12-22.23:44:46</IntrospectionTimestamp>
-      <CommentsHash>5252731221587</CommentsHash>
+      <IntrospectionTimestamp>2020-12-23.03:04:03</IntrospectionTimestamp>
+      <CommentsHash>5322612545315</CommentsHash>
       <Current>1</Current>
     </schema>
     <schema id="12" parent="1" name="MDSYS">
@@ -121,147 +121,147 @@
       <ObjectId>2147483638</ObjectId>
     </user>
     <sequence id="37" parent="11" name="PRODUCTCODE">
-      <ObjectId>20136</ObjectId>
-      <CreatedTimestamp>2020-12-22.23:44:45</CreatedTimestamp>
-      <ModifiedTimestamp>2020-12-22.23:44:45</ModifiedTimestamp>
+      <ObjectId>20180</ObjectId>
+      <CreatedTimestamp>2020-12-23.03:04:02</CreatedTimestamp>
+      <ModifiedTimestamp>2020-12-23.03:04:02</ModifiedTimestamp>
       <SequenceIdentity>1</SequenceIdentity>
     </sequence>
     <sequence id="38" parent="11" name="SEQ_ADD">
-      <ObjectId>20133</ObjectId>
-      <CreatedTimestamp>2020-12-22.23:44:45</CreatedTimestamp>
-      <ModifiedTimestamp>2020-12-22.23:44:45</ModifiedTimestamp>
+      <ObjectId>20177</ObjectId>
+      <CreatedTimestamp>2020-12-23.03:04:01</CreatedTimestamp>
+      <ModifiedTimestamp>2020-12-23.03:04:01</ModifiedTimestamp>
       <SequenceIdentity>1</SequenceIdentity>
     </sequence>
     <sequence id="39" parent="11" name="SEQ_BP_INDEX">
-      <ObjectId>20140</ObjectId>
-      <CreatedTimestamp>2020-12-22.23:44:46</CreatedTimestamp>
-      <ModifiedTimestamp>2020-12-22.23:44:46</ModifiedTimestamp>
+      <ObjectId>20184</ObjectId>
+      <CreatedTimestamp>2020-12-23.03:04:02</CreatedTimestamp>
+      <ModifiedTimestamp>2020-12-23.03:04:02</ModifiedTimestamp>
       <SequenceIdentity>1</SequenceIdentity>
     </sequence>
     <sequence id="40" parent="11" name="SEQ_CCP_INDEX">
-      <ObjectId>20141</ObjectId>
-      <CreatedTimestamp>2020-12-22.23:44:46</CreatedTimestamp>
-      <ModifiedTimestamp>2020-12-22.23:44:46</ModifiedTimestamp>
+      <ObjectId>20185</ObjectId>
+      <CreatedTimestamp>2020-12-23.03:04:02</CreatedTimestamp>
+      <ModifiedTimestamp>2020-12-23.03:04:02</ModifiedTimestamp>
       <SequenceIdentity>1</SequenceIdentity>
     </sequence>
     <sequence id="41" parent="11" name="SEQ_COMMENT">
-      <ObjectId>20135</ObjectId>
-      <CreatedTimestamp>2020-12-22.23:44:45</CreatedTimestamp>
-      <ModifiedTimestamp>2020-12-22.23:44:45</ModifiedTimestamp>
+      <ObjectId>20179</ObjectId>
+      <CreatedTimestamp>2020-12-23.03:04:02</CreatedTimestamp>
+      <ModifiedTimestamp>2020-12-23.03:04:02</ModifiedTimestamp>
       <SequenceIdentity>1</SequenceIdentity>
     </sequence>
     <sequence id="42" parent="11" name="SEQ_PAF_FILE">
-      <ObjectId>20138</ObjectId>
-      <CreatedTimestamp>2020-12-22.23:44:45</CreatedTimestamp>
-      <ModifiedTimestamp>2020-12-22.23:44:45</ModifiedTimestamp>
+      <ObjectId>20182</ObjectId>
+      <CreatedTimestamp>2020-12-23.03:04:02</CreatedTimestamp>
+      <ModifiedTimestamp>2020-12-23.03:04:02</ModifiedTimestamp>
       <SequenceIdentity>1</SequenceIdentity>
     </sequence>
     <sequence id="43" parent="11" name="SEQ_PAY">
-      <ObjectId>20134</ObjectId>
-      <CreatedTimestamp>2020-12-22.23:44:45</CreatedTimestamp>
-      <ModifiedTimestamp>2020-12-22.23:44:45</ModifiedTimestamp>
+      <ObjectId>20178</ObjectId>
+      <CreatedTimestamp>2020-12-23.03:04:01</CreatedTimestamp>
+      <ModifiedTimestamp>2020-12-23.03:04:01</ModifiedTimestamp>
       <SequenceIdentity>1</SequenceIdentity>
     </sequence>
     <sequence id="44" parent="11" name="SEQ_PPF_FILE">
-      <ObjectId>20137</ObjectId>
-      <CreatedTimestamp>2020-12-22.23:44:45</CreatedTimestamp>
-      <ModifiedTimestamp>2020-12-22.23:44:45</ModifiedTimestamp>
+      <ObjectId>20181</ObjectId>
+      <CreatedTimestamp>2020-12-23.03:04:02</CreatedTimestamp>
+      <ModifiedTimestamp>2020-12-23.03:04:02</ModifiedTimestamp>
       <SequenceIdentity>1</SequenceIdentity>
     </sequence>
     <sequence id="45" parent="11" name="SEQ_PP_INDEX">
-      <ObjectId>20139</ObjectId>
-      <CreatedTimestamp>2020-12-22.23:44:46</CreatedTimestamp>
-      <ModifiedTimestamp>2020-12-22.23:44:46</ModifiedTimestamp>
+      <ObjectId>20183</ObjectId>
+      <CreatedTimestamp>2020-12-23.03:04:02</CreatedTimestamp>
+      <ModifiedTimestamp>2020-12-23.03:04:02</ModifiedTimestamp>
       <SequenceIdentity>1</SequenceIdentity>
     </sequence>
     <table id="46" parent="11" name="ADDRESSES">
-      <ObjectId>20104</ObjectId>
-      <CreatedTimestamp>2020-12-22.23:44:33</CreatedTimestamp>
-      <ModifiedTimestamp>2020-12-22.23:44:44</ModifiedTimestamp>
+      <ObjectId>20148</ObjectId>
+      <CreatedTimestamp>2020-12-23.03:03:45</CreatedTimestamp>
+      <ModifiedTimestamp>2020-12-23.03:04:00</ModifiedTimestamp>
       <TemporaryPreserve>1</TemporaryPreserve>
     </table>
     <table id="47" parent="11" name="BBS_POST">
-      <ObjectId>20109</ObjectId>
-      <CreatedTimestamp>2020-12-22.23:44:37</CreatedTimestamp>
-      <ModifiedTimestamp>2020-12-22.23:44:43</ModifiedTimestamp>
+      <ObjectId>20153</ObjectId>
+      <CreatedTimestamp>2020-12-23.03:03:50</CreatedTimestamp>
+      <ModifiedTimestamp>2020-12-23.03:03:59</ModifiedTimestamp>
       <TemporaryPreserve>1</TemporaryPreserve>
     </table>
     <table id="48" parent="11" name="CUSTOMER_CENTER_POST">
-      <ObjectId>20106</ObjectId>
-      <CreatedTimestamp>2020-12-22.23:44:35</CreatedTimestamp>
-      <ModifiedTimestamp>2020-12-22.23:44:43</ModifiedTimestamp>
+      <ObjectId>20150</ObjectId>
+      <CreatedTimestamp>2020-12-23.03:03:47</CreatedTimestamp>
+      <ModifiedTimestamp>2020-12-23.03:03:59</ModifiedTimestamp>
       <TemporaryPreserve>1</TemporaryPreserve>
     </table>
     <table id="49" parent="11" name="DETAIL_ORDER">
-      <ObjectId>20116</ObjectId>
-      <CreatedTimestamp>2020-12-22.23:44:42</CreatedTimestamp>
-      <ModifiedTimestamp>2020-12-22.23:44:45</ModifiedTimestamp>
+      <ObjectId>20160</ObjectId>
+      <CreatedTimestamp>2020-12-23.03:03:57</CreatedTimestamp>
+      <ModifiedTimestamp>2020-12-23.03:04:01</ModifiedTimestamp>
       <TemporaryPreserve>1</TemporaryPreserve>
     </table>
     <table id="50" parent="11" name="DETAIL_REGULAR_ORDER">
-      <ObjectId>20117</ObjectId>
-      <CreatedTimestamp>2020-12-22.23:44:42</CreatedTimestamp>
-      <ModifiedTimestamp>2020-12-22.23:44:45</ModifiedTimestamp>
+      <ObjectId>20161</ObjectId>
+      <CreatedTimestamp>2020-12-23.03:03:58</CreatedTimestamp>
+      <ModifiedTimestamp>2020-12-23.03:04:01</ModifiedTimestamp>
       <TemporaryPreserve>1</TemporaryPreserve>
     </table>
     <table id="51" parent="11" name="MEMBERS">
-      <ObjectId>20103</ObjectId>
-      <CreatedTimestamp>2020-12-22.23:44:32</CreatedTimestamp>
-      <ModifiedTimestamp>2020-12-22.23:44:43</ModifiedTimestamp>
+      <ObjectId>20147</ObjectId>
+      <CreatedTimestamp>2020-12-23.03:03:44</CreatedTimestamp>
+      <ModifiedTimestamp>2020-12-23.03:03:58</ModifiedTimestamp>
       <TemporaryPreserve>1</TemporaryPreserve>
     </table>
     <table id="52" parent="11" name="ORDERS">
-      <ObjectId>20114</ObjectId>
-      <CreatedTimestamp>2020-12-22.23:44:40</CreatedTimestamp>
-      <ModifiedTimestamp>2020-12-22.23:44:44</ModifiedTimestamp>
+      <ObjectId>20158</ObjectId>
+      <CreatedTimestamp>2020-12-23.03:03:55</CreatedTimestamp>
+      <ModifiedTimestamp>2020-12-23.03:04:00</ModifiedTimestamp>
       <TemporaryPreserve>1</TemporaryPreserve>
     </table>
     <table id="53" parent="11" name="PAYMENT_METHOD">
-      <ObjectId>20105</ObjectId>
-      <CreatedTimestamp>2020-12-22.23:44:34</CreatedTimestamp>
-      <ModifiedTimestamp>2020-12-22.23:44:44</ModifiedTimestamp>
+      <ObjectId>20149</ObjectId>
+      <CreatedTimestamp>2020-12-23.03:03:46</CreatedTimestamp>
+      <ModifiedTimestamp>2020-12-23.03:04:00</ModifiedTimestamp>
       <TemporaryPreserve>1</TemporaryPreserve>
     </table>
     <table id="54" parent="11" name="POST_ATTACHED_FILE">
-      <ObjectId>20110</ObjectId>
-      <CreatedTimestamp>2020-12-22.23:44:38</CreatedTimestamp>
-      <ModifiedTimestamp>2020-12-22.23:44:44</ModifiedTimestamp>
+      <ObjectId>20154</ObjectId>
+      <CreatedTimestamp>2020-12-23.03:03:51</CreatedTimestamp>
+      <ModifiedTimestamp>2020-12-23.03:03:59</ModifiedTimestamp>
       <TemporaryPreserve>1</TemporaryPreserve>
     </table>
     <table id="55" parent="11" name="POST_COMMENTS">
-      <ObjectId>20111</ObjectId>
-      <CreatedTimestamp>2020-12-22.23:44:38</CreatedTimestamp>
-      <ModifiedTimestamp>2020-12-22.23:44:44</ModifiedTimestamp>
+      <ObjectId>20155</ObjectId>
+      <CreatedTimestamp>2020-12-23.03:03:52</CreatedTimestamp>
+      <ModifiedTimestamp>2020-12-23.03:03:59</ModifiedTimestamp>
       <TemporaryPreserve>1</TemporaryPreserve>
     </table>
     <table id="56" parent="11" name="PRODUCTS">
-      <ObjectId>20107</ObjectId>
-      <CreatedTimestamp>2020-12-22.23:44:35</CreatedTimestamp>
-      <ModifiedTimestamp>2020-12-22.23:44:43</ModifiedTimestamp>
+      <ObjectId>20151</ObjectId>
+      <CreatedTimestamp>2020-12-23.03:03:48</CreatedTimestamp>
+      <ModifiedTimestamp>2020-12-23.03:03:59</ModifiedTimestamp>
       <TemporaryPreserve>1</TemporaryPreserve>
     </table>
     <table id="57" parent="11" name="PRODUCT_POSTS">
-      <ObjectId>20108</ObjectId>
-      <CreatedTimestamp>2020-12-22.23:44:37</CreatedTimestamp>
-      <ModifiedTimestamp>2020-12-22.23:44:43</ModifiedTimestamp>
+      <ObjectId>20152</ObjectId>
+      <CreatedTimestamp>2020-12-23.03:03:50</CreatedTimestamp>
+      <ModifiedTimestamp>2020-12-23.03:03:59</ModifiedTimestamp>
       <TemporaryPreserve>1</TemporaryPreserve>
     </table>
     <table id="58" parent="11" name="PRODUCT_POSTS_FILE">
-      <ObjectId>20113</ObjectId>
-      <CreatedTimestamp>2020-12-22.23:44:40</CreatedTimestamp>
-      <ModifiedTimestamp>2020-12-22.23:44:45</ModifiedTimestamp>
+      <ObjectId>20157</ObjectId>
+      <CreatedTimestamp>2020-12-23.03:03:54</CreatedTimestamp>
+      <ModifiedTimestamp>2020-12-23.03:04:01</ModifiedTimestamp>
       <TemporaryPreserve>1</TemporaryPreserve>
     </table>
     <table id="59" parent="11" name="REGULAR_ORDER">
-      <ObjectId>20115</ObjectId>
-      <CreatedTimestamp>2020-12-22.23:44:41</CreatedTimestamp>
-      <ModifiedTimestamp>2020-12-22.23:44:44</ModifiedTimestamp>
+      <ObjectId>20159</ObjectId>
+      <CreatedTimestamp>2020-12-23.03:03:56</CreatedTimestamp>
+      <ModifiedTimestamp>2020-12-23.03:04:00</ModifiedTimestamp>
       <TemporaryPreserve>1</TemporaryPreserve>
     </table>
     <table id="60" parent="11" name="SURVEY_RESULT">
-      <ObjectId>20112</ObjectId>
-      <CreatedTimestamp>2020-12-22.23:44:39</CreatedTimestamp>
-      <ModifiedTimestamp>2020-12-22.23:44:44</ModifiedTimestamp>
+      <ObjectId>20156</ObjectId>
+      <CreatedTimestamp>2020-12-23.03:03:52</CreatedTimestamp>
+      <ModifiedTimestamp>2020-12-23.03:04:00</ModifiedTimestamp>
       <TemporaryPreserve>1</TemporaryPreserve>
     </table>
     <synonym id="61" parent="15" name="ABSPATH">
@@ -28113,7 +28113,7 @@
       <DataType>VARCHAR2(15 byte)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="4040" parent="46" name="shippingName">
+    <column id="4040" parent="46" name="shippingname">
       <Position>3</Position>
       <Comment>문자</Comment>
       <DataType>VARCHAR2(30 byte)|0s</DataType>
@@ -28144,16 +28144,16 @@
       <NotNull>1</NotNull>
     </column>
     <index id="4045" parent="46" name="PK_ADDRESSES">
-      <ObjectId>20119</ObjectId>
-      <CreatedTimestamp>2020-12-22.23:44:43</CreatedTimestamp>
-      <ModifiedTimestamp>2020-12-22.23:44:43</ModifiedTimestamp>
+      <ObjectId>20163</ObjectId>
+      <CreatedTimestamp>2020-12-23.03:03:58</CreatedTimestamp>
+      <ModifiedTimestamp>2020-12-23.03:03:58</ModifiedTimestamp>
       <TablespaceName>USERS</TablespaceName>
       <ColNames>seq_add
 id</ColNames>
       <Unique>1</Unique>
     </index>
     <key id="4046" parent="46" name="PK_ADDRESSES">
-      <ModifiedTimestamp>2020-12-22.23:44:43</ModifiedTimestamp>
+      <ModifiedTimestamp>2020-12-23.03:03:58</ModifiedTimestamp>
       <ColNames>seq_add
 id</ColNames>
       <InitiallyDeferred>1</InitiallyDeferred>
@@ -28161,7 +28161,7 @@ id</ColNames>
       <Primary>1</Primary>
     </key>
     <foreign-key id="4047" parent="46" name="FK_MEMBERS_TO_ADDRESSES_1">
-      <ModifiedTimestamp>2020-12-22.23:44:44</ModifiedTimestamp>
+      <ModifiedTimestamp>2020-12-23.03:04:00</ModifiedTimestamp>
       <ColNames>id</ColNames>
       <RefSchemaName>LOMUE</RefSchemaName>
       <RefTableName>MEMBERS</RefTableName>
@@ -28192,14 +28192,14 @@ id</ColNames>
       <DataType>VARCHAR2(1000 byte)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="4052" parent="47" name="postDate">
+    <column id="4052" parent="47" name="postdate">
       <Position>5</Position>
       <Comment>YYYYMMDD HH:MM</Comment>
       <DataType>DATE|0s</DataType>
       <NotNull>1</NotNull>
       <DefaultExpression>SYSDATE</DefaultExpression>
     </column>
-    <column id="4053" parent="47" name="likeNumber">
+    <column id="4053" parent="47" name="likenumber">
       <Position>6</Position>
       <Comment>숫자</Comment>
       <DataType>NUMBER(*)|0s</DataType>
@@ -28207,15 +28207,15 @@ id</ColNames>
       <DefaultExpression>0</DefaultExpression>
     </column>
     <index id="4054" parent="47" name="PK_BBS_POST">
-      <ObjectId>20124</ObjectId>
-      <CreatedTimestamp>2020-12-22.23:44:43</CreatedTimestamp>
-      <ModifiedTimestamp>2020-12-22.23:44:43</ModifiedTimestamp>
+      <ObjectId>20168</ObjectId>
+      <CreatedTimestamp>2020-12-23.03:03:59</CreatedTimestamp>
+      <ModifiedTimestamp>2020-12-23.03:03:59</ModifiedTimestamp>
       <TablespaceName>USERS</TablespaceName>
       <ColNames>seq_index</ColNames>
       <Unique>1</Unique>
     </index>
     <key id="4055" parent="47" name="PK_BBS_POST">
-      <ModifiedTimestamp>2020-12-22.23:44:43</ModifiedTimestamp>
+      <ModifiedTimestamp>2020-12-23.03:03:59</ModifiedTimestamp>
       <ColNames>seq_index</ColNames>
       <InitiallyDeferred>1</InitiallyDeferred>
       <UnderlyingIndexName>PK_BBS_POST</UnderlyingIndexName>
@@ -28249,15 +28249,15 @@ id</ColNames>
       <NotNull>1</NotNull>
     </column>
     <index id="4061" parent="48" name="PK_CUSTOMER_CENTER_POST">
-      <ObjectId>20121</ObjectId>
-      <CreatedTimestamp>2020-12-22.23:44:43</CreatedTimestamp>
-      <ModifiedTimestamp>2020-12-22.23:44:43</ModifiedTimestamp>
+      <ObjectId>20165</ObjectId>
+      <CreatedTimestamp>2020-12-23.03:03:59</CreatedTimestamp>
+      <ModifiedTimestamp>2020-12-23.03:03:59</ModifiedTimestamp>
       <TablespaceName>USERS</TablespaceName>
       <ColNames>seq_index</ColNames>
       <Unique>1</Unique>
     </index>
     <key id="4062" parent="48" name="PK_CUSTOMER_CENTER_POST">
-      <ModifiedTimestamp>2020-12-22.23:44:43</ModifiedTimestamp>
+      <ModifiedTimestamp>2020-12-23.03:03:59</ModifiedTimestamp>
       <ColNames>seq_index</ColNames>
       <InitiallyDeferred>1</InitiallyDeferred>
       <UnderlyingIndexName>PK_CUSTOMER_CENTER_POST</UnderlyingIndexName>
@@ -28269,7 +28269,7 @@ id</ColNames>
       <DataType>NUMBER(*)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="4064" parent="49" name="productCode">
+    <column id="4064" parent="49" name="productcode">
       <Position>2</Position>
       <Comment>시퀸스넘버</Comment>
       <DataType>NUMBER(*)|0s</DataType>
@@ -28282,33 +28282,33 @@ id</ColNames>
       <NotNull>1</NotNull>
     </column>
     <index id="4066" parent="49" name="PK_DETAIL_ORDER">
-      <ObjectId>20131</ObjectId>
-      <CreatedTimestamp>2020-12-22.23:44:44</CreatedTimestamp>
-      <ModifiedTimestamp>2020-12-22.23:44:44</ModifiedTimestamp>
+      <ObjectId>20175</ObjectId>
+      <CreatedTimestamp>2020-12-23.03:04:00</CreatedTimestamp>
+      <ModifiedTimestamp>2020-12-23.03:04:00</ModifiedTimestamp>
       <TablespaceName>USERS</TablespaceName>
       <ColNames>ordernumber
-productCode</ColNames>
+productcode</ColNames>
       <Unique>1</Unique>
     </index>
     <key id="4067" parent="49" name="PK_DETAIL_ORDER">
-      <ModifiedTimestamp>2020-12-22.23:44:44</ModifiedTimestamp>
+      <ModifiedTimestamp>2020-12-23.03:04:00</ModifiedTimestamp>
       <ColNames>ordernumber
-productCode</ColNames>
+productcode</ColNames>
       <InitiallyDeferred>1</InitiallyDeferred>
       <UnderlyingIndexName>PK_DETAIL_ORDER</UnderlyingIndexName>
       <Primary>1</Primary>
     </key>
-    <foreign-key id="4068" parent="49" name="FK_ORDERS_TO_DETAIL_ORDER_1">
-      <ModifiedTimestamp>2020-12-22.23:44:45</ModifiedTimestamp>
+    <foreign-key id="4068" parent="49" name="FK_ORDERS_TO_DO_1">
+      <ModifiedTimestamp>2020-12-23.03:04:01</ModifiedTimestamp>
       <ColNames>ordernumber</ColNames>
       <RefSchemaName>LOMUE</RefSchemaName>
       <RefTableName>ORDERS</RefTableName>
       <RefKeyName>PK_ORDERS</RefKeyName>
       <OnDelete>restrict</OnDelete>
     </foreign-key>
-    <foreign-key id="4069" parent="49" name="FK_PRODUCTS_TO_DETAIL_ORDER_1">
-      <ModifiedTimestamp>2020-12-22.23:44:45</ModifiedTimestamp>
-      <ColNames>productCode</ColNames>
+    <foreign-key id="4069" parent="49" name="FK_PRODUCTS_TO_DO_1">
+      <ModifiedTimestamp>2020-12-23.03:04:01</ModifiedTimestamp>
+      <ColNames>productcode</ColNames>
       <RefSchemaName>LOMUE</RefSchemaName>
       <RefTableName>PRODUCTS</RefTableName>
       <RefKeyName>PK_PRODUCTS</RefKeyName>
@@ -28320,37 +28320,37 @@ productCode</ColNames>
       <DataType>NUMBER(*)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="4071" parent="50" name="productCode">
+    <column id="4071" parent="50" name="productcode">
       <Position>2</Position>
       <Comment>시퀸스넘버</Comment>
       <DataType>NUMBER(*)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="4072" parent="50" name="quantity">
+    <column id="4072" parent="50" name="qty">
       <Position>3</Position>
       <Comment>숫자</Comment>
       <DataType>NUMBER(*)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
     <index id="4073" parent="50" name="PK_DETAIL_REGULAR_ORDER">
-      <ObjectId>20132</ObjectId>
-      <CreatedTimestamp>2020-12-22.23:44:44</CreatedTimestamp>
-      <ModifiedTimestamp>2020-12-22.23:44:44</ModifiedTimestamp>
+      <ObjectId>20176</ObjectId>
+      <CreatedTimestamp>2020-12-23.03:04:00</CreatedTimestamp>
+      <ModifiedTimestamp>2020-12-23.03:04:00</ModifiedTimestamp>
       <TablespaceName>USERS</TablespaceName>
       <ColNames>ordernumber
-productCode</ColNames>
+productcode</ColNames>
       <Unique>1</Unique>
     </index>
     <key id="4074" parent="50" name="PK_DETAIL_REGULAR_ORDER">
-      <ModifiedTimestamp>2020-12-22.23:44:44</ModifiedTimestamp>
+      <ModifiedTimestamp>2020-12-23.03:04:00</ModifiedTimestamp>
       <ColNames>ordernumber
-productCode</ColNames>
+productcode</ColNames>
       <InitiallyDeferred>1</InitiallyDeferred>
       <UnderlyingIndexName>PK_DETAIL_REGULAR_ORDER</UnderlyingIndexName>
       <Primary>1</Primary>
     </key>
     <foreign-key id="4075" parent="50" name="FK_RO_TO_DRO_1">
-      <ModifiedTimestamp>2020-12-22.23:44:45</ModifiedTimestamp>
+      <ModifiedTimestamp>2020-12-23.03:04:01</ModifiedTimestamp>
       <ColNames>ordernumber</ColNames>
       <RefSchemaName>LOMUE</RefSchemaName>
       <RefTableName>REGULAR_ORDER</RefTableName>
@@ -28358,8 +28358,8 @@ productCode</ColNames>
       <OnDelete>restrict</OnDelete>
     </foreign-key>
     <foreign-key id="4076" parent="50" name="FK_PRODUCTS_TO_DRO_1">
-      <ModifiedTimestamp>2020-12-22.23:44:45</ModifiedTimestamp>
-      <ColNames>productCode</ColNames>
+      <ModifiedTimestamp>2020-12-23.03:04:01</ModifiedTimestamp>
+      <ColNames>productcode</ColNames>
       <RefSchemaName>LOMUE</RefSchemaName>
       <RefTableName>PRODUCTS</RefTableName>
       <RefKeyName>PK_PRODUCTS</RefKeyName>
@@ -28383,7 +28383,7 @@ productCode</ColNames>
       <DataType>VARCHAR2(30 byte)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="4080" parent="51" name="BIRTH">
+    <column id="4080" parent="51" name="birth">
       <Position>4</Position>
       <Comment>YYYYMMDD</Comment>
       <DataType>DATE|0s</DataType>
@@ -28424,15 +28424,15 @@ productCode</ColNames>
       <NotNull>1</NotNull>
     </column>
     <index id="4086" parent="51" name="PK_MEMBERS">
-      <ObjectId>20118</ObjectId>
-      <CreatedTimestamp>2020-12-22.23:44:43</CreatedTimestamp>
-      <ModifiedTimestamp>2020-12-22.23:44:43</ModifiedTimestamp>
+      <ObjectId>20162</ObjectId>
+      <CreatedTimestamp>2020-12-23.03:03:58</CreatedTimestamp>
+      <ModifiedTimestamp>2020-12-23.03:03:58</ModifiedTimestamp>
       <TablespaceName>USERS</TablespaceName>
       <ColNames>id</ColNames>
       <Unique>1</Unique>
     </index>
     <key id="4087" parent="51" name="PK_MEMBERS">
-      <ModifiedTimestamp>2020-12-22.23:44:43</ModifiedTimestamp>
+      <ModifiedTimestamp>2020-12-23.03:03:58</ModifiedTimestamp>
       <ColNames>id</ColNames>
       <InitiallyDeferred>1</InitiallyDeferred>
       <UnderlyingIndexName>PK_MEMBERS</UnderlyingIndexName>
@@ -28474,7 +28474,7 @@ productCode</ColNames>
       <DataType>VARCHAR2(15 byte)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="4094" parent="52" name="shippingStatus">
+    <column id="4094" parent="52" name="shippingstatus">
       <Position>7</Position>
       <Comment>0은 배송준비중&#xd;
 1은 배송중&#xd;
@@ -28499,15 +28499,15 @@ productCode</ColNames>
       <DefaultExpression>SYSDATE</DefaultExpression>
     </column>
     <index id="4097" parent="52" name="PK_ORDERS">
-      <ObjectId>20129</ObjectId>
-      <CreatedTimestamp>2020-12-22.23:44:44</CreatedTimestamp>
-      <ModifiedTimestamp>2020-12-22.23:44:44</ModifiedTimestamp>
+      <ObjectId>20173</ObjectId>
+      <CreatedTimestamp>2020-12-23.03:04:00</CreatedTimestamp>
+      <ModifiedTimestamp>2020-12-23.03:04:00</ModifiedTimestamp>
       <TablespaceName>USERS</TablespaceName>
       <ColNames>ordernumber</ColNames>
       <Unique>1</Unique>
     </index>
     <key id="4098" parent="52" name="PK_ORDERS">
-      <ModifiedTimestamp>2020-12-22.23:44:44</ModifiedTimestamp>
+      <ModifiedTimestamp>2020-12-23.03:04:00</ModifiedTimestamp>
       <ColNames>ordernumber</ColNames>
       <InitiallyDeferred>1</InitiallyDeferred>
       <UnderlyingIndexName>PK_ORDERS</UnderlyingIndexName>
@@ -28537,35 +28537,35 @@ productCode</ColNames>
       <DataType>VARCHAR2(3 byte)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="4103" parent="53" name="cardNumber">
+    <column id="4103" parent="53" name="cardnumber">
       <Position>5</Position>
       <Comment>숫자 16자리</Comment>
       <DataType>VARCHAR2(16 byte)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="4104" parent="53" name="cvcNumber">
+    <column id="4104" parent="53" name="cvcnumber">
       <Position>6</Position>
       <Comment>숫자 3자리</Comment>
       <DataType>VARCHAR2(3 byte)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="4105" parent="53" name="expirationDate">
+    <column id="4105" parent="53" name="expirationdate">
       <Position>7</Position>
       <Comment>YYYYMM</Comment>
       <DataType>DATE|0s</DataType>
       <NotNull>1</NotNull>
     </column>
     <index id="4106" parent="53" name="PK_PAYMENT_METHOD">
-      <ObjectId>20120</ObjectId>
-      <CreatedTimestamp>2020-12-22.23:44:43</CreatedTimestamp>
-      <ModifiedTimestamp>2020-12-22.23:44:43</ModifiedTimestamp>
+      <ObjectId>20164</ObjectId>
+      <CreatedTimestamp>2020-12-23.03:03:59</CreatedTimestamp>
+      <ModifiedTimestamp>2020-12-23.03:03:59</ModifiedTimestamp>
       <TablespaceName>USERS</TablespaceName>
       <ColNames>seq_pay
 id</ColNames>
       <Unique>1</Unique>
     </index>
     <key id="4107" parent="53" name="PK_PAYMENT_METHOD">
-      <ModifiedTimestamp>2020-12-22.23:44:43</ModifiedTimestamp>
+      <ModifiedTimestamp>2020-12-23.03:03:59</ModifiedTimestamp>
       <ColNames>seq_pay
 id</ColNames>
       <InitiallyDeferred>1</InitiallyDeferred>
@@ -28573,7 +28573,7 @@ id</ColNames>
       <Primary>1</Primary>
     </key>
     <foreign-key id="4108" parent="53" name="FK_MEMBERS_TO_PAYMENT_METHOD_1">
-      <ModifiedTimestamp>2020-12-22.23:44:44</ModifiedTimestamp>
+      <ModifiedTimestamp>2020-12-23.03:04:00</ModifiedTimestamp>
       <ColNames>id</ColNames>
       <RefSchemaName>LOMUE</RefSchemaName>
       <RefTableName>MEMBERS</RefTableName>
@@ -28599,15 +28599,15 @@ id</ColNames>
       <NotNull>1</NotNull>
     </column>
     <index id="4112" parent="54" name="PK_POST_ATTACHED_FILE">
-      <ObjectId>20125</ObjectId>
-      <CreatedTimestamp>2020-12-22.23:44:44</CreatedTimestamp>
-      <ModifiedTimestamp>2020-12-22.23:44:44</ModifiedTimestamp>
+      <ObjectId>20169</ObjectId>
+      <CreatedTimestamp>2020-12-23.03:03:59</CreatedTimestamp>
+      <ModifiedTimestamp>2020-12-23.03:03:59</ModifiedTimestamp>
       <TablespaceName>USERS</TablespaceName>
       <ColNames>seq_file</ColNames>
       <Unique>1</Unique>
     </index>
     <key id="4113" parent="54" name="PK_POST_ATTACHED_FILE">
-      <ModifiedTimestamp>2020-12-22.23:44:44</ModifiedTimestamp>
+      <ModifiedTimestamp>2020-12-23.03:03:59</ModifiedTimestamp>
       <ColNames>seq_file</ColNames>
       <InitiallyDeferred>1</InitiallyDeferred>
       <UnderlyingIndexName>PK_POST_ATTACHED_FILE</UnderlyingIndexName>
@@ -28631,7 +28631,7 @@ id</ColNames>
       <DataType>VARCHAR2(15 byte)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="4117" parent="55" name="commentDate">
+    <column id="4117" parent="55" name="commentdate">
       <Position>4</Position>
       <Comment>YYYYMMDD HH:MM</Comment>
       <DataType>DATE|0s</DataType>
@@ -28645,33 +28645,33 @@ id</ColNames>
       <NotNull>1</NotNull>
     </column>
     <index id="4119" parent="55" name="PK_POST_COMMENTS">
-      <ObjectId>20126</ObjectId>
-      <CreatedTimestamp>2020-12-22.23:44:44</CreatedTimestamp>
-      <ModifiedTimestamp>2020-12-22.23:44:44</ModifiedTimestamp>
+      <ObjectId>20170</ObjectId>
+      <CreatedTimestamp>2020-12-23.03:03:59</CreatedTimestamp>
+      <ModifiedTimestamp>2020-12-23.03:03:59</ModifiedTimestamp>
       <TablespaceName>USERS</TablespaceName>
       <ColNames>seq_comment</ColNames>
       <Unique>1</Unique>
     </index>
     <key id="4120" parent="55" name="PK_POST_COMMENTS">
-      <ModifiedTimestamp>2020-12-22.23:44:44</ModifiedTimestamp>
+      <ModifiedTimestamp>2020-12-23.03:03:59</ModifiedTimestamp>
       <ColNames>seq_comment</ColNames>
       <InitiallyDeferred>1</InitiallyDeferred>
       <UnderlyingIndexName>PK_POST_COMMENTS</UnderlyingIndexName>
       <Primary>1</Primary>
     </key>
-    <column id="4121" parent="56" name="productCode">
+    <column id="4121" parent="56" name="productcode">
       <Position>1</Position>
       <Comment>시퀸스넘버</Comment>
       <DataType>NUMBER(*)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="4122" parent="56" name="productName">
+    <column id="4122" parent="56" name="productname">
       <Position>2</Position>
       <Comment>문자</Comment>
       <DataType>VARCHAR2(60 byte)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="4123" parent="56" name="productPrice">
+    <column id="4123" parent="56" name="productprice">
       <Position>3</Position>
       <Comment>숫자</Comment>
       <DataType>NUMBER(*)|0s</DataType>
@@ -28690,14 +28690,14 @@ id</ColNames>
       <NotNull>1</NotNull>
       <DefaultExpression>0</DefaultExpression>
     </column>
-    <column id="4126" parent="56" name="bloodCirculation">
+    <column id="4126" parent="56" name="bloodcirculation">
       <Position>6</Position>
       <Comment>숫자 1자리</Comment>
       <DataType>NUMBER(*)|0s</DataType>
       <NotNull>1</NotNull>
       <DefaultExpression>0</DefaultExpression>
     </column>
-    <column id="4127" parent="56" name="digestiveApparatus">
+    <column id="4127" parent="56" name="digestiveapparatus">
       <Position>7</Position>
       <Comment>숫자 1자리</Comment>
       <DataType>NUMBER(*)|0s</DataType>
@@ -28739,140 +28739,146 @@ id</ColNames>
       <NotNull>1</NotNull>
       <DefaultExpression>0</DefaultExpression>
     </column>
-    <index id="4133" parent="56" name="PK_PRODUCTS">
-      <ObjectId>20122</ObjectId>
-      <CreatedTimestamp>2020-12-22.23:44:43</CreatedTimestamp>
-      <ModifiedTimestamp>2020-12-22.23:44:43</ModifiedTimestamp>
+    <column id="4133" parent="56" name="images">
+      <Position>13</Position>
+      <Comment>상품이미지 경로</Comment>
+      <DataType>VARCHAR2(50 byte)|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <index id="4134" parent="56" name="PK_PRODUCTS">
+      <ObjectId>20166</ObjectId>
+      <CreatedTimestamp>2020-12-23.03:03:59</CreatedTimestamp>
+      <ModifiedTimestamp>2020-12-23.03:03:59</ModifiedTimestamp>
       <TablespaceName>USERS</TablespaceName>
-      <ColNames>productCode</ColNames>
+      <ColNames>productcode</ColNames>
       <Unique>1</Unique>
     </index>
-    <key id="4134" parent="56" name="PK_PRODUCTS">
-      <ModifiedTimestamp>2020-12-22.23:44:43</ModifiedTimestamp>
-      <ColNames>productCode</ColNames>
+    <key id="4135" parent="56" name="PK_PRODUCTS">
+      <ModifiedTimestamp>2020-12-23.03:03:59</ModifiedTimestamp>
+      <ColNames>productcode</ColNames>
       <InitiallyDeferred>1</InitiallyDeferred>
       <UnderlyingIndexName>PK_PRODUCTS</UnderlyingIndexName>
       <Primary>1</Primary>
     </key>
-    <column id="4135" parent="57" name="seq_index">
+    <column id="4136" parent="57" name="seq_index">
       <Position>1</Position>
       <Comment>시퀸스넘버</Comment>
       <DataType>NUMBER(*)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="4136" parent="57" name="productCode">
+    <column id="4137" parent="57" name="productcode">
       <Position>2</Position>
       <Comment>시퀸스넘버</Comment>
       <DataType>NUMBER(*)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="4137" parent="57" name="title">
+    <column id="4138" parent="57" name="title">
       <Position>3</Position>
       <Comment>문자</Comment>
       <DataType>VARCHAR2(60 byte)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="4138" parent="57" name="content">
+    <column id="4139" parent="57" name="content">
       <Position>4</Position>
       <Comment>문자</Comment>
       <DataType>VARCHAR2(500 byte)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <index id="4139" parent="57" name="PK_PRODUCT_POSTS">
-      <ObjectId>20123</ObjectId>
-      <CreatedTimestamp>2020-12-22.23:44:43</CreatedTimestamp>
-      <ModifiedTimestamp>2020-12-22.23:44:43</ModifiedTimestamp>
+    <index id="4140" parent="57" name="PK_PRODUCT_POSTS">
+      <ObjectId>20167</ObjectId>
+      <CreatedTimestamp>2020-12-23.03:03:59</CreatedTimestamp>
+      <ModifiedTimestamp>2020-12-23.03:03:59</ModifiedTimestamp>
       <TablespaceName>USERS</TablespaceName>
       <ColNames>seq_index</ColNames>
       <Unique>1</Unique>
     </index>
-    <key id="4140" parent="57" name="PK_PRODUCT_POSTS">
-      <ModifiedTimestamp>2020-12-22.23:44:43</ModifiedTimestamp>
+    <key id="4141" parent="57" name="PK_PRODUCT_POSTS">
+      <ModifiedTimestamp>2020-12-23.03:03:59</ModifiedTimestamp>
       <ColNames>seq_index</ColNames>
       <InitiallyDeferred>1</InitiallyDeferred>
       <UnderlyingIndexName>PK_PRODUCT_POSTS</UnderlyingIndexName>
       <Primary>1</Primary>
     </key>
-    <column id="4141" parent="58" name="seq_file">
+    <column id="4142" parent="58" name="seq_file">
       <Position>1</Position>
       <Comment>시퀸스넘버</Comment>
       <DataType>NUMBER(*)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="4142" parent="58" name="seq_index">
+    <column id="4143" parent="58" name="seq_index">
       <Position>2</Position>
       <Comment>시퀸스넘버</Comment>
       <DataType>NUMBER(*)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="4143" parent="58" name="file">
+    <column id="4144" parent="58" name="file">
       <Position>3</Position>
       <Comment>문자</Comment>
       <DataType>VARCHAR2(100 byte)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <index id="4144" parent="58" name="PK_PRODUCT_POSTS_FILE">
-      <ObjectId>20128</ObjectId>
-      <CreatedTimestamp>2020-12-22.23:44:44</CreatedTimestamp>
-      <ModifiedTimestamp>2020-12-22.23:44:44</ModifiedTimestamp>
+    <index id="4145" parent="58" name="PK_PRODUCT_POSTS_FILE">
+      <ObjectId>20172</ObjectId>
+      <CreatedTimestamp>2020-12-23.03:04:00</CreatedTimestamp>
+      <ModifiedTimestamp>2020-12-23.03:04:00</ModifiedTimestamp>
       <TablespaceName>USERS</TablespaceName>
       <ColNames>seq_file
 seq_index</ColNames>
       <Unique>1</Unique>
     </index>
-    <key id="4145" parent="58" name="PK_PRODUCT_POSTS_FILE">
-      <ModifiedTimestamp>2020-12-22.23:44:44</ModifiedTimestamp>
+    <key id="4146" parent="58" name="PK_PRODUCT_POSTS_FILE">
+      <ModifiedTimestamp>2020-12-23.03:04:00</ModifiedTimestamp>
       <ColNames>seq_file
 seq_index</ColNames>
       <InitiallyDeferred>1</InitiallyDeferred>
       <UnderlyingIndexName>PK_PRODUCT_POSTS_FILE</UnderlyingIndexName>
       <Primary>1</Primary>
     </key>
-    <foreign-key id="4146" parent="58" name="FK_PP_TO_PPF_1">
-      <ModifiedTimestamp>2020-12-22.23:44:45</ModifiedTimestamp>
+    <foreign-key id="4147" parent="58" name="FK_PP_TO_PPF_1">
+      <ModifiedTimestamp>2020-12-23.03:04:01</ModifiedTimestamp>
       <ColNames>seq_index</ColNames>
       <RefSchemaName>LOMUE</RefSchemaName>
       <RefTableName>PRODUCT_POSTS</RefTableName>
       <RefKeyName>PK_PRODUCT_POSTS</RefKeyName>
       <OnDelete>restrict</OnDelete>
     </foreign-key>
-    <column id="4147" parent="59" name="ordernumber">
+    <column id="4148" parent="59" name="ordernumber">
       <Position>1</Position>
       <Comment>숫자</Comment>
       <DataType>NUMBER(*)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="4148" parent="59" name="id">
+    <column id="4149" parent="59" name="id">
       <Position>2</Position>
       <Comment>영어소문자, 숫자</Comment>
       <DataType>VARCHAR2(15 byte)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="4149" parent="59" name="seq_add">
+    <column id="4150" parent="59" name="seq_add">
       <Position>3</Position>
       <Comment>시퀸스넘버</Comment>
       <DataType>NUMBER(*)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="4150" parent="59" name="id2">
+    <column id="4151" parent="59" name="id2">
       <Position>4</Position>
       <Comment>영어소문자, 숫자</Comment>
       <DataType>VARCHAR2(15 byte)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="4151" parent="59" name="seq_pay">
+    <column id="4152" parent="59" name="seq_pay">
       <Position>5</Position>
       <Comment>시퀸스넘버</Comment>
       <DataType>NUMBER(*)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="4152" parent="59" name="id3">
+    <column id="4153" parent="59" name="id3">
       <Position>6</Position>
       <Comment>영어소문자, 숫자</Comment>
       <DataType>VARCHAR2(15 byte)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="4153" parent="59" name="shippingStatus">
+    <column id="4154" parent="59" name="shippingstatus">
       <Position>7</Position>
       <Comment>0은 배송준비중&#xd;
 1은 배송중&#xd;
@@ -28882,132 +28888,132 @@ seq_index</ColNames>
       <NotNull>1</NotNull>
       <DefaultExpression>0</DefaultExpression>
     </column>
-    <column id="4154" parent="59" name="invoice">
+    <column id="4155" parent="59" name="invoice">
       <Position>8</Position>
       <Comment>문자</Comment>
       <DataType>VARCHAR2(20 byte)|0s</DataType>
       <NotNull>1</NotNull>
       <DefaultExpression>null</DefaultExpression>
     </column>
-    <column id="4155" parent="59" name="orderdate">
+    <column id="4156" parent="59" name="orderdate">
       <Position>9</Position>
       <Comment>YYYYMMDD</Comment>
       <DataType>DATE|0s</DataType>
       <NotNull>1</NotNull>
       <DefaultExpression>SYSDATE</DefaultExpression>
     </column>
-    <index id="4156" parent="59" name="PK_REGULAR_ORDER">
-      <ObjectId>20130</ObjectId>
-      <CreatedTimestamp>2020-12-22.23:44:44</CreatedTimestamp>
-      <ModifiedTimestamp>2020-12-22.23:44:44</ModifiedTimestamp>
+    <index id="4157" parent="59" name="PK_REGULAR_ORDER">
+      <ObjectId>20174</ObjectId>
+      <CreatedTimestamp>2020-12-23.03:04:00</CreatedTimestamp>
+      <ModifiedTimestamp>2020-12-23.03:04:00</ModifiedTimestamp>
       <TablespaceName>USERS</TablespaceName>
       <ColNames>ordernumber</ColNames>
       <Unique>1</Unique>
     </index>
-    <key id="4157" parent="59" name="PK_REGULAR_ORDER">
-      <ModifiedTimestamp>2020-12-22.23:44:44</ModifiedTimestamp>
+    <key id="4158" parent="59" name="PK_REGULAR_ORDER">
+      <ModifiedTimestamp>2020-12-23.03:04:00</ModifiedTimestamp>
       <ColNames>ordernumber</ColNames>
       <InitiallyDeferred>1</InitiallyDeferred>
       <UnderlyingIndexName>PK_REGULAR_ORDER</UnderlyingIndexName>
       <Primary>1</Primary>
     </key>
-    <column id="4158" parent="60" name="id">
+    <column id="4159" parent="60" name="id">
       <Position>1</Position>
       <Comment>영어소문자, 숫자</Comment>
       <DataType>VARCHAR2(15 byte)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="4159" parent="60" name="height">
+    <column id="4160" parent="60" name="height">
       <Position>2</Position>
       <Comment>숫자 3자리</Comment>
       <DataType>VARCHAR2(3 byte)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="4160" parent="60" name="weight">
+    <column id="4161" parent="60" name="weight">
       <Position>3</Position>
       <Comment>숫자 3자리</Comment>
       <DataType>VARCHAR2(3 byte)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="4161" parent="60" name="momentum">
+    <column id="4162" parent="60" name="momentum">
       <Position>4</Position>
       <Comment>정도에 따라 5까지 올라감</Comment>
       <DataType>NUMBER(*)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="4162" parent="60" name="eyes">
+    <column id="4163" parent="60" name="eyes">
       <Position>5</Position>
       <Comment>불편한 정도에 따라 5까지 올라감</Comment>
       <DataType>NUMBER(*)|0s</DataType>
       <NotNull>1</NotNull>
       <DefaultExpression>0</DefaultExpression>
     </column>
-    <column id="4163" parent="60" name="bloodcirculation">
+    <column id="4164" parent="60" name="bloodcirculation">
       <Position>6</Position>
       <Comment>불편한 정도에 따라 5까지 올라감</Comment>
       <DataType>NUMBER(*)|0s</DataType>
       <NotNull>1</NotNull>
       <DefaultExpression>0</DefaultExpression>
     </column>
-    <column id="4164" parent="60" name="digestiveapparatus">
+    <column id="4165" parent="60" name="digestiveapparatus">
       <Position>7</Position>
       <Comment>불편한 정도에 따라 5까지 올라감</Comment>
       <DataType>NUMBER(*)|0s</DataType>
       <NotNull>1</NotNull>
       <DefaultExpression>0</DefaultExpression>
     </column>
-    <column id="4165" parent="60" name="skin">
+    <column id="4166" parent="60" name="skin">
       <Position>8</Position>
       <Comment>불편한 정도에 따라 5까지 올라감</Comment>
       <DataType>NUMBER(*)|0s</DataType>
       <NotNull>1</NotNull>
       <DefaultExpression>0</DefaultExpression>
     </column>
-    <column id="4166" parent="60" name="fatigue">
+    <column id="4167" parent="60" name="fatigue">
       <Position>9</Position>
       <Comment>불편한 정도에 따라 5까지 올라감</Comment>
       <DataType>NUMBER(*)|0s</DataType>
       <NotNull>1</NotNull>
       <DefaultExpression>0</DefaultExpression>
     </column>
-    <column id="4167" parent="60" name="joint">
+    <column id="4168" parent="60" name="joint">
       <Position>10</Position>
       <Comment>불편한 정도에 따라 5까지 올라감</Comment>
       <DataType>NUMBER(*)|0s</DataType>
       <NotNull>1</NotNull>
       <DefaultExpression>0</DefaultExpression>
     </column>
-    <column id="4168" parent="60" name="hair">
+    <column id="4169" parent="60" name="hair">
       <Position>11</Position>
       <Comment>불편한 정도에 따라 5까지 올라감</Comment>
       <DataType>NUMBER(*)|0s</DataType>
       <NotNull>1</NotNull>
       <DefaultExpression>0</DefaultExpression>
     </column>
-    <column id="4169" parent="60" name="immunity">
+    <column id="4170" parent="60" name="immunity">
       <Position>12</Position>
       <Comment>불편한 정도에 따라 5까지 올라감</Comment>
       <DataType>NUMBER(*)|0s</DataType>
       <NotNull>1</NotNull>
       <DefaultExpression>0</DefaultExpression>
     </column>
-    <index id="4170" parent="60" name="PK_SURVEY_RESULT">
-      <ObjectId>20127</ObjectId>
-      <CreatedTimestamp>2020-12-22.23:44:44</CreatedTimestamp>
-      <ModifiedTimestamp>2020-12-22.23:44:44</ModifiedTimestamp>
+    <index id="4171" parent="60" name="PK_SURVEY_RESULT">
+      <ObjectId>20171</ObjectId>
+      <CreatedTimestamp>2020-12-23.03:03:59</CreatedTimestamp>
+      <ModifiedTimestamp>2020-12-23.03:03:59</ModifiedTimestamp>
       <TablespaceName>USERS</TablespaceName>
       <ColNames>id</ColNames>
       <Unique>1</Unique>
     </index>
-    <key id="4171" parent="60" name="PK_SURVEY_RESULT">
-      <ModifiedTimestamp>2020-12-22.23:44:44</ModifiedTimestamp>
+    <key id="4172" parent="60" name="PK_SURVEY_RESULT">
+      <ModifiedTimestamp>2020-12-23.03:03:59</ModifiedTimestamp>
       <ColNames>id</ColNames>
       <InitiallyDeferred>1</InitiallyDeferred>
       <UnderlyingIndexName>PK_SURVEY_RESULT</UnderlyingIndexName>
       <Primary>1</Primary>
     </key>
-    <foreign-key id="4172" parent="60" name="FK_MEMBERS_TO_SURVEY_RESULT_1">
-      <ModifiedTimestamp>2020-12-22.23:44:44</ModifiedTimestamp>
+    <foreign-key id="4173" parent="60" name="FK_MEMBERS_TO_SURVEY_RESULT_1">
+      <ModifiedTimestamp>2020-12-23.03:04:00</ModifiedTimestamp>
       <ColNames>id</ColNames>
       <RefSchemaName>LOMUE</RefSchemaName>
       <RefTableName>MEMBERS</RefTableName>
