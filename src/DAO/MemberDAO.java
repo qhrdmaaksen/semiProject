@@ -6,7 +6,7 @@ import java.sql.ResultSet;
 
 import VO.MemberVO;
 
-public class MemberDao extends SuperDao{
+public class MemberDAO extends SuperDAO {
 
 
 	public MemberVO Insertdate(String id, String password) {

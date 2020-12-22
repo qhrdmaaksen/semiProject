@@ -4,7 +4,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-public class SuperDao {
+public class SuperDAO {
 	protected Connection conn = null;
 	private String driver = "oracle.jdbc.driver.OracleDriver";
 	private String url = "jdbc:oracle:thin:@localhost:1521:xe";
@@ -13,7 +13,7 @@ public class SuperDao {
 	private String id = "lomue";
 	private String password = "w12270502w";
 	
-	public SuperDao() {
+	public SuperDAO() {
 		try {
 			Class.forName(this.driver) ;
 			this.conn = this.getConnection();
