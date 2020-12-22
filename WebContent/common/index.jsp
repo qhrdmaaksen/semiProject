@@ -7,7 +7,6 @@
 --%>
 <!DOCTYPE html>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1">
 <%@ include file="nav.jsp"%>
 <html>
 <head>

@@ -36,9 +36,7 @@ public class OrderDAO extends SuperDao{
             rs = pstmt.executeQuery() ;
             while (lists.size()<4){
                 rs.next();
-                System.out.println(rs.getInt("productCode"));
                 ProductVO product = SelectProduct(rs.getInt("productCode"));
-
                 lists.add(product);
             }
         } catch (Exception e) {
@@ -69,7 +67,6 @@ public class OrderDAO extends SuperDao{
         ResultSet rs = null ;
 
         try {
-            System.out.println("productcode : " + productcode);
             conn = super.getConnection() ;
             pstmt = conn.prepareStatement(sql) ;
 

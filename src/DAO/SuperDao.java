@@ -8,8 +8,10 @@ public class SuperDao {
 	protected Connection conn = null;
 	private String driver = "oracle.jdbc.driver.OracleDriver";
 	private String url = "jdbc:oracle:thin:@localhost:1521:xe";
-	private String id = "proman";
-	private String password = "oracle";
+//	private String id = "proman";
+//	private String password = "oracle";
+	private String id = "lomue";
+	private String password = "w12270502w";
 	
 	public SuperDao() {
 		try {

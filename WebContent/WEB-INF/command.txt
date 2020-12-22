@@ -1,5 +1,6 @@
 #### Main Section ####################################
 index=common.IndexController
+survey=common.ServeyController
 #### Member Section ##################################
 
 #### CS-Center Section ###############################
