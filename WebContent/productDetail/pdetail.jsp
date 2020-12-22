@@ -55,13 +55,13 @@
 			target.innerHTML = imgInfo;
 			imageZoom();
 		}
+		
 	</script>
 	<script>
 		function regularInnerHTML(){
 			var str = " ";
 	
 			str +=  "<table>";
-			str +=  "<div id='regular-display'>";
 			str +=  "<tr>";
 			str +=  "<td>";
 			str +=  "<button type='button'>1개월 정기</button>"; 
@@ -71,7 +71,6 @@
 			str +=  "</td>";
 			str +=  "<td>";
 			str +=  "<button type='button'>3개월 정기</button>"; 
-			str +=  "</td>";
 			str +=  "</td>";
 			str +=  "</tr>";
 			str +=  "<tr>";
@@ -85,17 +84,18 @@
 			str +=  "<button type='button'>6개월 정기</button>"; 
 			str +=  "</td>";
 			str +=  "</tr>";
-			str +=  "</div>";
 			str +=  "</table>";
 	
 			document.getElementById("inHere").innerHTML = str;
 		};
 	</script>
-	<style type="text/css">
-		#regular-display{
-			display: none;
-		}
-	</style>
+	<script type="text/javascript">
+		$(document).ready(function() {
+			$('radio#delivery-select').click(function(){
+				$("#inHere").css("display","inline");
+			});
+		})
+	</script>
 	<style type="text/css">
 		#prod-contents{
 			position: absolute; 
@@ -105,6 +105,7 @@
 		}
 		#prod-tab-menu{
 			font-size: 30px;
+			position: 
 		}
 		#gojung.gojung2{
 			position: fixed;
@@ -157,8 +158,33 @@
 							</td>
 						<tr>	
 							<td align="center">
-								<input type="radio" name="delivery" value="정기 배송" onclick="regularInnerHTML();">&nbsp;&nbsp;정기 배송 선택
-								<div id="inHere"></div>
+								<input id="delivery-select" type="radio" name="delivery" value="정기 배송" onclick="regularInnerHTML();">&nbsp;&nbsp;정기 배송 선택
+								<div id="inHere" style="display: none;">
+									<table>
+										<tr>
+											<td>
+												<button type='button'>1개월 정기</button>
+											</td>
+											<td>
+													<button type='button'>2개월 정기</button>
+											</td>
+											<td>
+													<button type='button'>3개월 정기</button>
+											</td>
+										</tr>
+										<tr>
+											<td>
+													<button type='button'>4개월 정기</button>
+											</td>
+											<td>
+													<button type='button'>5개월 정기</button>
+											</td>
+											<td>
+												<button type='button'>6개월 정기</button>
+											</td>
+										</tr>
+									</table>
+								</div>
 							</td>
 						</tr>
 							<tr>	
@@ -174,163 +200,248 @@
 			</div>
 		</div>
 	</div>
-	<div class="container">
-		<nav id="prod-tab-menu">
-			<div class="nav nav-tabs" id="nav-tab" role="tablist">
-				<a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab"
-					aria-controls="nav-home" aria-selected="true">상품 상세 보기
-				</a>
-				<a
-					class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab"
-					href="#nav-profile" role="tab" aria-controls="nav-profile"
-					aria-selected="false">상품평
-				</a> 
-				<a class="nav-item nav-link"
-					id="nav-contact-tab" data-toggle="tab" href="#nav-contact"
-					role="tab" aria-controls="nav-contact" aria-selected="false">상품 문의
-				</a>
+	<div class="container mt-3">
+		<h1 style="color: white">.......</h1>
+		<br>
+		<ul class="nav nav-tabs">
+			<li class="nav-item"><a class="nav-link active"
+				data-toggle="tab" href="#prod-detail">상품 정보</a></li>
+			<li class="nav-item"><a class="nav-link" data-toggle="tab"
+				href="#prod-review">상품 리뷰</a></li>
+			<li class="nav-item"><a class="nav-link" data-toggle="tab"
+				href="#cs-main">고객 문의</a></li>
+			<li class="nav-item"><a class="nav-link" data-toggle="tab"
+			href="#delivery-info">배송/교환/반품 안내</a></li>
+		</ul>
+	</div>
+		<div class="tab-content">
+			<div id="prod-detail" align="center" class="container tab-pane active">
+			<img id="img0" title="홍삼" width="50%" height="50%"
+				src="./../images/bottle.png" alt="bottle.png"> <br> 면역력
+			증진·피로개선·지구력 증진에 도움을 줄 수 있는 면역력 증진·피로개선·기억력개선에 도움을 줄 수 있음<br> 쌀의
+			배아, 현미, 사탕수수 등에서 찾을 수 있는 옥타코사놀은 지구력 증진에 도움을 줄 수 있습니다.<br> 천연소재
+			비타민E는 유해산소로부터 단백질의 산화를 방지하고, DNA의 손상을 억제하여 세포를 보호하는데 필요합니다.
+			<button id="prod-moreView"
+				style="width: 60%; font-size: 20px; color: blue; background: white;">상품
+				정보 상세 보기 ▼</button>
 			</div>
-		</nav>
-		<div class="tab-content" id="nav-tabContent">
-			<div class="tab-pane fade show active" id="nav-home" role="tabpanel"
-				aria-labelledby="nav-home-tab">...</div>
-			<div class="tab-pane fade" id="prod-review" role="tabpanel"
-				aria-labelledby="nav-profile-tab">...</div>
-			<div class="tab-pane fade" id="cs-main" role="tabpanel"
-				aria-labelledby="nav-contact-tab">...</div>
-		</div>
-	</div>
-	<br><br><br><br><br><br><br>
-	<div align="center">
-	 <img id="img0" title="홍삼" width="50%" height="50%" src="./../images/bottle.png" alt="bottle.png">  <br>
-	 		면역력 증진·피로개선·지구력 증진에 도움을 줄 수 있는
-			면역력 증진·피로개선·기억력개선에 도움을 줄 수 있음<br>
-			쌀의 배아, 현미, 사탕수수 등에서 찾을 수 있는 옥타코사놀은 지구력 증진에 도움을 줄 수 있습니다.<br>
-			천연소재 비타민E는 유해산소로부터 단백질의 산화를 방지하고,
-			DNA의 손상을 억제하여 세포를 보호하는데 필요합니다.
-		<button id="prod-moreView" style="width: 60%; font-size: 20px; color: blue; background: white;">상품 상세 내용 보기 ▼</button>
-	</div>
-	<div align="center" id="prod-images" style="display: none;" >
-		 <img id="img1" title="홍삼1" width="50%" height="50%" src="./../images/point.jpg" alt="point.jpg">    <br>
-		 	필리 홍삼 옥타코사놀 포인트
-			01
-			국내산 6년근 홍삼 사용
-			국내산 6년근 홍삼분말을 사용하여 진세노사이드(Rg1, Rb1 및 Rg3의 합)를 하루 3.4 mg 섭취할 수 있습니다.<br>
-		 <img id="img2" title="홍삼2" width="50%" height="50%" src="./../images/point01.jpg" alt="point01.jpg"><br>
-		 	02
-			지구력 증진을 위한 옥타코사놀 함유
-			사탕수수에서 추출한 독일산 옥타코사놀을 하루 10 mg 섭취할 수 있습니다.<br>
-		 <img id="img3" title="홍삼3" width="50%" height="50%" src="./../images/point02.jpg" alt="point02.jpg"><br>
-		 	03
-			비타민E 함유
-			미국 BASF의 식물성 오일에서 추출한 비타민E(d-α-토코페롤)를 하루 3.3 mg 섭취할 수 있습니다.<br>
-		 <img id="img4" title="홍삼4" width="50%" height="50%" src="./../images/point03.jpg" alt="point03.jpg"><br>
-		 	제품설명
-			필리 홍삼 옥타코사놀 제품형태
-			이렇게 드세요
-			33 g (550 mg x 60캡슐), 30일분<br>
-			필리 홍삼 옥타코사놀 섭취방법
-			홍삼농축액분말(홍삼: 국내산 / 6년근 / 원료삼배합비율: 홍삼근70%, 미삼류30%), 옥타코사놀(독일산), D-알파-토코페롤혼합제제(d-a-토코페롤, 대두유)
-			부원료: 대두유(외국산: 미국, 태국, 벨기에 등),<br> 밀납, 대두레시틴
-			캡슐기제: 젤라틴(돈피) 글리세린, 카카오색소(카카오색소, 덱스트린)
-		 <br><br><br><br>
-		 <button id="prod-moreView-remove" style="width: 60%; font-size: 20px; color: blue; background: white;">상 품 상세 보기 접기 ▲</button>
-		  <br><br><br> <br><br><br>
-	</div>
-	<nav id="gojung" class="navbar navbar-light bg-light justify-content-between">
-		<a class="navbar-brand"></a>
-		<form class="form-inline">
-			<button class="gojung2" class="btn btn-outline-success my-2 my-sm-0" type="submit">위로 이동</button>
-		</form>
-	</nav>
-	<div class="container col-sm-offset-<%=myoffset%> col-sm-<%=mywidth%>">
-		<div class="panel panel-default panel-primary">
-			<div class="panel-heading">
-				<form class="form-inline" role="form">
-					<h3>리뷰 목록</h3>
-				</form>
-			</div>
-			<table class="table table-striped table-hover">
-				<thead>
-					<tr>
-						<!-- <th>글 번호</th> -->
-						<th>작성자</th>						
-						<th>글 내용</th>
-						<th>조회수</th>
-						<th>작성 일자</th>
-						<th>수정</th>
-						<th>삭제</th>
-						<th>답글</th>
-					</tr>
-				</thead>
-				<tr align="right">
-					<td colspan="10">
-						<form class="form-inline" role="form" name="myform" action="" method="get">
-							<input type="hidden" name="command" value="boList">
-							<button class="btn btn-default btn-info" type="button"
-								onclick="writeForm();">글 쓰기</button>
-								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-								<p class="form-control-static">${requestScope.pagingStatus}</p>
+		<div id="prod-review" class="container tab-pane fade">
+			<div
+				class="container col-sm-offset-<%=myoffset%> col-sm-<%=mywidth%>">
+				<div class="panel panel-default panel-primary">
+					<div class="panel-heading">
+						<form class="form-inline" role="form">
+							<h3>리뷰 목록</h3>
 						</form>
-					</td>
-				</tr>
-				<c:forEach var="bean" items="${requestScope.lists}">
-					<tr>
-						<%-- <td>${bean.no}</td> --%>						
-						<td>
-							<c:forEach var="cnt" begin="1" end="${bean.depth}">
-								<span class="badge re">re</span>
-							</c:forEach>
-							<a href="boDetailView&no=${bean.no}&${requestScope.parameters}">
-								${bean.subject}
-							</a>
-						</td>
-						<td>${bean.writer}</td>
-						<td>${bean.password}</td>
-						<td>${bean.content}</td>
-						<td>${bean.readhit}</td>
-						<td>${bean.regdate}</td>
-						<td>
-							<c:if test="${sessionScope.loginfo.id == bean.writer}">
-								<a href="boUpdate&no=${bean.no}&${requestScope.parameters}">
+					</div>
+					<table class="table table-striped table-hover">
+						<thead>
+							<tr>
+								<!-- <th>글 번호</th> -->
+								<th>작성자</th>
+								<th>글 내용</th>
+								<th>조회수</th>
+								<th>작성 일자</th>
+								<th>수정</th>
+								<th>삭제</th>
+								<th>답글</th>
+							</tr>
+						</thead>
+						<tr align="right">
+							<td colspan="10">
+								<form class="form-inline" role="form" name="myform" action=""
+									method="get">
+									<input type="hidden" name="command" value="boList">
+									<button class="btn btn-default btn-info" type="button"
+										onclick="writeForm();">글 쓰기</button>
+									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+									<p class="form-control-static">${requestScope.pagingStatus}</p>
+								</form>
+							</td>
+						</tr>
+						<c:forEach var="bean" items="${requestScope.lists}">
+							<tr>
+								<%-- <td>${bean.no}</td> --%>
+								<td><c:forEach var="cnt" begin="1" end="${bean.depth}">
+										<span class="badge re">re</span>
+									</c:forEach> <a
+									href="boDetailView&no=${bean.no}&${requestScope.parameters}">
+										${bean.subject} </a></td>
+								<td>${bean.writer}</td>
+								<td>${bean.password}</td>
+								<td>${bean.content}</td>
+								<td>${bean.readhit}</td>
+								<td>${bean.regdate}</td>
+								<td><c:if test="${sessionScope.loginfo.id == bean.writer}">
+										<a href="boUpdate&no=${bean.no}&${requestScope.parameters}">
+											수정 </a>
+									</c:if> <c:if test="${sessionScope.loginfo.id != bean.writer}">
 									수정
-								</a>
-							</c:if>
-							<c:if test="${sessionScope.loginfo.id != bean.writer}">
-								수정
-							</c:if>
-						</td>
-						<td>
-							<c:if test="${sessionScope.loginfo.id == bean.writer}">
-								<a href="boDelete&no=${bean.no}&${requestScope.parameters}">
+								</c:if></td>
+								<td><c:if test="${sessionScope.loginfo.id == bean.writer}">
+										<a href="boDelete&no=${bean.no}&${requestScope.parameters}">
+											삭제 </a>
+									</c:if> <c:if test="${sessionScope.loginfo.id != bean.writer}">
 									삭제
-								</a>
-							</c:if>
-							<c:if test="${sessionScope.loginfo.id != bean.writer}">
-								삭제
-							</c:if>
-						</td>
-						<td>
-							<c:if test="${bean.depth <3 }">
-								<a href="boReply&no=${bean.no}&${requestScope.parameters}&groupno=${bean.groupno}&orderno=${bean.orderno}&depth=${bean.depth}">
-									답글 
-								</a>
-							</c:if>
-							<c:if test="${bean.depth >= 3 }">
-								답글
-							</c:if>
-						</td>
-						<td>
-							${bean.remark}
-						</td>
-					</tr>
-				</c:forEach>
-			</table>
+								</c:if></td>
+								<td><c:if test="${bean.depth <3 }">
+										<a
+											href="boReply&no=${bean.no}&${requestScope.parameters}&groupno=${bean.groupno}&orderno=${bean.orderno}&depth=${bean.depth}">
+											답글 </a>
+									</c:if> <c:if test="${bean.depth >= 3 }">
+									답글
+								</c:if></td>
+								<td>${bean.remark}</td>
+							</tr>
+						</c:forEach>
+					</table>
+				</div>
+				<div align="center">
+					<footer>${requestScope.pagingHtml}</footer>
+				</div>
+			</div>
 		</div>
-		<div align="center">
-			<footer>${requestScope.pagingHtml}</footer>			
-		</div>		
-	</div>
-	<br><br><br><br>
+		<div id="cs-main" class="container tab-pane fade">
+			</div>
+			<div id="delivery-info" class="container tab-pane fade" align="center">
+				<li class="product-etc">
+					<h5 class="prod-delivery-return-policy-title">배송정보</h5>
+					<table class="prod-delivery-return-policy-table" border="1">
+						<colgroup>
+							<col width="150px">
+							<col width="340px">
+							<col width="150px">
+							<col width="*">
+						</colgroup>
+						<tbody>
+							<tr align="center">
+								<th>배송방법</th>
+								<td>순차배송</td>
+								<th rowspan="2">배송비</th>
+								<td rowspan="2">무료배송<br>- 도서산간 지역 추가비용 없음
+								</td>
+							</tr>
+							<tr align="center">
+								<th>묶음배송 여부</th>
+								<td>가능</td>
+							</tr>
+							<tr>
+								<th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;배송기간</th>
+								<td colspan="3">
+									<ol>
+										<li class="prod-delivery-period-contents etc-pdd-info"><span>
+												배송 지역 : 주문 및 결제 완료 후, 1-2일 이내 도착</span>
+										</li>
+										<li class="prod-delivery-period-contents">미배송 지역 : 주문 및
+											결제 완료 후, 2-3일 이내 도착
+											<p class="prod-delivery-period__notice">- 도서 산간 지역 등은 하루가 더
+												소요될 수 있습니다. 곧 고객님께 찾아갈 수 있도록 노력하겠습니다</p>
+										</li>
+										<li class="prod-delivery-period-contents">천재지변, 물량 수급 변동 등
+											예외적인 사유 발생 시, 다소 지연될 수 있는 점 양해 부탁드립니다.</li>
+									</ol>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+					<h5 class="prod-delivery-return-policy-title">교환/반품 안내</h5>
+					<table class="prod-delivery-return-policy-table" border="1">
+						<colgroup>
+							<col width="160px">
+							<col width="*">
+						</colgroup>
+						<tbody align="center">
+							<tr>
+								<th>교환/반품 비용</th>
+								<td>5,000원<br>- 단, 고객 변심의 경우에만 발생<br>- 부분반품 시, 남은금액이
+									무료배송 조건을 유지하면 일부 반품비용이 부과
+								</td>
+							</tr>
+							<tr>
+								<th>교환/반품 신청 기준</th>
+								<td>
+									<p>ㆍ단순변심에 의한 상품의 교환/반품은 제품 수령 후 30일 이내까지만 가능 (교환/반품비용
+										고객부담)</p>
+									<p>
+										ㆍ상품의 내용이 표시·광고의 내용과 다른 경우에는 상품을 수령한 날부터 3개월 이내,<br>
+										 그 사실을 안 날 또는 알 수 있었던 날부터 30일이내에 청약철회 가능<br>
+									</p>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+						<h5 class="prod-delivery-return-policy-title">교환/반품 제한사항</h5>
+							<li >주문/제작 상품의 경우, 상품의 제작이 이미 진행된 경우</li>
+							<li>상품 포장을 개봉하여 사용 또는 설치 완료되어 상품의 가치가 훼손된 경우 (단, 내용 확인을 위한 포장
+								개봉의 경우는 예외)</li>
+							<li>고객의 사용, 시간경과, 일부 소비에 의하여 상품의 가치가 현저히 감소한 경우</li>
+							<li>세트상품 일부 사용, 구성품을 분실하였거나 취급 부주의로 인한 파손/고장/오염으로 재판매 불가한 경우</li>
+							<li>모니터 해상도의 차이로 인해 색상이나 이미지가 실제와 달라, 고객이 단순 변심으로 교환/반품을 무료로
+								요청하는 경우</li>
+							<li>제조사의 사정 (신모델 출시 등) 및 부품 가격 변동 등에 의해 무료 교환/반품으로 요청하는 경우</li>
+						<p class="prod-delivery-return-policy__limit-text">※ 각 상품별로 아래와 같은
+							사유로 취소/반품이 제한 될 수 있습니다.</p>
+					<div class="product-item__table product-seller">
+						<p class="prod-delivery-return-policy-title">판매자 정보</p>
+						<table class="prod-delivery-return-policy-table" border="1">
+							<colgroup>
+								<col width="150px">
+								<col width="*">
+							</colgroup>
+							<tbody>
+								<tr>
+									<th>판매자</th>
+									<td>도담도담</td>
+								</tr>
+							</tbody>
+						</table>
+			
+						<p class="prod-minor-notice">미성년자가 체결한 계약은 법정대리인이 동의하지 않는 경우 본인
+							또는 법정대리인이 취소할 수 있습니다.</p>
+					</div>
+				</li>
+			</div>
+			</div>
+		<div align="center" id="prod-images" style="display: none;">
+			<img id="img1" title="홍삼1" width="50%" height="50%"
+				src="./../images/point.jpg" alt="point.jpg"> <br> 필리 홍삼
+			옥타코사놀 포인트 01 국내산 6년근 홍삼 사용 국내산 6년근 홍삼분말을 사용하여 진세노사이드(Rg1, Rb1 및 Rg3의
+			합)를 하루 3.4 mg 섭취할 수 있습니다.<br> <img id="img2" title="홍삼2"
+				width="50%" height="50%" src="./../images/point01.jpg"
+				alt="point01.jpg"><br> 02 지구력 증진을 위한 옥타코사놀 함유 사탕수수에서 추출한
+			독일산 옥타코사놀을 하루 10 mg 섭취할 수 있습니다.<br> <img id="img3" title="홍삼3"
+				width="50%" height="50%" src="./../images/point02.jpg"
+				alt="point02.jpg"><br> 03 비타민E 함유 미국 BASF의 식물성 오일에서 추출한
+			비타민E(d-α-토코페롤)를 하루 3.3 mg 섭취할 수 있습니다.<br> <img id="img4"
+				title="홍삼4" width="50%" height="50%" src="./../images/point03.jpg"
+				alt="point03.jpg"><br> 제품설명 필리 홍삼 옥타코사놀 제품형태 이렇게 드세요 33 g
+			(550 mg x 60캡슐), 30일분<br> 필리 홍삼 옥타코사놀 섭취방법 홍삼농축액분말(홍삼: 국내산 / 6년근
+			/ 원료삼배합비율: 홍삼근70%, 미삼류30%), 옥타코사놀(독일산), D-알파-토코페롤혼합제제(d-a-토코페롤, 대두유)
+			부원료: 대두유(외국산: 미국, 태국, 벨기에 등),<br> 밀납, 대두레시틴 캡슐기제: 젤라틴(돈피) 글리세린,
+			카카오색소(카카오색소, 덱스트린) <br>
+			<br>
+			<br>
+			<br>
+			<button id="prod-moreView-remove"
+				style="width: 60%; font-size: 20px; color: blue; background: white;">상
+				품 상세 보기 접기 ▲</button>
+			<br>
+			<br>
+			<br> <br>
+			<br>
+			<br>
+		</div>
+		<nav id="gojung"
+			class="navbar navbar-light bg-light justify-content-between">
+			<a class="navbar-brand"></a>
+			<form class="form-inline">
+				<button class="gojung2" class="btn btn-outline-success my-2 my-sm-0"
+					type="submit">위로 이동</button>
+			</form>
+		</nav>
+		<br>
+		<br>
+		<br>
+		<br>
 </body>
 </html>

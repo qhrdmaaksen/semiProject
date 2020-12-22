@@ -4,138 +4,67 @@
 <!DOCTYPE html>
 
 <html>
-
 <head>
 	<meta charset="UTF-8">
-	<title>Insert title here</title>
+	<title>태그 선택자 사용(li 요소에 디자인 적용)</title>
 	<style type="text/css">
-		body{
-			font:12px "맑은 고딕", 돋움, arial;
-			margin: 0px;
-		}
-		h1{
-			font-size:20px;
-			background-color: #666666 ;
+		h3{/*h3 전체*/
+			background-color: #000000;
 			color: #ffffff;
-			text-align: center;
-			margin: 0px;
-			padding: 10px 15px ;
+			width: 50%;/*전체 웹 페이지 100%중 50%*/
+			margin-left: 20px;
 		}
-		h2{
-			font-size:15px;
-			letter-spacing: -2px;
-			text-align: center;
-			margin: 0px;
+		li{/*li 전체*/
+			line-height: 200% ;
+			color: #ff6600;
+			font-size: 12px;
+			width: 400px;
+			margin-left: 20px;
 		}
-		h3{
-			font-size:13px;
-			letter-spacing: 1px;
-			text-align: center;
-			margin: 20px 0px;
+		span{
+			color:#ffffff; 
+			background-color:#ff0000;
 		}
-		p{/* 행별 간격 line-height */
-			line-height: 250%;
+		.hoho{/*class 지정 클래스는 .클래스이름 으로 코딩 (한 묶음으로 처리할때 class를 사용함.)*/
+			color: #ff00ff;
+			background-color: #ffffff;
+			font-size: 15px;
 		}
-		dl{
-			margin:20px 0px;
-			line-height: 250%;
+		#one{/*id 지정은 #아이디이름 으로 코딩*/
+			color: #00ffff;
+			background-color: #000000;
+			font-size: 20px;
 		}
-		dt{
-			font-size:12px;
-			margin: 0px;
-			padding: 25px;
-			color: #6666cc;
+		.haha{/*class hoho 와 haha 를 같이쓰는데 .haha .hoho 순서에따라 다르게 적용된다 . */
+			font-size: 50px;
 		}
-		.bookImg{/* 이미지 영역 */
-			text-align: center;
-			margin: 40px 0px;
+		#two{
+			color: green ; 
 		}
-		a{/* 고정 영역 스타일 */
-			color: #666666;
-			text-decoration: none;
-			font-family: "궁서", arial;
-		}
-		a:hover{/* 고정 영역에 마우스가 들어가면... */
-			text-decoration: underline;
-			color: blue;
-		}
-		#topNavi{/* 고정 영역 ul 컨테이너 박스 */
-			list-style: none;/* 이부분을 활용해서 메뉴를 만들기도한다 .  */
-			width:300px;
-			padding: 30px 0px 0px 0px ; 
-			margin: 0px;
-			text-align: left;
-		}
-		header{/* 상단의 타이틀 */
-			position: fixed;
-			width:100%;
-			top:0px;
-			left:0px;
-		}
-		nav{
-			position: fixed; /* 항상고정 fixed */
-			width:280px;
-			border: 1px solid #666666;
-			background-color: #efefef;
-			padding: 15px;
-			top:80px;
-			left:50px;
-			text-align: left;
-		}
-		section{
-			margin: 80px 0px 50px 350px ;
-			width: 500px ;
+		.gamja{
+			background-color: #000000;
+			color: #ffffff;
 		}
 	</style>
 </head>
 <body>
-	<header>
-			<h1 id="titlePage">프로그래머의 모바일 레시피</h1>
-		</header>
-		<nav>
-			<h2>관련 도서</h2>
-			<ul id="topNavi">
-				<li><a href="#"><font color="red"><b>이 부분은 고정 영역입니다.</b></font></a> </li>
-				<li><a href="#">아이폰 프로그래밍 UIKit 핵심 바이블</a> </li>				
-				<li><a href="#">가장 쉬운 실전 아이폰 프로그래밍 스타트 </a> </li>
-				<li><a href="#"> 안드로이드 API 바이블 : 200개 예제로 배우는 Android API 핵심 원리  </a> </li>
-				<li><a href="#"> 예제로 배우는 핵심 패턴 안드로이드 프로그래밍 SDK 2.1  </a> </li>
-				<li><a href="#">예제로 배우는 핵심 패턴 아이폰 프로그래밍  </a> </li>
-			</ul>
-		</nav>
-		<section>
-			<h2>아이폰 프로그래밍 UIKit 핵심 바이블</h2>
-			<div class="bookImg">
-				<figure>
-					<img src="../images/book_mobile1.gif" width="135" height="168" alt="아이폰 프로그래밍 UIKit 핵심 바이블" />
-				</figure>
-			</div>
-			<ul>
-				<li>저 자 토코로 유타</li>  
-				<li>역 자  김은철 , 유세라</li>  
-				<li>구 분  번역서</li>  
-				<li>발행일 2011년 06월 09일</li> 
-				<li>페이지 512 페이지</li>
-				<li>ISBN 978-89-5674-530-5 </li>
-				<li>난이도 초급.중급</li>
-				<li>출판사 정보문화사</li>
-			</ul>
-			<h3>UIKit 상세 레퍼런스를 통해 기초부터 다지는 아이폰 프로그래밍!</h3>
-			<dl>
-				<dt>인터페이스 빌더는 필수인가?</dt>
-				<dd>대답은 물론 &quot;아니다&quot;이다. 이 책에서는 기본적으로 인터페이스 빌더를 사용하지 않고 진행한다. 인터페이스 빌더를 사용하면 은폐되는 부분이 생기기 때문이다. 이 책은 UIKit의 내용에 초점을 맞춰 설명하고 있다. UIKit의 기능이나 움직임이 블랙박스화 된 상태로는 내용을 정확하게 알 수 없기 때문이다. 뒤집어 말하면 이 책의 내용을 이해하는 것은 인터페이스 빌더에서 블랙박스화 되어 있는 부분을 배우는 것이라고 할 수 있다.</dd>
-				<dt>UIKit이란?</dt>
-				<dd>UIKit는 모든 iPhone/iPad 애플리케이션의 핵심이 되는 프레임워크이다. UIKit는 애플리케이션의 기본 부분을 제어하고 터치 판넬 조작이나 모션 등 사용자 조작을 감지하며, 화면 표시를 하기 위한 각종 기능을 제공한다. UIKit 지식을 잘 이해한다면 보다 능률이 높고 결함이 적은 iPhone/iPad 애플리케이션을 개발할 수 있게 될 것이다.</dd>
-			</dl>
-			<p>
-				&quot;UIKit는 대체로 어떤 기능으로 구성되어 있는 걸까?&quot; <br />
-				&quot;UISlider를 사용하려고 하는데 어떤 식으로 하면 될까?&quot;<br />
-				&quot;UIBarButton의 초기화 방법이 생각나지 않는데 어떻게 하는 거였지?&quot;<br />
-				&quot;전체 화면은 어떻게 하면 될까?&quot;
-			</p>
-			<p>
-				아이폰 프로그래밍 UIKit는 iPhone SDK에 대해서 어느 정도 알고 있는 독자가 이런 의문에 빠졌을 때 빠르게 참고할 수 있는 책이다. 이 책을 통해 iPhone 프로그램의 주요 기능을 익힐 수 있다.
-			</p>
-		</section>
+	<h1>선택자 사용하기</h1>
+	<hr>
+	<h2>두부<span id="two">감자</span>조림</h2> 
+	<h3>재료</h3>
+	<ul><!--순서없는 목록-->
+		<li><span class="gamja">감자 </span>1개</li>
+		<li><span class="hoho haha">두부</span> 1/2모</li>
+		<li>꽈리고추 10개</li>
+		<li>홍고추 1개</li>
+	</ul>
+	<h3>조리법</h3>
+	<ol><!--순서있는 목록-->
+		<li><span class="gamja">감자 </span>는 껍질을 벗기고 돌려가면서 어슷하게 썰어 찬물에 담가놓고 <span id="one">두부</span>는 도톰하게 한입크기로 썰며 꽈리고추, 홍고추는 어슷썬다.</li>	
+		<li>첫번째 썰은 재료에 <span class="hoho">두부</span>를 팬에 기름을 두르고 노릇노릇하게 앞뒤로 지져 기름은 뺀다.</li> 
+		<li>냄비에 <span class="gamja">감자 </span>와 홍고추를 담고 조림장을 반분량만 넣는다. </li>
+		<li>3번째를 끓이다가 <span>감자</span>가 반정도 익으면, <span>두부</span>와 남은 양념장을 넣는다. </li>
+		<li>윤기나게 졸여지면 꽈리고추를 마지막에 넣어 다시한번 살짝 졸여 조린다.</li>
+	</ol>
 </body>
 </html>
