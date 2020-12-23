@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
  <%@ include file="./../common/nav.jsp"%>
 <!DOCTYPE html>
 <html lang="en">
@@ -76,7 +76,7 @@
 <body>
 
 <div class="container">
-  <form action="/action_page.php" class="totallogin">
+  <div class="totallogin">
 		<form class="form-horizontal" role="form" action="<%=YesForm%>" method="post" >
 	<div class="borderclass ">
 	<div class="logo">
@@ -123,11 +123,10 @@
     </div>
     </div>
     </form>
-  </form>
+  </div>
   
 </div>
 
 </body>
 </html>
 
-   <%@ include file="./../common/footer.jsp"%>
