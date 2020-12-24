@@ -38,10 +38,18 @@ public class MemberLoginController extends SuperClass{
 		}
 		
 		if(this.validate(request)==true) {
+			String gotopage ;
+			gotopage = "common/index.jsp";
+			System.out.println(gotopage);
+			
+			
+			
 			MemberDAO dao = new MemberDAO();
 			MemberVO member =  dao.Insertdate(id,password);
 			super.session.setAttribute("loginfo", member);
-			super.GotoPage("/common/index.jsp");
+			super.GotoPage(gotopage);
+		
+		
 		}
 		super.doPost(request, response);
 	}
