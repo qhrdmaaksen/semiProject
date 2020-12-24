@@ -1,25 +1,18 @@
-package common;
+package member;
 
-import DAO.OrderDAO;
-import VO.ProductVO;
+import common.SuperClass;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.List;
 
-public class IndexController extends SuperClass {
+public class MemberMypageController extends SuperClass {
     @Override
     public void doProcess(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        OrderDAO dao = new OrderDAO();
-        List<ProductVO> lists = dao.SelectTop4Lists();
-
-        request.setAttribute("top4", lists);
 
         super.doProcess(request, response);
-        super.GotoPage("/common/index.jsp");
+        super.GotoPage("/member/mypage.jsp");
     }
 
     @Override

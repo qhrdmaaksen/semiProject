@@ -32,6 +32,7 @@ public class Controller extends HttpServlet {
     private String uploadedPath = null ;
 
     public void init(ServletConfig config) throws ServletException {
+        super.init();
         String configFile = config.getInitParameter("configFile") ;
         System.out.println("설정 파일 이름 : " + configFile);
 
@@ -57,53 +58,30 @@ public class Controller extends HttpServlet {
         System.out.println("커맨드 파라미터 : " + command);
 
         if (command==null) {
-            System.out.println("파일 업로드를 수행합니다.");
-            MultipartRequest multi = MainUtility.getMultiPartRequest(request, uploadedPath);
-
-            if (multi != null) {
-                command = multi.getParameter("command") ;
-
-                // delete_image : 이전에 업로드 했던 이미지입니다.
-                // 이 파라미터는 상품 수정 페이지에서 넘어 옵니다.
-                String delete_image = multi.getParameter("image") ;
-                System.out.println("삭제할 이미지 이름 : " + delete_image );
-
-                // 삭제될 이미지 전체 경로를 구합니다.
-                String delete_file = this.uploadedPath + "/" + delete_image ;
-                System.out.println("삭제될 파일 : " + delete_file );
-
-                // File 객체를 구합니다.
-                File delfile = new File(delete_file) ;
-
-                // File 객체의 delete() 메소드를 사용하여 이전에 업로드했던 이미지 파일을 삭제합니다.
-                delfile.delete() ;
-
-                // 파일 업로드 객체를 바인딩합니다.
-                request.setAttribute("multi", multi);
-            } else {
-                System.out.println("MultipartRequest 객체를 구하지 못했습니다.");
-            }
-        }
-
-        SuperController controller = this.todolist.get(command) ;
-        if(controller != null) {
-            String method = request.getMethod().toLowerCase();
-            if(method.equals("get")) {
-                System.out.println(controller.toString() + " get 호출됨");
-                controller.doGet(request, response);
+            //파일 업로드시 여기에 들어옴.
+        } else {
+            SuperController controller = this.todolist.get(command) ;
+            if(controller != null) {
+                String method = request.getMethod().toLowerCase();
+                if(method.equals("get")) {
+                    System.out.println(controller.toString() + " get 호출됨");
+                    controller.doGet(request, response);
+                }else {
+                    System.out.println(controller.toString() + " post 호출됨");
+                    controller.doPost(request, response);
+                }
             }else {
-                System.out.println(controller.toString() + " post 호출됨");
-                controller.doPost(request, response);
+                System.out.println("command가 널입니다.");
             }
-        }else {
-            System.out.println("command가 널입니다.");
         }
     }
+
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
         doProcess(request, response);
     }
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");

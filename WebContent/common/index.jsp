@@ -24,7 +24,7 @@
             margin-top: 20px;
         }
         .top4 {
-            padding: 20px 120px;
+            padding: 20px 200px;
         }
     </style>
 </head>
@@ -77,23 +77,21 @@
         <h1>건강 검진으로 필요한 영상소를 체크해보세요.</h1>
         <button id="go-survey" type="button" class="btn btn-primary" onclick="location.href='/dodamdodam?command=survey';">검진 시작</button>
     </div>
-    <div class="bs-example">
-        <div class="container-fluid top4 text-center">
-            <h3>저번달동안 가장 많이 팔린 영양제 리스트</h3>
-            <div class="row">
-                <div class="card-deck">
-                    <c:forEach var="product" items="${requestScope.top4}">
-                        <div class="card">
-                            <img src="./../images/test02.png" class="card-img-top" alt="...">
-                            <div class="card-body">
-                                <h5 class="card-title text-center">${product.productcode}, ${product.productname}</h5>
-                                <p class="card-text">간략한 영양제의 정보를 적어둠</p>
-                                <a href="<%=NoForm%>pdetail&code=${product.productcode}" class="btn btn-primary stretched-link">제품 상세</a>
-                            </div>
+    <div class="container-fluid top4 text-center">
+        <h3>저번달동안 가장 많이 팔린 영양제 리스트</h3>
+        <div class="row">
+            <c:forEach var="product" items="${requestScope.top4}">
+                <div class="col-xl-3 col-lg-6 col-12">
+                    <div class="card">
+                        <img src="./../images/test02.png" class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <h5 class="card-title text-center">${product.productcode}, ${product.productname}</h5>
+                            <p class="card-text">간략한 영양제의 정보를 적어둠</p>
+                            <a href="<%=NoForm%>pdetail&code=${product.productcode}" class="btn btn-primary stretched-link">제품 상세</a>
                         </div>
-                    </c:forEach>
+                    </div>
                 </div>
-            </div>
+            </c:forEach>
         </div>
     </div>
 </body>

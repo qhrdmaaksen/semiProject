@@ -13,18 +13,12 @@ import common.SuperClass;
 public class MemberLoginController extends SuperClass{
 	private String id ; 
 	private String  password ;
-	
-	
-	
+
 	@Override
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		System.out.println("회원 로그인 호출됨");
 		super.doGet(request, response);
-		String gotopage = "/member/meLoginForm.jsp" ;
-		
-		super.GotoPage(gotopage);
-		
-		
+		super.GotoPage("/member/login.jsp");
 	}
 	
 	@Override
@@ -35,40 +29,28 @@ public class MemberLoginController extends SuperClass{
 		
 		if(this.validate(request) == false) {
 			String gotopage ;
-			gotopage = "login/login.jsp";
-			
+			gotopage = "/member/login.jsp";
 			String errmsg = "회원 정보가 없습니다.";
-			
-			
+
 			super.setErrorMessage(errmsg);
 			super.doPost(request, response);
 			super.GotoPage(gotopage);
-			
-			
 		}
 		
 		if(this.validate(request)==true) {
-			
-			MemberDAO dao = new MemberDAO();
-			
-			MemberVO member =  dao.Insertdate(id,password);
-			
-			super.session.setAttribute("loginfo", member);
-			
 			String gotopage ;
 			gotopage = "common/index.jsp";
+			System.out.println(gotopage);
 			
+			
+			
+			MemberDAO dao = new MemberDAO();
+			MemberVO member =  dao.Insertdate(id,password);
+			super.session.setAttribute("loginfo", member);
 			super.GotoPage(gotopage);
-			
-			
+		
+		
 		}
-		
-		
-		
-	
-		
-		
-		
 		super.doPost(request, response);
 	}
 	
@@ -87,7 +69,6 @@ public class MemberLoginController extends SuperClass{
 			request.setAttribute(super.PREFIX+"passowrd", "비밀번호는 4자리 이상 10자리 이하이어야 합니다.");
 			isCheck = false;
 		}
-		
 		return isCheck;
 	}
 	

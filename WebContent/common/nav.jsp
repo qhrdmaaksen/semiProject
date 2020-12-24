@@ -27,9 +27,11 @@
 </c:if>
 
 
+
 <%!
     String YesForm = null ;
     String NoForm = null ;
+    String NAME = "도담도담";
 %>
 <%
     String contextPath = request.getContextPath() ;
@@ -58,7 +60,7 @@
 %>
 
 <c:set var="contextPath" value="<%=contextPath%>" scope="application"/> 
-<!-- 이거 왜 여기에 있는지? -->
+
 
 
 <html>
@@ -170,6 +172,7 @@
 					</c:if> 
 					<c:if test="${whologin != 0}">
 						<a class="dropdown-item" href="<%=NoForm%>meUpdate&id=${sessionScope.loginfo.id}">회원 정보 수정</a>
+					<a class="nav-link" href="<%=NoForm%>mypage">${sessionScope.loginfo.name}님</a>
 				</c:if>
 			</li>
 			
