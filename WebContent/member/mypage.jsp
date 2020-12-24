@@ -29,14 +29,14 @@
             background-color: rgb(40, 109, 180);
         }
         .nav_box_h {
-            height: 80px;
+            height: 93px;
             box-sizing: border-box;
             color: #FFFFFF;
         }
         .nav_box_header {
-            width: 110px;
+            text-align: center;
             background-position: 0px 0px;
-            margin: 42px auto 0px;
+            margin: 29px auto 0px;
         }
         .mypage_nav {
             background-color: rgb(249, 249, 249);
@@ -118,7 +118,7 @@
     <div id="container" class="container">
         <div class="mypage mypage_left">
             <div class="nav_box_h">
-                <h3 class="nav_box_header">MY 쿠팡</h3>
+                <h3 class="nav_box_header">마이<br>페이지</h3>
             </div>
             <nav class="mypage_nav">
                 <div class="nav_boxes">
