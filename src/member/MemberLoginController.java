@@ -13,9 +13,7 @@ import common.SuperClass;
 public class MemberLoginController extends SuperClass{
 	private String id ; 
 	private String  password ;
-	
-	
-	
+
 	@Override
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		System.out.println("회원 로그인 호출됨");
@@ -28,7 +26,6 @@ public class MemberLoginController extends SuperClass{
 
 		this.id = request.getParameter("id");
 		this.password = request.getParameter("password");
-		System.out.println(id + " & " + password);
 		
 		if(this.validate(request) == false) {
 			String gotopage ;
@@ -41,13 +38,11 @@ public class MemberLoginController extends SuperClass{
 		}
 		
 		if(this.validate(request)==true) {
-			
 			MemberDAO dao = new MemberDAO();
 			MemberVO member =  dao.Insertdate(id,password);
 			super.session.setAttribute("loginfo", member);
 			super.GotoPage("/common/index.jsp");
 		}
-
 		super.doPost(request, response);
 	}
 	
@@ -66,7 +61,6 @@ public class MemberLoginController extends SuperClass{
 			request.setAttribute(super.PREFIX+"passowrd", "비밀번호는 4자리 이상 10자리 이하이어야 합니다.");
 			isCheck = false;
 		}
-		
 		return isCheck;
 	}
 	
