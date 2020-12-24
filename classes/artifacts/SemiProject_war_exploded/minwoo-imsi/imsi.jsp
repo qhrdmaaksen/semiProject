@@ -1,141 +1,47 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-	
+
 <!DOCTYPE html>
 
 <html>
-
 <head>
-	<meta charset="UTF-8">
-	<title>Insert title here</title>
-	<style type="text/css">
-		body{
-			font:12px "맑은 고딕", 돋움, arial;
-			margin: 0px;
-		}
-		h1{
-			font-size:20px;
-			background-color: #666666 ;
-			color: #ffffff;
-			text-align: center;
-			margin: 0px;
-			padding: 10px 15px ;
-		}
-		h2{
-			font-size:15px;
-			letter-spacing: -2px;
-			text-align: center;
-			margin: 0px;
-		}
-		h3{
-			font-size:13px;
-			letter-spacing: 1px;
-			text-align: center;
-			margin: 20px 0px;
-		}
-		p{/* 행별 간격 line-height */
-			line-height: 250%;
-		}
-		dl{
-			margin:20px 0px;
-			line-height: 250%;
-		}
-		dt{
-			font-size:12px;
-			margin: 0px;
-			padding: 25px;
-			color: #6666cc;
-		}
-		.bookImg{/* 이미지 영역 */
-			text-align: center;
-			margin: 40px 0px;
-		}
-		a{/* 고정 영역 스타일 */
-			color: #666666;
-			text-decoration: none;
-			font-family: "궁서", arial;
-		}
-		a:hover{/* 고정 영역에 마우스가 들어가면... */
-			text-decoration: underline;
-			color: blue;
-		}
-		#topNavi{/* 고정 영역 ul 컨테이너 박스 */
-			list-style: none;/* 이부분을 활용해서 메뉴를 만들기도한다 .  */
-			width:300px;
-			padding: 30px 0px 0px 0px ; 
-			margin: 0px;
-			text-align: left;
-		}
-		header{/* 상단의 타이틀 */
-			position: fixed;
-			width:100%;
-			top:0px;
-			left:0px;
-		}
-		nav{
-			position: fixed; /* 항상고정 fixed */
-			width:280px;
-			border: 1px solid #666666;
-			background-color: #efefef;
-			padding: 15px;
-			top:80px;
-			left:50px;
-			text-align: left;
-		}
-		section{
-			margin: 80px 0px 50px 350px ;
-			width: 500px ;
-		}
-	</style>
+	<%@ include file="/common/nav.jsp"%>
+	<title>Bootstrap Example</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  
 </head>
 <body>
-	<header>
-			<h1 id="titlePage">프로그래머의 모바일 레시피</h1>
-		</header>
-		<nav>
-			<h2>관련 도서</h2>
-			<ul id="topNavi">
-				<li><a href="#"><font color="red"><b>이 부분은 고정 영역입니다.</b></font></a> </li>
-				<li><a href="#">아이폰 프로그래밍 UIKit 핵심 바이블</a> </li>				
-				<li><a href="#">가장 쉬운 실전 아이폰 프로그래밍 스타트 </a> </li>
-				<li><a href="#"> 안드로이드 API 바이블 : 200개 예제로 배우는 Android API 핵심 원리  </a> </li>
-				<li><a href="#"> 예제로 배우는 핵심 패턴 안드로이드 프로그래밍 SDK 2.1  </a> </li>
-				<li><a href="#">예제로 배우는 핵심 패턴 아이폰 프로그래밍  </a> </li>
-			</ul>
-		</nav>
-		<section>
-			<h2>아이폰 프로그래밍 UIKit 핵심 바이블</h2>
-			<div class="bookImg">
-				<figure>
-					<img src="../images/book_mobile1.gif" width="135" height="168" alt="아이폰 프로그래밍 UIKit 핵심 바이블" />
-				</figure>
-			</div>
-			<ul>
-				<li>저 자 토코로 유타</li>  
-				<li>역 자  김은철 , 유세라</li>  
-				<li>구 분  번역서</li>  
-				<li>발행일 2011년 06월 09일</li> 
-				<li>페이지 512 페이지</li>
-				<li>ISBN 978-89-5674-530-5 </li>
-				<li>난이도 초급.중급</li>
-				<li>출판사 정보문화사</li>
-			</ul>
-			<h3>UIKit 상세 레퍼런스를 통해 기초부터 다지는 아이폰 프로그래밍!</h3>
-			<dl>
-				<dt>인터페이스 빌더는 필수인가?</dt>
-				<dd>대답은 물론 &quot;아니다&quot;이다. 이 책에서는 기본적으로 인터페이스 빌더를 사용하지 않고 진행한다. 인터페이스 빌더를 사용하면 은폐되는 부분이 생기기 때문이다. 이 책은 UIKit의 내용에 초점을 맞춰 설명하고 있다. UIKit의 기능이나 움직임이 블랙박스화 된 상태로는 내용을 정확하게 알 수 없기 때문이다. 뒤집어 말하면 이 책의 내용을 이해하는 것은 인터페이스 빌더에서 블랙박스화 되어 있는 부분을 배우는 것이라고 할 수 있다.</dd>
-				<dt>UIKit이란?</dt>
-				<dd>UIKit는 모든 iPhone/iPad 애플리케이션의 핵심이 되는 프레임워크이다. UIKit는 애플리케이션의 기본 부분을 제어하고 터치 판넬 조작이나 모션 등 사용자 조작을 감지하며, 화면 표시를 하기 위한 각종 기능을 제공한다. UIKit 지식을 잘 이해한다면 보다 능률이 높고 결함이 적은 iPhone/iPad 애플리케이션을 개발할 수 있게 될 것이다.</dd>
-			</dl>
-			<p>
-				&quot;UIKit는 대체로 어떤 기능으로 구성되어 있는 걸까?&quot; <br />
-				&quot;UISlider를 사용하려고 하는데 어떤 식으로 하면 될까?&quot;<br />
-				&quot;UIBarButton의 초기화 방법이 생각나지 않는데 어떻게 하는 거였지?&quot;<br />
-				&quot;전체 화면은 어떻게 하면 될까?&quot;
-			</p>
-			<p>
-				아이폰 프로그래밍 UIKit는 iPhone SDK에 대해서 어느 정도 알고 있는 독자가 이런 의문에 빠졌을 때 빠르게 참고할 수 있는 책이다. 이 책을 통해 iPhone 프로그램의 주요 기능을 익힐 수 있다.
-			</p>
-		</section>
+<div class="container mt-3">
+  <h2>Toggleable Tabs</h2>
+  <br>
+  <!-- Nav tabs -->
+  <ul class="nav nav-tabs">
+    <li class="nav-item">
+      <a class="nav-link active" data-toggle="tab" href="#home">Home</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" data-toggle="tab" href="#menu1">Menu 1</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" data-toggle="tab" href="#menu2">Menu 2</a>
+    </li>
+  </ul>
+
+  <!-- Tab panes -->
+  <div class="tab-content">
+    <div id="home" class="container tab-pane active"><br>
+      <h3>HOME</h3>
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+    </div>
+    <div id="menu1" class="container tab-pane fade"><br>
+      <h3>Menu 1</h3>
+      <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+    </div>
+    <div id="menu2" class="container tab-pane fade"><br>
+      <h3>Menu 2</h3>
+      <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam.</p>
+    </div>
+  </div>
+</div>
 </body>
 </html>

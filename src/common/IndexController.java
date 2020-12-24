@@ -17,8 +17,9 @@ public class IndexController extends SuperClass {
         List<ProductVO> lists = dao.SelectTop4Lists();
 
         request.setAttribute("top4", lists);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/common/index.jsp");
-        dispatcher.forward(request, response);
+
+        super.doProcess(request, response);
+        super.GotoPage("/common/index.jsp");
     }
 
     @Override

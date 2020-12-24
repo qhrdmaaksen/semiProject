@@ -20,11 +20,7 @@ public class MemberLoginController extends SuperClass{
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		System.out.println("회원 로그인 호출됨");
 		super.doGet(request, response);
-		String gotopage = "/member/meLoginForm.jsp" ;
-		
-		super.GotoPage(gotopage);
-		
-		
+		super.GotoPage("/member/login.jsp");
 	}
 	
 	@Override
@@ -32,43 +28,26 @@ public class MemberLoginController extends SuperClass{
 
 		this.id = request.getParameter("id");
 		this.password = request.getParameter("password");
+		System.out.println(id + " & " + password);
 		
 		if(this.validate(request) == false) {
 			String gotopage ;
-			gotopage = "login/login.jsp";
-			
+			gotopage = "/member/login.jsp";
 			String errmsg = "회원 정보가 없습니다.";
-			
-			
+
 			super.setErrorMessage(errmsg);
 			super.doPost(request, response);
 			super.GotoPage(gotopage);
-			
-			
 		}
 		
 		if(this.validate(request)==true) {
 			
 			MemberDAO dao = new MemberDAO();
-			
 			MemberVO member =  dao.Insertdate(id,password);
-			
 			super.session.setAttribute("loginfo", member);
-			
-			String gotopage ;
-			gotopage = "common/index.jsp";
-			
-			super.GotoPage(gotopage);
-			
-			
+			super.GotoPage("/common/index.jsp");
 		}
-		
-		
-		
-	
-		
-		
-		
+
 		super.doPost(request, response);
 	}
 	

@@ -14,6 +14,8 @@ public class SuperClass implements SuperController, Validator {
     private HttpServletResponse response = null ;
     protected HttpSession session = null ;
 
+
+
     public void doProcess(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         // get, post에 상관없이 무조건 호출되도록 합니다.
@@ -47,7 +49,6 @@ public class SuperClass implements SuperController, Validator {
     public void GotoPage(String url) {
         // dispatcher 객체를 사용하여 특정 페이지로 이동합니다.
         RequestDispatcher dispatcher = this.request.getRequestDispatcher(url);
-
         try {
             dispatcher.forward(this.request, this.response);
         } catch (ServletException e) {

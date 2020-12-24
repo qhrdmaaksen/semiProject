@@ -1,11 +1,13 @@
 package VO;
 
+import java.util.Date;
+
 public class MemberVO {
 	
 	private String id ;
 	private String password ;
 	private String name ;
-	private int date ;
+	private Date birth ;
 	private String phone ;
 	private String level ; //일반 유저는1, 운영자는 2
 	private int point ;
@@ -15,7 +17,7 @@ public class MemberVO {
 
 	@Override
 	public String toString() {
-		return "Member [id=" + id + ", password=" + password + ", name=" + name + ", date=" + date + ", phone=" + phone
+		return "Member [id=" + id + ", password=" + password + ", name=" + name + ", birth=" + birth + ", phone=" + phone
 				+ ", level=" + level + ", point=" + point + ", picture=" + picture + "]";
 	}
 
@@ -37,11 +39,11 @@ public class MemberVO {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public int getDate() {
-		return date;
+	public Date getBirth() {
+		return birth;
 	}
-	public void setDate(int date) {
-		this.date = date;
+	public void setBirth(Date date) {
+		this.birth = date;
 	}
 	public String getPhone() {
 		return phone;
