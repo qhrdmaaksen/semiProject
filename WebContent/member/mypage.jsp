@@ -15,8 +15,9 @@
         dl, dt, dd, ul, ol, menu, li {list-style: none; margin: 0px; padding: 0px}
 
         #container {
+            position: relative;
             min-width: 980px;
-            margin: 0 auto;
+            margin: 30px auto 0px;
             padding: 0 30px;
         }
         .mypage {

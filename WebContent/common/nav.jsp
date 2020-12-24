@@ -85,7 +85,7 @@
 </head>
 
 
-<body style="height:1500px">
+<body>
 
 <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
   <!-- Brand/logo -->
@@ -101,9 +101,7 @@
     
 <%--     <li class="nav-item">
     <a class="nav-link" href="<%=contextPath%>/main.jsp">Home</a></li> --%>
-    
-    
-    
+
     <li class="nav-item">
       <a class="nav-link" href="#">
 		<c:if test="${whologin == 0}">
@@ -152,15 +150,6 @@
         <a class="dropdown-item" href="#">Link 2</a>
         <a class="dropdown-item" href="#">Link 3</a></div>
     </li>
-  
-    
-    
-    
-    
-    
-
-  
-  
    <li class="nav-item dropdown">
       <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">
       		회원<b class="caret"></b></a>
@@ -207,10 +196,10 @@
   
   				<ul class="nav navbar-nav navbar-right">
 					<li><c:if test="${empty sessionScope.loginfo}">
-							<a href="<%=NoForm%>meLogin"><span
+							<a href="<%=NoForm%>melogin"><span
 								class="glyphicon glyphicon-log-in"> 로그인 </span> </a>
 						</c:if> <c:if test="${not empty sessionScope.loginfo}">
-							<a href="<%=NoForm%>meLogout"><span
+							<a href="<%=NoForm%>melogout"><span
 								class="glyphicon glyphicon-log-in"> 로그 아웃 </span> </a>
 						</c:if></li>
 				</ul>
