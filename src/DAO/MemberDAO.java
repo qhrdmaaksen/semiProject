@@ -10,11 +10,9 @@ public class MemberDAO extends SuperDAO {
 
 
 	public MemberVO selectMember(String id, String password) {
-
-		MemberVO bean = new MemberVO();
+		MemberVO bean = null;
 		
 		String sql = "select * from members where \"id\" = ? and \"password\" = ? " ;
-
 		Connection conn = null ;
 		PreparedStatement pstmt = null ;
 		ResultSet rs = null;
@@ -28,7 +26,8 @@ public class MemberDAO extends SuperDAO {
 			
 			rs = pstmt.executeQuery();
 			
-			if(rs.next()) {
+			if(rs.next() ) {
+				bean = new MemberVO();
 				bean.setId(rs.getString("id"));
 				bean.setPassword(rs.getString("password"));
 				bean.setBirth(rs.getDate("birth"));
@@ -52,5 +51,6 @@ public class MemberDAO extends SuperDAO {
 		}
 		return bean;
 	}
+
 
 }

@@ -12,7 +12,7 @@ import common.IndexController;
 import common.SuperClass;
 
 public class MemberLoginController extends SuperClass{
-	private String id ; 
+	private String id ;
 	private String password ;
 
 	@Override
@@ -37,7 +37,7 @@ public class MemberLoginController extends SuperClass{
 			super.doPost(request, response);
 			super.GotoPage(gotopage);
 		}
-		
+
 		if(this.validate(request)) {
 			String gotopage ;
 			gotopage = "/common/index.jsp";
