@@ -152,7 +152,7 @@
 				<div class="side_banner">
 					<li>
 					<a href="" class="banner_link" style="background-color: ">
-					<img src="./../images/bart.jpg" width="150" height="150">
+					<img src="./../images/bart.jpg" width="125" height="125">
 					</a><!--N=a:top.banner-->
 					</li>
 				</div>
