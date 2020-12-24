@@ -91,7 +91,7 @@
   <!-- Brand/logo -->
   
   <div class="navbar-header">
-  <a class="navbar-brand" href="<%=contextPath%>/main.jsp">
+  <a class="navbar-brand" href="<%=NoForm%>index">
     <img src="./../images/logo1.png" alt="logo" style="width:200px;">
   </a>
   </div>
@@ -120,25 +120,25 @@
     
        
   	<li class="nav-item">
-    <a class="nav-link" href="<%=contextPath%>/main.jsp">추천 받기</a>
+    <a class="nav-link" href="<%=NoForm%>index">추천 받기</a>
     </li>
       
       
             
   	<li class="nav-item">
-    <a class="nav-link" href="<%=contextPath%>/main.jsp">제품 보기</a>
+    <a class="nav-link" href="<%=NoForm%>index">제품 보기</a>
     </li>
     
     
           
   	<li class="nav-item">
-    <a class="nav-link" href="<%=contextPath%>/main.jsp">장바구니</a>
+    <a class="nav-link" href="<%=NoForm%>index">장바구니</a>
     </li>
     
     
            
   	<li class="nav-item">
-    <a class="nav-link" href="<%=contextPath%>/main.jsp">고객포럼</a>
+    <a class="nav-link" href="<%=NoForm%>index">고객포럼</a>
     </li>
     
 
@@ -157,36 +157,36 @@
       
 	      	<li>
 		      	<c:if test="${whologin == 0}">
-					<a class="dropdown-item" href="<%=NoForm%>meInsert">회원 가입</a>
+					<a class="dropdown-item" href="<%=NoForm%>meinsert">회원 가입</a>
 					</c:if> 
 					<c:if test="${whologin != 0}">
-						<a class="dropdown-item" href="<%=NoForm%>meUpdate&id=${sessionScope.loginfo.id}">회원 정보 수정</a>
+						<a class="dropdown-item" href="<%=NoForm%>meupdate&id=${sessionScope.loginfo.id}">회원 정보 수정</a>
 					<a class="nav-link" href="<%=NoForm%>mypage">${sessionScope.loginfo.name}님</a>
 				</c:if>
 			</li>
 			
 			<li>
 				<c:if test="${whologin == 0}">
-					<a class="dropdown-item" href="<%=NoForm%>meLogin">로그인</a>
+					<a class="dropdown-item" href="<%=NoForm%>melogin">로그인</a>
 				</c:if> 
 				<c:if test="${whologin != 0}">
-					<a class="dropdown-item" href="<%=NoForm%>meLogout">로그 아웃</a>
+					<a class="dropdown-item" href="<%=NoForm%>melogout">로그 아웃</a>
 				</c:if>
 			</li>
 			
 			<li>
 			<c:if test="${whologin == 1}">
-				<a class="dropdown-item" href="<%=NoForm%>meDelete&id=${sessionScope.loginfo.id}">회원 탈퇴</a>
+				<a class="dropdown-item" href="<%=NoForm%>medelete&id=${sessionScope.loginfo.id}">회원 탈퇴</a>
 				</c:if>
 			</li>
 			<li>
 				<c:if test="${whologin == 2}">
-				<a class="dropdown-item" href="<%=NoForm%>meList">회원 목록 보기</a>
+				<a class="dropdown-item" href="<%=NoForm%>melist">회원 목록 보기</a>
 				</c:if>
 			</li>
 			<li>
 				<c:if test="${whologin == 1}">
-				<a class="dropdown-item" href="<%=NoForm%>meDetailView&id=${sessionScope.loginfo.id}">회원 상세 보기</a>
+				<a class="dropdown-item" href="<%=NoForm%>medetailview&id=${sessionScope.loginfo.id}">회원 상세 보기</a>
 				</c:if>
 			</li>
 
