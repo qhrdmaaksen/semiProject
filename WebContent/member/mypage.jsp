@@ -24,6 +24,7 @@
         }
         .mypage_left {
             width: 140px;
+            min-height: 1000px;
             background-color: rgb(40, 109, 180);
         }
         .nav_box_h {
@@ -113,7 +114,7 @@
     </style>
 </head>
 <body>
-    <div id="container">
+    <div id="container" class="container">
         <div class="mypage mypage_left">
             <div class="nav_box_h">
                 <h3 class="nav_box_header">MY 쿠팡</h3>

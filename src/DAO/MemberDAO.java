@@ -13,7 +13,7 @@ public class MemberDAO extends SuperDAO {
 
 		MemberVO bean = new MemberVO();
 		
-		String sql = "select * from members where id = ? and password = ? " ;
+		String sql = "select * from members where \"id\" = ? and \"password\" = ? " ;
 		
 		Connection conn = null ;
 		PreparedStatement pstmt = null ;

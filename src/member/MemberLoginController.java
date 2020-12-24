@@ -37,7 +37,7 @@ public class MemberLoginController extends SuperClass{
 			super.GotoPage(gotopage);
 		}
 		
-		if(this.validate(request)==true) {
+		if(this.validate(request)) {
 			String gotopage ;
 			gotopage = "common/index.jsp";
 			System.out.println(gotopage);
