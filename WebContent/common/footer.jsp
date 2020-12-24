@@ -38,7 +38,7 @@
 			column-gap: 50px;/* column-gap 칸막이와의 거리 */
 			column-rule: 3px solid #f0f0f5;/* 칸막이 지정 선 */
 		}
-		#footerMenu{
+		#footermenu{
 			width:100%;
 			background-color: #f0f0f5;
 			padding: 0px;
@@ -48,18 +48,18 @@
 			border: 0px solid #darkgreen;
 			padding-left: 5%;
 		}
-		#footerMenu li{
+		#footermenu li{
 			display: inline;
 			font: sans-serif;
 			border-left: 1px solid gray; 
 			padding: 1px 15px ;
 		}
-		#footerMenu a{
+		#footermenu a{
 			text-decoration: none;
 			color : black;
 			border: 0px solid #darkgreen;
 		}
-		#footerMenu a:hover{
+		#footermenu a:hover{
 			color: red;
 			font-size: 1.2em;
 		}
@@ -69,7 +69,7 @@
 			padding-top: 2%;
 			padding-right: 15%;
 		}
-		.footerDodam{
+		.footerdodam{
 			font-style: normal;
 		}
 		.icon {
@@ -82,7 +82,7 @@
 <body>
 	<footer>
 		<div class="contianer">
-			<div class="row" id="footerMenu">
+			<div class="row" id="footermenu">
 				<div class='col'>
 					<ul>
 						<li class="only-pc"><a href="/terms/service">이용 약관</a>
@@ -117,8 +117,9 @@
 			</div>			
 		</div>
 	<div id="cannanoogi">
-		<address class="fooerAddress">
-		<div class="footerDodam">
+		<address class="fooeraddress">
+		<div class="footerdodam">
+			<!-- <img alt="도담도담" src="../images/logo.png" style="width: 70%;"> -->
 			<h3 align="right">회사명</h3>
 				<p align="right">
 					도담도담

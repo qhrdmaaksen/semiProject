@@ -174,16 +174,20 @@
 	<div class="container mt-3">
 		<ul class="nav nav-tabs" id="myTab" role="tablist" style="margin-top: 15%;">
 			<li class="nav-item">
-				<a id="prod-contents01" class="nav-link active" data-toggle="tab" href="#prod-detail" aria-controls="상품 정보"  aria-selected="true">상품 정보</a>
+				<a id="prod-contents01" class="nav-link active" data-toggle="tab" 
+					href="#prod-detail" aria-controls="상품 정보"  aria-selected="true">상품 정보</a>
 			</li>
 			<li class="nav-item">
-				<a id="prod-review01" class="nav-link" data-toggle="tab" href="#prod-review" role="tab" aria-controls="상품 리뷰"  aria-selected="false">상품 리뷰</a>
+				<a id="prod-review01" class="nav-link" data-toggle="tab" 
+					href="#prod-review" role="tab" aria-controls="상품 리뷰"  aria-selected="false">상품 리뷰</a>
 			</li>
 			<li class="nav-item">
-				<a id="cs-tab01" class="nav-link" data-toggle="tab" href="#cs-main" role="tab" aria-controls="고객 문의"  aria-selected="false">고객 문의</a>
+				<a id="cs-tab01" class="nav-link" data-toggle="tab" 
+					href="#cs-main" role="tab" aria-controls="고객 문의"  aria-selected="false">고객 문의</a>
 			</li>
 			<li class="nav-item">
-				<a id="delivery-info-tab" class="nav-link" data-toggle="tab" href="#delivery-info" role="tab" aria-controls="배송/교환/반품 안내"  aria-selected="false">배송/교환/반품 안내</a>
+				<a id="delivery-info-tab" class="nav-link" data-toggle="tab" 
+					href="#delivery-info" role="tab" aria-controls="배송/교환/반품 안내"  aria-selected="false">배송/교환/반품 안내</a>
 			</li>
 		</ul>
 	</div>
