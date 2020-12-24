@@ -153,5 +153,18 @@
 			</li>
 		</ul>
 	</nav>
+    <c:if test="${not empty requestScope.errmsg}">
+        <div class="alert alert-danger alert-dismissable">
+            <a href="#" id="myalert" class="close" data-dismiss="alert" aria-label="close">닫기</a>
+            <strong>${requestScope.errmsg}</strong>
+        </div>
+    </c:if>
+
+    <c:if test="${not empty sessionScope.message}">
+        <script type="text/javascript">
+            alert('${sessionScope.message}') ;
+        </script>
+        <% session.removeAttribute("message") ; %>
+    </c:if>
 </body>
 </html>

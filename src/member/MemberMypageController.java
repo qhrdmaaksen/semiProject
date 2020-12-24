@@ -16,11 +16,17 @@ public class MemberMypageController extends SuperClass {
     @Override
     public void doProcess(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
-        MemberVO mem = (MemberVO)session.getAttribute("loginfo");
+        MemberVO tem = (MemberVO)session.getAttribute("loginfo");
+        MemberDAO dao = new MemberDAO();
 
-        mem = new MemberDAO().selectMember(mem.getId(), mem.getPassword());
+        try {
+            MemberVO mem = dao.selectMember(tem.getId(), tem.getPassword());
+            session.setAttribute("loginfo", mem);
+        } catch (NoSuchFieldException e) {
+            e.printStackTrace();
+            new IndexController().doGet(request, response);
+        }
 
-        super.session.setAttribute("loginfo", mem);
         super.doProcess(request, response);
         super.GotoPage("/member/mypage.jsp");
     }
