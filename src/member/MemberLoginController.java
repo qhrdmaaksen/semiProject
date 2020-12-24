@@ -1,6 +1,7 @@
 package member;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -8,11 +9,12 @@ import javax.servlet.http.HttpServletResponse;
 
 import DAO.MemberDAO;
 import VO.MemberVO;
+import common.IndexController;
 import common.SuperClass;
 
 public class MemberLoginController extends SuperClass{
-	private String id ; 
-	private String  password ;
+	private String id ;
+	private String password ;
 
 	@Override
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -28,30 +30,28 @@ public class MemberLoginController extends SuperClass{
 		this.password = request.getParameter("password");
 		
 		if(this.validate(request) == false) {
-			String gotopage ;
-			gotopage = "/member/login.jsp";
-			String errmsg = "회원 정보가 없습니다.";
+			String errmsg = "로그인 양식이 잘못되었습니다.";
 
 			super.setErrorMessage(errmsg);
-			super.doPost(request, response);
-			super.GotoPage(gotopage);
+			this.doGet(request, response);
 		}
-		
+
 		if(this.validate(request)) {
-			String gotopage ;
-			gotopage = "common/index.jsp";
-			System.out.println(gotopage);
-			
-			
-			
+
 			MemberDAO dao = new MemberDAO();
-			MemberVO member =  dao.Insertdate(id,password);
+			MemberVO member = null;
+			try {
+				member = dao.selectMember(id,password);
+			} catch (NoSuchFieldException e) {
+				String errmsg = "아이디 혹은 비밀번호가 잘못되었습니다.";
+				System.out.println(errmsg);
+				super.setErrorMessage(errmsg);
+				this.doGet(request, response);
+			}
 			super.session.setAttribute("loginfo", member);
-			super.GotoPage(gotopage);
-		
-		
+
+			new IndexController().doGet(request, response);
 		}
-		super.doPost(request, response);
 	}
 	
 	@Override

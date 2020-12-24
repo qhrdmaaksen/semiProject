@@ -15,27 +15,28 @@
         dl, dt, dd, ul, ol, menu, li {list-style: none; margin: 0px; padding: 0px}
 
         #container {
+            position: relative;
             min-width: 980px;
-            margin: 0 auto;
+            margin: 30px auto 0px;
             padding: 0 30px;
         }
         .mypage {
             float: left;
         }
         .mypage_left {
+            float: left;
             width: 140px;
-            min-height: 1000px;
             background-color: rgb(40, 109, 180);
         }
         .nav_box_h {
-            height: 80px;
+            height: 93px;
             box-sizing: border-box;
             color: #FFFFFF;
         }
         .nav_box_header {
-            width: 110px;
+            text-align: center;
             background-position: 0px 0px;
-            margin: 42px auto 0px;
+            margin: 29px auto 0px;
         }
         .mypage_nav {
             background-color: rgb(249, 249, 249);
@@ -117,7 +118,7 @@
     <div id="container" class="container">
         <div class="mypage mypage_left">
             <div class="nav_box_h">
-                <h3 class="nav_box_header">MY 쿠팡</h3>
+                <h3 class="nav_box_header">마이<br>페이지</h3>
             </div>
             <nav class="mypage_nav">
                 <div class="nav_boxes">
@@ -178,7 +179,7 @@
                 <li class="content_box_c">
                     <strong class="content_box_content">보유한 포인트</strong>
                     <div>
-                        <span class="content_box_content_no">100,000</span>
+                        <span class="content_box_content_no"><fmt:formatNumber value="${sessionScope.loginfo.point}" pattern="#,###" /></span>
                         <span class="content_box_content_font">원</span>
                     </div>
                 </li>
