@@ -16,18 +16,15 @@
 	<c:set var="whologin" value="0" />
 </c:if>
 <c:if test="${not empty sessionScope.loginfo}">
-	<c:if test="${sessionScope.loginfo.id == 'manager'}">\
+	<c:if test="${sessionScope.loginfo.level == '2'}">
 		<!-- 관리자로 로그인한 경우 -->
 		<c:set var="whologin" value="2" />
 	</c:if>
-	<c:if test="${sessionScope.loginfo.id != 'manager'}">
+	<c:if test="${sessionScope.loginfo.level == '1'}">
 		<!-- 일반 사용자로 로그인한 경우 -->
 		<c:set var="whologin" value="1" />
 	</c:if>
 </c:if>
-
-
-
 <%!
     String YesForm = null ;
     String NoForm = null ;
@@ -65,12 +62,12 @@
 
 <html>
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
 	<style type="text/css">
 		.err{
@@ -78,136 +75,83 @@
 			color:red;
 			font-weight: bolder;
 			}
-		
-			
 	</style>
-
 </head>
-
-
 <body>
-
-<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
-  <!-- Brand/logo -->
-  
-  <div class="navbar-header">
-  <a class="navbar-brand" href="<%=NoForm%>index">
-    <img src="./../images/logo1.png" alt="logo" style="width:200px;">
-  </a>
-  </div>
-  
-  
-  <ul class="navbar-nav">
-    
-<%--     <li class="nav-item">
-    <a class="nav-link" href="<%=contextPath%>/main.jsp">Home</a></li> --%>
-
-    <li class="nav-item">
-      <a class="nav-link" href="#">
-		<c:if test="${whologin == 0}">
-				미로그인
-			</c:if> 
-				<c:if test="${whologin != 0}">
-				${sessionScope.loginfo.name}(${sessionScope.loginfo.id}) 님
-				</c:if>
-			</font>
-		</a>
-    </li>
-    
-    
-    
-
-    
-       
-  	<li class="nav-item">
-    <a class="nav-link" href="<%=NoForm%>index">추천 받기</a>
-    </li>
-      
-      
-            
-  	<li class="nav-item">
-    <a class="nav-link" href="<%=NoForm%>index">제품 보기</a>
-    </li>
-    
-    
-          
-  	<li class="nav-item">
-    <a class="nav-link" href="<%=NoForm%>index">장바구니</a>
-    </li>
-    
-    
-           
-  	<li class="nav-item">
-    <a class="nav-link" href="<%=NoForm%>index">고객포럼</a>
-    </li>
-    
-
-    
-        <li class="nav-item dropdown">
-      <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">Dropdown</a>
-      <div class="dropdown-menu">
-        <a class="dropdown-item" href="#">Link 1</a>
-        <a class="dropdown-item" href="#">Link 2</a>
-        <a class="dropdown-item" href="#">Link 3</a></div>
-    </li>
-   <li class="nav-item dropdown">
-      <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">
-      		회원<b class="caret"></b></a>
-      <ul class="dropdown-menu">
-      
-	      	<li>
-		      	<c:if test="${whologin == 0}">
-					<a class="dropdown-item" href="<%=NoForm%>meinsert">회원 가입</a>
-					</c:if> 
+	<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+		<!-- Brand/logo -->
+		<div class="navbar-header">
+			<a class="navbar-brand" href="<%=NoForm%>index">
+				<img src="./../images/logo1.png" alt="logo" style="width:200px;">
+			</a>
+		</div>
+		<ul class="navbar-nav">
+			<%--     <li class="nav-item">
+			<a class="nav-link" href="<%=contextPath%>/main.jsp">Home</a></li> --%>
+			<li class="nav-item">
+				<a class="nav-link" href="#">
+					<c:if test="${whologin == 0}">
+					미로그인
+					</c:if>
 					<c:if test="${whologin != 0}">
-						<a class="dropdown-item" href="<%=NoForm%>meupdate&id=${sessionScope.loginfo.id}">회원 정보 수정</a>
-					<a class="nav-link" href="<%=NoForm%>mypage">${sessionScope.loginfo.name}님</a>
-				</c:if>
-			</li>
-			
-			<li>
-				<c:if test="${whologin == 0}">
-					<a class="dropdown-item" href="<%=NoForm%>melogin">로그인</a>
-				</c:if> 
-				<c:if test="${whologin != 0}">
-					<a class="dropdown-item" href="<%=NoForm%>melogout">로그 아웃</a>
-				</c:if>
-			</li>
-			
-			<li>
-			<c:if test="${whologin == 1}">
-				<a class="dropdown-item" href="<%=NoForm%>medelete&id=${sessionScope.loginfo.id}">회원 탈퇴</a>
-				</c:if>
-			</li>
-			<li>
-				<c:if test="${whologin == 2}">
-				<a class="dropdown-item" href="<%=NoForm%>melist">회원 목록 보기</a>
-				</c:if>
-			</li>
-			<li>
-				<c:if test="${whologin == 1}">
-				<a class="dropdown-item" href="<%=NoForm%>medetailview&id=${sessionScope.loginfo.id}">회원 상세 보기</a>
-				</c:if>
+					${sessionScope.loginfo.name}(${sessionScope.loginfo.id}) 님
+					</c:if>
+				</a>
 			</li>
 
-        </ul>
-   </li>
-    </ul>
-  
-  				<ul class="nav navbar-nav navbar-right">
-					<li><c:if test="${empty sessionScope.loginfo}">
-							<a href="<%=NoForm%>melogin"><span
-								class="glyphicon glyphicon-log-in"> 로그인 </span> </a>
-						</c:if> <c:if test="${not empty sessionScope.loginfo}">
-							<a href="<%=NoForm%>melogout"><span
-								class="glyphicon glyphicon-log-in"> 로그 아웃 </span> </a>
-						</c:if></li>
+			<li class="nav-item">
+				<a class="nav-link" href="<%=NoForm%>index">추천 받기</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link" href="<%=NoForm%>index">제품 보기</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link" href="<%=NoForm%>index">장바구니</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link" href="<%=NoForm%>index">고객포럼</a>
+			</li>
+			<li class="nav-item dropdown">
+				<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">Dropdown</a>
+				<div class="dropdown-menu">
+					<a class="dropdown-item" href="#">Link 1</a>
+					<a class="dropdown-item" href="#">Link 2</a>
+					<a class="dropdown-item" href="#">Link 3</a>
+				</div>
+			</li>
+			<li class="nav-item dropdown">
+				<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">
+				회원<b class="caret"></b></a>
+				<ul class="dropdown-menu">
+					<c:if test="${whologin == 0}">
+						<li>
+							<a class="dropdown-item" href="<%=NoForm%>melogin">로그인</a>
+						</li>
+						<li>
+							<a class="dropdown-item" href="<%=NoForm%>meinsert">회원 가입</a>
+						</li>
+					</c:if>
+					<c:if test="${whologin != 0}">
+						<li>
+							<a class="dropdown-item" href="<%=NoForm%>mypage">마이 페이지</a>
+						</li>
+						<li>
+							<a class="dropdown-item" href="<%=NoForm%>melogout">로그 아웃</a>
+						</li>
+					</c:if>
+					<c:if test="${whologin == 1}">
+						<li>
+							<a class="dropdown-item text-danger" href="<%=NoForm%>medelete&id=${sessionScope.loginfo.id}">회원 탈퇴</a>
+						</li>
+					</c:if>
+					<c:if test="${whologin == 2}">
+						<li>
+							<a class="dropdown-item" href="<%=NoForm%>melist">회원 목록 보기</a>
+						</li>
+					</c:if>
 				</ul>
-  
-  
-</nav>
-
-
-
+			</li>
+		</ul>
+	</nav>
 </body>
 </html>

@@ -9,12 +9,12 @@ import VO.MemberVO;
 public class MemberDAO extends SuperDAO {
 
 
-	public MemberVO Insertdate(String id, String password) {
+	public MemberVO selectMember(String id, String password) {
 
 		MemberVO bean = new MemberVO();
 		
 		String sql = "select * from members where \"id\" = ? and \"password\" = ? " ;
-		
+
 		Connection conn = null ;
 		PreparedStatement pstmt = null ;
 		ResultSet rs = null;

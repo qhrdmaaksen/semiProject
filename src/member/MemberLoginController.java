@@ -8,11 +8,12 @@ import javax.servlet.http.HttpServletResponse;
 
 import DAO.MemberDAO;
 import VO.MemberVO;
+import common.IndexController;
 import common.SuperClass;
 
 public class MemberLoginController extends SuperClass{
 	private String id ; 
-	private String  password ;
+	private String password ;
 
 	@Override
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -39,19 +40,14 @@ public class MemberLoginController extends SuperClass{
 		
 		if(this.validate(request)) {
 			String gotopage ;
-			gotopage = "common/index.jsp";
-			System.out.println(gotopage);
-			
-			
-			
+			gotopage = "/common/index.jsp";
+
 			MemberDAO dao = new MemberDAO();
-			MemberVO member =  dao.Insertdate(id,password);
+			MemberVO member =  dao.selectMember(id,password);
 			super.session.setAttribute("loginfo", member);
-			super.GotoPage(gotopage);
-		
-		
+
+			new IndexController().doGet(request, response);
 		}
-		super.doPost(request, response);
 	}
 	
 	@Override
