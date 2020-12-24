@@ -13,7 +13,7 @@ import common.SuperClass;
 public class MemberLoginController extends SuperClass{
 	private String id ; 
 	private String  password ;
-
+	
 	@Override
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		System.out.println("회원 로그인 호출됨");
@@ -37,20 +37,33 @@ public class MemberLoginController extends SuperClass{
 			super.GotoPage(gotopage);
 		}
 		
-		if(this.validate(request)) {
-			String gotopage ;
-			gotopage = "common/index.jsp";
-			System.out.println(gotopage);
-			
+		if(this.validate(request) == true ) {
 			
 			
 			MemberDAO dao = new MemberDAO();
 			MemberVO member =  dao.Insertdate(id,password);
-			super.session.setAttribute("loginfo", member);
-			super.GotoPage(gotopage);
+			
+			System.out.println(member + "값이 들어있나요");
+			
+			String gotopage ;
+			if(member == null) { // 로그인 실패
+				gotopage= "member/login.jsp";
+				String errmsg = "회원 정보가 없습니다.";
+				super.setErrorMessage(errmsg);
+				super.GotoPage(gotopage);
+				
+				
+			}
+			if(member!=null) {
+				gotopage= "common/index.jsp";
+				super.session.setAttribute("loginfo", member);
+				super.GotoPage(gotopage);
+				
+			}
 		
 		
 		}
+		
 		super.doPost(request, response);
 	}
 	
