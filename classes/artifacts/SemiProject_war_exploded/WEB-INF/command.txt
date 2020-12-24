@@ -2,12 +2,11 @@
 index=common.IndexController
 survey=common.ServeyController
 #### Member Section ##################################
-
+melogin=member.MemberLoginController
+mypage=memeber.MemberMypageController
 #### CS-Center Section ###############################
 
 #### Customer Section ################################
 
 #### Product Section #################################
 
-#### Login Section ############
-melogin=member.MemberLoginController

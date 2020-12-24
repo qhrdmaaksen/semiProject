@@ -16,9 +16,9 @@
 	<title>product detail</title>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<%@ include file="./../common/nav.jsp"%>
+	<%@ include file="../common/nav.jsp"%>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-	<script src="./../js/jquery.zoom.min.js"></script>
+	<script src="../js/jquery.zoom.min.js"></script>
 	<style>
 		body{
 			width: 100%;
@@ -92,14 +92,14 @@
 					<img class="img-thumbnail" alt="prod-img" src="../images/imsitest.png" width="400" height="600" onmouseover="applyImage(this.src);">
 				</div>
 				<div align="center">
-					<img class="img-thumbnail" alt="a" src="./../images/imsitest01.png"
+					<img class="img-thumbnail" alt="a" src="../images/imsitest01.png"
 						width="70" height="130" onmouseover="applyImage(this.src);">
 					<!-- apply 함수한테 나의 이미지 경로를 알려줌? -->
-					<img class="img-thumbnail" alt="b" src="./../images/imsitest02.png"
+					<img class="img-thumbnail" alt="b" src="../images/imsitest02.png"
 						width="70" height="130" onmouseover="applyImage(this.src);"> 
-					<img class="img-thumbnail" alt="c" src="./../images/imsitest03.png"
+					<img class="img-thumbnail" alt="c" src="../images/imsitest03.png"
 						width="70" height="130" onmouseover="applyImage(this.src);"> 
-					<img class="img-thumbnail" alt="c" src="./../images/imsitest.png"
+					<img class="img-thumbnail" alt="c" src="../images/imsitest.png"
 						width="70" height="130" onmouseover="applyImage(this.src);">
 				</div>
 			</div>
@@ -190,17 +190,17 @@
 		<div class="tab-content">
 			<div id="prod-detail" align="center" class="container tab-pane active" role="tabpanel" aria-labelledby="prod-contents01">
 				<img id="img0" title="홍삼" width="50%" height="50%"
-					src="./../images/bottle.png" alt="bottle.png">
+                     src="../images/bottle.png" alt="bottle.png">
 				<!-- <button id="prod-moreView"
 					style="width: 60%; font-size: 20px; color: blue; background: white;">상품
 					정보 상세 보기 ▼</button> -->
 					<img id="img1" title="홍삼1" width="50%" height="50%"
-						src="./../images/point.jpg" alt="point.jpg"> 
-					<img id="img2" title="홍삼2"	width="50%" height="50%" src="./../images/point01.jpg"
+                         src="../images/point.jpg" alt="point.jpg">
+					<img id="img2" title="홍삼2"	width="50%" height="50%" src="../images/point01.jpg"
 						alt="point01.jpg">
-					<img id="img3" title="홍삼3"	width="50%" height="50%" src="./../images/point02.jpg"
+					<img id="img3" title="홍삼3"	width="50%" height="50%" src="../images/point02.jpg"
 						alt="point02.jpg"><br> 
-					<img id="img4" title="홍삼4" width="50%" height="50%" src="./../images/point03.jpg"
+					<img id="img4" title="홍삼4" width="50%" height="50%" src="../images/point03.jpg"
 						alt="point03.jpg"><br>
 						면역력
 					증진·피로개선·지구력 증진에 도움을 줄 수 있는 면역력 증진·피로개선·기억력개선에 도움을 줄 수 있음<br> 쌀의
