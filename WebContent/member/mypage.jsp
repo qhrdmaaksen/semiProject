@@ -23,8 +23,8 @@
             float: left;
         }
         .mypage_left {
+            float: left;
             width: 140px;
-            min-height: 1000px;
             background-color: rgb(40, 109, 180);
         }
         .nav_box_h {
