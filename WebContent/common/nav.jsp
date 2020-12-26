@@ -77,27 +77,17 @@
 			}
 	</style>
 </head>
+
+
 <body>
-	<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+<nav class="navbar navbar-expand-sm bg-warning navbar-dark">
 		<!-- Brand/logo -->
 		<div class="navbar-header">
 			<a class="navbar-brand" href="<%=NoForm%>index">
-				<img src="./../images/logo1.png" alt="logo" style="width:200px;">
+				<img src="./../images/logosize.png" alt="logo" style="width:250px;">
 			</a>
 		</div>
 		<ul class="navbar-nav">
-			<%--     <li class="nav-item">
-			<a class="nav-link" href="<%=contextPath%>/main.jsp">Home</a></li> --%>
-			<li class="nav-item">
-				<a class="nav-link" href="#">
-					<c:if test="${whologin == 0}">
-					미로그인
-					</c:if>
-					<c:if test="${whologin != 0}">
-					${sessionScope.loginfo.name}(${sessionScope.loginfo.id}) 님
-					</c:if>
-				</a>
-			</li>
 
 			<li class="nav-item">
 				<a class="nav-link" href="<%=NoForm%>index">추천 받기</a>
@@ -111,6 +101,7 @@
 			<li class="nav-item">
 				<a class="nav-link" href="<%=NoForm%>index">고객포럼</a>
 			</li>
+			
 			<li class="nav-item dropdown">
 				<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">Dropdown</a>
 				<div class="dropdown-menu">
@@ -152,6 +143,13 @@
 				</ul>
 			</li>
 		</ul>
+	<ul class="nav justify-content-end">
+
+    <li class="nav-item">
+      <a class="nav-link" href="#">Link</a>
+    </li>
+
+  </ul>
 	</nav>
     <c:if test="${not empty requestScope.errmsg}">
         <div class="alert alert-danger alert-dismissable">
