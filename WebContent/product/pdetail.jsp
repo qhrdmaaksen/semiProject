@@ -244,7 +244,7 @@ body {
 							<td colspan="10">
 								<form class="form-inline" role="form" name="myform" 
 									method="get">
-									<input type="hidden" name="command" value="boList">
+									<input type="hidden" name="command" value=pdetail>
 									<button class="btn btn-default btn-info" type="button"
 										onclick="writeForm();">글 쓰기</button>
 									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -299,8 +299,7 @@ body {
 							</div>
 							<div class="panel-body">
 								<!-- 리뷰 등록  form -->
-								<form class="form-horizontal" role="form" name="productForm" method="post" action="<%=YesForm%>"
-								enctype="multipart/form-data">
+								<form class="form-horizontal" role="form" name="productForm" method="post" action="<%=YesForm%>">
 									<input type="hidden" name="command" value="pdetail">
 									<div class="row">
 										<div class="form-group col-sm-6">
@@ -309,10 +308,12 @@ body {
 											<div class="col-sm-12">
 												<input type="text" class="form-control" name="writer"
 													id="fakewriter" placeholder="작성자"
-													value="${sessionScope.loginfo.name}(${sessionScope.loginfo.id})"
+													<%-- value="${sessionScope.loginfo.name}(${sessionScope.loginfo.id})" --%>
+													value="김민우"
 													disabled="disabled"> <input type="hidden"
 													name="writer" id="writer"
-													value="${sessionScope.loginfo.id}">
+													value="김민우"
+													<%-- value="${sessionScope.loginfo.id}" --%>>
 											</div>
 											<label class="control-label col-sm-12" for="subject">
 											</label>
