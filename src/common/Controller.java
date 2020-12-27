@@ -78,12 +78,14 @@ public class Controller extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    	System.out.println("post");
         request.setCharacterEncoding("UTF-8");
         doProcess(request, response);
     }
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    	System.out.println("get");
         request.setCharacterEncoding("UTF-8");
         doProcess(request, response);
     }
