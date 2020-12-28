@@ -179,7 +179,7 @@
                 <li class="content_box_c">
                     <strong class="content_box_content">보유한 포인트</strong>
                     <div>
-                        <span class="content_box_content_no">100,000</span>
+                        <span class="content_box_content_no"><fmt:formatNumber value="${sessionScope.loginfo.point}" pattern="#,###" /></span>
                         <span class="content_box_content_font">원</span>
                     </div>
                 </li>
