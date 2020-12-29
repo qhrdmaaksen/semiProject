@@ -13,71 +13,90 @@ int mysearch = 2;
 <!DOCTYPE html>
 <html>
 <head>
-<title>product detail</title>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>product detail</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
 <%@ include file="../common/nav.jsp"%>
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-<script src="../js/jquery.zoom.min.js"></script>
-<style>
-body {
-	width: 100%;
-	height: 100%;
-}
-
-.zoom {
-	display: inline-block;
-	position: relative;
-}
-</style>
-<script type="text/javascript">
-	function imageZoom() {
-		$("#myarea").zoom();
+	<script
+		src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+	<script src="../js/jquery.zoom.min.js"></script>
+	<script src="../js/jquery-3.5.1.min.js" type="text/javascript"></script>
+	<link
+	    rel="stylesheet"
+	    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"
+	  />
+	<style>
+	body {
+		width: 100%;
+		height: 100%;
 	}
-
-	function applyImage(srcimg) {
-		var mywidth = 340; /* form에 너비 높이들을 가져오는 문  */
-		var myheight = 450;
-
-		var imgInfo = "<img src='" + srcimg ;
-				imgInfo += "' width='" + mywidth ;
-				imgInfo += "' height='" + myheight + "'></img>";
-
-		var target = document.getElementById('myarea');
-		target.innerHTML = imgInfo;
-		imageZoom();
+	
+	.zoom {
+		display: inline-block;
+		position: relative;
 	}
-</script>
-<script type="text/javascript">
-	$(document).ready(function() {
-		$("input[name='delivery']").click(function() {
-			var thisValue = $(this).val();
-			if (thisValue == "정기 배송") {
-				$("#inHere").css("display", "block");
-			} else {
-				$("#inHere").css("display", "none");
-			}
+	</style>
+	<script type="text/javascript">
+		function imageZoom() {
+			$("#myarea").zoom();
+		}
+	
+		function applyImage(srcimg) {
+			var mywidth = 340; /* form에 너비 높이들을 가져오는 문  */
+			var myheight = 450;
+	
+			var imgInfo = "<img src='" + srcimg ;
+					imgInfo += "' width='" + mywidth ;
+					imgInfo += "' height='" + myheight + "'></img>";
+	
+			var target = document.getElementById('myarea');
+			target.innerHTML = imgInfo;
+			imageZoom();
+		}
+	</script>
+	<script type="text/javascript">
+		$(document).ready(function() {
+			$("input[name='delivery']").click(function() {
+				var thisValue = $(this).val();
+				if (thisValue == "정기 배송") {
+					$("#inHere").css("display", "block");
+				} else {
+					$("#inHere").css("display", "none");
+				}
+			})
 		})
-	})
-</script>
-<style type="text/css">
-#prod-contents {
-	position: absolute;
-	top: 62px;
-	left: 150px;
-	width: 550px;
-}
-
-#prod-tab-menu {
-	font-size: 30px;
-	position:
-}
-
-#gojung.gojung2 {
-	position: fixed;
-}
-</style>
+	</script>
+	<script type="text/javascript">
+	   $('#star_grade a').click(function(){
+           $(this).parent().children("a").removeClass("on");  /* 별점의 on 클래스 전부 제거 */ 
+           $(this).addClass("on").prevAll("a").addClass("on"); /* 클릭한 별과, 그 앞 까지 별점에 on 클래스 추가 */
+           return false;
+       });
+	</script>
+	<style type="text/css">
+	#prod-contents {
+		position: absolute;
+		top: 62px;
+		left: 150px;
+		width: 550px;
+	}
+	
+	#prod-tab-menu {
+		font-size: 30px;
+		position:
+	}
+	
+	#gojung.gojung2 {
+		position: fixed;
+	}
+	#star_grade a{
+        text-decoration: none;
+        color: gray;
+    }
+    #star_grade a.on{
+        color: red;
+    }
+	</style>
 </head>
 <body>
 	<div class="container">
@@ -295,7 +314,7 @@ body {
 						style="display: inline;">
 						<div class="panel panel-default panel-primary">
 							<div class="panel-heading">
-								<h4>리뷰 등록</h4>
+								<h4 align="center">리뷰 등록</h4>
 							</div>
 							<div class="panel-body">
 								<!-- 리뷰 등록  form -->
@@ -317,11 +336,6 @@ body {
 											</div>
 											<label class="control-label col-sm-12" for="subject">
 											</label>
-											<div class="col-sm-12">
-												<input type="text" class="form-control" name="subject"
-													id="subject" placeholder="글 제목" value="${bean.subject}">
-												<span class="err">${errsubject}</span>
-											</div>
 											<div class="form-group">
 												<label class="control-label col-sm-<%=formleft%>"
 													for="image"></label>
@@ -340,22 +354,24 @@ body {
 											</div> --%>
 										</div>
 										<div class="form-group col-sm-6">
-											<label class="control-label col-sm-12" for="content">
-												글 내용</label>
+											<label class="control-label col-sm-12" for="content" style="color: white;">
+												&nbsp;</label>
 											<div class="col-sm-12">
 												<textarea name="content" id="content" rows="5" cols=""
 													placeholder="글 내용" class="form-control">${bean.content}</textarea>
 												<span class="err">${errcontent}</span>
 											</div>
 											<br>
-											<div align="center" class="col-sm-offset-3 col-sm-12 row">
-												<div class="col-sm-6">
-													<button class="btn btn-outline-primary" type="submit" id="addreview">글등록</button>
+												<div class="col-sm-6" align="right">
+													<p id="star_grade">
+												        <a href="#">★</a>
+												        <a href="#">★</a>
+												        <a href="#">★</a>
+												        <a href="#">★</a>
+												        <a href="#">★</a>
+													</p>
+													<button class="btn btn-outline-primary" type="submit" id="addreview">글 등록</button>
 												</div>
-												<div class="col-sm-6">
-													<button class="btn btn-outline-danger" type="reset">취소</button>
-												</div>
-											</div>
 										</div>
 									</div>
 									<%-- <div class="form-group">
@@ -368,6 +384,7 @@ body {
 										</div>
 									</div> --%>
 								</form>
+								
 							</div>
 						</div>
 					</div>

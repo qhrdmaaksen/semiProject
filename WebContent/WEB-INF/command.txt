@@ -10,3 +10,4 @@ mypage=member.MemberMypageController
 
 #### Product Section #################################
 pdetail=common.PreviewController
+pdetail=common.PdetailController
