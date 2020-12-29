@@ -90,7 +90,8 @@
 		<ul class="navbar-nav">
 
 			<li class="nav-item">
-				<a class="nav-link" href="<%=NoForm%>index">추천 받기</a>
+				<a class="nav-link" href="<%=NoForm%>index">
+				추천 받기</a>
 			</li>
 			<li class="nav-item">
 				<a class="nav-link" href="<%=NoForm%>index">제품 보기</a>
@@ -119,7 +120,7 @@
 							<a class="dropdown-item" href="<%=NoForm%>melogin">로그인</a>
 						</li>
 						<li>
-							<a class="dropdown-item" href="<%=NoForm%>meinsert">회원 가입</a>
+							<a class="dropdown-item" href="<%=NoForm%>newmember">회원 가입</a>
 						</li>
 					</c:if>
 					<c:if test="${whologin != 0}">
