@@ -20,12 +20,15 @@ public class PreviewDAO extends SuperDAO{
 		
 		MemberVO bean = null;
 		
-		String sql = "insert into p_review values(seq_review.nextval,seq_index.nextval,?,?,sysdate,?)" ;
-		Connection conn = null ;
+		String sql = "insert into p_review values(seq_review.nextval,1,?,?,sysdate,?)" ;
+		Connection conn = null ; 
 		PreparedStatement pstmt = null ;
 		int result = 0;
 
 		try {
+			System.out.println("content : "+request.getParameter("content").toString());
+			System.out.println("grade : "+request.getParameter("grade").toString());
+			System.out.println("id : "+request.getParameter("id").toString());
 			conn = super.getConnection();
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, request.getParameter("content").toString());

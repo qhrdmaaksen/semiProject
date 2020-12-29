@@ -2,13 +2,13 @@
 	pageEncoding="UTF-8"%>
 <%
 	int twelve = 12;
-int myoffset = 2;
-int mywidth = twelve - 2 * myoffset;
-int formleft = 3;
-int formright = twelve - formleft;
-int mysearch = 2;
-//int label = 3 ; //양식의 왼쪽에 보여지는 라벨의 너비 
-//int content = twelve - label ; //우측의 내용 입력(input, select, textarea)의 너비
+	int myoffset = 2;
+	int mywidth = twelve - 2 * myoffset;
+	int formleft = 3;
+	int formright = twelve - formleft;
+	int mysearch = 2;
+	//int label = 3 ; //양식의 왼쪽에 보여지는 라벨의 너비 
+	//int content = twelve - label ; //우측의 내용 입력(input, select, textarea)의 너비
 %>
 <!DOCTYPE html>
 <html>
@@ -64,14 +64,19 @@ int mysearch = 2;
 					$("#inHere").css("display", "none");
 				}
 			})
+			  $('#star_grade a').click(function(){
+		           $(this).parent().children("a").removeClass("on");  /* 별점의 on 클래스 전부 제거 */ 
+		           $(this).addClass("on").prevAll("a").addClass("on"); /* 클릭한 별과, 그 앞 까지 별점에 on 클래스 추가 */
+		           var i = 0;
+		           $("#star_grade a").each(function() {
+		        	   if($(this).hasClass("on")){
+		        	   		i++;
+		        		   $("[name='grade']").val(i);
+		        	   }
+		           })
+		           return false;
+		       });
 		})
-	</script>
-	<script type="text/javascript">
-	   $('#star_grade a').click(function(){
-           $(this).parent().children("a").removeClass("on");  /* 별점의 on 클래스 전부 제거 */ 
-           $(this).addClass("on").prevAll("a").addClass("on"); /* 클릭한 별과, 그 앞 까지 별점에 on 클래스 추가 */
-           return false;
-       });
 	</script>
 	<style type="text/css">
 	#prod-contents {
@@ -97,6 +102,29 @@ int mysearch = 2;
         color: red;
     }
 	</style>
+<script type="text/javascript">
+	var id = "${id}";
+	var password = "${password}";
+	console.log("id : "+id);
+	console.log("password : "+ password)
+	if(id != null && 
+	   password !=null &&
+	   id != "" &&
+	   password != "" &&
+	   id != undefined &&
+	   password != undefined)
+	{
+		//session 등록
+		//location.href = "pdetail.jsp";
+	}else{
+		//location.href = "login.jsp";
+	}
+	
+</script>
+<script>
+	//alert("로그아웃 되었습니다.");
+	//location.href="login.jsp";                                    // 로그아웃 페이지로 이동
+</script>
 </head>
 <body>
 	<div class="container">
@@ -319,7 +347,7 @@ int mysearch = 2;
 							<div class="panel-body">
 								<!-- 리뷰 등록  form -->
 								<form class="form-horizontal" role="form" name="productForm" method="post" action="<%=YesForm%>">
-									<input type="hidden" name="command" value="pdetail">
+									<input type="hidden" name="command" value="preview">
 									<div class="row">
 										<div class="form-group col-sm-6">
 											<label class="control-label col-sm-<%=formleft%>"
@@ -345,7 +373,7 @@ int mysearch = 2;
 														class="err form-control-static">${errimage}</span>
 												</div>
 											</div>
-											<label class="control-label col-sm-<%=formleft%>"
+											<label class="control-label col-sm-<%=formleft%>-
 												for="regdate"> </label>
 											<%-- 	<div class="col-sm-12">
 												<input type="datetime" class="form-control" name="regdate"
@@ -383,6 +411,8 @@ int mysearch = 2;
 												<span class="err">${errpassword}</span>
 										</div>
 									</div> --%>
+									<input type="hidden" name="id" value="김민우"><!--  세션의 아이디 값 대입 -->
+									<input type="hidden" name='grade' value="0">
 								</form>
 								
 							</div>

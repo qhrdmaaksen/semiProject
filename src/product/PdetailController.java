@@ -11,10 +11,6 @@ import common.SuperClass;
 
 public class PdetailController extends SuperClass{
 	
-	public PdetailController() {
-		// TODO Auto-generated constructor stub
-	}
-	
 	@Override
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		PdetailDao dao = new PdetailDao(request) ; 
