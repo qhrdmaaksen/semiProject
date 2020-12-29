@@ -10,7 +10,6 @@
 <%@ include file="./../common/nav.jsp"%>
 <html>
 <head>
-    <title><%=NAME%>, 마이페이지</title>
     <style>
         dl, dt, dd, ul, ol, menu, li {list-style: none; margin: 0px; padding: 0px}
 
@@ -64,9 +63,9 @@
         }
         .mypage_right {
             width: 840px;
-            background-color: rgb(130, 188, 226);
         }
         .content_box {
+            background-color: rgb(130, 188, 226);
             border-width: 1px 1px 1px 0px;
             border-top-style: solid;
             border-right-style: solid;
@@ -132,7 +131,7 @@
                 <div class="nav_boxes">
                     <ul class="nav_boxes_list">
                         <li class="nav_boxes_list_f">MY 혜택</li>
-                        <li class="nav_boxes_list_c">보유 쿠폰 조회</li>
+                        <li class="nav_boxes_list_c"><a href="<%=NoForm%>coupon">보유 쿠폰 조회</a></li>
                         <li class="nav_boxes_list_c">보유 포인트 내역</li>
                     </ul>
                 </div>
@@ -151,7 +150,7 @@
                 <li class="content_box_c">
                     <strong class="content_box_content">보유중인 쿠폰</strong>
                     <div>
-                        <span class="content_box_content_no">3</span>
+                        <span class="content_box_content_no">${sessionScope.coupons}</span>
                         <span class="content_box_content_font">장</span>
                     </div>
                 </li>
@@ -184,7 +183,5 @@
                     </div>
                 </li>
             </ul>
-        </div>
-    </div>
 </body>
 </html>

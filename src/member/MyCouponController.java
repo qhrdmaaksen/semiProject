@@ -2,11 +2,9 @@ package member;
 
 import DAO.CouponDAO;
 import DAO.MemberDAO;
-import VO.CouponVO;
+import VO.MemberVO;
 import common.IndexController;
 import common.SuperClass;
-import VO.MemberVO;
-import DAO.MemberDAO;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -14,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
-public class MemberMypageController extends SuperClass {
+public class MyCouponController extends SuperClass {
     @Override
     public void doProcess(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
@@ -35,7 +33,7 @@ public class MemberMypageController extends SuperClass {
 
 
         super.doProcess(request, response);
-        super.GotoPage("/member/mypage.jsp");
+        super.GotoPage("/member/coupon.jsp");
     }
 
     @Override
