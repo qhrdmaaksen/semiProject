@@ -20,7 +20,7 @@
 		}
 				
 	function isCheckFalse() {
-		document.myform.isCheck.value = false;
+		document.myform.isCheck.value = true;
 	}
 	function checkForm() {
 		var isCheck = document.myform.isCheck.value;
@@ -85,8 +85,13 @@
 
 <div class="container">
   <h2>도담도담 회원가입</h2>
-  <form action="/action_page.php" class="was-validated">
+ <!--  <form action="/action_page.php" class="was-validated"> class="form-horizontal"-->
   
+  <form id="myform" name="myform" class="was-validated" role="form"
+					action="<%=YesForm%>" method="post">
+					<input type="hidden" name="command" value="newmember">
+					 <input type="hidden" name="isCheck" value="false"> 
+					 <input type="hidden" name="mpoint" value="5">
   
     <div class="form-group">
       <label for="id">UserID:</label>
@@ -97,6 +102,7 @@
       
       <button type="button" class="btn btn-outline-info btn-sm" value="중복 검사"
 								onclick="checkDuplicateId();">아이디 중복 검사</button>
+								<!-- onclick="checkDuplicateId();" -->
     </div>
     
     <div class="form-group">
@@ -111,11 +117,11 @@
 
 	<div class="form-group">
 		<input type="password" name="password2" id="password"
-			class="form-control" placeholder="비밀 번호 확인" onkeyup="checkpw();"
+			class="form-control" placeholder="비밀 번호 확인" 
 			value="" required>
 		<div class="valid-feedback">상기 비밀번호와 동일하게 작성 해 주세요. </div> 
 		 <div class="invalid-feedback">비밀번호를 작성 해 주세요.</div>
-		 
+		 <!-- onkeyup="checkpw();" -->
     </div>
     
     <div class="form-group">
@@ -155,9 +161,15 @@
       </label>
     </div>
     
+   <div class="form-group">
+		<button type="submit" class="btn btn-primary btn-block"
+		onclick="return checkForm();">
+		<b>회원 가입</b>
+		</button>
+	</div>
     
     
-    <button type="submit" class="btn btn-primary btn-block">submit</button>
+    
   </form>
 </div>
 

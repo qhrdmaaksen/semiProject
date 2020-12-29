@@ -29,6 +29,7 @@ public class MemberNewmemberController extends SuperClass{
 			throws ServletException, IOException {
 		
 		bean  = new MemberVO();
+		System.out.println(request.getParameter("birth"));
 		bean.setBirth(Date.valueOf(request.getParameter("birth")));
 		System.out.println("생일은?" + bean.getBirth());
 		bean.setId(request.getParameter("id"));
