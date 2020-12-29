@@ -100,36 +100,36 @@
 								</form>
 							</td>
 						</tr>
-						<c:forEach var="bean" items="${requestScope.lists}">
+						<c:forEach var="vo" items="${requestScope.lists}">
 							<tr>
 								<td>
-									<c:forEach var="cnt" begin="1" end="${bean.depth}">
+									<c:forEach var="cnt" begin="1" end="${vo.depth}">
 										<span class="badge re">re</span>
 									</c:forEach>
-									<a href="<%=NoForm%>cs-detailView&no=${bean.no}&${requestScope.parameters}">
-										${bean.subject}
+									<a href="<%=NoForm%>cs-detailView&no=${vo.no}&${requestScope.parameters}">
+										${vo.subject}
 									</a>
 								</td>
-								<td>${bean.writer}</td>
-								<td>${bean.content}</td>
-								<td>${bean.regdate}</td>
+								<td>${vo.writer}</td>
+								<td>${vo.content}</td>
+								<td>${vo.regdate}</td>
 								<td>
-									<c:if test="${sessionScope.loginfo.id == bean.writer}">
-										<a href="<%=NoForm%>cs-update&no=${bean.no}&${requestScope.parameters}">
+									<c:if test="${sessionScope.loginfo.id == vo.writer}">
+										<a href="<%=NoForm%>cs-update&no=${vo.no}&${requestScope.parameters}">
 											수정
 										</a>
 									</c:if>
-									<c:if test="${sessionScope.loginfo.id != bean.writer}">
+									<c:if test="${sessionScope.loginfo.id != vo.writer}">
 											수정
 									</c:if>
 								</td>
 								<td>
-									<c:if test="${sessionScope.loginfo.id == bean.writer}">
-										<a href="<%=NoForm %>cs-delete&no=${bean.no}&${requestScope.parameters}">
+									<c:if test="${sessionScope.loginfo.id == vo.writer}">
+										<a href="<%=NoForm %>cs-delete&no=${vo.no}&${requestScope.parameters}">
 											삭제
 										</a>
 									</c:if>
-									<c:if test="${sessionScope.loginfo.id != bean.writer}">
+									<c:if test="${sessionScope.loginfo.id != vo.writer}">
 										삭제
 									</c:if>
 								</td>
@@ -163,7 +163,7 @@
 											</label>
 											<div class="col-sm-12">
 												<input type="text" class="form-control" name="subject"
-													id="subject" placeholder="글 제목" value="${bean.subject}"> 
+													id="subject" placeholder="글 제목" value="${vo.subject}"> 
 												<span class="err">${errsubject}</span>
 											</div>
 											<div class="form-group">
@@ -179,7 +179,7 @@
 											</label>
 										<%-- 	<div class="col-sm-12">
 												<input type="datetime" class="form-control" name="regdate"
-													id="regdate" placeholder="작성 일자" value="${bean.regdate}"> <span
+													id="regdate" placeholder="작성 일자" value="${vo.regdate}"> <span
 													class="err">${errregdate}</span>
 											</div> --%>
 										</div>
@@ -188,7 +188,7 @@
 											</label>
 											<div class="col-sm-12">
 												<textarea name="content" id="content" rows="5" cols=""
-													placeholder="글 내용" class="form-control">${bean.content}</textarea>
+													placeholder="글 내용" class="form-control">${vo.content}</textarea>
 												<span class="err">${errcontent}</span>
 											</div><br>
 											<div align="center" class="col-sm-offset-3 col-sm-12 row">
@@ -206,7 +206,7 @@
 											번호</label>
 										<div class="col-sm-<%=formright%>">
 											<input type="password" class="form-control" name="password"
-												id="password" placeholder="비밀 번호를 넣어 주셔용^^" value="${bean.password}">
+												id="password" placeholder="비밀 번호를 넣어 주셔용^^" value="${vo.password}">
 												<span class="err">${errpassword}</span>
 										</div>
 									</div> --%>
