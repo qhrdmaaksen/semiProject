@@ -5,6 +5,7 @@ survey=common.ServeyController
 melogin=member.MemberLoginController
 mypage=member.MemberMypageController
 newmember=member.MemberNewmemberController
+coupon=member.MyCouponController
 #### CS-Center Section ###############################
 
 #### Customer Section ################################

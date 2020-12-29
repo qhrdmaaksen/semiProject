@@ -11,7 +11,7 @@ import VO.MemberVO;
 public class MemberDAO extends SuperDAO {
 
 
-	public MemberVO selectMember(String id, String password) throws NoSuchFieldException  {
+	public MemberVO selectMember(String id, String password) throws NoSuchFieldException {
 		MemberVO bean = null;
 		
 		String sql = "select * from members where \"id\" = ? and \"password\" = ? " ;
