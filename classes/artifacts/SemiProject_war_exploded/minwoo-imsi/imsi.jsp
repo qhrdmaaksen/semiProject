@@ -115,7 +115,7 @@
 		m.src = n;
 		l = b.getElementsByTagName(f)[0];
 		l.parentNode.insertBefore(m, l)
-	}(window, document, "script",
+		}(window, document, "script",
 			"https://connect.facebook.net/en_US/fbevents.js");
 	fbq("init", "2055296004544318");
 	fbq("track", "PageView");

@@ -42,8 +42,8 @@ public class MemberVO {
 	public Date getBirth() {
 		return birth;
 	}
-	public void setBirth(Date date) {
-		this.birth = date;
+	public void setBirth(Date birth) {
+		this.birth = birth;
 	}
 	public String getPhone() {
 		return phone;

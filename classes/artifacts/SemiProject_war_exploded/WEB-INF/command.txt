@@ -4,9 +4,10 @@ survey=common.ServeyController
 #### Member Section ##################################
 melogin=member.MemberLoginController
 mypage=member.MemberMypageController
+coupon=member.MyCouponController
 #### CS-Center Section ###############################
 
 #### Customer Section ################################
 
 #### Product Section #################################
-
+pdetail=common.PreviewController

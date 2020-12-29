@@ -1,0 +1,8 @@
+.coupons {
+    float: left;
+    margin-top: 20px;
+}
+.coupons_tabs {
+    border: 1px solid rgb(217,217,217);
+    border-bottom: 2px solid rgb(61,130,247);
+}
