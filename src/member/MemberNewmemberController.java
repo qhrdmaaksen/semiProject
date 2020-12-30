@@ -1,7 +1,6 @@
 package member;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -13,7 +12,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import DAO.MemberDAO;
 import VO.MemberVO;
-import common.IndexController;
 import common.SuperClass;
 
 public class MemberNewmemberController extends SuperClass{
@@ -44,19 +42,18 @@ public class MemberNewmemberController extends SuperClass{
 		System.out.println("생일은?" + bean.getBirth());
 		bean.setId(request.getParameter("id"));
 		bean.setName(request.getParameter("uname"));
-		bean.setPassword(request.getParameter("password"));
+		bean.setPassword(request.getParameter("password1"));
+		
 		/*
 		 * if (request.getParameter("password1") == request.getParameter("password2")) {
 		 * bean.setPassword(request.getParameter("password1"));
 		 * System.out.println(request.getParameter("password1"));
-		 * System.out.println(request.getParameter("password2")); }
+		 * System.out.println(request.getParameter("password2")); } else {
+		 * System.out.println(request.getParameter("password1"));
+		 * System.out.println(request.getParameter("password2")); gotopage =
+		 * "member/newmember.jsp"; super.GotoPage( gotopage ); }
 		 */
-		/*
-			 * else { System.out.println(request.getParameter("password1"));
-			 * System.out.println(request.getParameter("password2"));
-			 *  gotopage =
-			 * "member/newmember.jsp"; super.GotoPage( gotopage ); }
-			 */
+			
 		bean.setPhone(request.getParameter("phone"));
 		
 		/*
@@ -116,9 +113,11 @@ public class MemberNewmemberController extends SuperClass{
 			request.setAttribute( super.PREFIX + "phone", "휴대폰 번호를 정확하게 작성 해 주세요.");
 			isCheck = false  ;
 		}
-				
+
 		String regex = "\\d{4}[-]\\d{2}[-]\\d{2}" ;
+
 		boolean result = Pattern.matches(regex, request.getParameter("birth"));
+		
 		if (result == false ) {
 			request.setAttribute( super.PREFIX + "birth", "생일은 yyyy-MM-dd 형식으로 입력해 주세요.");
 			isCheck = false  ;

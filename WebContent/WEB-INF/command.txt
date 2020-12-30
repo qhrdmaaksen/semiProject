@@ -6,6 +6,7 @@ melogin=member.MemberLoginController
 mypage=member.MemberMypageController
 newmember=member.MemberNewmemberController
 coupon=member.MyCouponController
+idcheck=member.IdcheckController
 #### CS-Center Section ###############################
 
 #### Customer Section ################################
