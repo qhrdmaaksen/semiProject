@@ -9,6 +9,7 @@
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 	<style type="text/css">
 		body{
+			position: relative;
 			margin: 0px;
 			font:12px "맑은 고딕";
 		}
