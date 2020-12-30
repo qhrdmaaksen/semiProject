@@ -2,9 +2,9 @@ package member;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.regex.Pattern;
 
 import javax.servlet.ServletException;
@@ -31,13 +31,15 @@ public class MemberNewmemberController extends SuperClass{
 			throws ServletException, IOException {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		bean  = new MemberVO();
-		java.util.Date birth = null;
+
+		Date birth = null;
 		try {
 			birth = sdf.parse(request.getParameter("birth"));
 			bean.setBirth(birth);
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
+
 		System.out.println(request.getParameter("birth"));
 		System.out.println("생일은?" + bean.getBirth());
 		bean.setId(request.getParameter("id"));
@@ -69,7 +71,7 @@ public class MemberNewmemberController extends SuperClass{
 		 */
 		
 		System.out.println( bean );
-		
+
 		if ( this.validate( request ) == true ) {
 			//DAO 객체를 생성한다.
 			MemberDAO mdao = new MemberDAO();			
@@ -81,11 +83,7 @@ public class MemberNewmemberController extends SuperClass{
 			
 			// 회원 가입을 성공하면, 바로 로그인되도록 처리해줍니다.
 			// doPost() 메소드를 호출하여 바로 로그인을 수행합니다.
-			doPost(request, response);
-			gotopage = "member/index.jsp"; 
-			super.GotoPage( gotopage );
-			
-			//new MemberLoginController().doPost(request, response);
+			new MemberLoginController().doPost(request, response);
 		}else{
 			gotopage = "member/newmember.jsp";  
 			request.setAttribute("bean", bean);
@@ -114,22 +112,17 @@ public class MemberNewmemberController extends SuperClass{
 			isCheck = false  ;
 		}
 			
-		if( bean.getPhone().length() < 11 || bean.getPhone().length() > 10 ){
+		if( bean.getPhone().length() < 11 || bean.getPhone().length() > 11 ){
 			request.setAttribute( super.PREFIX + "phone", "휴대폰 번호를 정확하게 작성 해 주세요.");
 			isCheck = false  ;
 		}
 				
-		String regex = "\\d{4}[/]\\d{2}[/]\\d{2}" ;
-		if( bean.getBirth() == null){
-			bean.setBirth(Date.valueOf(""));
-		}
-		//bean.getBirth()
+		String regex = "\\d{4}[-]\\d{2}[-]\\d{2}" ;
 		boolean result = Pattern.matches(regex, request.getParameter("birth"));
 		if (result == false ) {
-			request.setAttribute( super.PREFIX + "birth", "생일은 yyyy/MM/dd 형식으로 입력해 주세요.");
+			request.setAttribute( super.PREFIX + "birth", "생일은 yyyy-MM-dd 형식으로 입력해 주세요.");
 			isCheck = false  ;
 		}
-
 		return isCheck ;
 	}
 }

@@ -91,7 +91,6 @@
 					action="<%=YesForm%>" method="post">
 					<input type="hidden" name="command" value="newmember">
 					 <input type="hidden" name="isCheck" value="false"> 
-					 <input type="hidden" name="mpoint" value="5">
   
     <div class="form-group">
       <label for="id">UserID:</label>
@@ -138,7 +137,7 @@
       <input type="date" name="birth" id="birth"
 			class="form-control datepicker" placeholder="생년월일" value="" required>
 			<span class="err">${errbirth}</span>
-			<div class="valid-feedback">형식 예시 : 1900/01/01</div> 
+			<div class="valid-feedback">형식 예시 : 1900-01-01</div>
 			  <div class="invalid-feedback">생일을 작성 해 주세요</div>
     </div>
     
@@ -162,8 +161,7 @@
     </div>
     
    <div class="form-group">
-		<button type="submit" class="btn btn-primary btn-block"
-		onclick="return checkForm();">
+		<button type="submit" class="btn btn-primary btn-block" onclick="return checkForm();">
 		<b>회원 가입</b>
 		</button>
 	</div>
