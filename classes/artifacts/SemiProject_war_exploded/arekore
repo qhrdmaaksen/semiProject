@@ -1,0 +1,28 @@
+설문지에 BS4 Progress Bars 기능
+페이징처리는 BS4 Pagination
+게시물은 BS4 Cards
+font awesome bootstrap 그
+
+*image 폴더에 logo.png는 테두리따서 배경 없앤거구요, logo1.png는 흰배경으로 한거예요.
+index.jsp에 주소가 dodamdodma으로 되어있어서 오타 수정했어요.
+
+
+
+강사님의 프로젝트와 바뀐 내용
+
+
+< 변수명 or 메소드명 >
+관리자 분류 level로
+커맨드명 전부 소문자로
+main -> index
+
+
+* 회원가입은 로그인 페이지에서 가능하게 연결하고, 회원 탈퇴는 마이페이지에서 연결 가능하도록 합니다.
+
+
+
+
+
+
+
+
