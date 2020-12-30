@@ -60,7 +60,7 @@ public class MemberDAO extends SuperDAO {
 	public int NewData(MemberVO bean) {
 		System.out.println( bean.toString() ); 
 		String sql = " insert into members (id,password,name,birth,phone,level,point,picture) " ; 
-		sql += " values(?,?,?,?,?,?,?,?)" ;
+		sql += " values(?,?,?,?,?,default,default,default)" ;
 
 		PreparedStatement pstmt = null ;
 		int cnt = -99999 ;
@@ -76,8 +76,7 @@ public class MemberDAO extends SuperDAO {
 			pstmt.setString(5, bean.getPhone());
 			pstmt.setString(6, bean.getLevel());
 			pstmt.setInt(7, bean.getPoint());
-			pstmt.setString(8, bean.getPicture());
-			
+			//pstmt.setString(8, bean.getPicture());
 			
 			cnt = pstmt.executeUpdate() ; 
 			conn.commit(); 

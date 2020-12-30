@@ -108,7 +108,7 @@
     <div class="form-group">
       <label for="password">Password:</label>
      	
-     	<input type="password" name="password1" id="password"
+     	<input type="password" name="password" id="password"
 			class="form-control" placeholder="비밀 번호"
 			value="" required>
 		<div class="valid-feedback">영문/숫자 포함 6자리 이상이어야 합니다.(최대 15자) </div> 
@@ -116,7 +116,7 @@
 			    </div>
 
 	<div class="form-group">
-		<input type="password" name="password2" id="password"
+		<input type="password" name="password2" id="password2"
 			class="form-control" placeholder="비밀 번호 확인" 
 			value="" required>
 		<div class="valid-feedback">상기 비밀번호와 동일하게 작성 해 주세요. </div> 

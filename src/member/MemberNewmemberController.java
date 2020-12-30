@@ -3,6 +3,8 @@ package member;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.regex.Pattern;
 
 import javax.servlet.ServletException;
@@ -27,32 +29,44 @@ public class MemberNewmemberController extends SuperClass{
 	@Override
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		bean  = new MemberVO();
+		java.util.Date birth = null;
+		try {
+			birth = sdf.parse(request.getParameter("birth"));
+			bean.setBirth(birth);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
 		System.out.println(request.getParameter("birth"));
-		bean.setBirth(Date.valueOf(request.getParameter("birth")));
 		System.out.println("생일은?" + bean.getBirth());
 		bean.setId(request.getParameter("id"));
-		bean.setName(request.getParameter("name"));
-		if (request.getParameter("password1") == request.getParameter("password2")) {
-			bean.setPassword(request.getParameter("password1"));
-		} else {
-			doPost(request, response);
-			gotopage = "member/index.jsp"; 
-			super.GotoPage( gotopage );
-		}
+		bean.setName(request.getParameter("uname"));
 		bean.setPassword(request.getParameter("password"));
+		/*
+		 * if (request.getParameter("password1") == request.getParameter("password2")) {
+		 * bean.setPassword(request.getParameter("password1"));
+		 * System.out.println(request.getParameter("password1"));
+		 * System.out.println(request.getParameter("password2")); }
+		 */
+		/*
+			 * else { System.out.println(request.getParameter("password1"));
+			 * System.out.println(request.getParameter("password2"));
+			 *  gotopage =
+			 * "member/newmember.jsp"; super.GotoPage( gotopage ); }
+			 */
 		bean.setPhone(request.getParameter("phone"));
-		if( request.getParameter("point") != null || request.getParameter("point").equals("") == false ){
-			bean.setPoint( Integer.parseInt( request.getParameter("point") ));	
-		}
-		if( request.getParameter("picture") != null || request.getParameter("picture").equals("") == false ){
-			bean.setPicture( request.getParameter("picture"));	
-		}
-		if( request.getParameter("level") != null || request.getParameter("level").equals("") == false ){
-			bean.setLevel(request.getParameter("level"));	
-		}
 		
+		/*
+		 * if( request.getParameter("point") != null ||
+		 * request.getParameter("point").equals("") == false ){ bean.setPoint(
+		 * Integer.parseInt( request.getParameter("point") )); } if(
+		 * request.getParameter("picture") != null ||
+		 * request.getParameter("picture").equals("") == false ){ bean.setPicture(
+		 * request.getParameter("picture")); } if( request.getParameter("level") != null
+		 * || request.getParameter("level").equals("") == false ){
+		 * bean.setLevel(request.getParameter("level")); }
+		 */
 		
 		System.out.println( bean );
 		
