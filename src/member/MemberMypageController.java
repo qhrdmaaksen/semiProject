@@ -31,7 +31,7 @@ public class MemberMypageController extends SuperClass {
 
 
         CouponDAO dao = new CouponDAO();
-        session.setAttribute("coupons", dao.CountCoupons(tem.getId()));
+        session.setAttribute("cpnCount", dao.CountCoupons(tem.getId()));
 
 
         super.doProcess(request, response);

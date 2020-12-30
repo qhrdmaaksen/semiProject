@@ -150,7 +150,7 @@
                 <li class="content_box_c">
                     <strong class="content_box_content">보유중인 쿠폰</strong>
                     <div>
-                        <span class="content_box_content_no">${sessionScope.coupons}</span>
+                        <span class="content_box_content_no">${sessionScope.cpnCount}</span>
                         <span class="content_box_content_font">장</span>
                     </div>
                 </li>

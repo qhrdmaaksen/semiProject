@@ -28,27 +28,28 @@ public class MemberLoginController extends SuperClass{
 
 		this.id = request.getParameter("id");
 		this.password = request.getParameter("password");
-		
-		if(this.validate(request) == false) {
+
+		System.out.println("id : " + request.getParameter("id"));
+		System.out.println("password : " + request.getParameter("password"));
+
+		if(!this.validate(request)) {
 			String errmsg = "로그인 양식이 잘못되었습니다.";
 
 			super.setErrorMessage(errmsg);
 			this.doGet(request, response);
-		}
-
-		if(this.validate(request)) {
+		}else {
 
 			MemberDAO dao = new MemberDAO();
-			MemberVO member = null;
 			try {
-				member = dao.selectMember(id,password);
+				MemberVO member = dao.selectMember(id,password);
+				super.doPost(request, response);
+				super.session.setAttribute("loginfo", member);
 			} catch (NoSuchFieldException e) {
 				String errmsg = "아이디 혹은 비밀번호가 잘못되었습니다.";
 				System.out.println(errmsg);
 				super.setErrorMessage(errmsg);
 				this.doGet(request, response);
 			}
-			super.session.setAttribute("loginfo", member);
 
 			new IndexController().doGet(request, response);
 		}

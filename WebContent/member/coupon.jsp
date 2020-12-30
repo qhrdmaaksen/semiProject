@@ -24,13 +24,13 @@
                 </ul>
             </div>
             <div class="container-fluid tab-content coupons">
-                <div id="home" class="container tab-pane active">
+                <div id="home" class="container-fluid tab-pane active">
                     <table class="table table-bordered">
                         <colgroup>
                             <col>
                             <col width="100">
                             <col width="150">
-                            <col width="100">
+                            <col width="130">
                         </colgroup>
                         <thead>
                             <tr>
@@ -41,18 +41,58 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>가</td>
-                                <td>짐</td>
-                                <td>어</td>
-                                <td>서</td>
-                            </tr>
+                            <c:forEach var="coupon" items="${requestScope.coupons}">
+                                <tr>
+                                    <td>${coupon.name}</td>
+                                    <td><fmt:formatNumber type = "percent" maxIntegerDigits="3" value = "${coupon.discount}" /></td>
+                                    <td>${coupon.exp}</td>
+                                    <td>
+                                        <c:if test="${coupon.kind==1}">
+                                            할인쿠폰
+                                        </c:if>
+                                        <c:if test="${coupon.kind==2}">
+                                            배송비할인
+                                        </c:if>
+                                    </td>
+                                </tr>
+                            </c:forEach>
                         </tbody>
                     </table>
                 </div>
-                <div id="menu1" class="container tab-pane fade"><br>
-                    <h3>Menu 1</h3>
-                    <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                <div id="menu1" class="container-fluid tab-pane fade"><br>
+                    <table class="table table-bordered">
+                        <colgroup>
+                            <col>
+                            <col width="100">
+                            <col width="150">
+                            <col width="130">
+                        </colgroup>
+                        <thead>
+                        <tr>
+                            <td>쿠폰명</td>
+                            <td>할인액</td>
+                            <td>유효기간</td>
+                            <td>쿠폰종류</td>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <c:forEach var="coupon" items="${requestScope.usedcoupons}">
+                            <tr>
+                                <td>${coupon.name}</td>
+                                <td><fmt:formatNumber type = "percent" maxIntegerDigits="3" value = "${coupon.discount}" /></td>
+                                <td>${coupon.exp}</td>
+                                <td>
+                                    <c:if test="${coupon.kind==1}">
+                                        할인쿠폰
+                                    </c:if>
+                                    <c:if test="${coupon.kind==2}">
+                                        배송비할인
+                                    </c:if>
+                                </td>
+                            </tr>
+                        </c:forEach>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
