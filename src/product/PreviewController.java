@@ -1,19 +1,33 @@
 package product;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import DAO.PreviewDAO;
+import VO.PreviewVO;
 import common.SuperClass;
 
 public class PreviewController extends SuperClass{
 	
 	@Override
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("get 호출");
+		System.out.println("PreviewController doGet");
+		PreviewDAO dao = new PreviewDAO(request);
+		List<PreviewVO> result = dao.listsSelect() ;
+		HttpSession session = request.getSession();
+		for (PreviewVO previewVO : result) {
+			System.out.println(previewVO.getId());
+			System.out.println(previewVO.getContent());
+			System.out.println(previewVO.getGrade());
+			System.out.println(previewVO.getPostdate());
+			System.out.println(previewVO.getReviewno());
+		}
+		session.setAttribute("lists", result);
 	}
 	
 	@Override

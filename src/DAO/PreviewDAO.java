@@ -2,11 +2,15 @@ package DAO;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
 import VO.MemberVO;
+import VO.PreviewVO;
 
 public class PreviewDAO extends SuperDAO{
 	
@@ -18,7 +22,7 @@ public class PreviewDAO extends SuperDAO{
 	
 	public int addReview() {
 		
-		MemberVO bean = null;
+		MemberVO vo = null;
 		
 		String sql = "insert into p_review values(seq_review.nextval,1,?,?,sysdate,?)" ;
 		Connection conn = null ; 
@@ -55,5 +59,49 @@ public class PreviewDAO extends SuperDAO{
 			}
 		}
 		return result;
+	}
+
+	public List<PreviewVO> listsSelect() {
+			PreviewVO vo = null;
+			Connection conn = null ;
+			PreparedStatement pstmt = null ;
+			ResultSet rs = null ;
+			
+			String sql = "select * from p_review order by \"seq_review\"";
+			int result = 0;
+			
+			List<PreviewVO> lists = new ArrayList<PreviewVO>() ;
+		try {
+			conn = super.getConnection() ;
+			pstmt = conn.prepareStatement(sql) ;
+			
+			rs = pstmt.executeQuery() ;
+			while(rs.next()) {
+				vo = new PreviewVO();
+				vo.setReviewno(rs.getInt("seq_review")); 
+				vo.setId(rs.getString("id")); 
+				vo.setContent(rs.getString("content")); 
+			    vo.setPostdate(rs.getString("postdate")); 
+				vo.setGrade(rs.getInt("grade"));
+				lists.add(vo) ;
+			}
+		} catch (Exception e) {
+			SQLException err = (SQLException)e ;			
+			result = err.getErrorCode() ;			
+			e.printStackTrace();
+			try {
+				conn.rollback(); 
+			} catch (Exception e2) {
+				e2.printStackTrace();
+			}
+		} finally{
+			try {
+				if(pstmt != null){pstmt.close();}
+				if(conn != null){conn.close();}
+			} catch (Exception e2) {
+				e2.printStackTrace();
+			}
+		}
+		return lists;
 	}
 }
