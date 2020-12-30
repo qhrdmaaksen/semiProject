@@ -1,6 +1,7 @@
 package DAO;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -54,6 +55,56 @@ public class MemberDAO extends SuperDAO {
 		}
 		return bean;
 	}
+
+	
+	public int NewData(MemberVO bean) {
+		System.out.println( bean.toString() ); 
+		String sql = " insert into members (id,password,name,birth,phone,level,point,picture) " ; 
+		sql += " values(?,?,?,?,?,?,?,?)" ;
+
+		PreparedStatement pstmt = null ;
+		int cnt = -99999 ;
+		try {
+			conn = super.getConnection() ;
+			conn.setAutoCommit( false );
+			pstmt = super.conn.prepareStatement(sql) ;
+			//개발자가 수정할 곳 2 : ? 수정할 것
+			pstmt.setString(1, bean.getId() );
+			pstmt.setString(2, bean.getPassword());
+			pstmt.setString(3, bean.getName() );
+			pstmt.setDate(4, (Date)bean.getBirth());
+			pstmt.setString(5, bean.getPhone());
+			pstmt.setString(6, bean.getLevel());
+			pstmt.setInt(7, bean.getPoint());
+			pstmt.setString(8, bean.getPicture());
+			
+			
+			cnt = pstmt.executeUpdate() ; 
+			conn.commit(); 
+		} catch (Exception e) {
+			SQLException err = (SQLException)e ;
+			//getErrorCode() : 오라클 오류 상수가 리턴
+			//예 : not null 이면 1400 
+			cnt = - err.getErrorCode() ;			
+			e.printStackTrace();
+			try {
+				conn.rollback(); 
+			} catch (Exception e2) {
+				e2.printStackTrace();
+			}
+		} finally{
+			try {
+				if( pstmt != null ){ pstmt.close(); }
+				if(conn != null){conn.close();} 
+			} catch (Exception e2) {
+				e2.printStackTrace();
+			}
+		}
+		return cnt ;
+	}	
+		
+		
+
 
 
 }

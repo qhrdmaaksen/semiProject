@@ -1,23 +1,32 @@
 package VO;
 
 public class PreviewVO {
-
-	String writer;
-	String subject;
-	String content;
+	
+	private int reviewno ;
+	private int searchno ;
+	private String content;
+	private int grade ; 
+	private String postdate ; 
+	private String id ;
 	
 	
-	public String getWriter() {
-		return writer;
+	
+	@Override
+	public String toString() {
+		return "PreviewVO [reviewno=" + reviewno + ", searchno=" + searchno + ", content=" + content + ", grade="
+				+ grade + ", postdate=" + postdate + ", id=" + id + "]";
 	}
-	public void setWriter(String writer) {
-		this.writer = writer;
+	public int getReviewno() {
+		return reviewno;
 	}
-	public String getSubject() {
-		return subject;
+	public void setReviewno(int reviewno) {
+		this.reviewno = reviewno;
 	}
-	public void setSubject(String subject) {
-		this.subject = subject;
+	public int getSearchno() {
+		return searchno;
+	}
+	public void setSearchno(int searchno) {
+		this.searchno = searchno;
 	}
 	public String getContent() {
 		return content;
@@ -25,5 +34,24 @@ public class PreviewVO {
 	public void setContent(String content) {
 		this.content = content;
 	}
+	public int getGrade() {
+		return grade;
+	}
+	public void setGrade(int grade) {
+		this.grade = grade;
+	}
+	public String getPostdate() {
+		return postdate;
+	}
+	public void setPostdate(String postdate) {
+		this.postdate = postdate;
+	}
+	public String getId() {
+		return id;
+	}
+	public void setId(String id) {
+		this.id = id;
+	} 
+	
 	
 }
