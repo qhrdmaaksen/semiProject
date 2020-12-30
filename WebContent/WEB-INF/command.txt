@@ -11,3 +11,4 @@ coupon=member.MyCouponController
 
 #### Product Section #################################
 pdetail=common.PreviewController
+sss=common.imsi

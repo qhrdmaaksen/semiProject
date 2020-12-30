@@ -48,12 +48,12 @@ public class CouponDAO extends SuperDAO{
         return cnt  ;
     }
 
-    public List<CouponVO> SelectCoupons(String id, int beginRow, int endRow) {
+    public List<CouponVO> SelectCoupons(String id, int used, int beginRow, int endRow) {
         conn = null ;
         PreparedStatement pstmt = null ;
         ResultSet rs = null ;
 
-        String sql = "SELECT * FROM (SELECT \"no\", \"name\", \"kind\", \"discount\", \"exp\", RANK() OVER(ORDER BY \"no\" DESC) AS rank FROM coupons WHERE \"id\" IN(?) AND \"use\" = 0 ) WHERE rank BETWEEN ? AND ? ";
+        String sql = "SELECT * FROM (SELECT \"no\", \"name\", \"kind\", \"discount\", \"exp\", RANK() OVER(ORDER BY \"no\" DESC) AS rank FROM coupons WHERE \"id\" IN(?) AND \"use\" = ? ) WHERE rank BETWEEN ? AND ? ";
 
         List<CouponVO> lists = new ArrayList<CouponVO>();
 
@@ -62,8 +62,9 @@ public class CouponDAO extends SuperDAO{
             pstmt = conn.prepareStatement(sql) ;
 
             pstmt.setString(1, id);
-            pstmt.setInt(2, beginRow);
-            pstmt.setInt(3, endRow);
+            pstmt.setInt(2, used);
+            pstmt.setInt(3, beginRow);
+            pstmt.setInt(4, endRow);
 
             rs = pstmt.executeQuery() ;
             while( rs.next() ){
