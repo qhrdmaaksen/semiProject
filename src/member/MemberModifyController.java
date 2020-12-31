@@ -20,9 +20,20 @@ public class MemberModifyController extends SuperClass{
 	@Override
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		
+		String id = request.getParameter("id");
+		
+		MemberDAO dao = new MemberDAO();
+		
+		// bean 객체 : 로그인 한 사람의 정보
+		MemberVO bean = dao.SelectDataByPk(id);
+		
 		super.doGet(request, response);
-		String gotopage = "member/newmember.jsp";		
-		super.GotoPage( gotopage );
+		request.setAttribute("bean", bean);
+		
+		String gotopage = "member/memodify.jsp";	
+		super.GotoPage(gotopage);
+		
 	}
 	@Override
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -64,7 +75,7 @@ public class MemberModifyController extends SuperClass{
 			MemberDAO mdao = new MemberDAO();			
 			int cnt = -99999 ; 		
 			//Bean 객체를 이용하여 해당 게시물을 추가한다.
-			cnt = mdao.NewData(bean) ;
+			cnt = mdao.ModifyData(bean) ;
 			
 			super.session.setAttribute( "message" , "축하합니다. 회원 가입이 되었습니다. 로그인 후 메인 페이지로 이동합니다." );
 			
@@ -72,7 +83,7 @@ public class MemberModifyController extends SuperClass{
 			// doPost() 메소드를 호출하여 바로 로그인을 수행합니다.
 			new MemberLoginController().doPost(request, response);
 		}else{
-			gotopage = "member/newmember.jsp";  
+			gotopage = "member/memodify.jsp";  
 			request.setAttribute("bean", bean);
 			super.doPost(request, response);
 			super.GotoPage( gotopage );

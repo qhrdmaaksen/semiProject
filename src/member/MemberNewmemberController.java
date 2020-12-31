@@ -21,19 +21,10 @@ public class MemberNewmemberController extends SuperClass{
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		
-		String id = request.getParameter("id");
-		
-		MemberDAO dao = new MemberDAO();
-		
-		// bean 객체 : 로그인 한 사람의 정보
-		MemberVO bean = dao.SelectDataByPk(id);
-		
+
 		super.doGet(request, response);
-		request.setAttribute("bean", bean);
-		
-		String gotopage = "member/memodify.jsp";	
-		super.GotoPage(gotopage);
-		
+		String gotopage = "member/newmember.jsp";		
+		super.GotoPage( gotopage );
 		
 	}
 	@Override
@@ -57,12 +48,12 @@ public class MemberNewmemberController extends SuperClass{
 		
 		System.out.println( bean );
 
-		if ( this.validate( request ) == true ) {
+		if (this.validate(request)) {
 			//DAO 객체를 생성한다.
 			MemberDAO mdao = new MemberDAO();			
 			int cnt = -99999 ; 		
 			//Bean 객체를 이용하여 해당 게시물을 추가한다.
-			cnt = mdao.ModifyData(bean) ;
+			cnt = mdao.NewData(bean) ;
 			
 			super.session.setAttribute( "message" , "정보 수정이 완료 되었습니다. 로그인 후 메인 페이지로 이동합니다." );
 			
@@ -70,7 +61,7 @@ public class MemberNewmemberController extends SuperClass{
 			// doPost() 메소드를 호출하여 바로 로그인을 수행합니다.
 			new MemberLoginController().doPost(request, response);
 		}else{
-			gotopage = "member/memodify.jsp";  
+			gotopage = "member/newmember.jsp";  
 			request.setAttribute("bean", bean);
 			super.doPost(request, response);
 			super.GotoPage( gotopage );
@@ -80,7 +71,8 @@ public class MemberNewmemberController extends SuperClass{
 	public boolean validate(HttpServletRequest request) {
 		boolean isCheck = true ; //기본 값으로 true이고, 유효성 검사에 문제가 생기면 false으로 변경
 		
-		if( bean.getId().length() < 5 || bean.getId().length() > 12 ){
+
+		if( bean.getId().length() < 4 || bean.getId().length() > 12 ){
 			request.setAttribute( super.PREFIX + "id", "아이디는 4자리 이상 12자리 이하이어야 합니다.");
 			isCheck = false  ;
 		}

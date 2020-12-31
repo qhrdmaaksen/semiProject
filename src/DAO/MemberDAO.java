@@ -76,7 +76,7 @@ public class MemberDAO extends SuperDAO {
 			pstmt.setString(5, bean.getPhone());
 			
 			cnt = pstmt.executeUpdate() ; 
-			conn.commit(); 
+			conn.commit();
 		} catch (Exception e) {
 			e.printStackTrace();
 			try {
