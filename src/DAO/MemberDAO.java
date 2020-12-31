@@ -41,7 +41,7 @@ public class MemberDAO extends SuperDAO {
 			}else {
 				throw new NoSuchFieldException("로그인에 실패함!");
 			}
-			System.out.println("성공");
+			System.out.println(bean);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -59,8 +59,8 @@ public class MemberDAO extends SuperDAO {
 	
 	public int NewData(MemberVO bean) {
 		System.out.println( bean.toString() ); 
-		String sql = " insert into members (id,password,name,birth,phone,level,point,picture) " ; 
-		sql += " values(?,?,?,?,?,?,?,?)" ;
+		String sql = "insert into members (\"id\", \"password\", \"name\", \"birth\", \"phone\", \"level\", \"point\", \"picture\")" +
+				" values(?,?,?,?,?,default,default,'default.jpg')" ;
 
 		PreparedStatement pstmt = null ;
 		int cnt = -99999 ;
@@ -68,24 +68,16 @@ public class MemberDAO extends SuperDAO {
 			conn = super.getConnection() ;
 			conn.setAutoCommit( false );
 			pstmt = super.conn.prepareStatement(sql) ;
-			//개발자가 수정할 곳 2 : ? 수정할 것
+
 			pstmt.setString(1, bean.getId() );
 			pstmt.setString(2, bean.getPassword());
 			pstmt.setString(3, bean.getName() );
-			pstmt.setDate(4, (Date)bean.getBirth());
+			pstmt.setDate(4, new java.sql.Date(bean.getBirth().getTime()));
 			pstmt.setString(5, bean.getPhone());
-			pstmt.setString(6, bean.getLevel());
-			pstmt.setInt(7, bean.getPoint());
-			pstmt.setString(8, bean.getPicture());
-			
 			
 			cnt = pstmt.executeUpdate() ; 
-			conn.commit(); 
+			conn.commit();
 		} catch (Exception e) {
-			SQLException err = (SQLException)e ;
-			//getErrorCode() : 오라클 오류 상수가 리턴
-			//예 : not null 이면 1400 
-			cnt = - err.getErrorCode() ;			
 			e.printStackTrace();
 			try {
 				conn.rollback(); 

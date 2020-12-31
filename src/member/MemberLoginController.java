@@ -18,59 +18,58 @@ public class MemberLoginController extends SuperClass{
 
 	@Override
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("È¸¿ø ·Î±×ÀÎ È£ÃâµÊ");
+		System.out.println("íšŒì› ë¡œê·¸ì¸ í˜¸ì¶œë¨");
 		super.doGet(request, response);
 		super.GotoPage("/member/login.jsp");
 	}
-	
+
 	@Override
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		this.id = request.getParameter("id");
 		this.password = request.getParameter("password");
-		
-		if(this.validate(request) == false) {
-			String errmsg = "·Î±×ÀÎ ¾ç½ÄÀÌ Àß¸øµÇ¾ú½À´Ï´Ù.";
+
+		System.out.println("id : " + request.getParameter("id"));
+		System.out.println("password : " + request.getParameter("password"));
+
+		if(!this.validate(request)) {
+			String errmsg = "ë¡œê·¸ì¸ ì–‘ì‹ì´ ì˜ëª»ë˜ì—ˆìŠµë‹ˆë‹¤.";
 
 			super.setErrorMessage(errmsg);
 			this.doGet(request, response);
-		}
-
-		if(this.validate(request)) {
+		}else {
 
 			MemberDAO dao = new MemberDAO();
-			MemberVO member = null;
 			try {
-				member = dao.selectMember(id,password);
+				MemberVO member = dao.selectMember(id,password);
+				super.doPost(request, response);
+				super.session.setAttribute("loginfo", member);
 			} catch (NoSuchFieldException e) {
-				String errmsg = "¾ÆÀÌµğ È¤Àº ºñ¹Ğ¹øÈ£°¡ Àß¸øµÇ¾ú½À´Ï´Ù.";
+				String errmsg = "ì•„ì´ë”” í˜¹ì€ ë¹„ë°€ë²ˆí˜¸ê°€ ì˜ëª»ë˜ì—ˆìŠµë‹ˆë‹¤.";
 				System.out.println(errmsg);
 				super.setErrorMessage(errmsg);
 				this.doGet(request, response);
 			}
-			super.session.setAttribute("loginfo", member);
 
 			new IndexController().doGet(request, response);
 		}
 	}
-	
+
 	@Override
 	public boolean validate(HttpServletRequest request) {
-		boolean isCheck = true;	// ±âº» °ªÀº true ÀÔ´Ï´Ù. 
-		// ¸¸ÀÏ À¯È¿¼º °Ë»çÀÇ ¹®Á¦°¡ ÀÖÀ¸¸é isCheck ´Â false ·Î º¯°æÇÕ´Ï´Ù.
-		
+		boolean isCheck = true;	// ê¸°ë³¸ ê°’ì€ true ì…ë‹ˆë‹¤.
+		// ë§Œì¼ ìœ íš¨ì„± ê²€ì‚¬ì˜ ë¬¸ì œê°€ ìˆìœ¼ë©´ isCheck ëŠ” false ë¡œ ë³€ê²½í•©ë‹ˆë‹¤.
+
 		if(this.id.length() < 4 || this.id.length()> 10) {
-			request.setAttribute(super.PREFIX+"id", "¾ÆÀÌµğ´Â 4ÀÚ¸® ÀÌ»ó 10ÀÚ¸® ÀÌÇÏÀÌ¾î¾ß ÇÕ´Ï´Ù.");
-			
+			request.setAttribute(super.PREFIX+"id", "ì•„ì´ë””ëŠ” 4ìë¦¬ ì´ìƒ 10ìë¦¬ ì´í•˜ì´ì–´ì•¼ í•©ë‹ˆë‹¤.");
+
 			isCheck = false;
 		}
-		
+
 		if(this.password.length() < 4 || this.password.length()> 10) {
-			request.setAttribute(super.PREFIX+"passowrd", "ºñ¹Ğ¹øÈ£´Â 4ÀÚ¸® ÀÌ»ó 10ÀÚ¸® ÀÌÇÏÀÌ¾î¾ß ÇÕ´Ï´Ù.");
+			request.setAttribute(super.PREFIX+"passowrd", "ë¹„ë°€ë²ˆí˜¸ëŠ” 4ìë¦¬ ì´ìƒ 10ìë¦¬ ì´í•˜ì´ì–´ì•¼ í•©ë‹ˆë‹¤.");
 			isCheck = false;
 		}
 		return isCheck;
 	}
-	
-
 }

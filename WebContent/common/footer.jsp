@@ -9,6 +9,7 @@
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 	<style type="text/css">
 		body{
+			position: relative;
 			margin: 0px;
 			font:12px "맑은 고딕";
 		}
@@ -28,13 +29,14 @@
 			margin-bottom: 0px;
 		}
 		#cannanoogi{
+			position: relative;
 			font-size:13px;
 			width: 100%;
 			margin-left: 50px ;
 			margin-bottom: 50px;
 			text-align: justify;
 			line-height: 0.1em;
-			column-count: 3;/*column-count==세로로 칸을 만들 수*/
+			column-count: 4;/*column-count==세로로 칸을 만들 수*/
 			column-gap: 50px;/* column-gap 칸막이와의 거리 */
 			column-rule: 3px solid #f0f0f5;/* 칸막이 지정 선 */
 		}
@@ -59,10 +61,6 @@
 			color : black;
 			border: 0px solid #darkgreen;
 		}
-		#footermenu a:hover{
-			color: red;
-			font-size: 1.2em;
-		}
 		.cs{
 			text-decoration: none;
 			font-style: normal;
@@ -75,7 +73,11 @@
 		.icon {
 			width: 20px;
 			height: 20px;
-			margin-right: 0%
+			margin-right: 0%;
+		}
+		#footermenu a:hover{
+			color: red;
+			font-size: 1.2em ;
 		}
 	</style>
 </head>
@@ -89,7 +91,7 @@
 						<!--고객센터 메뉴로연동--></li>
 						<li class="only-pc"><a href="/terms/privacy">개인정보 처리방침</a>
 						<!--고객센터 메뉴로연동--></li>
-						<li class="only-pc"><a href="/cs/notice">고객 센터</a>
+						<li class="only-pc"><a onclick="location.href='http://localhost:8989/SemiProject/cs-center/cs-center-main.jsp'">고객 센터</a>
 						<!--고객센터 메뉴로연동--></li>
 					</ul>
 				</div>
@@ -119,15 +121,17 @@
 	<div id="cannanoogi">
 		<address class="fooeraddress">
 		<div class="footerdodam">
-			<!-- <img alt="도담도담" src="../images/logo.png" style="width: 70%;"> -->
-			<h3 align="right">회사명</h3>
-				<p align="right">
+			<div id="footerlogimage" align="center">
+				<img alt="도담도담" src="../images/logotest.png">
+			</div>
+			<h3 align="center" style="font: bolder;">회사명</h3>
+				<p align="center">
 					도담도담
 				</p>
-				<p id="representative" align="right">
+				<p id="representative" align="center">
 					<b>대표</b>
 				</p>
-				<p align="right">
+				<p align="center">
 					1조 도담도담 팀
 				</p>
 				

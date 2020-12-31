@@ -2,84 +2,146 @@
 	pageEncoding="UTF-8"%>
 <%
 	int twelve = 12;
-int myoffset = 2;
-int mywidth = twelve - 2 * myoffset;
-int formleft = 3;
-int formright = twelve - formleft;
-int mysearch = 2;
-//int label = 3 ; //양식의 왼쪽에 보여지는 라벨의 너비 
-//int content = twelve - label ; //우측의 내용 입력(input, select, textarea)의 너비
+	int myoffset = 2;
+	int mywidth = twelve - 2 * myoffset;
+	int formleft = 3;
+	int formright = twelve - formleft;
+	int mysearch = 2;
+	//int label = 3 ; //양식의 왼쪽에 보여지는 라벨의 너비 
+	//int content = twelve - label ; //우측의 내용 입력(input, select, textarea)의 너비
 %>
 <!DOCTYPE html>
 <html>
 <head>
-<title>product detail</title>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>product detail</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
 <%@ include file="../common/nav.jsp"%>
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-<script src="../js/jquery.zoom.min.js"></script>
-<style>
-body {
-	width: 100%;
-	height: 100%;
-}
-
-.zoom {
-	display: inline-block;
-	position: relative;
-}
-</style>
-<script type="text/javascript">
-	function imageZoom() {
-		$("#myarea").zoom();
+	<script
+		src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+	<script src="../js/jquery.zoom.min.js"></script>
+	<script src="../js/jquery-3.5.1.min.js" type="text/javascript"></script>
+	<link
+	    rel="stylesheet"
+	    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"
+	  />
+	<style>
+	body {
+		width: 100%;
+		height: 100%;
 	}
-
-	function applyImage(srcimg) {
-		var mywidth = 340; /* form에 너비 높이들을 가져오는 문  */
-		var myheight = 450;
-
-		var imgInfo = "<img src='" + srcimg ;
-				imgInfo += "' width='" + mywidth ;
-				imgInfo += "' height='" + myheight + "'></img>";
-
-		var target = document.getElementById('myarea');
-		target.innerHTML = imgInfo;
-		imageZoom();
+	
+	.zoom {
+		display: inline-block;
+		position: relative;
 	}
-</script>
-<script type="text/javascript">
-	$(document).ready(function() {
-		$("input[name='delivery']").click(function() {
-			var thisValue = $(this).val();
-			if (thisValue == "정기 배송") {
-				$("#inHere").css("display", "block");
-			} else {
-				$("#inHere").css("display", "none");
-			}
+	</style>
+	<script type="text/javascript">
+		function imageZoom() {
+			$("#myarea").zoom();
+		}
+	
+		function applyImage(srcimg) {
+			var mywidth = 340; /* form에 너비 높이들을 가져오는 문  */
+			var myheight = 450;
+	
+			var imgInfo = "<img src='" + srcimg ;
+					imgInfo += "' width='" + mywidth ;
+					imgInfo += "' height='" + myheight + "'></img>";
+	
+			var target = document.getElementById('myarea');
+			target.innerHTML = imgInfo;
+			imageZoom();
+		}
+	</script>
+	<script type="text/javascript">
+		$(document).ready(function() {
+			$.ajax({
+				url:"${pageContext.request.contextPath}/dodamdodam?command=preview",
+				type:"get",
+				success: (response) =>{
+					console.log(response)
+					console.log(${lists})
+				},
+				error: () =>{
+					console.log("error")
+				}
+				
+			})
+			$("input[name='delivery']").click(function() {
+				var thisValue = $(this).val();
+				if (thisValue == "정기 배송") {
+					$("#inHere").css("display", "block");
+				} else {
+					$("#inHere").css("display", "none");
+				}
+			})
+			  $('#star_grade a').click(function(){
+		           $(this).parent().children("a").removeClass("on");  /* 별점의 on 클래스 전부 제거 */ 
+		           $(this).addClass("on").prevAll("a").addClass("on"); /* 클릭한 별과, 그 앞 까지 별점에 on 클래스 추가 */
+		           var i = 0;
+		           $("#star_grade a").each(function() {
+		        	   if($(this).hasClass("on")){
+		        	   		i++;
+		        		   $("[name='grade']").val(i);
+		        	   }
+		           })
+		           return false;
+		       });
 		})
-	})
+	</script>
+	<style type="text/css">
+	#prod-contents {
+		position: absolute;
+		top: 62px;
+		left: 150px;
+		width: 550px;
+	}
+	
+	#prod-tab-menu {
+		font-size: 30px;
+		position:
+	}
+	
+	#gojung.gojung2 {
+		position: fixed;
+	}
+	#star_grade a{
+        text-decoration: none;
+        color: gray;
+    }
+    #star_grade a.on{
+        color: red;
+    }
+	</style>
+<script type="text/javascript">
+	var id = "${id}";
+	var password = "${password}";
+	console.log("id : "+id);
+	console.log("password : "+ password)
+	if(id != null && 
+	   password !=null &&
+	   id != "" &&
+	   password != "" &&
+	   id != undefined &&
+	   password != undefined)
+	{
+		//session 등록
+		//location.href = "pdetail.jsp";
+	}else{
+		//location.href = "login.jsp";
+	}
+	
 </script>
-<style type="text/css">
-#prod-contents {
-	position: absolute;
-	top: 62px;
-	left: 150px;
-	width: 550px;
-}
-
-#prod-tab-menu {
-	font-size: 30px;
-	position:
-}
-
-#gojung.gojung2 {
-	position: fixed;
-}
-</style>
+<script>
+	//alert("로그아웃 되었습니다.");
+	//location.href="login.jsp";                                    // 로그아웃 페이지로 이동
+</script>
 </head>
 <body>
+	<c:forEach items="${lists}" var="item">
+		${item.reviewno},${item.content},${item.grade},${item.postdate},${item.id}<br>
+	</c:forEach>
 	<div class="container">
 		<div class="row">
 			<div class="col-md-4">
@@ -181,7 +243,7 @@ body {
 				aria-controls="상품 리뷰" aria-selected="false">상품 리뷰</a></li>
 			<li class="nav-item"><a id="cs-tab01" class="nav-link"
 				data-toggle="tab" href="#cs-main" role="tab" aria-controls="고객 문의"
-				aria-selected="false">고객 문의</a></li>
+				aria-selected="false" onclick="location.href='http://localhost:8989/SemiProject/cs-center/cs-center-main.jsp'">고객 문의</a></li>
 			<li class="nav-item"><a id="delivery-info-tab" class="nav-link"
 				data-toggle="tab" href="#delivery-info" role="tab"
 				aria-controls="배송/교환/반품 안내" aria-selected="false">배송/교환/반품 안내</a></li>
@@ -230,11 +292,11 @@ body {
 					<table class="table table-striped table-hover">
 						<thead>
 							<tr>
-								<!-- <th>글 번호</th> -->
+								<th>글 번호</th>
 								<th>작성자</th>
 								<th>글 내용</th>
-								<th>조회수</th>
 								<th>작성 일자</th>
+								<th>별점</th>
 								<th>수정</th>
 								<th>삭제</th>
 								<th>답글</th>
@@ -252,42 +314,49 @@ body {
 								</form>
 							</td>
 						</tr>
-						<c:forEach var="bean" items="${requestScope.lists}">
+						<c:forEach var="vo" items="${requestScope.lists}">
 							<tr>
-								<%-- <td>${bean.no}</td> --%>
-								<td><c:forEach var="cnt" begin="1" end="${bean.depth}">
+								<%-- <td>${vo.no}</td> --%>
+								<td><c:forEach var="cnt" begin="1" end="${vo.depth}">
 										<span class="badge re">re</span>
 									</c:forEach> <a
-									href="boDetailView&no=${bean.no}&${requestScope.parameters}">
-										${bean.subject} </a></td>
-								<td>${bean.writer}</td>
-								<td>${bean.password}</td>
-								<td>${bean.content}</td>
-								<td>${bean.readhit}</td>
-								<td>${bean.regdate}</td>
+									href="boDetailView&no=${vo.no}&${requestScope.parameters}">
+										${vo.subject} </a></td>
+								<td>${vo.writer}</td>
+								<td>${vo.content}</td>
+								<td>${vo.regdate}</td>
+								<td>${vo.grade}</td>
+								<td>${vo.update}</td>
+								<td>${vo.delete}</td>
 								<td>
-									<c:if test="${sessionScope.loginfo.id == bean.writer}">
-										<a href="boUpdate&no=${bean.no}&${requestScope.parameters}">
+									<c:if test="${sessionScope.loginfo.id == vo.writer}">
+										<a href="boUpdate&no=${vo.no}&${requestScope.parameters}">
 											수정 </a>
 									</c:if> 
-									<c:if test="${sessionScope.loginfo.id != bean.writer}">
+									<c:if test="${sessionScope.loginfo.id != vo.writer}">
 									수정
 									</c:if>
 								</td>
-								<td><c:if test="${sessionScope.loginfo.id == bean.writer}">
-										<a href="boDelete&no=${bean.no}&${requestScope.parameters}">
+								<td>
+									<c:if test="${sessionScope.loginfo.id == vo.writer}">
+										<a href="boDelete&no=${vo.no}&${requestScope.parameters}">
 											삭제 </a>
-									</c:if> <c:if test="${sessionScope.loginfo.id != bean.writer}">
-									삭제
-								</c:if></td>
-								<td><c:if test="${bean.depth <3 }">
+									</c:if> 
+									<c:if test="${sessionScope.loginfo.id != vo.writer}">
+										삭제
+									</c:if>
+								</td>
+								<td>
+									<c:if test="${vo.depth <3 }">
 										<a
-											href="boReply&no=${bean.no}&${requestScope.parameters}&groupno=${bean.groupno}&orderno=${bean.orderno}&depth=${bean.depth}">
+											href="boReply&no=${vo.no}&${requestScope.parameters}&groupno=${vo.groupno}&orderno=${vo.orderno}&depth=${vo.depth}">
 											답글 </a>
-									</c:if> <c:if test="${bean.depth >= 3 }">
+									</c:if> 
+									<c:if test="${vo.depth >= 3 }">
 									답글
-								</c:if></td>
-								<td>${bean.remark}</td>
+									</c:if>
+								</td>
+								<td>${vo.remark}</td>
 							</tr>
 						</c:forEach>
 					</table>
@@ -295,12 +364,12 @@ body {
 						style="display: inline;">
 						<div class="panel panel-default panel-primary">
 							<div class="panel-heading">
-								<h4>리뷰 등록</h4>
+								<h4 align="center">리뷰 등록</h4>
 							</div>
 							<div class="panel-body">
 								<!-- 리뷰 등록  form -->
 								<form class="form-horizontal" role="form" name="productForm" method="post" action="<%=YesForm%>">
-									<input type="hidden" name="command" value="pdetail">
+									<input type="hidden" name="command" value="preview">
 									<div class="row">
 										<div class="form-group col-sm-6">
 											<label class="control-label col-sm-<%=formleft%>"
@@ -317,11 +386,6 @@ body {
 											</div>
 											<label class="control-label col-sm-12" for="subject">
 											</label>
-											<div class="col-sm-12">
-												<input type="text" class="form-control" name="subject"
-													id="subject" placeholder="글 제목" value="${bean.subject}">
-												<span class="err">${errsubject}</span>
-											</div>
 											<div class="form-group">
 												<label class="control-label col-sm-<%=formleft%>"
 													for="image"></label>
@@ -331,30 +395,34 @@ body {
 														class="err form-control-static">${errimage}</span>
 												</div>
 											</div>
-											<label class="control-label col-sm-<%=formleft%>"
+												<label class="control-label col-sm-<%=formleft%>-
 												for="regdate"> </label>
 											<%-- 	<div class="col-sm-12">
 												<input type="datetime" class="form-control" name="regdate"
-													id="regdate" placeholder="작성 일자" value="${bean.regdate}"> <span
+													id="regdate" placeholder="작성 일자" value="${vo.regdate}"> <span
 													class="err">${errregdate}</span>
 											</div> --%>
 										</div>
 										<div class="form-group col-sm-6">
-											<label class="control-label col-sm-12" for="content">
-												글 내용</label>
+											<label class="control-label col-sm-12" for="content" style="color: white;">
+												&nbsp;</label>
 											<div class="col-sm-12">
 												<textarea name="content" id="content" rows="5" cols=""
-													placeholder="글 내용" class="form-control">${bean.content}</textarea>
+													placeholder="글 내용" class="form-control">${vo.content}</textarea>
 												<span class="err">${errcontent}</span>
 											</div>
 											<br>
-											<div align="center" class="col-sm-offset-3 col-sm-12 row">
-												<div class="col-sm-6">
-													<button class="btn btn-outline-primary" type="submit" id="addreview">글등록</button>
-												</div>
-												<div class="col-sm-6">
-													<button class="btn btn-outline-danger" type="reset">취소</button>
-												</div>
+											<div class="col-sm-6">
+												<p id="star_grade">상품 별점 :
+											        <a href="#">★</a>
+											        <a href="#">★</a>
+											        <a href="#">★</a>
+											        <a href="#">★</a>
+											        <a href="#">★</a>
+												</p>
+											</div>
+											<div align="center">
+												<button class="btn btn-outline-primary" type="submit" id="addreview">글 등록</button>
 											</div>
 										</div>
 									</div>
@@ -363,11 +431,14 @@ body {
 											번호</label>
 										<div class="col-sm-<%=formright%>">
 											<input type="password" class="form-control" name="password"
-												id="password" placeholder="비밀 번호를 넣어 주셔용^^" value="${bean.password}">
+												id="password" placeholder="비밀 번호를 넣어 주셔용^^" value="${vo.password}">
 												<span class="err">${errpassword}</span>
 										</div>
 									</div> --%>
+									<input type="hidden" name="id" value="김민우"><!--  세션의 아이디 값 대입 -->
+									<input type="hidden" name='grade' value="0">
 								</form>
+								
 							</div>
 						</div>
 					</div>

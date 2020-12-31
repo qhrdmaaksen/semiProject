@@ -56,6 +56,18 @@
 	</script>
 	<script type="text/javascript">
 		$(document).ready(function() {
+			$.ajax({
+				url:"${pageContext.request.contextPath}/dodamdodam?command=preview",
+				type:"get",
+				success: (response) =>{
+					console.log(response)
+					console.log(${lists})
+				},
+				error: () =>{
+					console.log("error")
+				}
+				
+			})
 			$("input[name='delivery']").click(function() {
 				var thisValue = $(this).val();
 				if (thisValue == "정기 배송") {
@@ -127,6 +139,9 @@
 </script>
 </head>
 <body>
+	<c:forEach items="${lists}" var="item">
+		${item.reviewno},${item.content},${item.grade},${item.postdate},${item.id}<br>
+	</c:forEach>
 	<div class="container">
 		<div class="row">
 			<div class="col-md-4">
@@ -228,7 +243,7 @@
 				aria-controls="상품 리뷰" aria-selected="false">상품 리뷰</a></li>
 			<li class="nav-item"><a id="cs-tab01" class="nav-link"
 				data-toggle="tab" href="#cs-main" role="tab" aria-controls="고객 문의"
-				aria-selected="false">고객 문의</a></li>
+				aria-selected="false" onclick="location.href='http://localhost:8989/SemiProject/cs-center/cs-center-main.jsp'">고객 문의</a></li>
 			<li class="nav-item"><a id="delivery-info-tab" class="nav-link"
 				data-toggle="tab" href="#delivery-info" role="tab"
 				aria-controls="배송/교환/반품 안내" aria-selected="false">배송/교환/반품 안내</a></li>
@@ -277,11 +292,11 @@
 					<table class="table table-striped table-hover">
 						<thead>
 							<tr>
-								<!-- <th>글 번호</th> -->
+								<th>글 번호</th>
 								<th>작성자</th>
 								<th>글 내용</th>
-								<th>조회수</th>
 								<th>작성 일자</th>
+								<th>별점</th>
 								<th>수정</th>
 								<th>삭제</th>
 								<th>답글</th>
@@ -299,42 +314,49 @@
 								</form>
 							</td>
 						</tr>
-						<c:forEach var="bean" items="${requestScope.lists}">
+						<c:forEach var="vo" items="${requestScope.lists}">
 							<tr>
-								<%-- <td>${bean.no}</td> --%>
-								<td><c:forEach var="cnt" begin="1" end="${bean.depth}">
+								<%-- <td>${vo.no}</td> --%>
+								<td><c:forEach var="cnt" begin="1" end="${vo.depth}">
 										<span class="badge re">re</span>
 									</c:forEach> <a
-									href="boDetailView&no=${bean.no}&${requestScope.parameters}">
-										${bean.subject} </a></td>
-								<td>${bean.writer}</td>
-								<td>${bean.password}</td>
-								<td>${bean.content}</td>
-								<td>${bean.readhit}</td>
-								<td>${bean.regdate}</td>
+									href="boDetailView&no=${vo.no}&${requestScope.parameters}">
+										${vo.subject} </a></td>
+								<td>${vo.writer}</td>
+								<td>${vo.content}</td>
+								<td>${vo.regdate}</td>
+								<td>${vo.grade}</td>
+								<td>${vo.update}</td>
+								<td>${vo.delete}</td>
 								<td>
-									<c:if test="${sessionScope.loginfo.id == bean.writer}">
-										<a href="boUpdate&no=${bean.no}&${requestScope.parameters}">
+									<c:if test="${sessionScope.loginfo.id == vo.writer}">
+										<a href="boUpdate&no=${vo.no}&${requestScope.parameters}">
 											수정 </a>
 									</c:if> 
-									<c:if test="${sessionScope.loginfo.id != bean.writer}">
+									<c:if test="${sessionScope.loginfo.id != vo.writer}">
 									수정
 									</c:if>
 								</td>
-								<td><c:if test="${sessionScope.loginfo.id == bean.writer}">
-										<a href="boDelete&no=${bean.no}&${requestScope.parameters}">
+								<td>
+									<c:if test="${sessionScope.loginfo.id == vo.writer}">
+										<a href="boDelete&no=${vo.no}&${requestScope.parameters}">
 											삭제 </a>
-									</c:if> <c:if test="${sessionScope.loginfo.id != bean.writer}">
-									삭제
-								</c:if></td>
-								<td><c:if test="${bean.depth <3 }">
+									</c:if> 
+									<c:if test="${sessionScope.loginfo.id != vo.writer}">
+										삭제
+									</c:if>
+								</td>
+								<td>
+									<c:if test="${vo.depth <3 }">
 										<a
-											href="boReply&no=${bean.no}&${requestScope.parameters}&groupno=${bean.groupno}&orderno=${bean.orderno}&depth=${bean.depth}">
+											href="boReply&no=${vo.no}&${requestScope.parameters}&groupno=${vo.groupno}&orderno=${vo.orderno}&depth=${vo.depth}">
 											답글 </a>
-									</c:if> <c:if test="${bean.depth >= 3 }">
+									</c:if> 
+									<c:if test="${vo.depth >= 3 }">
 									답글
-								</c:if></td>
-								<td>${bean.remark}</td>
+									</c:if>
+								</td>
+								<td>${vo.remark}</td>
 							</tr>
 						</c:forEach>
 					</table>
@@ -373,11 +395,11 @@
 														class="err form-control-static">${errimage}</span>
 												</div>
 											</div>
-											<label class="control-label col-sm-<%=formleft%>-
+												<label class="control-label col-sm-<%=formleft%>-
 												for="regdate"> </label>
 											<%-- 	<div class="col-sm-12">
 												<input type="datetime" class="form-control" name="regdate"
-													id="regdate" placeholder="작성 일자" value="${bean.regdate}"> <span
+													id="regdate" placeholder="작성 일자" value="${vo.regdate}"> <span
 													class="err">${errregdate}</span>
 											</div> --%>
 										</div>
@@ -386,20 +408,22 @@
 												&nbsp;</label>
 											<div class="col-sm-12">
 												<textarea name="content" id="content" rows="5" cols=""
-													placeholder="글 내용" class="form-control">${bean.content}</textarea>
+													placeholder="글 내용" class="form-control">${vo.content}</textarea>
 												<span class="err">${errcontent}</span>
 											</div>
 											<br>
-												<div class="col-sm-6" align="right">
-													<p id="star_grade">
-												        <a href="#">★</a>
-												        <a href="#">★</a>
-												        <a href="#">★</a>
-												        <a href="#">★</a>
-												        <a href="#">★</a>
-													</p>
-													<button class="btn btn-outline-primary" type="submit" id="addreview">글 등록</button>
-												</div>
+											<div class="col-sm-6">
+												<p id="star_grade">상품 별점 :
+											        <a href="#">★</a>
+											        <a href="#">★</a>
+											        <a href="#">★</a>
+											        <a href="#">★</a>
+											        <a href="#">★</a>
+												</p>
+											</div>
+											<div align="center">
+												<button class="btn btn-outline-primary" type="submit" id="addreview">글 등록</button>
+											</div>
 										</div>
 									</div>
 									<%-- <div class="form-group">
@@ -407,7 +431,7 @@
 											번호</label>
 										<div class="col-sm-<%=formright%>">
 											<input type="password" class="form-control" name="password"
-												id="password" placeholder="비밀 번호를 넣어 주셔용^^" value="${bean.password}">
+												id="password" placeholder="비밀 번호를 넣어 주셔용^^" value="${vo.password}">
 												<span class="err">${errpassword}</span>
 										</div>
 									</div> --%>
