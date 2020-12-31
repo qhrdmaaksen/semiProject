@@ -139,9 +139,6 @@
 </script>
 </head>
 <body>
-	<c:forEach items="${lists}" var="item">
-		${item.reviewno},${item.content},${item.grade},${item.postdate},${item.id}<br>
-	</c:forEach>
 	<div class="container">
 		<div class="row">
 			<div class="col-md-4">
@@ -297,9 +294,8 @@
 								<th>글 내용</th>
 								<th>작성 일자</th>
 								<th>별점</th>
-								<th>수정</th>
-								<th>삭제</th>
-								<th>답글</th>
+								<th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;수정</th>
+								<th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;삭제</th>
 							</tr>
 						</thead>
 						<tr align="right">
@@ -307,56 +303,50 @@
 								<form class="form-inline" role="form" name="myform" 
 									method="get">
 									<input type="hidden" name="command" value=pdetail>
-									<button class="btn btn-default btn-info" type="button"
-										onclick="writeForm();">글 쓰기</button>
 									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 									<p class="form-control-static">${requestScope.pagingStatus}</p>
 								</form>
 							</td>
 						</tr>
-						<c:forEach var="vo" items="${requestScope.lists}">
+						<c:forEach items="${lists}" var="item">
 							<tr>
-								<%-- <td>${vo.no}</td> --%>
-								<td><c:forEach var="cnt" begin="1" end="${vo.depth}">
-										<span class="badge re">re</span>
-									</c:forEach> <a
-									href="boDetailView&no=${vo.no}&${requestScope.parameters}">
-										${vo.subject} </a></td>
-								<td>${vo.writer}</td>
-								<td>${vo.content}</td>
-								<td>${vo.regdate}</td>
-								<td>${vo.grade}</td>
-								<td>${vo.update}</td>
-								<td>${vo.delete}</td>
+								<%-- <td>${bean.no}</td> --%>
+								<td>${item.reviewno}</td>
+								<td>${item.id}</td>
+								<td>${item.content}</td>
+								<td>${item.postdate}</td>
+								<td>${item.grade}</td>
+								<td>${bean.update}</td>
+								<td>${bean.delete}</td>
 								<td>
-									<c:if test="${sessionScope.loginfo.id == vo.writer}">
-										<a href="boUpdate&no=${vo.no}&${requestScope.parameters}">
+									<c:if test="${sessionScope.loginfo.id == bean.writer}">
+										<a href="boUpdate&no=${bean.no}&${requestScope.parameters}">
 											수정 </a>
 									</c:if> 
-									<c:if test="${sessionScope.loginfo.id != vo.writer}">
+									<c:if test="${sessionScope.loginfo.id != bean.writer}">
 									수정
 									</c:if>
 								</td>
 								<td>
-									<c:if test="${sessionScope.loginfo.id == vo.writer}">
-										<a href="boDelete&no=${vo.no}&${requestScope.parameters}">
+									<c:if test="${sessionScope.loginfo.id == bean.writer}">
+										<a href="boDelete&no=${bean.no}&${requestScope.parameters}">
 											삭제 </a>
 									</c:if> 
-									<c:if test="${sessionScope.loginfo.id != vo.writer}">
+									<c:if test="${sessionScope.loginfo.id != bean.writer}">
 										삭제
 									</c:if>
 								</td>
 								<td>
-									<c:if test="${vo.depth <3 }">
+									<c:if test="${bean.depth <3 }">
 										<a
-											href="boReply&no=${vo.no}&${requestScope.parameters}&groupno=${vo.groupno}&orderno=${vo.orderno}&depth=${vo.depth}">
+											href="boReply&no=${bean.no}&${requestScope.parameters}&groupno=${bean.groupno}&orderno=${bean.orderno}&depth=${bean.depth}">
 											답글 </a>
 									</c:if> 
-									<c:if test="${vo.depth >= 3 }">
+									<c:if test="${bean.depth >= 3 }">
 									답글
 									</c:if>
 								</td>
-								<td>${vo.remark}</td>
+								<td>${bean.remark}</td>
 							</tr>
 						</c:forEach>
 					</table>
@@ -399,7 +389,7 @@
 												for="regdate"> </label>
 											<%-- 	<div class="col-sm-12">
 												<input type="datetime" class="form-control" name="regdate"
-													id="regdate" placeholder="작성 일자" value="${vo.regdate}"> <span
+													id="regdate" placeholder="작성 일자" value="${bean.regdate}"> <span
 													class="err">${errregdate}</span>
 											</div> --%>
 										</div>
@@ -408,7 +398,7 @@
 												&nbsp;</label>
 											<div class="col-sm-12">
 												<textarea name="content" id="content" rows="5" cols=""
-													placeholder="글 내용" class="form-control">${vo.content}</textarea>
+													placeholder="글 내용" class="form-control">${bean.content}</textarea>
 												<span class="err">${errcontent}</span>
 											</div>
 											<br>
@@ -431,7 +421,7 @@
 											번호</label>
 										<div class="col-sm-<%=formright%>">
 											<input type="password" class="form-control" name="password"
-												id="password" placeholder="비밀 번호를 넣어 주셔용^^" value="${vo.password}">
+												id="password" placeholder="비밀 번호를 넣어 주셔용^^" value="${bean.password}">
 												<span class="err">${errpassword}</span>
 										</div>
 									</div> --%>

@@ -57,7 +57,7 @@ public class MemberNewmemberController extends SuperClass{
 		
 		System.out.println( bean );
 
-		if ( this.validate( request ) == true ) {
+		if (this.validate(request)) {
 			//DAO 객체를 생성한다.
 			MemberDAO mdao = new MemberDAO();			
 			int cnt = -99999 ; 		
@@ -80,7 +80,11 @@ public class MemberNewmemberController extends SuperClass{
 	public boolean validate(HttpServletRequest request) {
 		boolean isCheck = true ; //기본 값으로 true이고, 유효성 검사에 문제가 생기면 false으로 변경
 		
+<<<<<<< HEAD
 		if( bean.getId().length() < 5 || bean.getId().length() > 12 ){
+=======
+		if( bean.getId().length() < 4 || bean.getId().length() > 10 ){
+>>>>>>> d9c94c149643ff4082ee7e1bf2475582a8b34103
 			request.setAttribute( super.PREFIX + "id", "아이디는 4자리 이상 12자리 이하이어야 합니다.");
 			isCheck = false  ;
 		}

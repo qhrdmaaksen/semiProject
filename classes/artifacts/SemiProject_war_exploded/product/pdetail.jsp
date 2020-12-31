@@ -56,6 +56,18 @@
 	</script>
 	<script type="text/javascript">
 		$(document).ready(function() {
+			$.ajax({
+				url:"${pageContext.request.contextPath}/dodamdodam?command=preview",
+				type:"get",
+				success: (response) =>{
+					console.log(response)
+					console.log(${lists})
+				},
+				error: () =>{
+					console.log("error")
+				}
+				
+			})
 			$("input[name='delivery']").click(function() {
 				var thisValue = $(this).val();
 				if (thisValue == "정기 배송") {
@@ -127,6 +139,9 @@
 </script>
 </head>
 <body>
+	<c:forEach items="${lists}" var="item">
+		${item.reviewno},${item.content},${item.grade},${item.postdate},${item.id}<br>
+	</c:forEach>
 	<div class="container">
 		<div class="row">
 			<div class="col-md-4">
@@ -277,11 +292,11 @@
 					<table class="table table-striped table-hover">
 						<thead>
 							<tr>
-								<!-- <th>글 번호</th> -->
+								<th>글 번호</th>
 								<th>작성자</th>
 								<th>글 내용</th>
-								<th>조회수</th>
 								<th>작성 일자</th>
+								<th>별점</th>
 								<th>수정</th>
 								<th>삭제</th>
 								<th>답글</th>
@@ -308,10 +323,11 @@
 									href="boDetailView&no=${vo.no}&${requestScope.parameters}">
 										${vo.subject} </a></td>
 								<td>${vo.writer}</td>
-								<td>${vo.password}</td>
 								<td>${vo.content}</td>
-								<td>${vo.readhit}</td>
 								<td>${vo.regdate}</td>
+								<td>${vo.grade}</td>
+								<td>${vo.update}</td>
+								<td>${vo.delete}</td>
 								<td>
 									<c:if test="${sessionScope.loginfo.id == vo.writer}">
 										<a href="boUpdate&no=${vo.no}&${requestScope.parameters}">
@@ -321,19 +337,25 @@
 									수정
 									</c:if>
 								</td>
-								<td><c:if test="${sessionScope.loginfo.id == vo.writer}">
+								<td>
+									<c:if test="${sessionScope.loginfo.id == vo.writer}">
 										<a href="boDelete&no=${vo.no}&${requestScope.parameters}">
 											삭제 </a>
-									</c:if> <c:if test="${sessionScope.loginfo.id != vo.writer}">
-									삭제
-								</c:if></td>
-								<td><c:if test="${vo.depth <3 }">
+									</c:if> 
+									<c:if test="${sessionScope.loginfo.id != vo.writer}">
+										삭제
+									</c:if>
+								</td>
+								<td>
+									<c:if test="${vo.depth <3 }">
 										<a
 											href="boReply&no=${vo.no}&${requestScope.parameters}&groupno=${vo.groupno}&orderno=${vo.orderno}&depth=${vo.depth}">
 											답글 </a>
-									</c:if> <c:if test="${vo.depth >= 3 }">
+									</c:if> 
+									<c:if test="${vo.depth >= 3 }">
 									답글
-								</c:if></td>
+									</c:if>
+								</td>
 								<td>${vo.remark}</td>
 							</tr>
 						</c:forEach>
@@ -373,7 +395,7 @@
 														class="err form-control-static">${errimage}</span>
 												</div>
 											</div>
-											<label class="control-label col-sm-<%=formleft%>-
+												<label class="control-label col-sm-<%=formleft%>-
 												for="regdate"> </label>
 											<%-- 	<div class="col-sm-12">
 												<input type="datetime" class="form-control" name="regdate"
