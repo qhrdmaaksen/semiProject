@@ -19,6 +19,7 @@ public class MemberLoginController extends SuperClass{
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		System.out.println("회원 로그인 호출됨");
+
 		super.doGet(request, response);
 		super.GotoPage("/member/login.jsp");
 	}
@@ -36,6 +37,7 @@ public class MemberLoginController extends SuperClass{
 
 			String errmsg = "로그인 양식이 잘못되었습니다.";
 
+
 			super.setErrorMessage(errmsg);
 			this.doGet(request, response);
 		}else {
@@ -48,6 +50,7 @@ public class MemberLoginController extends SuperClass{
 			} catch (NoSuchFieldException e) {
 
 				String errmsg = "아이디 혹은 비밀번호가 잘못되었습니다.";
+
 				System.out.println(errmsg);
 				super.setErrorMessage(errmsg);
 				this.doGet(request, response);
@@ -71,6 +74,7 @@ public class MemberLoginController extends SuperClass{
 
 		if(this.password.length() < 4 || this.password.length()> 15) {
 			request.setAttribute(super.PREFIX+"passowrd", "비밀번호는 4자리 이상 15자리 이하이어야 합니다.");
+
 			isCheck = false;
 		}
 		return isCheck;

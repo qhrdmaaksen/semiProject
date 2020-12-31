@@ -73,6 +73,7 @@ public class MemberNewmemberController extends SuperClass{
 		
 
 		if( bean.getId().length() < 4 || bean.getId().length() > 12 ){
+
 			request.setAttribute( super.PREFIX + "id", "아이디는 4자리 이상 12자리 이하이어야 합니다.");
 			isCheck = false  ;
 		}
