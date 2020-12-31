@@ -141,4 +141,64 @@ public class MemberDAO extends SuperDAO {
 
 
 	}
+
+
+	public int ModifyData(MemberVO bean) {
+		String sql = " update members set \"password\" = ?, ";
+			sql += " \"name\" = ?, " ;
+			sql += " \"birth\" = ?, " ;
+			sql += " \"phone\" = ?, " ;
+			sql += " \"level\" = ?, " ;
+			sql += " \"point\" = ?, " ;
+			sql += " \"picture\" = ? " ;
+			sql += " where \"id\" = ? "; 
+			
+		
+			Connection conn = null ;
+			PreparedStatement pstmt = null ;
+			int cnt = -999999 ;
+
+			try {
+				conn = super.getConnection() ;
+				pstmt = conn.prepareStatement(sql) ;
+
+				// placeholder
+				pstmt.setString(1, bean.getPassword());
+				pstmt.setString(2, bean.getName());				
+				pstmt.setDate(3, new java.sql.Date(bean.getBirth().getTime()));		
+				pstmt.setString(4, bean.getPhone());	
+				pstmt.setString(5, bean.getLevel());		
+				pstmt.setInt(6, bean.getPoint());
+				pstmt.setString(7, bean.getPicture());
+				pstmt.setString(8, bean.getId());
+				
+				cnt = pstmt.executeUpdate() ; 
+				conn.commit(); 
+
+			} catch (Exception e) {
+				SQLException err = (SQLException)e ;			
+				cnt = - err.getErrorCode() ;			
+				e.printStackTrace();
+				try {
+					conn.rollback(); 
+				} catch (Exception e2) {
+					e2.printStackTrace();
+				}
+			} finally{
+				try {
+					if(pstmt != null){pstmt.close();}
+					if(conn != null){conn.close();}
+				} catch (Exception e2) {
+					e2.printStackTrace();
+				}
+			}
+			return cnt ;
+	}
 }
+
+
+
+
+
+
+

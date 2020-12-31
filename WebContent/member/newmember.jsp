@@ -51,7 +51,7 @@
 		}
 				
 	function isCheckFalse() {
-		document.myform.isCheck.value = false;
+		document.myform.isCheck.value = true;
 	}
 	function checkForm() {
 		var isCheck = document.myform.isCheck.value;
@@ -113,7 +113,8 @@
 			class="form-control" placeholder="비밀 번호"
 			value="" required>
 		<div class="valid-feedback">영문/숫자 포함 6자리 이상이어야 합니다.(최대 15자) </div> 
-		 <div class="invalid-feedback">비밀번호를 작성 해 주세요.</div>
+		 
+		 <div class="invalid-feedback"><span class="err">${errpassword}</span></div>
 			    </div>
 
 	<div class="form-group">
@@ -163,7 +164,7 @@
     </div>
     
    <div class="form-group">
-		<button type="submit" class="btn btn-primary btn-block" onclick="return checkForm();">
+		<button type="submit" class="btn btn-warning btn-block" onclick="return checkForm();">
 		<b>회원 가입</b>
 		</button>
 	</div>

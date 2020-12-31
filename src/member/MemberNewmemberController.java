@@ -55,24 +55,14 @@ public class MemberNewmemberController extends SuperClass{
 		 */
 			
 		bean.setPhone(request.getParameter("phone"));
-		
-		/*
-		 * if( request.getParameter("point") != null ||
-		 * request.getParameter("point").equals("") == false ){ bean.setPoint(
-		 * Integer.parseInt( request.getParameter("point") )); } if(
-		 * request.getParameter("picture") != null ||
-		 * request.getParameter("picture").equals("") == false ){ bean.setPicture(
-		 * request.getParameter("picture")); } if( request.getParameter("level") != null
-		 * || request.getParameter("level").equals("") == false ){
-		 * bean.setLevel(request.getParameter("level")); }
-		 */
+
 		
 		System.out.println( bean );
 
 		if ( this.validate( request ) == true ) {
 			//DAO 객체를 생성한다.
 			MemberDAO mdao = new MemberDAO();			
-			int cnt = -99999 ; 			
+			int cnt = -99999 ; 		
 			//Bean 객체를 이용하여 해당 게시물을 추가한다.
 			cnt = mdao.NewData(bean) ;
 			
@@ -92,15 +82,15 @@ public class MemberNewmemberController extends SuperClass{
 	public boolean validate(HttpServletRequest request) {
 		boolean isCheck = true ; //기본 값으로 true이고, 유효성 검사에 문제가 생기면 false으로 변경
 		
-		if( bean.getId().length() < 5 || bean.getId().length() > 10 ){
+		if( bean.getId().length() < 5 || bean.getId().length() > 12 ){
 			request.setAttribute( super.PREFIX + "id", "아이디는 4자리 이상 12자리 이하이어야 합니다.");
 			isCheck = false  ;
 		}
-		if( bean.getName().length() < 2 || bean.getName().length() > 10 ){
+		if( bean.getName().length() < 2 || bean.getName().length() > 15 ){
 			request.setAttribute( super.PREFIX + "name", "이름은 2자리 이상 15자리 이하이어야 합니다.");
 			isCheck = false  ;
 		}
-		if( bean.getPassword().length() < 6 || bean.getPassword().length() > 10 ){
+		if( bean.getPassword().length() < 6 || bean.getPassword().length() > 15 ){
 			request.setAttribute( super.PREFIX + "password", "비밀 번호는 6자리 이상 15자리 이하이어야 합니다.");
 			isCheck = false  ;
 		}
