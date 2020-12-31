@@ -90,7 +90,7 @@
   <form id="myform" name="myform" class="was-validated" role="form"
 					action="<%=YesForm%>" method="post">
 					<input type="hidden" name="command" value="newmember">
-					 <input type="hidden" name="isCheck" value="false"> 
+					 <input type="hidden" name="isCheck" value="false">
   
     <div class="form-group">
       <label for="id">UserID:</label>
