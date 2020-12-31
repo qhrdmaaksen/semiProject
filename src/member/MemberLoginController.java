@@ -28,10 +28,10 @@ public class MemberLoginController extends SuperClass{
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		this.id = request.getParameter("id");
-		this.password = request.getParameter("password");
+		this.password = request.getParameter("password1");
 
 		System.out.println("id : " + request.getParameter("id"));
-		System.out.println("password : " + request.getParameter("password"));
+		System.out.println("password : " + request.getParameter("password1"));
 
 		if(!this.validate(request)) {
 
