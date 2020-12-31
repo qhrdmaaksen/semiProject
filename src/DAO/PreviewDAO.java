@@ -22,7 +22,7 @@ public class PreviewDAO extends SuperDAO{
 	
 	public int addReview() {
 		
-		MemberVO vo = null;
+		MemberVO bean = null;
 		
 		String sql = "insert into p_review values(seq_review.nextval,1,?,?,sysdate,?)" ;
 		Connection conn = null ; 
@@ -62,7 +62,7 @@ public class PreviewDAO extends SuperDAO{
 	}
 
 	public List<PreviewVO> listsSelect() {
-			PreviewVO vo = null;
+			PreviewVO bean = null;
 			Connection conn = null ;
 			PreparedStatement pstmt = null ;
 			ResultSet rs = null ;
@@ -77,13 +77,13 @@ public class PreviewDAO extends SuperDAO{
 			
 			rs = pstmt.executeQuery() ;
 			while(rs.next()) {
-				vo = new PreviewVO();
-				vo.setReviewno(rs.getInt("seq_review")); 
-				vo.setId(rs.getString("id")); 
-				vo.setContent(rs.getString("content")); 
-			    vo.setPostdate(rs.getString("postdate")); 
-				vo.setGrade(rs.getInt("grade"));
-				lists.add(vo) ;
+				bean = new PreviewVO();
+				bean.setReviewno(rs.getInt("seq_review")); 
+				bean.setId(rs.getString("id")); 
+				bean.setContent(rs.getString("content")); 
+			    bean.setPostdate(rs.getString("postdate")); 
+				bean.setGrade(rs.getInt("grade"));
+				lists.add(bean) ;
 			}
 		} catch (Exception e) {
 			SQLException err = (SQLException)e ;			
