@@ -93,10 +93,112 @@ public class MemberDAO extends SuperDAO {
 			}
 		}
 		return cnt ;
-	}	
+	}
+
+
+	public MemberVO SelectDataByPk(String id) {
+		MemberVO bean = null;
 		
+		String sql = "select * from members where \"id\" = ?  " ;
+		Connection conn = null ;
+		PreparedStatement pstmt = null ;
+		ResultSet rs = null;
+
+		try {
+			conn = super.getConnection();
+			pstmt = conn.prepareStatement(sql);
+
+			pstmt.setString(1, id);
+
+			rs = pstmt.executeQuery();
+
+			if(rs.next()) {
+				bean = new MemberVO();
+				bean.setId(rs.getString("id"));
+				bean.setPassword(rs.getString("password"));
+				bean.setBirth(rs.getDate("birth"));
+				bean.setLevel(rs.getString("level"));
+				bean.setName(rs.getString("name"));
+				bean.setPhone(rs.getString("phone"));
+				bean.setPicture(rs.getString("picture"));
+				bean.setPoint(rs.getInt("point"));
+	
+			System.out.println("성공");
+			}
+		 }catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if(rs != null) {rs.close();}
+				if(pstmt != null) {pstmt.close();}
+				if(conn != null) {conn.close();}
+			} catch (Exception e2) {
+				e2.printStackTrace();
+			}
+		}
 		
+		return bean;
 
 
+	}
 
+
+	public int ModifyData(MemberVO bean) {
+		String sql = " update members set \"password\" = ?, ";
+			sql += " \"name\" = ?, " ;
+			sql += " \"birth\" = ?, " ;
+			sql += " \"phone\" = ?, " ;
+			sql += " \"level\" = ?, " ;
+			sql += " \"point\" = ?, " ;
+			sql += " \"picture\" = ? " ;
+			sql += " where \"id\" = ? "; 
+			
+		
+			Connection conn = null ;
+			PreparedStatement pstmt = null ;
+			int cnt = -999999 ;
+
+			try {
+				conn = super.getConnection() ;
+				pstmt = conn.prepareStatement(sql) ;
+
+				// placeholder
+				pstmt.setString(1, bean.getPassword());
+				pstmt.setString(2, bean.getName());				
+				pstmt.setDate(3, new java.sql.Date(bean.getBirth().getTime()));		
+				pstmt.setString(4, bean.getPhone());	
+				pstmt.setString(5, bean.getLevel());		
+				pstmt.setInt(6, bean.getPoint());
+				pstmt.setString(7, bean.getPicture());
+				pstmt.setString(8, bean.getId());
+				
+				cnt = pstmt.executeUpdate() ; 
+				conn.commit(); 
+
+			} catch (Exception e) {
+				SQLException err = (SQLException)e ;			
+				cnt = - err.getErrorCode() ;			
+				e.printStackTrace();
+				try {
+					conn.rollback(); 
+				} catch (Exception e2) {
+					e2.printStackTrace();
+				}
+			} finally{
+				try {
+					if(pstmt != null){pstmt.close();}
+					if(conn != null){conn.close();}
+				} catch (Exception e2) {
+					e2.printStackTrace();
+				}
+			}
+			return cnt ;
+	}
 }
+
+
+
+
+
+
+

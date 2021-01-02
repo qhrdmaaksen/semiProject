@@ -14,17 +14,25 @@ import DAO.MemberDAO;
 import VO.MemberVO;
 import common.SuperClass;
 
-public class MemberNewmemberController extends SuperClass{
+public class MemberModifyController extends SuperClass{
 	private MemberVO bean = null ;	
 	String gotopage = "";
 	@Override
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		
-
+		String id = request.getParameter("id");
+		
+		MemberDAO dao = new MemberDAO();
+		
+		// bean 객체 : 로그인 한 사람의 정보
+		MemberVO bean = dao.SelectDataByPk(id);
+		
 		super.doGet(request, response);
-		String gotopage = "member/newmember.jsp";		
-		super.GotoPage( gotopage );
+		request.setAttribute("bean", bean);
+		
+		String gotopage = "member/memodify.jsp";	
+		super.GotoPage(gotopage);
 		
 	}
 	@Override
@@ -41,27 +49,41 @@ public class MemberNewmemberController extends SuperClass{
 			e.printStackTrace();
 		}
 
+		System.out.println(request.getParameter("birth"));
+		System.out.println("생일은?" + bean.getBirth());
 		bean.setId(request.getParameter("id"));
 		bean.setName(request.getParameter("uname"));
 		bean.setPassword(request.getParameter("password1"));
+		
+		/*
+		 * if (request.getParameter("password1") == request.getParameter("password2")) {
+		 * bean.setPassword(request.getParameter("password1"));
+		 * System.out.println(request.getParameter("password1"));
+		 * System.out.println(request.getParameter("password2")); } else {
+		 * System.out.println(request.getParameter("password1"));
+		 * System.out.println(request.getParameter("password2")); gotopage =
+		 * "member/newmember.jsp"; super.GotoPage( gotopage ); }
+		 */
+			
 		bean.setPhone(request.getParameter("phone"));
+
 		
 		System.out.println( bean );
 
-		if (this.validate(request)) {
+		if ( this.validate( request ) == true ) {
 			//DAO 객체를 생성한다.
 			MemberDAO mdao = new MemberDAO();			
 			int cnt = -99999 ; 		
 			//Bean 객체를 이용하여 해당 게시물을 추가한다.
-			cnt = mdao.NewData(bean) ;
+			cnt = mdao.ModifyData(bean) ;
 			
-			super.session.setAttribute( "message" , "정보 수정이 완료 되었습니다. 로그인 후 메인 페이지로 이동합니다." );
+			super.session.setAttribute( "message" , "축하합니다. 회원 가입이 되었습니다. 로그인 후 메인 페이지로 이동합니다." );
 			
 			// 회원 가입을 성공하면, 바로 로그인되도록 처리해줍니다.
 			// doPost() 메소드를 호출하여 바로 로그인을 수행합니다.
 			new MemberLoginController().doPost(request, response);
 		}else{
-			gotopage = "member/newmember.jsp";  
+			gotopage = "member/memodify.jsp";  
 			request.setAttribute("bean", bean);
 			super.doPost(request, response);
 			super.GotoPage( gotopage );
@@ -71,9 +93,7 @@ public class MemberNewmemberController extends SuperClass{
 	public boolean validate(HttpServletRequest request) {
 		boolean isCheck = true ; //기본 값으로 true이고, 유효성 검사에 문제가 생기면 false으로 변경
 		
-
-		if( bean.getId().length() < 4 || bean.getId().length() > 12 ){
-
+		if( bean.getId().length() < 5 || bean.getId().length() > 12 ){
 			request.setAttribute( super.PREFIX + "id", "아이디는 4자리 이상 12자리 이하이어야 합니다.");
 			isCheck = false  ;
 		}
