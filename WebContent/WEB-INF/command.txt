@@ -13,3 +13,4 @@ coupon=member.MyCouponController
 #### Product Section #################################
 preview=product.PreviewController
 pdetail=product.PdetailController
+previewupdate=product.PreviewUpdateController

@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html;charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%
+	pageContext.setAttribute("replaceChar", "\n");
 	int twelve = 12;
 	int myoffset = 2;
 	int mywidth = twelve - 2 * myoffset;
@@ -17,10 +19,12 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 <%@ include file="../common/nav.jsp"%>
-	<script
-		src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-	<script src="../js/jquery.zoom.min.js"></script>
 	<script src="../js/jquery-3.5.1.min.js" type="text/javascript"></script>
+	<script	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+	<script src="../js/jquery.zoom.min.js"></script>
+	<script type="text/javascript" src="https://rawgit.com/jackmoore/autosize/master/dist/autosize.min.js"></script>
+	<
+	
 	<link
 	    rel="stylesheet"
 	    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"
@@ -60,8 +64,7 @@
 				url:"${pageContext.request.contextPath}/dodamdodam?command=preview",
 				type:"get",
 				success: (response) =>{
-					console.log(response)
-					console.log(${lists})
+					autosize($('textarea'))
 				},
 				error: () =>{
 					console.log("error")
@@ -145,18 +148,18 @@
 				<h2 align="center">상품 이미지 상세보기</h2>
 				<div id="myarea">
 					<img class="img-thumbnail" alt="prod-img"
-						src="../images/imsitest.png" width="400" height="600"
+						src="${pageContext.request.contextPath}/images/imsitest.png" width="400" height="600"
 						onmouseover="applyImage(this.src);">
 				</div>
 				<div align="center">
-					<img class="img-thumbnail" alt="a" src="../images/imsitest01.png"
+					<img class="img-thumbnail" alt="a" src="${pageContext.request.contextPath}/images/imsitest01.png"
 						width="70" height="130" onmouseover="applyImage(this.src);">
 					<!-- apply 함수한테 나의 이미지 경로를 알려줌? -->
-					<img class="img-thumbnail" alt="b" src="../images/imsitest02.png"
+					<img class="img-thumbnail" alt="b" src="${pageContext.request.contextPath}/images/imsitest02.png"
 						width="70" height="130" onmouseover="applyImage(this.src);">
-					<img class="img-thumbnail" alt="c" src="../images/imsitest03.png"
+					<img class="img-thumbnail" alt="c" src="${pageContext.request.contextPath}/images/imsitest03.png"
 						width="70" height="130" onmouseover="applyImage(this.src);">
-					<img class="img-thumbnail" alt="c" src="../images/imsitest.png"
+					<img class="img-thumbnail" alt="c" src="${pageContext.request.contextPath}/images/imsitest.png"
 						width="70" height="130" onmouseover="applyImage(this.src);">
 				</div>
 			</div>
@@ -250,17 +253,17 @@
 		<div id="prod-detail" align="center" class="container tab-pane active"
 			role="tabpanel" aria-labelledby="prod-contents01">
 			<img id="img0" title="홍삼" width="50%" height="50%"
-				src="../images/bottle.png" alt="bottle.png">
+				src="${pageContext.request.contextPath}/images/bottle.png" alt="bottle.png">
 			<!-- <button id="prod-moreView"
 					style="width: 60%; font-size: 20px; color: blue; background: white;">상품
 					정보 상세 보기 ▼</button> -->
 			<img id="img1" title="홍삼1" width="50%" height="50%"
-				src="../images/point.jpg" alt="point.jpg"> <img id="img2"
-				title="홍삼2" width="50%" height="50%" src="../images/point01.jpg"
+				src="${pageContext.request.contextPath}/images/point.jpg" alt="point.jpg"> <img id="img2"
+				title="홍삼2" width="50%" height="50%" src="${pageContext.request.contextPath}/images/point01.jpg"
 				alt="point01.jpg"> <img id="img3" title="홍삼3" width="50%"
-				height="50%" src="../images/point02.jpg" alt="point02.jpg"><br>
+				height="50%" src="${pageContext.request.contextPath}/images/point02.jpg" alt="point02.jpg"><br>
 			<img id="img4" title="홍삼4" width="50%" height="50%"
-				src="../images/point03.jpg" alt="point03.jpg"><br> 면역력
+				src="${pageContext.request.contextPath}/images/point03.jpg" alt="point03.jpg"><br> 면역력
 			증진·피로개선·지구력 증진에 도움을 줄 수 있는 면역력 증진·피로개선·기억력개선에 도움을 줄 수 있음<br> 쌀의
 			배아, 현미, 사탕수수 등에서 찾을 수 있는 옥타코사놀은 지구력 증진에 도움을 줄 수 있습니다. 03 비타민E 함유 미국
 			BASF의 식물성 오일에서 추출한 비타민E(d-α-토코페롤)를 하루 3.3 mg 섭취할 수 있습니다.<br> <br>
@@ -313,14 +316,14 @@
 								<%-- <td>${bean.no}</td> --%>
 								<td>${item.reviewno}</td>
 								<td>${item.id}</td>
-								<td>${item.content}</td>
+								<td><textarea readonly="readonly" style="overflow: visible; resize: both;">${fn:replace(item.content, replaceChar,replaceChar)}</textarea></td>
 								<td>${item.postdate}</td>
-								<td>${item.grade}</td>
+								<td> ${item.grade}</td>
 								<td>${bean.update}</td>
 								<td>${bean.delete}</td>
 								<td>
 									<c:if test="${sessionScope.loginfo.id == bean.writer}">
-										<a href="boUpdate&no=${bean.no}&${requestScope.parameters}">
+										<a href="previewupdate.jsp?seq_review=${bean.no}&${requestScope.parameters}">
 											수정 </a>
 									</c:if> 
 									<c:if test="${sessionScope.loginfo.id != bean.writer}">
@@ -329,24 +332,13 @@
 								</td>
 								<td>
 									<c:if test="${sessionScope.loginfo.id == bean.writer}">
-										<a href="boDelete&no=${bean.no}&${requestScope.parameters}">
+										<a href="pdetaildelete&no=${bean.no}&${requestScope.parameters}">
 											삭제 </a>
 									</c:if> 
 									<c:if test="${sessionScope.loginfo.id != bean.writer}">
 										삭제
 									</c:if>
 								</td>
-								<td>
-									<c:if test="${bean.depth <3 }">
-										<a
-											href="boReply&no=${bean.no}&${requestScope.parameters}&groupno=${bean.groupno}&orderno=${bean.orderno}&depth=${bean.depth}">
-											답글 </a>
-									</c:if> 
-									<c:if test="${bean.depth >= 3 }">
-									답글
-									</c:if>
-								</td>
-								<td>${bean.remark}</td>
 							</tr>
 						</c:forEach>
 					</table>
