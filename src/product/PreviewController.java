@@ -20,18 +20,6 @@ public class PreviewController extends SuperClass{
 		PreviewDAO dao = new PreviewDAO(request);
 		List<PreviewVO> result = dao.listsSelect() ;
 		HttpSession session = request.getSession();
-		for (PreviewVO previewVO : result) {
-			System.out.println(previewVO.getId());
-			System.out.println(previewVO.getContent());
-			System.out.println(previewVO.getGrade());
-			System.out.println(previewVO.getPostdate());
-			System.out.println(previewVO.getReviewno());
-			/*
-			 * if (previewVO.getGrade()==1) { System.out.println(); } else {
-			 * 
-			 * }
-			 */
-		}
 		session.setAttribute("lists", result);
 	}
 	

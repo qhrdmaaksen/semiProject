@@ -63,7 +63,28 @@
 				url:"${pageContext.request.contextPath}/dodamdodam?command=preview",
 				type:"get",
 				success: (response) =>{
-					autosize($('textarea'))
+					autosize($('textarea'));
+					
+					$("[id*=starGarde_]").each(function() {
+						
+						var star = "☆";
+						var star2 = "★";
+						var grade = Number($(this).text()); // 별점 수
+						var starGrade  = ""; //최종 문자열
+						
+						//별점만큼 채워진별을 대입
+						for(var i = 0 ; i < grade; i++){
+							starGrade += star2;	
+						}
+						
+						// 5-별점 만큼 빈별을 대입
+						for(var i = 0 ;i < 5-grade; i++){
+							starGrade += star;
+						}
+						// 완성된 문자열을 대입
+						$(this).text(starGrade).css("color","red");
+					});
+					
 				},
 				error: () =>{
 					console.log("error")
@@ -74,7 +95,7 @@
 				var thisValue = $(this).val();
 				if (thisValue == "정기 배송") {
 					$("#inHere").css("display", "block");
-					$('#buy-qty').val(0);
+					$('#buy-qty').val(1);
 				} else {
 					$("#inHere").css("display", "none");
 				}
@@ -83,15 +104,7 @@
 				thisValue = $(this).val();
 				if (thisValue == "단품 구매") {
 					$('#buy-qty').val(0);}
-			})
-			$("input[name='gopayment']").click(function(){
-				if ($('#buy-qty').val() == 0 ) {
-					alert('구매 방법을 선택해주세요.');	
-				} else {
-					$("input[name='gopayment']").click(function(){
-						location.href='http://localhost:8989/SemiProject/product/payment.jsp';
-				}
-			)};
+			});
 			  $('#star_grade a').click(function(){
 		           $(this).parent().children("a").removeClass("on");  /* 별점의 on 클래스 전부 제거 */ 
 		           $(this).addClass("on").prevAll("a").addClass("on"); /* 클릭한 별과, 그 앞 까지 별점에 on 클래스 추가 */
@@ -153,23 +166,6 @@
 		//alert("로그아웃 되었습니다.");
 		//location.href="login.jsp";                                    // 로그아웃 페이지로 이동
 	</script>
-	<script type="text/javascript">
-		var getstar = "${item.grade}";
-		console.log('star ' + getstar);
-		if (getstart==1) {
-			getstart=★;
-		} else if(getstart==2) {
-			getstart=★★;
-		} else if (getstart==3) {
-			getstart=★★★;
-		} else if (getstart==4) {
-			getstart=★★★★;
-		} else if (getstart==5) {
-			getstart=★★★★★;
-		} else {
-			getstar='☆';
-		}
-	</script>
 </head>
 <body>
 	<div class="container">
@@ -209,16 +205,12 @@
 							<td>
 								<div class="form-group col-sm-4">
 									<label>구매 수량</label> <input id="buy-qty" type="number"
-										class="form-control mypopover" title="수량 입력란" value="0"
+										class="form-control mypopover" title="수량 입력란" value="1" min="1"
 										data-content="구매하고자 하는 수량을 정수로 입력하세요.">
 								</div>
 								<!--data-trigger 자동으로-->
 							</td>
 						</tr>
-						<tr>
-							<td id="only-one-buy" align="center" class="list-group-item"><input
-								type="radio" name="delivery" value="단품 구매">&nbsp;&nbsp;단품
-								구매 : 10,000 원</td>
 						<tr>
 							<td align="center"><input id="delivery-select" type="radio"
 								name="delivery" value="정기 배송">&nbsp;&nbsp;정기 배송 선택
@@ -247,7 +239,8 @@
 											</td>
 										</tr>
 									</table>
-								</div></td>
+								</div>
+							</td>
 						</tr>
 						<tr>
 							<td class="list-group-item"><input type="button"
@@ -341,14 +334,14 @@
 								</form>
 							</td>
 						</tr>
-						<c:forEach items="${lists}" var="item">
+						<c:forEach items="${lists}" var="item"  begin="0" varStatus="i" end="${lists.size()}">
 							<tr>
 								<%-- <td>${bean.no}</td> --%>
 								<td>${item.reviewno}</td>
 								<td>${item.id}</td>
 								<td><textarea readonly="readonly" style="overflow: visible; resize: both;">${fn:replace(item.content, replaceChar,replaceChar)}</textarea></td>
 								<td>${item.postdate}</td>
-								<td>${item.grade}</td>
+								<td id="starGarde_${i.index}">${item.grade}</td>
 								<td>${bean.update}</td>
 								<td>${bean.delete}</td>
 								<td>
