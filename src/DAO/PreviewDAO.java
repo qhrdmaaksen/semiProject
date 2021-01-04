@@ -14,15 +14,15 @@ import VO.PreviewVO;
 
 public class PreviewDAO extends SuperDAO{
 	
-	HttpServletRequest request;
+	HttpServletRequest request; //null
+	
 	
 	public PreviewDAO(HttpServletRequest request) {
 		this.request = request;
 	}
-	
 	public int addReview() {
 		
-		MemberVO vo = null;
+		MemberVO bean = null;
 		
 		String sql = "insert into p_review values(seq_review.nextval,1,?,?,sysdate,?)" ;
 		Connection conn = null ; 
@@ -62,7 +62,7 @@ public class PreviewDAO extends SuperDAO{
 	}
 
 	public List<PreviewVO> listsSelect() {
-			PreviewVO vo = null;
+			PreviewVO bean = null;
 			Connection conn = null ;
 			PreparedStatement pstmt = null ;
 			ResultSet rs = null ;
@@ -77,13 +77,13 @@ public class PreviewDAO extends SuperDAO{
 			
 			rs = pstmt.executeQuery() ;
 			while(rs.next()) {
-				vo = new PreviewVO();
-				vo.setReviewno(rs.getInt("seq_review")); 
-				vo.setId(rs.getString("id")); 
-				vo.setContent(rs.getString("content")); 
-			    vo.setPostdate(rs.getString("postdate")); 
-				vo.setGrade(rs.getInt("grade"));
-				lists.add(vo) ;
+				bean = new PreviewVO();
+				bean.setReviewno(rs.getInt("seq_review")); 
+				bean.setId(rs.getString("id")); 
+				bean.setContent(rs.getString("content")); 
+			    bean.setPostdate(rs.getString("postdate")); 
+				bean.setGrade(rs.getInt("grade"));
+				lists.add(bean) ;
 			}
 		} catch (Exception e) {
 			SQLException err = (SQLException)e ;			
@@ -103,5 +103,98 @@ public class PreviewDAO extends SuperDAO{
 			}
 		}
 		return lists;
+	}
+
+	public int UpdateData(PreviewVO bean) {
+		String sql = " update p_review set  ";
+		sql += " seq_review=?, id=?, content=?, postdate=? " ;
+		sql += " where seq_review = ? " ;    
+		Connection conn = null ;
+		PreparedStatement pstmt = null ;
+		int cnt = -999999 ;
+
+		try {
+			conn = super.getConnection() ;
+			pstmt = conn.prepareStatement(sql) ;
+
+			// placeholder
+			pstmt.setInt(1, bean.getReviewno());
+			pstmt.setString(2, bean.getId());
+			pstmt.setString(3, bean.getContent());
+			pstmt.setString(4, bean.getPostdate());
+			
+			cnt = pstmt.executeUpdate() ; 
+			conn.commit(); 
+
+		} catch (Exception e) {
+			SQLException err = (SQLException)e ;			
+			cnt = - err.getErrorCode() ;			
+			e.printStackTrace();
+			try {
+				conn.rollback(); 
+			} catch (Exception e2) {
+				e2.printStackTrace();
+			}
+		} finally{
+			try {
+				if(pstmt != null){pstmt.close();}
+				if(conn != null){conn.close();}
+			} catch (Exception e2) {
+				e2.printStackTrace();
+			}
+		}
+		return cnt ;
+	}
+
+	public PreviewVO selectdatabypk(int no) {
+		// 해당 게시물 번호의 Bean 객체를 구합니다.
+				PreviewVO bean = null ;
+				
+				String sql = " select * from p_review ";
+				sql += " where seq_review = ? " ;
+				
+				Connection conn = null ;
+				PreparedStatement pstmt = null ;
+				ResultSet rs = null ;
+				
+				try {
+					conn = super.getConnection() ;
+					pstmt = conn.prepareStatement(sql) ;
+
+					// placeholder		
+					pstmt.setInt(1, no);
+								
+					rs = pstmt.executeQuery() ;
+					
+					while(rs.next()) {
+						bean = new PreviewVO() ;
+						bean.setReviewno(rs.getInt("seq_review")); 
+						bean.setSearchno(rs.getInt("seq_index")); 
+						bean.setContent(rs.getString("content")); 				
+						bean.setGrade(rs.getInt("grade")); 				
+						bean.setPostdate(String.valueOf(rs.getDate("postdate"))); 				
+						bean.setId(rs.getString("id")); 
+					}
+					
+					System.out.println("ok");
+				} catch (Exception e) {
+					SQLException err = (SQLException)e ;
+					e.printStackTrace();
+					try {
+						conn.rollback(); 
+					} catch (Exception e2) {
+						e2.printStackTrace();
+					}
+				} finally {
+					try {
+						if(rs != null) {rs.close();}
+						if(pstmt != null) {pstmt.close();}
+						if(conn != null) {conn.close();}
+					} catch (Exception e2) {
+						e2.printStackTrace();
+					}
+				}
+				
+				return bean  ;
 	}
 }
