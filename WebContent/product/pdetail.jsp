@@ -496,7 +496,7 @@
 						</tr>
 					</tbody>
 				</table>
-				<h5 class="prod-delivery-return-policy-title">교환/반품 안내</h5>
+				<h5 class="prod-delivery-return-policy-title" style="font-weight: bold;">교환/반품 안내</h5>
 				<table class="prod-delivery-return-policy-table" border="1">
 					<colgroup>
 						<col width="160px">
@@ -521,19 +521,29 @@
 						</tr>
 					</tbody>
 				</table>
-				<h5 class="prod-delivery-return-policy-title">교환/반품 제한사항</h5>
-			<li>주문/제작 상품의 경우, 상품의 제작이 이미 진행된 경우</li>
-			<li>상품 포장을 개봉하여 사용 또는 설치 완료되어 상품의 가치가 훼손된 경우 (단, 내용 확인을 위한 포장
-				개봉의 경우는 예외)</li>
-			<li>고객의 사용, 시간경과, 일부 소비에 의하여 상품의 가치가 현저히 감소한 경우</li>
-			<li>세트상품 일부 사용, 구성품을 분실하였거나 취급 부주의로 인한 파손/고장/오염으로 재판매 불가한 경우</li>
-			<li>모니터 해상도의 차이로 인해 색상이나 이미지가 실제와 달라, 고객이 단순 변심으로 교환/반품을 무료로
-				요청하는 경우</li>
-			<li>제조사의 사정 (신모델 출시 등) 및 부품 가격 변동 등에 의해 무료 교환/반품으로 요청하는 경우</li>
-			<p class="prod-delivery-return-policy__limit-text">※ 각 상품별로 아래와
-				같은 사유로 취소/반품이 제한 될 수 있습니다.</p>
+				<h5 class="prod-delivery-return-policy-title" style="font-weight: bold;">교환/반품 제한사항</h5>
+				<table border="1">
+				<tr>
+					<td>
+						<ol>
+							<li>주문/제작 상품의 경우, 상품의 제작이 이미 진행된 경우</li>
+							<li>상품 포장을 개봉하여 사용 또는 설치 완료되어 상품의 가치가 훼손된 경우 (단, 내용 확인을 위한 포장
+								개봉의 경우는 예외)</li>
+							<li>고객의 사용, 시간경과, 일부 소비에 의하여 상품의 가치가 현저히 감소한 경우</li>
+							<li>세트상품 일부 사용, 구성품을 분실하였거나 취급 부주의로 인한 파손/고장/오염으로 재판매 불가한 경우</li>
+							<li>모니터 해상도의 차이로 인해 색상이나 이미지가 실제와 달라, 고객이 단순 변심으로 교환/반품을 무료로
+								요청하는 경우</li>
+							<li>제조사의 사정 (신모델 출시 등) 및 부품 가격 변동 등에 의해 무료 교환/반품으로 요청하는 경우</li>
+						</ol>
+							<div align="center">
+								<span>※ 각 상품별로 아래와
+									같은 사유로 취소/반품이 제한 될 수 있습니다.</span>
+							</div>
+					</td>
+				</tr>		
+				</table>
 			<div class="product-item__table product-seller">
-				<p class="prod-delivery-return-policy-title">판매자 정보</p>
+				<p class="prod-delivery-return-policy-title">&nbsp;</p>
 				<table class="prod-delivery-return-policy-table" border="1">
 					<colgroup>
 						<col width="150px">
@@ -541,12 +551,12 @@
 					</colgroup>
 					<tbody>
 						<tr>
-							<th>판매자</th>
+							<th>판매자  :</th>
 							<td>도담도담</td>
 						</tr>
 					</tbody>
 				</table>
-
+				<br>
 				<p class="prod-minor-notice">미성년자가 체결한 계약은 법정대리인이 동의하지 않는 경우 본인
 					또는 법정대리인이 취소할 수 있습니다.</p>
 			</div>
