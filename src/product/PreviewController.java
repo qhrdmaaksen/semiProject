@@ -26,6 +26,11 @@ public class PreviewController extends SuperClass{
 			System.out.println(previewVO.getGrade());
 			System.out.println(previewVO.getPostdate());
 			System.out.println(previewVO.getReviewno());
+			/*
+			 * if (previewVO.getGrade()==1) { System.out.println(); } else {
+			 * 
+			 * }
+			 */
 		}
 		session.setAttribute("lists", result);
 	}

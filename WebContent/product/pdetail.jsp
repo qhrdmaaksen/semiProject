@@ -23,8 +23,7 @@
 	<script	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 	<script src="../js/jquery.zoom.min.js"></script>
 	<script type="text/javascript" src="https://rawgit.com/jackmoore/autosize/master/dist/autosize.min.js"></script>
-	<
-	
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
 	<link
 	    rel="stylesheet"
 	    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"
@@ -75,10 +74,24 @@
 				var thisValue = $(this).val();
 				if (thisValue == "정기 배송") {
 					$("#inHere").css("display", "block");
+					$('#buy-qty').val(0);
 				} else {
 					$("#inHere").css("display", "none");
 				}
 			})
+			$("input[name='delivery']").click(function(){
+				thisValue = $(this).val();
+				if (thisValue == "단품 구매") {
+					$('#buy-qty').val(0);}
+			})
+			$("input[name='gopayment']").click(function(){
+				if ($('#buy-qty').val() == 0 ) {
+					alert('구매 방법을 선택해주세요.');	
+				} else {
+					$("input[name='gopayment']").click(function(){
+						location.href='http://localhost:8989/SemiProject/product/payment.jsp';
+				}
+			)};
 			  $('#star_grade a').click(function(){
 		           $(this).parent().children("a").removeClass("on");  /* 별점의 on 클래스 전부 제거 */ 
 		           $(this).addClass("on").prevAll("a").addClass("on"); /* 클릭한 별과, 그 앞 까지 별점에 on 클래스 추가 */
@@ -117,29 +130,46 @@
         color: red;
     }
 	</style>
-<script type="text/javascript">
-	var id = "${id}";
-	var password = "${password}";
-	console.log("id : "+id);
-	console.log("password : "+ password)
-	if(id != null && 
-	   password !=null &&
-	   id != "" &&
-	   password != "" &&
-	   id != undefined &&
-	   password != undefined)
-	{
-		//session 등록
-		//location.href = "pdetail.jsp";
-	}else{
-		//location.href = "login.jsp";
-	}
-	
-</script>
-<script>
-	//alert("로그아웃 되었습니다.");
-	//location.href="login.jsp";                                    // 로그아웃 페이지로 이동
-</script>
+	<script type="text/javascript">
+		var id = "${id}";
+		var password = "${password}";
+		console.log("id : "+id);
+		console.log("password : "+ password)
+		if(id != null && 
+		   password !=null &&
+		   id != "" &&
+		   password != "" &&
+		   id != undefined &&
+		   password != undefined)
+		{
+			//session 등록
+			//location.href = "pdetail.jsp";
+		}else{
+			//location.href = "login.jsp";
+		}
+		
+	</script>
+	<script>
+		//alert("로그아웃 되었습니다.");
+		//location.href="login.jsp";                                    // 로그아웃 페이지로 이동
+	</script>
+	<script type="text/javascript">
+		var getstar = "${item.grade}";
+		console.log('star ' + getstar);
+		if (getstart==1) {
+			getstart=★;
+		} else if(getstart==2) {
+			getstart=★★;
+		} else if (getstart==3) {
+			getstart=★★★;
+		} else if (getstart==4) {
+			getstart=★★★★;
+		} else if (getstart==5) {
+			getstart=★★★★★;
+		} else {
+			getstar='☆';
+		}
+	</script>
 </head>
 <body>
 	<div class="container">
@@ -178,16 +208,16 @@
 						<tr align="center">
 							<td>
 								<div class="form-group col-sm-4">
-									<label>구매 수량</label> <input type="number"
-										class="form-control mypopover" title="수량 입력란"
+									<label>구매 수량</label> <input id="buy-qty" type="number"
+										class="form-control mypopover" title="수량 입력란" value="0"
 										data-content="구매하고자 하는 수량을 정수로 입력하세요.">
 								</div>
 								<!--data-trigger 자동으로-->
 							</td>
 						</tr>
 						<tr>
-							<td align="center" class="list-group-item"><input
-								type="radio" name="delivery" value="단품 구매" checked="checked">&nbsp;&nbsp;단품
+							<td id="only-one-buy" align="center" class="list-group-item"><input
+								type="radio" name="delivery" value="단품 구매">&nbsp;&nbsp;단품
 								구매 : 10,000 원</td>
 						<tr>
 							<td align="center"><input id="delivery-select" type="radio"
@@ -225,7 +255,7 @@
 								name="goMall" value="장바구니 담기"></td>
 							<td class="list-group-item"><input type="submit"
 								style="width: 100%; color: white; background: blue;"
-								name="goPayment" value="바로 구매 >"></td>
+								name="gopayment" value="바로 구매 >" onclick="location.href='http://localhost:8989/SemiProject/product/payment.jsp'"></td>
 						</tr>
 					</table>
 				</div>
@@ -318,7 +348,7 @@
 								<td>${item.id}</td>
 								<td><textarea readonly="readonly" style="overflow: visible; resize: both;">${fn:replace(item.content, replaceChar,replaceChar)}</textarea></td>
 								<td>${item.postdate}</td>
-								<td> ${item.grade}</td>
+								<td>${item.grade}</td>
 								<td>${bean.update}</td>
 								<td>${bean.delete}</td>
 								<td>
@@ -371,11 +401,11 @@
 											<div class="form-group">
 												<label class="control-label col-sm-<%=formleft%>"
 													for="image"></label>
-												<div class="col-sm-<%=formright%>">
+												<%-- <div class="col-sm-<%=formright%>">
 													<input type="file" class="form-control" name="image"
 														id="image" placeholder="이미지를 넣어 주셔용^^"><span
 														class="err form-control-static">${errimage}</span>
-												</div>
+												</div> --%>
 											</div>
 												<label class="control-label col-sm-<%=formleft%>-
 												for="regdate"> </label>
