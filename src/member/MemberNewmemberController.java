@@ -42,8 +42,8 @@ public class MemberNewmemberController extends SuperClass{
 		}
 
 		bean.setId(request.getParameter("id"));
-		bean.setName(request.getParameter("uname"));
-		bean.setPassword(request.getParameter("password1"));
+		bean.setName(request.getParameter("name"));
+		bean.setPassword(request.getParameter("password"));
 		bean.setPhone(request.getParameter("phone"));
 		
 		System.out.println( bean );

@@ -52,8 +52,8 @@ public class MemberModifyController extends SuperClass{
 		System.out.println(request.getParameter("birth"));
 		System.out.println("생일은?" + bean.getBirth());
 		bean.setId(request.getParameter("id"));
-		bean.setName(request.getParameter("uname"));
-		bean.setPassword(request.getParameter("password1"));
+		bean.setName(request.getParameter("name"));
+		bean.setPassword(request.getParameter("password"));
 		
 		/*
 		 * if (request.getParameter("password1") == request.getParameter("password2")) {
@@ -93,7 +93,7 @@ public class MemberModifyController extends SuperClass{
 	public boolean validate(HttpServletRequest request) {
 		boolean isCheck = true ; //기본 값으로 true이고, 유효성 검사에 문제가 생기면 false으로 변경
 		
-		if( bean.getId().length() < 5 || bean.getId().length() > 12 ){
+		if( bean.getId().length() < 4 || bean.getId().length() > 12 ){
 			request.setAttribute( super.PREFIX + "id", "아이디는 4자리 이상 12자리 이하이어야 합니다.");
 			isCheck = false  ;
 		}

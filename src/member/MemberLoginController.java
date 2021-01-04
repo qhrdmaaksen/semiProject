@@ -72,8 +72,8 @@ public class MemberLoginController extends SuperClass{
 			isCheck = false;
 		}
 
-		if(this.password.length() < 4 || this.password.length()> 15) {
-			request.setAttribute(super.PREFIX+"passowrd", "비밀번호는 4자리 이상 15자리 이하이어야 합니다.");
+		if(this.password.length() < 6 || this.password.length()> 15) {
+			request.setAttribute(super.PREFIX+"passowrd", "비밀번호는 6자리 이상 15자리 이하이어야 합니다.");
 
 			isCheck = false;
 		}

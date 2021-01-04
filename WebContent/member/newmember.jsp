@@ -62,7 +62,7 @@
 		}
 	}
 	function checkpw(){
-		var pw1 = document.myform.password1.value ;
+		var pw1 = document.myform.password.value ;
 		var pw2 = document.myform.password2.value ;
 		if (pw1 != pw2) {
 			alert('비밀번호가 일치하지 않습니다.') ;
@@ -109,7 +109,7 @@
     <div class="form-group">
       <label for="password">Password:</label>
      	
-     	<input type="password" name="password1" id="password1"
+     	<input type="password" name="password" id="password"
 			class="form-control" placeholder="비밀 번호"
 			value="" required>
 		<div class="valid-feedback">영문/숫자 포함 6자리 이상이어야 합니다.(최대 15자) </div> 
@@ -127,9 +127,9 @@
     </div>
     
     <div class="form-group">
-      <label for="uname">UserName:</label>
-      <input type="text" class="form-control" id="uname" placeholder="이름" name="uname" required>
-      		<span class="err">${erruname}</span>
+      <label for="name">UserName:</label>
+      <input type="text" class="form-control" id="name" placeholder="이름" name="name" required>
+      		<span class="err">${errname}</span>
 			<div class="valid-feedback">형식 예시 : 홍길동</div> 
 			  <div class="invalid-feedback">성함을 작성 해 주세요</div>
     </div>
