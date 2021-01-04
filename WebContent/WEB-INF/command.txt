@@ -12,7 +12,8 @@ memodify=member.MemberModifyController
 #### CS-Center Section ###############################
 
 #### Customer Section ################################
-
+//boInsert
+boList=board.BoardListController
 #### Product Section #################################
 preview=product.PreviewController
 pdetail=product.PdetailController
