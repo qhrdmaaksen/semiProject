@@ -16,3 +16,4 @@ memodify=member.MemberModifyController
 #### Product Section #################################
 preview=product.PreviewController
 pdetail=product.PdetailController
+previewupdate=product.PreviewUpdateController

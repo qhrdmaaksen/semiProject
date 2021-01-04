@@ -85,7 +85,7 @@
 		<!-- Brand/logo -->
 		<div class="navbar-header">
 			<a class="navbar-brand" href="<%=NoForm%>index">
-				<img src="./../images/logosize.png" alt="logo" style="width:250px;">
+				<img src="${pageContext.request.contextPath}/images/logosize.png" alt="logo" style="width:250px;">
 			</a>
 		</div>
 		<ul class="navbar-nav">
