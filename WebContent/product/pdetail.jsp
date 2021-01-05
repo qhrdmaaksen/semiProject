@@ -38,6 +38,22 @@
 		display: inline-block;
 		position: relative;
 	}
+	#prod-contents {
+		position: absolute;
+		top: 62px;
+		left: 150px;
+		width: 550px;
+	}
+	#gojung.gojung2 {
+		position: fixed;
+	}
+	#star_grade a{
+        text-decoration: none;
+        color: gray;
+    }
+    #star_grade a.on{
+        color: red;
+    }
 	</style>
 	<script type="text/javascript">
 		function imageZoom() {
@@ -95,55 +111,27 @@
 				var thisValue = $(this).val();
 				if (thisValue == "정기 배송") {
 					$("#inHere").css("display", "block");
-					$('#buy-qty').val(1);
-				} else {
+					$('#buy-qty').val(0);
+				} else if (thisValue == false){
 					$("#inHere").css("display", "none");
+					$('#buy-qty').val(1);
 				}
-			})
-			$("input[name='delivery']").click(function(){
-				thisValue = $(this).val();
-				if (thisValue == "단품 구매") {
-					$('#buy-qty').val(0);}
 			});
-			  $('#star_grade a').click(function(){
-		           $(this).parent().children("a").removeClass("on");  /* 별점의 on 클래스 전부 제거 */ 
-		           $(this).addClass("on").prevAll("a").addClass("on"); /* 클릭한 별과, 그 앞 까지 별점에 on 클래스 추가 */
-		           var i = 0;
-		           $("#star_grade a").each(function() {
-		        	   if($(this).hasClass("on")){
-		        	   		i++;
-		        		   $("[name='grade']").val(i);
-		        	   }
-		           })
-		           return false;
-		       });
+			$('#star_grade a').click(function(){
+		         $(this).parent().children("a").removeClass("on");  /* 별점의 on 클래스 전부 제거 */ 
+		         $(this).addClass("on").prevAll("a").addClass("on"); /* 클릭한 별과, 그 앞 까지 별점에 on 클래스 추가 */
+		         var i = 1;
+		         $("#star_grade a").each(function() {
+		      	   if($(this).hasClass("on")){
+		      	   		i++;
+		      		   $("[name='grade']").val(i);
+		      	   }
+		         })
+		         return false;
+			});
 		})
 	</script>
-	<style type="text/css">
-	#prod-contents {
-		position: absolute;
-		top: 62px;
-		left: 150px;
-		width: 550px;
-	}
-	
-	#prod-tab-menu {
-		font-size: 30px;
-		position:
-	}
-	
-	#gojung.gojung2 {
-		position: fixed;
-	}
-	#star_grade a{
-        text-decoration: none;
-        color: gray;
-    }
-    #star_grade a.on{
-        color: red;
-    }
-	</style>
-	<script type="text/javascript">
+		<script type="text/javascript">
 		var id = "${id}";
 		var password = "${password}";
 		console.log("id : "+id);
@@ -160,11 +148,12 @@
 		}else{
 			//location.href = "login.jsp";
 		}
-		
-	</script>
-	<script>
 		//alert("로그아웃 되었습니다.");
 		//location.href="login.jsp";                                    // 로그아웃 페이지로 이동
+		function deliverynone(none){
+			$("#inHere").css("display", "none");
+			$("input:radio[value='정기 배송']").removeAttr("checked");
+		};
 	</script>
 </head>
 <body>
@@ -201,18 +190,14 @@
 							<td class="list-group-item">일반 회원 판매 가격 : 10,000 원</td>
 							<td class="list-group-item">구독 회원 가격 : 9,000 원</td>
 							<td class="list-group-item">내일 토요일 12-19 도착 예정</td>
-						<tr align="center">
-							<td>
-								<div class="form-group col-sm-4">
-									<label>구매 수량</label> <input id="buy-qty" type="number"
+							<td class="list-group-item">구매 수량
+								<div class="col-sm-6">
+									<input id="buy-qty" type="number"
 										class="form-control mypopover" title="수량 입력란" value="1" min="1"
-										data-content="구매하고자 하는 수량을 정수로 입력하세요.">
+										data-content="구매하고자 하는 수량을 정수로 입력하세요." onclick="deliverynone()">
 								</div>
-								<!--data-trigger 자동으로-->
 							</td>
-						</tr>
-						<tr>
-							<td align="center"><input id="delivery-select" type="radio"
+							<td class="list-group-item" align="center"><input id="delivery-select" type="radio"
 								name="delivery" value="정기 배송">&nbsp;&nbsp;정기 배송 선택
 								<div id="inHere" style="display: none;">
 									<table>
@@ -241,13 +226,11 @@
 									</table>
 								</div>
 							</td>
-						</tr>
-						<tr>
 							<td class="list-group-item"><input type="button"
-								style="width: 100%; color: blue; background: white; border: 1; border-color: blue; font: bold;"
+								style="width: 80%; color: blue; background: white; border: 1; border-color: blue; font: bold;"
 								name="goMall" value="장바구니 담기"></td>
 							<td class="list-group-item"><input type="submit"
-								style="width: 100%; color: white; background: blue;"
+								style="width: 80%; color: white; background: blue;"
 								name="gopayment" value="바로 구매 >" onclick="location.href='http://localhost:8989/SemiProject/product/payment.jsp'"></td>
 						</tr>
 					</table>
@@ -457,8 +440,7 @@
 			aria-labelledby="cs-tab01"></div>
 		<div id="delivery-info" class="container tab-pane fade" align="center"
 			role="tabpanel" aria-labelledby="delivery-info-tab">
-			<li class="product-etc">
-				<h5 class="prod-delivery-return-policy-title">배송정보</h5>
+				<h5 class="prod-delivery-return-policy-title" style="font-weight: bolder;">배송정보</h5>
 				<table class="prod-delivery-return-policy-table" border="1">
 					<colgroup>
 						<col width="150px">
@@ -560,7 +542,6 @@
 				<p class="prod-minor-notice">미성년자가 체결한 계약은 법정대리인이 동의하지 않는 경우 본인
 					또는 법정대리인이 취소할 수 있습니다.</p>
 			</div>
-			</li>
 		</div>
 	</div>
 	<nav id="gojung"
