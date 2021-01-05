@@ -207,7 +207,7 @@
 			위 주문 내용을 확인 하였으며, 회원 본인은 결제에 동의합니다.
 		</div>
 		<div align="center">
-			<button type="button"style="background: white;">결제 하기</button>
+			<button class="btn btn-primary" type="button">결제 하기</button>
 		</div>
 	</div>
 </body>
