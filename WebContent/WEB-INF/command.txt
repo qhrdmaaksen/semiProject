@@ -12,7 +12,7 @@ point=member.MyPointController
 #### CS-Center Section ###############################
 
 #### Customer Section ################################
-# boInsert
+boInsert=board.BoardInsertController
 boList=board.BoardListController
 #### Product Section #################################
 preview=product.PreviewController
