@@ -55,7 +55,7 @@ public class MemberNewmemberController extends SuperClass{
 			//Bean 객체를 이용하여 해당 게시물을 추가한다.
 			cnt = mdao.NewData(bean) ;
 			
-			super.session.setAttribute( "message" , "정보 수정이 완료 되었습니다. 로그인 후 메인 페이지로 이동합니다." );
+			super.session.setAttribute( "message" , "축하합니다. 회원 가입이 되었습니다. 로그인 후 메인 페이지로 이동합니다." );
 			
 			// 회원 가입을 성공하면, 바로 로그인되도록 처리해줍니다.
 			// doPost() 메소드를 호출하여 바로 로그인을 수행합니다.

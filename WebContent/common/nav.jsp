@@ -62,7 +62,7 @@
 
 <html>
 <head>
-	<meta charset="utf-8">
+	
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="./../css/style.css">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
@@ -85,7 +85,8 @@
 		<!-- Brand/logo -->
 		<div class="navbar-header">
 			<a class="navbar-brand" href="<%=NoForm%>index">
-				<img src="${pageContext.request.contextPath}/images/logosize.png" alt="logo" style="width:250px;">
+				<img src="${pageContext.request.contextPath}/images/logosize.png" alt="logo" style="width:200px;">
+
 			</a>
 		</div>
 		<ul class="navbar-nav">
@@ -95,7 +96,7 @@
 				추천 받기</a>
 			</li>
 			<li class="nav-item">
-				<a class="nav-link" href="<%=NoForm%>index">제품 보기</a>
+				<a class="nav-link" href="<%=NoForm%>plist">제품 보기</a>
 			</li>
 			<li class="nav-item">
 				<a class="nav-link" href="<%=NoForm%>index">장바구니</a>

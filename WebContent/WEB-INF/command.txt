@@ -17,3 +17,5 @@ memodify=member.MemberModifyController
 preview=product.PreviewController
 pdetail=product.PdetailController
 previewupdate=product.PreviewUpdateController
+plist=product.PlistController
+
