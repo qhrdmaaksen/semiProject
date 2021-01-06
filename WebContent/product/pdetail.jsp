@@ -23,8 +23,7 @@
 	<script	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 	<script src="../js/jquery.zoom.min.js"></script>
 	<script type="text/javascript" src="https://rawgit.com/jackmoore/autosize/master/dist/autosize.min.js"></script>
-	<
-	
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
 	<link
 	    rel="stylesheet"
 	    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"
@@ -39,6 +38,22 @@
 		display: inline-block;
 		position: relative;
 	}
+	#prod-contents {
+		position: absolute;
+		top: 62px;
+		left: 150px;
+		width: 550px;
+	}
+	#gojung.gojung2 {
+		position: fixed;
+	}
+	#star_grade a{
+        text-decoration: none;
+        color: gray;
+    }
+    #star_grade a.on{
+        color: red;
+    }
 	</style>
 	<script type="text/javascript">
 		function imageZoom() {
@@ -64,7 +79,28 @@
 				url:"${pageContext.request.contextPath}/dodamdodam?command=preview",
 				type:"get",
 				success: (response) =>{
-					autosize($('textarea'))
+					autosize($('textarea'));
+					
+					$("[id*=starGarde_]").each(function() {
+						
+						var star = "☆";
+						var star2 = "★";
+						var grade = Number($(this).text()); // 별점 수
+						var starGrade  = ""; //최종 문자열
+						
+						//별점만큼 채워진별을 대입
+						for(var i = 0 ; i < grade; i++){
+							starGrade += star2;	
+						}
+						
+						// 5-별점 만큼 빈별을 대입
+						for(var i = 0 ;i < 5-grade; i++){
+							starGrade += star;
+						}
+						// 완성된 문자열을 대입
+						$(this).text(starGrade).css("color","red");
+					});
+					
 				},
 				error: () =>{
 					console.log("error")
@@ -75,71 +111,50 @@
 				var thisValue = $(this).val();
 				if (thisValue == "정기 배송") {
 					$("#inHere").css("display", "block");
-				} else {
+					$('#buy-qty').val(0);
+				} else if (thisValue == false){
 					$("#inHere").css("display", "none");
+					$('#buy-qty').val(1);
 				}
-			})
-			  $('#star_grade a').click(function(){
-		           $(this).parent().children("a").removeClass("on");  /* 별점의 on 클래스 전부 제거 */ 
-		           $(this).addClass("on").prevAll("a").addClass("on"); /* 클릭한 별과, 그 앞 까지 별점에 on 클래스 추가 */
-		           var i = 0;
-		           $("#star_grade a").each(function() {
-		        	   if($(this).hasClass("on")){
-		        	   		i++;
-		        		   $("[name='grade']").val(i);
-		        	   }
-		           })
-		           return false;
-		       });
+			});
+			$('#star_grade a').click(function(){
+		         $(this).parent().children("a").removeClass("on");  /* 별점의 on 클래스 전부 제거 */ 
+		         $(this).addClass("on").prevAll("a").addClass("on"); /* 클릭한 별과, 그 앞 까지 별점에 on 클래스 추가 */
+		         var i = 1;
+		         $("#star_grade a").each(function() {
+		      	   if($(this).hasClass("on")){
+		      	   		i++;
+		      		   $("[name='grade']").val(i);
+		      	   }
+		         })
+		         return false;
+			});
 		})
 	</script>
-	<style type="text/css">
-	#prod-contents {
-		position: absolute;
-		top: 62px;
-		left: 150px;
-		width: 550px;
-	}
-	
-	#prod-tab-menu {
-		font-size: 30px;
-		position:
-	}
-	
-	#gojung.gojung2 {
-		position: fixed;
-	}
-	#star_grade a{
-        text-decoration: none;
-        color: gray;
-    }
-    #star_grade a.on{
-        color: red;
-    }
-	</style>
-<script type="text/javascript">
-	var id = "${id}";
-	var password = "${password}";
-	console.log("id : "+id);
-	console.log("password : "+ password)
-	if(id != null && 
-	   password !=null &&
-	   id != "" &&
-	   password != "" &&
-	   id != undefined &&
-	   password != undefined)
-	{
-		//session 등록
-		//location.href = "pdetail.jsp";
-	}else{
-		//location.href = "login.jsp";
-	}
-	
-</script>
-<script>
-	//alert("로그아웃 되었습니다.");
-	//location.href="login.jsp";                                    // 로그아웃 페이지로 이동
-</script>
+		<script type="text/javascript">
+		var id = "${id}";
+		var password = "${password}";
+		console.log("id : "+id);
+		console.log("password : "+ password)
+		if(id != null && 
+		   password !=null &&
+		   id != "" &&
+		   password != "" &&
+		   id != undefined &&
+		   password != undefined)
+		{
+			//session 등록
+			//location.href = "pdetail.jsp";
+		}else{
+			//location.href = "login.jsp";
+		}
+		//alert("로그아웃 되었습니다.");
+		//location.href="login.jsp";                                    // 로그아웃 페이지로 이동
+		function deliverynone(none){
+			$("#inHere").css("display", "none");
+			$("input:radio[value='정기 배송']").removeAttr("checked");
+		};
+	</script>
 </head>
 <body>
 	<div class="container">
@@ -175,22 +190,14 @@
 							<td class="list-group-item">일반 회원 판매 가격 : 10,000 원</td>
 							<td class="list-group-item">구독 회원 가격 : 9,000 원</td>
 							<td class="list-group-item">내일 토요일 12-19 도착 예정</td>
-						<tr align="center">
-							<td>
-								<div class="form-group col-sm-4">
-									<label>구매 수량</label> <input type="number"
-										class="form-control mypopover" title="수량 입력란"
-										data-content="구매하고자 하는 수량을 정수로 입력하세요.">
+							<td class="list-group-item">구매 수량
+								<div class="col-sm-6">
+									<input id="buy-qty" type="number"
+										class="form-control mypopover" title="수량 입력란" value="1" min="1"
+										data-content="구매하고자 하는 수량을 정수로 입력하세요." onclick="deliverynone()">
 								</div>
-								<!--data-trigger 자동으로-->
 							</td>
-						</tr>
-						<tr>
-							<td align="center" class="list-group-item"><input
-								type="radio" name="delivery" value="단품 구매" checked="checked">&nbsp;&nbsp;단품
-								구매 : 10,000 원</td>
-						<tr>
-							<td align="center"><input id="delivery-select" type="radio"
+							<td class="list-group-item" align="center"><input id="delivery-select" type="radio"
 								name="delivery" value="정기 배송">&nbsp;&nbsp;정기 배송 선택
 								<div id="inHere" style="display: none;">
 									<table>
@@ -217,15 +224,14 @@
 											</td>
 										</tr>
 									</table>
-								</div></td>
-						</tr>
-						<tr>
+								</div>
+							</td>
 							<td class="list-group-item"><input type="button"
-								style="width: 100%; color: blue; background: white; border: 1; border-color: blue; font: bold;"
+								style="width: 80%; color: blue; background: white; border: 1; border-color: blue; font: bold;"
 								name="goMall" value="장바구니 담기"></td>
 							<td class="list-group-item"><input type="submit"
-								style="width: 100%; color: white; background: blue;"
-								name="goPayment" value="바로 구매 >"></td>
+								style="width: 80%; color: white; background: blue;"
+								name="gopayment" value="바로 구매 >" onclick="location.href='http://localhost:8989/SemiProject/product/payment.jsp'"></td>
 						</tr>
 					</table>
 				</div>
@@ -311,14 +317,14 @@
 								</form>
 							</td>
 						</tr>
-						<c:forEach items="${lists}" var="item">
+						<c:forEach items="${lists}" var="item"  begin="0" varStatus="i" end="${lists.size()}">
 							<tr>
 								<%-- <td>${bean.no}</td> --%>
 								<td>${item.reviewno}</td>
 								<td>${item.id}</td>
 								<td><textarea readonly="readonly" style="overflow: visible; resize: both;">${fn:replace(item.content, replaceChar,replaceChar)}</textarea></td>
 								<td>${item.postdate}</td>
-								<td> ${item.grade}</td>
+								<td id="starGarde_${i.index}">${item.grade}</td>
 								<td>${bean.update}</td>
 								<td>${bean.delete}</td>
 								<td>
@@ -371,11 +377,11 @@
 											<div class="form-group">
 												<label class="control-label col-sm-<%=formleft%>"
 													for="image"></label>
-												<div class="col-sm-<%=formright%>">
+												<%-- <div class="col-sm-<%=formright%>">
 													<input type="file" class="form-control" name="image"
 														id="image" placeholder="이미지를 넣어 주셔용^^"><span
 														class="err form-control-static">${errimage}</span>
-												</div>
+												</div> --%>
 											</div>
 												<label class="control-label col-sm-<%=formleft%>-
 												for="regdate"> </label>
@@ -434,8 +440,7 @@
 			aria-labelledby="cs-tab01"></div>
 		<div id="delivery-info" class="container tab-pane fade" align="center"
 			role="tabpanel" aria-labelledby="delivery-info-tab">
-			<li class="product-etc">
-				<h5 class="prod-delivery-return-policy-title">배송정보</h5>
+				<h5 class="prod-delivery-return-policy-title" style="font-weight: bolder;">배송정보</h5>
 				<table class="prod-delivery-return-policy-table" border="1">
 					<colgroup>
 						<col width="150px">
@@ -473,7 +478,7 @@
 						</tr>
 					</tbody>
 				</table>
-				<h5 class="prod-delivery-return-policy-title">교환/반품 안내</h5>
+				<h5 class="prod-delivery-return-policy-title" style="font-weight: bold;">교환/반품 안내</h5>
 				<table class="prod-delivery-return-policy-table" border="1">
 					<colgroup>
 						<col width="160px">
@@ -498,19 +503,29 @@
 						</tr>
 					</tbody>
 				</table>
-				<h5 class="prod-delivery-return-policy-title">교환/반품 제한사항</h5>
-			<li>주문/제작 상품의 경우, 상품의 제작이 이미 진행된 경우</li>
-			<li>상품 포장을 개봉하여 사용 또는 설치 완료되어 상품의 가치가 훼손된 경우 (단, 내용 확인을 위한 포장
-				개봉의 경우는 예외)</li>
-			<li>고객의 사용, 시간경과, 일부 소비에 의하여 상품의 가치가 현저히 감소한 경우</li>
-			<li>세트상품 일부 사용, 구성품을 분실하였거나 취급 부주의로 인한 파손/고장/오염으로 재판매 불가한 경우</li>
-			<li>모니터 해상도의 차이로 인해 색상이나 이미지가 실제와 달라, 고객이 단순 변심으로 교환/반품을 무료로
-				요청하는 경우</li>
-			<li>제조사의 사정 (신모델 출시 등) 및 부품 가격 변동 등에 의해 무료 교환/반품으로 요청하는 경우</li>
-			<p class="prod-delivery-return-policy__limit-text">※ 각 상품별로 아래와
-				같은 사유로 취소/반품이 제한 될 수 있습니다.</p>
+				<h5 class="prod-delivery-return-policy-title" style="font-weight: bold;">교환/반품 제한사항</h5>
+				<table border="1">
+				<tr>
+					<td>
+						<ol>
+							<li>주문/제작 상품의 경우, 상품의 제작이 이미 진행된 경우</li>
+							<li>상품 포장을 개봉하여 사용 또는 설치 완료되어 상품의 가치가 훼손된 경우 (단, 내용 확인을 위한 포장
+								개봉의 경우는 예외)</li>
+							<li>고객의 사용, 시간경과, 일부 소비에 의하여 상품의 가치가 현저히 감소한 경우</li>
+							<li>세트상품 일부 사용, 구성품을 분실하였거나 취급 부주의로 인한 파손/고장/오염으로 재판매 불가한 경우</li>
+							<li>모니터 해상도의 차이로 인해 색상이나 이미지가 실제와 달라, 고객이 단순 변심으로 교환/반품을 무료로
+								요청하는 경우</li>
+							<li>제조사의 사정 (신모델 출시 등) 및 부품 가격 변동 등에 의해 무료 교환/반품으로 요청하는 경우</li>
+						</ol>
+							<div align="center">
+								<span>※ 각 상품별로 아래와
+									같은 사유로 취소/반품이 제한 될 수 있습니다.</span>
+							</div>
+					</td>
+				</tr>		
+				</table>
 			<div class="product-item__table product-seller">
-				<p class="prod-delivery-return-policy-title">판매자 정보</p>
+				<p class="prod-delivery-return-policy-title">&nbsp;</p>
 				<table class="prod-delivery-return-policy-table" border="1">
 					<colgroup>
 						<col width="150px">
@@ -518,16 +533,15 @@
 					</colgroup>
 					<tbody>
 						<tr>
-							<th>판매자</th>
+							<th>판매자  :</th>
 							<td>도담도담</td>
 						</tr>
 					</tbody>
 				</table>
-
+				<br>
 				<p class="prod-minor-notice">미성년자가 체결한 계약은 법정대리인이 동의하지 않는 경우 본인
 					또는 법정대리인이 취소할 수 있습니다.</p>
 			</div>
-			</li>
 		</div>
 	</div>
 	<nav id="gojung"

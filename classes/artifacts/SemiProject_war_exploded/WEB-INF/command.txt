@@ -6,10 +6,15 @@ melogin=member.MemberLoginController
 mypage=member.MemberMypageController
 newmember=member.MemberNewmemberController
 coupon=member.MyCouponController
+idcheck=member.IdcheckController
+memodify=member.MemberModifyController
+point=member.MyPointController
 #### CS-Center Section ###############################
 
 #### Customer Section ################################
-
+# boInsert
+boList=board.BoardListController
 #### Product Section #################################
 preview=product.PreviewController
 pdetail=product.PdetailController
+previewupdate=product.PreviewUpdateController

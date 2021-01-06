@@ -132,7 +132,7 @@
                     <ul class="nav_boxes_list">
                         <li class="nav_boxes_list_f">MY 혜택</li>
                         <li class="nav_boxes_list_c"><a href="<%=NoForm%>coupon">보유 쿠폰 조회</a></li>
-                        <li class="nav_boxes_list_c">보유 포인트 내역</li>
+                        <li class="nav_boxes_list_c"><a href="<%=NoForm%>point">보유 포인트 내역</a></li>
                     </ul>
                 </div>
                 <div class="nav_boxes">

@@ -7,39 +7,6 @@
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="jquery.validate.js"></script>
 
-<script type="text/javascript">
-		function checkDuplicateId(  ){
-			var id = document.myform.id.value ;
-			if( id.length == 0 ){
-				alert('아이디를 입력해 주세요') ;
-				document.myform.id.focus() ; 
-				return false ;
-			}
-			var url='<%=NoForm%>meIdcheck&id=' + id ; 
-			window.open(url, 'mywin', 'height=150,width=300') ;
-		}
-				
-	function isCheckFalse() {
-		document.myform.isCheck.value = true;
-	}
-	function checkForm() {
-		var isCheck = document.myform.isCheck.value;
-		//alert( isCheck ) ;
-		if (isCheck == 'false') {
-			alert('아이디 중복 체크를 우선 해주세용.');
-			return false;
-		}
-	}
-	function checkpw(){
-		var pw1 = document.myform.password1.value ;
-		var pw2 = document.myform.password2.value ;
-		if (pw1 != pw2) {
-			alert('비밀번호가 일치하지 않습니다.') ;
-			document.myform.password2.focus() ; 
-			return false ;
-		}
-	}
-</script>
 <%!
     String YesForm = null ;
     String NoForm = null ;
@@ -70,6 +37,41 @@
 
 // 주소 만드는 부분
 %>
+
+<script type="text/javascript">
+		function checkDuplicateId(  ){
+			var id = document.myform.id.value ;
+			if( id.length == 0 ){
+				alert('아이디를 입력해 주세요') ;
+				document.myform.id.focus() ; 
+				return false ;
+			}
+			var url='<%=NoForm%>idcheck&id=' + id ; 
+			window.open(url, 'mywin', 'height=150,width=300') ;
+		}
+				
+	function isCheckFalse() {
+		document.myform.isCheck.value = true;
+	}
+	function checkForm() {
+		var isCheck = document.myform.isCheck.value;
+		//alert( isCheck ) ;
+		if (isCheck == 'false') {
+			alert('아이디 중복 체크를 우선 해주세용.');
+			return false;
+		}
+	}
+	function checkpw(){
+		var pw1 = document.myform.password.value ;
+		var pw2 = document.myform.password2.value ;
+		if (pw1 != pw2) {
+			alert('비밀번호가 일치하지 않습니다.') ;
+			document.myform.password2.focus() ; 
+			return false ;
+		}
+	}
+</script>
+
 <head>
   <title>Bootstrap Example</title>
   <meta charset="utf-8">
@@ -111,7 +113,8 @@
 			class="form-control" placeholder="비밀 번호"
 			value="" required>
 		<div class="valid-feedback">영문/숫자 포함 6자리 이상이어야 합니다.(최대 15자) </div> 
-		 <div class="invalid-feedback">비밀번호를 작성 해 주세요.</div>
+		 
+		 <div class="invalid-feedback"><span class="err">${errpassword}</span></div>
 			    </div>
 
 	<div class="form-group">
@@ -124,9 +127,9 @@
     </div>
     
     <div class="form-group">
-      <label for="uname">UserName:</label>
-      <input type="text" class="form-control" id="uname" placeholder="이름" name="uname" required>
-      		<span class="err">${erruname}</span>
+      <label for="name">UserName:</label>
+      <input type="text" class="form-control" id="name" placeholder="이름" name="name" required>
+      		<span class="err">${errname}</span>
 			<div class="valid-feedback">형식 예시 : 홍길동</div> 
 			  <div class="invalid-feedback">성함을 작성 해 주세요</div>
     </div>
@@ -137,7 +140,7 @@
       <input type="date" name="birth" id="birth"
 			class="form-control datepicker" placeholder="생년월일" value="" required>
 			<span class="err">${errbirth}</span>
-			<div class="valid-feedback">형식 예시 : 1900-01-01</div>
+			<div class="valid-feedback">형식 예시 : 1900-01-01</div> 
 			  <div class="invalid-feedback">생일을 작성 해 주세요</div>
     </div>
     
@@ -161,7 +164,7 @@
     </div>
     
    <div class="form-group">
-		<button type="submit" class="btn btn-primary btn-block" onclick="return checkForm();">
+		<button type="submit" class="btn btn-warning btn-block" onclick="return checkForm();">
 		<b>회원 가입</b>
 		</button>
 	</div>
@@ -170,17 +173,6 @@
     
   </form>
 </div>
-
-
-
-
-
-
-
-
-
-
-
 
    
 </body>
