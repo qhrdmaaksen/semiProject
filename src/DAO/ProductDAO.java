@@ -97,7 +97,7 @@ public class ProductDAO extends SuperDAO{
 					bean.setBloodCirculation(rs.getInt("bloodCirculation"));
 					bean.setDigestiveapparatus(rs.getInt("digestiveapparatus"));
 					bean.setEyes(rs.getInt("eyes"));
-					bean.setFatgue(rs.getInt("fatgue"));
+					bean.setFatigue(rs.getInt("fatigue"));
 					bean.setHair(rs.getInt("hair"));
 					bean.setImages(rs.getString("images"));
 					bean.setImmunity(rs.getInt("immunity"));

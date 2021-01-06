@@ -9,7 +9,7 @@ public class ProductVO {
     private int digestiveapparatus;
     private int skin;
     private int eyes;
-    private int fatgue;
+    private int fatigue;
     private int joint;
     private int hair;
     private int immunity;
@@ -63,11 +63,11 @@ public class ProductVO {
     public void setSkin(int skin) {
         this.skin = skin;
     }
-    public int getFatgue() {
-        return fatgue;
+    public int getFatigue() {
+        return fatigue;
     }
-    public void setFatgue(int fatgue) {
-        this.fatgue = fatgue;
+    public void setFatigue(int fatigue) {
+        this.fatigue = fatigue;
     }
     public int getJoint() {
         return joint;
