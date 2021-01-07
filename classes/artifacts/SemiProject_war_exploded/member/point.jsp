@@ -29,8 +29,22 @@
     <style>
         .point{
             margin-top: 150px;
+            background-color: #edeff2;
+            border: 1px solid #ced4da;
+            color: #4e555b;
+        }
+        .point-header1{
+            font-size: 20px;
+            padding: 10px 0px 0px 15px;
+        }
+        .point-amount1{
+            font-size: 80px;
+        }
+        .point-amount2{
+            font-size: 40px;
         }
         .month{
+            padding-left: 15px;
             float: left;
         }
         .month-lists{
@@ -39,36 +53,54 @@
             padding: 0px;
         }
         .month-list{
-            width: 40px;
+            width: 50px;
+            height: 32px;
+            font-size: 11px;
             text-align: center;
+            padding: 7px 0px;
             margin: 0px;
-            padding: 0px;
             float: left;
-            border: 1px solid black;
+            border: 1px solid #ced4da;
+            background-color: #fff;
             border-right: 0px;
         }
+        .month-list:hover{
+            cursor:pointer;
+            text-decoration: underline;
+        }
         .month-list:nth-last-child(1){
-            border-right: 1px solid black;
+            border-right: 1px solid #ced4da;
         }
 
         .date-form{
-            padding-left: 20px;
+            width: 240px;
+            height: 32px;
             float: left;
         }
         .date-box{
             position: relative;
             float: left;
+            padding-left: 20px;
+            font-weight: normal;
+        }
+        .wave{
+            top: 3px;
+            right: 0px;
+            position: absolute;
         }
         .date-input{
             padding: 0px 4px;
             font-size: 13px;
             width: 100px;
+            height: 32px;
+            border: 1px solid #ced4da;
         }
+        .date-input:hover{cursor: pointer;}
         .cal-ico{
             width: 15px;
             height: 15px;
             position: absolute;
-            top: 7px;
+            top: 10px;
             right: 6px;
             background: url(http://localhost:8999/images/sp_saving_ico.png) no-repeat;
         }
@@ -78,13 +110,22 @@
             padding-left: 20px;
             float: left;
         }
-        .search-ico{
-            width: 15px;
-            height: 15px;
-            position: absolute;
-
-            background: url(http://localhost:8999/images/sp_search.png?20200604) no-repeat;
+        .date-config{
+            width: 120px;
+            height: 32px;
+            font-size: 13px;
+            border: 1px solid #ced4da;
+            border-radius: 0px;
         }
+        .date-config:hover{cursor: pointer;}
+        .search-ico{
+            width: 60px;
+            height: 32px;
+            position: absolute;
+            margin-left: 5px;
+            background: url(http://localhost:8999/images/sp_search.png) no-repeat;
+        }
+        .search-ico:hover{cursor: pointer;}
     </style>
     <script type="text/javascript">
         $(function() {
@@ -134,22 +175,44 @@
     </script>
 </head>
 <body>
-            <div class="container-fluid point">
-                <table class="table table-bordered">
+            <div class="container-fluid">
+                <table class="table table-bordered point">
+                    <colgroup>
+                        <col width="50%">
+                        <col width="50%">
+                    </colgroup>
                     <tr>
                         <th rowspan="2">
-                            <span>사용가능 포인트</span>
+                            <div class="point-header1">
+                                <strong>사용가능 포인트</strong>
+                                <div>
+                                    <span class="point-amount1"><fmt:formatNumber value="${sessionScope.loginfo.point}" pattern="#,###" /></span>
+                                    <span>포인트</span>
+                                </div>
+                            </div>
                         </th>
                         <th>
-                            <span>적립 예정</span>
+                            <div class="point-header2">
+                                <strong>적립 예정</strong>
+                                <div>
+                                    <span class="point-amount2">10,000</span>
+                                    <span>포인트</span>
+                                </div>
+                            </div>
                         </th>
                     </tr>
                     <tr>
                         <th>
-                            <span>한 달 이내 소멸예정</span>
+                            <div class="point-header2">
+                                <strong>한 달 이내 소멸예정</strong>
+                                <div>
+                                    <span class="point-amount2"><fmt:formatNumber value="${sessionScope.exPoint}" pattern="#,###" /></span>
+                                    <span>포인트</span>
+                                </div>
+                            </div>
                         </th>
                     </tr>
-                    <tr>
+                    <tr class="month-box">
                         <th colspan="2">
                             <div class="month">
                                 <ul class="month-lists">
@@ -167,7 +230,7 @@
                                     <sapn class="cal-ico"></sapn>
                                 </div>
                                 <div class="date-box">
-                                    &nbsp;~&nbsp;
+                                    <span class="wave">&nbsp;~&nbsp;</span>
                                 </div>
                                 <div class="date-box">
                                     <input type="text" id="toDate" class="date-input"  value="<%=toDate%>">
@@ -175,17 +238,38 @@
                                 </div>
                             </div>
                             <div class="form-controls">
-                                <select class="form-control" name="mode" id="mode">
+                                <select class="form-control date-config" name="mode" id="mode">
                                     <option value="all" selected="selected">전체
                                     <option value="save">적립
                                     <option value="use">사용
                                 </select>
                             </div>
-                            <button type="button" id="click-btn">조회</button>
                             <sapn class="search-ico"></sapn>
                         </th>
 <%--                        <input type="text" id="datePicker" class="form-control" value="2019-06-27">--%>
                     </tr>
+                </table>
+                <table class="table">
+                    <colgroup>
+                        <col width="100">
+                        <col>
+                        <col width="150">
+                        <col width="130">
+                    </colgroup>
+                    <thead>
+                        <th>구분</th>
+                        <th>내역</th>
+                        <th>금액</th>
+                        <th>날짜</th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>입금</td>
+                            <td>첫번째</td>
+                            <td>10,000원</td>
+                            <td>2020-12-25</td>
+                        </tr>
+                    </tbody>
                 </table>
             </div>
         </div>

@@ -2,6 +2,7 @@ package member;
 
 import DAO.CouponDAO;
 import DAO.MemberDAO;
+import DAO.PointDAO;
 import VO.MemberVO;
 import common.IndexController;
 import common.SuperClass;
@@ -29,8 +30,11 @@ public class MyPointController extends SuperClass {
         }
 
 
-        CouponDAO dao = new CouponDAO();
-        session.setAttribute("cpnCount", dao.CountCoupons(tem.getId()));
+        CouponDAO cu_dao = new CouponDAO();
+        session.setAttribute("cpnCount", cu_dao.CountCoupons(tem.getId()));
+
+        PointDAO po_dao = new PointDAO();
+        session.setAttribute("exPoint", po_dao.selectExtinctionPoint(tem.getId()));
 
         super.doProcess(request, response);
         super.GotoPage("/member/point.jsp");
