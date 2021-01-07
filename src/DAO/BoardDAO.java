@@ -126,4 +126,43 @@ public class BoardDAO  extends SuperDAO {
 		
 		return lists ;
 	}
+
+	public int InsertData(BbsPostVo bean) {
+		String sql = " insert into BBS_POST (seq_index, id, title, content, postdate, likenumber ) " ;
+		sql += " values(seq_BP_index.nextval,?,?,?,to_date(?, 'yyyy/MM/dd'), default ) " ;
+		Connection conn = null ;
+		PreparedStatement pstmt = null ;
+		int cnt = -999999 ;
+
+		try {
+			conn = super.getConnection() ;
+			pstmt = conn.prepareStatement(sql) ;
+
+			// placeholder
+			pstmt.setString(1, bean.getId());
+			pstmt.setString(2, bean.getTitle());
+			pstmt.setString(3, bean.getContent());
+			
+			cnt = pstmt.executeUpdate() ; 
+			conn.commit(); 
+
+		} catch (Exception e) {
+			SQLException err = (SQLException)e ;			
+			cnt = - err.getErrorCode() ;			
+			e.printStackTrace();
+			try {
+				conn.rollback(); 
+			} catch (Exception e2) {
+				e2.printStackTrace();
+			}
+		} finally{
+			try {
+				if(pstmt != null){pstmt.close();}
+				if(conn != null){conn.close();}
+			} catch (Exception e2) {
+				e2.printStackTrace();
+			}
+		}
+		return cnt ;
+}
 }
