@@ -18,10 +18,11 @@
     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
     Calendar fromtime = Calendar.getInstance();
     Calendar totime = Calendar.getInstance();
+    Calendar now = Calendar.getInstance();
     fromtime.add(Calendar.MONTH, -1);
 
-    fromDate = request.getParameter("name")==null?sdf.format(fromtime.getTime()):request.getParameter("name");
-    toDate = request.getParameter("name")==null?sdf.format(totime.getTime()):request.getParameter("name");
+    fromDate = request.getParameter("fromdate")==null?sdf.format(fromtime.getTime()):request.getParameter("fromdate");
+    toDate = request.getParameter("todate")==null?sdf.format(totime.getTime()):request.getParameter("todate");
 %>
 <html>
 <head>
@@ -195,7 +196,7 @@
                             <div class="point-header2">
                                 <strong>적립 예정</strong>
                                 <div>
-                                    <span class="point-amount2">10,000</span>
+                                    <span class="point-amount2"><fmt:formatNumber value="${requestScope.scPoint}" pattern="#,###" /></span>
                                     <span>포인트</span>
                                 </div>
                             </div>
@@ -206,7 +207,7 @@
                             <div class="point-header2">
                                 <strong>한 달 이내 소멸예정</strong>
                                 <div>
-                                    <span class="point-amount2"><fmt:formatNumber value="${sessionScope.exPoint}" pattern="#,###" /></span>
+                                    <span class="point-amount2"><fmt:formatNumber value="${requestScope.exPoint}" pattern="#,###" /></span>
                                     <span>포인트</span>
                                 </div>
                             </div>
@@ -216,12 +217,18 @@
                         <th colspan="2">
                             <div class="month">
                                 <ul class="month-lists">
-                                    <li class="month-list">8월</li>
-                                    <li class="month-list">9월</li>
-                                    <li class="month-list">10월</li>
-                                    <li class="month-list">11월</li>
-                                    <li class="month-list">12월</li>
-                                    <li class="month-list">1월</li>
+                                    <% now.add(now.MONTH,-5); %>
+                                    <li class="month-list"><%=now.get(now.MONTH)+1%>월</li>
+                                    <% now.add(now.MONTH,1); %>
+                                    <li class="month-list"><%=now.get(now.MONTH)+1%>월</li>
+                                    <% now.add(now.MONTH,1); %>
+                                    <li class="month-list"><%=now.get(now.MONTH)+1%>월</li>
+                                    <% now.add(now.MONTH,1); %>
+                                    <li class="month-list"><%=now.get(now.MONTH)+1%>월</li>
+                                    <% now.add(now.MONTH,1); %>
+                                    <li class="month-list"><%=now.get(now.MONTH)+1%>월</li>
+                                    <% now.add(now.MONTH,1); %>
+                                    <li class="month-list"><%=now.get(now.MONTH)+1%>월</li>
                                 </ul>
                             </div>
                             <div class="date-form">
@@ -263,14 +270,26 @@
                         <th>날짜</th>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>입금</td>
-                            <td>첫번째</td>
-                            <td>10,000원</td>
-                            <td>2020-12-25</td>
-                        </tr>
+                        <c:forEach var="point" items="${requestScope.points}">
+                            <tr>
+                                <td>
+                                    <c:if test="${!point.plma}">
+                                        <span class="point-pl">적립</span>
+                                    </c:if>
+                                    <c:if test="${point.plma}">
+                                        <span class="point-ma">사용</span>
+                                    </c:if>
+                                </td>
+                                <td>${point.po_subject}</td>
+                                <td><fmt:formatNumber value="${point.point}" pattern="#,###" /></td>
+                                <td>${point.po_date}</td>
+                            </tr>
+                        </c:forEach>
                     </tbody>
                 </table>
+            </div>
+            <div align="center">
+                <footer>${requestScope.pagingHtml}</footer>
             </div>
         </div>
     </div>

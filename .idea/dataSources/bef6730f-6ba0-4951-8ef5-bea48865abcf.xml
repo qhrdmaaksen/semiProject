@@ -57,10 +57,10 @@
     <schema id="17" parent="1" name="SEMI">
       <ObjectId>51</ObjectId>
       <CreatedTimestamp>2020-12-25.02:35:41</CreatedTimestamp>
-      <ModifiedTimestamp>2021-01-07.21:43:13</ModifiedTimestamp>
+      <ModifiedTimestamp>2021-01-08.00:10:07</ModifiedTimestamp>
       <IntrospectionVersion>200820</IntrospectionVersion>
-      <IntrospectionTimestamp>2021-01-07.21:43:16</IntrospectionTimestamp>
-      <CommentsHash>6514375204013</CommentsHash>
+      <IntrospectionTimestamp>2021-01-08.00:26:20</IntrospectionTimestamp>
+      <CommentsHash>6582860408362</CommentsHash>
       <Current>1</Current>
     </schema>
     <schema id="18" parent="1" name="SEMIPROJECT">
@@ -28084,15 +28084,15 @@
       <TemporaryPreserve>1</TemporaryPreserve>
     </table>
     <table id="4038" parent="17" name="POINTS">
-      <ObjectId>21031</ObjectId>
-      <CreatedTimestamp>2021-01-06.20:32:47</CreatedTimestamp>
-      <ModifiedTimestamp>2021-01-06.20:32:48</ModifiedTimestamp>
+      <ObjectId>21119</ObjectId>
+      <CreatedTimestamp>2021-01-08.00:10:05</CreatedTimestamp>
+      <ModifiedTimestamp>2021-01-08.00:10:07</ModifiedTimestamp>
       <TemporaryPreserve>1</TemporaryPreserve>
     </table>
     <table id="4039" parent="17" name="POINT_BALANCE">
-      <ObjectId>21117</ObjectId>
-      <CreatedTimestamp>2021-01-07.21:43:11</CreatedTimestamp>
-      <ModifiedTimestamp>2021-01-07.21:43:13</ModifiedTimestamp>
+      <ObjectId>21120</ObjectId>
+      <CreatedTimestamp>2021-01-08.00:10:06</CreatedTimestamp>
+      <ModifiedTimestamp>2021-01-08.00:10:07</ModifiedTimestamp>
       <TemporaryPreserve>1</TemporaryPreserve>
     </table>
     <table id="4040" parent="17" name="POST_ATTACHED_FILE">
@@ -28715,14 +28715,13 @@ id</ColNames>
     </column>
     <column id="4132" parent="4038" name="plma">
       <Position>3</Position>
-      <Comment>1은 입금&#xd;
-2는 출금</Comment>
+      <Comment>0은 입금 1는 출금</Comment>
       <DataType>NUMBER(1 digit)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
     <column id="4133" parent="4038" name="point">
       <Position>4</Position>
-      <Comment>포인트 금액</Comment>
+      <Comment>포인트는 익일 충전, 3달이 지나면 소멸</Comment>
       <DataType>NUMBER(*)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
@@ -28733,75 +28732,81 @@ id</ColNames>
       <NotNull>1</NotNull>
       <DefaultExpression>SYSDATE</DefaultExpression>
     </column>
-    <index id="4135" parent="4038" name="PK_POINTS">
-      <ObjectId>21032</ObjectId>
-      <CreatedTimestamp>2021-01-06.20:32:48</CreatedTimestamp>
-      <ModifiedTimestamp>2021-01-06.20:32:48</ModifiedTimestamp>
+    <column id="4135" parent="4038" name="po_subject">
+      <Position>6</Position>
+      <Comment>포인트내용</Comment>
+      <DataType>VARCHAR2(40 byte)|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <index id="4136" parent="4038" name="PK_POINTS">
+      <ObjectId>21121</ObjectId>
+      <CreatedTimestamp>2021-01-08.00:10:07</CreatedTimestamp>
+      <ModifiedTimestamp>2021-01-08.00:10:07</ModifiedTimestamp>
       <TablespaceName>USERS</TablespaceName>
       <ColNames>seq_point</ColNames>
       <Unique>1</Unique>
     </index>
-    <key id="4136" parent="4038" name="PK_POINTS">
-      <ModifiedTimestamp>2021-01-06.20:32:48</ModifiedTimestamp>
+    <key id="4137" parent="4038" name="PK_POINTS">
+      <ModifiedTimestamp>2021-01-08.00:10:07</ModifiedTimestamp>
       <ColNames>seq_point</ColNames>
       <InitiallyDeferred>1</InitiallyDeferred>
       <UnderlyingIndexName>PK_POINTS</UnderlyingIndexName>
       <Primary>1</Primary>
     </key>
-    <column id="4137" parent="4039" name="seq_point">
+    <column id="4138" parent="4039" name="seq_point">
       <Position>1</Position>
       <Comment>시퀸스넘버</Comment>
       <DataType>NUMBER(*)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="4138" parent="4039" name="po_bal">
+    <column id="4139" parent="4039" name="po_bal">
       <Position>2</Position>
       <Comment>포인트 잔액</Comment>
       <DataType>NUMBER(*)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <index id="4139" parent="4039" name="PK_POINT_BALANCE">
-      <ObjectId>21118</ObjectId>
-      <CreatedTimestamp>2021-01-07.21:43:12</CreatedTimestamp>
-      <ModifiedTimestamp>2021-01-07.21:43:12</ModifiedTimestamp>
+    <index id="4140" parent="4039" name="PK_POINT_BALANCE">
+      <ObjectId>21122</ObjectId>
+      <CreatedTimestamp>2021-01-08.00:10:07</CreatedTimestamp>
+      <ModifiedTimestamp>2021-01-08.00:10:07</ModifiedTimestamp>
       <TablespaceName>USERS</TablespaceName>
       <ColNames>seq_point</ColNames>
       <Unique>1</Unique>
     </index>
-    <key id="4140" parent="4039" name="PK_POINT_BALANCE">
-      <ModifiedTimestamp>2021-01-07.21:43:12</ModifiedTimestamp>
+    <key id="4141" parent="4039" name="PK_POINT_BALANCE">
+      <ModifiedTimestamp>2021-01-08.00:10:07</ModifiedTimestamp>
       <ColNames>seq_point</ColNames>
       <InitiallyDeferred>1</InitiallyDeferred>
       <UnderlyingIndexName>PK_POINT_BALANCE</UnderlyingIndexName>
       <Primary>1</Primary>
     </key>
-    <foreign-key id="4141" parent="4039" name="FK_POINTS_TO_POINT_BALANCE_1">
-      <ModifiedTimestamp>2021-01-07.21:43:13</ModifiedTimestamp>
+    <foreign-key id="4142" parent="4039" name="FK_POINTS_TO_POINT_BALANCE_1">
+      <ModifiedTimestamp>2021-01-08.00:10:07</ModifiedTimestamp>
       <ColNames>seq_point</ColNames>
       <RefSchemaName>SEMI</RefSchemaName>
       <RefTableName>POINTS</RefTableName>
       <RefKeyName>PK_POINTS</RefKeyName>
       <OnDelete>restrict</OnDelete>
     </foreign-key>
-    <column id="4142" parent="4040" name="seq_file">
+    <column id="4143" parent="4040" name="seq_file">
       <Position>1</Position>
       <Comment>시퀸스넘버</Comment>
       <DataType>NUMBER(*)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="4143" parent="4040" name="seq_index">
+    <column id="4144" parent="4040" name="seq_index">
       <Position>2</Position>
       <Comment>시퀸스넘버</Comment>
       <DataType>NUMBER(*)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="4144" parent="4040" name="file">
+    <column id="4145" parent="4040" name="file">
       <Position>3</Position>
       <Comment>문자</Comment>
       <DataType>VARCHAR2(100 byte)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <index id="4145" parent="4040" name="PK_POST_ATTACHED_FILE">
+    <index id="4146" parent="4040" name="PK_POST_ATTACHED_FILE">
       <ObjectId>20335</ObjectId>
       <CreatedTimestamp>2020-12-25.02:35:59</CreatedTimestamp>
       <ModifiedTimestamp>2020-12-25.02:35:59</ModifiedTimestamp>
@@ -28809,45 +28814,45 @@ id</ColNames>
       <ColNames>seq_file</ColNames>
       <Unique>1</Unique>
     </index>
-    <key id="4146" parent="4040" name="PK_POST_ATTACHED_FILE">
+    <key id="4147" parent="4040" name="PK_POST_ATTACHED_FILE">
       <ModifiedTimestamp>2020-12-25.02:35:59</ModifiedTimestamp>
       <ColNames>seq_file</ColNames>
       <InitiallyDeferred>1</InitiallyDeferred>
       <UnderlyingIndexName>PK_POST_ATTACHED_FILE</UnderlyingIndexName>
       <Primary>1</Primary>
     </key>
-    <column id="4147" parent="4041" name="seq_comment">
+    <column id="4148" parent="4041" name="seq_comment">
       <Position>1</Position>
       <Comment>시퀸스넘버</Comment>
       <DataType>NUMBER(*)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="4148" parent="4041" name="seq_index">
+    <column id="4149" parent="4041" name="seq_index">
       <Position>2</Position>
       <Comment>시퀸스넘버</Comment>
       <DataType>NUMBER(*)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="4149" parent="4041" name="id">
+    <column id="4150" parent="4041" name="id">
       <Position>3</Position>
       <Comment>영어소문자, 숫자</Comment>
       <DataType>VARCHAR2(15 byte)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="4150" parent="4041" name="commentdate">
+    <column id="4151" parent="4041" name="commentdate">
       <Position>4</Position>
       <Comment>YYYYMMDD HH:MM</Comment>
       <DataType>DATE|0s</DataType>
       <NotNull>1</NotNull>
       <DefaultExpression>SYSDATE</DefaultExpression>
     </column>
-    <column id="4151" parent="4041" name="comment">
+    <column id="4152" parent="4041" name="comment">
       <Position>5</Position>
       <Comment>문자</Comment>
       <DataType>VARCHAR2(100 byte)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <index id="4152" parent="4041" name="PK_POST_COMMENTS">
+    <index id="4153" parent="4041" name="PK_POST_COMMENTS">
       <ObjectId>20942</ObjectId>
       <CreatedTimestamp>2021-01-05.01:25:23</CreatedTimestamp>
       <ModifiedTimestamp>2021-01-05.01:25:23</ModifiedTimestamp>
@@ -28855,100 +28860,100 @@ id</ColNames>
       <ColNames>seq_comment</ColNames>
       <Unique>1</Unique>
     </index>
-    <key id="4153" parent="4041" name="PK_POST_COMMENTS">
+    <key id="4154" parent="4041" name="PK_POST_COMMENTS">
       <ModifiedTimestamp>2021-01-05.01:25:23</ModifiedTimestamp>
       <ColNames>seq_comment</ColNames>
       <InitiallyDeferred>1</InitiallyDeferred>
       <UnderlyingIndexName>PK_POST_COMMENTS</UnderlyingIndexName>
       <Primary>1</Primary>
     </key>
-    <column id="4154" parent="4042" name="productcode">
+    <column id="4155" parent="4042" name="productcode">
       <Position>1</Position>
       <Comment>시퀸스넘버</Comment>
       <DataType>NUMBER(*)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="4155" parent="4042" name="productname">
+    <column id="4156" parent="4042" name="productname">
       <Position>2</Position>
       <Comment>문자</Comment>
       <DataType>VARCHAR2(60 byte)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="4156" parent="4042" name="productprice">
+    <column id="4157" parent="4042" name="productprice">
       <Position>3</Position>
       <Comment>숫자</Comment>
       <DataType>NUMBER(*)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="4157" parent="4042" name="stock">
+    <column id="4158" parent="4042" name="stock">
       <Position>4</Position>
       <Comment>숫자</Comment>
       <DataType>NUMBER(*)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="4158" parent="4042" name="eyes">
+    <column id="4159" parent="4042" name="eyes">
       <Position>5</Position>
       <Comment>숫자 1자리</Comment>
       <DataType>NUMBER(*)|0s</DataType>
       <NotNull>1</NotNull>
       <DefaultExpression>0</DefaultExpression>
     </column>
-    <column id="4159" parent="4042" name="bloodcirculation">
+    <column id="4160" parent="4042" name="bloodcirculation">
       <Position>6</Position>
       <Comment>숫자 1자리</Comment>
       <DataType>NUMBER(*)|0s</DataType>
       <NotNull>1</NotNull>
       <DefaultExpression>0</DefaultExpression>
     </column>
-    <column id="4160" parent="4042" name="digestiveapparatus">
+    <column id="4161" parent="4042" name="digestiveapparatus">
       <Position>7</Position>
       <Comment>숫자 1자리</Comment>
       <DataType>NUMBER(*)|0s</DataType>
       <NotNull>1</NotNull>
       <DefaultExpression>0</DefaultExpression>
     </column>
-    <column id="4161" parent="4042" name="skin">
+    <column id="4162" parent="4042" name="skin">
       <Position>8</Position>
       <Comment>숫자 1자리</Comment>
       <DataType>NUMBER(*)|0s</DataType>
       <NotNull>1</NotNull>
       <DefaultExpression>0</DefaultExpression>
     </column>
-    <column id="4162" parent="4042" name="fatigue">
+    <column id="4163" parent="4042" name="fatigue">
       <Position>9</Position>
       <Comment>숫자 1자리</Comment>
       <DataType>NUMBER(*)|0s</DataType>
       <NotNull>1</NotNull>
       <DefaultExpression>0</DefaultExpression>
     </column>
-    <column id="4163" parent="4042" name="joint">
+    <column id="4164" parent="4042" name="joint">
       <Position>10</Position>
       <Comment>숫자 1자리</Comment>
       <DataType>NUMBER(*)|0s</DataType>
       <NotNull>1</NotNull>
       <DefaultExpression>0</DefaultExpression>
     </column>
-    <column id="4164" parent="4042" name="hair">
+    <column id="4165" parent="4042" name="hair">
       <Position>11</Position>
       <Comment>숫자 1자리</Comment>
       <DataType>NUMBER(*)|0s</DataType>
       <NotNull>1</NotNull>
       <DefaultExpression>0</DefaultExpression>
     </column>
-    <column id="4165" parent="4042" name="immunity">
+    <column id="4166" parent="4042" name="immunity">
       <Position>12</Position>
       <Comment>숫자 1자리</Comment>
       <DataType>NUMBER(*)|0s</DataType>
       <NotNull>1</NotNull>
       <DefaultExpression>0</DefaultExpression>
     </column>
-    <column id="4166" parent="4042" name="images">
+    <column id="4167" parent="4042" name="images">
       <Position>13</Position>
       <Comment>상품이미지 경로</Comment>
       <DataType>VARCHAR2(50 byte)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <index id="4167" parent="4042" name="PK_PRODUCTS">
+    <index id="4168" parent="4042" name="PK_PRODUCTS">
       <ObjectId>20332</ObjectId>
       <CreatedTimestamp>2020-12-25.02:35:59</CreatedTimestamp>
       <ModifiedTimestamp>2020-12-25.02:35:59</ModifiedTimestamp>
@@ -28956,38 +28961,38 @@ id</ColNames>
       <ColNames>productcode</ColNames>
       <Unique>1</Unique>
     </index>
-    <key id="4168" parent="4042" name="PK_PRODUCTS">
+    <key id="4169" parent="4042" name="PK_PRODUCTS">
       <ModifiedTimestamp>2020-12-25.02:35:59</ModifiedTimestamp>
       <ColNames>productcode</ColNames>
       <InitiallyDeferred>1</InitiallyDeferred>
       <UnderlyingIndexName>PK_PRODUCTS</UnderlyingIndexName>
       <Primary>1</Primary>
     </key>
-    <column id="4169" parent="4043" name="seq_index">
+    <column id="4170" parent="4043" name="seq_index">
       <Position>1</Position>
       <Comment>시퀸스넘버</Comment>
       <DataType>NUMBER(*)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="4170" parent="4043" name="productcode">
+    <column id="4171" parent="4043" name="productcode">
       <Position>2</Position>
       <Comment>시퀸스넘버</Comment>
       <DataType>NUMBER(*)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="4171" parent="4043" name="title">
+    <column id="4172" parent="4043" name="title">
       <Position>3</Position>
       <Comment>문자</Comment>
       <DataType>VARCHAR2(60 byte)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="4172" parent="4043" name="content">
+    <column id="4173" parent="4043" name="content">
       <Position>4</Position>
       <Comment>문자</Comment>
       <DataType>VARCHAR2(500 byte)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <index id="4173" parent="4043" name="PK_PRODUCT_POSTS">
+    <index id="4174" parent="4043" name="PK_PRODUCT_POSTS">
       <ObjectId>20333</ObjectId>
       <CreatedTimestamp>2020-12-25.02:35:59</CreatedTimestamp>
       <ModifiedTimestamp>2020-12-25.02:35:59</ModifiedTimestamp>
@@ -28995,32 +29000,32 @@ id</ColNames>
       <ColNames>seq_index</ColNames>
       <Unique>1</Unique>
     </index>
-    <key id="4174" parent="4043" name="PK_PRODUCT_POSTS">
+    <key id="4175" parent="4043" name="PK_PRODUCT_POSTS">
       <ModifiedTimestamp>2020-12-25.02:35:59</ModifiedTimestamp>
       <ColNames>seq_index</ColNames>
       <InitiallyDeferred>1</InitiallyDeferred>
       <UnderlyingIndexName>PK_PRODUCT_POSTS</UnderlyingIndexName>
       <Primary>1</Primary>
     </key>
-    <column id="4175" parent="4044" name="seq_file">
+    <column id="4176" parent="4044" name="seq_file">
       <Position>1</Position>
       <Comment>시퀸스넘버</Comment>
       <DataType>NUMBER(*)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="4176" parent="4044" name="seq_index">
+    <column id="4177" parent="4044" name="seq_index">
       <Position>2</Position>
       <Comment>시퀸스넘버</Comment>
       <DataType>NUMBER(*)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="4177" parent="4044" name="file">
+    <column id="4178" parent="4044" name="file">
       <Position>3</Position>
       <Comment>문자</Comment>
       <DataType>VARCHAR2(100 byte)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <index id="4178" parent="4044" name="PK_PRODUCT_POSTS_FILE">
+    <index id="4179" parent="4044" name="PK_PRODUCT_POSTS_FILE">
       <ObjectId>20338</ObjectId>
       <CreatedTimestamp>2020-12-25.02:36:00</CreatedTimestamp>
       <ModifiedTimestamp>2020-12-25.02:36:00</ModifiedTimestamp>
@@ -29029,7 +29034,7 @@ id</ColNames>
 seq_index</ColNames>
       <Unique>1</Unique>
     </index>
-    <key id="4179" parent="4044" name="PK_PRODUCT_POSTS_FILE">
+    <key id="4180" parent="4044" name="PK_PRODUCT_POSTS_FILE">
       <ModifiedTimestamp>2020-12-25.02:36:00</ModifiedTimestamp>
       <ColNames>seq_file
 seq_index</ColNames>
@@ -29037,7 +29042,7 @@ seq_index</ColNames>
       <UnderlyingIndexName>PK_PRODUCT_POSTS_FILE</UnderlyingIndexName>
       <Primary>1</Primary>
     </key>
-    <foreign-key id="4180" parent="4044" name="FK_PP_TO_PPF_1">
+    <foreign-key id="4181" parent="4044" name="FK_PP_TO_PPF_1">
       <ModifiedTimestamp>2020-12-25.02:36:01</ModifiedTimestamp>
       <ColNames>seq_index</ColNames>
       <RefSchemaName>SEMI</RefSchemaName>
@@ -29045,44 +29050,44 @@ seq_index</ColNames>
       <RefKeyName>PK_PRODUCT_POSTS</RefKeyName>
       <OnDelete>restrict</OnDelete>
     </foreign-key>
-    <column id="4181" parent="4045" name="seq_review">
+    <column id="4182" parent="4045" name="seq_review">
       <Position>1</Position>
       <Comment>시퀸스넘버</Comment>
       <DataType>NUMBER(*)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="4182" parent="4045" name="seq_index">
+    <column id="4183" parent="4045" name="seq_index">
       <Position>2</Position>
       <Comment>시퀸스넘버</Comment>
       <DataType>NUMBER(*)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="4183" parent="4045" name="content">
+    <column id="4184" parent="4045" name="content">
       <Position>3</Position>
       <Comment>문자</Comment>
       <DataType>VARCHAR2(300 byte)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="4184" parent="4045" name="grade">
+    <column id="4185" parent="4045" name="grade">
       <Position>4</Position>
       <Comment>0~5 숫자</Comment>
       <DataType>NUMBER(*)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="4185" parent="4045" name="postdate">
+    <column id="4186" parent="4045" name="postdate">
       <Position>5</Position>
       <Comment>YYYYMMDD</Comment>
       <DataType>DATE|0s</DataType>
       <NotNull>1</NotNull>
       <DefaultExpression>SYSDATE</DefaultExpression>
     </column>
-    <column id="4186" parent="4045" name="id">
+    <column id="4187" parent="4045" name="id">
       <Position>6</Position>
       <Comment>영어소문자, 숫자</Comment>
       <DataType>VARCHAR2(15 byte)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <index id="4187" parent="4045" name="PK_P_REVIEW">
+    <index id="4188" parent="4045" name="PK_P_REVIEW">
       <ObjectId>20560</ObjectId>
       <CreatedTimestamp>2020-12-28.19:24:25</CreatedTimestamp>
       <ModifiedTimestamp>2020-12-28.19:24:25</ModifiedTimestamp>
@@ -29091,7 +29096,7 @@ seq_index</ColNames>
 seq_index</ColNames>
       <Unique>1</Unique>
     </index>
-    <key id="4188" parent="4045" name="PK_P_REVIEW">
+    <key id="4189" parent="4045" name="PK_P_REVIEW">
       <ModifiedTimestamp>2020-12-28.19:24:25</ModifiedTimestamp>
       <ColNames>seq_review
 seq_index</ColNames>
@@ -29099,7 +29104,7 @@ seq_index</ColNames>
       <UnderlyingIndexName>PK_P_REVIEW</UnderlyingIndexName>
       <Primary>1</Primary>
     </key>
-    <foreign-key id="4189" parent="4045" name="FK_PRODUCT_POSTS_TO_P_REVIEW_1">
+    <foreign-key id="4190" parent="4045" name="FK_PRODUCT_POSTS_TO_P_REVIEW_1">
       <ModifiedTimestamp>2020-12-28.19:24:25</ModifiedTimestamp>
       <ColNames>seq_index</ColNames>
       <RefSchemaName>SEMI</RefSchemaName>
@@ -29107,31 +29112,31 @@ seq_index</ColNames>
       <RefKeyName>PK_PRODUCT_POSTS</RefKeyName>
       <OnDelete>restrict</OnDelete>
     </foreign-key>
-    <column id="4190" parent="4046" name="ordernumber">
+    <column id="4191" parent="4046" name="ordernumber">
       <Position>1</Position>
       <Comment>숫자</Comment>
       <DataType>NUMBER(*)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="4191" parent="4046" name="id">
+    <column id="4192" parent="4046" name="id">
       <Position>2</Position>
       <Comment>영어소문자, 숫자</Comment>
       <DataType>VARCHAR2(15 byte)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="4192" parent="4046" name="seq_add">
+    <column id="4193" parent="4046" name="seq_add">
       <Position>3</Position>
       <Comment>시퀸스넘버</Comment>
       <DataType>NUMBER(*)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="4193" parent="4046" name="seq_pay">
+    <column id="4194" parent="4046" name="seq_pay">
       <Position>4</Position>
       <Comment>시퀸스넘버</Comment>
       <DataType>NUMBER(*)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="4194" parent="4046" name="shippingstatus">
+    <column id="4195" parent="4046" name="shippingstatus">
       <Position>5</Position>
       <Comment>0은 배송준비중&#xd;
 1은 배송중&#xd;
@@ -29141,21 +29146,21 @@ seq_index</ColNames>
       <NotNull>1</NotNull>
       <DefaultExpression>0</DefaultExpression>
     </column>
-    <column id="4195" parent="4046" name="invoice">
+    <column id="4196" parent="4046" name="invoice">
       <Position>6</Position>
       <Comment>문자</Comment>
       <DataType>VARCHAR2(20 byte)|0s</DataType>
       <NotNull>1</NotNull>
       <DefaultExpression>null</DefaultExpression>
     </column>
-    <column id="4196" parent="4046" name="orderdate">
+    <column id="4197" parent="4046" name="orderdate">
       <Position>7</Position>
       <Comment>YYYYMMDD</Comment>
       <DataType>DATE|0s</DataType>
       <NotNull>1</NotNull>
       <DefaultExpression>SYSDATE</DefaultExpression>
     </column>
-    <index id="4197" parent="4046" name="PK_REGULAR_ORDER">
+    <index id="4198" parent="4046" name="PK_REGULAR_ORDER">
       <ObjectId>20932</ObjectId>
       <CreatedTimestamp>2021-01-04.19:07:41</CreatedTimestamp>
       <ModifiedTimestamp>2021-01-04.19:07:41</ModifiedTimestamp>
@@ -29163,32 +29168,32 @@ seq_index</ColNames>
       <ColNames>ordernumber</ColNames>
       <Unique>1</Unique>
     </index>
-    <key id="4198" parent="4046" name="PK_REGULAR_ORDER">
+    <key id="4199" parent="4046" name="PK_REGULAR_ORDER">
       <ModifiedTimestamp>2021-01-04.19:07:41</ModifiedTimestamp>
       <ColNames>ordernumber</ColNames>
       <InitiallyDeferred>1</InitiallyDeferred>
       <UnderlyingIndexName>PK_REGULAR_ORDER</UnderlyingIndexName>
       <Primary>1</Primary>
     </key>
-    <column id="4199" parent="4047" name="seq_rive_file">
+    <column id="4200" parent="4047" name="seq_rive_file">
       <Position>1</Position>
       <Comment>시퀸스 넘버</Comment>
       <DataType>NUMBER(*)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="4200" parent="4047" name="seq_review">
+    <column id="4201" parent="4047" name="seq_review">
       <Position>2</Position>
       <Comment>시퀸스넘버</Comment>
       <DataType>NUMBER(*)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="4201" parent="4047" name="file">
+    <column id="4202" parent="4047" name="file">
       <Position>3</Position>
       <Comment>이미지파일 경로</Comment>
       <DataType>VARCHAR2(20 byte)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <index id="4202" parent="4047" name="PK_REVIEW_FILE">
+    <index id="4203" parent="4047" name="PK_REVIEW_FILE">
       <ObjectId>20559</ObjectId>
       <CreatedTimestamp>2020-12-28.19:24:25</CreatedTimestamp>
       <ModifiedTimestamp>2020-12-28.19:24:25</ModifiedTimestamp>
@@ -29196,94 +29201,94 @@ seq_index</ColNames>
       <ColNames>seq_rive_file</ColNames>
       <Unique>1</Unique>
     </index>
-    <key id="4203" parent="4047" name="PK_REVIEW_FILE">
+    <key id="4204" parent="4047" name="PK_REVIEW_FILE">
       <ModifiedTimestamp>2020-12-28.19:24:25</ModifiedTimestamp>
       <ColNames>seq_rive_file</ColNames>
       <InitiallyDeferred>1</InitiallyDeferred>
       <UnderlyingIndexName>PK_REVIEW_FILE</UnderlyingIndexName>
       <Primary>1</Primary>
     </key>
-    <column id="4204" parent="4048" name="id">
+    <column id="4205" parent="4048" name="id">
       <Position>1</Position>
       <Comment>영어소문자, 숫자</Comment>
       <DataType>VARCHAR2(15 byte)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="4205" parent="4048" name="height">
+    <column id="4206" parent="4048" name="height">
       <Position>2</Position>
       <Comment>숫자 3자리</Comment>
       <DataType>VARCHAR2(3 byte)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="4206" parent="4048" name="weight">
+    <column id="4207" parent="4048" name="weight">
       <Position>3</Position>
       <Comment>숫자 3자리</Comment>
       <DataType>VARCHAR2(3 byte)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="4207" parent="4048" name="momentum">
+    <column id="4208" parent="4048" name="momentum">
       <Position>4</Position>
       <Comment>정도에 따라 5까지 올라감</Comment>
       <DataType>NUMBER(*)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="4208" parent="4048" name="eyes">
+    <column id="4209" parent="4048" name="eyes">
       <Position>5</Position>
       <Comment>불편한 정도에 따라 5까지 올라감</Comment>
       <DataType>NUMBER(*)|0s</DataType>
       <NotNull>1</NotNull>
       <DefaultExpression>0</DefaultExpression>
     </column>
-    <column id="4209" parent="4048" name="bloodcirculation">
+    <column id="4210" parent="4048" name="bloodcirculation">
       <Position>6</Position>
       <Comment>불편한 정도에 따라 5까지 올라감</Comment>
       <DataType>NUMBER(*)|0s</DataType>
       <NotNull>1</NotNull>
       <DefaultExpression>0</DefaultExpression>
     </column>
-    <column id="4210" parent="4048" name="digestiveapparatus">
+    <column id="4211" parent="4048" name="digestiveapparatus">
       <Position>7</Position>
       <Comment>불편한 정도에 따라 5까지 올라감</Comment>
       <DataType>NUMBER(*)|0s</DataType>
       <NotNull>1</NotNull>
       <DefaultExpression>0</DefaultExpression>
     </column>
-    <column id="4211" parent="4048" name="skin">
+    <column id="4212" parent="4048" name="skin">
       <Position>8</Position>
       <Comment>불편한 정도에 따라 5까지 올라감</Comment>
       <DataType>NUMBER(*)|0s</DataType>
       <NotNull>1</NotNull>
       <DefaultExpression>0</DefaultExpression>
     </column>
-    <column id="4212" parent="4048" name="fatigue">
+    <column id="4213" parent="4048" name="fatigue">
       <Position>9</Position>
       <Comment>불편한 정도에 따라 5까지 올라감</Comment>
       <DataType>NUMBER(*)|0s</DataType>
       <NotNull>1</NotNull>
       <DefaultExpression>0</DefaultExpression>
     </column>
-    <column id="4213" parent="4048" name="joint">
+    <column id="4214" parent="4048" name="joint">
       <Position>10</Position>
       <Comment>불편한 정도에 따라 5까지 올라감</Comment>
       <DataType>NUMBER(*)|0s</DataType>
       <NotNull>1</NotNull>
       <DefaultExpression>0</DefaultExpression>
     </column>
-    <column id="4214" parent="4048" name="hair">
+    <column id="4215" parent="4048" name="hair">
       <Position>11</Position>
       <Comment>불편한 정도에 따라 5까지 올라감</Comment>
       <DataType>NUMBER(*)|0s</DataType>
       <NotNull>1</NotNull>
       <DefaultExpression>0</DefaultExpression>
     </column>
-    <column id="4215" parent="4048" name="immunity">
+    <column id="4216" parent="4048" name="immunity">
       <Position>12</Position>
       <Comment>불편한 정도에 따라 5까지 올라감</Comment>
       <DataType>NUMBER(*)|0s</DataType>
       <NotNull>1</NotNull>
       <DefaultExpression>0</DefaultExpression>
     </column>
-    <index id="4216" parent="4048" name="PK_SURVEY_RESULT">
+    <index id="4217" parent="4048" name="PK_SURVEY_RESULT">
       <ObjectId>20337</ObjectId>
       <CreatedTimestamp>2020-12-25.02:36:00</CreatedTimestamp>
       <ModifiedTimestamp>2020-12-25.02:36:00</ModifiedTimestamp>
@@ -29291,14 +29296,14 @@ seq_index</ColNames>
       <ColNames>id</ColNames>
       <Unique>1</Unique>
     </index>
-    <key id="4217" parent="4048" name="PK_SURVEY_RESULT">
+    <key id="4218" parent="4048" name="PK_SURVEY_RESULT">
       <ModifiedTimestamp>2020-12-25.02:36:00</ModifiedTimestamp>
       <ColNames>id</ColNames>
       <InitiallyDeferred>1</InitiallyDeferred>
       <UnderlyingIndexName>PK_SURVEY_RESULT</UnderlyingIndexName>
       <Primary>1</Primary>
     </key>
-    <foreign-key id="4218" parent="4048" name="FK_MEMBERS_TO_SURVEY_RESULT_1">
+    <foreign-key id="4219" parent="4048" name="FK_MEMBERS_TO_SURVEY_RESULT_1">
       <ModifiedTimestamp>2020-12-25.02:36:01</ModifiedTimestamp>
       <ColNames>id</ColNames>
       <RefSchemaName>SEMI</RefSchemaName>
