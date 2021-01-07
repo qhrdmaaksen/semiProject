@@ -140,7 +140,7 @@ public class BoardDAO  extends SuperDAO {
 
 			// placeholder
 			pstmt.setString(1, bean.getId());
-			pstmt.setString(2, bean.getTitle());
+			pstmt.setString(2, bean.getTitle()); 
 			pstmt.setString(3, bean.getContent());
 			
 			cnt = pstmt.executeUpdate() ; 

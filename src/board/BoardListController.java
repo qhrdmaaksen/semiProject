@@ -75,7 +75,7 @@ public class BoardListController extends SuperClass {
 		
 		
 		
-		String gotopage = "board/boList.jsp";
+		String gotopage = "customer/bbs.jsp";
 		super.GotoPage(gotopage);
 		
 		

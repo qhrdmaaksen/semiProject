@@ -20,8 +20,8 @@ public class BoardInsertController extends SuperClass {
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		super.doGet(request, response);
 		
-		String ogtopage = "/board/boInsert.jsp";
-		super.GotoPage(ogtopage);
+		String gotopage = "/customer/bbsinsert.jsp";
+		super.GotoPage(gotopage);
 		
 	}
 	
@@ -48,7 +48,7 @@ public class BoardInsertController extends SuperClass {
 		if ( this.validate( request ) == false ) {			
 			request.setAttribute("bean", bean);
 			super.doPost(request, response);
-			String url = "/board/boInsert.jsp";
+			String url = "/customer/bbs.jsp";
 			super.GotoPage( url );
 //			super.GotoPage(this.getClass().toString(), "boInsertForm");
 		}else{
