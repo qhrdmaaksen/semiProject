@@ -128,8 +128,8 @@ public class BoardDAO  extends SuperDAO {
 	}
 
 	public int InsertData(BbsPostVo bean) {
-		String sql = " insert into BBS_POST (\"seq_index\", \"id\", \"title\", \"content\", \"postdate\", \"likenumber\" ) " ;
-		sql += " values(seq_BP_index.nextval,?,?,?,to_date(?, 'yyyy/MM/dd') , default ) " ;
+		String sql = " insert into BBS_POST (\"seq_index\", \"id\", \"title\", \"content\", \"postdate\", \"likenumber\", \"IMAGE\" ) " ;
+		sql += " values(seq_BP_index.nextval,?,?,?,to_date(?, 'yyyy/MM/dd') , default, ? ) " ;
 		Connection conn = null ;
 		PreparedStatement pstmt = null ;
 		int cnt = -999999 ;
@@ -143,7 +143,7 @@ public class BoardDAO  extends SuperDAO {
 			pstmt.setString(2, bean.getTitle()); 
 			pstmt.setString(3, bean.getContent());
 			pstmt.setString(4, bean.getPostdate());
-			
+			pstmt.setString(5, bean.getImage());
 			
 			cnt = pstmt.executeUpdate() ; 
 			conn.commit(); 

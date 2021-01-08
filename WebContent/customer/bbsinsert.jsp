@@ -24,7 +24,7 @@
 			</div>
 			<div class="panel-body">
 				<form class="form-horizontal" role="form" action="<%=YesForm%>"
-					method="post">
+					method="post" enctype="multipart/form-data">
 					<input type="hidden" name="command" value="boInsert">
 					<div class="form-group">
 						<label class="control-label col-sm-<%=formleft%>" for="writer">작성자</label>
@@ -85,4 +85,4 @@
 		</div>
 	</div>
 </body>
-</html>l>
+</html>

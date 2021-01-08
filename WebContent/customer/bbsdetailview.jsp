@@ -191,9 +191,9 @@
 </head>
 <%
 	int myoffset = 2; //전체 외관의 옵셋
-	int mywidth = twelve - 2 * myoffset;
+	int mywidth = 12 - 2 * myoffset;
 	int leftside = 4; //판넬의 좌측
-	int rightside = twelve - leftside; //판넬의 우측
+	int rightside = 12 - leftside; //판넬의 우측
 %>
 <body>
 	<div class="container col-sm-offset-<%=myoffset%> col-sm-<%=mywidth%>">
@@ -205,7 +205,7 @@
 				<div class="col-sm-<%=leftside%> col-sm-<%=leftside%>">
 					<table>
 						<tr>
-							<td align="center"><img align="middle" src="<%=contextPath%>/images/Koala.jpg"
+							<td align="center"><img align="middle" src="<%=contextPath%>${requestScope.bean.image}"
 								class="img-rounded" width="200" height="200"></td>
 						</tr>
 					</table>
