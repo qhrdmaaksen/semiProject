@@ -36,6 +36,8 @@ public class MyPointController extends SuperClass {
             new IndexController().doGet(request, response);
         }
         MemberVO tem = (MemberVO)session.getAttribute("loginfo");
+        System.out.println(request.getParameter("fromdate"));
+        System.out.println(request.getParameter("todate"));
 
         try {
             MemberDAO dao = new MemberDAO();
@@ -55,7 +57,7 @@ public class MyPointController extends SuperClass {
         }else {
             mode=request.getParameter("mode");
         }
-        if(request.getParameter("fromDate")==null||request.getParameter("toDate")==null){
+        if(request.getParameter("fromdate")==null||request.getParameter("todate")==null){
             Calendar cal = Calendar.getInstance();
             cal.add(Calendar.MONTH, -1);
 
@@ -70,8 +72,8 @@ public class MyPointController extends SuperClass {
                 parameters = new FlowParameters(
                         request.getParameter("pageNumber"),
                         request.getParameter("pageSize"),
-                        sdf.parse(request.getParameter("fromDate")),
-                        sdf.parse(request.getParameter("toDate")),
+                        sdf.parse(request.getParameter("fromdate")),
+                        sdf.parse(request.getParameter("todate")),
                         mode);
             } catch (ParseException e) {
                 e.printStackTrace();
@@ -87,12 +89,13 @@ public class MyPointController extends SuperClass {
         Paging pageInfo = new Paging(
                 parameters.getPageNumber(),
                 parameters.getPageSize(),
-                po_dao.selectTotalCount(tem.getId()),
+                po_dao.selectTotalCount(tem.getId(), parameters.getMode(), parameters.getFromdate(), parameters.getTodate()),
                 myurl,
+                parameters.getMode(),
                 parameters.getFromdate(),
                 parameters.getTodate());
 
-        List<PointVO> lists = po_dao.selectPoints(pageInfo.getBeginRow(), pageInfo.getEndRow(), tem.getId(), parameters.getFromdate(), parameters.getTodate());
+        List<PointVO> lists = po_dao.selectPoints(pageInfo.getBeginRow(), pageInfo.getEndRow(), tem.getId(), parameters.getMode(), parameters.getFromdate(), parameters.getTodate());
 
         // 쿠폰 갯수
         session.setAttribute("cpnCount", cu_dao.CountCoupons(tem.getId()));
@@ -104,6 +107,9 @@ public class MyPointController extends SuperClass {
         System.out.println("todate : " + sdf.format(parameters.getTodate()));
         request.setAttribute("pagingHtml", pageInfo.getPagingPointHtml());
         request.setAttribute("pagingStatus", pageInfo.getPagingStatus());
+
+        request.setAttribute("mode", parameters.getMode());
+        request.setAttribute("month", request.getParameter("month"));
 
         // 소멸예정 포인트, 적립예정 포인트, 포인트 내역들
         request.setAttribute("exPoint", po_dao.selectExtinctionPoint(tem.getId()));
