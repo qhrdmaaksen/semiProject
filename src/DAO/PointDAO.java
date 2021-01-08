@@ -96,11 +96,15 @@ public class PointDAO extends SuperDAO{
         return result;
     }
 
-    public List<PointVO> selectPoints(int beginrow, int endrow, String id, Date fromdate, Date todate){
+    public List<PointVO> selectPoints(int beginrow, int endrow, String id, String mode, Date fromdate, Date todate){
         PreparedStatement pstmt = null ;
         ResultSet rs = null ;
 
-        String sql = "SELECT * FROM (SELECT \"seq_point\", \"id\", \"plma\", \"point\", \"po_date\", \"po_subject\", RANK() over (ORDER BY \"po_date\" DESC) AS ranking FROM points WHERE \"id\" IN(?) AND \"po_date\" BETWEEN ? AND ?) WHERE ranking BETWEEN ? AND ?";
+        String sql = "SELECT * FROM (SELECT \"seq_point\", \"id\", \"plma\", \"point\", \"po_date\", \"po_subject\", RANK() over (ORDER BY \"po_date\" DESC) AS ranking FROM points WHERE \"id\" IN(?) AND \"po_date\" BETWEEN ? AND ? ";
+        if(!mode.equalsIgnoreCase("all")){
+            sql+= "AND \"plma\" in(?)";
+        }
+        sql += ") WHERE ranking BETWEEN ? AND ?";
         List<PointVO> lists = new ArrayList<PointVO>();
 
         try {
@@ -115,8 +119,19 @@ public class PointDAO extends SuperDAO{
 
             cal.setTime(todate);
             pstmt.setDate(3, new java.sql.Date(cal.getTimeInMillis()));
-            pstmt.setInt(4, beginrow);
-            pstmt.setInt(5, endrow);
+
+            if(mode.equalsIgnoreCase("all")){
+                pstmt.setInt(4, beginrow);
+                pstmt.setInt(5, endrow);
+            }else if(mode.equalsIgnoreCase("save")){
+                pstmt.setInt(4, 0);
+                pstmt.setInt(5, beginrow);
+                pstmt.setInt(6, endrow);
+            }else if(mode.equalsIgnoreCase("use")){
+                pstmt.setInt(4, 1);
+                pstmt.setInt(5, beginrow);
+                pstmt.setInt(6, endrow);
+            }
 
             rs = pstmt.executeQuery() ;
             while( rs.next() ){
@@ -149,8 +164,11 @@ public class PointDAO extends SuperDAO{
         return lists;
     }
 
-    public int selectTotalCount(String id){
-        String sql = "SELECT COUNT(*) AS count FROM POINTS WHERE \"id\" IN(?)";
+    public int selectTotalCount(String id, String mode, Date fromdate, Date todate){
+        String sql = "SELECT COUNT(*) AS count FROM POINTS WHERE \"id\" IN(?) AND \"po_date\" BETWEEN ? AND ? ";
+        if(!mode.equalsIgnoreCase("all")){
+            sql += "AND \"plma\" in(?)";
+        }
 
         conn = null ;
         PreparedStatement pstmt = null ;
@@ -161,6 +179,17 @@ public class PointDAO extends SuperDAO{
             conn = super.getConnection() ;
             pstmt = conn.prepareStatement(sql) ;
             pstmt.setString(1, id);
+            Calendar cal = Calendar.getInstance();
+            cal.setTime(fromdate);
+            pstmt.setDate(2, new java.sql.Date(cal.getTimeInMillis()));
+            cal.setTime(todate);
+            pstmt.setDate(3, new java.sql.Date(cal.getTimeInMillis()));
+
+            if(mode.equalsIgnoreCase("save")){
+                pstmt.setString(4, "0");
+            }else if(mode.equalsIgnoreCase("use")){
+                pstmt.setString(4, "1");
+            }
 
             rs = pstmt.executeQuery() ;
 

@@ -82,6 +82,7 @@ public class Paging {
 				String _pageSize,
 				int totalCount,
 				String url,
+				String mode,
 				Date fromdate,
 				Date todate) {
 
@@ -98,6 +99,7 @@ public class Paging {
 			this.totalCount = totalCount ;
 			this.url = url ;
 
+			this.mode = mode;
 			this.fromdate = fromdate ;
 			this.todate = todate ;
 
@@ -169,7 +171,7 @@ public class Paging {
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 
 			//add_param 변수 : 검색 관련하여 추가되는 파라미터 리스트
-			String add_param = "&fromdate=" + sdf.format(fromdate) + "&todate=" + sdf.format(todate) ;
+			String add_param = "&fromdate=" + sdf.format(fromdate) + "&todate=" + sdf.format(todate) + "&mode=" + mode ;
 
 			result += "<ul class='pagination" + paginationSize + "'>";
 			if ( pageNumber <= pageCount ) {//1부터 10페이지까지는 [맨처음]과 [이전]이 없다
