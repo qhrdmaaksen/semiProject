@@ -65,11 +65,11 @@ public class BoardDAO  extends SuperDAO {
 		ResultSet rs = null ;
 		
 		int cnt = -99999;
-	      String sql = " select seq_index, id, title, content, postdate, likenumber " ;
+	      String sql = " select \"seq_index\", \"id\", \"title\", \"content\", \"postdate\", \"likenumber\" " ;
 	      sql += " from ( " ;
-	      sql += " select seq_index, id, title, content, postdate, likenumber " ;
-	      sql += " rank() over( order by groupno desc, orderno asc) as ranking " ;
-	      sql += " from BBS_POST " ;
+	      sql += " select \"seq_index\", \"id\", \"title\", \"content\", \"postdate\", \"likenumber\", " ;
+	      sql += " rank() over( order by \"seq_index\" desc ) as ranking " ;
+	      sql += " from \"BBS_POST\" " ;
 	      
 	      if(mode.equalsIgnoreCase("all")== false) {
 	    	  sql+= " where " + mode + " like '"+ keyword +"%' " ; 
@@ -98,7 +98,7 @@ public class BoardDAO  extends SuperDAO {
 				bean.setContent(rs.getString("content"));
 				bean.setId(rs.getString("id"));
 				bean.setLikenumber(rs.getInt("likenumber"));
-				bean.setNum(rs.getInt("num"));
+				bean.setNum(rs.getInt("seq_index"));
 				bean.setPostdate(String.valueOf(rs.getString("postdate")));
 				bean.setTitle(rs.getString("title"));
 				
@@ -128,8 +128,8 @@ public class BoardDAO  extends SuperDAO {
 	}
 
 	public int InsertData(BbsPostVo bean) {
-		String sql = " insert into BBS_POST (seq_index, id, title, content, postdate, likenumber ) " ;
-		sql += " values(seq_BP_index.nextval,?,?,?,to_date(?, 'yyyy/MM/dd'), default ) " ;
+		String sql = " insert into BBS_POST (\"seq_index\", \"id\", \"title\", \"content\", \"postdate\", \"likenumber\" ) " ;
+		sql += " values(seq_BP_index.nextval,?,?,?,to_date(?, 'yyyy/MM/dd') , default ) " ;
 		Connection conn = null ;
 		PreparedStatement pstmt = null ;
 		int cnt = -999999 ;
@@ -142,6 +142,8 @@ public class BoardDAO  extends SuperDAO {
 			pstmt.setString(1, bean.getId());
 			pstmt.setString(2, bean.getTitle()); 
 			pstmt.setString(3, bean.getContent());
+			pstmt.setString(4, bean.getPostdate());
+			
 			
 			cnt = pstmt.executeUpdate() ; 
 			conn.commit(); 

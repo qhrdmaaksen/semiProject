@@ -29,19 +29,17 @@ public class BoardInsertController extends SuperClass {
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {		
 		bean  = new BbsPostVo();
+		
 		//bean.setNo(no); //�������� �ʿ� ����
 		bean.setContent( request.getParameter("content") );
 		bean.setId(request.getParameter("id"));
-		bean.setLikenumber(Integer.parseInt(request.getParameter("likenumber")));
-		
 		bean.setPostdate(String.valueOf(request.getParameter("postdate")));
 		bean.setTitle(request.getParameter("title"));
+		if( request.getParameter("likenumber") != null && request.getParameter("likenumber") != "" ){
+			bean.setLikenumber( Integer.parseInt( request.getParameter("likenumber") ));	
+		}   
 		
-		
-		if( request.getParameter("num") != null && request.getParameter("num") != "" ){
-			bean.setNum(Integer.parseInt(request.getParameter("num")));
-		}
-  
+	
 		
 		System.out.println( bean );
 		

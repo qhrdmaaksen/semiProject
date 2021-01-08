@@ -9,6 +9,8 @@ public class BbsPostVo {
 	String postdate ; 
 	int likenumber ; // 좋아요 수 
 	
+	
+	
 	@Override
 	public String toString() {
 		return "BbsPostVo [num=" + num + ", id=" + id + ", title=" + title + ", content=" + content + ", postdate="

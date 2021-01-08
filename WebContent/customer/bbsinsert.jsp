@@ -31,17 +31,17 @@
 						<div class="col-sm-<%=formright%>">
 							<input type="text" class="form-control" name="fakewriter" id="fakewriter"
 								placeholder="작성자" value="${sessionScope.loginfo.name}(${sessionScope.loginfo.id})" disabled="disabled">
-							<input type="hidden" name="writer" id="writer"
+							<input type="hidden" name="id" id="id"
 								value="${sessionScope.loginfo.id}">
 						</div>
 					</div>
 					<div class="form-group">
-						<label class="control-label col-sm-<%=formleft%>" for="subject">글
+						<label class="control-label col-sm-<%=formleft%>" for="title">글
 							제목</label>
 						<div class="col-sm-<%=formright%>">
-							<input type="text" class="form-control" name="subject"
-								id="subject" placeholder="글 제목" value="${bean.subject}"> 
-							<span class="err">${errsubject}</span>
+							<input type="text" class="form-control" name="title"
+								id="title" placeholder="글 제목" value="${bean.title}"> 
+							<span class="err">${errtitle}</span>
 						</div>
 					</div>
 					
@@ -65,12 +65,12 @@
 						</div>
 					</div>
 					<div class="form-group">
-						<label class="control-label col-sm-<%=formleft%>" for="regdate">작성
+						<label class="control-label col-sm-<%=formleft%>" for="postdate">작성
 							일자</label>
 						<div class="col-sm-<%=formright%>">
-							<input type="datetime" class="form-control" name="regdate"
-								id="regdate" placeholder="작성 일자" value="${bean.regdate}"> <span
-								class="err">${errregdate}</span>
+							<input type="datetime" class="form-control" name="postdate"
+								id="postdate" placeholder="작성 일자" value="${bean.postdate}"> <span
+								class="err">${errpostdate}</span>
 						</div>
 					</div>
 					<div class="form-group">
