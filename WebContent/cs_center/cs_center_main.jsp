@@ -87,36 +87,30 @@ int mysearch = 2;
 					</thead>
 					
 					<c:forEach var="bean" items="${requestScope.lists}">
-						<tr> 
+						<tr>
 							<td align="center">
 								<c:forEach var="cnt" begin="1" end="${bean.depth}">
 								</c:forEach> 
 								<a
-									href="<%=NoForm%>notice_detailview&no=${bean.no}&${requestScope.parameters}">
+								href="<%=NoForm%>notice_detailview&no=${bean.no}&${requestScope.parameters}">
 									${bean.subject} 
 								</a>
 							</td>
 							<td>${bean.regdate}</td>
 							<td>
-								<c:if test="${sessionScope.loginfo.id == bean.writer}">
+								<c:if test="${whologin == 2}">
 									<a
 										href="<%=NoForm%>notice_update&no=${bean.no}&${requestScope.parameters}">
 										수정 
 									</a>
 								</c:if>
-								 <c:if test="${sessionScope.loginfo.id != bean.writer}">
-									수정
-								</c:if>
 							</td>
 							<td>
-								<c:if test="${sessionScope.loginfo.id == bean.writer}">
+								<c:if test="${whologin == 2}">
 									<a
 										href="<%=NoForm %>notice_delete&no=${bean.no}&${requestScope.parameters}">
 										삭제 
 									</a>
-								</c:if>
-								 <c:if test="${sessionScope.loginfo.id != bean.writer}">
-									삭제
 								</c:if>
 							</td>
 						</tr>
@@ -141,17 +135,94 @@ int mysearch = 2;
 									onclick="search();">검색</button>
 								<button class="btn btn-default btn-warning" type="button"
 									onclick="searchAll();">전체 검색</button>
-								<button class="btn btn-default btn-warning" type="button"
-									onclick="writeForm();">글 쓰기</button>
-								<!-- 운영자만 글 쓰기 가능으로 hidden처리해야함-->
-								<p class="form-control-static">${requestScope.pagingStatus}</p>
+								<c:if test="${whologin == 2}">
+									<button class="btn btn-default btn-warning" type="button"
+										onclick="writeForm();">글 쓰기</button>
+								</c:if>
+								<div style="float: right; margin-top: 2%;" class="col-md-5">
+									<p class="form-control-static">${requestScope.pagingStatus}</p>
+								</div>
 							</form>
 						</td>
 					</tr>
 				</table>
-			</div>
 			<div align="right" style="float: right;" class="container col-md-7">
 				<footer>${requestScope.pagingHtml}</footer>
+			</div>
+			</div>
+			<div id="menu1" class="container tab-pane fade">
+				<br>
+				<table class="table table-striped table-hover">
+					<thead class="container">
+						<tr>
+							<td class="col-md-2" align="center">제목</td>
+							<td class="col-md-4" align="right">작성 일자</td>
+						</tr>
+					</thead>
+					
+					<c:forEach var="bean" items="${requestScope.lists}">
+						<tr>
+							<td align="center">
+								<c:forEach var="cnt" begin="1" end="${bean.depth}">
+								</c:forEach> 
+								<a
+								href="<%=NoForm%>notice_detailview&no=${bean.no}&${requestScope.parameters}">
+									${bean.subject} 
+								</a>
+							</td>
+							<td>${bean.regdate}</td>
+							<td>
+								<c:if test="${whologin == 2}">
+									<a
+										href="<%=NoForm%>notice_update&no=${bean.no}&${requestScope.parameters}">
+										수정 
+									</a>
+								</c:if>
+							</td>
+							<td>
+								<c:if test="${whologin == 2}">
+									<a
+										href="<%=NoForm %>notice_delete&no=${bean.no}&${requestScope.parameters}">
+										삭제 
+									</a>
+								</c:if>
+							</td>
+						</tr>
+					</c:forEach>
+					<tr>
+						<td colspan="2" align="center">
+							<form action="<%=YesForm%>" class="form-inline" name="myform"
+								method="get">
+								<input type="hidden" name="command" value="cs_center_main">
+								<div class="form-group">
+									<select class="form-control" name="mode" id="mode">
+										<option value="all" selected="selected">-- 선택하세요 --
+										<option value="subject">제목
+										<option value="content">글 내용
+									</select>
+								</div>
+								<div class="form-group">
+									<input type="text" class="form-control btn-xs" name="keyword"
+										id="keyword" placeholder="검색 키워드">
+								</div>
+								<button class="btn btn-default btn-warning" type="submit"
+									onclick="search();">검색</button>
+								<button class="btn btn-default btn-warning" type="button"
+									onclick="searchAll();">전체 검색</button>
+								<c:if test="${whologin == 2}">
+									<button class="btn btn-default btn-warning" type="button"
+										onclick="writeForm();">글 쓰기</button>
+								</c:if>
+								<div style="float: right; margin-top: 2%;" class="col-md-5">
+									<p class="form-control-static">${requestScope.pagingStatus}</p>
+								</div>
+							</form>
+						</td>
+					</tr>
+				</table>
+				<div align="right" style="float: right;" class="container col-md-7">
+					<footer>${requestScope.pagingHtml}</footer>
+				</div>
 			</div>
 			<div id="menu2" class="container tab-pane fade" align="center">
 				<br>

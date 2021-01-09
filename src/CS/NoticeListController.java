@@ -15,7 +15,6 @@ import utility.Paging;
 public class NoticeListController extends SuperClass{
 	@Override
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("csnoticelistcontroller doget");
 		NoticeDAO dao = new NoticeDAO();
 		
 		utility.FlowParameters parameters 
