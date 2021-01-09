@@ -105,7 +105,7 @@
 				<a class="nav-link" href="<%=NoForm%>index">장바구니</a>
 			</li>
 			<li class="nav-item">
-				<a class="nav-link" href="<%=NoForm%>index">고객포럼</a>
+				<a class="nav-link" href="<%=NoForm%>boList">고객포럼</a>
 			</li>
 			
 			<li class="nav-item dropdown">

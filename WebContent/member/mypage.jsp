@@ -11,7 +11,7 @@
 <html>
 <head>
     <style>
-        dl, dt, dd, ul, ol, menu, li {list-style: none; margin: 0px; padding: 0px}
+        dl, dt, dd, ul, ol, menu, li,th {list-style: none; margin: 0px; padding: 0px; font-weight: normal;}
 
         #container {
             position: relative;

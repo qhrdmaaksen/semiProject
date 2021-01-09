@@ -1,8 +1,11 @@
 package common;
 
 
-import com.oreilly.servlet.MultipartRequest;
-import utility.MainUtility;
+
+import java.io.File;
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
@@ -12,10 +15,10 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.File;
-import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
+
+import com.oreilly.servlet.MultipartRequest;
+
+import utility.MainUtility;
 
 @WebServlet(urlPatterns = {"/dodamdodam"},
         initParams = {
@@ -59,7 +62,37 @@ public class Controller extends HttpServlet {
 
         if (command==null) {
             //파일 업로드시 여기에 들어옴.
-        } else {
+        	
+        	System.out.println("파일 업로드를 수행합니다. ");
+			MultipartRequest multi = MainUtility.getMultiPartRequest(request, uploadedPath);
+        	
+			if (multi != null) {
+				command = multi.getParameter("command");
+				
+				//delete_image = 이전에 업로드 했던 이미지 입니다. 
+				//이 파라미터는 상품 수정 페이지 에서 넘어 옵니다. 
+				String delete_image = multi.getParameter("image") ;
+				System.out.println("삭제할 이미지 이름 : " + delete_image);
+				
+				//삭제될 이미지 전체 경로를 구합니다. 
+				String delete_file = this.uploadedPath + "/" + delete_image ;
+				System.out.println("삭제될 파일 : " + delete_image);
+				
+				// File 객체를 구합니다. 
+				File delfile = new File(delete_file);
+				// File 객체의 delete() 메소드를 사용하여 이전에 업로드했던 이미지 파일을 삭제합니다.
+				delfile.delete() ;  
+				
+				
+				//파일 업로드 객첼를 바인딩 합니다. 
+				request.setAttribute("multi", multi);
+				
+			} else {
+				System.out.println("MultipartRequest 객체를 구하지 못했습니다.");
+			}
+			
+			
+        } 
             SuperController controller = this.todolist.get(command) ;
             if(controller != null) {
                 String method = request.getMethod().toLowerCase();
@@ -73,7 +106,6 @@ public class Controller extends HttpServlet {
             }else {
                 System.out.println("command가 널입니다.");
             }
-        }
     }
 
     @Override
