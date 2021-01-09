@@ -13,30 +13,49 @@ int mysearch = 2;
 <!DOCTYPE html>
 <html>
 <head>
-<title>cs-center</title>
-<meta charset="UTF-8">
-<%@ include file="../common/nav.jsp"%>
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-<script type="text/javascript">
-	$('#mode option').each(function(index) {
-		if ($(this).val() == '${requestScope.mode}') {
-			$(this).attr('selected', 'selected');
+	<title>cs_center</title>
+	<meta charset="UTF-8">
+	<%@ include file="../common/nav.jsp"%>
+	<link rel="stylesheet"
+		href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+	<script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+	<script
+		src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+	<script type="text/javascript">
+		$('#mode option').each(function(index) {
+			if ($(this).val() == '${requestScope.mode}') {
+				$(this).attr('selected', 'selected');
+			}
+		});
+		$('#keyword').val('${requestScope.keyword}');
+		function writeForm(){
+			location.href='<%=NoForm%>notice_insert';
 		}
-	});
-	$('#keyword').val('${requestScope.keyword}');
-</script>
-<style type="text/css">
-.bold {
-	font-weight: bold;
-}
-</style>
+	</script>
+	<script type="text/javascript">
+		#(document).ready(function(){
+			$.ajax({
+				url:"${pageContext.request.contextPath}/dodamdodam?command=notice_insert",
+				type:"get",
+			})
+		})success: (response);
+	</script>
+	<style type="text/css">
+		.bold {
+		font-weight: bold;
+		}
+		.anchor-link, .anchor-link:visited {
+			text-decoration: none;
+		}
+		
+		.highlighted-link {
+			font-weight: bold;
+			font-size: 1.05em;
+		}
+	</style>
 </head>
 <body>
 	<div class="container mt-3">
@@ -60,17 +79,53 @@ int mysearch = 2;
 			<div id="home" class="container tab-pane active">
 				<br>
 				<table class="table table-striped table-hover">
-					<thead>
+					<thead class="container">
 						<tr>
-							<td align="center">제목</td>
-							<td align="right">작성 일자</td>
+							<td class="col-md-2" align="center">제목</td>
+							<td class="col-md-4" align="right">작성 일자</td>
 						</tr>
 					</thead>
+					
+					<c:forEach var="bean" items="${requestScope.lists}">
+						<tr> 
+							<td align="center">
+								<c:forEach var="cnt" begin="1" end="${bean.depth}">
+								</c:forEach> 
+								<a
+									href="<%=NoForm%>notice_detailview&no=${bean.no}&${requestScope.parameters}">
+									${bean.subject} 
+								</a>
+							</td>
+							<td>${bean.regdate}</td>
+							<td>
+								<c:if test="${sessionScope.loginfo.id == bean.writer}">
+									<a
+										href="<%=NoForm%>notice_update&no=${bean.no}&${requestScope.parameters}">
+										수정 
+									</a>
+								</c:if>
+								 <c:if test="${sessionScope.loginfo.id != bean.writer}">
+									수정
+								</c:if>
+							</td>
+							<td>
+								<c:if test="${sessionScope.loginfo.id == bean.writer}">
+									<a
+										href="<%=NoForm %>notice_delete&no=${bean.no}&${requestScope.parameters}">
+										삭제 
+									</a>
+								</c:if>
+								 <c:if test="${sessionScope.loginfo.id != bean.writer}">
+									삭제
+								</c:if>
+							</td>
+						</tr>
+					</c:forEach>
 					<tr>
 						<td colspan="2" align="center">
 							<form action="<%=YesForm%>" class="form-inline" name="myform"
 								method="get">
-								<input type="hidden" name="command" value="cs-center-main">
+								<input type="hidden" name="command" value="cs_center_main">
 								<div class="form-group">
 									<select class="form-control" name="mode" id="mode">
 										<option value="all" selected="selected">-- 선택하세요 --
@@ -93,211 +148,10 @@ int mysearch = 2;
 							</form>
 						</td>
 					</tr>
-					<c:forEach var="bean" items="${requestScope.lists}">
-						<tr>
-							<td><c:forEach var="cnt" begin="1" end="${bean.depth}">
-									<span class="badge re">re</span>
-								</c:forEach> <a
-								href="<%=NoForm%>cs-detailView&no=${bean.no}&${requestScope.parameters}">
-									${bean.subject} </a></td>
-							<td>${bean.writer}</td>
-							<td>${bean.content}</td>
-							<td>${bean.regdate}</td>
-							<td><c:if test="${sessionScope.loginfo.id == bean.writer}">
-									<a
-										href="<%=NoForm%>cs-update&no=${bean.no}&${requestScope.parameters}">
-										수정 </a>
-								</c:if> <c:if test="${sessionScope.loginfo.id != bean.writer}">
-								수정
-						</c:if></td>
-							<td><c:if test="${sessionScope.loginfo.id == bean.writer}">
-									<a
-										href="<%=NoForm %>cs-delete&no=${bean.no}&${requestScope.parameters}">
-										삭제 </a>
-								</c:if> <c:if test="${sessionScope.loginfo.id != bean.writer}">
-							삭제
-						</c:if></td>
-						</tr>
-					</c:forEach>
 				</table>
-				<form class="form-horizontal" role="form" action="<%=YesForm%>"
-					method="post">
-					<input type="hidden" name="command" value="cs-center-insert">
-					<div class="row">
-						<div class="form-group col-sm-6">
-							<label class="control-label col-sm-<%=formleft%>" for="writer">작성자</label>
-							<div class="col-sm-12">
-								<input type="text" class="form-control" name="fakewriter"
-									id="fakewriter" placeholder="작성자"
-									value="${sessionScope.loginfo.name}(${sessionScope.loginfo.id})"
-									disabled="disabled"> <input type="hidden" name="writer"
-									id="writer" value="${sessionScope.loginfo.id}">
-							</div>
-							<label class="control-label col-sm-12" for="subject"> </label>
-							<div class="col-sm-12">
-								<input type="text" class="form-control" name="subject"
-									id="subject" placeholder="글 제목" value="${bean.subject}">
-								<span class="err">${errsubject}</span>
-							</div>
-							<div class="form-group">
-								<label class="control-label col-sm-<%=formleft%>" for="image"></label>
-								<div class="col-sm-<%=formright%>">
-									<input type="file" class="form-control" name="image" id="image"
-										placeholder="이미지를 넣어 주셔용^^"><span
-										class="err form-control-static">${errimage}</span>
-								</div>
-							</div>
-							<label class="control-label col-sm-<%=formleft%>" for="regdate">
-							</label>
-							<%-- 	<div class="col-sm-12">
-						<input type="datetime" class="form-control" name="regdate"
-							id="regdate" placeholder="작성 일자" value="${bean.regdate}"> <span
-							class="err">${errregdate}</span>
-					</div> --%>
-						</div>
-						<div class="form-group col-sm-6">
-							<label class="control-label col-sm-12" for="content"> </label>
-							<div class="col-sm-12">
-								<textarea name="content" id="content" rows="5" cols=""
-									placeholder="글 내용" class="form-control">${bean.content}</textarea>
-								<span class="err">${errcontent}</span>
-							</div>
-							<br>
-							<div align="center" class="col-sm-offset-3 col-sm-12 row">
-								<div class="col-sm-6">
-									<button class="btn btn-outline-primary" type="submit">글
-										등록</button>
-								</div>
-								<div class="col-sm-6">
-									<button class="btn btn-outline-danger" type="reset">취소</button>
-								</div>
-							</div>
-						</div>
-					</div>
-					<%-- <div class="form-group">
-				<label class="control-label col-sm-<%=formleft%>" for="password">비밀
-					번호</label>
-				<div class="col-sm-<%=formright%>">
-					<input type="password" class="form-control" name="password"
-						id="password" placeholder="비밀 번호를 넣어 주셔용^^" value="${bean.password}">
-						<span class="err">${errpassword}</span>
-				</div>
-			</div> --%>
-				</form>
 			</div>
-			<div id="menu1" class="container tab-pane fade">
-				<br>
-				<table class="table table-striped table-hover">
-					<thead>
-						<tr>
-							<td align="center">제목</td>
-							<td align="right">작성 일자</td>
-						</tr>
-					</thead>
-					<tr>
-						<td colspan="2" align="center">
-							<form action="<%=YesForm%>" class="form-inline" name="myform"
-								method="get">
-								<input type="hidden" name="command" value="cs-center-main">
-								<div class="form-group">
-									<select class="form-control" name="mode" id="mode">
-										<option value="all" selected="selected">-- 선택하세요 --
-										<option value="subject">제목
-										<option value="content">글 내용
-									</select>
-								</div>
-								<div class="form-group">
-									<input type="text" class="form-control btn-xs" name="keyword"
-										id="keyword" placeholder="검색 키워드">
-								</div>
-								<button class="btn btn-default btn-warning" type="submit"
-									onclick="search();">검색</button>
-								<button class="btn btn-default btn-warning" type="button"
-									onclick="searchAll();">전체 검색</button>
-								<button class="btn btn-default btn-warning" type="button"
-									onclick="writeForm();">글 쓰기</button>
-								<!-- 운영자만 글 쓰기 가능으로 hidden처리해야함-->
-								<p class="form-control-static">${requestScope.pagingStatus}</p>
-							</form>
-						</td>
-					</tr>
-					<c:forEach var="bean" items="${requestScope.lists}">
-						<tr>
-							<td><c:forEach var="cnt" begin="1" end="${bean.depth}">
-									<span class="badge re">re</span>
-								</c:forEach> <a
-								href="<%=NoForm%>cs-detailView&no=${bean.no}&${requestScope.parameters}">
-									${bean.subject} </a></td>
-							<td>${bean.writer}</td>
-							<td>${bean.content}</td>
-							<td>${bean.regdate}</td>
-							<td><c:if test="${sessionScope.loginfo.id == bean.writer}">
-									<a
-										href="<%=NoForm%>cs-update&no=${bean.no}&${requestScope.parameters}">
-										수정 </a>
-								</c:if> <c:if test="${sessionScope.loginfo.id != bean.writer}">
-								수정
-						</c:if></td>
-							<td><c:if test="${sessionScope.loginfo.id == bean.writer}">
-									<a
-										href="<%=NoForm %>cs-delete&no=${bean.no}&${requestScope.parameters}">
-										삭제 </a>
-								</c:if> <c:if test="${sessionScope.loginfo.id != bean.writer}">
-							삭제
-						</c:if></td>
-						</tr>
-					</c:forEach>
-				</table>
-				<form class="form-horizontal" role="form" action="<%=YesForm%>"
-					method="post">
-					<input type="hidden" name="command" value="cs-center-insert">
-					<div class="row">
-						<div class="form-group col-sm-6">
-							<label class="control-label col-sm-<%=formleft%>" for="writer">작성자</label>
-							<div class="col-sm-12">
-								<input type="text" class="form-control" name="fakewriter"
-									id="fakewriter" placeholder="작성자"
-									value="${sessionScope.loginfo.name}(${sessionScope.loginfo.id})"
-									disabled="disabled"> <input type="hidden" name="writer"
-									id="writer" value="${sessionScope.loginfo.id}">
-							</div>
-							<label class="control-label col-sm-12" for="subject"> </label>
-							<div class="col-sm-12">
-								<input type="text" class="form-control" name="subject"
-									id="subject" placeholder="글 제목" value="${bean.subject}">
-								<span class="err">${errsubject}</span>
-							</div>
-							<div class="form-group">
-								<label class="control-label col-sm-<%=formleft%>" for="image"></label>
-								<div class="col-sm-<%=formright%>">
-									<input type="file" class="form-control" name="image" id="image"
-										placeholder="이미지를 넣어 주셔용^^"><span
-										class="err form-control-static">${errimage}</span>
-								</div>
-							</div>
-							<label class="control-label col-sm-<%=formleft%>" for="regdate">
-							</label>
-						</div>
-						<div class="form-group col-sm-6">
-							<label class="control-label col-sm-12" for="content"> </label>
-							<div class="col-sm-12">
-								<textarea name="content" id="content" rows="5" cols=""
-									placeholder="글 내용" class="form-control">${bean.content}</textarea>
-								<span class="err">${errcontent}</span>
-							</div>
-							<br>
-							<div align="center" class="col-sm-offset-3 col-sm-12 row">
-								<div class="col-sm-6">
-									<button class="btn btn-outline-primary" type="submit">글
-										등록</button>
-								</div>
-								<div class="col-sm-6">
-									<button class="btn btn-outline-danger" type="reset">취소</button>
-								</div>
-							</div>
-						</div>
-					</div>
-				</form>
+			<div align="right" style="float: right;" class="container col-md-7">
+				<footer>${requestScope.pagingHtml}</footer>
 			</div>
 			<div id="menu2" class="container tab-pane fade" align="center">
 				<br>
@@ -312,7 +166,8 @@ int mysearch = 2;
 					<div class="modal-dialog modal-xl" role="document">
 						<div class="modal-content">
 							<div class="modal-header">
-								<h5 class="modal-title" id="exampleModalLongTitle" style="font-weight: bold;">도담도담</h5>
+								<h5 class="modal-title" id="exampleModalLongTitle"
+									style="font-weight: bold;">도담도담</h5>
 								<button type="button" class="close" data-dismiss="modal"
 									aria-label="Close">
 									<span aria-hidden="true">&times;</span>
@@ -320,16 +175,6 @@ int mysearch = 2;
 							</div>
 							<div class="modal-body">
 								<div class="policy privacy" style="display: block;">
-<style>
-.anchor-link, .anchor-link:visited {
-	text-decoration: none;
-}
-
-.highlighted-link {
-	font-weight: bold;
-	font-size: 1.05em;
-}
-</style>
 									<div id="promise-kr">
 										<h2 style="text-align: center;">고객의 개인정보를 위한 도담도담의 약속</h2>
 										<div>
@@ -347,11 +192,11 @@ int mysearch = 2;
 										</ul>
 									</div>
 									<p>
-										<br> 도담도담은 고객이 도담도담에서 상품을 구매하고 배송받은 이후 전 과정에 걸쳐 빠르고 혁신적이며 안전한
-										쇼핑을 제공하기 위해 헌신하고 있습니다. 이러한 차별화된 경험을 통해 고객들이 "도담도담 없이 어떻게 살았을까"라고
-										말하는 세상을 만드는 것이 도담도담의 목표입니다. 도담도담은 고객의 개인정보를 보호하면서 이러한 개인 맞춤형 온라인
-										쇼핑서비스를 제공하는 것이 가능하다고 믿습니다. 따라서 고객의 개인정보를 보호하는 것은 도담도담의 중요한 사업
-										원칙입니다.&nbsp;&nbsp;
+										<br> 도담도담은 고객이 도담도담에서 상품을 구매하고 배송받은 이후 전 과정에 걸쳐 빠르고 혁신적이며
+										안전한 쇼핑을 제공하기 위해 헌신하고 있습니다. 이러한 차별화된 경험을 통해 고객들이 "도담도담 없이 어떻게
+										살았을까"라고 말하는 세상을 만드는 것이 도담도담의 목표입니다. 도담도담은 고객의 개인정보를 보호하면서 이러한
+										개인 맞춤형 온라인 쇼핑서비스를 제공하는 것이 가능하다고 믿습니다. 따라서 고객의 개인정보를 보호하는 것은
+										도담도담의 중요한 사업 원칙입니다.&nbsp;&nbsp;
 									</p>
 									<p>
 										<b>&nbsp; &nbsp;</b>
@@ -359,9 +204,9 @@ int mysearch = 2;
 									<p>
 										<b>고객의 개인정보는 고객의 것이며 도담도담은 이를 항상 존중합니다.&nbsp;</b>
 									</p>
-									<p>도담도담은 고객이 믿고 맡긴 개인정보를 제3자와 거래하지 않습니다. 주문 처리 또는 고객 경험개선을 위해
-										수탁업체에 제한적으로 정보를 제공할 수 있으나, 그 경우 반드시 업체명과 제공되는 정보를 고지합니다. 도담도담은
-										데이터 기반의 회사입니다. 데이터를 활용하여 고객 경험을 개선한다는 우리의 설립 원칙은 지금까지도
+									<p>도담도담은 고객이 믿고 맡긴 개인정보를 제3자와 거래하지 않습니다. 주문 처리 또는 고객 경험개선을
+										위해 수탁업체에 제한적으로 정보를 제공할 수 있으나, 그 경우 반드시 업체명과 제공되는 정보를 고지합니다.
+										도담도담은 데이터 기반의 회사입니다. 데이터를 활용하여 고객 경험을 개선한다는 우리의 설립 원칙은 지금까지도
 										유효합니다.&nbsp;</p>
 									<p>
 										<br> <b>도담도담의 혁신은 고객의 개인정보를 보호하며 맞춤형 쇼핑 경험을 제공하는 데서
@@ -372,20 +217,21 @@ int mysearch = 2;
 										방식에 맞게 도담도담맨 또는 도담도담 플렉스가 상품을 배송합니다.&nbsp;</p>
 									<p>
 										또한 로켓페이와 같은 새롭고 매력적인 서비스 개발의 중심에는 개인정보에 대한 이해, 그리고 보안과 개인정보보호에
-										대한 강력한 의지가 반영되어 있습니다. 도담도담 자체적으로 개발한 로켓페이는 사용이 편리한 결제 플랫폼으로, 고도의
-										암호화와 데이터 분석을 통해 빠르고 안전하게, 터치 한 번으로 결제를 가능하게 합니다.&nbsp;&nbsp;<br>
-										<br> <b>도담도담은 세계 최고의 전문가와 기술로 고객을 보호합니다.&nbsp;</b>
+										대한 강력한 의지가 반영되어 있습니다. 도담도담 자체적으로 개발한 로켓페이는 사용이 편리한 결제 플랫폼으로,
+										고도의 암호화와 데이터 분석을 통해 빠르고 안전하게, 터치 한 번으로 결제를 가능하게
+										합니다.&nbsp;&nbsp;<br> <br> <b>도담도담은 세계 최고의 전문가와
+											기술로 고객을 보호합니다.&nbsp;</b>
 									</p>
 									<p>
 										안전하고 신뢰할 수 있는 서비스에 대한 중요성은 도담도담의 기업 문화 전반에 깊숙이 뿌리내리고 있습니다. <br>
-										<br> 도담도담은 세계 최고 수준의 시스템 및 기술력을 바탕으로 고객의 개인정보를 안전하게 보호합니다.
-										도담도담 보안팀은 관련 시스템을 24시간 끊김없이 모니터링하며 지속적으로 진화하는 사이버 위협에 맞추어 프로세스를
-										강화합니다. 또한 글로벌 최고 수준의 기준에 부합하고 보다 엄격한 내부 기준을 마련하기 위해 보안과
-										개인정보보호에 지속적으로 많은 투자를 하고 있습니다. 보안 및 개인정보보호 전담팀은 임직원을 대상으로 데이터
-										취급방법에 대한 교육을 실시합니다. 임직원 모두는 기존 관행에 언제든지 문제를 제기하도록 장려되며, 고객의
-										개인정보 보호에 대한 경각심을 갖고 노력을 기울이는 것을 공동의 책임으로 여기고 있습니다.<br> <br>
-										더 나아가 도담도담은 관련 법령을 준수하며 정부 및 규제 당국과 긴밀히 협력하여 이커머스 산업의 미래를 만들어
-										나가고 있습니다.&nbsp;
+										<br> 도담도담은 세계 최고 수준의 시스템 및 기술력을 바탕으로 고객의 개인정보를 안전하게
+										보호합니다. 도담도담 보안팀은 관련 시스템을 24시간 끊김없이 모니터링하며 지속적으로 진화하는 사이버 위협에
+										맞추어 프로세스를 강화합니다. 또한 글로벌 최고 수준의 기준에 부합하고 보다 엄격한 내부 기준을 마련하기 위해
+										보안과 개인정보보호에 지속적으로 많은 투자를 하고 있습니다. 보안 및 개인정보보호 전담팀은 임직원을 대상으로
+										데이터 취급방법에 대한 교육을 실시합니다. 임직원 모두는 기존 관행에 언제든지 문제를 제기하도록 장려되며,
+										고객의 개인정보 보호에 대한 경각심을 갖고 노력을 기울이는 것을 공동의 책임으로 여기고 있습니다.<br>
+										<br> 더 나아가 도담도담은 관련 법령을 준수하며 정부 및 규제 당국과 긴밀히 협력하여 이커머스
+										산업의 미래를 만들어 나가고 있습니다.&nbsp;
 									</p>
 									<p>
 										<b><br></b>
@@ -437,9 +283,9 @@ int mysearch = 2;
 									<h2 style="text-align: left;">
 										<b style="font-family: Arial, sans-serif; font-size: 12px;">
 											<p>
-												<b>고객의 개인정보 보호는 도담도담 주식회사(이하 ‘도담도담’)의 중요한 사업 원칙입니다. 도담도담은
-													지속적으로 고객에게 더 높은수준의 서비스, 편리함과 가치를 제공하기 위해 노력하지만 결코 고객 개인정보
-													보호라는 가치를 희생하며 서비스 목표를 달성하지 않습니다.&nbsp; &nbsp;&nbsp;</b><br>
+												<b>고객의 개인정보 보호는 도담도담 주식회사(이하 ‘도담도담’)의 중요한 사업 원칙입니다.
+													도담도담은 지속적으로 고객에게 더 높은수준의 서비스, 편리함과 가치를 제공하기 위해 노력하지만 결코 고객
+													개인정보 보호라는 가치를 희생하며 서비스 목표를 달성하지 않습니다.&nbsp; &nbsp;&nbsp;</b><br>
 											</p>
 										</b>
 									</h2>
@@ -448,9 +294,9 @@ int mysearch = 2;
 											<b>따라서, 도담도담이 수행하는 모든 활동은 정보통신망 이용촉진 및 정보보호 등에 관한 법률(이하
 												‘정보통신망법’)과 개인정보 보호법 등 국내 관련 법령을 준수하며, 본 개인정보 처리방침을 따릅니다.</b>
 										</p>
-										<p>본 개인정보 처리방침은 도담도담의 개인정보 처리와 관련한 정보를 제공하고 고객이 가진 권리 및 어떻게
-											그 권리를 행사할 수 있는지에 대하여 설명합니다. 마지막으로, 도담도담의 서비스 이용 중 개인정보와 관련하여
-											문의가 있을 경우 연락할 수 있는 개인정보 보호책임자 및 담당자의 연락처를 안내합니다.</p>
+										<p>본 개인정보 처리방침은 도담도담의 개인정보 처리와 관련한 정보를 제공하고 고객이 가진 권리 및
+											어떻게 그 권리를 행사할 수 있는지에 대하여 설명합니다. 마지막으로, 도담도담의 서비스 이용 중 개인정보와
+											관련하여 문의가 있을 경우 연락할 수 있는 개인정보 보호책임자 및 담당자의 연락처를 안내합니다.</p>
 										<p>
 											<br> 도담도담은 고객의 개인정보와 관련된 변경사항이 생길 경우 개인정보 처리방침 개정을 통해 빠른
 											시일 안에 고객에게 안내합니다. 개인정보 처리방침의 세부 목차는 아래와 같습니다.
@@ -467,9 +313,9 @@ int mysearch = 2;
 										</p>
 										<p>정회원이란 도담도담 웹사이트 혹은 도담도담 앱을 통해 가입한 회원을 말합니다.</p>
 									</b><span style="font-weight: bold;"><br>※ 부정이용이란 회원 탈퇴
-										후 재가입, 상품 구매 후 구매취소 등을 반복적으로 행하는 등 “도담도담”이 제공하는 할인쿠폰, 이벤트 혜택 등의
-										경제상 이익을 불·편법적으로 수취하는 행위, 이용약관 등에서 금지하고 있는 행위, 명의도용 등의 불·편법 행위
-										등을 포함합니다.&nbsp;</span><br>
+										후 재가입, 상품 구매 후 구매취소 등을 반복적으로 행하는 등 “도담도담”이 제공하는 할인쿠폰, 이벤트 혜택
+										등의 경제상 이익을 불·편법적으로 수취하는 행위, 이용약관 등에서 금지하고 있는 행위, 명의도용 등의 불·편법
+										행위 등을 포함합니다.&nbsp;</span><br>
 									<table border="1" width="80%">
 										<thead>
 											<tr>
@@ -554,9 +400,9 @@ int mysearch = 2;
 													기록 보존, 서비스 이용에 따른 요금 정산, 서비스 안전한 이용을 위한 부정이용 방지, 서비스 이용 기록과
 													접속 빈도 분석, 서비스 이용에 대한 통계, 서비스 개선에 활용, 맞춤형 서비스 제공</td>
 												<td width="291">- 개인식별정보(이름, 생년월일, 성별, 휴대폰번호,
-													중복가입확인정보(DI), 고객번호), 나중결제 서비스 이용 내역(가입일시, 결제 및 연체 현황), 도담도담이
-													제공하는 서비스 이용 내역(가입 내역, 등록한 배송지 수, 기본 배송 주소, 구매/취소/환불 내역, 리뷰
-													내역), 부정거래정보, 서비스 접속 기록<br> <br> -
+													중복가입확인정보(DI), 고객번호), 나중결제 서비스 이용 내역(가입일시, 결제 및 연체 현황),
+													도담도담이 제공하는 서비스 이용 내역(가입 내역, 등록한 배송지 수, 기본 배송 주소, 구매/취소/환불
+													내역, 리뷰 내역), 부정거래정보, 서비스 접속 기록<br> <br> -
 													개인신용평가회사(코리아크레딧뷰로 주식회사)로부터 조회할 개인신용정보: 신용등급, 신용점수, 신용정보 변동
 													내역, 신용정보 조회내역(기관명, 조회일자, 조회목적), 카드현황(카드사, 보유카드, 이용내역, 한도,
 													카드대출내역, 카드연체금액), 대출현황(기관명, 개설일, 만기일, 약정금액, 대출잔액, 상환금액,
@@ -564,8 +410,8 @@ int mysearch = 2;
 													상환일자, 상환금액, 대지급잔액), 보증 현황(기관명, 보증일자, 보증금액), 기타(채무불이행정보,
 													공공정보, 금융질서문란정보), 고객분류코드<br>
 												</td>
-												<td width="291">도담도담 회원 탈퇴 시 까지 또는 관계 법령에 따른 보관 의무 기간 동안
-													보관</td>
+												<td width="291">도담도담 회원 탈퇴 시 까지 또는 관계 법령에 따른 보관 의무 기간
+													동안 보관</td>
 											</tr>
 											<tr>
 												<td rowspan="3">선택정보</td>
@@ -588,17 +434,17 @@ int mysearch = 2;
 									<span style="font-family: Arial, sans-serif; font-size: 12px;">
 										<p style="font-weight: bold;">
 											<br> ※ 부정이용이란 회원 탈퇴 후 재가입, 상품 구매 후 구매취소 등을 반복적으로 행하는 등
-											“도담도담”이 제공하는 할인쿠폰, 이벤트 혜택 등의 경제상 이익을 불·편법적으로 수취하는 행위, 이용약관 등에서
-											금지하고 있는 행위, 명의도용 등의 불·편법 행위 등을 포함합니다. <br> ※ 고객의 권리를 보장해
-											드리기 위하여 탈퇴 회원 또는 장기 미이용 회원에게 환불 또는 리콜 안내를 목적으로 구매정보를 이용하여 연락을
-											취할 수 있습니다. <br> ※ 위의 정보는 서비스 이용에 따른 통계∙분석에 이용될 수
+											“도담도담”이 제공하는 할인쿠폰, 이벤트 혜택 등의 경제상 이익을 불·편법적으로 수취하는 행위, 이용약관
+											등에서 금지하고 있는 행위, 명의도용 등의 불·편법 행위 등을 포함합니다. <br> ※ 고객의 권리를
+											보장해 드리기 위하여 탈퇴 회원 또는 장기 미이용 회원에게 환불 또는 리콜 안내를 목적으로 구매정보를 이용하여
+											연락을 취할 수 있습니다. <br> ※ 위의 정보는 서비스 이용에 따른 통계∙분석에 이용될 수
 											있습니다.&nbsp; &nbsp;
 										</p>
 										<p style="font-weight: bold;">
 											<br> 1.2 비회원
 										</p>
-										<p style="font-weight: bold;">비회원은 도담도담의 웹 혹은 앱을 통해 회원가입을 하지
-											않고 도담도담의 서비스(소식지 등)를 이용하는 회원을 말합니다.</p>
+										<p style="font-weight: bold;">비회원은 도담도담의 웹 혹은 앱을 통해 회원가입을
+											하지 않고 도담도담의 서비스(소식지 등)를 이용하는 회원을 말합니다.</p>
 										<table style="font-weight: bold; text-align: center;"
 											border="1" width="80%">
 											<thead>
@@ -673,9 +519,9 @@ int mysearch = 2;
 											</tbody>
 										</table> <br> 1.4 크리에이터 회원
 										<p></p>
-										<p style="font-weight: bold;">크리에이터란 도담도담에서 제공하는 실시간 영상 스트리밍
-											채널을 이용한 상품 판매 서비스인 도담도담라이브를 이용하여 상품을 판매하고자 실시간 영상 및 음성 스트리밍 서비스
-											기능을 이용하는 회원을 의미합니다.</p>
+										<p style="font-weight: bold;">크리에이터란 도담도담에서 제공하는 실시간 영상
+											스트리밍 채널을 이용한 상품 판매 서비스인 도담도담라이브를 이용하여 상품을 판매하고자 실시간 영상 및 음성
+											스트리밍 서비스 기능을 이용하는 회원을 의미합니다.</p>
 										<table border="1" width="80%" style="font-weight: bold;">
 											<thead>
 												<tr>
@@ -825,7 +671,8 @@ int mysearch = 2;
 														인적사항(주소,&nbsp;성명,&nbsp;생년월일),&nbsp;주문일자,&nbsp;상품명,&nbsp;수량,&nbsp;주문금액</td>
 												</tr>
 												<tr>
-													<td width="20%">해외직구 상품 제공업체- DodamDodam Global LLC(미국)</td>
+													<td width="20%">해외직구 상품 제공업체- DodamDodam Global
+														LLC(미국)</td>
 													<td width="25%">서비스제공,&nbsp;구매자확인,&nbsp;해피콜,&nbsp;통관업무처리※&nbsp;물품
 														구매 시 구매내역 전달</td>
 													<td width="35%">성명,&nbsp;휴대전화번호,&nbsp;배송지주소,&nbsp;개인통관고유부호<br>
@@ -833,8 +680,8 @@ int mysearch = 2;
 													</td>
 												</tr>
 												<tr>
-													<td width="20%">해외직구 상품 제공업체-DodamDodam Shanghai Trading
-														Co., Ltd.(중국)</td>
+													<td width="20%">해외직구 상품 제공업체-DodamDodam Shanghai
+														Trading Co., Ltd.(중국)</td>
 													<td width="25%">서비스제공,&nbsp;구매자확인,&nbsp;해피콜,&nbsp;통관업무처리※&nbsp;물품
 														구매 시 구매내역 전달</td>
 													<td width="35%">성명,&nbsp;휴대전화번호,&nbsp;배송지주소,&nbsp;개인통관고유부호<br>
@@ -846,8 +693,9 @@ int mysearch = 2;
 										<p style="font-weight: bold;">
 											※ 동의 거부권 등에 대한 고지<br> 개인정보 제공은 서비스 이용을 위해 꼭 필요합니다. 개인정보
 											제공을 거부하실 수 있으나, 이 경우 서비스 이용이 제한될 수 있습니다. 개인정보 제3자 제공은 구매 시에만
-											이뤄지며, 명확한 내용은 구매 시 안내하여 드립니다.로켓배송상품은 도담도담이 직접 배송하는 상품으로, 개인정보를
-											제3자(판매자)에게 제공하지 않습니다.<br> <br> 2.2 개인신용정보 제공 및 조회
+											이뤄지며, 명확한 내용은 구매 시 안내하여 드립니다.로켓배송상품은 도담도담이 직접 배송하는 상품으로,
+											개인정보를 제3자(판매자)에게 제공하지 않습니다.<br> <br> 2.2 개인신용정보 제공
+											및 조회
 										</p>
 										<p style="font-weight: bold;"></p>
 										<table border="1" width="80%" style="font-weight: bold;">
@@ -1193,11 +1041,11 @@ int mysearch = 2;
 											DB에 옮겨져 내부규정 및 관련 법령을 준수하여 안전하게 보관되며, 정해진 기간이 종료되었을 때 지체없이
 											파기됩니다. 이때, 별도의 DB로 옮겨진 개인정보는 회원이 동의한 목적을 초과하거나 혹은 법률이 정한 경우
 											외의 다른 목적으로 이용되지 않습니다.</p>
-										<p style="font-weight: bold;">도담도담을 최종 이용 후 1년 동안 이용 기록이 없는
-											고객(장기미이용회원)의 개인정보는 별도로 분리하여 안전하게 관리하게 되며, 대상자에게는 분리 보관 처리일을
-											기준으로 하여 최소 30일 이전에 이메일 주소를 통해 안내를 합니다. 단,통신비밀보호법, 전자상거래 등에서의
-											소비자보호에 관한 법률 등의 관계법령의 규정에 의하여 보존할 필요가 있는 경우 규정된 기간 동안 고객의
-											개인정보를 보관합니다.</p>
+										<p style="font-weight: bold;">도담도담을 최종 이용 후 1년 동안 이용 기록이
+											없는 고객(장기미이용회원)의 개인정보는 별도로 분리하여 안전하게 관리하게 되며, 대상자에게는 분리 보관
+											처리일을 기준으로 하여 최소 30일 이전에 이메일 주소를 통해 안내를 합니다. 단,통신비밀보호법, 전자상거래
+											등에서의 소비자보호에 관한 법률 등의 관계법령의 규정에 의하여 보존할 필요가 있는 경우 규정된 기간 동안
+											고객의 개인정보를 보관합니다.</p>
 										<p style="font-weight: bold;">
 											<br>
 										</p>
@@ -1209,21 +1057,22 @@ int mysearch = 2;
 											이용이 제한될 수 있습니다. 도담도담이 수집한 개인정보는 아래와 같은 방법을 통해 확인할 수 있습니다:</p>
 										<p style="font-weight: bold;">
 											&nbsp; &nbsp; &nbsp;<b> [수집된 개인정보 확인]</b><br> &nbsp;
-											&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;· 도담도담 웹페이지에서 - 도담도담 &gt; My
-											정보 &gt; 개인정보 확인 수정 / 주문목록 / 배송조회<br> &nbsp; &nbsp;
+											&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;· 도담도담 웹페이지에서 - 도담도담 &gt;
+											My 정보 &gt; 개인정보 확인 수정 / 주문목록 / 배송조회<br> &nbsp; &nbsp;
 											&nbsp; &nbsp; &nbsp; &nbsp;· 도담도담 모바일앱에서 - 도담도담 &gt; 내정보 관리
 											&gt; 회원정보 수정 / 주문목록 / 배송조회<br> <br> 도담도담 웹 또는 앱을 통해
 											직접 확인하지 못하는 정보는 도담도담 고객센터(1577-7011, 1:1 채팅문의,
 											help@DodamDodam.com)에 요청하여 확인할 수 있습니다.
 										</p>
 										<p style="font-weight: bold;">개인정보 동의 철회 및 삭제, 처리 정지를
-											요청하고자 하는 경우에는 도담도담 고객센터(1577-7011, 1:1 채팅문의, help@DodamDodam.com)를
-											통해 요청할 수 있습니다. 또한, 고객은 언제든 회원탈퇴를 통해 개인정보의 수집 및 이용 동의를 철회할 수
-											있습니다. 이러한 요청 시, 서비스의 일부 또는 전부 이용이 제한될 수 있습니다. 또한, 법률에 특별한 규정이
-											있거나 법령상 의무를 준수하기 위하여 불가피한 경우, 다른 사람의 생명·신체를 해할 우려가 있거나 다른사람의
-											재산과 그 밖의 이익을 부당하게 침해할 우려가 있는 경우, 개인정보를 처리하지 아니하면 정보 주체와 약정한
-											서비스를 제공하지 못하는 등 계약의 이행이 곤란한 경우로서 정보주체가 그 계약의 해지 의사를 명확하게 밝히지
-											아니한경우에는 동의 철회, 삭제, 처리 정지가 어려울 수 있습니다.</p>
+											요청하고자 하는 경우에는 도담도담 고객센터(1577-7011, 1:1 채팅문의,
+											help@DodamDodam.com)를 통해 요청할 수 있습니다. 또한, 고객은 언제든 회원탈퇴를 통해
+											개인정보의 수집 및 이용 동의를 철회할 수 있습니다. 이러한 요청 시, 서비스의 일부 또는 전부 이용이 제한될
+											수 있습니다. 또한, 법률에 특별한 규정이 있거나 법령상 의무를 준수하기 위하여 불가피한 경우, 다른 사람의
+											생명·신체를 해할 우려가 있거나 다른사람의 재산과 그 밖의 이익을 부당하게 침해할 우려가 있는 경우,
+											개인정보를 처리하지 아니하면 정보 주체와 약정한 서비스를 제공하지 못하는 등 계약의 이행이 곤란한 경우로서
+											정보주체가 그 계약의 해지 의사를 명확하게 밝히지 아니한경우에는 동의 철회, 삭제, 처리 정지가 어려울 수
+											있습니다.</p>
 										<p style="font-weight: bold;">요청하신 처리가 완료될 때까지 해당 정보를
 											이용하거나 타인에게 제공하지 않습니다. 또한, 합리적인 사유로 잘못된 개인정보를 제3자에게 이미 제공한 경우,
 											그 결과를 지체 없이 제3자에게 통지하여 동의 철회, 삭제, 처리 정지하도록 조치합니다</p>
@@ -1278,10 +1127,10 @@ int mysearch = 2;
 											고객에게 맞춤형 광고를 제공하기 위하여 도담도담은 웹 브라우저에서는 ‘쿠키’, 모바일 앱에서는
 											광고식별자(ADID)를 수집하여 사용합니다. 도담도담은 쿠키 및 광고식별자를 통해 고객의 서비스 사용 이력을
 											자동으로 수집하여 페이스북 및 Criteo(Tune을 통해서도 전달됨)에 제공합니다. 페이스북 및
-											Criteo(Tune)는 이를 활용하여 고객 맞춤 광고를 진행합니다. 도담도담에서 수집하는 쿠키 및 광고식별자는
-											다른 개인정보와 연계되지 않으며 개인을 식별하지 않습니다. 또한, 페이스북 및 Criteo는 도담도담에서 제공하는
-											정보를 활용하여 개인을 식별하지 않습니다.<br> <br> 사용자는 언제든지 이러한 맞춤형
-											광고 수신을 거부할 수 있으며, 이 경우 맞춤형 광고가 아닌 임의의 광고가 노출됩니다.
+											Criteo(Tune)는 이를 활용하여 고객 맞춤 광고를 진행합니다. 도담도담에서 수집하는 쿠키 및
+											광고식별자는 다른 개인정보와 연계되지 않으며 개인을 식별하지 않습니다. 또한, 페이스북 및 Criteo는
+											도담도담에서 제공하는 정보를 활용하여 개인을 식별하지 않습니다.<br> <br> 사용자는
+											언제든지 이러한 맞춤형 광고 수신을 거부할 수 있으며, 이 경우 맞춤형 광고가 아닌 임의의 광고가 노출됩니다.
 										</p>
 										<p style="font-weight: bold;">
 											<strong><br> </strong>
@@ -1292,8 +1141,8 @@ int mysearch = 2;
 										<p style="font-weight: bold;">고객의 개인정보에 관한 업무를 총괄해서 책임지고,
 											개인정보와 관련된 불만처리 및 피해구제 등을 위하여 아래와 같이 개인정보 보호책임자 및 담당부서를 지정하여
 											운영하고 있습니다. 회사가 제공하는 서비스를 이용하면서 발생하는 모든 개인정보 보호 관련 문의, 불만,
-											피해구제 등에 관한 사항은 아래로 연락하여 문의할 수 있습니다. 도담도담은 이러한 문의에 대해 지체 없이 답변 및
-											처리할 것입니다.</p>
+											피해구제 등에 관한 사항은 아래로 연락하여 문의할 수 있습니다. 도담도담은 이러한 문의에 대해 지체 없이 답변
+											및 처리할 것입니다.</p>
 										<table border="1" width="80%" style="font-weight: bold;">
 											<tbody>
 												<tr>
@@ -1340,8 +1189,9 @@ int mysearch = 2;
 											<a><strong>8. 고지의 의무</strong></a>
 										</p>
 										<p style="font-weight: bold;">이 개인정보 처리방침은 시행일로부터 적용됩니다.
-											고객의 개인정보 권리에 중요한 변경 사유가 발생하는 경우 최소 14일전에 도담도담 공지사항을 통하여 고지합니다.
-											이 외의 다른 변경사항이 발생하는 경우에는 변경사항의 시행 최소 7일 전부터 공지사항을 통해 고지합니다.</p>
+											고객의 개인정보 권리에 중요한 변경 사유가 발생하는 경우 최소 14일전에 도담도담 공지사항을 통하여
+											고지합니다. 이 외의 다른 변경사항이 발생하는 경우에는 변경사항의 시행 최소 7일 전부터 공지사항을 통해
+											고지합니다.</p>
 										<p style="font-weight: bold;">
 											<br> 개인정보 처리방침 버전 번호: 9.3<br> <br> 현재 개인정보
 											처리방침 공고일자: 2020년 12월 29일<br> 현재 개인정보 처리방침 시행일자: 2021년 1월
@@ -1391,8 +1241,8 @@ int mysearch = 2;
 											limited information with our direct partners so that we can
 											fulfill an order or improve your overall experience, but we
 											will always tell you who they are and what we are sharing.</p>
-										<p style="">DodamDodam is a data-driven business. The use of
-											data to improve the Customer experience is a founding
+										<p style="">DodamDodam is a data-driven business. The use
+											of data to improve the Customer experience is a founding
 											principle of DodamDodam and remains so today.</p>
 										<p style="font-weight: bold;">
 											<br> <b>Innovation: personalizing your experience
@@ -1401,8 +1251,9 @@ int mysearch = 2;
 										<p style="">Your data allows us to innovate and offer a
 											personal, fast, and safe shopping experience. This includes
 											tailoring recommendations to your individual needs and
-											preferences so that your DodamDodamman or DodamDodam-Flex driver
-											delivers your parcels when, where and how you want them.</p>
+											preferences so that your DodamDodamman or DodamDodam-Flex
+											driver delivers your parcels when, where and how you want
+											them.</p>
 										<p style="">Our understanding of data and a strong
 											commitment to security and privacy are central to how we
 											develop new and exciting services like Rocket Pay. Built from
@@ -1474,11 +1325,11 @@ int mysearch = 2;
 										<b><br></b>
 									</p>
 									<p>
-										<b>DodamDodam Corp. (“DodamDodam” or “Us” or “We”) is committed
-											to protecting personal data at all times. Our dedication to
-											delivering to our Customers an innovative, fast, seamless and
-											safe experience, will not come at the expense of your right
-											to data privacy.</b><br>
+										<b>DodamDodam Corp. (“DodamDodam” or “Us” or “We”) is
+											committed to protecting personal data at all times. Our
+											dedication to delivering to our Customers an innovative,
+											fast, seamless and safe experience, will not come at the
+											expense of your right to data privacy.</b><br>
 									</p>
 									<p>
 										<b>We are committed to ensuring that the way we conduct
@@ -1514,8 +1365,8 @@ int mysearch = 2;
 											<a href="#en-8">8. Obligation of Notification</a><br>
 										</b> <br> &nbsp;<br> <a><strong>1. Types of
 												Personal Data Collected and Used</strong></a><br> 1.1 DodamDodam
-										Members<br>“DodamDodam members” refer to Customers who sign
-										up via the DodamDodam website or DodamDodam mobile app.
+										Members<br>“DodamDodam members” refer to Customers who
+										sign up via the DodamDodam website or DodamDodam mobile app.
 									</p>
 									<table border="1" width="80%">
 										<thead>
@@ -1787,8 +1638,8 @@ int mysearch = 2;
 										recall.<br> ※ The above information can be used for
 										service usage statistics and analysis.<br> <br> 1.2
 										Guests<br> Guests refer to Customers who are not signed
-										up to DodamDodam via the website or app but are using DodamDodam’s
-										service (e.g., newsletter subscription.)
+										up to DodamDodam via the website or app but are using
+										DodamDodam’s service (e.g., newsletter subscription.)
 									</p>
 									<table border="1" width="80%">
 										<thead>
@@ -1881,8 +1732,8 @@ int mysearch = 2;
 												<td style="width: 135.083px;">Event participants</td>
 												<td style="width: 298.333px;">
 													<p>Customers enter their information directly to social
-														media pages or DodamDodam’s bulletin board to participate in
-														or send via email to apply for an event</p>
+														media pages or DodamDodam’s bulletin board to participate
+														in or send via email to apply for an event</p>
 												</td>
 												<td style="width: 138.833px;">
 													<p>Name, social media or DodamDodam ID</p>
@@ -1907,8 +1758,8 @@ int mysearch = 2;
 												</td>
 												<td>Goods: name, contact information, address<br>
 													<br> Mobile gift voucher (Giftishow): name, contact
-													information<br> <br> DodamDodam Cash: DodamDodam ID
-													(email), name, contact information
+													information<br> <br> DodamDodam Cash: DodamDodam
+													ID (email), name, contact information
 												</td>
 												<td>
 													<p>Delivering prizes</p>
@@ -2224,9 +2075,9 @@ int mysearch = 2;
 										<p>
 											※ Notice of right to refuse consent to the personal data
 											provision<br>Provision of personal data to a third party
-											is necessary for Customers to use some of DodamDodam’s services.
-											Customers may choose not to provide their personal data
-											required for the services, in which case some of those
+											is necessary for Customers to use some of DodamDodam’s
+											services. Customers may choose not to provide their personal
+											data required for the services, in which case some of those
 											services may be restricted from those Customers. DodamDodam
 											provides Customers’ personal data to a third party only when
 											a transaction is made and notifies customers of the details
@@ -2407,10 +2258,10 @@ int mysearch = 2;
 												</tr>
 												<tr>
 													<td>
-														<p>[Re-outsourcing by DodamDodamPay. Ltd.] NHN KCP Corp.,
-															KG Mobilians, Korea Information Communication Corp.,
-															Danal Co., Ltd., Galaxia Communications Co.,Ltd., NICE
-															Payments</p>
+														<p>[Re-outsourcing by DodamDodamPay. Ltd.] NHN KCP
+															Corp., KG Mobilians, Korea Information Communication
+															Corp., Danal Co., Ltd., Galaxia Communications Co.,Ltd.,
+															NICE Payments</p>
 													</td>
 													<td>
 														<p>Processing payment made by credit card, mobile
@@ -2494,59 +2345,60 @@ int mysearch = 2;
 										is signed (i.e. Customers sign up for membership) and ends
 										when the contract is terminated (i.e.Customers apply for
 										membership withdrawal or their membership is disqualified).
-										Moreover, if Customers withdraw consent, DodamDodam immediately
-										disposes of all of their personal data, with the exception of
-										some retained due to the reasons specified above for a certain
-										period. Hard copy printouts of personal data are shredded or
-										burned, whereas electronic files of personal data are disposed
-										through technical or physical means that ensure the
-										information cannot be recovered.<br> <br> When the
-										purpose of collection and use of personal data is achieved,
-										DodamDodam moves the information to another database,stores it
-										securely, and disposes it without delay after a predetermined
-										period, in line with the internal policy and applicable laws.
-										DodamDodam never uses personal data moved to a separate database
-										outside or beyond the scope consented by Customers, unless
-										mandated by law.<br> <br> Personal data of Customers
-										who do not have any history of using DodamDodam for the past one
-										year (long-term inactive members) is also segregated from
-										other information and managed safely. DodamDodam sends email
-										notifications to inactive members at least 30 days prior to
-										moving their information to a separate storage. If it is,
-										however, required by the Protection of Communications Secrets
-										Act, the Act on the Consumer Protection in Electronic
-										Commerce, Etc. or other applicable laws, DodamDodam may retain
-										the necessary personal data of customers for the prescribed
-										time period. <br> <br> <a><strong>5.
-												Rights and Obligations of Customers</strong></a><br> 5.1 Rights of
-										Customers<br> Customers and their legal representatives
-										may make requests to access, correct or delete their
-										information collected by DodamDodam,and have the right to
-										withdraw consent anytime. However, Customers who withdraw
+										Moreover, if Customers withdraw consent, DodamDodam
+										immediately disposes of all of their personal data, with the
+										exception of some retained due to the reasons specified above
+										for a certain period. Hard copy printouts of personal data are
+										shredded or burned, whereas electronic files of personal data
+										are disposed through technical or physical means that ensure
+										the information cannot be recovered.<br> <br> When
+										the purpose of collection and use of personal data is
+										achieved, DodamDodam moves the information to another
+										database,stores it securely, and disposes it without delay
+										after a predetermined period, in line with the internal policy
+										and applicable laws. DodamDodam never uses personal data moved
+										to a separate database outside or beyond the scope consented
+										by Customers, unless mandated by law.<br> <br>
+										Personal data of Customers who do not have any history of
+										using DodamDodam for the past one year (long-term inactive
+										members) is also segregated from other information and managed
+										safely. DodamDodam sends email notifications to inactive
+										members at least 30 days prior to moving their information to
+										a separate storage. If it is, however, required by the
+										Protection of Communications Secrets Act, the Act on the
+										Consumer Protection in Electronic Commerce, Etc. or other
+										applicable laws, DodamDodam may retain the necessary personal
+										data of customers for the prescribed time period. <br> <br>
+										<a><strong>5. Rights and Obligations of Customers</strong></a><br>
+										5.1 Rights of Customers<br> Customers and their legal
+										representatives may make requests to access, correct or delete
+										their information collected by DodamDodam,and have the right
+										to withdraw consent anytime. However, Customers who withdraw
 										consent or have information deleted may have limited access to
-										some or all of the DodamDodam services. Customers can check the
-										personal data collected by DodamDodam by following the
+										some or all of the DodamDodam services. Customers can check
+										the personal data collected by DodamDodam by following the
 										instruction described below:<br> <br> [How to view
 										the personal data collected by DodamDodam]<br>
 										<p>
 											• Go to the DodamDodam website and click “도담도담” &gt; “개인정보
-											확인/수정”, “주문목록”, “배송조회”<br> • Open the DodamDodam mobile app
-											and go to “내정보관리”
+											확인/수정”, “주문목록”, “배송조회”<br> • Open the DodamDodam mobile
+											app and go to “내정보관리”
 										</p>
 										<br>Customers may check the information not directly
 										available from the DodamDodam website or app by contacting the
-										DodamDodam customer support center (1577-7011, help@DodamDodam.com,
-										1:1 chat also available). Customers who wish to delete or stop
-										the processing of their personal data, or withdraw consent,
-										can make requests to the DodamDodam customer center (1577-7011,
-										help@DodamDodam.com, 1:1 chat also available). They also have the
-										right to withdraw membership, and thereby withdraw consent, to
-										the collection and use of their personal data at any time.
-										Upon making such requests, however, customers’ use of some or
-										the entire service may be restricted. Furthermore, it may be
-										difficult to fulfill requests from customers to delete or stop
-										the processing of their personal data, or withdraw the consent
-										if any of the following is true:<br> <br>
+										DodamDodam customer support center (1577-7011,
+										help@DodamDodam.com, 1:1 chat also available). Customers who
+										wish to delete or stop the processing of their personal data,
+										or withdraw consent, can make requests to the DodamDodam
+										customer center (1577-7011, help@DodamDodam.com, 1:1 chat also
+										available). They also have the right to withdraw membership,
+										and thereby withdraw consent, to the collection and use of
+										their personal data at any time. Upon making such requests,
+										however, customers’ use of some or the entire service may be
+										restricted. Furthermore, it may be difficult to fulfill
+										requests from customers to delete or stop the processing of
+										their personal data, or withdraw the consent if any of the
+										following is true:<br> <br>
 										<p>
 											• There are special provisions under the law, or it is
 											absolutely necessary to fulfill an obligation under the law;<br>
@@ -2558,16 +2410,16 @@ int mysearch = 2;
 											failed to explicitly express their intent to terminate their
 											contracts.
 										</p>
-										<br> Should Customers raise such requests, DodamDodam does
-										not use the customers’ information or provide it to a third
-										party until the requests are fulfilled. Moreover, if DodamDodam
-										has provided incorrect personal data to a third party for
-										reasonable grounds, DodamDodam promptly notifies the third party
-										and ensures that the information is deleted and no longer
-										processed, and the applicable consent is withdrawn.<br> <br>
-										5.2. Obligations of Customers<br>Customers have an
-										obligation to protect their personal data. DodamDodam is not
-										liable for issues that arise due to personal data leakage
+										<br> Should Customers raise such requests, DodamDodam
+										does not use the customers’ information or provide it to a
+										third party until the requests are fulfilled. Moreover, if
+										DodamDodam has provided incorrect personal data to a third
+										party for reasonable grounds, DodamDodam promptly notifies the
+										third party and ensures that the information is deleted and no
+										longer processed, and the applicable consent is withdrawn.<br>
+										<br> 5.2. Obligations of Customers<br>Customers have
+										an obligation to protect their personal data. DodamDodam is
+										not liable for issues that arise due to personal data leakage
 										caused not by the fault of DodamDodam, but by any of the
 										following:<br> <br>
 										<p>
@@ -2577,8 +2429,8 @@ int mysearch = 2;
 											leaving PC unattended while still logged into the service;<br>
 											• Methods that cannot be prevented by the security controls
 											required by the applicable laws or hacking and other
-											technologies that are outside the control of DodamDodam despite
-											the security controls DodamDodam has undertaken.
+											technologies that are outside the control of DodamDodam
+											despite the security controls DodamDodam has undertaken.
 										</p>
 										<br> It is also an obligation of Customers to keep their
 										personal data up to date. Any issues that arise due to
@@ -2600,8 +2452,8 @@ int mysearch = 2;
 										and personalized shopping experiences to Customers, DodamDodam
 										may store (collect) data automatically generated as Customers
 										interact with the service or device information that doesn’t
-										lead to the identification of individuals. And DodamDodam informs
-										Customers specifically which information out of the
+										lead to the identification of individuals. And DodamDodam
+										informs Customers specifically which information out of the
 										automatically generated data it collects and how Customers can
 										opt-out from such collection.<br> <br> 6.1. Cookie<br>
 										A cookie is a small text file sent to and stored on a user's
@@ -2629,9 +2481,9 @@ int mysearch = 2;
 												Chrome</a>
 										</p>
 										<br>6.2. Personalized ads <br>To deliver
-										personalized ads, DodamDodam collects and uses cookies from the
-										web browser and ADID from the mobile app. Cookies and ADID are
-										used to automatically collect customers’ history of
+										personalized ads, DodamDodam collects and uses cookies from
+										the web browser and ADID from the mobile app. Cookies and ADID
+										are used to automatically collect customers’ history of
 										interaction with the DodamDodam service and forward this
 										information to Facebook and Criteo (the information also sent
 										to Criteo viaTune). Facebook and Criteo (Tune) then uses this
@@ -2650,8 +2502,8 @@ int mysearch = 2;
 										related to customer privacy and handle complaints and address
 										damage from privacy-related issues. Customers may make
 										inquiries, raise complaints or ask for damage relief regarding
-										privacy issues through the contact points below. DodamDodam will
-										promptly respond to and handle inquiries.<br>
+										privacy issues through the contact points below. DodamDodam
+										will promptly respond to and handle inquiries.<br>
 									</div>
 									<div>
 										<table border="1" width="80%">
@@ -2702,10 +2554,11 @@ int mysearch = 2;
 													Notification&nbsp;</strong></a><br> Privacy notice takes effect
 											from its effective date. Should there be grounds for a
 											material change to customer’s right to data privacy,
-											customers will be notified by DodamDodam at least 14 days before
-											the change. Other changes will be notified to customers at
-											least 7 days prior to their implementation.&nbsp;&nbsp;<br>
-											<br> <b><u>Note:</u></b><br> <br>
+											customers will be notified by DodamDodam at least 14 days
+											before the change. Other changes will be notified to
+											customers at least 7 days prior to their
+											implementation.&nbsp;&nbsp;<br> <br> <b><u>Note:</u></b><br>
+											<br>
 										</p>
 										<p>
 											In the event of inconsistency or discrepancy between the
@@ -2730,267 +2583,305 @@ int mysearch = 2;
 					</div>
 				</div>
 			</div>
-			<div id="menu3" class="container tab-pane fade"><br><br>
+			<div id="menu3" class="container tab-pane fade">
+				<br>
 				<h2 align="center">(주)도담도담</h2>
 				<hr style="border: none; border: 5px double orange;">
 				<nav id="navbar-example3" class="navbar navbar-light bg-light">
-					<a class="navbar-brand" href="#" style="font-weight: bolder; color: blue; font-size: 20px;">이용 약관 및 방침</a>
+					<a class="navbar-brand" href="#"
+						style="font-weight: bolder; color: blue; font-size: 20px;">이용
+						약관 및 방침</a>
 					<nav class="nav nav-pills flex-column">
-						<a class="nav-link" href="#item-1">목적</a>
-						<a class="nav-link" href="#item-2">회원 가입</a> 
-						<a class="nav-link"	href="#item-3">지급 방법</a>
-						<a class="nav-link"	href="#item-4">환급</a>
-						<a class="nav-link"	href="#item-5">이용자의 의무</a>
-						<a class="nav-link"	href="#item-6">정기구매 서비스 이용제한</a>
+						<a class="nav-link" href="#item-1">목적</a> <a class="nav-link"
+							href="#item-2">회원 가입</a> <a class="nav-link" href="#item-3">지급
+							방법</a> <a class="nav-link" href="#item-4">환급</a> <a class="nav-link"
+							href="#item-5">이용자의 의무</a> <a class="nav-link" href="#item-6">정기구매
+							서비스 이용제한</a>
 					</nav>
 				</nav>
 				<div data-spy="scroll" data-target="#navbar-example3"
 					data-offset="0">
 					<h4 id="item-1">제1조 (목적)</h4>
 					<p>
-						<span class="bold">제1조(목적)</span> 이 약관은 (주)도담도담
-						회사(사업자등록번호 : 759-87-00821, 통신판매업신고번호 : 제2020-서울강남-03029호, 대표자 :
-						1조 도담도담)가 운영하는 온라인 웹사이트 도담도담 및 모바일 어플리케이션 도담도담케어(이하 두 서비스를 통칭하여
-						“도담도담”라 함)에서 제공하는 전자상거래 관련 서비스(이하 “서비스”라 한다.)를 이용함에 있어 도담도담와 이용자의
-						권리, 의무 및 책임사항을 규정함을 목적으로 합니다. *PC통신, 스마트폰 앱, 무선 등을 이용하는 전자상거래에
-						대해서도 그 성질에 반하지 않는 한 준용합니다.<br><span class="bold">제2조(정의) </span> ①
-						“도담도담"란 (주)케어위드 회사가 재화 또는 용역(이하 “재화 등"이라 함)을 이용자에게 제공하기 위하여 컴퓨터 등
-						정보통신설비를 이용하여 재화 등을 거래할 수 있도록 설정한 가상의 영업장 및 그에 부수되는 콘텐츠 서비스를 말하며,
-						아울러 서비스를 운영하는 사업자의 의미로도 사용합니다. ② “이용자"란 “도담도담"에 접속하여 이 약관에 따라
-						“도담도담"가 제공하는 서비스를 받는 회원 및 비회원을 말합니다. ③ “회원"이라 함은 “도담도담"에 회원등록을 한
-						자로서, 계속적으로 “도담도담"가 제공하는 서비스를 이용할 수 있는 자를 말합니다. ④ “비회원"이라 함은 회원으로
-						가입하지 않고 “도담도담"가 제공하는 서비스를 이용하는 자를 말합니다.<br><span class="bold">제3조
-						(약관 등의 명시와 설명 및 개정) </span> ① “도담도담”는 이 약관의 내용과 상호 및 대표자 성명, 영업소 소재지
-						주소(소비자의 불만을 처리할 수 있는 곳의 주소를 포함), 전화번호, 모사전송번호, 전자우편주소, 사업자등록번호,
-						통신판매업 신고번호, 개인정보관리책임자등을 이용자가 쉽게 알 수 있도록 도담도담의 초기 서비스화면(전면)에
-						게시합니다. 다만, 약관의 내용은 이용자가 연결화면을 통하여 볼 수 있도록 할 수 있습니다. ② “도담도담"는
-						이용자가 약관에 동의하기에 앞서 약관에 정하여져 있는 내용 중 청약철회, 배송책임, 환불조건 등과 같은 중요한 내용을
-						이용자가 이해할 수 있도록 별도의 연결화면 또는 팝업화면 등을 제공하여 이용자의 확인을 구하여야 합니다. ③
-						“도담도담”는「전자상거래 등에서의 소비자보호에 관한 법률」, 「약관의 규제에 관한 법률」, 「전자문서 및
-						전자거래기본법」, 「전자금융거래법」, 「전자서명법」, 「정보통신망 이용촉진 및 정보보호 등에 관한 법률」, 「방문판매
-						등에 관한 법률」, 「소비자기본법」 등 관련 법을 위배하지 않는 범위에서 이 약관을 개정할 수 있습니다. ④
-						“도담도담”가 약관을 개정할 경우에는 적용일자 및 개정사유를 명시하여 현행약관과 함께 몰의 초기화면에 그 적용일자
-						7일 이전부터 적용일자 전일까지 공지합니다. 다만, 이용자에게 불리하게 약관내용을 변경하는 경우에는 최소한 30일
-						이상의 사전 유예기간을 두고 공지합니다. 이 경우 "도담도담“는 개정 전 내용과 개정 후 내용을 명확하게 비교하여
-						이용자가 알기 쉽도록 표시합니다. ⑤ “도담도담”가 약관을 개정할 경우에는 그 개정약관은 그 적용일자 이후에 체결되는
-						계약에만 적용되고 그 이전에 이미 체결된 계약에 대해서는 개정 전의 약관조항이 그대로 적용됩니다. 다만 이미 계약을
-						체결한 이용자가 개정약관 조항의 적용을 받기를 원하는 뜻을 제3항에 의한 개정약관의 공지기간 내에 “도담도담”에
+						<span class="bold">제1조(목적)</span> 이 약관은 (주)도담도담 회사(사업자등록번호 :
+						759-87-00821, 통신판매업신고번호 : 제2020-서울강남-03029호, 대표자 : 1조 도담도담)가 운영하는
+						온라인 웹사이트 도담도담 및 모바일 어플리케이션 도담도담케어(이하 두 서비스를 통칭하여 “도담도담”라 함)에서 제공하는
+						전자상거래 관련 서비스(이하 “서비스”라 한다.)를 이용함에 있어 도담도담와 이용자의 권리, 의무 및 책임사항을
+						규정함을 목적으로 합니다. *PC통신, 스마트폰 앱, 무선 등을 이용하는 전자상거래에 대해서도 그 성질에 반하지 않는
+						한 준용합니다.<br>
+						<span class="bold">제2조(정의) </span> ① “도담도담"란 (주)케어위드 회사가 재화 또는
+						용역(이하 “재화 등"이라 함)을 이용자에게 제공하기 위하여 컴퓨터 등 정보통신설비를 이용하여 재화 등을 거래할 수
+						있도록 설정한 가상의 영업장 및 그에 부수되는 콘텐츠 서비스를 말하며, 아울러 서비스를 운영하는 사업자의 의미로도
+						사용합니다. ② “이용자"란 “도담도담"에 접속하여 이 약관에 따라 “도담도담"가 제공하는 서비스를 받는 회원 및
+						비회원을 말합니다. ③ “회원"이라 함은 “도담도담"에 회원등록을 한 자로서, 계속적으로 “도담도담"가 제공하는
+						서비스를 이용할 수 있는 자를 말합니다. ④ “비회원"이라 함은 회원으로 가입하지 않고 “도담도담"가 제공하는 서비스를
+						이용하는 자를 말합니다.<br>
+						<span class="bold">제3조 (약관 등의 명시와 설명 및 개정) </span> ① “도담도담”는 이 약관의
+						내용과 상호 및 대표자 성명, 영업소 소재지 주소(소비자의 불만을 처리할 수 있는 곳의 주소를 포함), 전화번호,
+						모사전송번호, 전자우편주소, 사업자등록번호, 통신판매업 신고번호, 개인정보관리책임자등을 이용자가 쉽게 알 수 있도록
+						도담도담의 초기 서비스화면(전면)에 게시합니다. 다만, 약관의 내용은 이용자가 연결화면을 통하여 볼 수 있도록 할 수
+						있습니다. ② “도담도담"는 이용자가 약관에 동의하기에 앞서 약관에 정하여져 있는 내용 중 청약철회, 배송책임,
+						환불조건 등과 같은 중요한 내용을 이용자가 이해할 수 있도록 별도의 연결화면 또는 팝업화면 등을 제공하여 이용자의
+						확인을 구하여야 합니다. ③ “도담도담”는「전자상거래 등에서의 소비자보호에 관한 법률」, 「약관의 규제에 관한 법률」,
+						「전자문서 및 전자거래기본법」, 「전자금융거래법」, 「전자서명법」, 「정보통신망 이용촉진 및 정보보호 등에 관한
+						법률」, 「방문판매 등에 관한 법률」, 「소비자기본법」 등 관련 법을 위배하지 않는 범위에서 이 약관을 개정할 수
+						있습니다. ④ “도담도담”가 약관을 개정할 경우에는 적용일자 및 개정사유를 명시하여 현행약관과 함께 몰의 초기화면에 그
+						적용일자 7일 이전부터 적용일자 전일까지 공지합니다. 다만, 이용자에게 불리하게 약관내용을 변경하는 경우에는 최소한
+						30일 이상의 사전 유예기간을 두고 공지합니다. 이 경우 "도담도담“는 개정 전 내용과 개정 후 내용을 명확하게
+						비교하여 이용자가 알기 쉽도록 표시합니다. ⑤ “도담도담”가 약관을 개정할 경우에는 그 개정약관은 그 적용일자 이후에
+						체결되는 계약에만 적용되고 그 이전에 이미 체결된 계약에 대해서는 개정 전의 약관조항이 그대로 적용됩니다. 다만 이미
+						계약을 체결한 이용자가 개정약관 조항의 적용을 받기를 원하는 뜻을 제3항에 의한 개정약관의 공지기간 내에 “도담도담”에
 						송신하여 “도담도담”의 동의를 받은 경우에는 개정약관 조항이 적용됩니다. ⑥ 이 약관에서 정하지 아니한 사항과 이
 						약관의 해석에 관하여는 전자상거래 등에서의 소비자보호에 관한 법률, 약관의 규제 등에 관한 법률, 공정거래위원회가
-						정하는 전자상거래 등에서의 소비자 보호지침 및 관계법령 또는 상관례에 따릅니다.<br><span class="bold">제4조(서비스의
-						제공 및 변경) </span> ① “도담도담”는 다음과 같은 서비스를 제공합니다.<br><span class="depth2">1.
-						재화 또는 용역에 대한 정보 제공 및 구매계약의 체결</span><br><span class="depth2">2.
-						구매계약이 체결된 재화 또는 용역의 배송</span><br><span class="depth2">3. 이용자의
-						“도담도담” 서비스 이용에 도움이 되는 알람 및 콘텐츠 제공 </span><br><span class="depth2">4.
-						기타 “도담도담”가 정하는 업무 </span> ② “도담도담”가 제공하는 재화 또는 용역 서비스는 비의료 건강관리서비스로서
-						질환의 치료 목적의 서비스가 아닌 보조적 건강관리 서비스입니다. 특히 만성질환자의 경우 본 서비스 이용대상자가 아니며
-						의사 또는 의료기관의 도움을 받으시기를 권고 드립니다. ③ “도담도담”는 재화 또는 용역의 품절 또는 기술적 사양의
-						변경 등의 경우에는 장차 체결되는 계약에 의해 제공할 재화 또는 용역의 내용을 변경할 수 있습니다. 이 경우에는
-						변경된 재화 또는 용역의 내용 및 제공일자를 명시하여 현재의 재화 또는 용역의 내용을 게시한 곳에 즉시 공지합니다.
-						④ “도담도담”가 제공하기로 이용자와 계약을 체결한 서비스의 내용을 재화등의 품절 또는 기술적 사양의 변경 등의
-						사유로 변경할 경우에는 그 사유를 이용자에게 통지 가능한 주소로 즉시 통지합니다. ⑤ 전항의 경우 “도담도담”는 이로
-						인하여 이용자가 입은 손해를 배상합니다. 다만, “도담도담”가 고의 또는 과실이 없음을 입증하는 경우에는 그러하지
-						아니합니다.<br><span class="bold">제5조(서비스의 중단) </span> ① “도담도담”는 연중무휴, 1일
-						24시간 제공을 원칙으로 합니다. 단, 컴퓨터 등 정보통신설비의 보수점검, 교체 및 고장, 통신의 두절 등의 사유가
-						발생한 경우에는 서비스의 제공을 일시적으로 중단할 수 있습니다. ② “도담도담”는 제1항의 사유로 서비스의 제공이
-						일시적으로 중단됨으로 인하여 이용자 또는 제3자가 입은 손해에 대하여 배상합니다. 단, “도담도담”가 고의 또는
-						과실이 없음을 입증하는 경우에는 그러하지 아니합니다. ③ 사업종목의 전환, 사업의 포기, 업체 간의 통합 등의 이유로
-						서비스를 제공할 수 없게 되는 경우에는 “도담도담”는 제8조에 정한 방법으로 이용자에게 통지하고 당초 “도담도담”에서
-						제시한 조건에 따라 소비자에게 보상합니다. 다만, “도담도담”가 보상기준 등을 고지하지 아니한 경우에는 이용자들의
-						포인트 또는 적립금 등을 “도담도담”에서 통용되는 통화가치에 상응하는 현물 또는 현금으로 이용자에게 지급합니다. ④
-						제3항에도 불구하고 “도담도담”가 이용자에게 사전에 통지할 수 없는 부득이한 사유가 있는 경우 사후에 통지할 수
-						있습니다.<br></p>
-						<h4 id="item-2">제6조(회원가입)</h4>
-						<p><span class="bold">제6조(회원가입) </span> ① 이용자는 “도담도담”가 정한 가입
-						양식에 따라 회원정보를 기입한 후 이 약관에 동의한다는 의사표시를 함으로서 회원가입을 신청합니다. ② “도담도담”는
-						제1항과 같이 회원으로 가입할 것을 신청한 이용자 중 다음 각 호에 해당하지 않는 한 회원으로 등록합니다.<br><span
-						class="depth2">1. 가입신청자가 이 약관 제7조제3항에 의하여 이전에 회원자격을 상실한 적이
-						있는 경우, 다만 제7조제3항에 의한 회원자격 상실 후 3년이 경과한 자로서 “도담도담”의 회원재가입 승낙을 얻은
-						경우에는 예외로 함.</span><br><span class="depth2">2. 등록 내용에 허위, 기재누락, 오기가
-						있는 경우 </span><br><span class="depth2">3. 기타 회원으로 등록하는 것이 “도담도담”의
-						기술상 현저히 지장이 있다고 판단되는 경우 </span><br><span class="depth2">4. 회원가입 및
-						전자상거래상의 계약에 관한 서비스는 만 14세 이상인자에 한함 </span> ③ 회원가입계약의 성립 시기는 “도담도담”의 승낙이
-						회원에게 도달한 시점으로 합니다. ④ 회원은 회원가입 시 등록한 사항에 변경이 있는 경우, 상당한 기간 이내에
-						“도담도담”에 대하여 회원정보 수정 등의 방법으로 그 변경사항을 알려야 합니다.<br><span class="bold">제7조(회원
-						탈퇴 및 자격 상실 등) </span> ① 회원은 “도담도담”에 언제든지 탈퇴를 요청할 수 있으며 “도담도담”는 즉시 회원탈퇴를
-						처리합니다. ② 회원이 다음 각 호의 사유에 해당하는 경우, “도담도담”는 회원자격을 제한 및 정지시킬 수 있습니다.
-						<span class="depth2">1. 가입 신청 시에 허위 내용을 등록한 경우 </span><br><span
-						class="depth2">2. “도담도담”를 이용하여 구입한 재화 등의 대금, 기타 “도담도담”이용에
-						관련하여 회원이 부담하는 채무를 기일에 지급하지 않는 경우 </span><br><span class="depth2">3.
-						다른 사람의 “도담도담” 이용을 방해하거나 그 정보를 도용하는 등 전자상거래 질서를 위협하는 경우 </span><br><span
-						class="depth2">4. “도담도담”를 이용하여 법령 또는 이 약관이 금지하거나 공서양속에 반하는
-						행위를 하는 경우 </span> ③ “도담도담”가 회원 자격을 제한․정지 시킨 후, 동일한 행위가 2회 이상 반복되거나 30일
-						이내에 그 사유가 시정되지 아니하는 경우 “도담도담”는 회원자격을 상실시킬 수 있습니다. ④ “도담도담”가 회원자격을
-						상실시키는 경우에는 회원등록을 말소합니다. 이 경우 회원에게 이를 통지하고, 회원등록 말소 전에 최소한 30일 이상의
-						기간을 정하여 소명할 기회를 부여합니다.<br><span class="bold">제8조(회원에 대한 통지) </span>
-						① “도담도담”가 회원에 대한 통지를 하는 경우, 회원이 “도담도담”와 미리 약정하여 지정한 전자우편 주소로 할 수
-						있습니다. ② “도담도담”는 불특정다수 회원에 대한 통지의 경우 1주일이상 “도담도담” 게시판에 게시함으로서 개별
-						통지에 갈음할 수 있습니다. 다만, 회원 본인의 거래와 관련하여 중대한 영향을 미치는 사항에 대하여는 개별통지를
-						합니다.<br><span class="bold">제9조(구매신청) </span> “도담도담”이용자는 “도담도담”상에서 다음
-						또는 이와 유사한 방법에 의하여 구매를 신청하며, “도담도담”는 이용자가 구매신청을 함에 있어서 다음의 각 내용을
-						알기 쉽게 제공하여야 합니다.<br><span class="depth2">1. 재화 등의 검색 및 선택 </span><br><span
-						class="depth2">2. 받는 사람의 성명, 주소, 전화번호, 전자우편주소(또는 이동전화번호)
-						등의 입력 </span><br><span class="depth2">3. 약관내용, 청약철회권이 제한되는 서비스, 배송료
-						등의 비용부담과 관련한 내용에 대한 확인 </span><br><span class="depth2">4. 이 약관에
-						동의하고 위 3.호의 사항을 확인하거나 거부하는 표시(예, 마우스 클릭) </span><br><span class="depth2">5.
-						재화등의 구매신청 및 이에 관한 확인 또는 “도담도담”의 확인에 대한 동의 </span><br><span class="depth2">6.
-						결제방법의 선택 </span><br><span class="bold">제10조 (계약의 성립) </span> ① “도담도담”는
-						제9조와 같은 구매신청에 대하여 다음 각 호에 해당하면 승낙하지 않을 수 있습니다. 다만, 미성년자와 계약을 체결하는
-						경우에는 법정대리인의 동의를 얻지 못하면 미성년자 본인 또는 법정대리인이 계약을 취소할 수 있다는 내용을 고지하여야
-						합니다.<br><span class="depth2">1. 신청 내용에 허위, 기재누락, 오기가 있는 경우 </span><br><span
-						class="depth2">2. 미성년자가 담배, 주류 등 청소년보호법에서 금지하는 재화 및 용역을
-						구매하는 경우 </span><br><span class="depth2">3. 기타 구매신청에 승낙하는 것이 “도담도담”
-						기술상 현저히 지장이 있다고 판단하는 경우 </span> ② “도담도담”의 승낙이 제13조 제1항의 수신확인통지형태로 이용자에게
-						도달한 시점에 계약이 성립한 것으로 봅니다. ③ “도담도담”의 승낙의 의사표시에는 이용자의 구매 신청에 대한 확인 및
-						판매가능 여부, 구매신청의 정정 취소 등에 관한 정보 등을 포함하여야 합니다.<br></p>
-						<h4 id="item-3">제11조(지급방법)</h4>
-						<p><span class="bold">제11조(지급방법)
-						</span> “도담도담”에서 구매한 재화 또는 용역에 대한 대금지급방법은 다음 각 호의 방법중 가용한 방법으로 할 수 있습니다.
-						단, “도담도담”는 이용자의 지급방법에 대하여 재화 등의 대금에 어떠한 명목의 수수료도 추가하여 징수할 수 없습니다.
-						① 폰뱅킹, 인터넷뱅킹, 메일 뱅킹 등의 각종 계좌이체 ② 선불카드, 직불카드, 신용카드 등의 각종 카드의 비인증식
-						정기결제 ③ 선불카드, 직불카드, 신용카드 등의 각종 카드의 인증식 일반결제 ④ 온라인무통장입금 ⑤ 포인트 등
-						“도담도담”가 지급한 적립금에 의한 결제 (단, 정기구매의 경우 최초 구매 신청시 1회 사용 가능) ⑥ “도담도담"와
-						계약을 맺었거나 “도담도담"가 인증한 상품권에 의한 결제 ⑦ 기타 전자적 지급 방법에 의한 대금 지급 등 (각종 간편
-						결제 서비스)<br><span class="bold">제12조(프로모션코드) </span> ① 프로모션코드는 회원에게
-						무상으로 발행되는 것으로 “도담도담"는 회원이 프로모션코드를 사이트에서 상품 구매 시 적용할 수 있도록 사용방법,
-						사용기간, 사용대상, 할인액 또는 할인율 등을 정할 수 있습니다. 프로모션코드의 종류와 내용은 “도담도담"의 정책에
-						따라 달라질 수 있습니다. ② 프로모션코드는 현금으로 환급될 수 없으며, 프로모션코드의 사용기간이 만료되거나 구매
-						취소 시 또는 이용계약이 종료되면 소멸됩니다. ③ “회원”은 허락되지 않은 방법으로 프로모션코드를 제3자에게 또는
-						다른 아이디로 양도할 수 없으며, 유상으로 거래하거나 현금으로 전환할 수 없습니다. ④ “도담도담”는 회원이
-						“도담도담”가 승인하지 않은 방법으로 프로모션코드를 획득하거나 부정한 목적이나 용도로 프로모션코드를 사용하는 경우
-						프로모션코드의 사용을 제한하거나 프로모션코드를 사용한 구매신청을 취소하거나 회원 자격을 정지할 수 있습니다. ⑤
-						“도담도담”는 “회원"이 사용한 프로모션코드와 동일한 프로모션코드로 재구매 시 해당 프로모션코드 적용을 하지 않을 수
-						있습니다.<br><span class="bold">제13조(수신확인통지, 구매신청 변경 및 취소) </span> ①
-						“도담도담”는 이용자의 구매신청이 있는 경우 이용자에게 수신확인통지를 합니다. ② 수신확인통지를 받은 이용자는
-						의사표시의 불일치 등이 있는 경우에는 수신확인통지를 받은 후 즉시 구매신청 변경 및 취소를 요청할 수 있고
-						“도담도담”는 배송 전에 이용자의 요청이 있는 경우에는 지체 없이 그 요청에 따라 처리하여야 합니다. 다만 이미
-						대금을 지불한 경우에는 제16조의 청약철회 등에 관한 규정에 따릅니다.<br><span class="bold">제14조(재화
-						등의 공급) </span> ① “도담도담”는 이용자와 재화 등의 공급시기에 관하여 별도의 약정이 없는 이상, 이용자가 청약을 한
-						날부터 7일 이내에 재화 등을 배송할 수 있도록 주문제작, 포장 등 기타의 필요한 조치를 취합니다. 다만,
-						“도담도담”가 이미 재화 등의 대금의 전부 또는 일부를 받은 경우에는 대금의 전부 또는 일부를 받은 날부터 3영업일
-						이내에 조치를 취합니다. 이때 “도담도담”는 이용자가 재화 등의 공급 절차 및 진행 사항을 확인할 수 있도록 적절한
-						조치를 합니다. ② “도담도담”는 이용자가 구매한 재화에 대해 배송수단, 수단별 배송비용 부담자, 수단별 배송기간
-						등을 명시합니다. 만약 “도담도담”가 약정 배송기간을 초과한 경우에는 그로 인한 이용자의 손해를 배상하여야 합니다.
-						다만 “도담도담”가 고의․과실이 없음을 입증한 경우에는 그러하지 아니합니다. ③ 이용자는 “도담도담”가 지정하는 일부
-						서비스 항목 또는 “도담도담”가 지정한 기한에 한하여 회원가입 없이 무상으로 서비스를 이용할 수 있습니다.<br><span
-						class="bold">제15조(적립금 제도의 운영) </span> ① “도담도담”는 회원이 정기구매서비스를 이용하여
-						재화를 구매하거나 이벤트에 참여하는 등의 일정한 경우 적립금으로서 포인트를 부여할 수 있습니다. 이러한 포인트의
-						부여는 다음 각 호의 방법에 따르되, 그 구체적인 운영방법은 회사의 운영정책에 따릅니다.<br><span
-						class="depth2">1. “도담도담”는 회원의 결제금액에 대하여 서비스 페이지에 고지한 특정한
-						비율만큼 포인트를 부여할 수 있습니다. 단, 이 경우 적립대상금액은 쿠폰, 프로모션 등 기타 방법을 통해 할인 받은
-						금액은 제외됩니다.</span><br><span class="depth2">2. “도담도담”는 회원이 서비스나 이벤트
-						등에 참여할 경우 포인트를 부여할 수 있습니다.</span><br><span class="depth2">3.
-						“도담도담”에서 회원이 구매한 재화를 반품하였을 때 해당 구매로 적립된 포인트는 환수됩니다.</span> ② 포인트는
-						“도담도담”의 서비스 제도로서 “도담도담”가 회원에게 사전 고지한 조건 및 비율에 따라 “도담도담”의 포인트몰에서
-						특정 재화로 교환이 가능합니다. 단, 포인트는 사은의 형태로 “도담도담”에서 지급하는 것으로 현금으로 환불되지는
-						않으며 타인에게 양도할 수 없습니다. ③ 포인트의 사용기한은 최초 적립일로부터 1년이며, 기한내 사용하지 않은
-						포인트는 소멸됩니다. 단일상품의 구매로 인하여 일시에 부여된 포인트에 대해서 그 중 일부만을 사용한 경우에도
-						동일합니다. 단, 포인트 부여시 적립금 사용기간에 대해 별도의 사전 고지 또는 특약이 있는 경우에는 그 사용기간
-						이내에 사용하여야 합니다. ④ 다음의 경우 포인트가 소멸됩니다.<br><span class="depth2">1.
-						회원을 탈퇴한 경우</span><br><span class="depth2">2. 사용기간이 경과한 경우</span><br><span
-						class="depth2">3. 사용가능 조건 및 소멸에 대한 내용이 별도로 공지된 경우</span> ⑤ 포인트를
-						이용하여 부당 이득을 취하거나, 악의적인 상거래가 발생할 경우, “도담도담”는 포인트에 대해 지급을 중지하며 기지급된
-						포인트를 환수할 수 있습니다.<br></p>
-						<h4 id="item-4">제16조(환급)</h4>
-						<p><span class="bold">제16조(환급) </span> “도담도담”는 이용자가
-						구매신청한 재화 등이 품절 등의 사유로 인도 또는 제공을 할 수 없을 때에는 지체 없이 그 사유를 이용자에게 통지하고
-						사전에 재화 등의 대금을 받은 경우에는 대금을 받은 날부터 3영업일 이내에 환급하거나 환급에 필요한 조치를 취합니다.
-						<br><span class="bold">제17조(청약철회 등) </span> ① “도담도담”와 재화등의 구매에 관한 계약을
+						정하는 전자상거래 등에서의 소비자 보호지침 및 관계법령 또는 상관례에 따릅니다.<br>
+						<span class="bold">제4조(서비스의 제공 및 변경) </span> ① “도담도담”는 다음과 같은 서비스를
+						제공합니다.<br>
+						<span class="depth2">1. 재화 또는 용역에 대한 정보 제공 및 구매계약의 체결</span><br>
+						<span class="depth2">2. 구매계약이 체결된 재화 또는 용역의 배송</span><br>
+						<span class="depth2">3. 이용자의 “도담도담” 서비스 이용에 도움이 되는 알람 및 콘텐츠
+							제공 </span><br>
+						<span class="depth2">4. 기타 “도담도담”가 정하는 업무 </span> ② “도담도담”가 제공하는
+						재화 또는 용역 서비스는 비의료 건강관리서비스로서 질환의 치료 목적의 서비스가 아닌 보조적 건강관리 서비스입니다. 특히
+						만성질환자의 경우 본 서비스 이용대상자가 아니며 의사 또는 의료기관의 도움을 받으시기를 권고 드립니다. ③
+						“도담도담”는 재화 또는 용역의 품절 또는 기술적 사양의 변경 등의 경우에는 장차 체결되는 계약에 의해 제공할 재화
+						또는 용역의 내용을 변경할 수 있습니다. 이 경우에는 변경된 재화 또는 용역의 내용 및 제공일자를 명시하여 현재의 재화
+						또는 용역의 내용을 게시한 곳에 즉시 공지합니다. ④ “도담도담”가 제공하기로 이용자와 계약을 체결한 서비스의 내용을
+						재화등의 품절 또는 기술적 사양의 변경 등의 사유로 변경할 경우에는 그 사유를 이용자에게 통지 가능한 주소로 즉시
+						통지합니다. ⑤ 전항의 경우 “도담도담”는 이로 인하여 이용자가 입은 손해를 배상합니다. 다만, “도담도담”가 고의
+						또는 과실이 없음을 입증하는 경우에는 그러하지 아니합니다.<br>
+						<span class="bold">제5조(서비스의 중단) </span> ① “도담도담”는 연중무휴, 1일 24시간
+						제공을 원칙으로 합니다. 단, 컴퓨터 등 정보통신설비의 보수점검, 교체 및 고장, 통신의 두절 등의 사유가 발생한
+						경우에는 서비스의 제공을 일시적으로 중단할 수 있습니다. ② “도담도담”는 제1항의 사유로 서비스의 제공이 일시적으로
+						중단됨으로 인하여 이용자 또는 제3자가 입은 손해에 대하여 배상합니다. 단, “도담도담”가 고의 또는 과실이 없음을
+						입증하는 경우에는 그러하지 아니합니다. ③ 사업종목의 전환, 사업의 포기, 업체 간의 통합 등의 이유로 서비스를 제공할
+						수 없게 되는 경우에는 “도담도담”는 제8조에 정한 방법으로 이용자에게 통지하고 당초 “도담도담”에서 제시한 조건에
+						따라 소비자에게 보상합니다. 다만, “도담도담”가 보상기준 등을 고지하지 아니한 경우에는 이용자들의 포인트 또는 적립금
+						등을 “도담도담”에서 통용되는 통화가치에 상응하는 현물 또는 현금으로 이용자에게 지급합니다. ④ 제3항에도 불구하고
+						“도담도담”가 이용자에게 사전에 통지할 수 없는 부득이한 사유가 있는 경우 사후에 통지할 수 있습니다.<br>
+					</p>
+					<h4 id="item-2">제6조(회원가입)</h4>
+					<p>
+						<span class="bold">제6조(회원가입) </span> ① 이용자는 “도담도담”가 정한 가입 양식에 따라
+						회원정보를 기입한 후 이 약관에 동의한다는 의사표시를 함으로서 회원가입을 신청합니다. ② “도담도담”는 제1항과 같이
+						회원으로 가입할 것을 신청한 이용자 중 다음 각 호에 해당하지 않는 한 회원으로 등록합니다.<br>
+						<span class="depth2">1. 가입신청자가 이 약관 제7조제3항에 의하여 이전에 회원자격을
+							상실한 적이 있는 경우, 다만 제7조제3항에 의한 회원자격 상실 후 3년이 경과한 자로서 “도담도담”의 회원재가입
+							승낙을 얻은 경우에는 예외로 함.</span><br>
+						<span class="depth2">2. 등록 내용에 허위, 기재누락, 오기가 있는 경우 </span><br>
+						<span class="depth2">3. 기타 회원으로 등록하는 것이 “도담도담”의 기술상 현저히 지장이
+							있다고 판단되는 경우 </span><br>
+						<span class="depth2">4. 회원가입 및 전자상거래상의 계약에 관한 서비스는 만 14세
+							이상인자에 한함 </span> ③ 회원가입계약의 성립 시기는 “도담도담”의 승낙이 회원에게 도달한 시점으로 합니다. ④ 회원은
+						회원가입 시 등록한 사항에 변경이 있는 경우, 상당한 기간 이내에 “도담도담”에 대하여 회원정보 수정 등의 방법으로 그
+						변경사항을 알려야 합니다.<br>
+						<span class="bold">제7조(회원 탈퇴 및 자격 상실 등) </span> ① 회원은 “도담도담”에 언제든지
+						탈퇴를 요청할 수 있으며 “도담도담”는 즉시 회원탈퇴를 처리합니다. ② 회원이 다음 각 호의 사유에 해당하는 경우,
+						“도담도담”는 회원자격을 제한 및 정지시킬 수 있습니다. <span class="depth2">1. 가입
+							신청 시에 허위 내용을 등록한 경우 </span><br>
+						<span class="depth2">2. “도담도담”를 이용하여 구입한 재화 등의 대금, 기타
+							“도담도담”이용에 관련하여 회원이 부담하는 채무를 기일에 지급하지 않는 경우 </span><br>
+						<span class="depth2">3. 다른 사람의 “도담도담” 이용을 방해하거나 그 정보를 도용하는
+							등 전자상거래 질서를 위협하는 경우 </span><br>
+						<span class="depth2">4. “도담도담”를 이용하여 법령 또는 이 약관이 금지하거나
+							공서양속에 반하는 행위를 하는 경우 </span> ③ “도담도담”가 회원 자격을 제한․정지 시킨 후, 동일한 행위가 2회 이상
+						반복되거나 30일 이내에 그 사유가 시정되지 아니하는 경우 “도담도담”는 회원자격을 상실시킬 수 있습니다. ④
+						“도담도담”가 회원자격을 상실시키는 경우에는 회원등록을 말소합니다. 이 경우 회원에게 이를 통지하고, 회원등록 말소
+						전에 최소한 30일 이상의 기간을 정하여 소명할 기회를 부여합니다.<br>
+						<span class="bold">제8조(회원에 대한 통지) </span> ① “도담도담”가 회원에 대한 통지를 하는
+						경우, 회원이 “도담도담”와 미리 약정하여 지정한 전자우편 주소로 할 수 있습니다. ② “도담도담”는 불특정다수 회원에
+						대한 통지의 경우 1주일이상 “도담도담” 게시판에 게시함으로서 개별 통지에 갈음할 수 있습니다. 다만, 회원 본인의
+						거래와 관련하여 중대한 영향을 미치는 사항에 대하여는 개별통지를 합니다.<br>
+						<span class="bold">제9조(구매신청) </span> “도담도담”이용자는 “도담도담”상에서 다음 또는 이와
+						유사한 방법에 의하여 구매를 신청하며, “도담도담”는 이용자가 구매신청을 함에 있어서 다음의 각 내용을 알기 쉽게
+						제공하여야 합니다.<br>
+						<span class="depth2">1. 재화 등의 검색 및 선택 </span><br>
+						<span class="depth2">2. 받는 사람의 성명, 주소, 전화번호, 전자우편주소(또는
+							이동전화번호) 등의 입력 </span><br>
+						<span class="depth2">3. 약관내용, 청약철회권이 제한되는 서비스, 배송료 등의 비용부담과
+							관련한 내용에 대한 확인 </span><br>
+						<span class="depth2">4. 이 약관에 동의하고 위 3.호의 사항을 확인하거나 거부하는
+							표시(예, 마우스 클릭) </span><br>
+						<span class="depth2">5. 재화등의 구매신청 및 이에 관한 확인 또는 “도담도담”의 확인에
+							대한 동의 </span><br>
+						<span class="depth2">6. 결제방법의 선택 </span><br>
+						<span class="bold">제10조 (계약의 성립) </span> ① “도담도담”는 제9조와 같은 구매신청에
+						대하여 다음 각 호에 해당하면 승낙하지 않을 수 있습니다. 다만, 미성년자와 계약을 체결하는 경우에는 법정대리인의
+						동의를 얻지 못하면 미성년자 본인 또는 법정대리인이 계약을 취소할 수 있다는 내용을 고지하여야 합니다.<br>
+						<span class="depth2">1. 신청 내용에 허위, 기재누락, 오기가 있는 경우 </span><br>
+						<span class="depth2">2. 미성년자가 담배, 주류 등 청소년보호법에서 금지하는 재화 및
+							용역을 구매하는 경우 </span><br>
+						<span class="depth2">3. 기타 구매신청에 승낙하는 것이 “도담도담” 기술상 현저히 지장이
+							있다고 판단하는 경우 </span> ② “도담도담”의 승낙이 제13조 제1항의 수신확인통지형태로 이용자에게 도달한 시점에 계약이
+						성립한 것으로 봅니다. ③ “도담도담”의 승낙의 의사표시에는 이용자의 구매 신청에 대한 확인 및 판매가능 여부,
+						구매신청의 정정 취소 등에 관한 정보 등을 포함하여야 합니다.<br>
+					</p>
+					<h4 id="item-3">제11조(지급방법)</h4>
+					<p>
+						<span class="bold">제11조(지급방법) </span> “도담도담”에서 구매한 재화 또는 용역에 대한
+						대금지급방법은 다음 각 호의 방법중 가용한 방법으로 할 수 있습니다. 단, “도담도담”는 이용자의 지급방법에 대하여
+						재화 등의 대금에 어떠한 명목의 수수료도 추가하여 징수할 수 없습니다. ① 폰뱅킹, 인터넷뱅킹, 메일 뱅킹 등의 각종
+						계좌이체 ② 선불카드, 직불카드, 신용카드 등의 각종 카드의 비인증식 정기결제 ③ 선불카드, 직불카드, 신용카드 등의
+						각종 카드의 인증식 일반결제 ④ 온라인무통장입금 ⑤ 포인트 등 “도담도담”가 지급한 적립금에 의한 결제 (단,
+						정기구매의 경우 최초 구매 신청시 1회 사용 가능) ⑥ “도담도담"와 계약을 맺었거나 “도담도담"가 인증한 상품권에
+						의한 결제 ⑦ 기타 전자적 지급 방법에 의한 대금 지급 등 (각종 간편 결제 서비스)<br>
+						<span class="bold">제12조(프로모션코드) </span> ① 프로모션코드는 회원에게 무상으로 발행되는
+						것으로 “도담도담"는 회원이 프로모션코드를 사이트에서 상품 구매 시 적용할 수 있도록 사용방법, 사용기간, 사용대상,
+						할인액 또는 할인율 등을 정할 수 있습니다. 프로모션코드의 종류와 내용은 “도담도담"의 정책에 따라 달라질 수
+						있습니다. ② 프로모션코드는 현금으로 환급될 수 없으며, 프로모션코드의 사용기간이 만료되거나 구매 취소 시 또는
+						이용계약이 종료되면 소멸됩니다. ③ “회원”은 허락되지 않은 방법으로 프로모션코드를 제3자에게 또는 다른 아이디로
+						양도할 수 없으며, 유상으로 거래하거나 현금으로 전환할 수 없습니다. ④ “도담도담”는 회원이 “도담도담”가 승인하지
+						않은 방법으로 프로모션코드를 획득하거나 부정한 목적이나 용도로 프로모션코드를 사용하는 경우 프로모션코드의 사용을
+						제한하거나 프로모션코드를 사용한 구매신청을 취소하거나 회원 자격을 정지할 수 있습니다. ⑤ “도담도담”는 “회원"이
+						사용한 프로모션코드와 동일한 프로모션코드로 재구매 시 해당 프로모션코드 적용을 하지 않을 수 있습니다.<br>
+						<span class="bold">제13조(수신확인통지, 구매신청 변경 및 취소) </span> ① “도담도담”는
+						이용자의 구매신청이 있는 경우 이용자에게 수신확인통지를 합니다. ② 수신확인통지를 받은 이용자는 의사표시의 불일치 등이
+						있는 경우에는 수신확인통지를 받은 후 즉시 구매신청 변경 및 취소를 요청할 수 있고 “도담도담”는 배송 전에 이용자의
+						요청이 있는 경우에는 지체 없이 그 요청에 따라 처리하여야 합니다. 다만 이미 대금을 지불한 경우에는 제16조의
+						청약철회 등에 관한 규정에 따릅니다.<br>
+						<span class="bold">제14조(재화 등의 공급) </span> ① “도담도담”는 이용자와 재화 등의
+						공급시기에 관하여 별도의 약정이 없는 이상, 이용자가 청약을 한 날부터 7일 이내에 재화 등을 배송할 수 있도록
+						주문제작, 포장 등 기타의 필요한 조치를 취합니다. 다만, “도담도담”가 이미 재화 등의 대금의 전부 또는 일부를 받은
+						경우에는 대금의 전부 또는 일부를 받은 날부터 3영업일 이내에 조치를 취합니다. 이때 “도담도담”는 이용자가 재화 등의
+						공급 절차 및 진행 사항을 확인할 수 있도록 적절한 조치를 합니다. ② “도담도담”는 이용자가 구매한 재화에 대해
+						배송수단, 수단별 배송비용 부담자, 수단별 배송기간 등을 명시합니다. 만약 “도담도담”가 약정 배송기간을 초과한
+						경우에는 그로 인한 이용자의 손해를 배상하여야 합니다. 다만 “도담도담”가 고의․과실이 없음을 입증한 경우에는 그러하지
+						아니합니다. ③ 이용자는 “도담도담”가 지정하는 일부 서비스 항목 또는 “도담도담”가 지정한 기한에 한하여 회원가입
+						없이 무상으로 서비스를 이용할 수 있습니다.<br>
+						<span class="bold">제15조(적립금 제도의 운영) </span> ① “도담도담”는 회원이 정기구매서비스를
+						이용하여 재화를 구매하거나 이벤트에 참여하는 등의 일정한 경우 적립금으로서 포인트를 부여할 수 있습니다. 이러한
+						포인트의 부여는 다음 각 호의 방법에 따르되, 그 구체적인 운영방법은 회사의 운영정책에 따릅니다.<br>
+						<span class="depth2">1. “도담도담”는 회원의 결제금액에 대하여 서비스 페이지에 고지한
+							특정한 비율만큼 포인트를 부여할 수 있습니다. 단, 이 경우 적립대상금액은 쿠폰, 프로모션 등 기타 방법을 통해 할인
+							받은 금액은 제외됩니다.</span><br>
+						<span class="depth2">2. “도담도담”는 회원이 서비스나 이벤트 등에 참여할 경우 포인트를
+							부여할 수 있습니다.</span><br>
+						<span class="depth2">3. “도담도담”에서 회원이 구매한 재화를 반품하였을 때 해당 구매로
+							적립된 포인트는 환수됩니다.</span> ② 포인트는 “도담도담”의 서비스 제도로서 “도담도담”가 회원에게 사전 고지한 조건 및
+						비율에 따라 “도담도담”의 포인트몰에서 특정 재화로 교환이 가능합니다. 단, 포인트는 사은의 형태로 “도담도담”에서
+						지급하는 것으로 현금으로 환불되지는 않으며 타인에게 양도할 수 없습니다. ③ 포인트의 사용기한은 최초 적립일로부터
+						1년이며, 기한내 사용하지 않은 포인트는 소멸됩니다. 단일상품의 구매로 인하여 일시에 부여된 포인트에 대해서 그 중
+						일부만을 사용한 경우에도 동일합니다. 단, 포인트 부여시 적립금 사용기간에 대해 별도의 사전 고지 또는 특약이 있는
+						경우에는 그 사용기간 이내에 사용하여야 합니다. ④ 다음의 경우 포인트가 소멸됩니다.<br>
+						<span class="depth2">1. 회원을 탈퇴한 경우</span><br>
+						<span class="depth2">2. 사용기간이 경과한 경우</span><br>
+						<span class="depth2">3. 사용가능 조건 및 소멸에 대한 내용이 별도로 공지된 경우</span> ⑤
+						포인트를 이용하여 부당 이득을 취하거나, 악의적인 상거래가 발생할 경우, “도담도담”는 포인트에 대해 지급을 중지하며
+						기지급된 포인트를 환수할 수 있습니다.<br>
+					</p>
+					<h4 id="item-4">제16조(환급)</h4>
+					<p>
+						<span class="bold">제16조(환급) </span> “도담도담”는 이용자가 구매신청한 재화 등이 품절 등의
+						사유로 인도 또는 제공을 할 수 없을 때에는 지체 없이 그 사유를 이용자에게 통지하고 사전에 재화 등의 대금을 받은
+						경우에는 대금을 받은 날부터 3영업일 이내에 환급하거나 환급에 필요한 조치를 취합니다. <br>
+						<span class="bold">제17조(청약철회 등) </span> ① “도담도담”와 재화등의 구매에 관한 계약을
 						체결한 이용자는 「전자상거래 등에서의 소비자보호에 관한 법률」 제13조 제2항에 따른 계약내용에 관한 서면을 받은
-						날(그 서면을 받은 때보다 재화 등의 공급이 늦게 이루어진 경우에는 재화 등을 공급받거나 재화 등의 공급이 시작된
-						날을 말합니다)부터 7일 이내에는 청약의 철회를 할 수 있습니다. 다만, 청약철회에 관하여 「전자상거래 등에서의
-						소비자보호에 관한 법률」에 달리 정함이 있는 경우에는 동 법 규정에 따릅니다. ② 이용자는 재화 등을 배송 받은 경우
-						다음 각 호의 1에 해당하는 경우에는 반품 및 교환을 할 수 없습니다.<br><span class="depth2">1.
-						이용자에게 책임 있는 사유로 재화 등이 멸실 또는 훼손된 경우 (다만, 재화 등의 내용을 확인하기 위하여 포장 등을
-						훼손한 경우에는 청약철회를 할 수 있습니다) </span><br><span class="depth2">2. 이용자의 사용
-						또는 일부 소비에 의하여 재화 등의 가치가 현저히 감소한 경우 </span><br><span class="depth2">3.
-						시간의 경과에 의하여 재판매가 곤란할 정도로 재화등의 가치가 현저히 감소한 경우 </span><br><span
-						class="depth2">4. 같은 성능을 지닌 재화 등으로 복제가 가능한 경우 그 원본인 재화 등의
-						포장을 훼손한 경우 </span> ③ 제2항제2호 내지 제4호의 경우에 “도담도담”가 사전에 청약철회 등이 제한되는 사실을
-						소비자가 쉽게 알 수 있는 곳에 명기하거나 시용상품을 제공하는 등의 조치를 하지 않았다면 이용자의 청약철회 등이
+						날(그 서면을 받은 때보다 재화 등의 공급이 늦게 이루어진 경우에는 재화 등을 공급받거나 재화 등의 공급이 시작된 날을
+						말합니다)부터 7일 이내에는 청약의 철회를 할 수 있습니다. 다만, 청약철회에 관하여 「전자상거래 등에서의 소비자보호에
+						관한 법률」에 달리 정함이 있는 경우에는 동 법 규정에 따릅니다. ② 이용자는 재화 등을 배송 받은 경우 다음 각 호의
+						1에 해당하는 경우에는 반품 및 교환을 할 수 없습니다.<br>
+						<span class="depth2">1. 이용자에게 책임 있는 사유로 재화 등이 멸실 또는 훼손된 경우
+							(다만, 재화 등의 내용을 확인하기 위하여 포장 등을 훼손한 경우에는 청약철회를 할 수 있습니다) </span><br>
+						<span class="depth2">2. 이용자의 사용 또는 일부 소비에 의하여 재화 등의 가치가 현저히
+							감소한 경우 </span><br>
+						<span class="depth2">3. 시간의 경과에 의하여 재판매가 곤란할 정도로 재화등의 가치가
+							현저히 감소한 경우 </span><br>
+						<span class="depth2">4. 같은 성능을 지닌 재화 등으로 복제가 가능한 경우 그 원본인
+							재화 등의 포장을 훼손한 경우 </span> ③ 제2항제2호 내지 제4호의 경우에 “도담도담”가 사전에 청약철회 등이 제한되는
+						사실을 소비자가 쉽게 알 수 있는 곳에 명기하거나 시용상품을 제공하는 등의 조치를 하지 않았다면 이용자의 청약철회 등이
 						제한되지 않습니다. ④ 이용자는 제1항 및 제2항의 규정에 불구하고 재화 등의 내용이 표시•광고 내용과 다르거나
 						계약내용과 다르게 이행된 때에는 당해 재화 등을 공급받은 날부터 3월 이내, 그 사실을 안 날 또는 알 수 있었던
-						날부터 30일 이내에 청약철회 등을 할 수 있습니다.<br><span class="bold">제18조(청약철회
-						등의 효과) </span> ① “도담도담”는 이용자로부터 재화 등을 반환받은 경우 3영업일 이내에 이미 지급받은 재화 등의
-						대금을 환급합니다. 이 경우 “도담도담”가 이용자에게 재화등의 환급을 지연한 때에는 그 지연기간에 대하여 「전자상거래
-						등에서의 소비자보호에 관한 법률 시행령」제21조의2에서 정하는 지연이자율(괄호 부분 삭제)을 곱하여 산정한 지연이자를
-						지급합니다. ② “도담도담”는 위 대금을 환급함에 있어서 이용자가 신용카드 또는 전자화폐 등의 결제수단으로 재화 등의
-						대금을 지급한 때에는 지체 없이 당해 결제수단을 제공한 사업자로 하여금 재화 등의 대금의 청구를 정지 또는 취소하도록
-						요청합니다. ③ 청약철회 등의 경우 공급받은 재화 등의 반환에 필요한 비용은 이용자가 부담합니다. “도담도담”는
-						이용자에게 청약철회 등을 이유로 위약금 또는 손해배상을 청구하지 않습니다. 다만 재화 등의 내용이 표시•광고 내용과
-						다르거나 계약내용과 다르게 이행되어 청약철회 등을 하는 경우 재화 등의 반환에 필요한 비용은 “도담도담”가
-						부담합니다. ④ 이용자가 재화 등을 제공받을 때 발송비를 부담한 경우에 “도담도담”는 청약철회 시 그 비용을 누가
-						부담하는지를 이용자가 알기 쉽도록 명확하게 표시합니다.<br><span class="bold">제19조(“도담도담“의
-						의무) </span> ① “도담도담”는 법령과 이 약관이 금지하거나 공서양속에 반하는 행위를 하지 않으며 이 약관이 정하는 바에
-						따라 지속적이고, 안정적으로 재화․용역을 제공하는데 최선을 다하여야 합니다. ② “도담도담”는 이용자가 안전하게
-						인터넷 서비스를 이용할 수 있도록 이용자의 개인정보(신용정보 포함)보호를 위한 보안 시스템을 갖추어야 합니다. ③
-						“도담도담”가 상품이나 용역에 대하여 「표시․광고의 공정화에 관한 법률」 제3조 소정의 부당한 표시․광고행위를
-						함으로써 이용자가 손해를 입은 때에는 이를 배상할 책임을 집니다. ④ “도담도담”는 이용자가 원하지 않는 영리목적의
-						광고성 전자우편을 발송하지 않습니다.<br><span class="bold">제20조(회원의 ID 및
-						비밀번호에 대한 의무) </span> ① ID와 비밀번호에 관한 관리책임은 회원에게 있으며, 어떠한 경우에도 본인의 ID 또는
-						비밀번호를 양도하거나 대여할 수 없습니다. ② 회원은 자신의 ID 및 비밀번호를 제3자에게 이용하게 해서는 안되며,
-						“도담도담”의 귀책사유 없이 이를 유출, 양도, 대여한 행위로 인하여 발생하는 손실이나 손해에 대하여는 회원 본인이
-						그에 대한 책임을 부담합니다. ③ 회원이 자신의 ID 및 비밀번호를 도난당하거나 제3자가 사용하고 있음을 인지한
-						경우에는 바로 “도담도담”에 통보하고 “도담도담”의 안내가 있는 경우에는 그에 따라야 합니다.<br></p>
-						<h4 id="item-5">제21조(이용자의 의무)</h4>
-						<p><span
-						class="bold">제21조(이용자의 의무) </span> 이용자는 다음 행위를 하여서는 안 됩니다.<br><span
-						class="depth2">1. 신청 또는 변경 시 허위 내용의 등록 </span><br><span
-						class="depth2">2. 타인의 정보 도용 </span><br><span class="depth2">3.
-						“도담도담”에 게시된 정보의 변경 </span><br><span class="depth2">4. “도담도담”가 정한 정보
-						이외의 정보(컴퓨터 프로그램 등) 등의 송신 또는 게시 </span><br><span class="depth2">5.
-						“도담도담” 기타 제3자의 저작권 등 지적재산권에 대한 침해 </span><br><span class="depth2">6.
-						“도담도담” 기타 제3자의 명예를 손상시키거나 업무를 방해하는 행위 </span><br><span class="depth2">7.
-						외설 또는 폭력적인 메시지, 화상, 음성, 기타 공서양속에 반하는 정보를 몰에 공개 또는 게시하는 행위 </span><br><span
-						class="bold">제22조(정기구매서비스 제공 및 이용자격) </span> ① 정기구매서비스는 “도담도담"
-						회원의 편의를 위하여 상품을 정기적으로 결제하고 배송하는 서비스입니다. ② 정기구매서비스는 “도담도담"회원이면 누구나
-						정기구매서비스를 신청함으로써 이용 가능합니다.<br><span class="bold">제23조(정기구매서비스
-						상품의 결제 등) </span> ① “도담도담"는 정기구매서비스 상품에 대하여 할인혜택을 제공할 수 있으며, 할인율 및 거래조건
-						등은 상품별로 다를 수 있고 변경될 수 있습니다. 할인율 및 거래조건 등이 회원에게 불리하게 변경되는 경우
-						“도담도담"는 2주 이상의 상당한 기간 동안 위 변경에 대하여 공지하고, 회원은 위 변경에 동의하지 않으면 위 기간
-						동안 본 서비스를 종료시킬 수 있으며, 위 기간 동안 서비스를 종료시키지 않으면 위 변경에 회원이 동의한 것으로
-						봅니다. ② 정기구매서비스의 특성상 상품의 가격은 계속적으로 변경될 수 있으며, 회원에게 고지된 시점의 상품가격을
-						기준으로 결제가 이루어집니다. 가격 결정의 기준 시점은 변경될 수 있습니다. ③ 정기구매서비스 상품의 추가 또는 변경
-						시 결제되는 총 상품의 금액은 변경될 수 있습니다. ④ 카드한도 초과 등 상품의 결제가 이루어지지 않을 경우, 해당
-						회차의 정기구매 주문은 이루어지지 않을 수 있으며, 위와 같은 상황이 2회 이상 지속되는 경우 “도담도담"는
-						정기구매서비스를 중지할 수 있습니다.<br><span class="bold">제24조(정기구매서비스 상품의
-						판매 종료 등) </span> ① 정기구매서비스의 대상 상품을 품절 등의 사유로 더 이상 판매할 수 없거나 해당 상품을
-						정기구매서비스로 제공할 수 없는 사유가 있는 경우, “도담도담"는 해당 상품의 정기구매서비스를 종료하거나 해당 회차의
-						상품을 공급하지 않을 수 있습니다. ② 재화 등의 대금을 환급하여야 하는 경우 제16조에서 정한 사항에 따릅니다.<br><span
-						class="bold">제25조(정기구매서비스의 종료) </span> ① 회원이 “도담도담"에게 정기구매서비스의
-						종료를 통지하거나, “도담도담"의 마이페이지에서 해지 신청함으로써 정기구매서비스를 종료시킬 수 있습니다. ②
-						정기구매서비스가 종료된 경우 해당 정기구매서비스에 적용된 프로모션코드와 장기구매고객할인 등 각종 혜택은 동시에
-						종료됩니다.<br></p>
-						<h4 id="item-6">제26조(정기구매서비스 이용의 제한)</h4>
-						<p><span class="bold">제26조(정기구매서비스 이용의 제한) </span> ① 회원의 통지
-						또는 과실에 의해서 정기구매서비스가 중지되는 경우, 해당 상품의 정기구매 서비스 신청이 2개월의 범위 내에서 제한될
-						수 있습니다. ② “도담도담"는 특정상품에 대하여 구매 수량을 제한할 수 있습니다. ③ “도담도담"는 상품의 재판매
-						가능성이 있는 경우, 또는 불법적이거나 부당한 행위와 관련된 경우 정기구매서비스 제공을 제한할 수 있습니다. ④
-						서비스 이용의 제한에 대한 구체적인 기준은 내부 운영정책에 따라 적용됩니다. ⑤ “도담도담"는 자체적인 시스템을 통해
-						모니터링과 각종 기관에서 접수된 민원 내용, 수사기관의 정보 등을 통해 정황을 확인한 후 정기구매서비스 제한
-						사유행위를 한 것으로 추정되는 경우 정기구매서비스 이용을 제한할 수 있습니다.<br><span class="bold">제27조(저작권의
-							귀속 및 이용제한) </span> ① “도담도담“가 작성한 저작물에 대한 저작권 기타 지적재산권은 "도담도담"에 귀속합니다. ②
-						이용자는 “도담도담”를 이용함으로써 얻은 정보 중 “도담도담”에게 지적재산권이 귀속된 정보를 “도담도담”의 사전 승낙
-						없이 복제, 송신, 출판, 배포, 방송 기타 방법에 의하여 영리목적으로 이용하거나 제3자에게 이용하게 하여서는
-						안됩니다. ③ “도담도담”는 약정에 따라 이용자에게 귀속된 저작권을 사용하는 경우 당해 이용자에게 통보하여야 합니다.
-						<br><span class="bold">제28조(면책조항) </span> ① “도담도담”는 천재지변 또는 이에 준하는
+						날부터 30일 이내에 청약철회 등을 할 수 있습니다.<br>
+						<span class="bold">제18조(청약철회 등의 효과) </span> ① “도담도담”는 이용자로부터 재화 등을
+						반환받은 경우 3영업일 이내에 이미 지급받은 재화 등의 대금을 환급합니다. 이 경우 “도담도담”가 이용자에게 재화등의
+						환급을 지연한 때에는 그 지연기간에 대하여 「전자상거래 등에서의 소비자보호에 관한 법률 시행령」제21조의2에서 정하는
+						지연이자율(괄호 부분 삭제)을 곱하여 산정한 지연이자를 지급합니다. ② “도담도담”는 위 대금을 환급함에 있어서
+						이용자가 신용카드 또는 전자화폐 등의 결제수단으로 재화 등의 대금을 지급한 때에는 지체 없이 당해 결제수단을 제공한
+						사업자로 하여금 재화 등의 대금의 청구를 정지 또는 취소하도록 요청합니다. ③ 청약철회 등의 경우 공급받은 재화 등의
+						반환에 필요한 비용은 이용자가 부담합니다. “도담도담”는 이용자에게 청약철회 등을 이유로 위약금 또는 손해배상을
+						청구하지 않습니다. 다만 재화 등의 내용이 표시•광고 내용과 다르거나 계약내용과 다르게 이행되어 청약철회 등을 하는
+						경우 재화 등의 반환에 필요한 비용은 “도담도담”가 부담합니다. ④ 이용자가 재화 등을 제공받을 때 발송비를 부담한
+						경우에 “도담도담”는 청약철회 시 그 비용을 누가 부담하는지를 이용자가 알기 쉽도록 명확하게 표시합니다.<br>
+						<span class="bold">제19조(“도담도담“의 의무) </span> ① “도담도담”는 법령과 이 약관이
+						금지하거나 공서양속에 반하는 행위를 하지 않으며 이 약관이 정하는 바에 따라 지속적이고, 안정적으로 재화․용역을
+						제공하는데 최선을 다하여야 합니다. ② “도담도담”는 이용자가 안전하게 인터넷 서비스를 이용할 수 있도록 이용자의
+						개인정보(신용정보 포함)보호를 위한 보안 시스템을 갖추어야 합니다. ③ “도담도담”가 상품이나 용역에 대하여
+						「표시․광고의 공정화에 관한 법률」 제3조 소정의 부당한 표시․광고행위를 함으로써 이용자가 손해를 입은 때에는 이를
+						배상할 책임을 집니다. ④ “도담도담”는 이용자가 원하지 않는 영리목적의 광고성 전자우편을 발송하지 않습니다.<br>
+						<span class="bold">제20조(회원의 ID 및 비밀번호에 대한 의무) </span> ① ID와 비밀번호에
+						관한 관리책임은 회원에게 있으며, 어떠한 경우에도 본인의 ID 또는 비밀번호를 양도하거나 대여할 수 없습니다. ②
+						회원은 자신의 ID 및 비밀번호를 제3자에게 이용하게 해서는 안되며, “도담도담”의 귀책사유 없이 이를 유출, 양도,
+						대여한 행위로 인하여 발생하는 손실이나 손해에 대하여는 회원 본인이 그에 대한 책임을 부담합니다. ③ 회원이 자신의
+						ID 및 비밀번호를 도난당하거나 제3자가 사용하고 있음을 인지한 경우에는 바로 “도담도담”에 통보하고 “도담도담”의
+						안내가 있는 경우에는 그에 따라야 합니다.<br>
+					</p>
+					<h4 id="item-5">제21조(이용자의 의무)</h4>
+					<p>
+						<span class="bold">제21조(이용자의 의무) </span> 이용자는 다음 행위를 하여서는 안 됩니다.<br>
+						<span class="depth2">1. 신청 또는 변경 시 허위 내용의 등록 </span><br>
+						<span class="depth2">2. 타인의 정보 도용 </span><br>
+						<span class="depth2">3. “도담도담”에 게시된 정보의 변경 </span><br>
+						<span class="depth2">4. “도담도담”가 정한 정보 이외의 정보(컴퓨터 프로그램 등) 등의
+							송신 또는 게시 </span><br>
+						<span class="depth2">5. “도담도담” 기타 제3자의 저작권 등 지적재산권에 대한 침해 </span><br>
+						<span class="depth2">6. “도담도담” 기타 제3자의 명예를 손상시키거나 업무를 방해하는
+							행위 </span><br>
+						<span class="depth2">7. 외설 또는 폭력적인 메시지, 화상, 음성, 기타 공서양속에
+							반하는 정보를 몰에 공개 또는 게시하는 행위 </span><br>
+						<span class="bold">제22조(정기구매서비스 제공 및 이용자격) </span> ① 정기구매서비스는
+						“도담도담" 회원의 편의를 위하여 상품을 정기적으로 결제하고 배송하는 서비스입니다. ② 정기구매서비스는
+						“도담도담"회원이면 누구나 정기구매서비스를 신청함으로써 이용 가능합니다.<br>
+						<span class="bold">제23조(정기구매서비스 상품의 결제 등) </span> ① “도담도담"는
+						정기구매서비스 상품에 대하여 할인혜택을 제공할 수 있으며, 할인율 및 거래조건 등은 상품별로 다를 수 있고 변경될 수
+						있습니다. 할인율 및 거래조건 등이 회원에게 불리하게 변경되는 경우 “도담도담"는 2주 이상의 상당한 기간 동안 위
+						변경에 대하여 공지하고, 회원은 위 변경에 동의하지 않으면 위 기간 동안 본 서비스를 종료시킬 수 있으며, 위 기간
+						동안 서비스를 종료시키지 않으면 위 변경에 회원이 동의한 것으로 봅니다. ② 정기구매서비스의 특성상 상품의 가격은
+						계속적으로 변경될 수 있으며, 회원에게 고지된 시점의 상품가격을 기준으로 결제가 이루어집니다. 가격 결정의 기준 시점은
+						변경될 수 있습니다. ③ 정기구매서비스 상품의 추가 또는 변경 시 결제되는 총 상품의 금액은 변경될 수 있습니다. ④
+						카드한도 초과 등 상품의 결제가 이루어지지 않을 경우, 해당 회차의 정기구매 주문은 이루어지지 않을 수 있으며, 위와
+						같은 상황이 2회 이상 지속되는 경우 “도담도담"는 정기구매서비스를 중지할 수 있습니다.<br>
+						<span class="bold">제24조(정기구매서비스 상품의 판매 종료 등) </span> ① 정기구매서비스의 대상
+						상품을 품절 등의 사유로 더 이상 판매할 수 없거나 해당 상품을 정기구매서비스로 제공할 수 없는 사유가 있는 경우,
+						“도담도담"는 해당 상품의 정기구매서비스를 종료하거나 해당 회차의 상품을 공급하지 않을 수 있습니다. ② 재화 등의
+						대금을 환급하여야 하는 경우 제16조에서 정한 사항에 따릅니다.<br>
+						<span class="bold">제25조(정기구매서비스의 종료) </span> ① 회원이 “도담도담"에게
+						정기구매서비스의 종료를 통지하거나, “도담도담"의 마이페이지에서 해지 신청함으로써 정기구매서비스를 종료시킬 수
+						있습니다. ② 정기구매서비스가 종료된 경우 해당 정기구매서비스에 적용된 프로모션코드와 장기구매고객할인 등 각종 혜택은
+						동시에 종료됩니다.<br>
+					</p>
+					<h4 id="item-6">제26조(정기구매서비스 이용의 제한)</h4>
+					<p>
+						<span class="bold">제26조(정기구매서비스 이용의 제한) </span> ① 회원의 통지 또는 과실에
+						의해서 정기구매서비스가 중지되는 경우, 해당 상품의 정기구매 서비스 신청이 2개월의 범위 내에서 제한될 수 있습니다.
+						② “도담도담"는 특정상품에 대하여 구매 수량을 제한할 수 있습니다. ③ “도담도담"는 상품의 재판매 가능성이 있는
+						경우, 또는 불법적이거나 부당한 행위와 관련된 경우 정기구매서비스 제공을 제한할 수 있습니다. ④ 서비스 이용의 제한에
+						대한 구체적인 기준은 내부 운영정책에 따라 적용됩니다. ⑤ “도담도담"는 자체적인 시스템을 통해 모니터링과 각종
+						기관에서 접수된 민원 내용, 수사기관의 정보 등을 통해 정황을 확인한 후 정기구매서비스 제한 사유행위를 한 것으로
+						추정되는 경우 정기구매서비스 이용을 제한할 수 있습니다.<br>
+						<span class="bold">제27조(저작권의 귀속 및 이용제한) </span> ① “도담도담“가 작성한 저작물에
+						대한 저작권 기타 지적재산권은 "도담도담"에 귀속합니다. ② 이용자는 “도담도담”를 이용함으로써 얻은 정보 중
+						“도담도담”에게 지적재산권이 귀속된 정보를 “도담도담”의 사전 승낙 없이 복제, 송신, 출판, 배포, 방송 기타 방법에
+						의하여 영리목적으로 이용하거나 제3자에게 이용하게 하여서는 안됩니다. ③ “도담도담”는 약정에 따라 이용자에게 귀속된
+						저작권을 사용하는 경우 당해 이용자에게 통보하여야 합니다. <br>
+						<span class="bold">제28조(면책조항) </span> ① “도담도담”는 천재지변 또는 이에 준하는
 						불가항력으로 인하여 서비스를 제공할 수 없는 경우에는 서비스 제공에 관한 책임이 면제됩니다. ② “도담도담”는 의
-						귀책사유로 인한 서비스 이용의 장애에 대하여 책임을 지지 않습니다. ③ “도담도담”는 회원이 서비스를 이용하여
-						기대하는 수익을 상실한 것에 대하여 책임을 지지 않으며, 그 밖의 서비스를 통하여 얻은 자료로 인한 손해에 관하여
-						책임을 지지 않습니다. ④ “도담도담”는 회원이 게재한 정보, 자료, 사실의 신뢰도, 정확성 등 내용에 관해서는
-						책임을 지지 않습니다. ⑤ “도담도담”는 회원 간 또는 회원과 제3자 상호간에 서비스를 매개로 하여 거래 등을 한
-						경우에는 책임을 지지 않습니다.<br><span class="bold">제29조(분쟁해결) </span> ① “도담도담”는
-						이용자가 제기하는 정당한 의견이나 불만을 반영하고 그 피해를 보상처리하기 위하여 피해보상처리기구를 설치․운영합니다.
-						② “도담도담”는 이용자로부터 제출되는 불만사항 및 의견은 우선적으로 그 사항을 처리합니다. 다만, 신속한 처리가
-						곤란한 경우에는 이용자에게 그 사유와 처리일정을 즉시 통보해 드립니다. ③ “도담도담”와 이용자 간에 발생한
-						전자상거래 분쟁과 관련하여 이용자의 피해구제신청이 있는 경우에는 공정거래위원회 또는 시•도지사가 의뢰하는
-						분쟁조정기관의 조정에 따를 수 있습니다.<br><span class="bold">제30조(재판권 및 준거법)</span>
-						① “도담도담”와 이용자 간에 발생한 전자상거래 분쟁에 관한 소송은 제소 당시의 이용자의 주소에 의하고, 주소가 없는
-						경우에는 거소를 관할하는 지방법원의 전속관할로 합니다. 다만, 제소 당시 이용자의 주소 또는 거소가 분명하지 않거나
-						외국 거주자의 경우에는 민사소송법상의 관할법원에 제기합니다. ② “도담도담”와 이용자 간에 제기된 전자상거래 소송에는
-						한국 법을 적용합니다. 이 약관은 2020년 8월 11일부터 시행됩니다. 단, 본 약관의 공지 이후 시행일 이전에 본
-						약관에 동의한 경우에는 동의 시부터 본 약관이 적용됩니다.
-						<br><br><br>
+						귀책사유로 인한 서비스 이용의 장애에 대하여 책임을 지지 않습니다. ③ “도담도담”는 회원이 서비스를 이용하여 기대하는
+						수익을 상실한 것에 대하여 책임을 지지 않으며, 그 밖의 서비스를 통하여 얻은 자료로 인한 손해에 관하여 책임을 지지
+						않습니다. ④ “도담도담”는 회원이 게재한 정보, 자료, 사실의 신뢰도, 정확성 등 내용에 관해서는 책임을 지지
+						않습니다. ⑤ “도담도담”는 회원 간 또는 회원과 제3자 상호간에 서비스를 매개로 하여 거래 등을 한 경우에는 책임을
+						지지 않습니다.<br>
+						<span class="bold">제29조(분쟁해결) </span> ① “도담도담”는 이용자가 제기하는 정당한 의견이나
+						불만을 반영하고 그 피해를 보상처리하기 위하여 피해보상처리기구를 설치․운영합니다. ② “도담도담”는 이용자로부터
+						제출되는 불만사항 및 의견은 우선적으로 그 사항을 처리합니다. 다만, 신속한 처리가 곤란한 경우에는 이용자에게 그
+						사유와 처리일정을 즉시 통보해 드립니다. ③ “도담도담”와 이용자 간에 발생한 전자상거래 분쟁과 관련하여 이용자의
+						피해구제신청이 있는 경우에는 공정거래위원회 또는 시•도지사가 의뢰하는 분쟁조정기관의 조정에 따를 수 있습니다.<br>
+						<span class="bold">제30조(재판권 및 준거법)</span> ① “도담도담”와 이용자 간에 발생한
+						전자상거래 분쟁에 관한 소송은 제소 당시의 이용자의 주소에 의하고, 주소가 없는 경우에는 거소를 관할하는 지방법원의
+						전속관할로 합니다. 다만, 제소 당시 이용자의 주소 또는 거소가 분명하지 않거나 외국 거주자의 경우에는 민사소송법상의
+						관할법원에 제기합니다. ② “도담도담”와 이용자 간에 제기된 전자상거래 소송에는 한국 법을 적용합니다. 이 약관은
+						2020년 8월 11일부터 시행됩니다. 단, 본 약관의 공지 이후 시행일 이전에 본 약관에 동의한 경우에는 동의 시부터
+						본 약관이 적용됩니다. <br>
+						<br>
+						<br>
 					</p>
 				</div>
 			</div>
