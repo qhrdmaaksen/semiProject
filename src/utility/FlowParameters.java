@@ -1,19 +1,25 @@
 package utility;
 
+import oracle.sql.DATE;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class FlowParameters {
-	// 페이징 처리 관려 변수들
+	// 페이징 처리 관련 변수들
 	private String pageNumber ;
 	private String pageSize ;
-	
-	// 필드 검색과 관련된 변수들 
+
+	// 필드 검색과 관련된 변수들
 	private String mode = "" ;
 	private String keyword = "" ;
-	
-	public FlowParameters() { 
-		
-		
-	}
-	
+
+	// 날짜 검색과 관련된 변수들
+	private Date fromdate;
+	private Date todate;
+
+	public FlowParameters() { }
+
 	public FlowParameters(String pageNumber, String pageSize, String mode, String keyword) {
 		this.pageNumber = pageNumber ;
 		this.pageSize = pageSize ;
@@ -26,13 +32,25 @@ public class FlowParameters {
 		}
 		this.keyword = keyword ;
 	}
-	 
+
+	public FlowParameters(String pageNumber, String pageSize, Date fromdate, Date todate, String mode){
+		this.pageNumber = pageNumber;
+		this.pageSize = pageSize;
+		this.fromdate = fromdate;
+		this.todate = todate;
+		this.mode = mode;
+	}
+
 	@Override
 	public String toString() {
-		return "pageNumber=" + pageNumber + "&pageSize="
-				+ pageSize + "&mode=" + mode + "&keyword=" + keyword + "";
+		return "pageNumber=" + pageNumber + "&pageSize=" + pageSize + "&mode=" + mode + "&keyword=" + keyword + "";
 	}
-	
+
+	public String toStringPoint(){
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		return "pageNumber=" + pageNumber + "&pageSize=" + pageSize + "&fromdate=" + sdf.format(fromdate) + "&todate=" + sdf.format(todate);
+	}
+
 	/*@Override
 	public String toString() {
 		return "pageNumber=" + pageNumber + "&pageSize="
@@ -54,14 +72,13 @@ public class FlowParameters {
 		return mode;
 	}
 	public void setMode(String mode) {
-		this.mode = mode;
-	}
-	
-	public String getKeyword() {
-		return keyword;
-	}
-	public void setKeyword(String keyword) {
-		this.keyword = keyword;
-	} 
-	
+			this.mode = mode;
+		}
+	public Date getFromdate() { return fromdate; }
+	public void setFromdate(Date fromdate) { this.fromdate = fromdate; }
+	public Date getTodate() { return todate; }
+	public void setTodate(Date todate) { this.todate = todate; }
+	public String getKeyword() { return keyword; }
+	public void setKeyword(String keyword){ this.keyword = keyword; }
 }
+

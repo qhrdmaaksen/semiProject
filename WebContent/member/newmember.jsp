@@ -4,8 +4,8 @@
 <!DOCTYPE html>
 <html>
 
-<script type="text/javascript" src="jquery.js"></script>
-<script type="text/javascript" src="jquery.validate.js"></script>
+<!-- <script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="jquery.validate.js"></script> -->
 
 <%!
     String YesForm = null ;

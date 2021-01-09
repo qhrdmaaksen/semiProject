@@ -62,11 +62,14 @@
 
 <html>
 <head>
-	<meta charset="utf-8">
+	
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="./../css/style.css">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/locales/bootstrap-datepicker.kr.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
@@ -85,7 +88,8 @@
 		<!-- Brand/logo -->
 		<div class="navbar-header">
 			<a class="navbar-brand" href="<%=NoForm%>index">
-				<img src="${pageContext.request.contextPath}/images/logosize.png" alt="logo" style="width:250px;">
+				<img src="${pageContext.request.contextPath}/images/logosize.png" alt="logo" style="width:200px;">
+
 			</a>
 		</div>
 		<ul class="navbar-nav">
@@ -95,13 +99,13 @@
 				추천 받기</a>
 			</li>
 			<li class="nav-item">
-				<a class="nav-link" href="<%=NoForm%>index">제품 보기</a>
+				<a class="nav-link" href="<%=NoForm%>plist">제품 보기</a>
 			</li>
 			<li class="nav-item">
 				<a class="nav-link" href="<%=NoForm%>index">장바구니</a>
 			</li>
 			<li class="nav-item">
-				<a class="nav-link" href="<%=NoForm%>index">고객포럼</a>
+				<a class="nav-link" href="<%=NoForm%>boList">고객포럼</a>
 			</li>
 			
 			<li class="nav-item dropdown">

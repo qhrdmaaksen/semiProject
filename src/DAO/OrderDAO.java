@@ -83,7 +83,7 @@ public class OrderDAO extends SuperDAO {
                 product.setBloodCirculation(rs.getInt("bloodcirculation"));
                 product.setDigestiveapparatus(rs.getInt("digestiveapparatus"));
                 product.setSkin(rs.getInt("skin"));
-                product.setFatgue(rs.getInt("fatigue"));
+                product.setFatigue(rs.getInt("fatigue"));
                 product.setJoint(rs.getInt("joint"));
                 product.setHair(rs.getInt("hair"));
                 product.setImmunity(rs.getInt("immunity"));

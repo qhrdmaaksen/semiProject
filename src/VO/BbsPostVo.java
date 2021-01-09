@@ -8,14 +8,35 @@ public class BbsPostVo {
 	String content ;
 	String postdate ; 
 	int likenumber ; // 좋아요 수 
+	String image;
 	
+	
+
+
+
+
+	
+
+
+
 	@Override
 	public String toString() {
 		return "BbsPostVo [num=" + num + ", id=" + id + ", title=" + title + ", content=" + content + ", postdate="
-				+ postdate + ", likenumber=" + likenumber + "]";
+				+ postdate + ", likenumber=" + likenumber + ", image=" + image + "]";
 	}
-	
-	
+
+
+
+	public String getImage() {
+		return image;
+	}
+
+
+
+	public void setImage(String image) {
+		this.image = image;
+	}
+
 	
 	public int getNum() {
 		return num;

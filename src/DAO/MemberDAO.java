@@ -94,12 +94,11 @@ public class MemberDAO extends SuperDAO {
 		}
 		return cnt ;
 	}
-
-
+	
 	public MemberVO SelectDataByPk(String id) {
 		MemberVO bean = null;
 		
-		String sql = "select * from members where \"id\" = ?  " ;
+		String sql = " select * from members where \"id\" = ?  " ;
 		Connection conn = null ;
 		PreparedStatement pstmt = null ;
 		ResultSet rs = null;
@@ -194,6 +193,9 @@ public class MemberDAO extends SuperDAO {
 			}
 			return cnt ;
 	}
+
+
+
 }
 
 
