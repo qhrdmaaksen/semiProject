@@ -33,7 +33,7 @@ public class PlistController extends SuperClass{
 						parameters.getKeyword() + "%");
 		
 		String contextPath = request.getContextPath() ;
-		String myurl = contextPath + "/Shopping?command=prList" ;
+		String myurl = contextPath + "/Shopping?command=plist" ;
 		
 		Paging pageInfo = new Paging(
 				parameters.getPageNumber(), 

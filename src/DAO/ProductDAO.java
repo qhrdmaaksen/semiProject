@@ -132,6 +132,12 @@ public class ProductDAO extends SuperDAO{
 			}
 			
 			return lists ;
+		}
+
+
+		public ProductVO SelectDataByPk(Integer pnum) {
+			// TODO Auto-generated method stub
+			return null;
 		}	
 		
 		
