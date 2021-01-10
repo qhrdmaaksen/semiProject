@@ -20,3 +20,9 @@ pdetail=product.PdetailController
 previewupdate=product.PreviewUpdateController
 plist=product.PlistController
 
+#### Mall Section ######################################################
+mallcartadd=mypkg.mall.MallCartAddController
+mallcartlist=mypkg.mall.MallCartListController
+
+
+
