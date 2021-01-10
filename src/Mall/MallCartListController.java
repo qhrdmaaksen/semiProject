@@ -14,12 +14,11 @@ import DAO.ProductDAO;
 import VO.ProductVO;
 import common.SuperClass;
 import member.MemberLoginController;
-import mypkg.product.ProductListController;
 import product.PlistController;
 import shopping.MyCartList;
 import shopping.ShoppingInfo;
 
-public class MallCartController extends SuperClass{
+public class MallCartListController extends SuperClass{
 	
 	//MallListController와 같다.
 	@Override
@@ -52,13 +51,13 @@ public class MallCartController extends SuperClass{
 			int totalAmount = 0 ; // 총 판매 금액
 			int totalPoint = 0 ; // 총 누적 포인트
 			
-			for(Integer pnum : keylist){ // pnum : 상품 번호
-				Integer qty = maplists.get(pnum) ; // 구매 수량
+			for(Integer productcode : keylist){ // productcode : 상품 번호
+				Integer qty = maplists.get(productcode) ; // 구매 수량
 				
 				ProductDAO pdao = new ProductDAO();
 				
-				// 상품 번호 pnum에 대한 Bean 정보
-				ProductVO bean = pdao.SelectDataByPk(pnum) ;
+				// 상품 번호 productcode에 대한 Bean 정보
+				ProductVO bean = pdao.SelectDataByPk(productcode) ;
 				
 				int point = bean.getPoint() ;
 				int price = bean.getPrice() ;

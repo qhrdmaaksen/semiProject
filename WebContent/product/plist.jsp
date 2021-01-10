@@ -13,39 +13,10 @@
 
 <html>
 	<head>
-<!-- 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> -->
-<!-- 	  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script> -->
-	
-
 
 <style type="text/css">
-	.card{
-		width:200px;
-		height: 300px;
-		background-color: skyblue;
-		display: inline-block;
-	}
-	.imsi{
-		width:250px;
-		height: 400px;
-		padding-top: 10px;
-		padding-left: 10px;
-		background-color: #AAAAFF;	
-		display: inline-block;
-	}
-	.list{
-	display: inline-block;
-	}
-	ul{
-	display: inline-block;
-	}
+
+
 </style>
 
 
@@ -54,38 +25,63 @@
 	
 
 	</script>
+
+	
 </head>
 <body >
 
 
 
-<div class="panel-heading"><h4>상품 목록</h4></div>
+<!--Section: Block Content-->
+<section>
 
-
-<ul class="list">
+  <!-- Grid row -->
+  <div class="row">
+<c:forEach var="bean" items="${requestScope.lists}">
+    <!-- Grid column -->
+    <div class="col-md-3 mb-3">
  
-	<c:forEach var="bean" items="${requestScope.lists}">
-	 <li>
-		<div class="imsi">
-		  <div class="card" style="" >
-		    <img class="card-img-top" src="./../images/logo.png" alt="Card image" style="width:100%">
-		    <div class="card-body">
-			 <h5 class="card-title">${bean.productname}</h5>
-			 <p class="card-text">${bean.productprice}</p>
-		      <a href="#" class="btn btn-primary">장바구니에 추가</a>
-		    </div>
-		  </div>
-		 </div>
-	 </li>
-	</c:forEach>
+      <!-- Card -->
+      <div class="">
 
-<%-- ${bean.images} --%>
-</ul>
+          <a href="#!">
+            <div class="mask">
+              <img class="img-fluid w-100"
+                src="https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Vertical/12.jpg">
+              <div class="mask rgba-black-slight"></div>
+            </div>
+          </a>
+
+        <div class="text-center pt-3">
+
+          <h5>${bean.productname}</h5>
+          <p class="mb-2 text-muted text-uppercase small">Shirts</p>
+
+          <hr>
+          <h6 class="mb-3">
+            <span class="text-danger mr-1">￦${bean.productprice}</span>
+            <span class="text-grey"><s>￦${bean.productprice*1.2}</s></span>
+          </h6>
+          <%-- <h6 class="mb-3">${bean.productprice}</h6> --%>
+          <button type="button" class="btn btn-primary btn-sm mr-1 mb-2"><i
+              class="fas fa-shopping-cart pr-2"></i>Add to cart</button>
+          <button type="button" class="btn btn-light btn-sm mr-1 mb-2"><i
+              class="fas fa-info-circle pr-2"></i>Details</button>
+    
+        </div>
+
+      </div>
+      <!-- Card -->
+
+
+    </div>
+    <!-- Grid column -->
+
+</c:forEach>
 
 
 
-
-
+<!-- src="https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Vertical/12.jpg" -->
 
 
 
