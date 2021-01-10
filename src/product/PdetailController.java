@@ -6,14 +6,14 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import DAO.PdetailDao;
+import DAO.PdetailDAO;
 import common.SuperClass;
 
 public class PdetailController extends SuperClass{
 	
 	@Override
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		PdetailDao dao = new PdetailDao(request) ; 
+		PdetailDAO dao = new PdetailDAO(request) ; 
 		GotoPage("/product/pdetail.jsp");
 	}
 	

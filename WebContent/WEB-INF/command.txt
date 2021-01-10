@@ -10,7 +10,10 @@ idcheck=member.IdcheckController
 memodify=member.MemberModifyController
 point=member.MyPointController
 #### CS-Center Section ###############################
-
+cs_center_main=CS.NoticeListController
+notice_detailview=CS.NoticeDetailViewController
+notice_update=CS.NoticeUpdateController
+notice_insert=CS.NoticeInsertController
 #### Customer Section ################################
 boInsert=board.BoardInsertController
 boList=board.BoardListController

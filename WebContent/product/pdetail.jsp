@@ -249,7 +249,7 @@
 				aria-controls="상품 리뷰" aria-selected="false">상품 리뷰</a></li>
 			<li class="nav-item"><a id="cs-tab01" class="nav-link"
 				data-toggle="tab" href="#cs-main" role="tab" aria-controls="고객 문의"
-				aria-selected="false" onclick="location.href='http://localhost:8989/SemiProject/cs-center/cs-center-main.jsp'">고객 문의</a></li>
+				aria-selected="false" onclick="location.href='http://localhost:8989/SemiProject/cs_center/cs_center_main.jsp'">고객 문의</a></li>
 			<li class="nav-item"><a id="delivery-info-tab" class="nav-link"
 				data-toggle="tab" href="#delivery-info" role="tab"
 				aria-controls="배송/교환/반품 안내" aria-selected="false">배송/교환/반품 안내</a></li>
