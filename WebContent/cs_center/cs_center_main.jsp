@@ -34,6 +34,17 @@ int mysearch = 2;
 		function writeForm(){
 			location.href='<%=NoForm%>notice_insert';
 		}
+		function loginCheck(no) {
+			console.log("login check!");
+			console.log(${whologin});
+			if(${whologin} == 0){
+				alert("로그인이 필요합니다");
+				return false;
+			}else {
+				console.log("로그인되어있음");
+				location.href="${NoForm}?command=notice_detailview&no="+no+"&${requestScope.parameters}"; 
+			}
+		}
 	</script>
 	<script type="text/javascript">
 		#(document).ready(function(){
@@ -85,14 +96,13 @@ int mysearch = 2;
 							<td class="col-md-4" align="right">작성 일자</td>
 						</tr>
 					</thead>
-					
 					<c:forEach var="bean" items="${requestScope.lists}">
 						<tr>
 							<td align="center">
 								<c:forEach var="cnt" begin="1" end="${bean.depth}">
 								</c:forEach> 
 								<a
-								href="<%=NoForm%>notice_detailview&no=${bean.no}&${requestScope.parameters}">
+								href="#" onclick="loginCheck(${bean.no})">
 									${bean.subject} 
 								</a>
 							</td>
@@ -159,7 +169,6 @@ int mysearch = 2;
 							<td class="col-md-4" align="right">작성 일자</td>
 						</tr>
 					</thead>
-					
 					<c:forEach var="bean" items="${requestScope.lists}">
 						<tr>
 							<td align="center">

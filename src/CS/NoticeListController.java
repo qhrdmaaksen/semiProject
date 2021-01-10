@@ -45,6 +45,7 @@ public class NoticeListController extends SuperClass{
 	
 
 	List<NoticeVO> lists = dao.SelectDataList(
+			pageInfo.getPageNumber(),
 			pageInfo.getBeginRow(),
 			pageInfo.getEndRow(),
 			parameters.getMode(), 

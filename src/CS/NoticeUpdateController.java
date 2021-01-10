@@ -27,7 +27,7 @@ public class NoticeUpdateController extends SuperClass{
 		
 		super.doGet(request, response);
 		
-		String gotopage = "board/boUpdateForm.jsp" ;
+		String gotopage = "cs_center/notice_update.jsp" ;
 		super.GotoPage(gotopage);
 	}
 	@Override
@@ -60,7 +60,7 @@ public class NoticeUpdateController extends SuperClass{
 		}else { // 유효성 검사 실패
 			request.setAttribute("bean", bean);			
 			super.doPost(request, response);
-			gotopage = "board/boUpdateForm.jsp" ;
+			gotopage = "cs_center/notice_update.jsp" ;
 			super.GotoPage(gotopage);
 		}
 	}
@@ -70,7 +70,7 @@ public class NoticeUpdateController extends SuperClass{
 		boolean isCheck = true ; 
 		
 		if( bean.getSubject().length() < 3 || bean.getSubject().length() > 10 ){
-			request.setAttribute( super.PREFIX + "subject", "제목은 3글자 이상 10글자 이하이어야 합니다.");
+			request.setAttribute( super.PREFIX + "subject", "제목은 3글자 이상 20글자 이하이어야 합니다.");
 			isCheck = false  ;
 		}
 		if( bean.getPassword().length() < 4 || bean.getPassword().length() > 12 ){
@@ -78,7 +78,7 @@ public class NoticeUpdateController extends SuperClass{
 			isCheck = false  ;
 		}
 		if( bean.getContent().length() < 5 || bean.getContent().length() > 30 ){
-			request.setAttribute( super.PREFIX + "content", "글 내용은 5자리 이상 30자리 이하이어야 합니다.");
+			request.setAttribute( super.PREFIX + "content", "글 내용은 5자리 이상 1000자리 이하이어야 합니다.");
 			isCheck = false  ;
 		}
  		String regex = "\\d{4}[-/]\\d{2}[-/]\\d{2}" ;

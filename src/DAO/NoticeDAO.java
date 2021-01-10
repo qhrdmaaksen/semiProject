@@ -67,7 +67,7 @@ public class NoticeDAO extends SuperDAO{
 		return cnt  ; 
 	}
 
-	public List<NoticeVO> SelectDataList(int beginRow, int endRow, String mode, String keyword) {
+	public List<NoticeVO> SelectDataList(int pageNumber,int beginRow, int endRow, String mode, String keyword) {
 		// 랭킹을 이용하여 해당 페이지의 데이터를 컬렉션으로 반환합니다.
 		Connection conn = null ;
 		PreparedStatement pstmt = null ;
