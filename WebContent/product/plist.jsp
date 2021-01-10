@@ -59,8 +59,12 @@
 
           <hr>
           <h6 class="mb-3">
-            <span class="text-danger mr-1">￦${bean.productprice}</span>
-            <span class="text-grey"><s>￦${bean.productprice*1.2}</s></span>
+            <span class="text-danger mr-1">
+            ￦<fmt:formatNumber value="${bean.productprice}" pattern="###,###"/>
+            </span>
+            <span class="text-grey"><s>
+            ￦<fmt:formatNumber value="${bean.productprice*1.2}" pattern="###,###"/>
+            </s></span>
           </h6>
           <%-- <h6 class="mb-3">${bean.productprice}</h6> --%>
           <button type="button" class="btn btn-primary btn-sm mr-1 mb-2"><i
