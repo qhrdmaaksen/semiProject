@@ -54,25 +54,17 @@
 	<div class="row">
  	<div class="col-3"> 
  	<div class="card" style="width: 18rem;"> 
- 		<img src="${bean.image}" class="card-img-top" alt="...">
+ 		<img src="${applicationScope.uploadedPath}/${bean.image}" class="card-img-top" alt="${bean.image}">
  	<div class="card-body"> 
  		<h5 class="card-title">Card title</h5> 
  		<p class="card-text">${sessionScope.loginfo.id}</p>
  		
-  								<a href="<%=NoForm%>bbsdetailview&no=${bean.no}&${requestScope.parameters}">
+  		<a href="<%=NoForm%>bbsdetailview&no=${bean.no}&${requestScope.parameters}">
 								${bean.title}
-							</a>
+			</a>
   	</div> 
   	</div>
-  	<div class="col-3"></div> 
-  	<div class="col-3"></div>
-  	<div class="col-3"></div>
-   	</div> 
-  	<div class="row">
-    <div class="col-3"></div> 
-    <div class="col-3"></div> 
-  	<div class="col-3"></div> 
-  	<div class="col-3"></div> 
+
   </div> 
   </div>
 	</c:forEach>

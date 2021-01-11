@@ -64,7 +64,7 @@ public class Controller extends HttpServlet {
             //파일 업로드시 여기에 들어옴.
         	
         	System.out.println("파일 업로드를 수행합니다. ");
-			MultipartRequest multi = MainUtility.getMultiPartRequest(request, uploadedPath);
+			MultipartRequest multi = MainUtility.getMultiPartRequest(request, this.uploadedPath);
         	
 			if (multi != null) {
 				command = multi.getParameter("command");

@@ -86,6 +86,7 @@
 			location.href='<%=NoForm%>boList&${requestScope.parameters}';
 			//alert('${requestScope.parameter}') ;
 		}
+
 		
 		function addNewItem(cnum, id, content, postdate) {
 			/* 댓글 1개를 추가해 주는 함수 */
@@ -187,6 +188,10 @@
 			});
 			
 		});	
+		
+
+		
+		
 	</script>
 </head>
 <%
@@ -202,14 +207,10 @@
 				<h1 class="panel-title" align="left">Detail View</h1>
 			</div>
 			<div class="panel-body">
-				<div class="col-sm-<%=leftside%> col-sm-<%=leftside%>">
-					<table>
-						<tr>
-							<td align="center"><img align="middle" src="${bean.image}"
-								class="img-rounded" width="200" height="200"></td>
-						</tr>
-					</table>
-				</div>
+				
+					
+					
+			
 				<div class="col-sm-<%=rightside%> col-sm-<%=rightside%>">
 					<table class="table table-hover table-condensed">
 						<tr>
@@ -224,6 +225,14 @@
 							<td width="25%" align="center">제목</td>
 							<td width="75%" align="left">${bean.title}</td>
 						</tr>
+						
+						<tr>
+							<td></td>
+							<td align="center"><img align="middle" src="${applicationScope.uploadedPath}/${bean.image}"
+								class="img-rounded" width="200" height="200"></td>
+						</tr>
+					
+						
 						<tr>
 							<td width="25%" align="center">글 내용</td>
 							<td width="75%" align="left">${bean.content}
@@ -233,6 +242,11 @@
 							<td width="25%" align="center">작성 일자</td>
 							<td width="75%" align="left">${bean.postdate}</td>
 						</tr>
+									<tr>
+							<td width="25%" align="center">좋아요 수</td>
+							<td width="75%" align="left">${bean.likenumber}</td>
+						</tr>
+						
 					</table>
 				</div>
 				<hr>
@@ -240,6 +254,21 @@
 					<button class="btn btn-primary" onclick="gotoBack();">
 						돌아 가기</button>
 				</div>
+				
+				
+				<br><br><br>
+				
+				
+			<div>	
+					<c:if test="${sessionScope.loginfo.id == bean.id}">
+						<a href="<%=NoForm%>boDelete&no=${bean.no}&${requestScope.parameters}">
+								삭제
+							</a>
+					</c:if>
+					
+					<c:if test="${sessionScope.loginfo.id != bean.id}">
+								삭제
+					</c:if>
 			</div>
 			<!-- 댓글 영역 -->
 			<div class="col-sm-12">					

@@ -104,9 +104,11 @@
 			<li class="nav-item">
 				<a class="nav-link" href="<%=NoForm%>mallcartlist">장바구니</a>
 			</li>
+			<c:if test="${whologin == 1}">
 			<li class="nav-item">
 				<a class="nav-link" href="<%=NoForm%>boList">고객포럼</a>
 			</li>
+			</c:if>
 			
 			<li class="nav-item dropdown">
 				<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">Dropdown</a>
