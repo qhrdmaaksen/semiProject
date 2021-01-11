@@ -17,6 +17,7 @@ notice_insert=CS.NoticeInsertController
 #### Customer Section ################################
 boInsert=board.BoardInsertController
 boList=board.BoardListController
+bbsdetailview=board.BoardDetailViewController
 #### Product Section #################################
 preview=product.PreviewController
 pdetail=product.PdetailController

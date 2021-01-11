@@ -59,7 +59,7 @@
  		<h5 class="card-title">Card title</h5> 
  		<p class="card-text">${sessionScope.loginfo.id}</p>
  		
-  			<a href="<%=NoForm%>boDetailView">
+  			<a href="<%=NoForm%>bbsdetailview">
 								${bean.title}
 							</a>
   	</div> 
