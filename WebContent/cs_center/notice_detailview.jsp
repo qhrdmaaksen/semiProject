@@ -7,6 +7,29 @@
 	<title>Insert title here</title>
 	<%@ include file="../common/nav.jsp"%>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+	<script type="text/javascript">
+		function gotoBack(){
+			location.href='<%=NoForm%>cs_center_main&${requestScope.parameters}';
+			//alert('${requestScope.parameter}') ;
+		};
+	</script>
+	<script>
+		/** 삭제 버튼 클릭시에 항목 삭제하도록 "미리" 지정 */
+		$(document).on("click", ".delete_btn", function() {
+			if (confirm("정말 선택하신 항목을 삭제하시겠습니까?")) {
+				
+				$.ajax({ /* 유효성 검사를 통과 했을 때 Ajax 함수 호출 */
+		            url: '<%=MakeCommand("delete.com")%>',
+		            data : 'cnum=' + $(this).attr('pmkey') + '&no=' + '${bean.no}',  
+		    		type : "post",             
+		            dataType: "text",
+		            success: function (data, textStatus) { /* 댓글 삭제 */	            	
+		            	getListComment() ; /* 목록 갱신 */		           
+		            }
+		        });			
+			}
+		});	
+	</script>
 </head>
 <%
 	int twelve = 12;
@@ -24,12 +47,12 @@
 			<div class="panel-body">
 				<div class="col-sm-<%=leftside%> col-sm-<%=leftside%>">
 					<table>
-						<tr>
+						<!-- <tr>
 							<td align="center">
 								<img align="middle" src="../images/logo1.png"
 								class="img-rounded" width="300" height="100">
 							</td>
-						</tr>
+						</tr> -->
 					</table>
 				</div>
 				<div class="col-sm-<%=twelve%> col-sm-<%=twelve%>">
@@ -40,26 +63,25 @@
 						</tr>
 					</table>
 					<table style="white-space:nowrap;">
-						<tbody style="width: 100%;">
-							<tr style="display: inline; " class="col-sm-<%=leftside%>">
-								<td width="20%"><span style="display: inline;">글 번호</span></td>
+						<tbody style="width: 100%; float: right;">
+							<%-- <tr style="display: inline; " class="col-sm-<%=leftside%>">
+								<!-- <td width="20%"><span style="display: inline;">글 번호</span></td> -->
 								<td width="30%">${bean.no}</td>
-							</tr>
+							</tr> --%>
 							<tr style="display: inline; " class="col-sm-<%=leftside%>">
-								<td width="20%">작성자</td>
+								<td width="20%">작성자 :</td>
 								<td width="30%">${bean.writer}</td>
 							</tr>
-							<tr style="display: inline; " class="col-sm-<%=leftside%>">	
-								<td width="20%">작성 일자</td>
+							<tr style="display: inline; " >	
+								<td width="20%">작성 일자 :</td>
 								<td width="30%">${bean.regdate}</td>
 							</tr>
 						</tbody>
 					</table>
-					<br><br><br><br><br>
-					<table>
-						<tr>
-							<td width="30%" align="center">글 내용</td>
-							<td width="70%" align="left">${bean.content}
+					<br><br><br>
+					<table style="white-space:nowrap;">
+						<tr align="center">
+							<td>${bean.content}
 							</td>
 						</tr> 
 					</table>

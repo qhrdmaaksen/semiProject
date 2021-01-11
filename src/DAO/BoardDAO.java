@@ -65,11 +65,11 @@ public class BoardDAO  extends SuperDAO {
 		ResultSet rs = null ;
 		
 		int cnt = -99999;
-	      String sql = " select seq_index, id, title, content, postdate, likenumber " ;
+	      String sql = " select \"NO\", \"id\", \"title\", \"content\", \"postdate\", \"likenumber\", \"IMAGE\" " ;
 	      sql += " from ( " ;
-	      sql += " select seq_index, id, title, content, postdate, likenumber " ;
-	      sql += " rank() over( order by groupno desc, orderno asc) as ranking " ;
-	      sql += " from BBS_POST " ;
+	      sql += " select \"NO\", \"id\", \"title\", \"content\", \"postdate\", \"likenumber\", \"IMAGE\",  " ;
+	      sql += " rank() over( order by \"NO\" desc ) as ranking " ;
+	      sql += " from \"BBS_POST\" " ;
 	      
 	      if(mode.equalsIgnoreCase("all")== false) {
 	    	  sql+= " where " + mode + " like '"+ keyword +"%' " ; 
@@ -98,10 +98,10 @@ public class BoardDAO  extends SuperDAO {
 				bean.setContent(rs.getString("content"));
 				bean.setId(rs.getString("id"));
 				bean.setLikenumber(rs.getInt("likenumber"));
-				bean.setNum(rs.getInt("num"));
+				bean.setNo(rs.getInt("NO"));
 				bean.setPostdate(String.valueOf(rs.getString("postdate")));
 				bean.setTitle(rs.getString("title"));
-				
+				bean.setImage(rs.getString("image"));
 				
 				lists.add( bean ) ;
 			}
@@ -128,8 +128,8 @@ public class BoardDAO  extends SuperDAO {
 	}
 
 	public int InsertData(BbsPostVo bean) {
-		String sql = " insert into BBS_POST (seq_index, id, title, content, postdate, likenumber ) " ;
-		sql += " values(seq_BP_index.nextval,?,?,?,to_date(?, 'yyyy/MM/dd'), default ) " ;
+		String sql = " insert into BBS_POST (\"NO\", \"id\", \"title\", \"content\", \"postdate\", \"likenumber\", \"IMAGE\" ) " ;
+		sql += " values(seq_BP_index.nextval,?,?,?,to_date(?, 'yyyy/MM/dd') , default, ? ) " ;
 		Connection conn = null ;
 		PreparedStatement pstmt = null ;
 		int cnt = -999999 ;
@@ -142,6 +142,8 @@ public class BoardDAO  extends SuperDAO {
 			pstmt.setString(1, bean.getId());
 			pstmt.setString(2, bean.getTitle()); 
 			pstmt.setString(3, bean.getContent());
+			pstmt.setString(4, bean.getPostdate());
+			pstmt.setString(5, bean.getImage());
 			
 			cnt = pstmt.executeUpdate() ; 
 			conn.commit(); 
@@ -165,4 +167,130 @@ public class BoardDAO  extends SuperDAO {
 		}
 		return cnt ;
 }
+
+	public BbsPostVo SelctDataByPK(int no) {
+		// 해당 게시물 번호의 Bean 객체를 구합니다. 
+		BbsPostVo bean = null ;
+		
+		String sql = " select * from \"BBS_POST\" ";
+		sql+= " where \"NO\" = ?" ;
+	
+				
+				Connection conn = null ;
+		PreparedStatement pstmt = null ;
+		ResultSet rs = null ;
+		
+		try {
+			conn = super.getConnection() ;
+			pstmt = conn.prepareStatement(sql) ;
+
+			
+			pstmt.setInt(1, no);
+			
+			rs = pstmt.executeQuery() ;
+			
+			while(rs.next()) {
+				bean = new BbsPostVo() ;
+				
+				bean.setContent(rs.getString("content"));
+				bean.setId(rs.getString("id"));
+				bean.setLikenumber(rs.getInt("likenumber"));
+				bean.setNo(rs.getInt("NO"));
+				bean.setPostdate(String.valueOf(rs.getString("postdate")));
+				bean.setTitle(rs.getString("title"));
+				bean.setImage(rs.getString("image"));		
+				
+			}
+			
+			System.out.println("ok");
+		} catch (Exception e) {
+			SQLException err = (SQLException)e ;			
+			e.printStackTrace();
+			try {
+				conn.rollback(); 
+			} catch (Exception e2) {
+				e2.printStackTrace();
+			}
+		} finally {
+			try {
+				if(rs != null) {rs.close();}
+				if(pstmt != null) {pstmt.close();}
+				if(conn != null) {conn.close();}
+			} catch (Exception e2) {
+				e2.printStackTrace();
+			}
+		}
+		
+		return bean  ;
+}
+
+	public int UpdateReadhit(int num) {
+		String sql = " update \"bbs_post\" set likenumber = likenumber + 1 ";
+		sql += " where no = ? ";    
+		Connection conn = null ;
+		PreparedStatement pstmt = null ;
+		int cnt = -999999 ;
+
+		try {
+			conn = super.getConnection() ;
+			pstmt = conn.prepareStatement(sql) ;
+
+			pstmt.setInt(1, num);
+			
+			cnt = pstmt.executeUpdate() ; 
+			conn.commit(); 
+
+		} catch (Exception e) {
+			SQLException err = (SQLException)e ;			
+			cnt = - err.getErrorCode() ;			
+			e.printStackTrace();
+			try {
+				conn.rollback(); 
+			} catch (Exception e2) {
+				e2.printStackTrace();
+			}
+		} finally{
+			try {
+				if(pstmt != null){pstmt.close();}
+				if(conn != null){conn.close();}
+			} catch (Exception e2) {
+				e2.printStackTrace();
+			}
+		}
+		return cnt ;
+}
+
+	public int DeleteData(int no) {
+		String sql = " delete from \"BBS_POST\" where no = ? " ;
+		
+		PreparedStatement pstmt = null ;
+		int cnt = -99999 ;
+		try {
+			if( conn == null ){ super.conn = super.getConnection() ; }
+			conn.setAutoCommit( false );
+			pstmt = super.conn.prepareStatement(sql) ;
+			
+			pstmt.setInt(1, no);
+			
+			cnt = pstmt.executeUpdate() ; 
+			conn.commit(); 
+		} catch (Exception e) {
+			SQLException err = (SQLException)e ;			
+			cnt = - err.getErrorCode() ;			
+			e.printStackTrace();
+			try {
+				conn.rollback(); 
+			} catch (Exception e2) {
+				e2.printStackTrace();
+			}
+		} finally{
+			try {
+				if( pstmt != null ){ pstmt.close(); }
+				super.closeConnection(); 
+			} catch (Exception e2) {
+				e2.printStackTrace();
+			}
+		}
+		return cnt ;
+	}
 }

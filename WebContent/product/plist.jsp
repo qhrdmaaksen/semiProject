@@ -6,120 +6,141 @@
 <%@ include file="./../common/nav.jsp"%>
 
 
-
-<% int twelve = 12 ; %>
-<%
-	int myoffset = 2;
-	int mywidth = twelve - 2 * myoffset;
-	int formleft = 3 ;
-	int formright = twelve - formleft ; 
-%>
 <!DOCTYPE html>
+
 <html>
 	<head>
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+<style type="text/css">
+
+</style>
+
+<script type="text/javascript">
 	
-	<script type="text/javascript">
-		function writeForm(){
-			location.href='<%=NoForm%>prInsert';
-		}
-		function search(){
-			if( $('#mode').val() == 'all' ){
-				alert('검색 목록을 선택해주세요') ;				
-			}
-		}
-		function searchAll(){
-			location.href='<%=NoForm%>prList';
-		}
+</script>
+
 	
-	</script>
 </head>
-<body>
-	<div class="container col-sm-offset-<%=myoffset%> col-sm-<%=mywidth%>">
-		<div class="panel panel-default">
-			<div class="panel-heading"><h4>상품 목록</h4></div>
-			<table class="table table-condensed table-hover">
-				<thead>
-					<tr>
-						<th>번호</th>
-						<th>상품명</th>
-						<th>이미지</th>
-						<th>단가</th>
-						<th>삭제</th>
-						<th>수정</th>
-					</tr>
-				</thead>
-				<tr>
-					<td colspan="12" align="center">
-						<form class="form-inline" role="form" name="myform" action="<%=YesForm%>" method="get">
-							<input type="hidden" name="command" value="prList">
-							<div class="form-group">
-								<select class="form-control" name="mode" id="mode">
-									<option value="all" selected="selected">-- 선택하세요---------
-									<option value="productname">상품명
-									<option value="company">제조회사									
-									<option value="category">카테고리									
-								</select>
-							</div>
-							<div class="form-group">
-								<input type="text" class="form-control btn-xs" name="keyword"
-									id="keyword" placeholder="검색 키워드">
-							</div>
-							<button class="btn btn-default btn-warning" type="submit" onclick="search();">검색</button>
-							<button class="btn btn-default btn-warning" type="button" onclick="searchAll();">전체 검색</button>
+<body >
+<div>
+
+<!--Section: Block Content-->
+<section>
+
+  <!-- Grid row -->
+  <div class="row">
+<c:forEach var="bean" items="${requestScope.lists}">
+    <!-- Grid column -->
+    <div class="col-md-3 mb-3">
+ 
+      <!-- Card -->
+      <div class="">
+
+          <a href="#!">
+            <div class="mask">
+            <img src="${applicationScope.uploadedPath}/${bean.images}"
+										class="img-fluid w-100" width="200" height="300"
+										alt="${bean.images}">
+            
+              <!-- <img class="img-fluid w-100"
+                src="https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Vertical/12.jpg"> -->
+              <div class="mask rgba-black-slight"></div>
+            </div>
+          </a>
+
+        <div class="text-center pt-3">
+
+          <h5>${bean.productname}</h5>
+          <p class="mb-2 text-muted text-uppercase small">Shirts</p>
+
+          <hr>
+          <h6 class="mb-3">
+            <span class="text-danger mr-1">
+            ￦<fmt:formatNumber value="${bean.productprice}" pattern="###,###"/>
+            </span>
+            <span class="text-grey"><s>
+            ￦<fmt:formatNumber value="${bean.productprice*1.2}" pattern="###,###"/>
+            </s></span>
+          </h6>
+          <%-- <h6 class="mb-3">${bean.productprice}</h6> --%>
+         		 <form class="form-inline" role="form" method="post" action="<%=YesForm%>">
+						<div class="form-group">
+							<input type="hidden" name="command" value="mallcartadd">
+							<input type="hidden" name="productcode" value="${bean.productcode}">
+							<input type="hidden" name="stock" value="${bean.stock}">
+							<input type="hidden" name="qty" value="1">         
+						</div>
+						<!-- <button type="submit" class="btn btn-primary btn-sm mr-1 mb-2"><i
+             			 class="fas fa-shopping-cart pr-2"></i>Add to cart</button> -->
+						<button type="submit" class="btn btn-primary btn-sm mr-1 mb-2">Add to cart</button>
+					</form>
+			<form class="form-inline" role="form" name="myform" action="<%=YesForm%>" method="get">
+				<input type="hidden" name="command" value="pdetail">
+             <button type="button" class="btn btn-light btn-sm mr-1 mb-2"><i
+              class="fas fa-info-circle pr-2"></i>Details</button>         
+         </form>
+         
+    
+        </div>
+
+      </div>
+      <!-- Card -->
+
+
+    </div>
+    <!-- Grid column -->
+
+</c:forEach>
+
+</div>
+
+
+<br><br><br><br>
+
+
+
+<table>
+	<tr>
+		<td colspan="12" align="center">
+			<form class="form-inline" role="form" name="myform" action="<%=YesForm%>" method="get">
+				<input type="hidden" name="command" value="plist">
+				<div class="form-group">
+					<select class="form-control" name="mode" id="mode">
+						<option value="all" selected="selected">-- 선택하세요---------
+						<option value="name">상품명
+						<option value="company">제조회사									
+						<option value="category">카테고리									
+					</select>
+				</div>
+				<div class="form-group">
+					<input type="text" class="form-control btn-xs" name="keyword"
+						id="keyword" placeholder="검색 키워드">
+				</div>
+					<button class="btn btn-default btn-warning" type="submit" onclick="search();">검색</button>
+					<button class="btn btn-default btn-warning" type="button" onclick="searchAll();">전체 검색</button>
 							
-							<c:if test="${whologin == 2}">
-								<button class="btn btn-default btn-info" type="button"
-									onclick="writeForm();">상품 등록</button>
-							</c:if>
+				<c:if test="${whologin == 2}">
+					<button class="btn btn-default btn-info" type="button"
+						onclick="writeForm();">상품 등록</button>
+				</c:if>
 								
 								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-								<p class="form-control-static">${requestScope.pagingStatus}</p>
-						</form>
-					</td>
-				</tr>				
-				<c:forEach var="bean" items="${requestScope.lists}">
-				<tr>
-					<td>${bean.productcode}</td>
-					<td>
-						<a href="<%=NoForm%>prDetailView&productcode=${bean.productcode}&${requestScope.parameters}">
-							${bean.productname}
-						</a>
-					</td>
-					<td>${bean.images}</td>
-					<td>${bean.productprice}</td>
-					<td>
-						<c:if test="${whologin == 2}">
-							<a href="<%=NoForm%>prDelete&productcode=${bean.productcode}&${requestScope.parameters}">
-								삭제
-							</a>
-						</c:if>
-						<c:if test="${whologin != 2}">
-							삭제
-						</c:if>				
-					</td>
-					<td>
-						<c:if test="${whologin == 2}">
-							<a href="<%=NoForm%>prUpdate&productcode=${bean.productcode}&${requestScope.parameters}">
-								수정
-							</a>
-						</c:if>
-						<c:if test="${whologin != 2}">
-							수정
-						</c:if>					
-						
-					</td>
-				</tr>
-				</c:forEach>			
-			</table>
-		</div>
-		<div align="center">
+					<p class="form-control-static">${requestScope.pagingStatus}</p>
+			</form>
+		</td>
+	</tr>				
+</table>	
+						<br><br><br><br>
+					
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				<div align="center">
 			<footer>${requestScope.pagingHtml}</footer>
 		</div>		
-	</div>
-	<br><br><br><br>
+		
+
+
+
+<br><br><br><br>
 	<script type="text/javascript">
 	   /* 방금 전 선택한 콤보 박스를 그대로 보여 주기 */ 
 		$('#mode option').each(function (index){
@@ -130,5 +151,6 @@
 		/* 이전에 넣었던 값 그대로 보존 */
 		$('#keyword').val( '${requestScope.keyword}' ) ;		
 	</script>	
+
 </body>
 </html>

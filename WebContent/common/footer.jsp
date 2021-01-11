@@ -87,9 +87,9 @@
 			<div class="row" id="footermenu">
 				<div class='col'>
 					<ul>
-						<li class="only-pc"><a href="http://localhost:8989/SemiProject/cs-center/cs-center-main.jsp#modal">개인정보 처리방침 및 이용약관</a>
+						<li class="only-pc"><a href="http://localhost:8989/SemiProject/cs_center/cs_center_main.jsp#modal">개인정보 처리방침 및 이용약관</a>
 						<!--고객센터 메뉴로연동--></li>
-						<li class="only-pc"><a href='http://localhost:8989/SemiProject/cs-center/cs-center-main.jsp'>고객 센터</a>
+						<li class="only-pc"><a href='http://localhost:8989/SemiProject/cs_center/cs_center_main.jsp'>고객 센터</a>
 						<!--고객센터 메뉴로연동--></li>
 					</ul>
 				</div>

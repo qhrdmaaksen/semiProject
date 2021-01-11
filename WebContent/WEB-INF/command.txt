@@ -10,13 +10,25 @@ idcheck=member.IdcheckController
 memodify=member.MemberModifyController
 point=member.MyPointController
 #### CS-Center Section ###############################
-
+cs_center_main=CS.NoticeListController
+notice_detailview=CS.NoticeDetailViewController
+notice_update=CS.NoticeUpdateController
+notice_insert=CS.NoticeInsertController
 #### Customer Section ################################
 boInsert=board.BoardInsertController
 boList=board.BoardListController
+bbsdetailview=board.BoardDetailViewController
+boDelete=board.BoardDeleteController
 #### Product Section #################################
 preview=product.PreviewController
 pdetail=product.PdetailController
 previewupdate=product.PreviewUpdateController
 plist=product.PlistController
+pdelete=product.PdeleteController
+
+#### Mall Section ######################################################
+mallcartadd=Mall.MallCartAddController
+mallcartlist=Mall.MallCartListController
+mallcartdelete=Mall.MallCartDeleteItemController
+
 
