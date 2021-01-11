@@ -9,7 +9,7 @@
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 	<script type="text/javascript">
 		function gotoBack(){
-			location.href='<%=NoForm%>cs_center_main&${requestScope.parameters}';
+			location.href='<%=NoForm%>cs_center_main_asked&${requestScope.parameters}';
 			//alert('${requestScope.parameter}') ;
 		};
 	</script>
@@ -40,7 +40,7 @@
 %>
 <body>
 	<div class="container col-sm-offset-<%=myoffset%> col-sm-<%=mywidth%>">
-		<div align="center" class="panel panel-default panel-primary">
+		<div class="panel panel-default panel-primary">
 			<div class="panel-heading">
 				<h1 class="panel-title" align="center">공지사항 상세 보기</h1>
 			</div>

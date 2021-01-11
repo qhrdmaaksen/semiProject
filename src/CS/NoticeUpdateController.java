@@ -1,6 +1,7 @@
 package CS;
 
 import java.io.IOException;
+import java.util.Enumeration;
 import java.util.regex.Pattern;
 
 import javax.servlet.ServletException;
@@ -41,12 +42,6 @@ public class NoticeUpdateController extends SuperClass{
 		bean.setSubject(request.getParameter("subject")); 
 		bean.setWriter(request.getParameter("writer")); 
 		
-		// 다음 항목들은 수정에 반영할 필요가 없습니다.
-		// bean.setReadhit(Integer.parseInt(request.getParameter("readhit"))) ;
-		// bean.setOrderno(Integer.parseInt(request.getParameter("orderno"))) ;
-		// bean.setGroupno(Integer.parseInt(request.getParameter("groupno"))) ;
-		// bean.setDepth(Integer.parseInt(request.getParameter("depth"))) ;
-		
 		String gotopage = "" ;
 		if (this.validate(request) == true) {
 			// 유효성 검사 통과
@@ -68,16 +63,17 @@ public class NoticeUpdateController extends SuperClass{
 	public boolean validate(HttpServletRequest request) {
 		//기본 값으로 true이고, 유효성 검사에 문제가 생기면 false으로 변경
 		boolean isCheck = true ; 
+		Enumeration<String> it =    request.getParameterNames();
 		
-		if( bean.getSubject().length() < 3 || bean.getSubject().length() > 10 ){
-			request.setAttribute( super.PREFIX + "subject", "제목은 3글자 이상 20글자 이하이어야 합니다.");
+		while(it.hasMoreElements()) {
+			System.out.println("it.nextElement() : "+it.nextElement());
+		}
+	
+		if( bean.getSubject().length() < 3 || bean.getSubject().length() > 50 ){
+			request.setAttribute( super.PREFIX + "subject", "제목은 3글자 이상 50글자 이하이어야 합니다.");
 			isCheck = false  ;
 		}
-		if( bean.getPassword().length() < 4 || bean.getPassword().length() > 12 ){
-			request.setAttribute( super.PREFIX + "password", "비밀 번호는 4자리 이상 10자리 이하이어야 합니다.");
-			isCheck = false  ;
-		}
-		if( bean.getContent().length() < 5 || bean.getContent().length() > 30 ){
+		if( bean.getContent().length() < 5 || bean.getContent().length() > 1000 ){
 			request.setAttribute( super.PREFIX + "content", "글 내용은 5자리 이상 1000자리 이하이어야 합니다.");
 			isCheck = false  ;
 		}

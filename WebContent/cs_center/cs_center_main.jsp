@@ -149,14 +149,14 @@ int mysearch = 2;
 									<button class="btn btn-default btn-warning" type="button"
 										onclick="writeForm();">글 쓰기</button>
 								</c:if>
-								<div style="float: right; margin-top: 2%;" class="col-md-5">
+								<div style="float: right; margin-top: 2%;" class="col-md-4">
 									<p class="form-control-static">${requestScope.pagingStatus}</p>
 								</div>
 							</form>
 						</td>
 					</tr>
 				</table>
-			<div align="right" style="float: right;" class="container col-md-7">
+			<div align="right" style="float: right;" class="container col-md-6">
 				<footer>${requestScope.pagingHtml}</footer>
 			</div>
 			</div>
@@ -175,7 +175,7 @@ int mysearch = 2;
 								<c:forEach var="cnt" begin="1" end="${bean.depth}">
 								</c:forEach> 
 								<a
-								href="<%=NoForm%>notice_detailview&no=${bean.no}&${requestScope.parameters}">
+								href="#" onclick="loginCheck(${bean.no})">
 									${bean.subject} 
 								</a>
 							</td>
@@ -183,7 +183,7 @@ int mysearch = 2;
 							<td>
 								<c:if test="${whologin == 2}">
 									<a
-										href="<%=NoForm%>notice_update&no=${bean.no}&${requestScope.parameters}">
+										href="<%=NoForm%>asked_update&no=${bean.no}&${requestScope.parameters}">
 										수정 
 									</a>
 								</c:if>
@@ -191,7 +191,7 @@ int mysearch = 2;
 							<td>
 								<c:if test="${whologin == 2}">
 									<a
-										href="<%=NoForm %>notice_delete&no=${bean.no}&${requestScope.parameters}">
+										href="<%=NoForm %>asked_delete&no=${bean.no}&${requestScope.parameters}">
 										삭제 
 									</a>
 								</c:if>
@@ -202,7 +202,7 @@ int mysearch = 2;
 						<td colspan="2" align="center">
 							<form action="<%=YesForm%>" class="form-inline" name="myform"
 								method="get">
-								<input type="hidden" name="command" value="cs_center_main">
+								<input type="hidden" name="command" value="cs_center_main_asked">
 								<div class="form-group">
 									<select class="form-control" name="mode" id="mode">
 										<option value="all" selected="selected">-- 선택하세요 --
@@ -222,14 +222,14 @@ int mysearch = 2;
 									<button class="btn btn-default btn-warning" type="button"
 										onclick="writeForm();">글 쓰기</button>
 								</c:if>
-								<div style="float: right; margin-top: 2%;" class="col-md-5">
+								<div style="float: right; margin-top: 2%;" class="col-md-4">
 									<p class="form-control-static">${requestScope.pagingStatus}</p>
 								</div>
 							</form>
 						</td>
 					</tr>
 				</table>
-				<div align="right" style="float: right;" class="container col-md-7">
+				<div align="right" style="float: right;" class="container col-md-6">
 					<footer>${requestScope.pagingHtml}</footer>
 				</div>
 			</div>

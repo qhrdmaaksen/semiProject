@@ -142,7 +142,7 @@ public class NoticeDAO extends SuperDAO{
 		// 넘겨진 Bean 데이터를 이용하여 추가합니다.
 		String sql = " insert into notice(no, subject, writer, password, content,  " ;
 		sql += " readhit, regdate, groupno, orderno, depth)  ";		
-		sql += " values(mynotice.nextval, ?, ?, ?, ?, default, to_date(?, 'yyyy/MM/dd'), mynotice.currval, default, default) " ;    
+		sql += " values(mynotice.nextval, ?, ?, default, ?, default, to_date(?, 'yyyy/MM/dd'), mynotice.currval, default, default) " ;    
 		Connection conn = null ;
 		PreparedStatement pstmt = null ;
 		int cnt = -999999 ;
@@ -150,13 +150,14 @@ public class NoticeDAO extends SuperDAO{
 		try {
 			conn = super.getConnection() ;
 			pstmt = conn.prepareStatement(sql) ;
-
+			
 			// placeholder
+			
 			pstmt.setString(1, bean.getSubject());
 			pstmt.setString(2, bean.getWriter());
-			pstmt.setString(3, bean.getPassword());
-			pstmt.setString(4, bean.getContent());
-			pstmt.setString(5, bean.getRegdate());
+			//pstmt.setString(3, bean.getPassword());
+			pstmt.setString(3, bean.getContent());
+			pstmt.setString(4, bean.getRegdate());
 			
 			cnt = pstmt.executeUpdate() ; 
 			conn.commit(); 
@@ -242,7 +243,7 @@ public class NoticeDAO extends SuperDAO{
 	public int UpdateData(NoticeVO bean) {
 		// 해당 게시물을 수정합니다.
 		String sql = " update notice set  ";
-		sql += " content=?, password=?, regdate=?, subject=?, writer=?, remark = ? " ;
+		sql += " content=?, regdate=?, subject=?, writer=?, remark = ? " ;
 		sql += " where no = ? " ;    
 		Connection conn = null ;
 		PreparedStatement pstmt = null ;
@@ -254,14 +255,13 @@ public class NoticeDAO extends SuperDAO{
 
 			// placeholder
 			pstmt.setString(1, bean.getContent());
-			pstmt.setString(2, bean.getPassword());
-			pstmt.setString(3, bean.getRegdate());
-			pstmt.setString(4, bean.getSubject());
-			pstmt.setString(5, bean.getWriter());
+			pstmt.setString(2, bean.getRegdate());
+			pstmt.setString(3, bean.getSubject());
+			pstmt.setString(4, bean.getWriter());
 			
-			pstmt.setString(6, bean.getRemark());
+			pstmt.setString(5, bean.getRemark());
 			
-			pstmt.setInt(7, bean.getNo());
+			pstmt.setInt(6, bean.getNo());
 			
 			cnt = pstmt.executeUpdate() ; 
 			conn.commit(); 
@@ -318,6 +318,38 @@ public class NoticeDAO extends SuperDAO{
 			try {
 				if(pstmt != null){pstmt.close();}
 				if(conn != null){conn.close();}
+			} catch (Exception e2) {
+				e2.printStackTrace();
+			}
+		}
+		return cnt ;
+	}
+
+	public int DeleteData(int no) {
+		String sql = " delete from notice where no = ? " ;
+		PreparedStatement pstmt = null ;
+		int cnt = -99999 ;
+		try {
+			if( conn == null ){ super.conn = super.getConnection() ; }
+			conn.setAutoCommit( false );
+			pstmt = super.conn.prepareStatement(sql) ;
+			pstmt.setInt(1, no);
+			
+			cnt = pstmt.executeUpdate() ; 
+			conn.commit(); 
+		} catch (Exception e) {
+			SQLException err = (SQLException)e ;			
+			cnt = - err.getErrorCode() ;			
+			e.printStackTrace();
+			try {
+				conn.rollback(); 
+			} catch (Exception e2) {
+				e2.printStackTrace();
+			}
+		} finally{
+			try {
+				if( pstmt != null ){ pstmt.close(); }
+				super.closeConnection(); 
 			} catch (Exception e2) {
 				e2.printStackTrace();
 			}
