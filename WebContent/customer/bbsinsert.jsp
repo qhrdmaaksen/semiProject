@@ -49,7 +49,7 @@
 						<label class="control-label col-sm-<%=formleft%>" for="image">이미지</label>
 						<div class="col-sm-<%=formright%>">
 							<input type="file" class="form-control" name="image"
-								id="image" placeholder="이미지를 넣어 주셔용^^">
+								id="image" placeholder="">
 							<span class="err form-control-static">${errimage}</span>								
 						</div>
 					</div>

@@ -22,6 +22,7 @@ asked_detailview=CS.AskedDetailController
 boInsert=board.BoardInsertController
 boList=board.BoardListController
 bbsdetailview=board.BoardDetailViewController
+boDelete=board.BoardDeleteController
 #### Product Section #################################
 preview=product.PreviewController
 pdetail=product.PdetailController

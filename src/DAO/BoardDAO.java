@@ -259,4 +259,38 @@ public class BoardDAO  extends SuperDAO {
 		}
 		return cnt ;
 }
+
+	public int DeleteData(int no) {
+		String sql = " delete from \"BBS_POST\" where no = ? " ;
+		
+		PreparedStatement pstmt = null ;
+		int cnt = -99999 ;
+		try {
+			if( conn == null ){ super.conn = super.getConnection() ; }
+			conn.setAutoCommit( false );
+			pstmt = super.conn.prepareStatement(sql) ;
+			
+			pstmt.setInt(1, no);
+			
+			cnt = pstmt.executeUpdate() ; 
+			conn.commit(); 
+		} catch (Exception e) {
+			SQLException err = (SQLException)e ;			
+			cnt = - err.getErrorCode() ;			
+			e.printStackTrace();
+			try {
+				conn.rollback(); 
+			} catch (Exception e2) {
+				e2.printStackTrace();
+			}
+		} finally{
+			try {
+				if( pstmt != null ){ pstmt.close(); }
+				super.closeConnection(); 
+			} catch (Exception e2) {
+				e2.printStackTrace();
+			}
+		}
+		return cnt ;
+	}
 }
