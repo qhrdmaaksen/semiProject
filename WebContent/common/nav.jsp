@@ -95,7 +95,7 @@
 		<ul class="navbar-nav">
 
 			<li class="nav-item">
-				<a class="nav-link" href="<%=NoForm%>index">
+				<a class="nav-link" href="<%=NoForm%>survey">
 				추천 받기</a>
 			</li>
 			<li class="nav-item">

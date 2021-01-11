@@ -65,6 +65,10 @@
             background-color: #fff;
             border-right: 0px;
         }
+        .month-list[type="checked"]{
+            background-color: #0056b3;
+            color: #FFFFFF;
+        }
         .month-list:hover{
             cursor:pointer;
             text-decoration: underline;
@@ -172,17 +176,17 @@
                             <div class="month">
                                 <ul class="month-lists">
                                     <% now.add(now.MONTH,-5); %>
-                                    <li class="month-list" onclick="searchMonth(5)"><%=now.get(now.MONTH)+1%>월</li>
+                                    <li id="month5" class="month-list" onclick="searchMonth(5)"><%=now.get(now.MONTH)+1%>월</li>
                                     <% now.add(now.MONTH,1); %>
-                                    <li class="month-list" onclick="searchMonth(4)"><%=now.get(now.MONTH)+1%>월</li>
+                                    <li id="month4" class="month-list" onclick="searchMonth(4)"><%=now.get(now.MONTH)+1%>월</li>
                                     <% now.add(now.MONTH,1); %>
-                                    <li class="month-list" onclick="searchMonth(3)"><%=now.get(now.MONTH)+1%>월</li>
+                                    <li id="month3" class="month-list" onclick="searchMonth(3)"><%=now.get(now.MONTH)+1%>월</li>
                                     <% now.add(now.MONTH,1); %>
-                                    <li class="month-list" onclick="searchMonth(2)"><%=now.get(now.MONTH)+1%>월</li>
+                                    <li id="month2" class="month-list" onclick="searchMonth(2)"><%=now.get(now.MONTH)+1%>월</li>
                                     <% now.add(now.MONTH,1); %>
-                                    <li class="month-list" onclick="searchMonth(1)"><%=now.get(now.MONTH)+1%>월</li>
+                                    <li id="month1" class="month-list" onclick="searchMonth(1)"><%=now.get(now.MONTH)+1%>월</li>
                                     <% now.add(now.MONTH,1); %>
-                                    <li class="month-list" onclick="searchMonth(0)"><%=now.get(now.MONTH)+1%>월</li>
+                                    <li id="month0" class="month-list" onclick="searchMonth(0)"><%=now.get(now.MONTH)+1%>월</li>
                                 </ul>
                             </div>
                             <div class="date-form">
@@ -272,7 +276,16 @@
 
             var todate_ = new Date(now.getFullYear(), now.getMonth()+1-month, 0);
             var todate = todate_.getFullYear() + '-' + ("0"+(todate_.getMonth()+1)).slice(-2) + '-' + ("0"+(todate_.getDate())).slice(-2);
-            location.href='<%=NoForm%>point&mode=' + $('#mode').val() + '&fromdate=' + fromdate + '&todate=' + todate;
+            <%--location.href='<%=NoForm%>point&mode=' + $('#mode').val() + '&fromdate=' + fromdate + '&todate=' + todate;--%>
+
+            document.getElementById("fromdate").value = fromdate;
+            document.getElementById("todate").value = todate;
+
+            for(var i=0; i<6; i++){
+                var lists = document.getElementById("month"+i);
+                lists.removeAttribute("type");
+            }
+            var lists = document.getElementById("month"+month).setAttribute("type","checked");
         }
 
         /* 방금 전 선택한 콤보 박스를 그대로 보여 주기 */
@@ -281,6 +294,8 @@
                 $(this).attr('selected', 'selected') ;
             }
         });
+
+        $('.month-list')
     </script>
 </body>
 </html>
