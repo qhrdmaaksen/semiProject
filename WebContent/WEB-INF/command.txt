@@ -8,6 +8,7 @@ newmember=member.MemberNewmemberController
 coupon=member.MyCouponController
 idcheck=member.IdcheckController
 memodify=member.MemberModifyController
+order=member.OrderListcontroller
 point=member.MyPointController
 #### CS-Center Section ###############################
 cs_center_main=CS.NoticeListController
@@ -19,6 +20,7 @@ boInsert=board.BoardInsertController
 boList=board.BoardListController
 bbsdetailview=board.BoardDetailViewController
 boDelete=board.BoardDeleteController
+boUpdate=board.BoardUpdateController
 #### Product Section #################################
 preview=product.PreviewController
 pdetail=product.PdetailController

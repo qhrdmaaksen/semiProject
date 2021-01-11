@@ -195,7 +195,7 @@ public class BoardDAO  extends SuperDAO {
 				bean.setContent(rs.getString("content"));
 				bean.setId(rs.getString("id"));
 				bean.setLikenumber(rs.getInt("likenumber"));
-				bean.setNo(rs.getInt("NO"));
+				bean.setNo(rs.getInt("no"));
 				bean.setPostdate(String.valueOf(rs.getString("postdate")));
 				bean.setTitle(rs.getString("title"));
 				bean.setImage(rs.getString("image"));		
@@ -293,4 +293,48 @@ public class BoardDAO  extends SuperDAO {
 		}
 		return cnt ;
 	}
+
+
+	public int UpdateData(BbsPostVo bean) {
+		// 해당 게시물을 수정합니다. 
+		String sql = " update \"BBS_POST\" set ";
+		sql += " \"content\" = ?, \"likenumber\" = ?, \"title\" = ?, \"id\" = ?, \"IMAGE\" = ?  ";
+		sql += " where no = ? ";
+		Connection conn = null ;
+		PreparedStatement pstmt = null ;
+		int cnt = -999999 ;
+
+		try {
+			conn = super.getConnection() ;
+			pstmt = conn.prepareStatement(sql) ;
+
+			pstmt.setString(1, bean.getContent());
+			pstmt.setInt(2, bean.getLikenumber());
+			pstmt.setString(3, bean.getTitle());
+			pstmt.setString(4, bean.getId());
+			pstmt.setString(5, bean.getImage());
+			pstmt.setInt(6, bean.getNo());
+			
+			cnt = pstmt.executeUpdate() ; 
+			conn.commit(); 
+
+		} catch (Exception e) {
+			SQLException err = (SQLException)e ;			
+			cnt = - err.getErrorCode() ;			
+			e.printStackTrace();
+			try {
+				conn.rollback(); 
+			} catch (Exception e2) {
+				e2.printStackTrace();
+			}
+		} finally{
+			try {
+				if(pstmt != null){pstmt.close();}
+				if(conn != null){conn.close();}
+			} catch (Exception e2) {
+				e2.printStackTrace();
+			}
+		}
+		return cnt ;
+}
 }
