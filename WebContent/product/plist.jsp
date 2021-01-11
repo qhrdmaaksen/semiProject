@@ -38,8 +38,12 @@
 
           <a href="#!">
             <div class="mask">
-              <img class="img-fluid w-100"
-                src="https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Vertical/12.jpg">
+            <img src="${applicationScope.uploadedPath}/${bean.images}"
+										class="img-fluid w-100" width="200" height="300"
+										alt="${bean.images}">
+            
+              <!-- <img class="img-fluid w-100"
+                src="https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Vertical/12.jpg"> -->
               <div class="mask rgba-black-slight"></div>
             </div>
           </a>
@@ -59,10 +63,23 @@
             </s></span>
           </h6>
           <%-- <h6 class="mb-3">${bean.productprice}</h6> --%>
-          <button type="button" class="btn btn-primary btn-sm mr-1 mb-2"><i
-              class="fas fa-shopping-cart pr-2"></i>Add to cart</button>
-          <button type="button" class="btn btn-light btn-sm mr-1 mb-2"><i
-              class="fas fa-info-circle pr-2"></i>Details</button>
+         		 <form class="form-inline" role="form" method="post" action="<%=YesForm%>">
+						<div class="form-group">
+							<input type="hidden" name="command" value="mallcartadd">
+							<input type="hidden" name="productcode" value="${bean.productcode}">
+							<input type="hidden" name="stock" value="${bean.stock}">
+							<input type="hidden" name="qty" value="1">         
+						</div>
+						<!-- <button type="submit" class="btn btn-primary btn-sm mr-1 mb-2"><i
+             			 class="fas fa-shopping-cart pr-2"></i>Add to cart</button> -->
+						<button type="submit" class="btn btn-primary btn-sm mr-1 mb-2">Add to cart</button>
+					</form>
+			<form class="form-inline" role="form" name="myform" action="<%=YesForm%>" method="get">
+				<input type="hidden" name="command" value="pdetail">
+             <button type="button" class="btn btn-light btn-sm mr-1 mb-2"><i
+              class="fas fa-info-circle pr-2"></i>Details</button>         
+         </form>
+         
     
         </div>
 

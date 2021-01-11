@@ -79,7 +79,7 @@ public class MallCartListController extends SuperClass{
 			super.session.setAttribute("totalAmount", totalAmount);
 		}
 		
-		String gotopage = "mall/MallList.jsp" ;
+		String gotopage = "mall/cartlist.jsp" ;
 		super.GotoPage(gotopage);
 	}
 }

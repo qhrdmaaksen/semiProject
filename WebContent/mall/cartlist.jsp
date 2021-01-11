@@ -35,9 +35,6 @@
 						<th class="text-center">상품명</th>
 						<th class="text-center">수량</th>
 						<th class="text-center">단가</th>
-						<th class="text-center">포인트</th>
-						<th class="text-center">금액</th>
-						<th class="text-center">누적 포인트</th>
 						<th class="text-center">삭제</th>
 					</tr>
 				</thead>
@@ -45,22 +42,20 @@
 					<tr>
 						<td align="center" valign="middle">${shopinfo.productcode}</td>
 						<td align="center" valign="middle">
-							<c:if test="${applicationScope.debugMode == true}">
+							<%-- <c:if test="${applicationScope.debugMode == true}">
 								이미지 경로<br>${applicationScope.uploadedPath}/${shopinfo.images}
-							</c:if>
+							</c:if> --%>
 							<img align="middle"
 								src="${applicationScope.uploadedPath}/${shopinfo.images}" class="img-rounded"
 								width="36" height="36"> <br>${shopinfo.productname}</td>
 						<td align="center">${shopinfo.qty} 개</td>
 						<td align="center"><fmt:formatNumber value="${shopinfo.productprice}" pattern="###,###"/> 원</td>
-						<td align="center">${shopinfo.point}원</td>
-						<td align="center"><fmt:formatNumber value="${shopinfo.qty * shopinfo.productprice}" pattern="###,###"/> 원</td>
 						<td align="center"><fmt:formatNumber value="${shopinfo.qty * shopinfo.productprice}" pattern="###,###"/> 원</td>
 						<td align="center">
-							<a href="<%=NoForm%>mallDelete&productcode=${shopinfo.productcode}">
+							<a href="<%=NoForm%>mallcartdelete&productcode=${shopinfo.productcode}">
 								삭제
 							</a>
-						</td>
+						</td> 
 					</tr>
 				</c:forEach>
 				<tr class="header">
