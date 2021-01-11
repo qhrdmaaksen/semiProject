@@ -98,7 +98,7 @@ public class BoardDAO  extends SuperDAO {
 				bean.setContent(rs.getString("content"));
 				bean.setId(rs.getString("id"));
 				bean.setLikenumber(rs.getInt("likenumber"));
-				bean.setNum(rs.getInt("no"));
+				bean.setNo(rs.getInt("NO"));
 				bean.setPostdate(String.valueOf(rs.getString("postdate")));
 				bean.setTitle(rs.getString("title"));
 				bean.setImage(rs.getString("image"));
@@ -172,8 +172,8 @@ public class BoardDAO  extends SuperDAO {
 		// 해당 게시물 번호의 Bean 객체를 구합니다. 
 		BbsPostVo bean = null ;
 		
-		String sql = " select * from BBS_POST ";
-		sql+= " where no = ?" ;
+		String sql = " select * from \"BBS_POST\" ";
+		sql+= " where \"NO\" = ?" ;
 	
 				
 				Connection conn = null ;
@@ -195,7 +195,7 @@ public class BoardDAO  extends SuperDAO {
 				bean.setContent(rs.getString("content"));
 				bean.setId(rs.getString("id"));
 				bean.setLikenumber(rs.getInt("likenumber"));
-				bean.setNum(rs.getInt("NO"));
+				bean.setNo(rs.getInt("NO"));
 				bean.setPostdate(String.valueOf(rs.getString("postdate")));
 				bean.setTitle(rs.getString("title"));
 				bean.setImage(rs.getString("image"));		
@@ -222,5 +222,41 @@ public class BoardDAO  extends SuperDAO {
 		}
 		
 		return bean  ;
+}
+
+	public int UpdateReadhit(int num) {
+		String sql = " update \"bbs_post\" set likenumber = likenumber + 1 ";
+		sql += " where no = ? ";    
+		Connection conn = null ;
+		PreparedStatement pstmt = null ;
+		int cnt = -999999 ;
+
+		try {
+			conn = super.getConnection() ;
+			pstmt = conn.prepareStatement(sql) ;
+
+			pstmt.setInt(1, num);
+			
+			cnt = pstmt.executeUpdate() ; 
+			conn.commit(); 
+
+		} catch (Exception e) {
+			SQLException err = (SQLException)e ;			
+			cnt = - err.getErrorCode() ;			
+			e.printStackTrace();
+			try {
+				conn.rollback(); 
+			} catch (Exception e2) {
+				e2.printStackTrace();
+			}
+		} finally{
+			try {
+				if(pstmt != null){pstmt.close();}
+				if(conn != null){conn.close();}
+			} catch (Exception e2) {
+				e2.printStackTrace();
+			}
+		}
+		return cnt ;
 }
 }
