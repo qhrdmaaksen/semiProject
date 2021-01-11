@@ -45,14 +45,41 @@ int mysearch = 2;
 				location.href="${NoForm}?command=notice_detailview&no="+no+"&${requestScope.parameters}"; 
 			}
 		}
-	</script>
-	<script type="text/javascript">
-		#(document).ready(function(){
+		$('#askedmode option').each(function(index) {
+			if ($(this).val() == '${requestScope.askedmode}') {
+				$(this).attr('selected', 'selected');
+			}
+		});
+		$('#askedkeyword').val('${requestScope.askedkeyword}');
+		function askedwriteForm(){
+			location.href='<%=NoForm%>asked_insert';
+		}
+		function askedloginCheck(no) {
+			console.log("login check!");
+			console.log(${whologin});
+			if(${whologin} == 0){
+				alert("로그인이 필요합니다");
+				return false;
+			}else {
+				console.log("로그인되어있음");
+				location.href="${NoForm}?command=asked_detailview&no="+no+"&${requestScope.askedparameters}"; 
+			}
+		}
+		function askedlist(){
+			alert('테스트');
 			$.ajax({
-				url:"${pageContext.request.contextPath}/dodamdodam?command=notice_insert",
+				url:"${pageContext.request.contextPath}/dodamdodam?command=cs_center_main_asked",
 				type:"get",
+				success:function(response){
+					console.log("asked 리스트 가져오기 성공");
+					console.log("${askedlists}");
+				},
+				error: function(){
+					console.log("asked 리스트 가져오기 실패");
+				}
 			})
-		})success: (response);
+			
+		}
 	</script>
 	<style type="text/css">
 		.bold {
@@ -77,7 +104,7 @@ int mysearch = 2;
 			<li class="nav-item"><a class="nav-link active"
 				data-toggle="tab" href="#home">공지사항</a></li>
 			<li class="nav-item"><a class="nav-link" data-toggle="tab"
-				href="#menu1">자주 묻는 질문</a></li>
+				href="#menu1" onclick="askedlist()">자주 묻는 질문</a></li>
 			<li class="nav-item"><a class="nav-link" data-toggle="tab"
 				href="#menu2">개인정보 처리방침</a></li>
 			<li class="nav-item"><a class="nav-link" data-toggle="tab"
@@ -169,7 +196,7 @@ int mysearch = 2;
 							<td class="col-md-4" align="right">작성 일자</td>
 						</tr>
 					</thead>
-					<c:forEach var="bean" items="${requestScope.lists}">
+					<c:forEach var="bean" items="${askedlists}">
 						<tr>
 							<td align="center">
 								<c:forEach var="cnt" begin="1" end="${bean.depth}">
@@ -183,7 +210,7 @@ int mysearch = 2;
 							<td>
 								<c:if test="${whologin == 2}">
 									<a
-										href="<%=NoForm%>asked_update&no=${bean.no}&${requestScope.parameters}">
+										href="<%=NoForm%>asked_update&no=${bean.no}&${requestScope.askedparameters}">
 										수정 
 									</a>
 								</c:if>
@@ -191,7 +218,7 @@ int mysearch = 2;
 							<td>
 								<c:if test="${whologin == 2}">
 									<a
-										href="<%=NoForm %>asked_delete&no=${bean.no}&${requestScope.parameters}">
+										href="<%=NoForm %>asked_delete&no=${bean.no}&${requestScope.askedparameters}">
 										삭제 
 									</a>
 								</c:if>
@@ -204,33 +231,33 @@ int mysearch = 2;
 								method="get">
 								<input type="hidden" name="command" value="cs_center_main_asked">
 								<div class="form-group">
-									<select class="form-control" name="mode" id="mode">
+									<select class="form-control" name="askedmode" id="askedmode">
 										<option value="all" selected="selected">-- 선택하세요 --
 										<option value="subject">제목
 										<option value="content">글 내용
 									</select>
 								</div>
 								<div class="form-group">
-									<input type="text" class="form-control btn-xs" name="keyword"
-										id="keyword" placeholder="검색 키워드">
+									<input type="text" class="form-control btn-xs" name="askedkeyword"
+										id="askedkeyword" placeholder="검색 키워드">
 								</div>
 								<button class="btn btn-default btn-warning" type="submit"
-									onclick="search();">검색</button>
+									onclick="askedsearch();">검색</button>
 								<button class="btn btn-default btn-warning" type="button"
-									onclick="searchAll();">전체 검색</button>
+									onclick="askedsearchAll();">전체 검색</button>
 								<c:if test="${whologin == 2}">
 									<button class="btn btn-default btn-warning" type="button"
-										onclick="writeForm();">글 쓰기</button>
+										onclick="askedwriteForm();">글 쓰기</button>
 								</c:if>
 								<div style="float: right; margin-top: 2%;" class="col-md-4">
-									<p class="form-control-static">${requestScope.pagingStatus}</p>
+									<p class="form-control-static">${requestScope.askedpagingStatus}</p>
 								</div>
 							</form>
 						</td>
 					</tr>
 				</table>
 				<div align="right" style="float: right;" class="container col-md-6">
-					<footer>${requestScope.pagingHtml}</footer>
+					<footer>${requestScope.askedpagingHtml}</footer>
 				</div>
 			</div>
 			<div id="menu2" class="container tab-pane fade" align="center">

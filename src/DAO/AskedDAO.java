@@ -41,7 +41,6 @@ public class AskedDAO extends SuperDAO{
 			pstmt.setInt(2, endRow);
 			
 			rs = pstmt.executeQuery() ; 
-			
 			while ( rs.next()) {
 				AskedVO bean = new AskedVO() ; 
 				

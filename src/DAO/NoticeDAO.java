@@ -142,7 +142,7 @@ public class NoticeDAO extends SuperDAO{
 		// 넘겨진 Bean 데이터를 이용하여 추가합니다.
 		String sql = " insert into notice(no, subject, writer, password, content,  " ;
 		sql += " readhit, regdate, groupno, orderno, depth)  ";		
-		sql += " values(mynotice.nextval, ?, ?, default, ?, default, to_date(?, 'yyyy/MM/dd'), mynotice.currval, default, default) " ;    
+		sql += " values(mynotice.nextval, ?, ?, 123456789, ?, default, to_date(?, 'yyyy/MM/dd'), mynotice.currval, default, default) " ;    
 		Connection conn = null ;
 		PreparedStatement pstmt = null ;
 		int cnt = -999999 ;

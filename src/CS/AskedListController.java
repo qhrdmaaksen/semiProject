@@ -6,6 +6,7 @@ import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import DAO.AskedDAO;
 import VO.AskedVO;
@@ -17,7 +18,6 @@ public class AskedListController extends SuperClass{
 	@Override
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		AskedDAO dao = new AskedDAO();
-		
 		FlowParameters parameters 
 			= new FlowParameters(
 					request.getParameter("pageNumber"),
@@ -47,18 +47,20 @@ public class AskedListController extends SuperClass{
 			parameters.getMode(),
 			parameters.getKeyword() + "%");
 		
-		request.setAttribute("lists", lists);
+		for (AskedVO askedVO : lists) {
+			System.out.println(askedVO.toString());
+		}
+		HttpSession session1 = request.getSession();
+		session1.setAttribute("askedlists", lists);
 		
-		request.setAttribute("pagingHtml", pageInfo.getPagingHtml());
-		request.setAttribute("pagingStatus", pageInfo.getPagingStatus());
+		request.setAttribute("askedpagingHtml", pageInfo.getPagingHtml());
+		request.setAttribute("askedpagingStatus", pageInfo.getPagingStatus());
 		
-		request.setAttribute("mode", parameters.getMode());
-		request.setAttribute("keyword", parameters.getKeyword());
+		request.setAttribute("askedmode", parameters.getMode());
+		request.setAttribute("askedkeyword", parameters.getKeyword());
 		
-		request.setAttribute("parameters", parameters.toString());
+		request.setAttribute("askedparameters", parameters.toString());
 		
-		String gotopage = "/cs_center/cs_center_main.jsp" ;
-		super.GotoPage(gotopage);
 	}
 	@Override
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
