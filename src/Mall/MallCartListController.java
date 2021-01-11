@@ -49,7 +49,6 @@ public class MallCartListController extends SuperClass{
 			List<ShoppingInfo> shoplists = new ArrayList<ShoppingInfo>();
 			
 			int totalAmount = 0 ; // 총 판매 금액
-			int totalPoint = 0 ; // 총 누적 포인트
 			
 			for(Integer productcode : keylist){ // productcode : 상품 번호
 				Integer qty = maplists.get(productcode) ; // 구매 수량
@@ -59,19 +58,17 @@ public class MallCartListController extends SuperClass{
 				// 상품 번호 productcode에 대한 Bean 정보
 				ProductVO bean = pdao.SelectDataByPk(productcode) ;
 				
-				int point = bean.getPoint() ;
-				int price = bean.getPrice() ;
+				int productprice = bean.getProductprice() ;
 				
-				totalAmount += qty * price ;
-				totalPoint += qty * point ;
+				totalAmount += qty * productprice ;
 												
 				ShoppingInfo shopinfo = new ShoppingInfo() ;
 				
-				shopinfo.setImage(bean.getImage());
-				shopinfo.setPname(bean.getName()); 
-				shopinfo.setPnum(pnum);
-				shopinfo.setPoint(point); 
-				shopinfo.setPrice(price); 
+				shopinfo.setImages(bean.getImages());
+				shopinfo.setProductname(bean.getProductname()); 
+				shopinfo.setProductcode(productcode);
+				shopinfo.setStock(bean.getStock()); 
+				shopinfo.setProductprice(productprice); 
 				shopinfo.setQty(qty);  
 				
 				shoplists.add(shopinfo) ;
@@ -80,10 +77,9 @@ public class MallCartListController extends SuperClass{
 			// 이번에 구매할 총 목록
 			super.session.setAttribute("shoplists", shoplists);
 			super.session.setAttribute("totalAmount", totalAmount);
-			super.session.setAttribute("totalPoint", totalPoint);			
 		}
 		
-		String gotopage = "mall/MallList.jsp" ;
+		String gotopage = "mall/cartlist.jsp" ;
 		super.GotoPage(gotopage);
 	}
 }

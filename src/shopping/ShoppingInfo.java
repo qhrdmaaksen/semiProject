@@ -1,62 +1,79 @@
 package shopping;
 
 public class ShoppingInfo {
-	private int pnum ; // 상품 번호
-	private String pname ; // 상품 이름
+	private int productcode ; // 상품 번호
+	private String productname ; // 상품 이름
 	private int qty ; // 구매 수량
-	private int price ; // 단가
-	private String image; // 상품 이미지 이름
-	private int point ; // 적립할 포인트
+	private int productprice ; // 단가
+	private String images; // 상품 이미지 이름
+	private int stock ; // 적립할 포인트
 	//private int amount ;
 	
 	public ShoppingInfo() {
 	
 	}
-	
-	// toString() 메소드 구현
+
 	@Override
 	public String toString() {
-		return "ShoppingInfo [pnum=" + pnum + ", pname=" + pname + ", qty=" + qty + ", price=" + price + ", image="
-				+ image + ", point=" + point + "]";
+		return "ShoppingInfo [productcode=" + productcode + ", productname=" + productname + ", qty=" + qty
+				+ ", productprice=" + productprice + ", images=" + images + ", stock=" + stock + "]";
 	}
-	
-	// getter, setter() 메소드 구현 	
-	
-	public int getPnum() {
-		return pnum;
+
+	public int getProductcode() {
+		return productcode;
 	}
-	
-	public void setPnum(int pnum) {
-		this.pnum = pnum;
+
+	public void setProductcode(int productcode) {
+		this.productcode = productcode;
 	}
-	public String getPname() {
-		return pname;
+
+	public String getProductname() {
+		return productname;
 	}
-	public void setPname(String pname) {
-		this.pname = pname;
+
+	public void setProductname(String productname) {
+		this.productname = productname;
 	}
+
 	public int getQty() {
 		return qty;
 	}
+
 	public void setQty(int qty) {
 		this.qty = qty;
 	}
-	public int getPrice() {
-		return price;
+
+	public int getProductprice() {
+		return productprice;
 	}
-	public void setPrice(int price) {
-		this.price = price;
+
+	public void setProductprice(int productprice) {
+		this.productprice = productprice;
 	}
-	public String getImage() {
-		return image;
+
+	public String getImages() {
+		return images;
 	}
-	public void setImage(String image) {
-		this.image = image;
+
+	public void setImages(String images) {
+		this.images = images;
 	}
-	public int getPoint() {
-		return point;
+
+	public int getStock() {
+		return stock;
 	}
-	public void setPoint(int point) {
-		this.point = point;
-	}	
+
+	public void setStock(int stock) {
+		this.stock = stock;
+	}
+	
+	
+	
+	
 }
+
+
+
+
+
+

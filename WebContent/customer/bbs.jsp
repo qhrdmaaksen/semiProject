@@ -54,12 +54,12 @@
 	<div class="row">
  	<div class="col-3"> 
  	<div class="card" style="width: 18rem;"> 
- 		<img src="https://images.unsplash.com/photo-1563725911583-7d108f720483" class="card-img-top" alt="...">
+ 		<img src="${bean.image}" class="card-img-top" alt="...">
  	<div class="card-body"> 
  		<h5 class="card-title">Card title</h5> 
  		<p class="card-text">${sessionScope.loginfo.id}</p>
  		
-  			<a href="<%=NoForm%>boDetailView">
+  								<a href="<%=NoForm%>bbsdetailview&no=${bean.no}&${requestScope.parameters}">
 								${bean.title}
 							</a>
   	</div> 

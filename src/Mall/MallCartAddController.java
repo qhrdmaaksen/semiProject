@@ -26,6 +26,7 @@ public void doPost(HttpServletRequest request, HttpServletResponse response) thr
 		gotopage = "member/login.jsp" ;
 		super.GotoPage(gotopage);
 	} else { // 누군가 로그인 한 상태입니다.
+		System.out.println("하하하");
 		int productcode = Integer.parseInt(request.getParameter("productcode")) ;
 		int stock = Integer.parseInt(request.getParameter("stock")) ; // 재고
 		int qty = Integer.parseInt(request.getParameter("qty")) ; // 구매 수량

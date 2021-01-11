@@ -135,12 +135,105 @@ public class ProductDAO extends SuperDAO{
 		}
 
 
-		public ProductVO SelectDataByPk(Integer pnum) {
-			// TODO Auto-generated method stub
-			return null;
-		}	
+		public ProductVO SelectDataByPk(Integer productcode) {
+			ProductVO bean = null ;
+			
+			String sql = "select * " ;
+			sql += " from products " ; 
+			sql += " where \"productcode\" = ? " ;
+			
+			Connection conn = null ;
+			PreparedStatement pstmt = null ;
+			ResultSet rs = null ;
+			
+			try {
+				conn = super.getConnection() ;
+				pstmt = conn.prepareStatement(sql) ;
+
+				pstmt.setInt( 1, productcode   ); 
+							
+				rs = pstmt.executeQuery() ;
+				
+				while(rs.next()) {
+					bean = new ProductVO() ;
+					
+					bean.setBloodCirculation(rs.getInt("bloodCirculation"));
+					bean.setDigestiveapparatus(rs.getInt("digestiveapparatus"));
+					bean.setEyes(rs.getInt("eyes"));
+					bean.setFatigue(rs.getInt("fatigue"));
+					bean.setHair(rs.getInt("hair"));
+					bean.setImages(rs.getString("images"));
+					bean.setImmunity(rs.getInt("immunity"));
+					bean.setJoint(rs.getInt("joint"));
+					bean.setProductcode(rs.getInt("productcode"));
+					bean.setProductname(rs.getString("productname"));
+					bean.setProductprice(rs.getInt("productprice"));
+					bean.setSkin(rs.getInt("skin"));
+					bean.setStock(rs.getInt("stock"));
+					
+				}
+				
+				System.out.println("ok");
+			} catch (Exception e) {
+				SQLException err = (SQLException)e ;			
+				e.printStackTrace();
+				try {
+					conn.rollback(); 
+				} catch (Exception e2) {
+					e2.printStackTrace();
+				}
+			} finally {
+				try {
+					if(rs != null) {rs.close();}
+					if(pstmt != null) {pstmt.close();}
+					if(conn != null) {conn.close();}
+				} catch (Exception e2) {
+					e2.printStackTrace();
+				}
+			}
+			
+			return bean  ;
+		}
 		
-		
+		public int DeleteItem(int productcode) {
+			Connection conn = null ;
+			PreparedStatement pstmt = null ;
+			int cnt = -999999 ;
+
+			try {
+				conn = super.getConnection() ;
+								
+				
+				// 해당 상품을 삭제합니다.
+				String sql = " delete from products  " ;
+				sql += " where \"num\" = ?" ;
+				
+				pstmt = conn.prepareStatement(sql) ;
+				
+				pstmt.setInt(1, productcode); // 상품 번호
+				cnt = pstmt.executeUpdate() ; 
+				
+				conn.commit(); 
+
+			} catch (Exception e) {
+				SQLException err = (SQLException)e ;			
+				cnt = - err.getErrorCode() ;			
+				e.printStackTrace();
+				try {
+					conn.rollback(); 
+				} catch (Exception e2) {
+					e2.printStackTrace();
+				}
+			} finally{
+				try {
+					if(pstmt != null){pstmt.close();}
+					if(conn != null){conn.close();}
+				} catch (Exception e2) {
+					e2.printStackTrace();
+				}
+			}
+			return cnt ;
+		}
 		
 		
 		

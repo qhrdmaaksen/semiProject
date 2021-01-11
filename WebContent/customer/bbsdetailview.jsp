@@ -87,20 +87,20 @@
 			//alert('${requestScope.parameter}') ;
 		}
 		
-		function addNewItem(cnum, writer, content, regdate) {
+		function addNewItem(cnum, id, content, postdate) {
 			/* 댓글 1개를 추가해 주는 함수 */
 			var litag = $("<li>"); // 새로운 글이 추가될 li태그 객체
 			litag.addClass("comment_item");
 			
 			var ptag = $("<p>");// 작성자 정보가 지정될 <p>태그
-			ptag.addClass("writer");
+			ptag.addClass("id");
 			
 			var spantag = $("<span>");// 작성자 정보의 이름
 			spantag.addClass("name");
-			spantag.html(writer + "님");
+			spantag.html(id + "님");
 			
 			var spandate = $("<span>");// 작성 일시
-			spandate.html("&nbsp;&nbsp;/&nbsp;&nbsp;" + regdate + " ");
+			spandate.html("&nbsp;&nbsp;/&nbsp;&nbsp;" + postdate + " ");
 			
 			var inputtag = $("<input>");// 삭제하기 버튼
 			inputtag.attr({"class" : "btn btn-default btn-xs", "type" : "button", "value" : "삭제하기", "pmkey" : cnum});
@@ -128,10 +128,10 @@
 		           	 
 					$.each(obj, function (idx) {
 		           		 var cnum = obj[idx].cnum ;	 
-		           		 var writer = obj[idx].writer ;
+		           		 var id = obj[idx].id ;
 		           		 var content = obj[idx].content ;	 
-		           		 var regdate = obj[idx].regdate ;
-		           		 addNewItem(cnum, writer, content, regdate);
+		           		 var postdate = obj[idx].postdate ;
+		           		 addNewItem(cnum, id, content, postdate);
 		           	});
 	            }
 	        });
@@ -199,13 +199,13 @@
 	<div class="container col-sm-offset-<%=myoffset%> col-sm-<%=mywidth%>">
 		<div class="panel panel-default panel-primary">
 			<div class="panel-heading">
-				<h1 class="panel-title" align="left">게시물 상세 보기</h1>
+				<h1 class="panel-title" align="left">Detail View</h1>
 			</div>
 			<div class="panel-body">
 				<div class="col-sm-<%=leftside%> col-sm-<%=leftside%>">
 					<table>
 						<tr>
-							<td align="center"><img align="middle" src="<%=contextPath%>${requestScope.bean.image}"
+							<td align="center"><img align="middle" src="${bean.image}"
 								class="img-rounded" width="200" height="200"></td>
 						</tr>
 					</table>
@@ -218,15 +218,11 @@
 						</tr>						
 						<tr>
 							<td width="25%" align="center">작성자</td>
-							<td width="75%" align="left">${bean.writer}</td>
+							<td width="75%" align="left">${bean.id}</td>
 						</tr>
 						<tr>
 							<td width="25%" align="center">제목</td>
-							<td width="75%" align="left">${bean.subject}</td>
-						</tr>
-						<tr>
-							<td width="25%" align="center">비밀번호</td>
-							<td width="75%" align="left">${bean.password}</td>
+							<td width="75%" align="left">${bean.title}</td>
 						</tr>
 						<tr>
 							<td width="25%" align="center">글 내용</td>
@@ -234,12 +230,8 @@
 							</td>
 						</tr> 
 						<tr>
-							<td width="25%" align="center">조회수</td>
-							<td width="75%" align="left">${bean.readhit}</td>
-						</tr>
-						<tr>
 							<td width="25%" align="center">작성 일자</td>
-							<td width="75%" align="left">${bean.regdate}</td>
+							<td width="75%" align="left">${bean.postdate}</td>
 						</tr>
 					</table>
 				</div>
@@ -260,7 +252,7 @@
 							<label for="writer" class="col-xs-3 col-lg-3 control-label">작성자</label>
 							<div class="col-xs-4 col-lg-4">
 								<input type="hidden" name="no" value="${bean.no}" />
-								<input type="text" name="writer" id="writer" class="form-control" > 
+								<input type="text" name="id" id="id" class="form-control" > 
 							</div>
 						</div>
 						<div class="form-group">
