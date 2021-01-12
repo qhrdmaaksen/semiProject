@@ -12,9 +12,14 @@ order=member.OrderListcontroller
 point=member.MyPointController
 #### CS-Center Section ###############################
 cs_center_main=CS.NoticeListController
+cs_center_main_asked=CS.AskedListController
 notice_detailview=CS.NoticeDetailViewController
 notice_update=CS.NoticeUpdateController
 notice_insert=CS.NoticeInsertController
+notice_delete=CS.NoticeDeleteController
+asked_insert=CS.AskedInsertController
+asked_update=CS.askedUpdateController
+asked_detailview=CS.AskedDetailController
 #### Customer Section ################################
 boInsert=board.BoardInsertController
 boList=board.BoardListController

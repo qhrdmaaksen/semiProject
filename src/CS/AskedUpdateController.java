@@ -8,21 +8,23 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import DAO.AskedDAO;
 import DAO.NoticeDAO;
+import VO.AskedVO;
 import VO.NoticeVO;
 import common.SuperClass;
 
-public class NoticeUpdateController extends SuperClass{
-	private NoticeVO bean = null ;
+public class AskedUpdateController extends SuperClass{
+	private AskedVO bean = null ;
 	
 	@Override
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int no = Integer.parseInt(request.getParameter("no")) ;
 		
-		NoticeDAO dao = new NoticeDAO();
+		AskedDAO dao = new AskedDAO();
 		
 		// 여기서 xxx는 현재 수정하고자 하는 이전에 기입했던 게시물 1건을 의미합니다.
-		NoticeVO xxx = dao.SelectDataByPk(no);
+		AskedVO xxx = dao.SelectDataByPk(no);
 		
 		request.setAttribute("bean", xxx);
 		
@@ -33,7 +35,7 @@ public class NoticeUpdateController extends SuperClass{
 	}
 	@Override
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		bean = new NoticeVO();
+		bean = new AskedVO();
 		
 		bean.setContent(request.getParameter("content")) ;
 		bean.setNo(Integer.parseInt(request.getParameter("no"))) ;
@@ -45,17 +47,17 @@ public class NoticeUpdateController extends SuperClass{
 		String gotopage = "" ;
 		if (this.validate(request) == true) {
 			// 유효성 검사 통과
-			NoticeDAO dao = new NoticeDAO();
+			AskedDAO dao = new AskedDAO();
 			int cnt = -999999 ;
 			cnt = dao.UpdateData(bean) ;
 			
 			// request 객체의 내용을 보존하면서 목록 보기 페이지로 넘겨 줍니다.
-			new NoticeListController().doGet(request, response);
+			new AskedListController().doGet(request, response);
 			
 		}else { // 유효성 검사 실패
 			request.setAttribute("bean", bean);			
 			super.doPost(request, response);
-			gotopage = "cs_center/notice_update.jsp" ;
+			gotopage = "cs_center/asked_update.jsp" ;
 			super.GotoPage(gotopage);
 		}
 	}

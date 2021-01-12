@@ -18,12 +18,12 @@
 	<div class="container col-sm-offset-<%=myoffset%> col-sm-<%=mywidth%>">
 		<div class="panel panel-default panel-primary">
 			<div class="panel-heading">
-				<h4 align="center">공지사항 등록</h4>
+				<h4 align="center">자주 묻는 질문 등록</h4>
 			</div>
 			<div class="panel-body">
 				<form class="form-horizontal" role="form" action="<%=YesForm%>"
 					method="post">
-					<input type="hidden" name="command" value="notice_insert">
+					<input type="hidden" name="command" value="asked_insert">
 					<div class="form-group">
 						<label class="control-label col-sm-<%=formleft%>" for="writer">작성자</label>
 						<div class="col-sm-<%=formright%>">
@@ -64,7 +64,7 @@
 						<div align="center" class="col-sm-offset-3 col-sm-6">
 							<button class="btn btn-primary" type="submit">새글 쓰기</button>
 							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-							<button class="btn btn-danger" type="reset" onclick="location.href='http://localhost:8989/SemiProject/dodamdodam?command=cs_center_main&'">취소</button>
+							<button class="btn btn-danger" type="reset">취소</button>
 						</div>
 					</div>
 				</form>

@@ -1,6 +1,7 @@
 package CS;
 
 import java.io.IOException;
+import java.util.Enumeration;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -39,7 +40,6 @@ public class NoticeDetailViewController extends SuperClass{
 			
 			// login : 현재 접속한 사람의 정보를 저장하고 있는 객체입니다.
 			MemberVO login =  (MemberVO)super.session.getAttribute("loginfo") ;
-			
 			if(!bean.getWriter().equals(login.getId())) {
 				dao.UpdateReadhit(no) ;
 			}

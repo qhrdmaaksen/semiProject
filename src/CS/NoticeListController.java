@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import DAO.NoticeDAO;
 import VO.NoticeVO;
 import common.SuperClass;
+import utility.FlowParameters;
 import utility.Paging;
 
 public class NoticeListController extends SuperClass{
@@ -17,8 +18,8 @@ public class NoticeListController extends SuperClass{
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		NoticeDAO dao = new NoticeDAO();
 		
-		utility.FlowParameters parameters 
-		= new utility.FlowParameters(
+		FlowParameters parameters 
+		= new FlowParameters(
 				request.getParameter("pageNumber"), 
 				request.getParameter("pageSize"), 
 				request.getParameter("mode"), 
@@ -45,6 +46,7 @@ public class NoticeListController extends SuperClass{
 	
 
 	List<NoticeVO> lists = dao.SelectDataList(
+			pageInfo.getPageNumber(),
 			pageInfo.getBeginRow(),
 			pageInfo.getEndRow(),
 			parameters.getMode(), 

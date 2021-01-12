@@ -31,15 +31,15 @@
 <body>
 	<div class="container col-sm-offset-<%=myoffset%> col-sm-<%=mywidth%>">
 		<div class="panel panel-default panel-primary">
-			<div class="panel-heading"><h4 align="center">공지사항 수정</h4></div>
+			<div class="panel-heading"><h4 align="center">자주묻는질문 수정</h4></div>
 			<div class="panel-body">
 				<form class="form-horizontal" role="form" action="<%=YesForm%>" method="post">
-					<input type="hidden" name="command" value="notice_update">
+					<input type="hidden" name="command" value="asked_update">
 					<input type="hidden" name="no" value="${param.no }">
-					<input type="hidden" name="pageNumber" value="${param.pageNumber}">
-					<input type="hidden" name="pageSize" value="${param.pageSize}">
-					<input type="hidden" name="mode" value="${param.mode}">
-					<input type="hidden" name="keyword" value="${param.keyword}">
+					<input type="hidden" name="askedpageNumber" value="${param.askedpageNumber}">
+					<input type="hidden" name="askedpageSize" value="${param.askedpageSize}">
+					<input type="hidden" name="askedmode" value="${param.askedmode}">
+					<input type="hidden" name="askedkeyword" value="${param.askedkeyword}">
 					<div class="form-group">
 						<label class="control-label col-sm-<%=formleft%>" for="no"></label>
 						<div class="col-sm-<%=formleft%>">

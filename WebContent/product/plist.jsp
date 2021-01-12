@@ -12,7 +12,12 @@
 	<head>
 
 <style type="text/css">
-
+	body {
+	  background: #eecda3;
+	  background: -webkit-linear-gradient(to bottom, #FAEBD7, #DEB887);
+	  background: linear-gradient(to bottom, #FAEBD7, #DEB887);
+	  min-height: 100vh;
+	}
 </style>
 
 <script type="text/javascript">
@@ -22,6 +27,11 @@
 	
 </head>
 <body >
+
+  <div class="container text-#8B4513 py-5 text-center">
+  	<h3>Product List</h3>
+  </div>
+
 <div>
 
 <!--Section: Block Content-->
@@ -95,7 +105,7 @@
 </div>
 
 
-<br><br><br><br>
+<br><br><br>
 
 
 
@@ -130,7 +140,7 @@
 		</td>
 	</tr>				
 </table>	
-						<br><br><br><br>
+		<br><br>
 					
 					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 				<div align="center">
@@ -140,7 +150,7 @@
 
 
 
-<br><br><br><br>
+<br><br>
 	<script type="text/javascript">
 	   /* 방금 전 선택한 콤보 박스를 그대로 보여 주기 */ 
 		$('#mode option').each(function (index){
