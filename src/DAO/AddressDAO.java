@@ -7,10 +7,11 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import VO.AddressVo;
 import VO.BbsPostVo;
 
 
-public class BoardDAO  extends SuperDAO {
+public class AddressDAO  extends SuperDAO {
 
 	public int SelectTotalCount(String mode, String keyword) {
 		// 해당 모드와 키워드를 이용하여 조건에 맞는 데이터의 건수를 구해줍니다. 
@@ -18,7 +19,7 @@ public class BoardDAO  extends SuperDAO {
 		PreparedStatement pstmt = null ;
 		ResultSet rs = null ;		
 		
-		String sql = " select count(*) as cnt from BBS_POST " ;  
+		String sql = " select count(*) as cnt from \"ADDRESSES\" " ;  
 		
 		if(mode.equalsIgnoreCase("all")==false) {
 			// 전체 검색이 아니면 
@@ -59,77 +60,11 @@ public class BoardDAO  extends SuperDAO {
 		return cnt  ; 
 	}
 
-	public List<BbsPostVo> SelectDataList(int beginRow, int endRow, String mode, String keyword) {
-		Connection conn = null ;
-		PreparedStatement pstmt = null ;
-		ResultSet rs = null ;
-		
-		int cnt = -99999;
-	      String sql = " select \"NO\", \"id\", \"title\", \"content\", \"postdate\", \"likenumber\", \"IMAGE\" " ;
-	      sql += " from ( " ;
-	      sql += " select \"NO\", \"id\", \"title\", \"content\", \"postdate\", \"likenumber\", \"IMAGE\",  " ;
-	      sql += " rank() over( order by \"NO\" desc ) as ranking " ;
-	      sql += " from \"BBS_POST\" " ;
-	      
-	      if(mode.equalsIgnoreCase("all")== false) {
-	    	  sql+= " where " + mode + " like '"+ keyword +"%' " ; 
-	    	  System.out.println(sql);
-	      }
-	      
-	      sql += " ) " ;
-	      sql += " where ranking between ?  and ?  " ; 
-		
-		List<BbsPostVo> lists = new ArrayList<BbsPostVo>();
+	
 
-		try {
-			conn = super.getConnection() ;
-			pstmt = conn.prepareStatement(sql) ;
-
-			// placeholder1
-				
-			pstmt.setInt(1, beginRow);
-			pstmt.setInt(2, endRow);
-			
-			
-			
-			rs = pstmt.executeQuery() ;			
-			while( rs.next() ){
-				BbsPostVo bean = new BbsPostVo();
-				bean.setContent(rs.getString("content"));
-				bean.setId(rs.getString("id"));
-				bean.setLikenumber(rs.getInt("likenumber"));
-				bean.setNo(rs.getInt("NO"));
-				bean.setPostdate(String.valueOf(rs.getString("postdate")));
-				bean.setTitle(rs.getString("title"));
-				bean.setImage(rs.getString("image"));
-				
-				lists.add( bean ) ;
-			}
-		} catch (Exception e) {
-			SQLException err = (SQLException)e ;			
-			cnt = - err.getErrorCode() ;			
-			e.printStackTrace();
-			try {
-				conn.rollback(); 
-			} catch (Exception e2) {
-				e2.printStackTrace();
-			}
-		} finally{
-			try {
-				if(rs != null){ rs.close(); }
-				if(pstmt != null){ pstmt.close(); }
-				if(conn != null){conn.close();}
-			} catch (Exception e2) {
-				e2.printStackTrace(); 
-			}
-		}
-		
-		return lists ;
-	}
-
-	public int InsertData(BbsPostVo bean) {
-		String sql = " insert into BBS_POST (\"NO\", \"id\", \"title\", \"content\", \"postdate\", \"likenumber\", \"IMAGE\" ) " ;
-		sql += " values(seq_BP_index.nextval,?,?,?,to_date(?, 'yyyy/MM/dd') , default, ? ) " ;
+	public int InsertData(AddressVo bean) {
+		String sql = " insert into \"ADDRESSES\" (\"seq_add\", \"id\", \"shippingname\", \"name\", \"address1\", \"address2\", \"phone\" ) " ;
+		sql += " values(seq_BP_index.nextval,?,?,?,?,?,? ) " ;
 		Connection conn = null ;
 		PreparedStatement pstmt = null ;
 		int cnt = -999999 ;
@@ -140,10 +75,13 @@ public class BoardDAO  extends SuperDAO {
 
 			// placeholder
 			pstmt.setString(1, bean.getId());
-			pstmt.setString(2, bean.getTitle()); 
-			pstmt.setString(3, bean.getContent());
-			pstmt.setString(4, bean.getPostdate());
-			pstmt.setString(5, bean.getImage());
+			pstmt.setString(2, bean.getShippingname());
+			pstmt.setString(3, bean.getName());
+			pstmt.setString(4, bean.getAddress1());
+			pstmt.setString(5, bean.getAddress2());
+			pstmt.setInt(6, bean.getPhone());
+			
+			
 			
 			cnt = pstmt.executeUpdate() ; 
 			conn.commit(); 
@@ -336,5 +274,71 @@ public class BoardDAO  extends SuperDAO {
 			}
 		}
 		return cnt ;
+}
+
+
+
+	public List<AddressVo> SelectDataList(int beginRow, int endRow, String mode, String keyword) {
+		Connection conn = null ;
+		PreparedStatement pstmt = null ;
+		ResultSet rs = null ;
+		
+		int cnt = -99999;
+	      String sql = " select \"seq_add\", \"id\", \"shippingname\", \"name\", \"address1\", \"address2\", \"phone\" " ;
+	      sql += " from \"ADDRESSES\" " ;
+	      
+			/*
+			 * if(mode.equalsIgnoreCase("all")== false) { sql+= " where " + mode +
+			 * " like '"+ keyword +"%' " ; System.out.println(sql); }
+			 * 
+			 * sql += " ) " ; sql += " where ranking between ?  and ?  " ;
+			 */
+	      
+		List<AddressVo> lists = new ArrayList<AddressVo>();
+
+		try {
+			conn = super.getConnection() ;
+			pstmt = conn.prepareStatement(sql) ;
+
+			// placeholder1
+			/*
+			 * pstmt.setInt(1, beginRow); pstmt.setInt(2, endRow);
+			 */
+			
+			
+			
+			rs = pstmt.executeQuery() ;			
+			while( rs.next() ){
+				AddressVo bean = new AddressVo();
+				bean.setAddress1(rs.getString("address1"));
+				bean.setAddress2(rs.getString("address2"));
+				bean.setId(rs.getString("id"));
+				bean.setName(rs.getString("name"));
+				bean.setPhone(rs.getInt("phone"));
+				bean.setSeq_add(rs.getInt("seq_add"));
+				bean.setShippingname(rs.getString("shippingname"));
+				
+				lists.add( bean ) ;
+			}
+		} catch (Exception e) {
+			SQLException err = (SQLException)e ;			
+			cnt = - err.getErrorCode() ;			
+			e.printStackTrace();
+			try {
+				conn.rollback(); 
+			} catch (Exception e2) {
+				e2.printStackTrace();
+			}
+		} finally{
+			try {
+				if(rs != null){ rs.close(); }
+				if(pstmt != null){ pstmt.close(); }
+				if(conn != null){conn.close();}
+			} catch (Exception e2) {
+				e2.printStackTrace(); 
+			}
+		}
+		
+		return lists ;
 }
 }

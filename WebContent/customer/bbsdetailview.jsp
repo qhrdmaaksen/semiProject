@@ -242,7 +242,7 @@
 							<td width="25%" align="center">작성 일자</td>
 							<td width="75%" align="left">${bean.postdate}</td>
 						</tr>
-									<tr>
+						<tr>
 							<td width="25%" align="center">좋아요 수</td>
 							<td width="75%" align="left">${bean.likenumber}</td>
 						</tr>
@@ -260,15 +260,36 @@
 				
 				
 			<div>	
-					<c:if test="${sessionScope.loginfo.id == bean.id}">
+				<table>
+					<tr>
+						<td width="50%" align="center">
+						<c:if test="${sessionScope.loginfo.id == bean.id}">
 						<a href="<%=NoForm%>boDelete&no=${bean.no}&${requestScope.parameters}">
 								삭제
 							</a>
-					</c:if>
-					
-					<c:if test="${sessionScope.loginfo.id != bean.id}">
+						</c:if>
+						<c:if test="${sessionScope.loginfo.id != bean.id}">
 								삭제
-					</c:if>
+						</c:if>
+						</td>
+						
+						
+						
+						<td width="50%" align="left">
+						<c:if test="${sessionScope.loginfo.id == bean.id}">
+								<a href="<%=NoForm%>boUpdate&no=${bean.no}&${requestScope.parameters}">
+									수정
+								</a>
+						</c:if>
+						
+						<c:if test="${sessionScope.loginfo.id != bean.id}">
+								수정
+								<!-- 로그인 한 아이디가 아니면 수정불가.   -->
+						</c:if>
+						
+						</td>
+						
+				</table>
 			</div>
 			<!-- 댓글 영역 -->
 			<div class="col-sm-12">					
