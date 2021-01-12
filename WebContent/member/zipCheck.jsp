@@ -10,7 +10,7 @@
 %>
 <%
 	String contextPath = request.getContextPath(); //현재 진행 중인 프로젝트 이름 
-	String mappingName = "/Shopping"; //요청을 위한 url 패턴 이름
+	String mappingName = "/dodamdodam"; //요청을 위한 url 패턴 이름
 	String YesForm = contextPath + mappingName; //폼이 있는 경우에 사용된다.
 	String NoForm = contextPath + mappingName + "?command=";	
 	

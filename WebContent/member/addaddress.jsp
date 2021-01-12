@@ -41,18 +41,50 @@
 	function isCheckFalse() {
 		document.myform.isCheck.value = false;
 	}
-	function checkForm() {
-		var isCheck = document.myform.isCheck.value;
-		//alert( isCheck ) ;
-		if (isCheck == 'false') {
-			alert('아이디 중복 체크를 우선 해주세용.');
-			return false;
-		}
-	}
+
 </script>
 </head>
 <body>
+	<form id="myform" name="myform" class="form-horizontal" role="form"
+					action="<%=YesForm%>" method="post">
+					<input type="hidden" name="command" value="addaddress"> <input
+						type="text" name="isCheck" value="false"> <input
+						type="hidden" name="mpoint" value="5">
 					<div class="form-group">
+					
+						<label class="control-label col-sm-<%=formleft%>" for="writer">주문자</label>
+						<div class="col-sm-<%=formright%>">
+							<input type="text" class="form-control" name="fakewriter" id="fakewriter"
+								placeholder="작성자" value="${sessionScope.loginfo.name}(${sessionScope.loginfo.id})" disabled="disabled">
+							<input type="hidden" name="id" id="id"
+								value="${sessionScope.loginfo.id}">
+									<input type="hidden" name="name" id="name"
+								value="${sessionScope.loginfo.name}">
+						</div>
+					</div>
+					
+					<div class="form-group">
+						<label class="control-label col-sm-<%=formleft%>" for="title">수령인</label>
+						<div class="col-sm-<%=formright%>">
+							<input type="text" class="form-control" name="shippingname"
+								id="shippingname" placeholder="글 제목" value="${bean.shippingname}"> 
+							<span class="err">${errshippingname}</span>
+						</div>
+					</div>
+					
+					
+					<div class="form-group">
+						<label class="control-label col-sm-<%=formleft%>" for="title">휴대폰번호</label>
+						<div class="col-sm-<%=formright%>">
+							<input type="text" class="form-control" name="phone"
+								id="phone" placeholder="글 제목" value="${bean.phone}"> 
+							<span class="err">${errphone}</span>
+						</div>
+					</div>
+					
+		
+		
+						<div class="form-group">
 						<label for="zipcode"
 							class="col-xs-<%=formleft%> col-lg-<%=formleft%> control-label">우편
 							번호</label>
@@ -88,5 +120,19 @@
 							<span class="err">${erraddress2}</span>
 						</div>
 					</div>
+					
+
+					
+					
+					
+					
+						<div class="form-group">
+						<div class="col-xs-<%=12%> col-lg-<%=12%>" align="center">
+								<button class="btn btn-default" type="submit">전송</button>
+							&nbsp;&nbsp;&nbsp;&nbsp;
+							<button type="reset" class="btn btn-default">초기화</button>
+						</div>
+					</div>
+				</form>
 </body>
 </html>
