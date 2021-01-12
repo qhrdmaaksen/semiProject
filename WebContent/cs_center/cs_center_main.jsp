@@ -66,7 +66,6 @@ int mysearch = 2;
 			}
 		}
 		function askedlist(){
-			alert('테스트');
 			$.ajax({
 				url:"${pageContext.request.contextPath}/dodamdodam?command=cs_center_main_asked",
 				type:"get",
@@ -202,7 +201,7 @@ int mysearch = 2;
 								<c:forEach var="cnt" begin="1" end="${bean.depth}">
 								</c:forEach> 
 								<a
-								href="#" onclick="loginCheck(${bean.no})">
+								href="#" onclick="askedloginCheck(${bean.no})">
 									${bean.subject} 
 								</a>
 							</td>

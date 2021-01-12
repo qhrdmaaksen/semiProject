@@ -117,7 +117,6 @@
 			</div>			
 		</div>
 	<div id="cannanoogi">
-		<address class="fooeraddress">
 		<div class="footerdodam">
 			<div id="footerlogimage" align="center">
 				<img alt="도담도담" src="../images/logotest.png">
@@ -149,6 +148,7 @@
 				</p>
 		</div>
 				<br><br>
+		<address class="fooeraddress">
 			<div class="cs"><h4 align="center">고객센터</h4>
 				<p align="center">
 					<span>고객문의: <a href="mailto:rlaalsdn8@gmail.com">rlaalsdn8@gmail.com</a>
