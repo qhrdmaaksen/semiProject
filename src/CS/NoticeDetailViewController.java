@@ -16,7 +16,7 @@ import utility.FlowParameters;
 public class NoticeDetailViewController extends SuperClass{
 	@Override
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int no = Integer.parseInt(request.getParameter("no")) ;
+		int no = Integer.parseInt(request.getParameter("seq_index")) ;
 		
 		NoticeDAO dao = new NoticeDAO() ;
 		
@@ -40,8 +40,7 @@ public class NoticeDetailViewController extends SuperClass{
 			
 			// login : 현재 접속한 사람의 정보를 저장하고 있는 객체입니다.
 			MemberVO login =  (MemberVO)super.session.getAttribute("loginfo") ;
-			if(!bean.getWriter().equals(login.getId())) {
-				dao.UpdateReadhit(no) ;
+			if(!bean.getId().equals(login.getId())) {
 			}
 			request.setAttribute("bean", bean);
 			request.setAttribute("parameters", parameters.toString());

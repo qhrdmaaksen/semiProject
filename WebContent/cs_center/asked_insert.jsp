@@ -24,12 +24,13 @@
 				<form class="form-horizontal" role="form" action="<%=YesForm%>"
 					method="post">
 					<input type="hidden" name="command" value="asked_insert">
+					<input type="hidden" name="category" value="test">
 					<div class="form-group">
 						<label class="control-label col-sm-<%=formleft%>" for="writer">작성자</label>
 						<div class="col-sm-<%=formright%>">
 							<input type="text" class="form-control" name="fakewriter" id="fakewriter"
 								placeholder="작성자" value="${sessionScope.loginfo.name}(${sessionScope.loginfo.id})" disabled="disabled">
-							<input type="hidden" name="writer" id="writer"
+							<input type="hidden" name="id" id="writer"
 								value="${sessionScope.loginfo.id}">
 						</div>
 					</div>
@@ -37,9 +38,9 @@
 						<label class="control-label col-sm-<%=formleft%>" for="subject">글
 							제목</label>
 						<div class="col-sm-<%=formright%>">
-							<input type="text" class="form-control" name="subject"
-								id="subject" placeholder="글 제목" value="${bean.subject}"> 
-							<span class="err">${errsubject}</span>
+							<input type="text" class="form-control" name="title"
+								id="subject" placeholder="글 제목" value="${bean.title}"> 
+							<span class="err">${errtitle}</span>
 						</div>
 					</div>
 					<div class="form-group">
@@ -51,7 +52,7 @@
 							<span class="err">${errcontent}</span>
 						</div>
 					</div>
-					<div class="form-group">
+					<%-- <div class="form-group">
 						<label class="control-label col-sm-<%=formleft%>" for="regdate">작성
 							일자</label>
 						<div class="col-sm-<%=formright%>">
@@ -59,7 +60,7 @@
 								id="regdate" placeholder="작성 일자" value="${bean.regdate}"> <span
 								class="err">${errregdate}</span>
 						</div>
-					</div>
+					</div> --%>
 					<div class="form-group">
 						<div align="center" class="col-sm-offset-3 col-sm-6">
 							<button class="btn btn-primary" type="submit">새글 쓰기</button>

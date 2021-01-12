@@ -249,7 +249,7 @@
 				aria-controls="상품 리뷰" aria-selected="false">상품 리뷰</a></li>
 			<li class="nav-item"><a id="cs-tab01" class="nav-link"
 				data-toggle="tab" href="#cs-main" role="tab" aria-controls="고객 문의"
-				aria-selected="false" onclick="location.href='http://localhost:8989/SemiProject/cs-center/cs-center-main.jsp'">고객 문의</a></li>
+				aria-selected="false" onclick="location.href='http://localhost:8989/SemiProject/cs_center/cs_center_main.jsp'">고객 문의</a></li>
 			<li class="nav-item"><a id="delivery-info-tab" class="nav-link"
 				data-toggle="tab" href="#delivery-info" role="tab"
 				aria-controls="배송/교환/반품 안내" aria-selected="false">배송/교환/반품 안내</a></li>
@@ -365,31 +365,11 @@
 											<div class="col-sm-12">
 												<input type="text" class="form-control" name="writer"
 													id="fakewriter" placeholder="작성자"
-													<%-- value="${sessionScope.loginfo.name}(${sessionScope.loginfo.id})" --%>
-													value="김민우"
+													value="${sessionScope.loginfo.name}(${sessionScope.loginfo.id})"
 													disabled="disabled"> <input type="hidden"
 													name="writer" id="writer"
-													value="김민우"
-													<%-- value="${sessionScope.loginfo.id}" --%>>
+													value="${sessionScope.loginfo.id}">
 											</div>
-											<label class="control-label col-sm-12" for="subject">
-											</label>
-											<div class="form-group">
-												<label class="control-label col-sm-<%=formleft%>"
-													for="image"></label>
-												<%-- <div class="col-sm-<%=formright%>">
-													<input type="file" class="form-control" name="image"
-														id="image" placeholder="이미지를 넣어 주셔용^^"><span
-														class="err form-control-static">${errimage}</span>
-												</div> --%>
-											</div>
-												<label class="control-label col-sm-<%=formleft%>-
-												for="regdate"> </label>
-											<%-- 	<div class="col-sm-12">
-												<input type="datetime" class="form-control" name="regdate"
-													id="regdate" placeholder="작성 일자" value="${bean.regdate}"> <span
-													class="err">${errregdate}</span>
-											</div> --%>
 										</div>
 										<div class="form-group col-sm-6">
 											<label class="control-label col-sm-12" for="content" style="color: white;">
@@ -414,16 +394,7 @@
 											</div>
 										</div>
 									</div>
-									<%-- <div class="form-group">
-										<label class="control-label col-sm-<%=formleft%>" for="password">비밀
-											번호</label>
-										<div class="col-sm-<%=formright%>">
-											<input type="password" class="form-control" name="password"
-												id="password" placeholder="비밀 번호를 넣어 주셔용^^" value="${bean.password}">
-												<span class="err">${errpassword}</span>
-										</div>
-									</div> --%>
-									<input type="hidden" name="id" value="김민우"><!--  세션의 아이디 값 대입 -->
+									<input type="hidden" name="id" value="${sessionScope.loginfo.name}(${sessionScope.loginfo.id}"><!--  세션의 아이디 값 대입 -->
 									<input type="hidden" name='grade' value="0">
 								</form>
 								

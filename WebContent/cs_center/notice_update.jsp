@@ -35,7 +35,7 @@
 			<div class="panel-body">
 				<form class="form-horizontal" role="form" action="<%=YesForm%>" method="post">
 					<input type="hidden" name="command" value="notice_update">
-					<input type="hidden" name="no" value="${param.no }">
+					<input type="hidden" name="seq_index" value="${param.seq_index }">
 					<input type="hidden" name="pageNumber" value="${param.pageNumber}">
 					<input type="hidden" name="pageSize" value="${param.pageSize}">
 					<input type="hidden" name="mode" value="${param.mode}">
@@ -43,22 +43,22 @@
 					<div class="form-group">
 						<label class="control-label col-sm-<%=formleft%>" for="no"></label>
 						<div class="col-sm-<%=formleft%>">
-							<input type="hidden" name="no" id="no" value="${bean.no}">
+							<input type="hidden" name="seq_index" id="no" value="${bean.seq_index}">
 						</div>
 					</div>
 					<div class="form-group">
 						<label class="control-label col-sm-<%=formleft%>" for="subject">글 제목</label>
 						<div class="col-sm-<%=formleft%>">
-							<input type="text" name="subject" id="subject" value="${bean.subject}">
+							<input type="text" name="title" id="subject" value="${bean.title}">
 						</div>
 					</div>
 					<div class="form-group">
 						<label class="control-label col-sm-<%=formleft%>" for="writer">작성자</label>
 						<div class="col-sm-<%=formright%>">
 							<input type="text" class="form-control" name="fakewriter" id="fakewriter"								
-								placeholder="작성자" value="${bean.writer}" disabled="disabled">
-							<input type="hidden" name="writer" id="writer" value="${bean.writer}">
-							<span class="err">${errwriter}</span>							 
+								placeholder="작성자" value="${bean.id}" disabled="disabled">
+							<input type="hidden" name="id" id="writer" value="${bean.id}">
+							<span class="err">${errid}</span>							 
 						</div>
 					</div>					
 					<div class="form-group">
@@ -69,7 +69,7 @@
 								<span class="err">${errcontent}</span>								
 						</div>
 					</div>
-					<div class="form-group">
+					<%-- <div class="form-group">
 						<label class="control-label col-sm-<%=formleft%>" for="regdate">작성	일자
 						</label>
 						<div class="col-sm-<%=formright%>">
@@ -78,7 +78,7 @@
 							<span class="err">${errregdate}
 							</span>
 						</div>
-					</div>
+					</div> --%>
 					<div class="form-group">
 						<div align="center" class="col-sm-offset-3 col-sm-6">
 							<button class="btn btn-primary" type="submit" onclick="location.href='http://localhost:8989/SemiProject/dodamdodam?command=cs_center_main&'">수정하기</button>

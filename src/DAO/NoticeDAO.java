@@ -26,7 +26,7 @@ public class NoticeDAO extends SuperDAO{
 		PreparedStatement pstmt = null ;
 		ResultSet rs = null ;		
 		
-		String sql = " select count(*) as cnt from notice  " ; 
+		String sql = " select count(*) as cnt from customer_center_post " ; 
 		if (mode.equalsIgnoreCase("all") == false) {
 			//전체 검색이 아니면
 			sql += " where " + mode + " like '" + keyword + "' " ;
@@ -75,18 +75,16 @@ public class NoticeDAO extends SuperDAO{
 
 		int cnt = -99999 ;
 		
-		String sql = " select no, subject, writer, password, content, readhit, regdate, groupno, orderno, depth, remark  " ;
-		sql += " from ( " ;
-		sql += " select no, subject, writer, password, content, readhit, regdate, groupno, orderno, depth, remark,  " ;
-		sql += " rank() over(order by groupno desc, orderno asc) as ranking " ;
-		sql += " from notice " ;
+		String sql = " select \"seq_index\" , \"category\" , \"title\" , \"content\" , \"id\" " ;
+		sql += " from (  select \"seq_index\" , \"category\" , \"title\" , \"content\" , \"id\", " ;
+		sql += " rank() over(order by \"seq_index\" asc) as ranking  from customer_center_post  " ;
 		
 		if(mode.equalsIgnoreCase("all") == false) {
 			sql += " where " + mode + " like '" + keyword + "' " ;  
 		}
 		
 		sql += " ) " ;
-		sql += " where ranking between ?  and ?  " ;
+		sql += " where ranking between ?  and ? " ; 
 		
 		List<NoticeVO> lists = new ArrayList<NoticeVO>();
 
@@ -103,17 +101,11 @@ public class NoticeDAO extends SuperDAO{
 			while( rs.next() ){
 				NoticeVO bean = new NoticeVO();
 				
+				bean.setSeq_index(rs.getInt("seq_index")); 
+				bean.setCategory(rs.getString("category")); 				
+				bean.setTitle(rs.getString("title")); 
 				bean.setContent(rs.getString("content")); 				
-				bean.setDepth(rs.getInt("depth")); 
-				bean.setGroupno(rs.getInt("groupno")); 
-				bean.setNo(rs.getInt("no")); 				
-				bean.setOrderno(rs.getInt("orderno")); 				
-				bean.setPassword(rs.getString("password")); 				
-				bean.setReadhit(rs.getInt("readhit")); 				
-				bean.setRegdate(String.valueOf(rs.getDate("regdate"))); 				
-				bean.setSubject(rs.getString("subject")); 
-				bean.setWriter(rs.getString("writer")); 
-				bean.setRemark(rs.getString("remark")); 
+				bean.setId(rs.getString("id")); 
 				
 				lists.add( bean ) ;
 			}
@@ -140,9 +132,8 @@ public class NoticeDAO extends SuperDAO{
 	}
 	public int InsertData(NoticeVO bean) {
 		// 넘겨진 Bean 데이터를 이용하여 추가합니다.
-		String sql = " insert into notice(no, subject, writer, password, content,  " ;
-		sql += " readhit, regdate, groupno, orderno, depth)  ";		
-		sql += " values(mynotice.nextval, ?, ?, 123456789, ?, default, to_date(?, 'yyyy/MM/dd'), mynotice.currval, default, default) " ;    
+		String sql = " insert into customer_center_post(\"seq_index\", \"category\", \"title\",\"content\", \"id\" )  " ;
+		sql += " values(seq_index.nextval, ?, ?, ?, ?) " ;    
 		Connection conn = null ;
 		PreparedStatement pstmt = null ;
 		int cnt = -999999 ;
@@ -153,11 +144,10 @@ public class NoticeDAO extends SuperDAO{
 			
 			// placeholder
 			
-			pstmt.setString(1, bean.getSubject());
-			pstmt.setString(2, bean.getWriter());
-			//pstmt.setString(3, bean.getPassword());
+			pstmt.setString(1, bean.getCategory());
+			pstmt.setString(2, bean.getTitle());
 			pstmt.setString(3, bean.getContent());
-			pstmt.setString(4, bean.getRegdate());
+			pstmt.setString(4, bean.getId());
 			
 			cnt = pstmt.executeUpdate() ; 
 			conn.commit(); 
@@ -182,12 +172,12 @@ public class NoticeDAO extends SuperDAO{
 		return cnt ;
 	}
 
-	public NoticeVO SelectDataByPk(int no) {
+	public NoticeVO SelectDataByPk(int seq_index) {
 		// 해당 게시물 번호의 Bean 객체를 구합니다.
 		NoticeVO bean = null ;
 		
-		String sql = " select * from notice ";
-		sql += " where no = ? " ;
+		String sql = " select * from customer_center_post ";
+		sql += " where \"seq_index\" = ? " ;
 		
 		Connection conn = null ;
 		PreparedStatement pstmt = null ;
@@ -198,24 +188,18 @@ public class NoticeDAO extends SuperDAO{
 			pstmt = conn.prepareStatement(sql) ;
 
 			// placeholder		
-			pstmt.setInt(1, no);
+			pstmt.setInt(1, seq_index);
 						
 			rs = pstmt.executeQuery() ;
 			
 			while(rs.next()) {
 				bean = new NoticeVO() ;
 				
-				bean.setContent(rs.getString("content")); 				
-				bean.setDepth(rs.getInt("depth")); 
-				bean.setGroupno(rs.getInt("groupno")); 
-				bean.setNo(rs.getInt("no")); 				
-				bean.setOrderno(rs.getInt("orderno")); 				
-				bean.setPassword(rs.getString("password")); 				
-				bean.setReadhit(rs.getInt("readhit")); 				
-				bean.setRegdate(String.valueOf(rs.getDate("regdate"))); 				
-				bean.setSubject(rs.getString("subject")); 
-				bean.setWriter(rs.getString("writer")); 
-				bean.setRemark(rs.getString("remark")); 
+				bean.setSeq_index(rs.getInt("seq_index")); 
+				bean.setCategory(rs.getString("category")); 				
+				bean.setTitle(rs.getString("title")); 
+				bean.setContent(rs.getString("content")); 
+				bean.setId(rs.getString("id")); 
 			}
 			
 		} catch (Exception e) {
@@ -241,9 +225,9 @@ public class NoticeDAO extends SuperDAO{
 
 	public int UpdateData(NoticeVO bean) {
 		// 해당 게시물을 수정합니다.
-		String sql = " update notice set  ";
-		sql += " content=?, regdate=?, subject=?, writer=?, remark = ? " ;
-		sql += " where no = ? " ;    
+		String sql = " update customer_center_post set  ";
+		sql += " \"category\"=?, \"title\"=?, \"content\"=?, \"id\" = ? " ;
+		sql += " where \"seq_index\" = ? " ;    
 		Connection conn = null ;
 		PreparedStatement pstmt = null ;
 		int cnt = -999999 ;
@@ -253,14 +237,12 @@ public class NoticeDAO extends SuperDAO{
 			pstmt = conn.prepareStatement(sql) ;
 
 			// placeholder
-			pstmt.setString(1, bean.getContent());
-			pstmt.setString(2, bean.getRegdate());
-			pstmt.setString(3, bean.getSubject());
-			pstmt.setString(4, bean.getWriter());
+			pstmt.setString(1, bean.getCategory());
+			pstmt.setString(2, bean.getTitle());
+			pstmt.setString(3, bean.getContent());
+			pstmt.setString(4, bean.getId());
+			pstmt.setInt(5, bean.getSeq_index());
 			
-			pstmt.setString(5, bean.getRemark());
-			
-			pstmt.setInt(6, bean.getNo());
 			
 			cnt = pstmt.executeUpdate() ; 
 			conn.commit(); 
@@ -284,55 +266,15 @@ public class NoticeDAO extends SuperDAO{
 		}
 		return cnt ;
 	}
-
-	public int UpdateReadhit(int no) {
-		// 조회수를 1증가 시킵니다.
-		String sql = " update notice set readhit = readhit + 1  ";
-		sql += " where no = ? " ;
-		
-		Connection conn = null ;
-		PreparedStatement pstmt = null ;
-		int cnt = -999999 ;
-
-		try {
-			conn = super.getConnection() ;
-			pstmt = conn.prepareStatement(sql) ;
-
-			// placeholder
-			pstmt.setInt(1, no); 
-			
-			cnt = pstmt.executeUpdate() ; 
-			conn.commit(); 
-
-		} catch (Exception e) {
-			SQLException err = (SQLException)e ;			
-			cnt = - err.getErrorCode() ;			
-			e.printStackTrace();
-			try {
-				conn.rollback(); 
-			} catch (Exception e2) {
-				e2.printStackTrace();
-			}
-		} finally{
-			try {
-				if(pstmt != null){pstmt.close();}
-				if(conn != null){conn.close();}
-			} catch (Exception e2) {
-				e2.printStackTrace();
-			}
-		}
-		return cnt ;
-	}
-
-	public int DeleteData(int no) {
-		String sql = " delete from notice where no = ? " ;
+	public int DeleteData(int seq_index) {
+		String sql = " delete from customer_center_post where \"seq_index\" = ? " ;
 		PreparedStatement pstmt = null ;
 		int cnt = -99999 ;
 		try {
 			if( conn == null ){ super.conn = super.getConnection() ; }
 			conn.setAutoCommit( false );
 			pstmt = super.conn.prepareStatement(sql) ;
-			pstmt.setInt(1, no);
+			pstmt.setInt(1, seq_index);
 			
 			cnt = pstmt.executeUpdate() ; 
 			conn.commit(); 

@@ -1,49 +1,33 @@
 package VO;
 
 public class AskedVO {
-	private int no ;
-	private String subject ;
-	private String writer ;
-	private String password ;
-	private String content ;
-	private int readhit ;	
-	private String regdate ;	
-	private String remark ;
-	private int groupno ;
-	private int orderno ;
-	private int depth ;
-	
-	
-	
+	private int seq_index ; 
+	private String category ; 
+	private String title ; 
+	private String content ; 
+	private String id ;
 	@Override
 	public String toString() {
-		return "AskedVO [no=" + no + ", subject=" + subject + ", writer=" + writer + ", password=" + password
-				+ ", content=" + content + ", readhit=" + readhit + ", regdate=" + regdate + ", remark=" + remark
-				+ ", groupno=" + groupno + ", orderno=" + orderno + ", depth=" + depth + "]";
+		return "AskedVO [seq_index=" + seq_index + ", category=" + category + ", title=" + title + ", content="
+				+ content + ", id=" + id + "]";
 	}
-	public int getNo() {
-		return no;
+	public int getSeq_index() {
+		return seq_index;
 	}
-	public void setNo(int no) {
-		this.no = no;
+	public void setSeq_index(int seq_index) {
+		this.seq_index = seq_index;
 	}
-	public String getSubject() {
-		return subject;
+	public String getCategory() {
+		return category;
 	}
-	public void setSubject(String subject) {
-		this.subject = subject;
+	public void setCategory(String category) {
+		this.category = category;
 	}
-	public String getWriter() {
-		return writer;
+	public String getTitle() {
+		return title;
 	}
-	public void setWriter(String writer) {
-		this.writer = writer;
-	}
-	public String getPassword() {
-		return password;
-	}
-	public void setPassword(String password) {
-		this.password = password;
+	public void setTitle(String title) {
+		this.title = title;
 	}
 	public String getContent() {
 		return content;
@@ -51,41 +35,11 @@ public class AskedVO {
 	public void setContent(String content) {
 		this.content = content;
 	}
-	public int getReadhit() {
-		return readhit;
+	public String getId() {
+		return id;
 	}
-	public void setReadhit(int readhit) {
-		this.readhit = readhit;
-	}
-	public String getRegdate() {
-		return regdate;
-	}
-	public void setRegdate(String regdate) {
-		this.regdate = regdate;
-	}
-	public String getRemark() {
-		return remark;
-	}
-	public void setRemark(String remark) {
-		this.remark = remark;
-	}
-	public int getGroupno() {
-		return groupno;
-	}
-	public void setGroupno(int groupno) {
-		this.groupno = groupno;
-	}
-	public int getOrderno() {
-		return orderno;
-	}
-	public void setOrderno(int orderno) {
-		this.orderno = orderno;
-	}
-	public int getDepth() {
-		return depth;
-	}
-	public void setDepth(int depth) {
-		this.depth = depth;
+	public void setId(String id) {
+		this.id = id;
 	}
 	
 	

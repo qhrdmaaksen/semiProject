@@ -25,6 +25,50 @@ int mysearch = 2;
 	<script
 		src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 	<script type="text/javascript">
+	
+		function getaskedlist (seq) {
+			console.log("seq",seq);
+			$.ajax({
+				url:"/SemiProject/dodamdodam?command=cs_center_main_asked&pageNumber="+seq+"&pageSize=10&mode=all&keyword=",
+				type:"get",
+				success: (response) => {
+					var tableForm ="";
+					for(var arr of response){
+						tableForm += 
+						`
+							<tr>
+								<td align="center">
+									<a
+									href="#" onclick="loginCheck(\${arr.seq_index})">
+										\${arr.title}
+									</a>
+								</td>
+								<td>
+									<c:if test="${whologin == 2}">
+										<a
+											href="<%=NoForm%>notice_update&seq_index=\${arr.seq_index}&${parameters}">
+											수정 
+										</a>
+									</c:if>
+								</td>
+								<td>
+									<c:if test="${whologin == 2}">
+										<a
+											href="<%=NoForm %>notice_delete&seq_index=\${arr.seq_index}&${parameters}">
+											삭제 
+										</a>
+									</c:if>
+								</td>
+							</tr>
+						`
+						
+					}
+					$("#askedbody").html("").html(tableForm); 
+				},error: () => {
+					
+				}
+			})
+		}
 		$('#mode option').each(function(index) {
 			if ($(this).val() == '${requestScope.mode}') {
 				$(this).attr('selected', 'selected');
@@ -34,7 +78,7 @@ int mysearch = 2;
 		function writeForm(){
 			location.href='<%=NoForm%>notice_insert';
 		}
-		function loginCheck(no) {
+		function loginCheck(seq_index) {
 			console.log("login check!");
 			console.log(${whologin});
 			if(${whologin} == 0){
@@ -42,7 +86,7 @@ int mysearch = 2;
 				return false;
 			}else {
 				console.log("로그인되어있음");
-				location.href="${NoForm}?command=notice_detailview&no="+no+"&${requestScope.parameters}"; 
+				location.href="${NoForm}?command=notice_detailview&seq_index="+seq_index+"&${requestScope.parameters}"; 
 			}
 		}
 		$('#askedmode option').each(function(index) {
@@ -54,30 +98,16 @@ int mysearch = 2;
 		function askedwriteForm(){
 			location.href='<%=NoForm%>asked_insert';
 		}
-		function askedloginCheck(no) {
+		function askedloginCheck(seq_index) {
 			console.log("login check!");
 			console.log(${whologin});
 			if(${whologin} == 0){
-				alert("로그인이 필요합니다");
+				//alert("로그인이 필요합니다");
 				return false;
 			}else {
 				console.log("로그인되어있음");
-				location.href="${NoForm}?command=asked_detailview&no="+no+"&${requestScope.askedparameters}"; 
+				location.href="${NoForm}?command=asked_detailview&seq_index="+seq_index+"&${requestScope.askedparameters}"; 
 			}
-		}
-		function askedlist(){
-			$.ajax({
-				url:"${pageContext.request.contextPath}/dodamdodam?command=cs_center_main_asked",
-				type:"get",
-				success:function(response){
-					console.log("asked 리스트 가져오기 성공");
-					console.log("${askedlists}");
-				},
-				error: function(){
-					console.log("asked 리스트 가져오기 실패");
-				}
-			})
-			
 		}
 	</script>
 	<style type="text/css">
@@ -119,24 +149,23 @@ int mysearch = 2;
 					<thead class="container">
 						<tr>
 							<td class="col-md-2" align="center">제목</td>
-							<td class="col-md-4" align="right">작성 일자</td>
+							<!-- <td class="col-md-4" align="right">작성 일자</td> -->
 						</tr>
 					</thead>
-					<c:forEach var="bean" items="${requestScope.lists}">
+					<c:forEach var="noticebean" items="${requestScope.lists}">
 						<tr>
 							<td align="center">
-								<c:forEach var="cnt" begin="1" end="${bean.depth}">
-								</c:forEach> 
+							<%-- 	<c:forEach var="cnt" begin="1" end="${bean.depth}">
+								</c:forEach>  --%>
 								<a
-								href="#" onclick="loginCheck(${bean.no})">
-									${bean.subject} 
+								href="#" onclick="loginCheck(${noticebean.seq_index})">
+									${noticebean.title} 
 								</a>
 							</td>
-							<td>${bean.regdate}</td>
 							<td>
 								<c:if test="${whologin == 2}">
 									<a
-										href="<%=NoForm%>notice_update&no=${bean.no}&${requestScope.parameters}">
+										href="<%=NoForm%>notice_update&seq_index=${noticebean.seq_index}&${requestScope.parameters}">
 										수정 
 									</a>
 								</c:if>
@@ -144,7 +173,7 @@ int mysearch = 2;
 							<td>
 								<c:if test="${whologin == 2}">
 									<a
-										href="<%=NoForm %>notice_delete&no=${bean.no}&${requestScope.parameters}">
+										href="<%=NoForm %>notice_delete&seq_index=${noticebean.seq_index}&${requestScope.parameters}">
 										삭제 
 									</a>
 								</c:if>
@@ -159,7 +188,7 @@ int mysearch = 2;
 								<div class="form-group">
 									<select class="form-control" name="mode" id="mode">
 										<option value="all" selected="selected">-- 선택하세요 --
-										<option value="subject">제목
+										<option value="title">제목
 										<option value="content">글 내용
 									</select>
 								</div>
@@ -183,7 +212,7 @@ int mysearch = 2;
 					</tr>
 				</table>
 			<div align="right" style="float: right;" class="container col-md-6">
-				<footer>${requestScope.pagingHtml}</footer>
+				<div>${requestScope.pagingHtml}</div>
 			</div>
 			</div>
 			<div id="menu1" class="container tab-pane fade">
@@ -192,38 +221,38 @@ int mysearch = 2;
 					<thead class="container">
 						<tr>
 							<td class="col-md-2" align="center">제목</td>
-							<td class="col-md-4" align="right">작성 일자</td>
 						</tr>
 					</thead>
-					<c:forEach var="bean" items="${askedlists}">
-						<tr>
-							<td align="center">
-								<c:forEach var="cnt" begin="1" end="${bean.depth}">
-								</c:forEach> 
-								<a
-								href="#" onclick="askedloginCheck(${bean.no})">
-									${bean.subject} 
-								</a>
-							</td>
-							<td>${bean.regdate}</td>
-							<td>
-								<c:if test="${whologin == 2}">
+					<tbody id="askedbody">
+						<c:forEach var="bean" items="${askedlists}">
+							<tr>
+								<td align="center">
+								<%-- 	<c:forEach var="cnt" begin="1" end="${bean.depth}">
+									</c:forEach>  --%>
 									<a
-										href="<%=NoForm%>asked_update&no=${bean.no}&${requestScope.askedparameters}">
-										수정 
+									href="#" onclick="askedloginCheck(${bean.seq_index})">
+										${bean.title} 
 									</a>
-								</c:if>
-							</td>
-							<td>
-								<c:if test="${whologin == 2}">
-									<a
-										href="<%=NoForm %>asked_delete&no=${bean.no}&${requestScope.askedparameters}">
-										삭제 
-									</a>
-								</c:if>
-							</td>
-						</tr>
-					</c:forEach>
+								</td>
+								<td>
+									<c:if test="${whologin == 2}">
+										<a
+											href="<%=NoForm%>asked_update&seq_index=${bean.seq_index}&${requestScope.askedparameters}">
+											수정 
+										</a>
+									</c:if>
+								</td>
+								<td>
+									<c:if test="${whologin == 2}">
+										<a
+											href="<%=NoForm %>asked_delete&seq_index=${bean.seq_index}&${requestScope.askedparameters}">
+											삭제 
+										</a>
+									</c:if>
+								</td>
+							</tr>
+						</c:forEach>
+					</tbody>
 					<tr>
 						<td colspan="2" align="center">
 							<form action="<%=YesForm%>" class="form-inline" name="myform"
@@ -232,7 +261,7 @@ int mysearch = 2;
 								<div class="form-group">
 									<select class="form-control" name="askedmode" id="askedmode">
 										<option value="all" selected="selected">-- 선택하세요 --
-										<option value="subject">제목
+										<option value="title">제목
 										<option value="content">글 내용
 									</select>
 								</div>
@@ -249,14 +278,19 @@ int mysearch = 2;
 										onclick="askedwriteForm();">글 쓰기</button>
 								</c:if>
 								<div style="float: right; margin-top: 2%;" class="col-md-4">
-									<p class="form-control-static">${requestScope.askedpagingStatus}</p>
+									<p class="form-control-static">${askedpagingStatus}</p>
 								</div>
 							</form>
 						</td>
 					</tr>
 				</table>
 				<div align="right" style="float: right;" class="container col-md-6">
-					<footer>${requestScope.askedpagingHtml}</footer>
+					<div>
+						<c:forEach begin="1" end="${(askedlists.size() / 10) +1 }" varStatus="i">
+							<a id="pagingnumcolor" href="#" onclick="getaskedlist(${i.index})">${i.index}</a>
+						</c:forEach>
+					
+					</div>
 				</div>
 			</div>
 			<div id="menu2" class="container tab-pane fade" align="center">

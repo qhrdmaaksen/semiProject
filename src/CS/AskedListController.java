@@ -8,6 +8,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.google.gson.Gson;
+
 import DAO.AskedDAO;
 import VO.AskedVO;
 import common.SuperClass;
@@ -50,16 +52,18 @@ public class AskedListController extends SuperClass{
 		for (AskedVO askedVO : lists) {
 			System.out.println(askedVO.toString());
 		}
-		HttpSession session1 = request.getSession();
-		session1.setAttribute("askedlists", lists);
-		
+		request.setAttribute("askedlists", lists);
 		request.setAttribute("askedpagingHtml", pageInfo.getPagingHtml());
 		request.setAttribute("askedpagingStatus", pageInfo.getPagingStatus());
-		
 		request.setAttribute("askedmode", parameters.getMode());
 		request.setAttribute("askedkeyword", parameters.getKeyword());
-		
 		request.setAttribute("askedparameters", parameters.toString());
+		
+		String json = new Gson().toJson(lists);
+		
+		response.setContentType("application/json;");
+		response.setCharacterEncoding("utf-8");
+		response.getWriter().write(json);
 		
 	}
 	@Override

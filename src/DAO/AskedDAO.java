@@ -19,18 +19,17 @@ public class AskedDAO extends SuperDAO{
 		
 		int cnt = -999999 ; 
 		
-		String sql = " select no, subject, writer, password, content, readhit, regdate, groupno, orderno, depth, remark  " ;
-		sql += " from ( " ;
-		sql += " select no, subject, writer, password, content, readhit, regdate, groupno, orderno, depth, remark,  " ;
-		sql += " rank() over(order by groupno desc, orderno asc) as ranking " ;
-		sql += " from asked " ;
+		String sql = " select \"seq_index\" , \"category\" , \"title\" , \"content\" , \"id\" " ;
+		sql += " from (  select \"seq_index\" , \"category\" , \"title\" , \"content\" , \"id\", " ;
+		sql += " rank() over(order by \"seq_index\" asc) as ranking  from customer_center_qna " ;
+		
 		
 		if(mode.equalsIgnoreCase("all") == false) {
 			sql += " where " + mode + " like '" + keyword + "' " ;  
 		}
 		
 		sql += " ) " ;
-		sql += " where ranking between ?  and ?  " ;
+		sql += " where ranking between ?  and ? " ; 
 		
 		List<AskedVO> lists = new ArrayList<AskedVO>() ;
 		
@@ -45,17 +44,11 @@ public class AskedDAO extends SuperDAO{
 			while ( rs.next()) {
 				AskedVO bean = new AskedVO() ; 
 				
-				bean.setContent(rs.getString("content"));
-				bean.setDepth(rs.getInt("depth"));
-				bean.setGroupno(rs.getInt("groupno"));
-				bean.setNo(rs.getInt("no"));
-				bean.setOrderno(rs.getInt("orderno"));
-				bean.setPassword(rs.getString("password"));
-				bean.setReadhit(rs.getInt("readhit"));
-				bean.setRegdate(String.valueOf(rs.getString("regdate")));
-				bean.setSubject(rs.getString("subject"));
-				bean.setWriter(rs.getString("writer"));
-				bean.setRemark(rs.getString("remark"));
+				bean.setSeq_index(rs.getInt("seq_index")); 
+				bean.setCategory(rs.getString("category")); 				
+				bean.setTitle(rs.getString("title")); 
+				bean.setContent(rs.getString("content")); 				
+				bean.setId(rs.getString("id")); 
 				
 				lists.add(bean) ;
 			}
@@ -85,7 +78,7 @@ public class AskedDAO extends SuperDAO{
 		PreparedStatement pstmt = null ; 
 		ResultSet rs = null ; 
 		
-		String sql = " select count(*) as cnt from asked " ;
+		String sql = " select count(*) as cnt from customer_center_qna " ;
 		if (mode.equalsIgnoreCase("all") == false) {
 			sql += " where " + mode + " like '" + keyword + "' " ;
 		}
@@ -124,9 +117,8 @@ public class AskedDAO extends SuperDAO{
 
 	public int InsertData(AskedVO bean) {
 		// 넘겨진 Bean 데이터를 이용하여 추가합니다.
-		String sql = " insert into asked(no, subject, writer, password, content,  " ;
-		sql += " readhit, regdate, groupno, orderno, depth)  ";		
-		sql += " values(myasked.nextval, ?, ?, ?, ?, default, to_date(?, 'yyyy/MM/dd'), myasked.currval, default, default) " ;
+		String sql = " insert into customer_center_qna(\"seq_index\", \"category\", \"title\", \"content\", \"id\" )  " ;
+		sql += " values(seq_index.nextval, ?, ?, ?, ?) " ;    
 		
 		Connection conn = null ; 
 		PreparedStatement pstmt = null ; 
@@ -137,11 +129,10 @@ public class AskedDAO extends SuperDAO{
 			conn = super.getConnection() ; 
 			pstmt = conn.prepareStatement(sql);
 			
-			pstmt.setString(1, bean.getSubject());
-			pstmt.setString(2, bean.getWriter());
-			pstmt.setString(3, bean.getPassword());
-			pstmt.setString(4, bean.getContent());
-			pstmt.setString(5, bean.getRegdate());
+			pstmt.setString(1, bean.getCategory());
+			pstmt.setString(2, bean.getTitle());
+			pstmt.setString(3, bean.getContent());
+			pstmt.setString(4, bean.getId());
 			
 			cnt = pstmt.executeUpdate() ;
 			conn.commit();
@@ -166,12 +157,12 @@ public class AskedDAO extends SuperDAO{
 		return cnt;
 	}
 
-	public AskedVO SelectDataByPk(int no) {
+	public AskedVO SelectDataByPk(int seq_index) {
 		// 해당 게시물 번호의 Bean 객체를 구합니다.
 		AskedVO bean = null ;
 		
-		String sql = " select * from asked ";
-		sql += " where no = ? " ;
+		String sql = " select * from customer_center_qna ";
+		sql += " where seq_index = ? " ;
 		
 		Connection conn = null ;
 		PreparedStatement pstmt = null ;
@@ -182,24 +173,18 @@ public class AskedDAO extends SuperDAO{
 			pstmt = conn.prepareStatement(sql) ;
 
 			// placeholder		
-			pstmt.setInt(1, no);
+			pstmt.setInt(1, seq_index);
 						
 			rs = pstmt.executeQuery() ;
 			
 			while(rs.next()) {
 				bean = new AskedVO() ;
 				
-				bean.setContent(rs.getString("content")); 				
-				bean.setDepth(rs.getInt("depth")); 
-				bean.setGroupno(rs.getInt("groupno")); 
-				bean.setNo(rs.getInt("no")); 				
-				bean.setOrderno(rs.getInt("orderno")); 				
-				bean.setPassword(rs.getString("password")); 				
-				bean.setReadhit(rs.getInt("readhit")); 				
-				bean.setRegdate(String.valueOf(rs.getDate("regdate"))); 				
-				bean.setSubject(rs.getString("subject")); 
-				bean.setWriter(rs.getString("writer")); 
-				bean.setRemark(rs.getString("remark")); 
+				bean.setSeq_index(rs.getInt("seq_index")); 
+				bean.setCategory(rs.getString("category")); 				
+				bean.setTitle(rs.getString("title")); 
+				bean.setContent(rs.getString("content")); 
+				bean.setId(rs.getString("id")); 
 			}
 			
 		} catch (Exception e) {
@@ -225,9 +210,9 @@ public class AskedDAO extends SuperDAO{
 
 	public int UpdateData(AskedVO bean) {
 		// 해당 게시물을 수정합니다.
-		String sql = " update asked set  ";
-		sql += " content=?, regdate=?, subject=?, writer=?, remark = ? " ;
-		sql += " where no = ? " ;    
+		String sql = " update customer_center_qna set  ";
+		sql += " category=?, title=?, subject=?, content=?, id = ? " ;
+		sql += " where seq_index = ? " ;    
 		Connection conn = null ;
 		PreparedStatement pstmt = null ;
 		int cnt = -999999 ;
@@ -237,14 +222,11 @@ public class AskedDAO extends SuperDAO{
 			pstmt = conn.prepareStatement(sql) ;
 
 			// placeholder
-			pstmt.setString(1, bean.getContent());
-			pstmt.setString(2, bean.getRegdate());
-			pstmt.setString(3, bean.getSubject());
-			pstmt.setString(4, bean.getWriter());
-			
-			pstmt.setString(5, bean.getRemark());
-			
-			pstmt.setInt(6, bean.getNo());
+			pstmt.setInt(1, bean.getSeq_index());
+			pstmt.setString(2, bean.getCategory());
+			pstmt.setString(3, bean.getTitle());
+			pstmt.setString(4, bean.getContent());
+			pstmt.setString(5, bean.getId());
 			
 			cnt = pstmt.executeUpdate() ; 
 			conn.commit(); 
