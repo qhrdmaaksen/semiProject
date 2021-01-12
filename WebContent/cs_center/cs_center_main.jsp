@@ -66,7 +66,6 @@ int mysearch = 2;
 			}
 		}
 		function askedlist(){
-			alert('테스트');
 			$.ajax({
 				url:"${pageContext.request.contextPath}/dodamdodam?command=cs_center_main_asked",
 				type:"get",
@@ -202,7 +201,7 @@ int mysearch = 2;
 								<c:forEach var="cnt" begin="1" end="${bean.depth}">
 								</c:forEach> 
 								<a
-								href="#" onclick="loginCheck(${bean.no})">
+								href="#" onclick="askedloginCheck(${bean.no})">
 									${bean.subject} 
 								</a>
 							</td>
@@ -3004,6 +3003,9 @@ int mysearch = 2;
 					<p align="center">
 						<span>제휴문의: <a href="mailto:rlaalsdn8@naver.com">rlaalsdn8@naver.com</a></span>
 						<span>전화: <a href="tel://010-9255-9798">010-9255-9798</a></span>
+					</p>
+					<p align="center">
+						<span>문자 상담: <a href="sms:010-9255-9798">010-9255-9798</a></span>
 					</p>
 				</address>
 			</div>

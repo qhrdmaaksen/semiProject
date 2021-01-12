@@ -31,20 +31,25 @@
 <body>
 	<div class="container col-sm-offset-<%=myoffset%> col-sm-<%=mywidth%>">
 		<div class="panel panel-default panel-primary">
-			<div class="panel-heading"><h4 align="center">리뷰 수정</h4></div>
+			<div class="panel-heading"><h4 align="center">자주묻는질문 수정</h4></div>
 			<div class="panel-body">
 				<form class="form-horizontal" role="form" action="<%=YesForm%>" method="post">
-					<input type="hidden" name="command" value="previewupdate">
-					<input type="hidden" name="pageNumber" value="${param.pageNumber}">
-					<input type="hidden" name="pageSize" value="${param.pageSize}">
-					<input type="hidden" name="mode" value="${param.mode}">
-					<input type="hidden" name="keyword" value="${param.keyword}">
+					<input type="hidden" name="command" value="asked_update">
+					<input type="hidden" name="no" value="${param.no }">
+					<input type="hidden" name="askedpageNumber" value="${param.askedpageNumber}">
+					<input type="hidden" name="askedpageSize" value="${param.askedpageSize}">
+					<input type="hidden" name="askedmode" value="${param.askedmode}">
+					<input type="hidden" name="askedkeyword" value="${param.askedkeyword}">
 					<div class="form-group">
-						<label class="control-label col-sm-<%=formleft%>" for="no">글번호</label>
-						<div class="col-sm-<%=formright%>">
-							<input type="text" class="form-control" name="fakeno" id="fakeno"								
-								placeholder="글번호" value="${bean.no}" disabled="disabled">
+						<label class="control-label col-sm-<%=formleft%>" for="no"></label>
+						<div class="col-sm-<%=formleft%>">
 							<input type="hidden" name="no" id="no" value="${bean.no}">
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="control-label col-sm-<%=formleft%>" for="subject">글 제목</label>
+						<div class="col-sm-<%=formleft%>">
+							<input type="text" name="subject" id="subject" value="${bean.subject}">
 						</div>
 					</div>
 					<div class="form-group">
@@ -73,12 +78,12 @@
 							<span class="err">${errregdate}
 							</span>
 						</div>
-					</div>	
+					</div>
 					<div class="form-group">
 						<div align="center" class="col-sm-offset-3 col-sm-6">
-							<button class="btn btn-primary" type="submit" onclick="location.href='http://localhost:8989/SemiProject/product/pdetail.jsp'">수정하기</button>
+							<button class="btn btn-primary" type="submit" onclick="location.href='http://localhost:8989/SemiProject/dodamdodam?command=cs_center_main&'">수정하기</button>
 							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-							<button class="btn btn-default" type="reset" onclick="location.href='http://localhost:8989/SemiProject/product/pdetail.jsp'">취소</button>
+							<button class="btn btn-default" type="reset" onclick="location.href='http://localhost:8989/SemiProject/dodamdodam?command=cs_center_main&'">취소</button>
 						</div>
 					</div>
 				</form>

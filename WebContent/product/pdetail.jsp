@@ -249,7 +249,7 @@
 				aria-controls="상품 리뷰" aria-selected="false">상품 리뷰</a></li>
 			<li class="nav-item"><a id="cs-tab01" class="nav-link"
 				data-toggle="tab" href="#cs-main" role="tab" aria-controls="고객 문의"
-				aria-selected="false" onclick="location.href='http://localhost:8989/SemiProject/cs_center/cs_center_main.jsp'">고객 문의</a></li>
+				aria-selected="false" onclick="location.href='http://localhost:8989/SemiProject/dodamdodam?command=cs_center_main&'">고객 문의</a></li>
 			<li class="nav-item"><a id="delivery-info-tab" class="nav-link"
 				data-toggle="tab" href="#delivery-info" role="tab"
 				aria-controls="배송/교환/반품 안내" aria-selected="false">배송/교환/반품 안내</a></li>
@@ -366,10 +366,10 @@
 												<input type="text" class="form-control" name="writer"
 													id="fakewriter" placeholder="작성자"
 													<%-- value="${sessionScope.loginfo.name}(${sessionScope.loginfo.id})" --%>
-													value="김민우"
-													disabled="disabled"> <input type="hidden"
+													value="${sessionScope.loginfo.name}(${sessionScope.loginfo.id})" disabled="disabled"> 
+												<input type="hidden"
 													name="writer" id="writer"
-													value="김민우"
+													value="${sessionScope.loginfo.id}"
 													<%-- value="${sessionScope.loginfo.id}" --%>>
 											</div>
 											<label class="control-label col-sm-12" for="subject">
@@ -423,7 +423,7 @@
 												<span class="err">${errpassword}</span>
 										</div>
 									</div> --%>
-									<input type="hidden" name="id" value="김민우"><!--  세션의 아이디 값 대입 -->
+									<input type="hidden" name="id" value="${sessionScope.loginfo.name}(${sessionScope.loginfo.id}"><!--  세션의 아이디 값 대입 -->
 									<input type="hidden" name='grade' value="0">
 								</form>
 								
@@ -544,14 +544,6 @@
 			</div>
 		</div>
 	</div>
-	<nav id="gojung"
-		class="navbar navbar-light bg-light justify-content-between">
-		<a class="navbar-brand"></a>
-		<form class="form-inline">
-			<button class="gojung2" class="btn btn-outline-success my-2 my-sm-0"
-				type="submit">위로 이동</button>
-		</form>
-	</nav>
 	<br>
 	<br>
 	<br>

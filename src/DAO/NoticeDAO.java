@@ -218,7 +218,6 @@ public class NoticeDAO extends SuperDAO{
 				bean.setRemark(rs.getString("remark")); 
 			}
 			
-			System.out.println("ok");
 		} catch (Exception e) {
 			SQLException err = (SQLException)e ;
 			e.printStackTrace();
