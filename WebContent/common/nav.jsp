@@ -107,15 +107,17 @@
 			<li class="nav-item">
 				<a class="nav-link" href="<%=NoForm%>boList">고객포럼</a>
 			</li>
-			
-			<li class="nav-item dropdown">
+			<li class="nav-item">
+				<a class="nav-link" href="<%=NoForm%>cs_center_main">고객센터</a>
+			</li>
+			<!-- <li class="nav-item dropdown">
 				<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">Dropdown</a>
 				<div class="dropdown-menu">
 					<a class="dropdown-item" href="#">Link 1</a>
 					<a class="dropdown-item" href="#">Link 2</a>
 					<a class="dropdown-item" href="#">Link 3</a>
 				</div>
-			</li>
+			</li> -->
 			<li class="nav-item dropdown">
 				<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">
 				회원<b class="caret"></b></a>

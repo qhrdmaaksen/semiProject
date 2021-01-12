@@ -3,75 +3,142 @@
 
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ include file="./../common/nav.jsp"%>
+ <%@ include file="./../common/nav.jsp"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<%
-	int myoffset = 2;
-	int mywidth = 12 - 2 * myoffset;
-	int formleft = 3 ;
-	int formright = 12 - formleft ;
-%>
+
 <script type="text/javascript">
-	function cartEdit(num) { /* 해당 상품에 대한 주문 수량 수정 */
-		var stock = document.getElementById("stock").value;
-		location.href = "mallCartEdit.jsp?num=" + num + "&stock=" + stock;
-	}
+
 </script>
+
+<style type="text/css">
+	body {
+	  background: #eecda3;
+	  background: -webkit-linear-gradient(to bottom, #FAEBD7, #DEB887);
+	  background: linear-gradient(to bottom, #FAEBD7, #DEB887);
+	  min-height: 100vh;
+	}
+	.red{
+	  text: red;
+	}
+</style>
+
 </head>
 <body>
-	<div class="container col-sm-offset-<%=myoffset%> col-sm-<%=mywidth%>">
-		<div class="panel panel-default panel-primary">
-			<div class="panel-heading">
-				<h4>장바구니 보기</h4>
-			</div>
-			<table class="table table-striped table-hover">
-				<thead>
-					<tr>
-						<th class="text-center">번호</th>
-						<th class="text-center">상품명</th>
-						<th class="text-center">수량</th>
-						<th class="text-center">단가</th>
-						<th class="text-center">삭제</th>
-					</tr>
-				</thead>
-				<c:forEach items="${sessionScope.shoplists}" var="shopinfo">
-					<tr>
-						<td align="center" valign="middle">${shopinfo.productcode}</td>
-						<td align="center" valign="middle">
-							<%-- <c:if test="${applicationScope.debugMode == true}">
+<div class="px-4 px-lg-0">
+  <!-- For demo purpose -->
+  <div class="container text-#8B4513 py-5 text-center">
+  	<h3>Shopping Cart</h3>
+  </div>
+  <!-- End -->
+
+  <div class="pb-5">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12 p-5 bg-white rounded shadow-sm mb-5">
+
+          <!-- Shopping cart table -->
+          <div class="table-responsive">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th scope="col" class="border-0 bg-light">
+                    <div class="p-2 px-3 text-uppercase">Product</div>
+                  </th>
+                  <th scope="col" class="border-0 bg-light">
+                    <div class="py-2 text-uppercase">Price</div>
+                  </th>
+                  <th scope="col" class="border-0 bg-light">
+                    <div class="py-2 text-uppercase">Quantity</div>
+                  </th>
+                  <th scope="col" class="border-0 bg-light">
+                    <div class="py-2 text-uppercase">Remove</div>
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+              
+              <c:forEach items="${sessionScope.shoplists}" var="shopinfo">
+                <tr>
+                  <th scope="row" class="border-0">
+                    <div class="p-2">
+                     <c:if test="${applicationScope.debugMode == true}">
 								이미지 경로<br>${applicationScope.uploadedPath}/${shopinfo.images}
-							</c:if> --%>
-							<img align="middle"
-								src="${applicationScope.uploadedPath}/${shopinfo.images}" class="img-rounded"
-								width="36" height="36"> <br>${shopinfo.productname}</td>
-						<td align="center">${shopinfo.qty} 개</td>
-						<td align="center"><fmt:formatNumber value="${shopinfo.productprice}" pattern="###,###"/> 원</td>
-						<td align="center"><fmt:formatNumber value="${shopinfo.qty * shopinfo.productprice}" pattern="###,###"/> 원</td>
-						<td align="center">
-							<a href="<%=NoForm%>mallcartdelete&productcode=${shopinfo.productcode}">
-								삭제
+							</c:if>
+							<img src="${applicationScope.uploadedPath}/${shopinfo.images}" alt="" width="70" class="img-fluid rounded shadow-sm">
+                      <div class="ml-3 d-inline-block align-middle">
+                        <h5 class="mb-0"> <a href="#" class="text-dark d-inline-block align-middle">
+                        ${shopinfo.productname}</a></h5>
+                        <span class="text-muted font-weight-normal font-italic d-block">Category: Watches</span>
+                      </div>
+                    </div>
+                  </th>
+                  <td class="border-0 align-middle"><strong>
+					￦<fmt:formatNumber value="${shopinfo.productprice}" pattern="###,###"/>
+					</strong></td>
+                  <td class="border-0 align-middle"><strong>${shopinfo.qty}</strong></td>
+                  <td class="border-0 align-middle">
+                  <a href="<%=NoForm%>mallcartdelete&productcode=${shopinfo.productcode}" type="button" class="card-link-secondary small text-uppercase mr-3"><i
+                        class="fas fa-trash-alt mr-1"></i>
+								Delete
 							</a>
-						</td> 
-					</tr>
-				</c:forEach>
-				<tr class="header">
-			<td colspan="4" align="center">
-				<a href="<%=NoForm%>plist">결재하기</a>
-				&nbsp;&nbsp; 
-				<a href="<%=NoForm%>plist">추가 주문</a>
-			</td>
-			<td colspan="4" align="center">
-				총 금액 : <fmt:formatNumber value="${sessionScope.totalAmount}" pattern="###,###"/> 원
-				&nbsp;
-				총 누적 포인트 : <fmt:formatNumber value="${sessionScope.totalAmount}" pattern="###,###"/> 원
-			</td>
-		</tr>
-			</table>
-		</div>
-	</div>
+                  <!-- <a href="#" class="text-dark"><i class="fa fa-trash"></i> </a>--></td>
+                </tr>
+                
+              </c:forEach>  
+     
+                
+              </tbody>
+            </table>
+          </div>
+          <!-- End -->
+        </div>
+      </div>
+
+      <div class="row py-5 p-4 bg-white rounded shadow-sm">
+        <div class="col-lg-6">
+          <div class="bg-light rounded-pill px-4 py-3 text-uppercase font-weight-bold">Coupon code</div>
+          <div class="p-4">
+            <p class="font-italic mb-4">If you have a coupon code, please enter it in the box below</p>
+            <div class="input-group mb-4 border rounded-pill p-2">
+              <input type="text" placeholder="Apply coupon" aria-describedby="button-addon3" class="form-control border-0">
+              <div class="input-group-append border-0">
+                <button id="button-addon3" type="button" class="btn btn-dark px-4 rounded-pill"><i class="fa fa-gift mr-2"></i>Apply coupon</button>
+              </div>
+            </div>
+          </div>
+          
+        </div>
+        <div class="col-lg-6">
+          <div class="bg-light rounded-pill px-4 py-3 text-uppercase font-weight-bold">Order summary </div>
+          <div class="p-4">
+            <p class="font-italic mb-4">총 구매금액이 50,000원 이상 일 경우 배송비가 부과되지 않습니다.</p>
+            <ul class="list-unstyled mb-4">
+              <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">Pre-discount totalamount </strong><strong>
+              	￦<fmt:formatNumber value="${sessionScope.totalAmount*1.2}" pattern="###,###"/>
+              	</strong></li>
+              <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">Shipping and handling</strong>
+              <c:if test="${sessionScope.totalAmount>=50000}">
+          		<strong>￦<fmt:formatNumber value="0" pattern="###,###"/>
+              </c:if>
+              <c:if test="${sessionScope.totalAmount<50000}"> ￦<fmt:formatNumber value="3000" pattern="###,###"/></c:if>
+              	<%-- ￦<fmt:formatNumber value="2500" pattern="###,###"/> --%></strong></li>
+              <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">Discount</strong><strong id="red">
+              	￦<fmt:formatNumber value="${sessionScope.totalAmount*1.2-totalAmount}" pattern="###,###"/>
+              	</strong></li>
+              <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">Total</strong>
+                <h5 class="font-weight-bold">￦<fmt:formatNumber value="${sessionScope.totalAmount}" pattern="###,###"/></h5>
+              </li>
+            </ul><a href="#" class="btn btn-dark rounded-pill py-2 btn-block">Procceed to checkout</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
 </body>
 </html>
