@@ -1,6 +1,10 @@
 /CS/
 /DAO/
 /Mall/
+<<<<<<< HEAD
+/shopping/
+/VO/
+=======
 /VO/
 /board/
 /common/
@@ -8,3 +12,4 @@
 /product/
 /shopping/
 /utility/
+>>>>>>> 7a303409e917fbdac92522841d8622c4cab4f71f

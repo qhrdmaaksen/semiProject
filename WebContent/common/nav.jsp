@@ -95,7 +95,7 @@
 		<ul class="navbar-nav">
 
 			<li class="nav-item">
-				<a class="nav-link" href="<%=NoForm%>index">
+				<a class="nav-link" href="<%=NoForm%>survey">
 				추천 받기</a>
 			</li>
 			<li class="nav-item">
@@ -104,9 +104,11 @@
 			<li class="nav-item">
 				<a class="nav-link" href="<%=NoForm%>mallcartlist">장바구니</a>
 			</li>
+			<c:if test="${whologin == 1}">
 			<li class="nav-item">
 				<a class="nav-link" href="<%=NoForm%>boList">고객포럼</a>
 			</li>
+			</c:if>
 			<li class="nav-item">
 				<a class="nav-link" href="<%=NoForm%>cs_center_main">고객센터</a>
 			</li>
