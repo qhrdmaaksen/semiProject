@@ -4,6 +4,10 @@
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
  <%@ include file="./../common/nav.jsp"%>
+ <%
+ 	double dis = 0.8;
+ 
+ %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,7 +15,6 @@
 <title>Insert title here</title>
 
 <script type="text/javascript">
-
 </script>
 
 <style type="text/css">
@@ -31,7 +34,7 @@
 <div class="px-4 px-lg-0">
   <!-- For demo purpose -->
   <div class="container text-#8B4513 py-5 text-center">
-  	<h3>Shopping Cart</h3>
+  	<h3><i class="fas fa-dolly"></i>Shopping Cart</h3>
   </div>
   <!-- End -->
 
@@ -118,19 +121,23 @@
             <p class="font-italic mb-4">총 구매금액이 50,000원 이상 일 경우 배송비가 부과되지 않습니다.</p>
             <ul class="list-unstyled mb-4">
               <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">Pre-discount totalamount </strong><strong>
-              	￦<fmt:formatNumber value="${sessionScope.totalAmount*1.2}" pattern="###,###"/>
+              	￦<fmt:formatNumber value="${sessionScope.totalAmount}" pattern="###,###"/>
               	</strong></li>
               <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">Shipping and handling</strong>
-              <c:if test="${sessionScope.totalAmount>=50000}">
-          		<strong>￦<fmt:formatNumber value="0" pattern="###,###"/>
+              <c:if test="${sessionScope.totalAmount*0.8>=50000}">
+          		<strong>
+          		<span class="text-grey"><s>
+            ￦<fmt:formatNumber value="3000" pattern="###,###"/>
+            </s></span>
+            ￦<fmt:formatNumber value="0" pattern="###,###"/>
               </c:if>
               <c:if test="${sessionScope.totalAmount<50000}"> ￦<fmt:formatNumber value="3000" pattern="###,###"/></c:if>
-              	<%-- ￦<fmt:formatNumber value="2500" pattern="###,###"/> --%></strong></li>
+              	</strong></li>
               <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">Discount</strong><strong id="red">
-              	￦<fmt:formatNumber value="${sessionScope.totalAmount*1.2-totalAmount}" pattern="###,###"/>
+              	￦<fmt:formatNumber value="${sessionScope.totalAmount*(1-0.8)}" pattern="###,###"/>
               	</strong></li>
               <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">Total</strong>
-                <h5 class="font-weight-bold">￦<fmt:formatNumber value="${sessionScope.totalAmount}" pattern="###,###"/></h5>
+                <h5 class="font-weight-bold">￦<fmt:formatNumber value="${sessionScope.totalAmount*0.8}" pattern="###,###"/></h5>
               </li>
             </ul><a href="#" class="btn btn-dark rounded-pill py-2 btn-block">Procceed to checkout</a>
           </div>

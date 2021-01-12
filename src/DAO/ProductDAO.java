@@ -20,7 +20,8 @@ public class ProductDAO extends SuperDAO{
 			String sql = " select count(*) as cnt from products " ;
 			
 			if(mode.equalsIgnoreCase("all") == false) {
-				sql += " where \" " + mode + " \" like '" + keyword + "'" ;	
+				//sql += " where \"" + mode + "\" like '" + keyword + "'" ;	
+				sql += " where \" " + mode + " \" like '" + keyword + "'" ;
 			}		
 			
 			int cnt = -999999 ;
@@ -72,14 +73,14 @@ public class ProductDAO extends SuperDAO{
 			sql += " rank() over(order by \"productcode\" desc) as ranking " ;
 			sql += " from products " ;
 			
-			/*
-			 * if(mode.equalsIgnoreCase("all") == false) { sql += " where " + mode +
-			 * " like '" + keyword + "'" ; }
-			 */
-			
+			 if(mode.equalsIgnoreCase("all") == false) { 
+				 sql += " where \"" + mode + "\" like '" + keyword + "'" ;
+				 }
+			 
 			sql += " )  " ;
 			sql += " where ranking between ? and ? " ;
 			
+			System.out.println(sql);
 			List<ProductVO> lists = new ArrayList<ProductVO>();
 
 			try {

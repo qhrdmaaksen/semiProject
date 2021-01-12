@@ -19,7 +19,7 @@ public class PdetailController extends SuperClass{
 	
 	@Override
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int num = Integer.parseInt(request.getParameter("seq.index"));
+		int num = Integer.parseInt(request.getParameter("productcode"));
 		System.out.println("doGet 호출");
 		super.doGet(request, response);
 	}

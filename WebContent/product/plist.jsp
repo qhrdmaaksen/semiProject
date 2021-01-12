@@ -18,15 +18,34 @@
 	  background: linear-gradient(to bottom, #FAEBD7, #DEB887);
 	  min-height: 100vh;
 	}
+	section{
+	padding: 50px;
+	}
+	div .ta{
+	padding: 50px;
+	}
 </style>
 
-<script type="text/javascript">
+	<script type="text/javascript">
+		function writeForm(){
+			location.href='<%=NoForm%>prInsert';
+		}
+		function search(){
+			if( $('#mode').val() == 'all' ){
+				alert('검색 목록을 선택해주세요') ;				
+			}
+		}
+		function searchAll(){
+			location.href='<%=NoForm%>prList';
+		}
 	
-</script>
+	</script>
 
 	
 </head>
 <body >
+
+
 
   <div class="container text-#8B4513 py-5 text-center">
   	<h3>Product List</h3>
@@ -66,10 +85,10 @@
           <hr>
           <h6 class="mb-3">
             <span class="text-danger mr-1">
-            ￦<fmt:formatNumber value="${bean.productprice}" pattern="###,###"/>
+            ￦<fmt:formatNumber value="${bean.productprice*0.8}" pattern="###,###"/>
             </span>
             <span class="text-grey"><s>
-            ￦<fmt:formatNumber value="${bean.productprice*1.2}" pattern="###,###"/>
+            ￦<fmt:formatNumber value="${bean.productprice}" pattern="###,###"/>
             </s></span>
           </h6>
           <%-- <h6 class="mb-3">${bean.productprice}</h6> --%>
@@ -84,10 +103,16 @@
              			 class="fas fa-shopping-cart pr-2"></i>Add to cart</button> -->
 						<button type="submit" class="btn btn-primary btn-sm mr-1 mb-2">Add to cart</button>
 					</form>
-			<form class="form-inline" role="form" name="myform" action="<%=YesForm%>" method="get">
+			<form class="form-inline" role="form" name="myform" action="<%=YesForm%>" method="post">
+			
 				<input type="hidden" name="command" value="pdetail">
-             <button type="button" class="btn btn-light btn-sm mr-1 mb-2"><i
-              class="fas fa-info-circle pr-2"></i>Details</button>         
+				<a href="<%=NoForm%>pdetail&productcode=${bean.productcode}&${requestScope.parameters}">
+					<button type="button" class="btn btn-light btn-sm mr-1 mb-2"><i
+            		  class="fas fa-info-circle pr-2"></i>Details</button> 		
+							<%-- ${bean.name} --%>
+						</a>
+             <!-- <button type="button" class="btn btn-light btn-sm mr-1 mb-2"><i
+              class="fas fa-info-circle pr-2"></i>Details</button>     -->     
          </form>
          
     
@@ -105,6 +130,7 @@
 </div>
 
 
+
 <br><br><br>
 
 
@@ -117,25 +143,78 @@
 				<div class="form-group">
 					<select class="form-control" name="mode" id="mode">
 						<option value="all" selected="selected">-- 선택하세요---------
-						<option value="name">상품명
-						<option value="company">제조회사									
-						<option value="category">카테고리									
+						<option value="productname">상품명
+						<!-- <option value="company">제조회사									
+						<option value="category">카테고리				 -->					
 					</select>
 				</div>
 				<div class="form-group">
 					<input type="text" class="form-control btn-xs" name="keyword"
 						id="keyword" placeholder="검색 키워드">
 				</div>
+				
 					<button class="btn btn-default btn-warning" type="submit" onclick="search();">검색</button>
 					<button class="btn btn-default btn-warning" type="button" onclick="searchAll();">전체 검색</button>
+					
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<div class="container">
+			  <form action="/action_page.php">
+			
+			      <label class="form-check-label" for="radio1">
+			        <input type="radio" class="form-check-input" id="radio1" name="optradio" value="option1" checked>눈
+			      </label>
+			 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			
+			      <label class="form-check-label" for="radio2">
+			        <input type="radio" class="form-check-input" id="radio2" name="optradio" value="option2">혈액순환
+			      </label>
+			   
+			 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			       <label class="form-check-label" for="radio3">
+			        <input type="radio" class="form-check-input" id="radio3" name="optradio" value="option3">소화기관
+			      </label>
+			     
+			 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			       <label class="form-check-label" for="radio4">
+			        <input type="radio" class="form-check-input" id="radio4" name="optradio" value="option4">피부
+			      </label>
+			      
+			 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			       <label class="form-check-label" for="radio5">
+			        <input type="radio" class="form-check-input" id="radio5" name="optradio" value="option5">피로
+			      </label>
+			      
+			 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			       <label class="form-check-label" for="radio6">
+			        <input type="radio" class="form-check-input" id="radio6" name="optradio" value="option6">관절
+			      </label>
+			      
+			 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			       <label class="form-check-label" for="radio7">
+			        <input type="radio" class="form-check-input" id="radio7" name="optradio" value="option7">머릿결,손톱
+			      </label>
+			      
+			 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			       <label class="form-check-label" for="radio8">
+			        <input type="radio" class="form-check-input" id="radio8" name="optradio" value="option8">면역
+			      </label>
+			   
+			    <button type="submit" class="btn btn-primary">Submit</button>
+			  </form>
+			</div>			
+					
+					
 							
 				<c:if test="${whologin == 2}">
 					<button class="btn btn-default btn-info" type="button"
 						onclick="writeForm();">상품 등록</button>
 				</c:if>
 								
-								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-					<p class="form-control-static">${requestScope.pagingStatus}</p>
+				<%-- 				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					<p class="form-control-static">${requestScope.pagingStatus}</p> --%>
 			</form>
 		</td>
 	</tr>				
@@ -146,7 +225,8 @@
 				<div align="center">
 			<footer>${requestScope.pagingHtml}</footer>
 		</div>		
-		
+	</div>		
+</section>	
 
 
 
