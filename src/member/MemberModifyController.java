@@ -9,6 +9,7 @@ import java.util.regex.Pattern;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import DAO.MemberDAO;
 import VO.MemberVO;
@@ -21,8 +22,10 @@ public class MemberModifyController extends SuperClass{
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		
-		String id = request.getParameter("id");
-		
+		HttpSession session = request.getSession();
+        MemberVO tem = (MemberVO)session.getAttribute("loginfo");
+        
+		String id = tem.getId();
 		MemberDAO dao = new MemberDAO();
 		
 		// bean 객체 : 로그인 한 사람의 정보

@@ -46,7 +46,7 @@
 					</div>
 					
 					<div class="form-group">
-						<label class="control-label col-sm-<%=formleft%>" for="image">이미지</label>
+						<label class="control-label col-sm-<%=formleft%>" for="image">사진</label>
 						<div class="col-sm-<%=formright%>">
 							<input type="file" class="form-control" name="image"
 								id="image" placeholder="">

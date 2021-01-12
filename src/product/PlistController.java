@@ -65,7 +65,7 @@ public class PlistController extends SuperClass{
 		request.setAttribute("parameters", parameters.toString());		
 		
 		super.doGet(request, response);
-		
+		System.out.println("왜 안나와" + request.getAttribute("mode"));
 		String gotopage = "product/plist.jsp" ;
 		super.GotoPage(gotopage);
 	}

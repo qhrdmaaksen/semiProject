@@ -27,6 +27,7 @@ public class PdetailController extends SuperClass{
 	
 	@Override
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+<<<<<<< HEAD
 		int num = Integer.parseInt(request.getParameter("seq.index"));
 		ProductDAO pdao = new ProductDAO();
 		
@@ -40,6 +41,9 @@ public class PdetailController extends SuperClass{
 			gotopage = "/product/plist.jsp";
 		}
 		
+=======
+		int num = Integer.parseInt(request.getParameter("productcode"));
+>>>>>>> 418ec792e093c3ea074f0e9deffccd6fabf3db86
 		System.out.println("doGet 호출");
 		super.doGet(request, response);
 		super.GotoPage(gotopage);
