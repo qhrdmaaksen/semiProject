@@ -77,7 +77,7 @@ public class NoticeDAO extends SuperDAO{
 		
 		String sql = " select \"seq_index\" , \"category\" , \"title\" , \"content\" , \"id\" " ;
 		sql += " from (  select \"seq_index\" , \"category\" , \"title\" , \"content\" , \"id\", " ;
-		sql += " rank() over(order by \"seq_index\" asc) as ranking  from customer_center_post  " ;
+		sql += " rank() over(order by \"seq_index\" desc) as ranking  from customer_center_post  " ;
 		
 		if(mode.equalsIgnoreCase("all") == false) {
 			sql += " where " + mode + " like '" + keyword + "' " ;  

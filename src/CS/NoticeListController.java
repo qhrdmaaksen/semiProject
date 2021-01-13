@@ -105,9 +105,6 @@ public class NoticeListController extends SuperClass{
 				askedparameters.getMode(),
 				askedparameters.getKeyword() + "%");
 		
-		for (AskedVO askedVO : askedlists) {
-			System.out.println(askedVO.toString());
-		}
 		request.setAttribute("askedlists", askedlists);
 		request.setAttribute("askedpagingHtml", askedpageInfo.getPagingHtml());
 		request.setAttribute("askedpagingStatus", askedpageInfo.getPagingStatus());
