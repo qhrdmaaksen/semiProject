@@ -32,8 +32,8 @@ public class Addaddresscontroller extends SuperClass {
 	
 		bean  = new AddressVo();
 		//bean.setNo(no); //�������� �ʿ� ����
-		bean.setAddress1(request.getParameter("address1"));
-		bean.setAddress2(request.getParameter("address2"));
+		bean.setAddress1(request.getParameter("sample4_roadAddress"));
+		bean.setAddress2(request.getParameter("sample4_jibunAddress"));
 		bean.setId(request.getParameter("id"));
 		bean.setName(request.getParameter("name"));
 		bean.setPhone(Integer.parseInt(request.getParameter("phone")));
