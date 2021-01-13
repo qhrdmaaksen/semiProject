@@ -12,7 +12,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Shopping Cart</title>
 
 <script type="text/javascript">
 </script>
@@ -34,7 +34,7 @@
 <div class="px-4 px-lg-0">
   <!-- For demo purpose -->
   <div class="container text-#8B4513 py-5 text-center">
-  	<h3><i class="fas fa-dolly"></i>Shopping Cart</h3>
+  	<h3><i class="fas fa-shopping-cart"></i>   Shopping Cart</h3>
   </div>
   <!-- End -->
 
@@ -123,7 +123,7 @@
               <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">Pre-discount totalamount </strong><strong>
               	￦<fmt:formatNumber value="${sessionScope.totalAmount}" pattern="###,###"/>
               	</strong></li>
-              <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">Shipping and handling</strong>
+              <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted"><i class="fas fa-shipping-fast"></i>  Shipping and handling</strong>
               <c:if test="${sessionScope.totalAmount*0.8>=50000}">
           		<strong>
           		<span class="text-grey"><s>

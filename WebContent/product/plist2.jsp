@@ -19,10 +19,9 @@
 	  min-height: 100vh;
 	}
 	section{
-	padding-left: 130px;
-	padding-right: 50px;
+	padding: 50px;
 	}
-	
+
 </style>
 
 	<script type="text/javascript">
@@ -35,52 +34,14 @@
 			}
 		}
 		function searchAll(){
-			location.href='<%=NoForm%>prList';
+			location.href='<%=NoForm%>plist';
 		}
 	
 	</script>
 
-	
+
 </head>
-
-
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<body >
-
-<div class="w3-sidebar w3-bar-block w3-yellow w3-xxlarge" style="width:70px">
-
-
- <a href="<%=NoForm%>pcategorylist&mode=eyes&${requestScope.parameters}"> 
-							<i class="fa fa-home"></i>
-						</a> 
- <a href="<%=NoForm%>pcategorylist&mode=&bloodcirculation${requestScope.parameters}"> 
-							<i class="fa fa-home"></i>
-						</a> 
- <a href="<%=NoForm%>pcategorylist&mode=digestiveapparatus&${requestScope.parameters}"> 
-							<i class="fa fa-home"></i>
-						</a> 						
- <a href="<%=NoForm%>pcategorylist&mode=skin&${requestScope.parameters}"> 
-							<i class="fa fa-home"></i>
-						</a> 						
- <a href="<%=NoForm%>pcategorylist&mode=eyes&${requestScope.parameters}"> 
-							<i class="fa fa-home"></i>
-						</a> 
- <a href="<%=NoForm%>pcategorylist&mode=fatigue&${requestScope.parameters}"> 
-							<i class="fa fa-home"></i>
-						</a> 				
- <a href="<%=NoForm%>pcategorylist&mode=joint&${requestScope.parameters}"> 
-							<i class="fa fa-home"></i>
-						</a> 								
- <a href="<%=NoForm%>pcategorylist&mode=hair&${requestScope.parameters}"> 
-							<i class="fa fa-home"></i>
-						</a> 								
- <a href="<%=NoForm%>pcategorylist&mode=immunity&${requestScope.parameters}"> 
-							<i class="fa fa-home"></i>
-						</a> 																					
-  
-</div>
+<body>
 
 
 
@@ -97,75 +58,61 @@
 
   <!-- Grid row -->
   <div class="row">
-<c:forEach var="bean" items="${requestScope.lists}">
-    <!-- Grid column -->
-    <div class="col-md-3 mb-3">
- 
-      <!-- Card -->
-      <div class="">
-
-          <a href="#!">
-            <div class="mask">
-            <img src="${applicationScope.uploadedPath}/${bean.images}"
-										class="img-fluid w-100" width="200" height="300"
-										alt="${bean.images}">
-            
-              <!-- <img class="img-fluid w-100"
-                src="https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Vertical/12.jpg"> -->
-              <div class="mask rgba-black-slight"></div>
-            </div>
-          </a>
-
-        <div class="text-center pt-3">
-
-          <h5>${bean.productname}</h5>
-          <p class="mb-2 text-muted text-uppercase small">Shirts</p>
-
-          <hr>
-          <h6 class="mb-3">
-            <span class="text-danger mr-1">
-            ￦<fmt:formatNumber value="${bean.productprice*0.8}" pattern="###,###"/>
-            </span>
-            <span class="text-grey"><s>
-            ￦<fmt:formatNumber value="${bean.productprice}" pattern="###,###"/>
-            </s></span>
-          </h6>
-          <%-- <h6 class="mb-3">${bean.productprice}</h6> --%>
-         		 <form class="form-inline" role="form" method="post" action="<%=YesForm%>">
-						<div class="form-group">
-							<input type="hidden" name="command" value="mallcartadd">
-							<input type="hidden" name="productcode" value="${bean.productcode}">
-							<input type="hidden" name="stock" value="${bean.stock}">
-							<input type="hidden" name="qty" value="1">         
-						</div>
-						<!-- <button type="submit" class="btn btn-primary btn-sm mr-1 mb-2"><i
-             			 class="fas fa-shopping-cart pr-2"></i>Add to cart</button> -->
-						<button type="submit" class="btn btn-primary btn-sm mr-1 mb-2">Add to cart</button>
-					</form>
-			<form class="form-inline" role="form" name="myform" action="<%=YesForm%>" method="post">
-			
-				<input type="hidden" name="command" value="pdetail">
-				<a href="<%=NoForm%>pdetail&productcode=${bean.productcode}&${requestScope.parameters}">
-					<button type="button" class="btn btn-light btn-sm mr-1 mb-2"><i
-            		  class="fas fa-info-circle pr-2"></i>Details</button> 		
-							<%-- ${bean.name} --%>
-						</a>
-             <!-- <button type="button" class="btn btn-light btn-sm mr-1 mb-2"><i
-              class="fas fa-info-circle pr-2"></i>Details</button>     -->     
-         </form>
-         
-    
-        </div>
-
-      </div>
-      <!-- Card -->
-
-
-    </div>
-    <!-- Grid column -->
-
-</c:forEach>
-
+		<c:forEach var="bean" items="${requestScope.lists}">
+		    <!-- Grid column -->
+		    <div class="col-md-3 mb-3">
+		 
+		      <!-- Card -->
+		      <div class="">
+		
+		          <a href="#!">
+		            <div class="mask">
+		            <img src="${applicationScope.uploadedPath}/${bean.images}"
+												class="img-fluid w-100" width="200" height="300"
+												alt="${bean.images}">
+		            
+		              <div class="mask rgba-black-slight"></div>
+		            </div>
+		          </a>
+		
+		        <div class="text-center pt-3">
+		
+		          <h5>${bean.productname}</h5>
+		          <p class="mb-2 text-muted text-uppercase small">Shirts</p>
+		
+		          <hr>
+		          <h6 class="mb-3">
+		            <span class="text-danger mr-1">
+		            ￦<fmt:formatNumber value="${bean.productprice*0.8}" pattern="###,###"/>
+		            </span>
+		            <span class="text-grey"><s>
+		            ￦<fmt:formatNumber value="${bean.productprice}" pattern="###,###"/>
+		            </s></span>
+		          </h6>
+		          <%-- <h6 class="mb-3">${bean.productprice}</h6> --%>
+		         		 <form class="form-inline" role="form" method="post" action="<%=YesForm%>">
+								<div class="form-group">
+									<input type="hidden" name="command" value="mallcartadd">
+									<input type="hidden" name="productcode" value="${bean.productcode}">
+									<input type="hidden" name="stock" value="${bean.stock}">
+									<input type="hidden" name="qty" value="1">         
+								</div>
+								<button type="submit" class="btn btn-primary btn-sm mr-1 mb-2">Add to cart</button>
+							</form>
+					<form class="form-inline" role="form" name="myform" action="<%=YesForm%>" method="post">
+					
+						<input type="hidden" name="command" value="pdetail">
+						<a href="<%=NoForm%>pdetail&productcode=${bean.productcode}&${requestScope.parameters}">
+							<button type="button" class="btn btn-light btn-sm mr-1 mb-2">
+							<i class="fas fa-info-circle pr-2"></i>Details</button> 		
+								</a>
+		         </form>
+		        </div>
+		      </div>
+		      <!-- Card -->
+		    </div>
+		    <!-- Grid column -->
+		</c:forEach>	
 </div>
 
 
@@ -194,7 +141,6 @@
 				
 					<button class="btn btn-default btn-warning" type="submit" onclick="search();">검색</button>
 					<button class="btn btn-default btn-warning" type="button" onclick="searchAll();">전체 검색</button>
-					
 		</td>
 	</tr>
 	<tr>
@@ -245,13 +191,11 @@
 			  </form>
 			</div>			
 					
-					
 							
 				<c:if test="${whologin == 2}">
 					<button class="btn btn-default btn-info" type="button"
 						onclick="writeForm();">상품 등록</button>
 				</c:if>
-								
 				<%-- 				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 					<p class="form-control-static">${requestScope.pagingStatus}</p> --%>
 			</form>
@@ -259,14 +203,12 @@
 	</tr>				
 </table>	
 		<br><br>
-					
 					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 				<div align="center">
 			<footer>${requestScope.pagingHtml}</footer>
 		</div>		
 	</div>		
 </section>	
-
 
 
 <br><br>
