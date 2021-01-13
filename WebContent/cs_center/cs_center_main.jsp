@@ -27,7 +27,6 @@ int mysearch = 2;
 	<script type="text/javascript">
 	
 		function getaskedlist (seq) {
-			console.log("seq",seq);
 			$.ajax({
 				url:"/SemiProject/dodamdodam?command=cs_center_main_asked&pageNumber="+seq+"&pageSize=10&mode=all&keyword=",
 				type:"get",

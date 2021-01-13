@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import VO.AskedVO;
-import VO.NoticeVO;
 
 public class AskedDAO extends SuperDAO{
 
@@ -21,7 +20,7 @@ public class AskedDAO extends SuperDAO{
 		
 		String sql = " select \"seq_index\" , \"category\" , \"title\" , \"content\" , \"id\" " ;
 		sql += " from (  select \"seq_index\" , \"category\" , \"title\" , \"content\" , \"id\", " ;
-		sql += " rank() over(order by \"seq_index\" asc) as ranking  from customer_center_qna " ;
+		sql += " rank() over(order by \"seq_index\" desc) as ranking  from customer_center_qna " ;
 		
 		
 		if(mode.equalsIgnoreCase("all") == false) {
@@ -162,7 +161,7 @@ public class AskedDAO extends SuperDAO{
 		AskedVO bean = null ;
 		
 		String sql = " select * from customer_center_qna ";
-		sql += " where seq_index = ? " ;
+		sql += " where \"seq_index\" = ? " ;
 		
 		Connection conn = null ;
 		PreparedStatement pstmt = null ;
@@ -211,8 +210,8 @@ public class AskedDAO extends SuperDAO{
 	public int UpdateData(AskedVO bean) {
 		// 해당 게시물을 수정합니다.
 		String sql = " update customer_center_qna set  ";
-		sql += " category=?, title=?, subject=?, content=?, id = ? " ;
-		sql += " where seq_index = ? " ;    
+		sql += " \"category\"=?, \"title\"=? , \"content\"=?, \"id\"= ? " ;
+		sql += " where \"seq_index\"= ? " ;    
 		Connection conn = null ;
 		PreparedStatement pstmt = null ;
 		int cnt = -999999 ;
@@ -222,12 +221,11 @@ public class AskedDAO extends SuperDAO{
 			pstmt = conn.prepareStatement(sql) ;
 
 			// placeholder
-			pstmt.setInt(1, bean.getSeq_index());
-			pstmt.setString(2, bean.getCategory());
-			pstmt.setString(3, bean.getTitle());
-			pstmt.setString(4, bean.getContent());
-			pstmt.setString(5, bean.getId());
-			
+			pstmt.setString(1, bean.getCategory());
+			pstmt.setString(2, bean.getTitle());
+			pstmt.setString(3, bean.getContent());
+			pstmt.setString(4, bean.getId());
+			pstmt.setInt(5, bean.getSeq_index());
 			cnt = pstmt.executeUpdate() ; 
 			conn.commit(); 
 
@@ -249,6 +247,38 @@ public class AskedDAO extends SuperDAO{
 			}
 		}
 		return cnt ;
+	}
+
+	public int DeleteData(int seq_index) {
+		String sql = " delete from customer_center_qna where \"seq_index\" = ? " ;
+		PreparedStatement pstmt = null ; 
+		int cnt = -999999 ; 
+		try {
+			if ( conn == null ) {super.conn = super.getConnection(); }
+			conn.setAutoCommit(false);
+			pstmt = super.conn.prepareStatement(sql) ; 
+			pstmt.setInt(1, seq_index); ;
+			
+			cnt = pstmt.executeUpdate() ;
+			conn.commit();
+		} catch (Exception e) {
+			SQLException err = (SQLException)e ;
+			cnt = -err.getErrorCode();
+			e.printStackTrace();
+			try {
+				conn.rollback();
+			} catch (Exception e2) {
+				e2.printStackTrace();
+			}
+		}finally {
+			try {
+				if( pstmt != null) { pstmt.close();}
+				super.closeConnection();
+			} catch (Exception e2) {
+				e2.printStackTrace();
+			}
+		}
+		return cnt;
 	}
 	
 }

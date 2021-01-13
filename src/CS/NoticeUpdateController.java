@@ -74,7 +74,7 @@ public class NoticeUpdateController extends SuperClass{
 		}
 	
 		if( bean.getTitle().length() < 3 || bean.getTitle().length() > 50 ){
-			request.setAttribute( super.PREFIX + "subject", "제목은 3글자 이상 50글자 이하이어야 합니다.");
+			request.setAttribute( super.PREFIX + "title", "제목은 3글자 이상 50글자 이하이어야 합니다.");
 			isCheck = false  ;
 		}
 		if( bean.getContent().length() < 5 || bean.getContent().length() > 1000 ){

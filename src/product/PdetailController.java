@@ -26,23 +26,20 @@ public class PdetailController extends SuperClass{
 	}
 	
 	@Override
-	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int num = Integer.parseInt(request.getParameter("seq.index"));
-		ProductDAO pdao = new ProductDAO();
-		
-		ProductVO bean  = pdao.SelectDataByPk(num);
-		
-		String gotopage = ""; 
-		if ( bean != null) {
-			request.setAttribute("bean", bean);
-			gotopage = "/product/pdetail.jsp" ;
-		} else {
-			gotopage = "/product/plist.jsp";
-		}
-
-		System.out.println("doGet 호출");
-		super.doGet(request, response);
-		super.GotoPage(gotopage);
-	}
-	
+	   public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	      int productcode = Integer.parseInt(request.getParameter("productcode"));
+	      ProductDAO pdao = new ProductDAO();
+	      
+	      ProductVO bean  = pdao.SelectDataByPk(productcode);
+	      
+	      String gotopage = ""; 
+	      if ( bean != null) {
+	         request.setAttribute("bean", bean);
+	         gotopage = "/product/pdetail.jsp" ;
+	      } else {
+	         gotopage = "/product/plist.jsp";
+	      }
+	      super.doGet(request, response);       
+	      super.GotoPage( gotopage );
+	   }
 }
