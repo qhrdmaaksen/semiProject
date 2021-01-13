@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import VO.AskedVO;
-import VO.NoticeVO;
 
 public class AskedDAO extends SuperDAO{
 
@@ -21,7 +20,7 @@ public class AskedDAO extends SuperDAO{
 		
 		String sql = " select \"seq_index\" , \"category\" , \"title\" , \"content\" , \"id\" " ;
 		sql += " from (  select \"seq_index\" , \"category\" , \"title\" , \"content\" , \"id\", " ;
-		sql += " rank() over(order by \"seq_index\" asc) as ranking  from customer_center_qna " ;
+		sql += " rank() over(order by \"seq_index\" desc) as ranking  from customer_center_qna " ;
 		
 		
 		if(mode.equalsIgnoreCase("all") == false) {

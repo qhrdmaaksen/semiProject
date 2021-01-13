@@ -33,7 +33,7 @@ public class PlistController extends SuperClass{
 						parameters.getKeyword() + "%");
 		
 		String contextPath = request.getContextPath() ;
-		String myurl = contextPath + "/Shopping?command=plist" ;
+		String myurl = contextPath + "/dodamdodam?command=plist" ;
 		
 		Paging pageInfo = new Paging(
 				parameters.getPageNumber(), 
@@ -56,6 +56,8 @@ public class PlistController extends SuperClass{
 		// 페이징 관련 항목들
 		request.setAttribute("pagingHtml", pageInfo.getPagingHtml());
 		request.setAttribute("pagingStatus", pageInfo.getPagingStatus());
+		System.out.println("pagingHtml : " + request.getParameter("pagingHtml"));
+		System.out.println("pagingStatus : " + request.getParameter("pagingStatus"));
 		
 		// 필드 검색과 관련된 항목들
 		request.setAttribute("mode", parameters.getMode());

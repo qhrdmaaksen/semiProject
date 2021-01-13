@@ -22,6 +22,9 @@
 	padding-left: 120px;
 	padding-right: 50px;
 	}
+	table {
+	padding-left: 120px;
+}
 
 </style>
 
@@ -156,7 +159,7 @@
 	<tr>
 		<td colspan="12" align="center">
 			<form class="form-inline" role="form" name="myform" action="<%=YesForm%>" method="get">
-				<input type="hidden" name="command" value="plist">
+				<input type="hidden" name="command" value="pcategorylist">
 				<!-- <div class="form-group">
 					<select class="form-control" name="mode" id="mode">
 						<option value="all" selected="selected">-- 선택하세요---------
@@ -172,6 +175,8 @@
 				
 					<button class="btn btn-default btn-warning" type="submit" onclick="search();">검색</button>
 					<button class="btn btn-default btn-warning" type="button" onclick="searchAll();">전체 검색</button>
+			
+			<p class="form-control-static">${requestScope.pagingStatus}</p>
 			</form>
 		</td>
 		
@@ -190,6 +195,7 @@
 	</div>		
 </section>	
 
+<%-- ${requestScope.pagingHtml} --%>
 
 <br><br>
 	<script type="text/javascript">

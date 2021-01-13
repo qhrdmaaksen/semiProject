@@ -18,11 +18,11 @@ public class ProductDAO extends SuperDAO{
 			ResultSet rs = null ;		
 			
 			String sql = " select count(*) as cnt from products " ;
-			
-			if(mode.equalsIgnoreCase("all") == false) {
-				//sql += " where \"" + mode + "\" like '" + keyword + "'" ;	
 				sql += " where \" " + mode + " \" like '" + keyword + "'" ;
-			}		
+			/*
+			 * if(mode.equalsIgnoreCase("all") == false) { sql += " where \" " + mode +
+			 * " \" like '" + keyword + "'" ; }
+			 */	
 			
 			int cnt = -999999 ;
 

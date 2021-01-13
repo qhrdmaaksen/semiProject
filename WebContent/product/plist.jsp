@@ -54,8 +54,8 @@
 
  <a href="<%=NoForm%>pcategorylist&mode=eyes&${requestScope.parameters}"> 
 							<i class="fa fa-home"></i>
-						</a> 
- <a href="<%=NoForm%>pcategorylist&mode=&bloodcirculation${requestScope.parameters}"> 
+						</a> 			
+ <a href="<%=NoForm%>pcategorylist&mode=bloodcirculation&${requestScope.parameters}"> 
 							<i class="fa fa-home"></i>
 						</a> 
  <a href="<%=NoForm%>pcategorylist&mode=digestiveapparatus&${requestScope.parameters}"> 
@@ -168,16 +168,13 @@
 
 </div>
 
-
+</section>
 
 <br><br><br>
 
 
-
-<table>
-	<tr>
-		<td colspan="12" align="center">
-			<form class="form-inline" role="form" name="myform" action="<%=YesForm%>" method="get">
+<div>
+		<form class="form-inline" role="form" name="myform" action="<%=YesForm%>" method="get">
 				<input type="hidden" name="command" value="plist">
 				<div class="form-group">
 					<select class="form-control" name="mode" id="mode">
@@ -187,87 +184,25 @@
 						<option value="category">카테고리				 -->					
 					</select>
 				</div>
-				<div class="form-group">
-					<input type="text" class="form-control btn-xs" name="keyword"
-						id="keyword" placeholder="검색 키워드">
-				</div>
-				
-					<button class="btn btn-default btn-warning" type="submit" onclick="search();">검색</button>
-					<button class="btn btn-default btn-warning" type="button" onclick="searchAll();">전체 검색</button>
-					
-		</td>
-	</tr>
-	<tr>
-		<td>
-			<div class="container">
-			  <form action="/action_page.php">
-			
-			      <label class="form-check-label" for="radio1">
-			        <input type="radio" class="form-check-input" id="radio1" name="optradio" value="option1" checked>눈
-			      </label>
-			 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-			
-			      <label class="form-check-label" for="radio2">
-			        <input type="radio" class="form-check-input" id="radio2" name="optradio" value="option2">혈액순환
-			      </label>
-			   
-			 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-			       <label class="form-check-label" for="radio3">
-			        <input type="radio" class="form-check-input" id="radio3" name="optradio" value="option3">소화기관
-			      </label>
-			     
-			 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-			       <label class="form-check-label" for="radio4">
-			        <input type="radio" class="form-check-input" id="radio4" name="optradio" value="option4">피부
-			      </label>
-			      
-			 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-			       <label class="form-check-label" for="radio5">
-			        <input type="radio" class="form-check-input" id="radio5" name="optradio" value="option5">피로
-			      </label>
-			      
-			 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-			       <label class="form-check-label" for="radio6">
-			        <input type="radio" class="form-check-input" id="radio6" name="optradio" value="option6">관절
-			      </label>
-			      
-			 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-			       <label class="form-check-label" for="radio7">
-			        <input type="radio" class="form-check-input" id="radio7" name="optradio" value="option7">머릿결,손톱
-			      </label>
-			      
-			 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-			       <label class="form-check-label" for="radio8">
-			        <input type="radio" class="form-check-input" id="radio8" name="optradio" value="option8">면역
-			      </label>
-			   
-			    <button type="submit" class="btn btn-primary">Submit</button>
-			  </form>
-			</div>			
-					
-					
-							
-				<c:if test="${whologin == 2}">
-					<button class="btn btn-default btn-info" type="button"
-						onclick="writeForm();">상품 등록</button>
-				</c:if>
-								
-				<%-- 				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-					<p class="form-control-static">${requestScope.pagingStatus}</p> --%>
-			</form>
-		</td>
-	</tr>				
-</table>	
-		<br><br>
-					
-					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-				<div align="center">
-			<footer>${requestScope.pagingHtml}</footer>
-		</div>		
+			<div class="form-group">
+				<input type="text" class="form-control btn-xs" name="keyword"
+					id="keyword" placeholder="검색 키워드">
+			</div>
+				<button class="btn btn-default btn-warning" type="submit" onclick="search();">검색</button>
+				<button class="btn btn-default btn-warning" type="button" onclick="searchAll();">전체 검색</button>
+		</div>
+		
+		
+		<p class="form-control-static">${requestScope.pagingStatus}</p>
+	
+	  </form>
 	</div>		
-</section>	
+	
 
-
+	
+	<div align="center">
+			<footer>${requestScope.pagingHtml}</footer>
+		</div>
 
 <br><br>
 	<script type="text/javascript">

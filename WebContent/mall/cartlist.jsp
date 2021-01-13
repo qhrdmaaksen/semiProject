@@ -123,15 +123,15 @@
               <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">Pre-discount totalamount </strong><strong>
               	￦<fmt:formatNumber value="${sessionScope.totalAmount}" pattern="###,###"/>
               	</strong></li>
-              <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted"><i class="fas fa-shipping-fast"></i>  Shipping and handling</strong>
-              <c:if test="${sessionScope.totalAmount*0.8>=50000}">
-          		<strong>
+              <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted"><i class='fas fa-shipping-fast'></i>  Shipping and handling</strong>
+              <strong>
+          		<c:if test="${sessionScope.totalAmount*0.8>=50000}">
           		<span class="text-grey"><s>
             ￦<fmt:formatNumber value="3000" pattern="###,###"/>
-            </s></span>
+            	</s></span>
             ￦<fmt:formatNumber value="0" pattern="###,###"/>
               </c:if>
-              <c:if test="${sessionScope.totalAmount<50000}"> ￦<fmt:formatNumber value="3000" pattern="###,###"/></c:if>
+              <c:if test="${sessionScope.totalAmount*0.8 < 50000}"> ￦<fmt:formatNumber value="3000" pattern="###,###"/></c:if>
               	</strong></li>
               <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">Discount</strong><strong id="red">
               	￦<fmt:formatNumber value="${sessionScope.totalAmount*(1-0.8)}" pattern="###,###"/>
