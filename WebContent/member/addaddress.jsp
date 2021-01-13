@@ -124,7 +124,7 @@
 
 					
 					
-					
+					<div> api 추가 합시다.</div>
 					
 						<div class="form-group">
 						<div class="col-xs-<%=12%> col-lg-<%=12%>" align="center">
