@@ -79,7 +79,7 @@ public class AskedDAO extends SuperDAO{
 		
 		String sql = " select count(*) as cnt from customer_center_qna " ;
 		if (mode.equalsIgnoreCase("all") == false) {
-			sql += " where " + mode + " like '" + keyword + "' " ;
+			sql += " where \"" + mode + "\" like '%" + keyword + "' " ;
 		}
 		
 		int cnt = -999999 ;

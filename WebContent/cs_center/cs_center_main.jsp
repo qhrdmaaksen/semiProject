@@ -38,14 +38,14 @@ int mysearch = 2;
 							<tr>
 								<td align="center">
 									<a
-									href="#" onclick="loginCheck(\${arr.seq_index})">
+									href="#" onclick="askedloginCheck(\${arr.seq_index})">
 										\${arr.title}
 									</a>
 								</td>
 								<td>
 									<c:if test="${whologin == 2}">
 										<a
-											href="<%=NoForm%>notice_update&seq_index=\${arr.seq_index}&${parameters}">
+											href="<%=NoForm%>asked_update&seq_index=\${arr.seq_index}&${parameters}">
 											수정 
 										</a>
 									</c:if>
@@ -53,7 +53,7 @@ int mysearch = 2;
 								<td>
 									<c:if test="${whologin == 2}">
 										<a
-											href="<%=NoForm %>notice_delete&seq_index=\${arr.seq_index}&${parameters}">
+											href="<%=NoForm %>asked_delete&seq_index=\${arr.seq_index}&${parameters}">
 											삭제 
 										</a>
 									</c:if>
@@ -68,12 +68,14 @@ int mysearch = 2;
 				}
 			})
 		}
-		$('#mode option').each(function(index) {
-			if ($(this).val() == '${requestScope.mode}') {
-				$(this).attr('selected', 'selected');
-			}
-		});
-		$('#keyword').val('${requestScope.keyword}');
+		function search() {
+			var mode = $("#mode").val();
+			var keyword = $("#keyword").val();
+			location.href = "/SemiProject/dodamdodam?command=cs_center_main&pageNumber=1&pageSize=10&mode="+mode+"&keyword="+keyword;
+		}
+		function searchAll() {
+			location.href = "/SemiProject/dodamdodam?command=cs_center_main&pageNumber=1&pageSize=10&mode=all&keyword=";
+		}
 		function writeForm(){
 			location.href='<%=NoForm%>notice_insert';
 		}
@@ -105,7 +107,7 @@ int mysearch = 2;
 				return false;
 			}else {
 				console.log("로그인되어있음");
-				location.href="${NoForm}?command=asked_detailview&seq_index="+seq_index+"&${requestScope.askedparameters}"; 
+				location.href="/SemiProject/dodamdodam?command=asked_detailview&seq_index="+seq_index+"&${requestScope.askedparameters}"; 
 			}
 		}
 	</script>
@@ -181,8 +183,7 @@ int mysearch = 2;
 					</c:forEach>
 					<tr>
 						<td colspan="2" align="center">
-							<form action="<%=YesForm%>" class="form-inline" name="myform"
-								method="get">
+							<form class="form-inline" name="myform" onsubmit="return false;">
 								<input type="hidden" name="command" value="cs_center_main">
 								<div class="form-group">
 									<select class="form-control" name="mode" id="mode">
@@ -195,10 +196,10 @@ int mysearch = 2;
 									<input type="text" class="form-control btn-xs" name="keyword"
 										id="keyword" placeholder="검색 키워드">
 								</div>
-								<button class="btn btn-default btn-warning" type="submit"
-									onclick="search();">검색</button>
 								<button class="btn btn-default btn-warning" type="button"
-									onclick="searchAll();">전체 검색</button>
+									onclick="search()">검색</button>
+								<button class="btn btn-default btn-warning" type="button"
+									onclick="searchAll()">전체 검색</button>
 								<c:if test="${whologin == 2}">
 									<button class="btn btn-default btn-warning" type="button"
 										onclick="writeForm();">글 쓰기</button>
