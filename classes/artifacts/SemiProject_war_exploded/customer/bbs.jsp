@@ -47,29 +47,29 @@
 					<h2>게시물 목록</h2>
 				</form>
 			</div>
+			
+		<c:forEach var="bean" items="${requestScope.lists}">	
 	<table class="table table-striped table-hover">
 	<div class="container"> 
 	<div class="row">
  	<div class="col-3"> 
  	<div class="card" style="width: 18rem;"> 
- 		<img src="https://images.unsplash.com/photo-1563725911583-7d108f720483" class="card-img-top" alt="...">
+ 		<img src="${applicationScope.uploadedPath}/${bean.image}" class="card-img-top" alt="${bean.image}">
  	<div class="card-body"> 
  		<h5 class="card-title">Card title</h5> 
- 		<p class="card-text">연습용입니당</p>
-  		<a href="#" class="btn btn-primary">Go somewhere</a> </div> 
+ 		<p class="card-text">${sessionScope.loginfo.id}</p>
+ 		
+  		<a href="<%=NoForm%>bbsdetailview&no=${bean.no}&${requestScope.parameters}">
+								${bean.title}
+			</a>
   	</div> 
   	</div>
-  	<div class="col-3"></div> 
-  	<div class="col-3"></div>
-  	<div class="col-3"></div>
-   	</div> 
-  	<div class="row">
-    <div class="col-3"></div> 
-    <div class="col-3"></div> 
-  	<div class="col-3"></div> 
-  	<div class="col-3"></div> 
+
   </div> 
   </div>
+	</c:forEach>
+	
+	
 		<tr>
 			<td colspan="10" align="center">
 				<form class="form-inline" role="form" name="myform" action="<%=YesForm%>" method="get">

@@ -4,12 +4,70 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import VO.ProductVO;
 
 public class ProductDAO extends SuperDAO{
+		public List<ProductVO> selectServeyList(String keyword){
+			String sql = "select * from PRODUCTS where \"" + keyword + "\" > 0 order by \"stock\" desc";
+			List<ProductVO> lists = new ArrayList<ProductVO>();
+			System.out.println(sql);
+
+			conn = null ;
+			PreparedStatement pstmt = null ;
+			ResultSet rs = null ;
+			int num = 0;
+
+			try {
+				conn = super.getConnection() ;
+				pstmt = conn.prepareStatement(sql) ;
+
+				rs = pstmt.executeQuery() ;
+
+				while(rs.next()) {
+					ProductVO product = new ProductVO();
+					product.setProductcode(rs.getInt("productcode"));
+					product.setProductname(rs.getString("productname"));
+					product.setProductprice(rs.getInt("productprice"));
+					product.setStock(rs.getInt("stock"));
+					product.setBloodCirculation(rs.getInt("bloodCirculation"));
+					product.setDigestiveapparatus(rs.getInt("digestiveapparatus"));
+					product.setSkin(rs.getInt("skin"));
+					product.setEyes(rs.getInt("eyes"));
+					product.setFatigue(rs.getInt("fatigue"));
+					product.setJoint(rs.getInt("joint"));
+					product.setHair(rs.getInt("hair"));
+					product.setImmunity(rs.getInt("immunity"));
+					product.setImages(rs.getString("images"));
+
+					lists.add(product);
+					num++;
+					if(num==4)
+						break;
+				}
+				System.out.println("ok");
+			} catch (Exception e) {
+				e.printStackTrace();
+				try {
+					conn.rollback();
+				} catch (Exception e2) {
+					e2.printStackTrace();
+				}
+			} finally {
+				try {
+					if(rs != null) {rs.close();}
+					if(pstmt != null) {pstmt.close();}
+					if(conn != null) {conn.close();}
+				} catch (Exception e2) {
+					e2.printStackTrace();
+				}
+			}
+			return lists;
+		}
 
 		public int SelectTotalCount(String mode, String keyword) {
 			// 해당 검색 모드(상품명, 제조 회사, 카테고리)에 충족하는 항목들의 갯수를 구해줍니다. 
