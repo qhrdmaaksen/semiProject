@@ -29,15 +29,7 @@
 		function writeForm(){
 			location.href='<%=NoForm%>prInsert';
 		}
-		function search(){
-			if( $('#mode').val() == 'all' ){
-				alert('검색 목록을 선택해주세요') ;				
-			}
-		}
-		function searchAll(){
-			location.href='<%=NoForm%>prList';
-		}
-	
+
 	</script>
 
 	
@@ -106,12 +98,11 @@
 
           <a href="#!">
             <div class="mask">
+            <a href="<%=NoForm%>pdetail&productcode=${bean.productcode}&${requestScope.parameters}">		  	
             <img src="${applicationScope.uploadedPath}/${bean.images}"
 										class="img-fluid w-100" width="200" height="300"
-										alt="${bean.images}">
-            
-              <!-- <img class="img-fluid w-100"
-                src="https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Vertical/12.jpg"> -->
+										alt="${bean.images}" >
+
               <div class="mask rgba-black-slight"></div>
             </div>
           </a>
@@ -138,10 +129,8 @@
 							<input type="hidden" name="stock" value="${bean.stock}">
 							<input type="hidden" name="qty" value="1">         
 						</div>
-						<!-- <button type="submit" class="btn btn-primary btn-sm mr-1 mb-2"><i
-             			 class="fas fa-shopping-cart pr-2"></i>Add to cart</button> -->
-						<button type="submit" class="btn btn-primary btn-sm mr-1 mb-2">Add to cart</button>
-					</form>
+					<button type="submit" class="btn btn-primary btn-sm mr-1 mb-2">Add to cart</button>
+				</form>
 			<form class="form-inline" role="form" name="myform" action="<%=YesForm%>" method="post">
 			
 				<input type="hidden" name="command" value="pdetail">
@@ -173,28 +162,19 @@
 <br><br><br>
 
 
-<div>
+	<div id="form-t" style="padding-left: 250px;">
 		<form class="form-inline" role="form" name="myform" action="<%=YesForm%>" method="get">
 				<input type="hidden" name="command" value="plist">
+				<input type="hidden" name="mode" value="productname">
 				<div class="form-group">
-					<select class="form-control" name="mode" id="mode">
-						<option value="all" selected="selected">-- 선택하세요---------
-						<option value="productname">상품명
-						<!-- <option value="company">제조회사									
-						<option value="category">카테고리				 -->					
-					</select>
-				</div>
 			<div class="form-group">
 				<input type="text" class="form-control btn-xs" name="keyword"
 					id="keyword" placeholder="검색 키워드">
 			</div>
-				<button class="btn btn-default btn-warning" type="submit" onclick="search();">검색</button>
-				<button class="btn btn-default btn-warning" type="button" onclick="searchAll();">전체 검색</button>
+				<button class="btn btn-default btn-warning" type="submit">검색</button>
+				<!-- <button class="btn btn-default btn-warning" type="button">전체 검색</button> -->
 		</div>
-		
-		
-		<p class="form-control-static">${requestScope.pagingStatus}</p>
-	
+			<p class="form-control-static">${requestScope.pagingStatus}</p>
 	  </form>
 	</div>		
 	
