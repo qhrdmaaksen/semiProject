@@ -98,8 +98,7 @@
 		<ul class="navbar-nav">
 
 			<li class="nav-item">
-				<a class="nav-link" href="<%=NoForm%>survey">
-				추천 받기</a>
+				<a class="nav-link" href="<%=NoForm%>survey">추천 받기</a>
 			</li>
 		    <li class="nav-item dropdown">
 				<a class="nav-link" href="<%=NoForm%>plist">상품 보기</a>
