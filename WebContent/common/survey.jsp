@@ -65,6 +65,11 @@
             border: 1px solid #ccc;
             border-radius: 4px;
         }
+        .radio_gender{
+            float: left;
+            text-align: center;
+            padding: 20px 0px 0px 30%;
+        }
         .radio_div{
             float: left;
             text-align: center;
@@ -136,7 +141,7 @@
         function buttonModify(){
             var tmp = null;
             if(num==4){
-                tmp = '<button type="submit" onclick="complete()" id="button-style" class="btn btn-primary btn-block">설문 완료</button>'
+                tmp = '<button type="button" onclick="complete()" id="button-style" class="btn btn-primary btn-block">설문 완료</button>'
             }else {
                 tmp = '<button type="button" onclick="next' + num +'()" id="button-style" class="btn btn-primary btn-block">다음</button>'
             }
@@ -145,15 +150,14 @@
         function next0(){
             document.getElementById("question-content").innerHTML = "이름과 성별을 입력해주세요.";
             questionInput();
-            console.log("test2");
             if(${empty sessionScope.loginfo}){
                 answer = '<input type="text" id="name" name="name" class="answer1" placeholder="이름">';
             }else {
                 answer = '<input type="text" id="name" name="name" class="answer1" value="${sessionScope.loginfo.name}" disabled>';
             }
             answer += '<ul id="radio_ul">' +
-                '<li class="radio_div"><label><input type="radio" name="gender" value="male"><br>남자</label></li>' +
-                '<li class="radio_div"><label><input type="radio" name="gender" value="female"><br>여자</label></li>' +
+                '<li class="radio_gender"><label><input type="radio" name="gender" value="male"><br>남자</label></li>' +
+                '<li class="radio_gender"><label><input type="radio" name="gender" value="female"><br>여자</label></li>' +
                 '</ul>';
             document.getElementById("answer").innerHTML = answer;
             buttonModify();
@@ -161,6 +165,10 @@
         function next1(){
             if(${empty sessionScope.loginfo}){
                 name = document.getElementById("answer").firstChild.value;
+            }
+            if(document.getElementById("answer").firstChild.value == ""){
+                alert("이름을 입력해 주세요");
+                return false;
             }
             var tmp = document.getElementsByName("gender");
             var result = false;
@@ -185,7 +193,15 @@
             buttonModify();
         }
         function next2(){
+            if(document.getElementById("answer").firstChild.value == ""){
+                alert("키를 입력해 주세요");
+                return false;
+            }
             height = document.getElementById("answer").firstChild.value;
+            if(document.getElementById("answer").lastChild.value == ""){
+                alert("체중을 입력해 주세요");
+                return false;
+            }
             weight = document.getElementById("answer").lastChild.value;
             num++;
             document.getElementById("question-content").innerHTML = "평상시 운동량은 어느정도 입니까?";
@@ -212,7 +228,7 @@
                 }
             }
             if(!result){
-                alert("한개 이상을 체크해야합니다.");
+                alert("운동량을 한개 체크해야합니다.");
                 return false;
             }
             num++;
@@ -226,7 +242,7 @@
                 '<li id="image-checker3" class="image-checkered"><label id="image-label3" class="form-check-label image-checker"><input id="checker_input3" type="checkbox" name="answer3" class="form-check-input" style="display: none;" value="digestiveapparatus"><img id="checker_image3" src="./../images/digestiveapparatus.png" width="160px" height="160px"></label></li>' +
                 '<li id="image-checker4" class="image-checkered"><label id="image-label4" class="form-check-label image-checker"><input id="checker_input4" type="checkbox" name="answer3" class="form-check-input" style="display: none;" value="hair"><img id="checker_image4" src="./../images/hair.png" width="160px" height="160px"></label></li>' +
                 '</ul><div id="checker_div"></div><ul class="image-checker-ul">' +
-                '<li id="image-checker5" class="image-checkered"><label id="image-label5" class="form-check-label image-checker"><input id="checker_input5" type="checkbox" name="answer3" class="form-check-input" style="display: none;" value="bloodCirculation"><img id="checker_image5" src="./../images/blood.png" width="160px" height="160px"></label></li>' +
+                '<li id="image-checker5" class="image-checkered"><label id="image-label5" class="form-check-label image-checker"><input id="checker_input5" type="checkbox" name="answer3" class="form-check-input" style="display: none;" value="bloodcirculation"><img id="checker_image5" src="./../images/blood.png" width="160px" height="160px"></label></li>' +
                 '<li id="image-checker6" class="image-checkered"><label id="image-label6" class="form-check-label image-checker"><input id="checker_input6" type="checkbox" name="answer3" class="form-check-input" style="display: none;" value="immunity"><img id="checker_image6" src="./../images/immunity.png" width="160px" height="160px"></label></li>' +
                 '<li id="image-checker7" class="image-checkered"><label id="image-label7" class="form-check-label image-checker"><input id="checker_input7" type="checkbox" name="answer3" class="form-check-input" style="display: none;" value="joint"><img id="checker_image7" src="./../images/joint.png" width="160px" height="160px"></label></li>' +
                 '<li id="image-checker8" class="image-checkered"><label id="image-label8" class="form-check-label image-checker"><input id="checker_input8" type="checkbox" name="answer3" class="form-check-input" style="display: none;" value="skin"><img id="checker_image8" src="./../images/skin.png" width="160px" height="160px"></label></li>' +
@@ -367,12 +383,25 @@
         }
 
         function complete(){
+            var answer3 = document.getElementsByName("answer3");
+            var result = false;
+            for(var i=0 ; i<answer3.length ; i++){
+                if(answer3[i].checked == true){
+                    result = true;
+                    break;
+                }
+            }
+            if(!result){
+                alert("운동량을 한개 체크해야합니다.");
+                return false;
+            }
             $("#survey-form").append("<input type='text' id='name' name='name' value='" + name + "' style='display: none;'>");
             $("#survey-form").append("<input type='text' id='gender' name='gender' value='" + gender + "' style='display: none;'>");
             $("#survey-form").append("<input type='text' id='height' name='height' value='" + height + "' style='display: none;'>");
             $("#survey-form").append("<input type='text' id='weight' name='weight' value='" + weight + "' style='display: none;'>");
             $("#survey-form").append("<input type='text' id='momentum' name='momentum' value='" + momentum + "' style='display: none;'>");
             $("#survey-form").append(command);
+            document.getElementById("survey-form").submit();
         }
     </script>
 </body>

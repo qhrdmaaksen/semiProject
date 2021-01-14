@@ -26,15 +26,21 @@
         .top4 {
             padding: 20px 200px;
         }
+        .card {
+            margin-bottom: 20px;
+        }
+        .card-subject{
+            height: 50px;
+        }
         .card-icon{
             float: left;
         }
         .card-icons{
-            height: 65px;
+            height: 40px;
         }
         .card-icon{
-            width: 54px;
-            height: 53px;
+            width: 34px;
+            height: 33px;
             border-radius: 50%;
             border: 2px solid #5a6268;
             overflow: hidden;
@@ -45,8 +51,8 @@
             margin-left: 0px;
         }
         .card-icon-img{
-            width: 50px;
-            height: 50px;
+            width: 30px;
+            height: 30px;
         }
     </style>
 </head>
@@ -105,9 +111,9 @@
             <c:forEach var="product" items="${requestScope.top4}">
                 <div class="col-xl-3 col-lg-6 col-12">
                     <div class="card">
-                        <img src="./../images/test02.png" class="card-img-top" alt="...">
+                        <img src="./../images/product/${product.images}" class="card-img-top" alt="...">
                         <div class="card-body">
-                            <h5 class="card-title text-center">${product.productname}</h5>
+                            <h5 class="card-title text-center card-subject">${product.productname}</h5>
                             <ul class="card-icons">
                                 <c:if test="${product.bloodCirculation > 0}">
                                     <li class="card-icon"><img class="card-icon-img" src="./../images/icon/icon_bloodcirculation.png"></li>
