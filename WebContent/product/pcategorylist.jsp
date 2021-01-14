@@ -49,7 +49,7 @@
  <a href="<%=NoForm%>pcategorylist&mode=eyes&${requestScope.parameters}"> 
 							<i class="fa fa-home"></i>
 						</a> 
- <a href="<%=NoForm%>pcategorylist&mode=&bloodcirculation${requestScope.parameters}"> 
+ <a href="<%=NoForm%>pcategorylist&mode=bloodcirculation&${requestScope.parameters}"> 
 							<i class="fa fa-home"></i>
 						</a> 
  <a href="<%=NoForm%>pcategorylist&mode=digestiveapparatus&${requestScope.parameters}"> 
@@ -99,15 +99,16 @@
 		      <!-- Card -->
 		      <div class="">
 		
-		          <a href="#!">
-		            <div class="mask">
-		            <img src="${applicationScope.uploadedPath}/${bean.images}"
-												class="img-fluid w-100" width="200" height="300"
-												alt="${bean.images}">
-		            
+		             <a href="#!">
+            <div class="mask">
+            	<a href="<%=NoForm%>pdetail&productcode=${bean.productcode}&${requestScope.parameters}">		  	
+            		<img src="${applicationScope.uploadedPath}/${bean.images}"
+										class="img-fluid w-100" width="200" height="300"
+										alt="${bean.images}" >
 		              <div class="mask rgba-black-slight"></div>
-		            </div>
-		          </a>
+		            </a>
+		       </div>
+		        
 		
 		        <div class="text-center pt-3">
 		
