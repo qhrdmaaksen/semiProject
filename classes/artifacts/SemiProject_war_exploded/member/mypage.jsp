@@ -123,7 +123,7 @@
                 <div class="nav_boxes">
                     <ul class="nav_boxes_list">
                         <li class="nav_boxes_list_f">MY 쇼핑</li>
-                        <li class="nav_boxes_list_c">주문목록/배송조회</li>
+                        <li class="nav_boxes_list_c"><a href="<%=NoForm%>order">주문목록/배송조회</li>
                         <li class="nav_boxes_list_c">교환/반품 내역</li>
                         <li class="nav_boxes_list_c">정기배송 내역</li>
                     </ul>
@@ -140,7 +140,7 @@
                         <li class="nav_boxes_list_f">MY 정보</li>
                         <li class="nav_boxes_list_c"><a href="<%=NoForm%>memodify">개인 정보 수정</a></li>
                         <li class="nav_boxes_list_c">결제 수단 관리</li>
-                        <li class="nav_boxes_list_c">배송지 관리</li>
+                        <li class="nav_boxes_list_c"><a href="<%=NoForm%>address">배송지 관리</a></li>
                     </ul>
                 </div>
             </nav>

@@ -10,10 +10,11 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import DAO.MemberDAO;
-import VO.MemberVO;
-import common.IndexController;
+import DAO.ProductDAO;
+import VO.ProductVO;
 import common.SuperClass;
+import shopping.MyCartList;
+import shopping.ShoppingInfo;
 
 public class OrderListcontroller extends SuperClass{
 	@Override
@@ -38,7 +39,7 @@ public class OrderListcontroller extends SuperClass{
 				
 				super.setErrorMessage(message);
 				
-				new MallListController().doGet(request, response);
+//				new MallListController().doGet(request, response);
 				
 			}
 			
@@ -63,26 +64,24 @@ public class OrderListcontroller extends SuperClass{
 				
 				
 				System.out.println(num + "pnum 값이 널입니다. ");
-				ProductDao pdao = new ProductDao();
+				ProductDAO pdao = new ProductDAO();
 				
 				//상품 번호 pnum 에 대한 Bean 정보 
-				Product bean = pdao.SelectDataByPk(num);
-				
-			
-		
-				int price = bean.getPrice();
-				int point = bean.getPoint();
+				ProductVO bean = pdao.SelectDataByPk(num);
+
+				int price = bean.getProductprice();
+				int point = bean.getProductprice();
 				
 				totalAmount += qty * price;
 				totalPoint += qty * point ;
 				
 				ShoppingInfo shopinfo = new ShoppingInfo();
 				
-				shopinfo.setImage(bean.getImage());
-				shopinfo.setPname(bean.getName());
-				shopinfo.setPnum(num);
-				shopinfo.setPoint(point );
-				shopinfo.setPrice(price);
+				shopinfo.setImages(bean.getImages());
+				shopinfo.setProductname(bean.getProductname());
+				shopinfo.setProductcode(num);
+				shopinfo.setPoint(point);
+				shopinfo.setProductprice(price);
 				shopinfo.setQty(qty);
 				
 				shoplists.add(shopinfo);

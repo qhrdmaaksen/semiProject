@@ -5,14 +5,14 @@ public class ProductVO {
     private String productname;
     private int productprice;
     private int stock;
-    private int bloodCirculation;
-    private int digestiveapparatus;
-    private int skin;
-    private int eyes;
-    private int fatigue;
-    private int joint;
-    private int hair;
-    private int immunity;
+    private int bloodCirculation;   // 혈액순환
+    private int digestiveapparatus; // 소화기관
+    private int skin;   // 피부
+    private int eyes;   // 눈
+    private int fatigue;    // 피로
+    private int joint;  // 관절
+    private int hair;   // 모발
+    private int immunity;   // 면역
     private String images;
 
     public int getProductcode() {

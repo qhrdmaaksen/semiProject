@@ -75,36 +75,36 @@
 	</script>
 	<script type="text/javascript">
 		$(document).ready(function() {
-			$.ajax({
-				url:"${pageContext.request.contextPath}/dodamdodam?command=preview",
-				type:"get",
-				success: (response) =>{
-					autosize($('textarea'));
+// 			$.ajax({
+// 				url:"${pageContext.request.contextPath}/dodamdodam?command=preview",
+// 				type:"get",
+// 				success: (response) =>{
+// 					autosize($('textarea'));
 					
-					$("[id*=starGarde_]").each(function() {
+// 					$("[id*=starGarde_]").each(function() {
 						
-						var star = "☆";
-						var star2 = "★";
-						var grade = Number($(this).text()); // 별점 수
-						var starGrade  = ""; //최종 문자열
+// 						var star = "☆";
+// 						var star2 = "★";
+// 						var grade = Number($(this).text()); // 별점 수
+// 						var starGrade  = ""; //최종 문자열
 						
-						//별점만큼 채워진별을 대입
-						for(var i = 0 ; i < grade; i++){
-							starGrade += star2;	
-						}
+// 						//별점만큼 채워진별을 대입
+// 						for(var i = 0 ; i < grade; i++){
+// 							starGrade += star2;	
+// 						}
 						
-						// 5-별점 만큼 빈별을 대입
-						for(var i = 0 ;i < 5-grade; i++){
-							starGrade += star;
-						}
-						// 완성된 문자열을 대입
-						$(this).text(starGrade).css("color","red");
-					});
+// 						// 5-별점 만큼 빈별을 대입
+// 						for(var i = 0 ;i < 5-grade; i++){
+// 							starGrade += star;
+// 						}
+// 						// 완성된 문자열을 대입
+// 						$(this).text(starGrade).css("color","red");
+// 					});
 					
-				},
-				error: () =>{
-					console.log("error")
-				}
+// 				},
+// 				error: () =>{
+// 					console.log("error")
+// 				}
 				
 			})
 			$("input[name='delivery']").click(function() {
@@ -144,12 +144,12 @@
 		   password != undefined)
 		{
 			//session 등록
-			//location.href = "pdetail.jsp";
+			location.href = "pdetail.jsp";
 		}else{
-			//location.href = "login.jsp";
+			//location.href = "melogin.jsp";
 		}
 		//alert("로그아웃 되었습니다.");
-		//location.href="login.jsp";                                    // 로그아웃 페이지로 이동
+		//location.href="http://localhost:8989/SemiProject/dodamdodam?command=melogin";                                    // 로그아웃 페이지로 이동
 		function deliverynone(none){
 			$("#inHere").css("display", "none");
 			$("input:radio[value='정기 배송']").removeAttr("checked");
@@ -249,7 +249,7 @@
 				aria-controls="상품 리뷰" aria-selected="false">상품 리뷰</a></li>
 			<li class="nav-item"><a id="cs-tab01" class="nav-link"
 				data-toggle="tab" href="#cs-main" role="tab" aria-controls="고객 문의"
-				aria-selected="false" onclick="location.href='http://localhost:8989/SemiProject/cs_center/cs_center_main.jsp'">고객 문의</a></li>
+				aria-selected="false" onclick="location.href='http://localhost:8989/SemiProject/dodamdodam?command=cs_center_main&'">고객 문의</a></li>
 			<li class="nav-item"><a id="delivery-info-tab" class="nav-link"
 				data-toggle="tab" href="#delivery-info" role="tab"
 				aria-controls="배송/교환/반품 안내" aria-selected="false">배송/교환/반품 안내</a></li>
@@ -286,6 +286,7 @@
 					품 상세 보기 접기 ▲</button> -->
 			<br> <br> <br> <br>
 		</div>
+		<!-- 리뷰  -->
 		<div id="prod-review" class="container tab-pane fade" role="tabpanel"
 			aria-labelledby="prod-review01">
 			<div class=" ">
@@ -317,7 +318,7 @@
 								</form>
 							</td>
 						</tr>
-						<c:forEach items="${lists}" var="item"  begin="0" varStatus="i" end="${lists.size()}">
+						<c:forEach items="${reviewlists}" var="item"  begin="0" varStatus="i" end="${reviewlists.size()}">
 							<tr>
 								<%-- <td>${bean.no}</td> --%>
 								<td>${item.reviewno}</td>
@@ -328,20 +329,20 @@
 								<td>${bean.update}</td>
 								<td>${bean.delete}</td>
 								<td>
-									<c:if test="${sessionScope.loginfo.id == bean.writer}">
+									<c:if test=" ${whologin == 1}${whologin == 2}">
 										<a href="previewupdate.jsp?seq_review=${bean.no}&${requestScope.parameters}">
 											수정 </a>
 									</c:if> 
-									<c:if test="${sessionScope.loginfo.id != bean.writer}">
+									<c:if test=" ${whologin == 1}${whologin == 2}">
 									수정
 									</c:if>
 								</td>
 								<td>
-									<c:if test="${sessionScope.loginfo.id == bean.writer}">
+									<c:if test="${whologin == 1}${whologin == 2}">
 										<a href="pdetaildelete&no=${bean.no}&${requestScope.parameters}">
 											삭제 </a>
 									</c:if> 
-									<c:if test="${sessionScope.loginfo.id != bean.writer}">
+									<c:if test=" ${whologin == 1}${whologin == 2}">
 										삭제
 									</c:if>
 								</td>
@@ -365,11 +366,18 @@
 											<div class="col-sm-12">
 												<input type="text" class="form-control" name="writer"
 													id="fakewriter" placeholder="작성자"
-													value="${sessionScope.loginfo.name}(${sessionScope.loginfo.id})"
-													disabled="disabled"> <input type="hidden"
+													value="${sessionScope.loginfo.name}(${sessionScope.loginfo.id})" disabled="disabled"> 
+												<input type="hidden"
 													name="writer" id="writer"
-													value="${sessionScope.loginfo.id}">
+													value="${sessionScope.loginfo.id}">										</div>
+											<label class="control-label col-sm-12" for="subject">
+											</label>
+											<div class="form-group">
+												<label class="control-label col-sm-<%=formleft%>"
+													for="image"></label>
 											</div>
+												<label class="control-label col-sm-<%=formleft%>-
+												for="regdate"> </label>
 										</div>
 										<div class="form-group col-sm-6">
 											<label class="control-label col-sm-12" for="content" style="color: white;">
@@ -515,14 +523,6 @@
 			</div>
 		</div>
 	</div>
-	<nav id="gojung"
-		class="navbar navbar-light bg-light justify-content-between">
-		<a class="navbar-brand"></a>
-		<form class="form-inline">
-			<button class="gojung2" class="btn btn-outline-success my-2 my-sm-0"
-				type="submit">위로 이동</button>
-		</form>
-	</nav>
 	<br>
 	<br>
 	<br>

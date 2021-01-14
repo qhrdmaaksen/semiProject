@@ -14,12 +14,13 @@ import utility.FlowParameters;
 import utility.Paging;
 
 public class PlistController extends SuperClass{
+	String pageSize = "12";
 	@Override
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		FlowParameters parameters 
 			= new FlowParameters(
 					request.getParameter("pageNumber"), 
-					request.getParameter("pageSize"), 
+					pageSize, 
 					request.getParameter("mode"), 
 					request.getParameter("keyword")) ;
 		
@@ -33,7 +34,7 @@ public class PlistController extends SuperClass{
 						parameters.getKeyword() + "%");
 		
 		String contextPath = request.getContextPath() ;
-		String myurl = contextPath + "/Shopping?command=plist" ;
+		String myurl = contextPath + "/dodamdodam?command=plist" ;
 		
 		Paging pageInfo = new Paging(
 				parameters.getPageNumber(), 
@@ -56,6 +57,8 @@ public class PlistController extends SuperClass{
 		// 페이징 관련 항목들
 		request.setAttribute("pagingHtml", pageInfo.getPagingHtml());
 		request.setAttribute("pagingStatus", pageInfo.getPagingStatus());
+		System.out.println("pagingHtml : " + request.getParameter("pagingHtml"));
+		System.out.println("pagingStatus : " + request.getParameter("pagingStatus"));
 		
 		// 필드 검색과 관련된 항목들
 		request.setAttribute("mode", parameters.getMode());

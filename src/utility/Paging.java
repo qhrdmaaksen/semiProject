@@ -76,6 +76,53 @@ public class Paging {
 			
 			//this.DisplayInformation(); 
 		}
+		
+		
+		public Paging(
+				String _pageNumber,
+				String _pageSize, 
+				int totalCount,
+				String url, 
+				String mode) {
+			
+			if ( _pageNumber == null || _pageNumber.equals("null") || _pageNumber.equals("")) {
+				_pageNumber = "1" ; 
+			}
+			this.pageNumber = Integer.parseInt( _pageNumber ) ;
+			
+			if ( _pageSize == null || _pageSize.equals("null") || _pageSize.equals("")) {
+				_pageSize = "10" ; 
+			}
+			this.pageSize = Integer.parseInt( _pageSize ) ;
+			
+			this.totalCount = totalCount ;
+			this.url = url ;
+			
+			this.mode = mode ;
+			
+			this.totalPage = (int)Math.ceil((double)totalCount / pageSize) ;
+			
+			this.beginRow = ( pageNumber - 1 ) * pageSize + 1 ;
+			
+			this.endRow = this.pageNumber * this.pageSize  ;
+
+			this.beginPage = ( this.pageNumber -1 ) / this.pageCount * this.pageCount + 1 ;
+			
+			this.endPage = this.beginPage + this.pageCount - 1 ;  
+
+			if( this.totalPage < this.endPage ){ this.endPage = this.totalPage ;  } 
+			
+			this.pagingHtml = this.getPagingHtml( url ) ;
+			
+			this.pagingStatus = "총 " + totalCount + "건[" 
+					+ this.pageNumber + "/" + this.totalPage + "]" ;
+			
+			//this.DisplayInformation(); 
+		}
+
+		
+		
+		
 
 		public Paging(
 				String _pageNumber,

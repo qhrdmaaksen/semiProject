@@ -40,8 +40,6 @@ public class PdetailController extends SuperClass{
 	         gotopage = "/product/plist.jsp";
 	      }
 	      super.doGet(request, response);       
-	      super.GotoPage( gotopage ); 
-
+	      super.GotoPage( gotopage );
 	   }
-	
 }

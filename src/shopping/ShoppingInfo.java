@@ -6,7 +6,7 @@ public class ShoppingInfo {
 	private int qty ; // 구매 수량
 	private int productprice ; // 단가
 	private String images; // 상품 이미지 이름
-	private int stock ; // 적립할 포인트
+	private int point ; // 적립할 포인트
 	//private int amount ;
 	
 	public ShoppingInfo() {
@@ -16,7 +16,7 @@ public class ShoppingInfo {
 	@Override
 	public String toString() {
 		return "ShoppingInfo [productcode=" + productcode + ", productname=" + productname + ", qty=" + qty
-				+ ", productprice=" + productprice + ", images=" + images + ", stock=" + stock + "]";
+				+ ", productprice=" + productprice + ", images=" + images + ", point=" + point + "]";
 	}
 
 	public int getProductcode() {
@@ -59,12 +59,12 @@ public class ShoppingInfo {
 		this.images = images;
 	}
 
-	public int getStock() {
-		return stock;
+	public int getPoint() {
+		return point;
 	}
 
-	public void setStock(int stock) {
-		this.stock = stock;
+	public void setPoint(int point) {
+		this.point = point;
 	}
 	
 	

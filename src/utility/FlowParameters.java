@@ -41,6 +41,16 @@ public class FlowParameters {
 		this.mode = mode;
 	}
 
+	public FlowParameters(String pageNumber, String pageSize, String mode) {
+		this.pageNumber = pageNumber ;
+		this.pageSize = pageSize ;
+		if ( mode == null || mode.equals("null") || mode.equals("") ) {
+			mode = "all" ;
+		}
+		this.mode = mode ;
+		
+	}
+
 	@Override
 	public String toString() {
 		return "pageNumber=" + pageNumber + "&pageSize=" + pageSize + "&mode=" + mode + "&keyword=" + keyword + "";
@@ -51,11 +61,6 @@ public class FlowParameters {
 		return "pageNumber=" + pageNumber + "&pageSize=" + pageSize + "&fromdate=" + sdf.format(fromdate) + "&todate=" + sdf.format(todate);
 	}
 
-	/*@Override
-	public String toString() {
-		return "pageNumber=" + pageNumber + "&pageSize="
-				+ pageSize + "&mode=" + mode + "&keyword=" + keyword + "";
-	}*/
 	public String getPageNumber() {
 		return pageNumber;
 	}
