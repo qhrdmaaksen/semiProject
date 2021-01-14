@@ -10,7 +10,7 @@ public class OrderVO {
 	private int seq_pay;
 	private int shippingstatus;
 	private String invoice;
-	private Date orderdate;
+	private String orderdate;
 	
 	public OrderVO() {
 	}
@@ -70,11 +70,11 @@ public class OrderVO {
 		this.invoice = invoice;
 	}
 
-	public Date getOrderdate() {
+	public String getOrderdate() {
 		return orderdate;
 	}
 
-	public void setOrderdate(Date orderdate) {
+	public void setOrderdate(String orderdate) {
 		this.orderdate = orderdate;
 	}
 	

@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import VO.PostVo;
+import shopping.ShoppingInfo;
 
 public class CompositeDao extends SuperDAO{
 	public List<PostVo> SelectDataZipcode(String dong) {
@@ -66,5 +67,48 @@ public class CompositeDao extends SuperDAO{
 		return lists ;
 	}
 
+	public List<ShoppingInfo> ShowDetail(int oid) {
+		Connection conn = null ;
+		PreparedStatement pstmt = null ;
+		ResultSet rs = null ;
+		
+		String sql = " select p.num pnum, p.name pname, od.qty, p.price, p.point, p.image " ; 
+		sql += " from ( orders o inner join \"DETAIL_ORDER\" od  ";
+		sql += " on o.\"ordernumber\"=od.\"ordernumber\" ) inner join products p ";
+		sql += " on od.pnum = p.num and o.oid = ? "; 
+		sql += " order by od.\"ordernumber\" desc ";
+		
+		List<ShoppingInfo> lists = new ArrayList<ShoppingInfo>();
+		
+		try {
+			conn = super.getConnection() ;	
+			pstmt = super.conn.prepareStatement(sql) ;			
+			pstmt.setInt(1, oid); 
+			rs = pstmt.executeQuery() ;
+			
+			while( rs.next() ){
+				ShoppingInfo bean = new ShoppingInfo();
+				bean.setImage( rs.getString("image") );
+				bean.setPname( rs.getString("pname") );
+				bean.setPnum( Integer.parseInt( rs.getString("pnum") ));
+				bean.setPoint( Integer.parseInt( rs.getString("point") ));
+				bean.setPrice( Integer.parseInt( rs.getString("price") ));
+				bean.setQty( Integer.parseInt( rs.getString("qty") ));				 
+				 
+				lists.add( bean ) ;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally{
+			try {
+				if( rs != null ){ rs.close(); }
+				if( pstmt != null ){ pstmt.close(); }
+				if(conn != null) {conn.close();}
+			} catch (Exception e2) {
+				e2.printStackTrace(); 
+			}
+		}		
+		return lists ;
+		}
 	
 }
