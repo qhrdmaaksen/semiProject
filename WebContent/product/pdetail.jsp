@@ -57,7 +57,6 @@
 		function imageZoom() {
 			$("#myarea").zoom();
 		}
-	
 		function applyImage(srcimg) {
 			var mywidth = 340; /* form에 너비 높이들을 가져오는 문  */
 			var myheight = 450;
@@ -85,12 +84,10 @@
  						var star2 = "★";
  						var grade = Number($(this).text()); // 별점 수
  						var starGrade  = ""; //최종 문자열
-						
  						//별점만큼 채워진별을 대입
  						for(var i = 0 ; i < grade; i++){
  							starGrade += star2;	
  						}
-						
  						// 5-별점 만큼 빈별을 대입
  						for(var i = 0 ;i < 5-grade; i++){
  							starGrade += star;
@@ -98,12 +95,10 @@
  						// 완성된 문자열을 대입
  						$(this).text(starGrade).css("color","red");
  					});
-					
  				},
  				error: () =>{
  					console.log("error")
  				}
-				
 			});
 			$("input[name='delivery']").change(function() {
 				if($(this).prop("checked")){
@@ -133,7 +128,6 @@
 					$("input[name='delivery']").click();
 				}	
 			});
-			
 			$("#buy-qty").on('change',function(e) {
 				let price = parseInt("${bean.productprice}");
 				$("[data-id=productprice]").each(function() {
@@ -561,5 +555,6 @@
 	<br>
 	<br>
 	<br>
+<%@ include file="../common/footer.jsp" %>
 </body>
 </html>

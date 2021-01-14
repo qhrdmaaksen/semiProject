@@ -1,11 +1,11 @@
 package VO;
 
 public class AskedVO {
-	private int seq_index ; 
-	private String category ; 
-	private String title ; 
-	private String content ; 
-	private String id ;
+	private int seq_index ; //게시판 글 번호
+	private String category ; //분류
+	private String title ; //글 제목
+	private String content ; //글 내용
+	private String id ;//아이디
 	@Override
 	public String toString() {
 		return "AskedVO [seq_index=" + seq_index + ", category=" + category + ", title=" + title + ", content="
