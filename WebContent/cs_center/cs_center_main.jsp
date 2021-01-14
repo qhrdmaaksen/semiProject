@@ -26,9 +26,9 @@ int mysearch = 2;
 		src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 	<script type="text/javascript">
 	
-		function getaskedlist (seq) {
+		function getaskedlist (seq, askedmode="all", askedkeyword="") {
 			$.ajax({
-				url:"/SemiProject/dodamdodam?command=cs_center_main_asked&pageNumber="+seq+"&pageSize=10&mode=all&keyword=",
+				url:"/SemiProject/dodamdodam?command=cs_center_main_asked&pageNumber="+seq+"&pageSize=10&mode="+askedmode+"&keyword="+askedkeyword,
 				type:"get",
 				success: (response) => {
 					var tableForm ="";
@@ -62,7 +62,7 @@ int mysearch = 2;
 						`
 						
 					}
-					$("#askedbody").html("").html(tableForm); 
+					$("#askedbody").html(tableForm); 
 				},error: () => {
 					
 				}
@@ -79,7 +79,7 @@ int mysearch = 2;
 		function askedsearch() {
 			var askedmode = $("#askedmode").val();
 			var askedkeyword = $("#askedkeyword").val();
-			location.href = "/SemiProject/dodamdodam?command=cs_center_main_asked&askedpageNumber=1&askedpageSize=10&askedmode="+askedmode+"&askedkeyword="+askedkeyword;
+			getaskedlist(1,askedmode,askedkeyword);
 		}
 		function askedsearchAll() {
 			location.href = "/SemiProject/dodamdodam?command=cs_center_main&pageNumber=1&pageSize=10&mode=all&keyword=";
@@ -195,8 +195,7 @@ int mysearch = 2;
 								<input type="hidden" name="command" value="cs_center_main">
 								<div class="form-group">
 									<select class="form-control" name="mode" id="mode">
-										<option value="all" selected="selected">-- 선택하세요 --
-										<option value="title">제목
+										<option value="title" selected="selected">제목
 										<option value="content">글 내용
 									</select>
 								</div>
@@ -267,8 +266,7 @@ int mysearch = 2;
 								<input type="hidden" name="command" value="cs_center_main_asked">
 								<div class="form-group">
 									<select class="form-control" name="askedmode" id="askedmode">
-										<option value="all" selected="selected">-- 선택하세요 --
-										<option value="title">제목
+										<option value="title" selected="selected">제목
 										<option value="content">글 내용
 									</select>
 								</div>

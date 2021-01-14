@@ -254,8 +254,8 @@
 								</div>
 							</td>
 							<td class="list-group-item">
-								<input type="button" style="width: 80%; color: blue; background: white; border: 1; border-color: blue; font: bold;"
-									name="goMall" value="장바구니 담기">
+								<input type="submit" style="width: 80%; color: blue; background: white; border: 1; border-color: blue; font: bold;"
+									name="goMall" value="장바구니 담기" onclick="location.href='http://localhost:8989/SemiProject/dodamdodam?command=mallcartlist'">
 							</td>
 							<td class="list-group-item">
 								<input type="submit" style="width: 80%; color: white; background: blue;"
