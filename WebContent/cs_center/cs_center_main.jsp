@@ -152,7 +152,7 @@ int mysearch = 2;
 		</ul>
 		<!-- Tab panes -->
 		<div class="tab-content">
-			<div id="home" class="container tab-pane active">
+			<div id="home" class="container tab-pane active" style="padding-bottom: 10%;">
 				<br>
 				<table class="table table-striped table-hover">
 					<thead class="container">
@@ -289,12 +289,11 @@ int mysearch = 2;
 						</td>
 					</tr>
 				</table>
-				<div align="right" style="float: right;" class="container col-md-6">
+				<div align="center" style="float: left;margin-bottom: 2%;" class="container col-md-12">
 					<div>
 						<c:forEach begin="1" end="${(askedlists.size() / 10) +1 }" varStatus="i">
 							<a id="pagingnumcolor" href="#" onclick="getaskedlist(${i.index})">${i.index}</a>
 						</c:forEach>
-					
 					</div>
 				</div>
 			</div>
@@ -2728,7 +2727,7 @@ int mysearch = 2;
 					</div>
 				</div>
 			</div>
-			<div id="menu3" class="container tab-pane fade">
+			<div id="menu3" class="container tab-pane fade" style="padding-bottom: 15%;">
 				<br>
 				<h2 align="center">(주)도담도담</h2>
 				<hr style="border: none; border: 5px double orange;">
@@ -3036,12 +3035,12 @@ int mysearch = 2;
 				<hr style="border: none; border: 5px double orange;">
 				<address>
 					<p align="center">
-						<span>고객문의: <a href="mailto:rlaalsdn8@gmail.com">rlaalsdn8@gmail.com</a></span>
-						<span>전화: <a href="tel://010-9255-9798">010-9255-9798</a></span>
+						<span>고객 문의 email address : <a href="mailto:rlaalsdn8@gmail.com">rlaalsdn8@gmail.com</a></span><br><br><br>
+						<span>고객 문의 전화 tell : <a href="tel://010-9255-9798">010-9255-9798</a></span><br><br><br>
 					</p>
 					<p align="center">
-						<span>제휴문의: <a href="mailto:rlaalsdn8@naver.com">rlaalsdn8@naver.com</a></span>
-						<span>전화: <a href="tel://010-9255-9798">010-9255-9798</a></span>
+						<span>제휴문의 email address : <a href="mailto:rlaalsdn8@naver.com">rlaalsdn8@naver.com</a></span><br><br><br>
+						<span>제휴 문의 전화 tell : <a href="tel://010-9255-9798">010-9255-9798</a></span><br><br><br>
 					</p>
 					<p align="center">
 						<span>문자 상담: <a href="sms:010-9255-9798">010-9255-9798</a></span>
@@ -3050,5 +3049,6 @@ int mysearch = 2;
 			</div>
 		</div>
 	</div>
+<%@ include file="../common/footer.jsp" %>
 </body>
 </html>
