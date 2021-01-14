@@ -1,25 +1,28 @@
 package CS;
 
 import java.io.IOException;
+import java.util.Enumeration;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import DAO.AskedDAO;
 import DAO.NoticeDAO;
+import VO.AskedVO;
 import VO.MemberVO;
 import VO.NoticeVO;
 import common.SuperClass;
 import utility.FlowParameters;
 
-public class NoticeDetailViewController extends SuperClass{
+public class AskedDetailViewController extends SuperClass{
 	@Override
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int seq_index = Integer.parseInt(request.getParameter("seq_index")) ;
 		
-		NoticeDAO dao = new NoticeDAO() ;
+		AskedDAO dao = new AskedDAO() ;
 		
-		NoticeVO bean = dao.SelectDataByPk(seq_index) ;
+		AskedVO bean = dao.SelectDataByPk(seq_index) ;
 		
 		FlowParameters parameters 
 			= new FlowParameters(
@@ -45,7 +48,7 @@ public class NoticeDetailViewController extends SuperClass{
 			request.setAttribute("parameters", parameters.toString());
 			
 			//상세 보기 페이지로 이동
-			String gotopage = "/cs_center/notice_detailview.jsp" ;
+			String gotopage = "/cs_center/asked_detailview.jsp" ;
 			super.GotoPage(gotopage);
 		} else {
 			// 포워딩을 이용하여 목록 페이지로 다시 돌아갑니다.

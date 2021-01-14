@@ -90,10 +90,10 @@ public class Controller extends HttpServlet {
 			} else {
 				System.out.println("MultipartRequest 객체를 구하지 못했습니다.");
 			}
-			
-			
         } 
             SuperController controller = this.todolist.get(command) ;
+            System.out.println("test command : "+command);
+            System.out.println("controller : "+controller);
             if(controller != null) {
                 String method = request.getMethod().toLowerCase();
                 if(method.equals("get")) {

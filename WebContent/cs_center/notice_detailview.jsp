@@ -20,7 +20,7 @@
 				
 				$.ajax({ /* 유효성 검사를 통과 했을 때 Ajax 함수 호출 */
 		            url: '<%=MakeCommand("delete.com")%>',
-		            data : 'cnum=' + $(this).attr('pmkey') + '&no=' + '${bean.no}',  
+		            data : 'cnum=' + $(this).attr('pmkey') + '&seq_index=' + '${bean.seq_index}',  
 		    		type : "post",             
 		            dataType: "text",
 		            success: function (data, textStatus) { /* 댓글 삭제 */	            	
@@ -59,7 +59,7 @@
 					<table class="table table-hover table-condensed">
 						<tr>
 							<td width="25%" align="center">제목</td>
-							<td width="75%" align="left">${bean.subject}</td>
+							<td width="75%" align="left">${bean.title}</td>
 						</tr>
 					</table>
 					<table style="white-space:nowrap;">
@@ -70,12 +70,12 @@
 							</tr> --%>
 							<tr style="display: inline; " class="col-sm-<%=leftside%>">
 								<td width="20%">작성자 :</td>
-								<td width="30%">${bean.writer}</td>
+								<td width="30%">${bean.id}</td>
 							</tr>
-							<tr style="display: inline; " >	
+							<%-- <tr style="display: inline; " >	
 								<td width="20%">작성 일자 :</td>
 								<td width="30%">${bean.regdate}</td>
-							</tr>
+							</tr> --%>
 						</tbody>
 					</table>
 					<br><br><br>

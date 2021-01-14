@@ -75,38 +75,38 @@
 	</script>
 	<script type="text/javascript">
 		$(document).ready(function() {
-// 			$.ajax({
-// 				url:"${pageContext.request.contextPath}/dodamdodam?command=preview",
-// 				type:"get",
-// 				success: (response) =>{
-// 					autosize($('textarea'));
+ 			 $.ajax({
+ 				url:"${pageContext.request.contextPath}/dodamdodam?command=preview",
+ 				type:"get",
+ 				success: (response) =>{
+ 					autosize($('textarea'));
 					
-// 					$("[id*=starGarde_]").each(function() {
+ 					$("[id*=starGarde_]").each(function() {
 						
-// 						var star = "☆";
-// 						var star2 = "★";
-// 						var grade = Number($(this).text()); // 별점 수
-// 						var starGrade  = ""; //최종 문자열
+ 						var star = "☆";
+ 						var star2 = "★";
+ 						var grade = Number($(this).text()); // 별점 수
+ 						var starGrade  = ""; //최종 문자열
 						
-// 						//별점만큼 채워진별을 대입
-// 						for(var i = 0 ; i < grade; i++){
-// 							starGrade += star2;	
-// 						}
+ 						//별점만큼 채워진별을 대입
+ 						for(var i = 0 ; i < grade; i++){
+ 							starGrade += star2;	
+ 						}
 						
-// 						// 5-별점 만큼 빈별을 대입
-// 						for(var i = 0 ;i < 5-grade; i++){
-// 							starGrade += star;
-// 						}
-// 						// 완성된 문자열을 대입
-// 						$(this).text(starGrade).css("color","red");
-// 					});
+ 						// 5-별점 만큼 빈별을 대입
+ 						for(var i = 0 ;i < 5-grade; i++){
+ 							starGrade += star;
+ 						}
+ 						// 완성된 문자열을 대입
+ 						$(this).text(starGrade).css("color","red");
+ 					});
 					
-// 				},
-// 				error: () =>{
-// 					console.log("error")
-// 				}
+ 				},
+ 				error: () =>{
+ 					console.log("error")
+ 				}
 				
-			})
+			});
 			$("input[name='delivery']").click(function() {
 				var thisValue = $(this).val();
 				if (thisValue == "정기 배송") {
@@ -129,7 +129,7 @@
 		         })
 		         return false;
 			});
-		})
+		});
 	</script>
 		<script type="text/javascript">
 		var id = "${id}";
@@ -154,6 +154,24 @@
 			$("#inHere").css("display", "none");
 			$("input:radio[value='정기 배송']").removeAttr("checked");
 		};
+		function onemonth(){
+			
+		}
+		function twomonth(){
+			
+		}
+		function threemonth(){
+			
+		}
+		function fourmonth(){
+			
+		}
+		function fivemonth(){
+			
+		}
+		function sixmonth(){
+			
+		}
 	</script>
 </head>
 <body>
@@ -185,10 +203,19 @@
 					<table border="1" style="width: 100%; height: 100%;"
 						class="text-left">
 						<tr style="height: 100%" align="center">
-							<td class="list-group-item" style="font-size: 12">탐 사 수</td>
-							<td class="list-group-item">시중 판매 가격 : 11,000 원</td>
-							<td class="list-group-item">일반 회원 판매 가격 : 10,000 원</td>
-							<td class="list-group-item">구독 회원 가격 : 9,000 원</td>
+							<td class="list-group-item" style="font-size: 12">상품명(번호)</td>
+							<td class="list-group-item" style="font-size: 12">${bean.productname}(${bean.productcode})</td>
+							
+							<td class="list-group-item">시중 판매 가격 : </td>
+							<td class="list-group-item">${bean.productprice}원</td>
+							
+							<td class="list-group-item">일반 회원 판매 가격 : </td>
+							<td class="list-group-item">${bean.productprice}원</td>
+							
+							<td class="list-group-item">구독 회원 가격 : </td>
+							<td class="list-group-item">${bean.productprice}원</td>
+							
+							<td class="list-group-item">내일 토요일 12-19 도착 예정</td>
 							<td class="list-group-item">내일 토요일 12-19 도착 예정</td>
 							<td class="list-group-item">구매 수량
 								<div class="col-sm-6">
@@ -203,35 +230,37 @@
 									<table>
 										<tr>
 											<td>
-												<button type='button'>1개월 정기</button>
+												<button type='button' onclick="onemonth()">1개월 정기</button>
 											</td>
 											<td>
-												<button type='button'>2개월 정기</button>
+												<button type='button' onclick="twomonth()">2개월 정기</button>
 											</td>
 											<td>
-												<button type='button'>3개월 정기</button>
+												<button type='button' onclick="threemonth()">3개월 정기</button>
 											</td>
 										</tr>
 										<tr>
 											<td>
-												<button type='button'>4개월 정기</button>
+												<button type='button' onclick="fourmonth()">4개월 정기</button>
 											</td>
 											<td>
-												<button type='button'>5개월 정기</button>
+												<button type='button' onclick="fivemonth()">5개월 정기</button>
 											</td>
 											<td>
-												<button type='button'>6개월 정기</button>
+												<button type='button' onclick="sixmonth()">6개월 정기</button>
 											</td>
 										</tr>
 									</table>
 								</div>
 							</td>
-							<td class="list-group-item"><input type="button"
-								style="width: 80%; color: blue; background: white; border: 1; border-color: blue; font: bold;"
-								name="goMall" value="장바구니 담기"></td>
-							<td class="list-group-item"><input type="submit"
-								style="width: 80%; color: white; background: blue;"
-								name="gopayment" value="바로 구매 >" onclick="location.href='http://localhost:8989/SemiProject/product/payment.jsp'"></td>
+							<td class="list-group-item">
+								<input type="submit" style="width: 80%; color: blue; background: white; border: 1; border-color: blue; font: bold;"
+									name="goMall" value="장바구니 담기" onclick="location.href='http://localhost:8989/SemiProject/dodamdodam?command=mallcartlist'">
+							</td>
+							<td class="list-group-item">
+								<input type="submit" style="width: 80%; color: white; background: blue;"
+									name="gopayment" value="바로 구매 >" onclick="location.href='http://localhost:8989/SemiProject/product/payment.jsp'">
+							</td>
 						</tr>
 					</table>
 				</div>

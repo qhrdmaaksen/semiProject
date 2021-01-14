@@ -13,14 +13,13 @@ import common.SuperClass;
 import utility.FlowParameters;
 import utility.Paging;
 
-public class PlistController extends SuperClass{
-	String pageSize = "12";
+public class PlistController2 extends SuperClass{
 	@Override
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		FlowParameters parameters 
 			= new FlowParameters(
 					request.getParameter("pageNumber"), 
-					pageSize, 
+					request.getParameter("pageSize"), 
 					request.getParameter("mode"), 
 					request.getParameter("keyword")) ;
 		
@@ -34,7 +33,7 @@ public class PlistController extends SuperClass{
 						parameters.getKeyword() + "%");
 		
 		String contextPath = request.getContextPath() ;
-		String myurl = contextPath + "/dodamdodam?command=plist" ;
+		String myurl = contextPath + "/Shopping?command=plist" ;
 		
 		Paging pageInfo = new Paging(
 				parameters.getPageNumber(), 
@@ -57,8 +56,6 @@ public class PlistController extends SuperClass{
 		// 페이징 관련 항목들
 		request.setAttribute("pagingHtml", pageInfo.getPagingHtml());
 		request.setAttribute("pagingStatus", pageInfo.getPagingStatus());
-		System.out.println("pagingHtml : " + request.getParameter("pagingHtml"));
-		System.out.println("pagingStatus : " + request.getParameter("pagingStatus"));
 		
 		// 필드 검색과 관련된 항목들
 		request.setAttribute("mode", parameters.getMode());
@@ -68,7 +65,7 @@ public class PlistController extends SuperClass{
 		request.setAttribute("parameters", parameters.toString());		
 		
 		super.doGet(request, response);
-		System.out.println("왜 안나와" + request.getAttribute("mode"));
+		//System.out.println("왜 안나와" + request.getAttribute("mode"));
 		String gotopage = "product/plist.jsp" ;
 		super.GotoPage(gotopage);
 	}

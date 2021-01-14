@@ -19,31 +19,62 @@
 	  min-height: 100vh;
 	}
 	section{
-	padding: 50px;
+	padding-left: 130px;
+	padding-right: 50px;
 	}
-	div .ta{
-	padding: 50px;
-	}
+	
 </style>
 
 	<script type="text/javascript">
 		function writeForm(){
 			location.href='<%=NoForm%>prInsert';
 		}
-		function search(){
-			if( $('#mode').val() == 'all' ){
-				alert('검색 목록을 선택해주세요') ;				
-			}
-		}
-		function searchAll(){
-			location.href='<%=NoForm%>prList';
-		}
-	
+
 	</script>
 
 	
 </head>
+
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <body >
+
+<div class="w3-sidebar w3-bar-block w3-yellow w3-xxlarge" style="width:70px">
+
+
+ <a href="<%=NoForm%>pcategorylist&mode=eyes&${requestScope.parameters}"> 
+							<i class="fa fa-home"></i>
+						</a> 			
+ <a href="<%=NoForm%>pcategorylist&mode=bloodcirculation&${requestScope.parameters}"> 
+							<i class="fa fa-home"></i>
+						</a> 
+ <a href="<%=NoForm%>pcategorylist&mode=digestiveapparatus&${requestScope.parameters}"> 
+							<i class="fa fa-home"></i>
+						</a> 						
+ <a href="<%=NoForm%>pcategorylist&mode=skin&${requestScope.parameters}"> 
+							<i class="fa fa-home"></i>
+						</a> 						
+ <a href="<%=NoForm%>pcategorylist&mode=eyes&${requestScope.parameters}"> 
+							<i class="fa fa-home"></i>
+						</a> 
+ <a href="<%=NoForm%>pcategorylist&mode=fatigue&${requestScope.parameters}"> 
+							<i class="fa fa-home"></i>
+						</a> 				
+ <a href="<%=NoForm%>pcategorylist&mode=joint&${requestScope.parameters}"> 
+							<i class="fa fa-home"></i>
+						</a> 								
+ <a href="<%=NoForm%>pcategorylist&mode=hair&${requestScope.parameters}"> 
+							<i class="fa fa-home"></i>
+						</a> 								
+ <a href="<%=NoForm%>pcategorylist&mode=immunity&${requestScope.parameters}"> 
+							<i class="fa fa-home"></i>
+						</a> 																					
+  
+</div>
+
+
 
 
 
@@ -67,12 +98,11 @@
 
           <a href="#!">
             <div class="mask">
+            <a href="<%=NoForm%>pdetail&productcode=${bean.productcode}&${requestScope.parameters}">		  	
             <img src="${applicationScope.uploadedPath}/${bean.images}"
 										class="img-fluid w-100" width="200" height="300"
-										alt="${bean.images}">
-            
-              <!-- <img class="img-fluid w-100"
-                src="https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Vertical/12.jpg"> -->
+										alt="${bean.images}" >
+
               <div class="mask rgba-black-slight"></div>
             </div>
           </a>
@@ -99,10 +129,8 @@
 							<input type="hidden" name="stock" value="${bean.stock}">
 							<input type="hidden" name="qty" value="1">         
 						</div>
-						<!-- <button type="submit" class="btn btn-primary btn-sm mr-1 mb-2"><i
-             			 class="fas fa-shopping-cart pr-2"></i>Add to cart</button> -->
-						<button type="submit" class="btn btn-primary btn-sm mr-1 mb-2">Add to cart</button>
-					</form>
+					<button type="submit" class="btn btn-primary btn-sm mr-1 mb-2">Add to cart</button>
+				</form>
 			<form class="form-inline" role="form" name="myform" action="<%=YesForm%>" method="post">
 			
 				<input type="hidden" name="command" value="pdetail">
@@ -129,106 +157,32 @@
 
 </div>
 
-
+</section>
 
 <br><br><br>
 
 
-
-<table>
-	<tr>
-		<td colspan="12" align="center">
-			<form class="form-inline" role="form" name="myform" action="<%=YesForm%>" method="get">
+	<div id="form-t" style="padding-left: 250px;">
+		<form class="form-inline" role="form" name="myform" action="<%=YesForm%>" method="get">
 				<input type="hidden" name="command" value="plist">
+				<input type="hidden" name="mode" value="productname">
 				<div class="form-group">
-					<select class="form-control" name="mode" id="mode">
-						<option value="all" selected="selected">-- 선택하세요---------
-						<option value="productname">상품명
-						<!-- <option value="company">제조회사									
-						<option value="category">카테고리				 -->					
-					</select>
-				</div>
-				<div class="form-group">
-					<input type="text" class="form-control btn-xs" name="keyword"
-						id="keyword" placeholder="검색 키워드">
-				</div>
-				
-					<button class="btn btn-default btn-warning" type="submit" onclick="search();">검색</button>
-					<button class="btn btn-default btn-warning" type="button" onclick="searchAll();">전체 검색</button>
-					
-		</td>
-	</tr>
-	<tr>
-		<td>
-			<div class="container">
-			  <form action="/action_page.php">
-			
-			      <label class="form-check-label" for="radio1">
-			        <input type="radio" class="form-check-input" id="radio1" name="optradio" value="option1" checked>눈
-			      </label>
-			 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-			
-			      <label class="form-check-label" for="radio2">
-			        <input type="radio" class="form-check-input" id="radio2" name="optradio" value="option2">혈액순환
-			      </label>
-			   
-			 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-			       <label class="form-check-label" for="radio3">
-			        <input type="radio" class="form-check-input" id="radio3" name="optradio" value="option3">소화기관
-			      </label>
-			     
-			 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-			       <label class="form-check-label" for="radio4">
-			        <input type="radio" class="form-check-input" id="radio4" name="optradio" value="option4">피부
-			      </label>
-			      
-			 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-			       <label class="form-check-label" for="radio5">
-			        <input type="radio" class="form-check-input" id="radio5" name="optradio" value="option5">피로
-			      </label>
-			      
-			 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-			       <label class="form-check-label" for="radio6">
-			        <input type="radio" class="form-check-input" id="radio6" name="optradio" value="option6">관절
-			      </label>
-			      
-			 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-			       <label class="form-check-label" for="radio7">
-			        <input type="radio" class="form-check-input" id="radio7" name="optradio" value="option7">머릿결,손톱
-			      </label>
-			      
-			 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-			       <label class="form-check-label" for="radio8">
-			        <input type="radio" class="form-check-input" id="radio8" name="optradio" value="option8">면역
-			      </label>
-			   
-			    <button type="submit" class="btn btn-primary">Submit</button>
-			  </form>
-			</div>			
-					
-					
-							
-				<c:if test="${whologin == 2}">
-					<button class="btn btn-default btn-info" type="button"
-						onclick="writeForm();">상품 등록</button>
-				</c:if>
-								
-				<%-- 				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-					<p class="form-control-static">${requestScope.pagingStatus}</p> --%>
-			</form>
-		</td>
-	</tr>				
-</table>	
-		<br><br>
-					
-					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-				<div align="center">
-			<footer>${requestScope.pagingHtml}</footer>
-		</div>		
+			<div class="form-group">
+				<input type="text" class="form-control btn-xs" name="keyword"
+					id="keyword" placeholder="검색 키워드">
+			</div>
+				<button class="btn btn-default btn-warning" type="submit">검색</button>
+				<!-- <button class="btn btn-default btn-warning" type="button">전체 검색</button> -->
+		</div>
+			<p class="form-control-static">${requestScope.pagingStatus}</p>
+	  </form>
 	</div>		
-</section>	
+	
 
-
+	
+	<div align="center">
+			<footer>${requestScope.pagingHtml}</footer>
+		</div>
 
 <br><br>
 	<script type="text/javascript">
