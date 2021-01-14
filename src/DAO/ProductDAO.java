@@ -18,7 +18,7 @@ public class ProductDAO extends SuperDAO{
 			ResultSet rs = null ;		
 			
 			String sql = " select count(*) as cnt from products " ;
-				sql += " where \" " + mode + " \" like '" + keyword + "'" ;
+				sql += " where \"" + mode + "\" like '" + keyword + "'" ;
 			/*
 			 * if(mode.equalsIgnoreCase("all") == false) { sql += " where \" " + mode +
 			 * " \" like '" + keyword + "'" ; }
@@ -352,6 +352,46 @@ public class ProductDAO extends SuperDAO{
 						
 						return lists ;
 					}
+
+
+		public int DeleteData(int productcode) {
+			Connection conn = null ;
+			PreparedStatement pstmt = null ;
+			int cnt = -999999 ;
+
+			try {
+				conn = super.getConnection() ;
+				
+				// 해당 상품을 삭제합니다.
+				String sql = " delete from products  " ;
+				sql += " where \"productcode\" = ? " ;
+				
+				pstmt = conn.prepareStatement(sql) ;
+				
+				pstmt.setInt(1, productcode); // 상품 번호
+				cnt = pstmt.executeUpdate() ; 
+				
+				conn.commit(); 
+
+			} catch (Exception e) {
+				SQLException err = (SQLException)e ;			
+				cnt = - err.getErrorCode() ;			
+				e.printStackTrace();
+				try {
+					conn.rollback(); 
+				} catch (Exception e2) {
+					e2.printStackTrace();
+				}
+			} finally{
+				try {
+					if(pstmt != null){pstmt.close();}
+					if(conn != null){conn.close();}
+				} catch (Exception e2) {
+					e2.printStackTrace();
+				}
+			}
+			return cnt ;
+		}
 		
 		
 		
