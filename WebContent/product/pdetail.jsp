@@ -19,11 +19,9 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 <%@ include file="../common/nav.jsp"%>
-	<script src="../js/jquery-3.5.1.min.js" type="text/javascript"></script>
-	<script	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-	<script src="../js/jquery.zoom.min.js"></script>
+	<script src="./js/jquery-3.5.1.min.js" type="text/javascript"></script>
+	<script src="./js/jquery.zoom.min.js"></script>
 	<script type="text/javascript" src="https://rawgit.com/jackmoore/autosize/master/dist/autosize.min.js"></script>
-	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
 	<link
 	    rel="stylesheet"
 	    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"
@@ -107,14 +105,15 @@
  				}
 				
 			});
-			$("input[name='delivery']").click(function() {
-				var thisValue = $(this).val();
-				if (thisValue == "정기 배송") {
+			$("input[name='delivery']").change(function() {
+				if($(this).prop("checked")){
 					$("#inHere").css("display", "block");
 					$('#buy-qty').val(0);
-				} else if (thisValue == false){
+					$('#buy-qty').trigger("change");
+				}else {
 					$("#inHere").css("display", "none");
 					$('#buy-qty').val(1);
+					$('#buy-qty').trigger("change");
 				}
 			});
 			$('#star_grade a').click(function(){
@@ -129,6 +128,20 @@
 		         })
 		         return false;
 			});
+			$("#buy-qty").on("click", function() {
+				if($("input[name='delivery']").prop("checked")){
+					$("input[name='delivery']").click();
+				}	
+			});
+			
+			$("#buy-qty").on('change',function(e) {
+				let price = parseInt("${bean.productprice}");
+				$("[data-id=productprice]").each(function() {
+					$(this).text(price * e.target.value + "원");
+				});
+				let price2 = parseInt("${bean.productprice}");
+				$("[data-id=productprice2]").text(price2 * e.target.value +"원");
+			})
 		});
 	</script>
 		<script type="text/javascript">
@@ -207,13 +220,13 @@
 							<td class="list-group-item" style="font-size: 12">${bean.productname}(${bean.productcode})</td>
 							
 							<td class="list-group-item">시중 판매 가격 : </td>
-							<td class="list-group-item">${bean.productprice}원</td>
+							<td class="list-group-item" data-id="productprice">${bean.productprice}원</td>
 							
 							<td class="list-group-item">일반 회원 판매 가격 : </td>
-							<td class="list-group-item">${bean.productprice}원</td>
+							<td class="list-group-item" data-id="productprice">${bean.productprice}원</td>
 							
 							<td class="list-group-item">구독 회원 가격 : </td>
-							<td class="list-group-item">${bean.productprice}원</td>
+							<td class="list-group-item" data-id="productprice2">${bean.productprice}원</td>
 							
 							<td class="list-group-item">내일 토요일 12-19 도착 예정</td>
 							<td class="list-group-item">내일 토요일 12-19 도착 예정</td>
@@ -221,10 +234,10 @@
 								<div class="col-sm-6">
 									<input id="buy-qty" type="number"
 										class="form-control mypopover" title="수량 입력란" value="1" min="1"
-										data-content="구매하고자 하는 수량을 정수로 입력하세요." onclick="deliverynone()">
+										data-content="구매하고자 하는 수량을 정수로 입력하세요." >
 								</div>
 							</td>
-							<td class="list-group-item" align="center"><input id="delivery-select" type="radio"
+							<td class="list-group-item" align="center"><input id="delivery-select" type="checkbox"
 								name="delivery" value="정기 배송">&nbsp;&nbsp;정기 배송 선택
 								<div id="inHere" style="display: none;">
 									<table>
@@ -259,7 +272,7 @@
 							</td>
 							<td class="list-group-item">
 								<input type="submit" style="width: 80%; color: white; background: blue;"
-									name="gopayment" value="바로 구매 >" onclick="location.href='http://localhost:8989/SemiProject/product/payment.jsp'">
+									name="gopayment" value="바로 구매 >" onclick="location.href='http://localhost:8989/SemiProject/product/payment.jsp?'">
 							</td>
 						</tr>
 					</table>
@@ -355,25 +368,17 @@
 								<td><textarea readonly="readonly" style="overflow: visible; resize: both;">${fn:replace(item.content, replaceChar,replaceChar)}</textarea></td>
 								<td>${item.postdate}</td>
 								<td id="starGarde_${i.index}">${item.grade}</td>
-								<td>${bean.update}</td>
-								<td>${bean.delete}</td>
 								<td>
-									<c:if test=" ${whologin == 1}${whologin == 2}">
-										<a href="previewupdate.jsp?seq_review=${bean.no}&${requestScope.parameters}">
+									<c:if test="${whologin == 1 || whologin == 2}">
+										<a href="?command=previewupdate&seq_review=${item.reviewno}&${requestScope.parameters}">
 											수정 </a>
 									</c:if> 
-									<c:if test=" ${whologin == 1}${whologin == 2}">
-									수정
-									</c:if>
 								</td>
 								<td>
-									<c:if test="${whologin == 1}${whologin == 2}">
-										<a href="pdetaildelete&no=${bean.no}&${requestScope.parameters}">
+									<c:if test="${whologin == 1 || whologin == 2}">
+										<a href="?command=preview_delete&seq_review=${item.reviewno}&${requestScope.parameters}">
 											삭제 </a>
 									</c:if> 
-									<c:if test=" ${whologin == 1}${whologin == 2}">
-										삭제
-									</c:if>
 								</td>
 							</tr>
 						</c:forEach>
@@ -413,8 +418,8 @@
 												&nbsp;</label>
 											<div class="col-sm-12">
 												<textarea name="content" id="content" rows="5" cols=""
-													placeholder="글 내용" class="form-control">${bean.content}</textarea>
-												<span class="err">${errcontent}</span>
+													placeholder="글 내용" class="form-control"></textarea>
+												<span class="err"></span>
 											</div>
 											<br>
 											<div class="col-sm-6">

@@ -14,10 +14,10 @@ public class PreviewUpdateController extends SuperClass{
 	private PreviewVO bean = null ; 
 	@Override
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int no = Integer.parseInt(request.getParameter("seq_review")) ;
+		int seq_review = Integer.parseInt(request.getParameter("seq_review")) ;
 		PreviewDAO dao = new PreviewDAO(request);
 		
-		PreviewVO xxx = dao.selectdatabypk(no);
+		PreviewVO xxx = dao.selectdatabypk(seq_review);
 		
 		request.setAttribute("bean", xxx);
 		
@@ -44,7 +44,7 @@ public class PreviewUpdateController extends SuperClass{
 			cnt = dao.UpdateData(bean) ;
 			
 			// request 객체의 내용을 보존하면서 목록 보기 페이지로 넘겨 줍니다.
-			new PreviewController().doGet(request, response);
+			response.sendRedirect("/SemiProject/dodamdodam?command=pdetail&productcode="+request.getParameter("reviewno"));
 			
 		}else { // 유효성 검사 실패
 			request.setAttribute("bean", bean);			

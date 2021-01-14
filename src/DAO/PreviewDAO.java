@@ -20,6 +20,8 @@ public class PreviewDAO extends SuperDAO{
 	public PreviewDAO(HttpServletRequest request) {
 		this.request = request;
 	}
+	public PreviewDAO() {
+	}
 	public int addReview() {
 		
 		MemberVO bean = null;
@@ -107,8 +109,8 @@ public class PreviewDAO extends SuperDAO{
 
 	public int UpdateData(PreviewVO bean) {
 		String sql = " update p_review set  ";
-		sql += " seq_review=?, id=?, content=?, postdate=? " ;
-		sql += " where seq_review = ? " ;    
+		sql += " \"id\"=?, \"content\"=?, \"postdate\"=? " ;
+		sql += " where \"seq_review\" = ? " ;    
 		Connection conn = null ;
 		PreparedStatement pstmt = null ;
 		int cnt = -999999 ;
@@ -118,10 +120,10 @@ public class PreviewDAO extends SuperDAO{
 			pstmt = conn.prepareStatement(sql) ;
 
 			// placeholder
-			pstmt.setInt(1, bean.getReviewno());
-			pstmt.setString(2, bean.getId());
-			pstmt.setString(3, bean.getContent());
-			pstmt.setString(4, bean.getPostdate());
+			pstmt.setString(1, bean.getId());
+			pstmt.setString(2, bean.getContent());
+			pstmt.setString(3, bean.getPostdate());
+			pstmt.setInt(4, bean.getReviewno());
 			
 			cnt = pstmt.executeUpdate() ; 
 			conn.commit(); 
@@ -146,12 +148,12 @@ public class PreviewDAO extends SuperDAO{
 		return cnt ;
 	}
 
-	public PreviewVO selectdatabypk(int no) {
+	public PreviewVO selectdatabypk(int seq_review) {
 		// 해당 게시물 번호의 Bean 객체를 구합니다.
 				PreviewVO bean = null ;
 				
 				String sql = " select * from p_review ";
-				sql += " where seq_review = ? " ;
+				sql += " where \"seq_review\" = ? " ;
 				
 				Connection conn = null ;
 				PreparedStatement pstmt = null ;
@@ -162,7 +164,7 @@ public class PreviewDAO extends SuperDAO{
 					pstmt = conn.prepareStatement(sql) ;
 
 					// placeholder		
-					pstmt.setInt(1, no);
+					pstmt.setInt(1, seq_review);
 								
 					rs = pstmt.executeQuery() ;
 					
@@ -196,5 +198,40 @@ public class PreviewDAO extends SuperDAO{
 				}
 				
 				return bean  ;
+	}
+	public int DeleteData(int seq_review) {
+		Connection conn = null ;
+		PreparedStatement pstmt = null ; 
+		int cnt = -999999 ; 
+		
+		try {
+			conn = super.getConnection() ; 
+			
+			String sql = "delete from p_review " ;
+			sql += " where \"seq_review\"= ? ";
+			
+			pstmt = conn.prepareStatement(sql) ;
+			pstmt.setInt(1, seq_review);
+			cnt = pstmt.executeUpdate() ; 
+			
+			conn.commit() ; 
+		} catch (SQLException e) {
+			SQLException err = (SQLException)e ;			
+			cnt = - err.getErrorCode() ;			
+			e.printStackTrace();
+			try {
+				conn.rollback(); 
+			} catch (Exception e2) {
+				e2.printStackTrace();
+			}
+		} finally{
+			try {
+				if(pstmt != null){pstmt.close();}
+				if(conn != null){conn.close();}
+			} catch (Exception e2) {
+				e2.printStackTrace();
+			}
+		}
+		return cnt ;
 	}
 }
