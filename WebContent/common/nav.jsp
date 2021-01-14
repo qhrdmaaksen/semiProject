@@ -101,8 +101,15 @@
 				<a class="nav-link" href="<%=NoForm%>survey">
 				추천 받기</a>
 			</li>
+		    <li class="nav-item dropdown">
+				<a class="nav-link" href="<%=NoForm%>plist">상품 보기</a>
+				<c:if test="${whologin == 2}">
+				<div class="dropdown-menu">
+					<a class="dropdown-item" href="<%=NoForm%>pinsert">상품 등록</a>
+				</div></c:if>
+			</li>
 			<li class="nav-item">
-				<a class="nav-link" href="<%=NoForm%>plist">제품 보기</a>
+				<a class="nav-link" href="<%=NoForm%>plist">상품 보기</a>
 			</li>
 			<li class="nav-item">
 				<a class="nav-link" href="<%=NoForm%>mallcartlist">장바구니</a>
