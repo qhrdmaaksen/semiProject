@@ -5,11 +5,6 @@
     
 <!DOCTYPE html>
 <html>
-
-
-
-
-
 <script type="text/javascript">
 		function checkDuplicateId(  ){
 			var id = document.myform.id.value ;

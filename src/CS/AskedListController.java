@@ -1,20 +1,17 @@
 package CS;
 
-import java.io.IOException;
-import java.util.List;
+import DAO.AskedDAO;
+import VO.AskedVO;
+import com.google.gson.Gson;
+import common.SuperClass;
+import utility.FlowParameters;
+import utility.Paging;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-
-import com.google.gson.Gson;
-
-import DAO.AskedDAO;
-import VO.AskedVO;
-import common.SuperClass;
-import utility.FlowParameters;
-import utility.Paging;
+import java.io.IOException;
+import java.util.List;
 
 public class AskedListController extends SuperClass{
 	@Override

@@ -27,7 +27,7 @@ public class AskedUpdateController extends SuperClass{
 		
 		super.doGet(request, response);
 		
-		String gotopage = "cs_center/notice_update.jsp" ;
+		String gotopage = "cs_center/asked_update.jsp" ;
 		super.GotoPage(gotopage);
 	}
 	@Override
@@ -46,9 +46,8 @@ public class AskedUpdateController extends SuperClass{
 			AskedDAO dao = new AskedDAO();
 			int cnt = -999999 ;
 			cnt = dao.UpdateData(bean) ;
-			
 			// request 객체의 내용을 보존하면서 목록 보기 페이지로 넘겨 줍니다.
-			new AskedListController().doGet(request, response);
+			new NoticeListController().doGet(request, response);
 			
 		}else { // 유효성 검사 실패
 			request.setAttribute("bean", bean);			
@@ -68,7 +67,7 @@ public class AskedUpdateController extends SuperClass{
 		}
 	
 		if( bean.getTitle().length() < 3 || bean.getTitle().length() > 50 ){
-			request.setAttribute( super.PREFIX + "subject", "제목은 3글자 이상 50글자 이하이어야 합니다.");
+			request.setAttribute( super.PREFIX + "title", "제목은 3글자 이상 50글자 이하이어야 합니다.");
 			isCheck = false  ;
 		}
 		if( bean.getContent().length() < 5 || bean.getContent().length() > 1000 ){

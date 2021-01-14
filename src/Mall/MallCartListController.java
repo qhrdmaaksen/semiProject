@@ -59,6 +59,7 @@ public class MallCartListController extends SuperClass{
 				ProductVO bean = pdao.SelectDataByPk(productcode) ;
 				
 				int productprice = bean.getProductprice() ;
+				int point = bean.getProductprice();
 				
 				totalAmount += qty * productprice ;
 												
@@ -67,7 +68,7 @@ public class MallCartListController extends SuperClass{
 				shopinfo.setImages(bean.getImages());
 				shopinfo.setProductname(bean.getProductname()); 
 				shopinfo.setProductcode(productcode);
-				shopinfo.setStock(bean.getStock()); 
+				shopinfo.setPoint(point);
 				shopinfo.setProductprice(productprice); 
 				shopinfo.setQty(qty);  
 				

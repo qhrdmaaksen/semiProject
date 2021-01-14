@@ -65,11 +65,15 @@
 						</div>
 					</div>
 					<div class="form-group">
-						<label class="control-label col-sm-<%=formleft%>" for="regdate">작성 일자</label>
+						<label class="control-label col-sm-<%=formleft%>" for="regdate">작성	일자
+						</label>
 						<div class="col-sm-<%=formright%>">
-							<span id="clock"></span>
+							<input type="datetime" class="form-control" name="regdate"
+								id="regdate" placeholder="작성 일자" value="${bean.regdate}">
+							<span class="err">${errregdate}
+							</span>
 						</div>
-					</div>					
+					</div>	
 					<div class="form-group">
 						<div align="center" class="col-sm-offset-3 col-sm-6">
 							<button class="btn btn-primary" type="submit" onclick="location.href='http://localhost:8989/SemiProject/product/pdetail.jsp'">수정하기</button>

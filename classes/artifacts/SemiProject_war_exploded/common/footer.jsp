@@ -87,9 +87,7 @@
 			<div class="row" id="footermenu">
 				<div class='col'>
 					<ul>
-						<li class="only-pc"><a href="http://localhost:8989/SemiProject/cs-center/cs-center-main.jsp#modal">개인정보 처리방침 및 이용약관</a>
-						<!--고객센터 메뉴로연동--></li>
-						<li class="only-pc"><a href='http://localhost:8989/SemiProject/cs-center/cs-center-main.jsp'>고객 센터</a>
+						<li class="only-pc"><a href='http://localhost:8989/SemiProject/dodamdodam?command=cs_center_main&'>고객 센터</a>
 						<!--고객센터 메뉴로연동--></li>
 					</ul>
 				</div>
@@ -117,7 +115,6 @@
 			</div>			
 		</div>
 	<div id="cannanoogi">
-		<address class="fooeraddress">
 		<div class="footerdodam">
 			<div id="footerlogimage" align="center">
 				<img alt="도담도담" src="../images/logotest.png">
@@ -149,6 +146,7 @@
 				</p>
 		</div>
 				<br><br>
+		<address class="fooeraddress">
 			<div class="cs"><h4 align="center">고객센터</h4>
 				<p align="center">
 					<span>고객문의: <a href="mailto:rlaalsdn8@gmail.com">rlaalsdn8@gmail.com</a>

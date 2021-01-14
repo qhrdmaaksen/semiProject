@@ -16,6 +16,9 @@
 	
 	
 	}
+	.logo2{
+  	margin-top: 70%;
+  	}
 
   	.totallogin{
   		margin-top : 20%;
@@ -74,7 +77,9 @@
 </head>
 <body>
     <div class="container">
+    	
         <div class="totallogin">
+       
             <form class="form-horizontal" role="form" action="<%=YesForm%>" method="post" >
                 <input type="hidden" name="command" value="melogin">
                 <div class="borderclass ">
@@ -126,4 +131,3 @@
     </div>
 </body>
 </html>
-

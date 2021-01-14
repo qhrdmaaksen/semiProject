@@ -26,6 +26,28 @@
         .top4 {
             padding: 20px 200px;
         }
+        .card-icon{
+            float: left;
+        }
+        .card-icons{
+            height: 65px;
+        }
+        .card-icon{
+            width: 54px;
+            height: 53px;
+            border-radius: 50%;
+            border: 2px solid #5a6268;
+            overflow: hidden;
+            margin-left: 5px;
+            float: left;
+        }
+        .card-icon:first-child{
+            margin-left: 0px;
+        }
+        .card-icon-img{
+            width: 50px;
+            height: 50px;
+        }
     </style>
 </head>
 <body>
@@ -85,8 +107,33 @@
                     <div class="card">
                         <img src="./../images/test02.png" class="card-img-top" alt="...">
                         <div class="card-body">
-                            <h5 class="card-title text-center">${product.productcode}, ${product.productname}</h5>
-                            <p class="card-text">간략한 영양제의 정보를 적어둠</p>
+                            <h5 class="card-title text-center">${product.productname}</h5>
+                            <ul class="card-icons">
+                                <c:if test="${product.bloodCirculation > 0}">
+                                    <li class="card-icon"><img class="card-icon-img" src="./../images/icon/icon_bloodcirculation.png"></li>
+                                </c:if>
+                                <c:if test="${product.digestiveapparatus > 0}">
+                                    <li class="card-icon"><img class="card-icon-img" src="./../images/icon/icon_digestiveapparatus.png"></li>
+                                </c:if>
+                                <c:if test="${product.eyes > 0}">
+                                    <li class="card-icon"><img class="card-icon-img" src="./../images/icon/icon_eyes.png"></li>
+                                </c:if>
+                                <c:if test="${product.fatigue > 0}">
+                                    <li class="card-icon"><img class="card-icon-img" src="./../images/icon/icon_fatigue.png"></li>
+                                </c:if>
+                                <c:if test="${product.hair > 0}">
+                                    <li class="card-icon"><img class="card-icon-img" src="./../images/icon/icon_hair.png"></li>
+                                </c:if>
+                                <c:if test="${product.immunity > 0}">
+                                    <li class="card-icon"><img class="card-icon-img" src="./../images/icon/icon_immunity.png"></li>
+                                </c:if>
+                                <c:if test="${product.joint > 0}">
+                                    <li class="card-icon"><img class="card-icon-img" src="./../images/icon/icon_joint.png"></li>
+                                </c:if>
+                                <c:if test="${product.skin > 0}">
+                                    <li class="card-icon"><img class="card-icon-img" src="./../images/icon/icon_skin.png"></li>
+                                </c:if>
+                            </ul>
                             <a href="<%=NoForm%>pdetail&code=${product.productcode}" class="btn btn-primary stretched-link">제품 상세</a>
                         </div>
                     </div>
