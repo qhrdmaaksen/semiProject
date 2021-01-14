@@ -43,5 +43,6 @@ pcategorylist=product.PcategorylistController
 mallcartadd=Mall.MallCartAddController
 mallcartlist=Mall.MallCartListController
 mallcartdelete=Mall.MallCartDeleteItemController
-
+mallhistory=Mall.MallHistoryController
+mallDetail=Mall.MallDetailController
 
