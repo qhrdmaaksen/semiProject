@@ -37,7 +37,6 @@ public class MemberLoginController extends SuperClass{
 
 			String errmsg = "로그인 양식이 잘못되었습니다.";
 
-
 			super.setErrorMessage(errmsg);
 			this.doGet(request, response);
 		}else {
