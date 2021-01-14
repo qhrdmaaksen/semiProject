@@ -14,12 +14,13 @@ import utility.FlowParameters;
 import utility.Paging;
 
 public class PlistController extends SuperClass{
+	String pageSize = "12";
 	@Override
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		FlowParameters parameters 
 			= new FlowParameters(
 					request.getParameter("pageNumber"), 
-					request.getParameter("pageSize"), 
+					pageSize, 
 					request.getParameter("mode"), 
 					request.getParameter("keyword")) ;
 		
