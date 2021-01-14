@@ -17,18 +17,8 @@
 <meta name='viewport' content='width=device-width, initial-scale=1'>
 <script src='https://kit.fontawesome.com/a076d05399.js'></script>
 </head>
-
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <body>
- <div class="w3-sidebar w3-bar-block w3-black w3-xxlarge" style="width:70px">
-  <a href="#" class="w3-bar-item w3-button"><i class="fa fa-home"></i></a> 
-  <a href="#" class="w3-bar-item w3-button"><i class="fa fa-search"></i></a> 
-  <a href="#" class="w3-bar-item w3-button"><i class="fa fa-envelope"></i></a> 
-  <a href="#" class="w3-bar-item w3-button"><i class="fa fa-globe"></i></a>
-  <a href="#" class="w3-bar-item w3-button"><i class="fa fa-trash"></i></a> 
-</div>
+ 
 <h3>Hellow World!</h3>
  
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
@@ -46,6 +36,8 @@
 <br><br>
 <i class="fas fa-exchange-alt" style='font-size:36px'>혈액순환</i>
 <br><br>
+<i class='fas fa-retweet' style='font-size:36px'></i>
+<br><br>
 
 <i class='fas fa-child' style='font-size:36px'>피로</i>
 <br><br>
@@ -57,6 +49,13 @@
 <br><br>
 <i class="far fa-smile-beam"></i>
 <br><br>
+<i class='fab fa-keybase' style='font-size:36px'></i>
+<br><br>
+<i class='far fa-laugh-beam' style='font-size:36px'></i>
+<br><br>
+<i class='fas fa-lungs-virus' style='font-size:36px'></i>
+<br><br>
+
 
 <br><br>
 
@@ -64,9 +63,8 @@
 
 <br><br>
 
+<br><br>
 
 </body>
 </html>
-
-
 
