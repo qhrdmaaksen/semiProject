@@ -76,6 +76,14 @@ int mysearch = 2;
 		function searchAll() {
 			location.href = "/SemiProject/dodamdodam?command=cs_center_main&pageNumber=1&pageSize=10&mode=all&keyword=";
 		}
+		function askedsearch() {
+			var askedmode = $("#askedmode").val();
+			var askedkeyword = $("#askedkeyword").val();
+			location.href = "/SemiProject/dodamdodam?command=cs_center_main_asked&askedpageNumber=1&askedpageSize=10&askedmode="+askedmode+"&askedkeyword="+askedkeyword;
+		}
+		function askedsearchAll() {
+			location.href = "/SemiProject/dodamdodam?command=cs_center_main&pageNumber=1&pageSize=10&mode=all&keyword=";
+		}
 		function writeForm(){
 			location.href='<%=NoForm%>notice_insert';
 		}
@@ -107,7 +115,7 @@ int mysearch = 2;
 				return false;
 			}else {
 				console.log("로그인되어있음");
-				location.href="/SemiProject/dodamdodam?command=asked_detailview&seq_index="+seq_index+"&${requestScope.askedparameters}"; 
+				location.href="${NoForm}?command=asked_detailview&seq_index="+seq_index+"&${requestScope.askedparameters}"; 
 			}
 		}
 	</script>
@@ -255,8 +263,7 @@ int mysearch = 2;
 					</tbody>
 					<tr>
 						<td colspan="2" align="center">
-							<form action="<%=YesForm%>" class="form-inline" name="myform"
-								method="get">
+							<form class="form-inline" name="myform" onsubmit="return false;">
 								<input type="hidden" name="command" value="cs_center_main_asked">
 								<div class="form-group">
 									<select class="form-control" name="askedmode" id="askedmode">
@@ -269,7 +276,7 @@ int mysearch = 2;
 									<input type="text" class="form-control btn-xs" name="askedkeyword"
 										id="askedkeyword" placeholder="검색 키워드">
 								</div>
-								<button class="btn btn-default btn-warning" type="submit"
+								<button class="btn btn-default btn-warning" type="button"
 									onclick="askedsearch();">검색</button>
 								<button class="btn btn-default btn-warning" type="button"
 									onclick="askedsearchAll();">전체 검색</button>
@@ -278,7 +285,7 @@ int mysearch = 2;
 										onclick="askedwriteForm();">글 쓰기</button>
 								</c:if>
 								<div style="float: right; margin-top: 2%;" class="col-md-4">
-									<p class="form-control-static">${askedpagingStatus}</p>
+									<p class="form-control-static">${requestScope.askedpagingStatus}</p>
 								</div>
 							</form>
 						</td>

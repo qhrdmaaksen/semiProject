@@ -53,7 +53,7 @@ public class AskedDetailViewController extends SuperClass{
 		} else {
 			// 포워딩을 이용하여 목록 페이지로 다시 돌아갑니다.
 			// 다음과 같이 코딩하면 request와 response 객체가 그대로 다시 넘어 갑니다.
-			new AskedListController().doGet(request, response); 
+			new NoticeListController().doGet(request, response); 
 		}		
 	}
 	@Override

@@ -24,7 +24,7 @@ public class AskedDAO extends SuperDAO{
 		
 		
 		if(mode.equalsIgnoreCase("all") == false) {
-			sql += " where " + mode + " like '" + keyword + "' " ;  
+			sql += " where \"" + mode + "\" like '%" + keyword + "' " ;  
 		}
 		
 		sql += " ) " ;

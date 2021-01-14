@@ -78,17 +78,21 @@
 				<h3 align="center">구매자 정보</h3>
 				<table id="paymemberinfo" style="padding: 10px 0px 10px 16px; font: 12px 돋움, Dotum, sans-werif;">
 					<tr align="center">
-						<th style="background: #f0f0f5; font-weight: bold;">이름</th>
-						<td>김민우</td>
+						<th style="background: #f0f0f5; font-weight: bold;">이름
+						</th>
+						<td>${sessionScope.loginfo.name}(${sessionScope.loginfo.id})님
+						</td>
 					</tr>
 					<tr align="center">
-						<th style="background: #f0f0f5; font-weight: bold;">이메일</th>
-						<td>rlaalsdn8@gmail.com</td>
+						<th style="background: #f0f0f5; font-weight: bold;">이메일
+						</th>
+						<td><%-- ${sessionScope.loginfo.email} --%>
+						</td>
 					</tr>
 					<tr align="center">
 						<th style="background: #f0f0f5; font-weight: bold;">휴대폰 번호</th>
 						<td>
-							<input type="text" name="phonenum" value="010-9255-9798">
+							<input type="text" name="phonenum" value="${sessionScope.loginfo.phone}">
 						</td>
 						<td>
 							<button type="button" style="background: white;">수정</button>
@@ -111,8 +115,10 @@
 				<table id="deliverytable" style="padding: 10px 0px 10px 16px; font: 12px 돋움, Dotum, sans-werif;">
 					<tbody>
 						<tr align="center">
-							<th style="background: #f0f0f5; font-weight: bold;">이름</th>
-							<td align="center">김민우</td>
+							<th style="background: #f0f0f5; font-weight: bold;">이름
+							</th>
+							<td align="center">${sessionScope.loginfo.name}(${sessionScope.loginfo.id})님
+							</td>
 							<td>
 								<button type="button" name="basedelivery" style="background: white;">
 									기본배송지
@@ -121,11 +127,11 @@
 						</tr>
 						<tr align="center">
 							<th style="background: #f0f0f5; font-weight: bold;">배송주소</th>
-							<td align="center">인천광역시 중구 중산동 1887-1 인천 영종하늘도시 한라비발디아파트 929동 1204호</td>
+							<td align="center"><%-- ${sessionScope.loginfo.address1} ${sessionScope.loginfo.address2} --%></td>
 						</tr>
 						<tr align="center">
 							<th style="background: #f0f0f5; font-weight: bold;">연락처</th>
-							<td align="center">010-9255-9798</td>
+							<td align="center">${sessionScope.loginfo.phone}</td>
 						</tr>
 						<tr align="center">
 							<th style="background: #f0f0f5; font-weight: bold;">배송 요청사항</th>
@@ -192,7 +198,9 @@
 				</tr>
 				<tr align="center">
 					<th>배송비</th>
-					<td>0원</td>
+					<td>
+						<fmt:formatNumber value="${shipExpense}" pattern="###,###"/>원
+					</td>
 				</tr>
 				<tr align="center">
 					<th>도담도담 캐시</th>
@@ -200,7 +208,12 @@
 				</tr>
 				<tr align="center">
 					<th>총 결제금액</th>
-					<td>120,000원</td>
+					<td>
+						<c:set var="finalAmount" value="${totalAmount + shipExpense}" />
+						<strong>
+							<fmt:formatNumber value="${finalAmount}" pattern="###,###"/> 원
+						</strong>
+					</td>
 				</tr>
 				<tr align="center">
 					<th>결제방법</th>
