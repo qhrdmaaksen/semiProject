@@ -43,45 +43,57 @@
 
 
 
-<div class="w3-sidebar w3-bar-block w3-yellow w3-xxlarge" style="width:70px">
+<div class="w3-sidebar w3-bar-block w3-yellow w3-xxlarge" style="width:70px; align-content: center;">
 
 
- <a href="<%=NoForm%>pcategorylist&mode=eyes&${requestScope.parameters}"> 
-							<i class="fa fa-home"></i>
+	<div class="container">
+ 		<a href="<%=NoForm%>pcategorylist&mode=eyes&${requestScope.parameters}"> 
+					<i class="fas fa-eye" style='font-size:36px;'></i>
+						</a> 		
+		</div>	
+	<div class="container">
+ 		<a href="<%=NoForm%>pcategorylist&mode=bloodcirculation&${requestScope.parameters}"> 
+							<i class='fas fa-retweet' style='font-size:36px'></i>
+						</a>
+		</div>	
+	<div class="container">						 
+		 <a href="<%=NoForm%>pcategorylist&mode=digestiveapparatus&${requestScope.parameters}"> 
+					<i class='fas fa-lungs-virus' style='font-size:36px'></i>
 						</a> 
- <a href="<%=NoForm%>pcategorylist&mode=bloodcirculation&${requestScope.parameters}"> 
-							<i class="fa fa-home"></i>
+		</div>	
+	<div class="container">												
+ 		<a href="<%=NoForm%>pcategorylist&mode=skin&${requestScope.parameters}"> 
+					<i class="far fa-smile-beam"></i>
+						</a>
+		</div>	
+	<div class="container">						
+ 		<a href="<%=NoForm%>pcategorylist&mode=fatigue&${requestScope.parameters}"> 
+					<i class='fas fa-child' style='font-size:36px'></i>
+						</a>
+		</div>	
+	<div class="container">						 				
+ 		<a href="<%=NoForm%>pcategorylist&mode=joint&${requestScope.parameters}"> 
+					<i class='fas fa-bone' style='font-size:36px'></i>
+						</a>
+		</div>	
+	<div class="container">								
+ 		<a href="<%=NoForm%>pcategorylist&mode=hair&${requestScope.parameters}"> 
+					<i class='fab fa-keybase' style='font-size:36px'></i>
 						</a> 
- <a href="<%=NoForm%>pcategorylist&mode=digestiveapparatus&${requestScope.parameters}"> 
-							<i class="fa fa-home"></i>
-						</a> 						
- <a href="<%=NoForm%>pcategorylist&mode=skin&${requestScope.parameters}"> 
-							<i class="fa fa-home"></i>
-						</a> 						
- <a href="<%=NoForm%>pcategorylist&mode=eyes&${requestScope.parameters}"> 
-							<i class="fa fa-home"></i>
+		</div>	
+	<div class="container">														
+ 		<a href="<%=NoForm%>pcategorylist&mode=immunity&${requestScope.parameters}"> 
+					<i class="fas fa-street-view" style='font-size:36px'></i>
 						</a> 
- <a href="<%=NoForm%>pcategorylist&mode=fatigue&${requestScope.parameters}"> 
-							<i class="fa fa-home"></i>
-						</a> 				
- <a href="<%=NoForm%>pcategorylist&mode=joint&${requestScope.parameters}"> 
-							<i class="fa fa-home"></i>
-						</a> 								
- <a href="<%=NoForm%>pcategorylist&mode=hair&${requestScope.parameters}"> 
-							<i class="fa fa-home"></i>
-						</a> 								
- <a href="<%=NoForm%>pcategorylist&mode=immunity&${requestScope.parameters}"> 
-							<i class="fa fa-home"></i>
-						</a> 																					
+		</div>																									
   
 </div>
+
 
 
   <div class="container text-#8B4513 py-5 text-center">
   	<h3>Product List</h3>
   </div>
-
-
 
 <div>
 
