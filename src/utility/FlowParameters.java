@@ -61,11 +61,6 @@ public class FlowParameters {
 		return "pageNumber=" + pageNumber + "&pageSize=" + pageSize + "&fromdate=" + sdf.format(fromdate) + "&todate=" + sdf.format(todate);
 	}
 
-	/*@Override
-	public String toString() {
-		return "pageNumber=" + pageNumber + "&pageSize="
-				+ pageSize + "&mode=" + mode + "&keyword=" + keyword + "";
-	}*/
 	public String getPageNumber() {
 		return pageNumber;
 	}
