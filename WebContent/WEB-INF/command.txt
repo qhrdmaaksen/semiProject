@@ -22,7 +22,7 @@ notice_insert=CS.NoticeInsertController
 notice_delete=CS.NoticeDeleteController
 asked_insert=CS.AskedInsertController
 asked_update=CS.AskedUpdateController
-asked_detailview=CS.AskedDetailController
+asked_detailview=CS.AskedDetailViewController
 asked_delete=CS.AskedDeleteController
 #### Customer Section ################################
 boInsert=board.BoardInsertController
