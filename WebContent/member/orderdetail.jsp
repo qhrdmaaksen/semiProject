@@ -30,13 +30,13 @@
 						</thead>
 						<tbody>
 							<c:set var="totalAmount" value="0" />
-							<c:forEach items="${requestScope.lists}" var="shopinfo">
+							<c:forEach items="${requestScope.order}" var="order">
 								<tr>
-									<td>${shopinfo.pname}</td>
-									<td>
-										<img alt="${shopinfo.image}" width="45" height="45" 
+									<td>${OrderVO.id}</td>
+									<%-- <td>
+										<img alt="${OrderVO.image}" width="45" height="45" 
 											src="${applicationScope.uploadedPath}/${shopinfo.image}">										
-									</td>									
+									</td>				 --%>					
 									<td class="text-center"><fmt:formatNumber
 											value="${shopinfo.price}" pattern="###,###"/> 원</td>
 									<td class="text-center"><fmt:formatNumber
