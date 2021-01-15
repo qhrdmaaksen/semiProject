@@ -65,7 +65,7 @@
 	</style>
 </head>
 <body>
-	<div class="container col-md-offset-<%=offset%> col-md-<%=content%>">
+	<div class="container col-md-offset-<%=offset%> col-md-<%=content%>" style="padding-bottom: 10%;">
 		<div class="ordTitle">
 			<h1>주문/결제</h1>
 			<hr style="border:none; border: 5px double orange;">
@@ -73,7 +73,7 @@
 				<span style="color: black;">"주문완료"</span>
 			</div>
 		</div>
-		<div data-component="customerinfo" align="center">
+		<div data-component="customerinfo" align="left">
 			<div class="customer_h2">
 				<h3 align="center">구매자 정보</h3>
 				<table id="paymemberinfo" style="padding: 10px 0px 10px 16px; font: 12px 돋움, Dotum, sans-werif;">
@@ -86,7 +86,7 @@
 					<tr align="center">
 						<th style="background: #f0f0f5; font-weight: bold;">이메일
 						</th>
-						<td>${sessionScope.loginfo.email}
+						<td><%-- ${sessionScope.loginfo.email} --%>
 						</td>
 					</tr>
 					<tr align="center">
@@ -117,7 +117,7 @@
 						<tr align="center">
 							<th style="background: #f0f0f5; font-weight: bold;">이름
 							</th>
-							<td align="center">${sessionScope.loginfo.name}(${sessionScope.loginfo.id})님
+							<td align="center">${sessionScope.loginfo.name}
 							</td>
 							<td>
 								<button type="button" name="basedelivery" style="background: white;">
@@ -133,35 +133,6 @@
 							<th style="background: #f0f0f5; font-weight: bold;">연락처</th>
 							<td align="center">${sessionScope.loginfo.phone}</td>
 						</tr>
-						<tr align="center">
-							<th style="background: #f0f0f5; font-weight: bold;">배송 요청사항</th>
-							<td align="center" colspan="2">문 앞</td>
-							<td>
-								<button type="button" name="deleverycondition" style="background: white;">
-									변경
-								</button>
-							</td>
-						</tr>
-						<tr align="center">
-							<th style="background: #f0f0f5; font-weight: bold;" align="center">해외배송상품<br>추가정보</th>
-							<td align="center" style="padding: 10px 0px 10px 16px; font: 12px 돋움, Dotum, sans-werif;">
-								<div>
-									<label>
-										<input type="radio" checked="checked"> 받는사람 개인통관 고유부호
-									</label>
-								</div>
-								<div style="padding: 10px 15px 10px 50px; margin: 0px 0px 8px;">
-									물품가액이 $150 초과할 경우 관/부가세가 발생 할 수 있으며,
-									<br>물품 종류와 해외공급자 관계없이 같은 날 입항하게 되면 합산과세 대상이 됩니다.
-								</div>
-								<div>
-									<label>
-										개인통관 고유부호 (P로 시작하는 13자리)<br>
-											<input type="text">
-									</label>
-								</div>
-							</td>
-						</tr>
 					</tbody>
 				</table>
 			</div>
@@ -176,7 +147,7 @@
 				</div>
 				<hr>
 				<div>
-						<span>로지텍 버티컬 무선 마우스</span>
+						<span>${bean.productname}</span>
 					<p align="right"><span>수량 1개 / <span>무료 배송</span></span></p>
 				</div>
 				<hr>
@@ -268,5 +239,6 @@
 			<button class="btn btn-primary" type="button">결제 하기</button>
 		</div>
 	</div>
+<%@ include file="../common/footer.jsp" %>
 </body>
 </html>
