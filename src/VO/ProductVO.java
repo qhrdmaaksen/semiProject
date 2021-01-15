@@ -5,7 +5,7 @@ public class ProductVO {
     private String productname;
     private int productprice;
     private int stock;
-    private int bloodCirculation;   // 혈액순환
+    private int bloodcirculation;   // 혈액순환
     private int digestiveapparatus; // 소화기관
     private int skin;   // 피부
     private int eyes;   // 눈
@@ -46,10 +46,10 @@ public class ProductVO {
         this.eyes = eyes;
     }
     public int getBloodCirculation() {
-        return bloodCirculation;
+        return bloodcirculation;
     }
-    public void setBloodCirculation(int bloodCirculation) {
-        this.bloodCirculation = bloodCirculation;
+    public void setBloodCirculation(int bloodcirculation) {
+        this.bloodcirculation = bloodcirculation;
     }
     public int getDigestiveapparatus() {
         return digestiveapparatus;

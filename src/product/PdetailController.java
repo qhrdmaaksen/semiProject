@@ -27,11 +27,14 @@ public class PdetailController extends SuperClass{
 	
 	@Override
 	   public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+			System.out.println("PdetailController : "+request.getParameter("productcode"));
 	      int productcode = Integer.parseInt(request.getParameter("productcode"));
 	      ProductDAO pdao = new ProductDAO();
 	      
 	      ProductVO bean  = pdao.SelectDataByPk(productcode);
-	      
+	      PreviewDAO reviewdao = new PreviewDAO(request);
+	      List<PreviewVO> reviewlists = reviewdao.listsSelect() ;
+		  request.setAttribute("reviewlists", reviewlists);
 	      String gotopage = ""; 
 	      if ( bean != null) {
 	         request.setAttribute("bean", bean);

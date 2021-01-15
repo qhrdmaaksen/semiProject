@@ -1,7 +1,6 @@
 package CS;
 
 import java.io.IOException;
-import java.util.Enumeration;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -16,11 +15,11 @@ import utility.FlowParameters;
 public class NoticeDetailViewController extends SuperClass{
 	@Override
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int no = Integer.parseInt(request.getParameter("seq_index")) ;
+		int seq_index = Integer.parseInt(request.getParameter("seq_index")) ;
 		
 		NoticeDAO dao = new NoticeDAO() ;
 		
-		NoticeVO bean = dao.SelectDataByPk(no) ;
+		NoticeVO bean = dao.SelectDataByPk(seq_index) ;
 		
 		FlowParameters parameters 
 			= new FlowParameters(

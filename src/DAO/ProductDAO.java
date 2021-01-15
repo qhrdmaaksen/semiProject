@@ -194,7 +194,7 @@ public class ProductDAO extends SuperDAO{
 		}
 
 
-		public ProductVO SelectDataByPk(Integer productcode) {
+		public ProductVO SelectDataByPk(int productcode) {
 			ProductVO bean = null ;
 			
 			String sql = "select * " ;

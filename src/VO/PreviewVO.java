@@ -2,12 +2,12 @@ package VO;
 
 public class PreviewVO {
 	
-	private int reviewno ;
+	private int reviewno ;//리뷰 게시글 번호
 	private int searchno ;
-	private String content;
-	private int grade ; 
-	private String postdate ; 
-	private String id ;
+	private String content;//리뷰 글 내용
+	private int grade ; //별점
+	private String postdate ;//날짜 
+	private String id ;//아이디
 	
 	
 	

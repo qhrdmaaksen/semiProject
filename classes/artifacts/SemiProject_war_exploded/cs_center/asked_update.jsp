@@ -35,7 +35,7 @@
 			<div class="panel-body">
 				<form class="form-horizontal" role="form" action="<%=YesForm%>" method="post">
 					<input type="hidden" name="command" value="asked_update">
-					<input type="hidden" name="seq_qna" value="${param.seq_qna}">
+					<input type="hidden" name="seq_index" value="${param.seq_index}">
 					<input type="hidden" name="askedpageNumber" value="${param.askedpageNumber}">
 					<input type="hidden" name="askedpageSize" value="${param.askedpageSize}">
 					<input type="hidden" name="askedmode" value="${param.askedmode}">
@@ -43,7 +43,7 @@
 					<div class="form-group">
 						<label class="control-label col-sm-<%=formleft%>" for="no"></label>
 						<div class="col-sm-<%=formleft%>">
-							<input type="hidden" name="seq_qna" id="no" value="${bean.seq_qna}">
+							<input type="hidden" name="seq_index" id="no" value="${bean.seq_index}">
 						</div>
 					</div>
 					<div class="form-group">

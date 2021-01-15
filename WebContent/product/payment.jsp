@@ -6,12 +6,57 @@
 	<meta charset="UTF-8">
 	<title>Insert title here</title>
 	<%@ include file="../common/nav.jsp"%>
+	<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
+	<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
 	<%
 	pageContext.setAttribute("replaceChar", "\n");
 		int twelve = 12 ;
 		int offset = 2; //오프 셋 
 		int content = twelve - 2 * offset; //12 - 2 * 오프셋
 	%>
+	<script>
+		IMP.init('자신의가맹점_키');
+		
+		IMP.request_pay({
+		    pg : 'inicis', // version 1.1.0부터 지원.
+		    pay_method : 'card',
+		    merchant_uid : 'merchant_' + new Date().getTime(),
+		    name : '주문명:결제테스트',
+		    amount : 14000, //판매 가격
+		    buyer_email : 'iamport@siot.do',
+		    buyer_name : '구매자이름',
+		    buyer_tel : '010-1234-5678',
+		    buyer_addr : '서울특별시 강남구 삼성동',
+		    buyer_postcode : '123-456'
+		}, function(rsp) {
+		    if ( rsp.success ) {
+		        var msg = '결제가 완료되었습니다.';
+		        msg += '고유ID : ' + rsp.imp_uid;
+		        msg += '상점 거래ID : ' + rsp.merchant_uid;
+		        msg += '결제 금액 : ' + rsp.paid_amount;
+		        msg += '카드 승인번호 : ' + rsp.apply_num;
+		    } else {
+		        var msg = '결제에 실패하였습니다.';
+		        msg += '에러내용 : ' + rsp.error_msg;
+		    }
+		    alert(msg);
+		});
+		var Iamport = require('iamport');
+		var iamport = new Iamport({
+		  impKey: '자신의_API_키',
+		  impSecret: '자신의_APIscret_키'
+		});
+		app.get('/payments/status/all',(req,res)=>{
+		        iamport.payment.getByStatus({
+		          payment_status: 'paid' 
+		        }).then(function(result){
+		            res.render('payments_list',{list:result.list});
+		        }).catch(function(error){
+		            console.log(error);
+		            red.send(error);
+		        })
+		});
+	</script>
 	<style type="text/css">
 		#payinfotable th{ font-weight: bold; padding: 7px 10px 7px 15px;}
 		#paymemberinfo th{ padding: 7px 10px 7px 15px;}
@@ -33,17 +78,21 @@
 				<h3 align="center">구매자 정보</h3>
 				<table id="paymemberinfo" style="padding: 10px 0px 10px 16px; font: 12px 돋움, Dotum, sans-werif;">
 					<tr align="center">
-						<th style="background: #f0f0f5; font-weight: bold;">이름</th>
-						<td>김민우</td>
+						<th style="background: #f0f0f5; font-weight: bold;">이름
+						</th>
+						<td>${sessionScope.loginfo.name}(${sessionScope.loginfo.id})님
+						</td>
 					</tr>
 					<tr align="center">
-						<th style="background: #f0f0f5; font-weight: bold;">이메일</th>
-						<td>rlaalsdn8@gmail.com</td>
+						<th style="background: #f0f0f5; font-weight: bold;">이메일
+						</th>
+						<td>${sessionScope.loginfo.email}
+						</td>
 					</tr>
 					<tr align="center">
 						<th style="background: #f0f0f5; font-weight: bold;">휴대폰 번호</th>
 						<td>
-							<input type="text" name="phonenum" value="010-9255-9798">
+							<input type="text" name="phonenum" value="${sessionScope.loginfo.phone}">
 						</td>
 						<td>
 							<button type="button" style="background: white;">수정</button>
@@ -66,8 +115,10 @@
 				<table id="deliverytable" style="padding: 10px 0px 10px 16px; font: 12px 돋움, Dotum, sans-werif;">
 					<tbody>
 						<tr align="center">
-							<th style="background: #f0f0f5; font-weight: bold;">이름</th>
-							<td align="center">김민우</td>
+							<th style="background: #f0f0f5; font-weight: bold;">이름
+							</th>
+							<td align="center">${sessionScope.loginfo.name}(${sessionScope.loginfo.id})님
+							</td>
 							<td>
 								<button type="button" name="basedelivery" style="background: white;">
 									기본배송지
@@ -76,11 +127,11 @@
 						</tr>
 						<tr align="center">
 							<th style="background: #f0f0f5; font-weight: bold;">배송주소</th>
-							<td align="center">인천광역시 중구 중산동 1887-1 인천 영종하늘도시 한라비발디아파트 929동 1204호</td>
+							<td align="center">${bean.address1}</td>
 						</tr>
 						<tr align="center">
 							<th style="background: #f0f0f5; font-weight: bold;">연락처</th>
-							<td align="center">010-9255-9798</td>
+							<td align="center">${sessionScope.loginfo.phone}</td>
 						</tr>
 						<tr align="center">
 							<th style="background: #f0f0f5; font-weight: bold;">배송 요청사항</th>
@@ -139,15 +190,17 @@
 			<table id="payinfotable" style="margin: 8px 0px 0px; font:12px 돋움, Dotum, sans-serif;">
 				<tr align="center">
 					<th>총 상품가격</th>
-					<td>120,000원</td>
+					<td>${bean.productprice}원</td>
 				</tr>
 				<tr align="center">
 					<th>할인 쿠폰</th>
-					<td>0원</td>
+					<td>${coupon.kind==1}</td>
 				</tr>
 				<tr align="center">
 					<th>배송비</th>
-					<td>0원</td>
+					<td>
+						<fmt:formatNumber value="${shipExpense}" pattern="###,###"/>원
+					</td>
 				</tr>
 				<tr align="center">
 					<th>도담도담 캐시</th>
@@ -155,7 +208,12 @@
 				</tr>
 				<tr align="center">
 					<th>총 결제금액</th>
-					<td>120,000원</td>
+					<td>
+						<c:set var="finalAmount" value="${totalAmount + shipExpense}" />
+						<strong>
+							<fmt:formatNumber value="${finalAmount}" pattern="###,###"/> 원
+						</strong>
+					</td>
 				</tr>
 				<tr align="center">
 					<th>결제방법</th>

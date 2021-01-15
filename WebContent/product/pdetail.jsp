@@ -19,11 +19,9 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 <%@ include file="../common/nav.jsp"%>
-	<script src="../js/jquery-3.5.1.min.js" type="text/javascript"></script>
-	<script	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-	<script src="../js/jquery.zoom.min.js"></script>
+	<script src="./js/jquery-3.5.1.min.js" type="text/javascript"></script>
+	<script src="./js/jquery.zoom.min.js"></script>
 	<script type="text/javascript" src="https://rawgit.com/jackmoore/autosize/master/dist/autosize.min.js"></script>
-	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
 	<link
 	    rel="stylesheet"
 	    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"
@@ -59,7 +57,6 @@
 		function imageZoom() {
 			$("#myarea").zoom();
 		}
-	
 		function applyImage(srcimg) {
 			var mywidth = 340; /* form에 너비 높이들을 가져오는 문  */
 			var myheight = 450;
@@ -75,46 +72,43 @@
 	</script>
 	<script type="text/javascript">
 		$(document).ready(function() {
-// 			$.ajax({
-// 				url:"${pageContext.request.contextPath}/dodamdodam?command=preview",
-// 				type:"get",
-// 				success: (response) =>{
-// 					autosize($('textarea'));
+ 			 $.ajax({
+ 				url:"${pageContext.request.contextPath}/dodamdodam?command=preview",
+ 				type:"get",
+ 				success: (response) =>{
+ 					autosize($('textarea'));
 					
-// 					$("[id*=starGarde_]").each(function() {
+ 					$("[id*=starGarde_]").each(function() {
 						
-// 						var star = "☆";
-// 						var star2 = "★";
-// 						var grade = Number($(this).text()); // 별점 수
-// 						var starGrade  = ""; //최종 문자열
-						
-// 						//별점만큼 채워진별을 대입
-// 						for(var i = 0 ; i < grade; i++){
-// 							starGrade += star2;	
-// 						}
-						
-// 						// 5-별점 만큼 빈별을 대입
-// 						for(var i = 0 ;i < 5-grade; i++){
-// 							starGrade += star;
-// 						}
-// 						// 완성된 문자열을 대입
-// 						$(this).text(starGrade).css("color","red");
-// 					});
-					
-// 				},
-// 				error: () =>{
-// 					console.log("error")
-// 				}
-				
-			})
-			$("input[name='delivery']").click(function() {
-				var thisValue = $(this).val();
-				if (thisValue == "정기 배송") {
+ 						var star = "☆";
+ 						var star2 = "★";
+ 						var grade = Number($(this).text()); // 별점 수
+ 						var starGrade  = ""; //최종 문자열
+ 						//별점만큼 채워진별을 대입
+ 						for(var i = 0 ; i < grade; i++){
+ 							starGrade += star2;	
+ 						}
+ 						// 5-별점 만큼 빈별을 대입
+ 						for(var i = 0 ;i < 5-grade; i++){
+ 							starGrade += star;
+ 						}
+ 						// 완성된 문자열을 대입
+ 						$(this).text(starGrade).css("color","red");
+ 					});
+ 				},
+ 				error: () =>{
+ 					console.log("error")
+ 				}
+			});
+			$("input[name='delivery']").change(function() {
+				if($(this).prop("checked")){
 					$("#inHere").css("display", "block");
 					$('#buy-qty').val(0);
-				} else if (thisValue == false){
+					$('#buy-qty').trigger("change");
+				}else {
 					$("#inHere").css("display", "none");
 					$('#buy-qty').val(1);
+					$('#buy-qty').trigger("change");
 				}
 			});
 			$('#star_grade a').click(function(){
@@ -129,7 +123,22 @@
 		         })
 		         return false;
 			});
-		})
+			$("#buy-qty").on("click", function() {
+				if($("input[name='delivery']").prop("checked")){
+					$("input[name='delivery']").click();
+				}	
+			});
+			$("#buy-qty").on('change',function(e) {
+				let price = parseInt("${bean.productprice}");
+				$("[data-id=productprice]").each(function() {
+					$(this).text(price * e.target.value + "원");
+				});
+				let price2 = parseInt("${bean.productprice * 0.8}");
+				$("[data-id=productprice2]").text(price2 * e.target.value +"원");
+				let price3 = parseInt("${bean.productprice * 0.7}");
+				$("[data-id=productprice3]").text(price3 * e.target.value +"원")
+			})
+		});
 	</script>
 		<script type="text/javascript">
 		var id = "${id}";
@@ -154,6 +163,24 @@
 			$("#inHere").css("display", "none");
 			$("input:radio[value='정기 배송']").removeAttr("checked");
 		};
+		function onemonth(){
+			
+		}
+		function twomonth(){
+			
+		}
+		function threemonth(){
+			
+		}
+		function fourmonth(){
+			
+		}
+		function fivemonth(){
+			
+		}
+		function sixmonth(){
+			
+		}
 	</script>
 </head>
 <body>
@@ -185,53 +212,67 @@
 					<table border="1" style="width: 100%; height: 100%;"
 						class="text-left">
 						<tr style="height: 100%" align="center">
-							<td class="list-group-item" style="font-size: 12">탐 사 수</td>
-							<td class="list-group-item">시중 판매 가격 : 11,000 원</td>
-							<td class="list-group-item">일반 회원 판매 가격 : 10,000 원</td>
-							<td class="list-group-item">구독 회원 가격 : 9,000 원</td>
+							<td class="list-group-item" style="font-size: 12">상품명(번호)</td>
+							<td class="list-group-item" style="font-size: 12">${bean.productname}(${bean.productcode})</td>
+							
+							<td class="list-group-item">시중 판매 가격 : </td>
+							<td class="list-group-item" data-id="productprice">${bean.productprice}원</td>
+							
+							<td class="list-group-item">일반 회원 판매 가격 : </td>
+							<td class="list-group-item" data-id="productprice2">
+								<fmt:formatNumber value="${bean.productprice * 0.8}" pattern="##########"/>원
+							</td>
+							<td class="list-group-item">구독 회원 가격 : </td>
+							<td class="list-group-item" data-id="productprice3">
+								<fmt:formatNumber value="${bean.productprice * 0.7}" pattern="##########"/>원
+							</td>
+							
+							<td class="list-group-item">내일 토요일 12-19 도착 예정</td>
 							<td class="list-group-item">내일 토요일 12-19 도착 예정</td>
 							<td class="list-group-item">구매 수량
 								<div class="col-sm-6">
 									<input id="buy-qty" type="number"
 										class="form-control mypopover" title="수량 입력란" value="1" min="1"
-										data-content="구매하고자 하는 수량을 정수로 입력하세요." onclick="deliverynone()">
+										data-content="구매하고자 하는 수량을 정수로 입력하세요." >
 								</div>
 							</td>
-							<td class="list-group-item" align="center"><input id="delivery-select" type="radio"
+							<td class="list-group-item" align="center"><input id="delivery-select" type="checkbox"
 								name="delivery" value="정기 배송">&nbsp;&nbsp;정기 배송 선택
 								<div id="inHere" style="display: none;">
 									<table>
 										<tr>
 											<td>
-												<button type='button'>1개월 정기</button>
+												<button type='button' onclick="onemonth()">1개월 정기</button>
 											</td>
 											<td>
-												<button type='button'>2개월 정기</button>
+												<button type='button' onclick="twomonth()">2개월 정기</button>
 											</td>
 											<td>
-												<button type='button'>3개월 정기</button>
+												<button type='button' onclick="threemonth()">3개월 정기</button>
 											</td>
 										</tr>
 										<tr>
 											<td>
-												<button type='button'>4개월 정기</button>
+												<button type='button' onclick="fourmonth()">4개월 정기</button>
 											</td>
 											<td>
-												<button type='button'>5개월 정기</button>
+												<button type='button' onclick="fivemonth()">5개월 정기</button>
 											</td>
 											<td>
-												<button type='button'>6개월 정기</button>
+												<button type='button' onclick="sixmonth()">6개월 정기</button>
 											</td>
 										</tr>
 									</table>
 								</div>
 							</td>
-							<td class="list-group-item"><input type="button"
-								style="width: 80%; color: blue; background: white; border: 1; border-color: blue; font: bold;"
-								name="goMall" value="장바구니 담기"></td>
-							<td class="list-group-item"><input type="submit"
-								style="width: 80%; color: white; background: blue;"
-								name="gopayment" value="바로 구매 >" onclick="location.href='http://localhost:8989/SemiProject/product/payment.jsp'"></td>
+							<td class="list-group-item">
+								<input type="submit" style="width: 80%; color: blue; background: white; border: 1; border-color: blue; font: bold;"
+									name="goMall" value="장바구니 담기" onclick="location.href='http://localhost:8989/SemiProject/dodamdodam?command=mallcartlist'">
+							</td>
+							<td class="list-group-item">
+								<input type="submit" style="width: 80%; color: white; background: blue;"
+									name="gopayment" value="바로 구매 >" onclick="location.href='http://localhost:8989/SemiProject/product/payment.jsp?'">
+							</td>
 						</tr>
 					</table>
 				</div>
@@ -255,7 +296,7 @@
 				aria-controls="배송/교환/반품 안내" aria-selected="false">배송/교환/반품 안내</a></li>
 		</ul>
 	</div>
-	<div class="tab-content">
+	<div class="tab-content" style="padding-bottom: 10%;">
 		<div id="prod-detail" align="center" class="container tab-pane active"
 			role="tabpanel" aria-labelledby="prod-contents01">
 			<img id="img0" title="홍삼" width="50%" height="50%"
@@ -326,25 +367,17 @@
 								<td><textarea readonly="readonly" style="overflow: visible; resize: both;">${fn:replace(item.content, replaceChar,replaceChar)}</textarea></td>
 								<td>${item.postdate}</td>
 								<td id="starGarde_${i.index}">${item.grade}</td>
-								<td>${bean.update}</td>
-								<td>${bean.delete}</td>
 								<td>
-									<c:if test=" ${whologin == 1}${whologin == 2}">
-										<a href="previewupdate.jsp?seq_review=${bean.no}&${requestScope.parameters}">
+									<c:if test="${whologin == 1 || whologin == 2}">
+										<a href="?command=previewupdate&seq_review=${item.reviewno}&${requestScope.parameters}">
 											수정 </a>
 									</c:if> 
-									<c:if test=" ${whologin == 1}${whologin == 2}">
-									수정
-									</c:if>
 								</td>
 								<td>
-									<c:if test="${whologin == 1}${whologin == 2}">
-										<a href="pdetaildelete&no=${bean.no}&${requestScope.parameters}">
+									<c:if test="${whologin == 1 || whologin == 2}">
+										<a href="?command=preview_delete&seq_review=${item.reviewno}&${requestScope.parameters}">
 											삭제 </a>
 									</c:if> 
-									<c:if test=" ${whologin == 1}${whologin == 2}">
-										삭제
-									</c:if>
 								</td>
 							</tr>
 						</c:forEach>
@@ -384,8 +417,8 @@
 												&nbsp;</label>
 											<div class="col-sm-12">
 												<textarea name="content" id="content" rows="5" cols=""
-													placeholder="글 내용" class="form-control">${bean.content}</textarea>
-												<span class="err">${errcontent}</span>
+													placeholder="글 내용" class="form-control"></textarea>
+												<span class="err"></span>
 											</div>
 											<br>
 											<div class="col-sm-6">
@@ -527,5 +560,6 @@
 	<br>
 	<br>
 	<br>
+<%@ include file="../common/footer.jsp" %>
 </body>
 </html>

@@ -29,7 +29,7 @@ public class NoticeDAO extends SuperDAO{
 		String sql = " select count(*) as cnt from customer_center_post " ; 
 		if (mode.equalsIgnoreCase("all") == false) {
 			//전체 검색이 아니면
-			sql += " where " + mode + " like '" + keyword + "' " ;
+			sql += " where \"" + mode + "\" like '%"+keyword+"'";
 		}
 		
 		int cnt = -999999 ;
@@ -80,7 +80,7 @@ public class NoticeDAO extends SuperDAO{
 		sql += " rank() over(order by \"seq_index\" desc) as ranking  from customer_center_post  " ;
 		
 		if(mode.equalsIgnoreCase("all") == false) {
-			sql += " where " + mode + " like '" + keyword + "' " ;  
+			sql += " where \"" + mode + "\" like '%" + keyword + "' " ;  
 		}
 		
 		sql += " ) " ;

@@ -23,7 +23,7 @@ notice_insert=CS.NoticeInsertController
 notice_delete=CS.NoticeDeleteController
 asked_insert=CS.AskedInsertController
 asked_update=CS.AskedUpdateController
-asked_detailview=CS.AskedDetailController
+asked_detailview=CS.AskedDetailViewController
 asked_delete=CS.AskedDeleteController
 #### Customer Section ################################
 boInsert=board.BoardInsertController
@@ -32,8 +32,10 @@ bbsdetailview=board.BoardDetailViewController
 boDelete=board.BoardDeleteController
 boUpdate=board.BoardUpdateController
 #### Product Section #################################
+preview_delete=product.PreviewDeleteController
 preview=product.PreviewController
 pdetail=product.PdetailController
+
 previewupdate=product.PreviewUpdateController
 plist=product.PlistController
 pdelete=product.PdeleteController
@@ -42,5 +44,6 @@ pcategorylist=product.PcategorylistController
 mallcartadd=Mall.MallCartAddController
 mallcartlist=Mall.MallCartListController
 mallcartdelete=Mall.MallCartDeleteItemController
-
+mallhistory=Mall.MallHistoryController
+mallDetail=Mall.MallDetailController
 

@@ -39,24 +39,24 @@ public class AskedListController extends SuperClass{
 				parameters.getMode(),
 				parameters.getKeyword());
 		
-		List<AskedVO> lists = dao.SelectDataList(
+		List<AskedVO> askedlists = dao.SelectDataList(
 			pageInfo.getPageNumber(),
 			pageInfo.getBeginRow(),
 			pageInfo.getEndRow(),
 			parameters.getMode(),
 			parameters.getKeyword() + "%");
 		
-		for (AskedVO askedVO : lists) {
+		for (AskedVO askedVO : askedlists) {
 			System.out.println(askedVO.toString());
 		}
-		request.setAttribute("askedlists", lists);
+		request.setAttribute("askedlists", askedlists);
 		request.setAttribute("askedpagingHtml", pageInfo.getPagingHtml());
 		request.setAttribute("askedpagingStatus", pageInfo.getPagingStatus());
 		request.setAttribute("askedmode", parameters.getMode());
 		request.setAttribute("askedkeyword", parameters.getKeyword());
 		request.setAttribute("askedparameters", parameters.toString());
 		
-		String json = new Gson().toJson(lists);
+		String json = new Gson().toJson(askedlists);
 		
 		response.setContentType("application/json;");
 		response.setCharacterEncoding("utf-8");
