@@ -20,7 +20,6 @@ public class MemberNewmemberController extends SuperClass{
 	@Override
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		
 
 		super.doGet(request, response);
 		String gotopage = "member/newmember.jsp";		
@@ -45,6 +44,15 @@ public class MemberNewmemberController extends SuperClass{
 		bean.setName(request.getParameter("name"));
 		bean.setPassword(request.getParameter("password"));
 		bean.setPhone(request.getParameter("phone"));
+		if( request.getParameter("level") != null || request.getParameter("level").equals("") == false ){
+			bean.setLevel(request.getParameter("level"));	
+		}
+		if( request.getParameter("point") != null || request.getParameter("point").equals("") == false ){
+			bean.setPoint( Integer.parseInt( request.getParameter("point") ));	
+		}
+		if( request.getParameter("picture") != null || request.getParameter("picture").equals("") == false ){
+			bean.setPicture(request.getParameter("picture"));	
+		}
 		
 		System.out.println( bean );
 
@@ -84,6 +92,11 @@ public class MemberNewmemberController extends SuperClass{
 		if( bean.getPassword().length() < 6 || bean.getPassword().length() > 15 ){
 			request.setAttribute( super.PREFIX + "password", "비밀 번호는 6자리 이상 15자리 이하이어야 합니다.");
 			isCheck = false  ;
+			}
+		System.out.println("비밀번호 잘 나오나? : " + bean.getPassword() + "/" + request.getParameter("password2"));
+		if( !bean.getPassword().equals(request.getParameter("password2"))){
+			request.setAttribute( super.PREFIX + "password2", "비밀 번호가 일치하지 않습니다.");
+			isCheck = false  ;
 		}
 		if( bean.getBirth() == null){
 			request.setAttribute( super.PREFIX + "birth", "생년월일을 형식에 맞게 작성 해 주세요.	");
@@ -105,4 +118,5 @@ public class MemberNewmemberController extends SuperClass{
 		}
 		return isCheck ;
 	}
+
 }

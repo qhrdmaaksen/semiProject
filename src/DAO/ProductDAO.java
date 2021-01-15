@@ -68,7 +68,7 @@ public class ProductDAO extends SuperDAO{
 			}
 			return lists;
 		}
-
+								
 		public int SelectTotalCount(String mode, String keyword) {
 			// 해당 검색 모드(상품명, 제조 회사, 카테고리)에 충족하는 항목들의 갯수를 구해줍니다. 
 			Connection conn = null ;
@@ -76,11 +76,13 @@ public class ProductDAO extends SuperDAO{
 			ResultSet rs = null ;		
 			
 			String sql = " select count(*) as cnt from products " ;
-				sql += " where \"" + mode + "\" like '" + keyword + "'" ;
-			/*
-			 * if(mode.equalsIgnoreCase("all") == false) { sql += " where \" " + mode +
-			 * " \" like '" + keyword + "'" ; }
-			 */	
+				
+			if (keyword == null) {
+				sql += " where \""+ mode +"\" is not null"; 
+			}else {
+				sql += " where \""+ mode +"\" like '" + keyword + "'" ;
+			}
+			
 			
 			int cnt = -999999 ;
 

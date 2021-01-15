@@ -3,6 +3,7 @@ index=common.IndexController
 survey=common.ServeyController
 #### Member Section ##################################
 melogin=member.MemberLoginController
+melogout=member.MemberLogoutController
 mypage=member.MemberMypageController
 newmember=member.MemberNewmemberController
 coupon=member.MyCouponController

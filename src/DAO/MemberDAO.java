@@ -55,7 +55,6 @@ public class MemberDAO extends SuperDAO {
 		}
 		return bean;
 	}
-
 	
 	public int NewData(MemberVO bean) {
 		System.out.println( bean.toString() ); 
@@ -138,9 +137,7 @@ public class MemberDAO extends SuperDAO {
 		
 		return bean;
 
-
 	}
-
 
 	public int ModifyData(MemberVO bean) {
 		String sql = " update members set \"password\" = ?, ";
@@ -193,8 +190,6 @@ public class MemberDAO extends SuperDAO {
 			}
 			return cnt ;
 	}
-
-
 
 }
 
