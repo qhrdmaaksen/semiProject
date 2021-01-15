@@ -30,13 +30,13 @@
 						</thead>
 						<tbody>
 							<c:set var="totalAmount" value="0" />
-							<c:forEach items="${requestScope.order}" var="order">
+							<c:forEach items="${requestScope.lists}" var="shopinfo">
 								<tr>
-									<td>${OrderVO.id}</td>
-									<%-- <td>
-										<img alt="${OrderVO.image}" width="45" height="45" 
+									<td>${sessionScope.loginfo.name}</td>
+									<td>
+										<img alt="${shopinfo.image}" width="45" height="45" 
 											src="${applicationScope.uploadedPath}/${shopinfo.image}">										
-									</td>				 --%>					
+									</td>									
 									<td class="text-center"><fmt:formatNumber
 											value="${shopinfo.price}" pattern="###,###"/> 원</td>
 									<td class="text-center"><fmt:formatNumber
@@ -104,7 +104,7 @@
 						<tbody>
 							<tr>
 								<td class="text-center gr"><strong>주문 번호</strong></td>
-								<td>${order.oid}</td>
+								<td>${order.ordernumber}</td>
 								<td class="text-center gr"><strong>주문일</strong></td>
 								<td>${order.orderdate}</td>
 							</tr>
@@ -142,15 +142,15 @@
 							</tr>
 							<tr>
 								<td class="text-center gr"><strong>우편  번호 </strong></td>
-								<td>${sessionScope.loginfo.zipcode}</td>
+								<td>${sessionScope.list.address1}</td>
 							</tr>
 							<tr>
 								<td class="text-center gr"><strong>주소</strong></td>
-								<td>${sessionScope.loginfo.address1} ${sessionScope.loginfo.address2}</td>
+								<td>${sessionScope.list.address1} ${sessionScope.list.address2}</td>
 							</tr>
 							<tr>
 								<td class="text-center gr"><strong>적립 포인트 </strong></td>
-								<td><fmt:formatNumber value="${sessionScope.loginfo.mpoint}" pattern="###,###"/> 원</td>
+								<td><fmt:formatNumber value="${sessionScope.loginfo.point}" pattern="###,###"/> 원</td>
 							</tr>
 							<tr>
 								<td class="text-center gr"><strong>배송 방법 </strong></td>

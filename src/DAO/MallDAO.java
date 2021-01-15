@@ -181,22 +181,23 @@ public class MallDAO extends SuperDAO{
 		return lists  ;
 	}
 
-	public OrderVO SelectDataByPk(String oid) {
+	public OrderVO SelectDataByPk(String id) {
 		Connection conn = null ;
 		PreparedStatement pstmt = null ;
 		ResultSet rs = null ;	
 		
 		String sql = "select * from orders " ;  
-		sql += " where id = ? " ; 
+		sql += " where \"id\" = ? " ; 
 
 		OrderVO bean = null ;
 		try {
 			conn = super.getConnection() ;		
 			pstmt = this.conn.prepareStatement(sql) ;			
-			pstmt.setString( 1, oid  ); 
+			pstmt.setString( 1 , id  ); 
 			
 			rs = pstmt.executeQuery() ;			
 			if ( rs.next() ) {
+				bean = new OrderVO();								
 				bean.setId(rs.getString("id"));
 				bean.setInvoice(rs.getString("invoice"));
 				bean.setOrderdate(String.valueOf(rs.getString("orderdate")));
