@@ -102,13 +102,6 @@
 			</li>
 		    <li class="nav-item dropdown">
 				<a class="nav-link" href="<%=NoForm%>plist">상품 보기</a>
-				<c:if test="${whologin == 2}">
-				<div class="dropdown-menu">
-					<a class="dropdown-item" href="<%=NoForm%>pinsert">상품 등록</a>
-				</div></c:if>
-			</li>
-			<li class="nav-item">
-				<a class="nav-link" href="<%=NoForm%>plist">상품 보기</a>
 			</li>
 			<li class="nav-item">
 				<a class="nav-link" href="<%=NoForm%>mallcartlist">장바구니</a>
@@ -154,11 +147,11 @@
 							<a class="dropdown-item text-danger" href="<%=NoForm%>medelete&id=${sessionScope.loginfo.id}">회원 탈퇴</a>
 						</li>
 					</c:if>
-					<c:if test="${whologin == 2}">
+					<%-- <c:if test="${whologin == 2}">
 						<li>
 							<a class="dropdown-item" href="<%=NoForm%>melist">회원 목록 보기</a>
 						</li>
-					</c:if>
+					</c:if> --%>
 				</ul>
 			</li>
 		</ul>
