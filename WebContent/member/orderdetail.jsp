@@ -30,19 +30,23 @@
 						</thead>
 						<tbody>
 							<c:set var="totalAmount" value="0" />
-							<c:forEach items="${requestScope.lists}" var="shopinfo">
+							<c:forEach items="${requestScope.lists}" var="odetail">
 								<tr>
 									<td>${sessionScope.loginfo.name}</td>
 									<td>
-										<img alt="${shopinfo.image}" width="45" height="45" 
-											src="${applicationScope.uploadedPath}/${shopinfo.image}">										
-									</td>									
+										<img alt="${odetail.images}" width="45" height="45" 
+											src="${applicationScope.uploadedPath}/${odetail.images}">										
+									</td>	</tr>
+							</c:forEach>
+							<c:forEach items="${requestScope.lists}" var="lists">
+								<tr>
+									<tr>								
 									<td class="text-center"><fmt:formatNumber
-											value="${shopinfo.price}" pattern="###,###"/> 원</td>
+											value="${lists.productprice}" pattern="###,###"/> 원</td>
 									<td class="text-center"><fmt:formatNumber
-											value="${shopinfo.qty}" pattern="###,###"/> 개</td>
+											value="${odetail.qty}" pattern="###,###"/> 개</td>
 									<td class="text-center">
-										<c:set var="amount" value="${shopinfo.price * shopinfo.qty}" />
+										<c:set var="amount" value="${lists.productprice * odetail.qty}" />
 										<c:set var="totalAmount" value="${totalAmount + amount}" />
 										<fmt:formatNumber value="${amount}" pattern="###,###"/> 원</td>
 								</tr>
