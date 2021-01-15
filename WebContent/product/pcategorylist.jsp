@@ -102,39 +102,32 @@
 
   <!-- Grid row -->
   <div class="row">
-  
-  
 		<c:forEach var="bean" items="${requestScope.lists}">
 		    <!-- Grid column -->
 		    <div class="col-md-3 mb-3">
-		 
 		      <!-- Card -->
 		      <div class="">
-		
-		             <a href="#!">
-            <div class="mask">
-            	<a href="<%=NoForm%>pdetail&productcode=${bean.productcode}&${requestScope.parameters}">		  	
+		        <!-- <a href="#!"> -->
+           		 <div class="mask">
+            		<a href="<%=NoForm%>pdetail&productcode=${bean.productcode}&${requestScope.parameters}">		  	
             		<img src="${applicationScope.uploadedPath}/${bean.images}"
 										class="img-fluid w-100" width="200" height="300"
 										alt="${bean.images}" >
-		              <div class="mask rgba-black-slight"></div>
-		            </a>
-		       </div>
-		        
+		              <!-- <div class="mask rgba-black-slight"></div> -->
+		         	 </a> 
+		          </div> 
 		
 		        <div class="text-center pt-3">
-		
 		          <h5>${bean.productname}</h5>
-		          <p class="mb-2 text-muted text-uppercase small">Shirts</p>
-		
+		          <!-- <p class="mb-2 text-muted text-uppercase small">Shirts</p> -->
 		          <hr>
 		          <h6 class="mb-3">
 		            <span class="text-danger mr-1">
 		            ￦<fmt:formatNumber value="${bean.productprice*0.8}" pattern="###,###"/>
 		            </span>
-		            <span class="text-grey"><s>
+		            <span class="text-grey">
 		            ￦<fmt:formatNumber value="${bean.productprice}" pattern="###,###"/>
-		            </s></span>
+		            </span>
 		          </h6>
 		          <%-- <h6 class="mb-3">${bean.productprice}</h6> --%>
 		         		 <form class="form-inline" role="form" method="post" action="<%=YesForm%>">
@@ -147,21 +140,20 @@
 								<button type="submit" class="btn btn-primary btn-sm mr-1 mb-2">Add to cart</button>
 							</form>
 					<form class="form-inline" role="form" name="myform" action="<%=YesForm%>" method="post">
-					
-						<input type="hidden" name="command" value="pdetail">
+					  <input type="hidden" name="command" value="pdetail">
 						<a href="<%=NoForm%>pdetail&productcode=${bean.productcode}&${requestScope.parameters}">
 							<button type="button" class="btn btn-light btn-sm mr-1 mb-2">
 							<i class="fas fa-info-circle pr-2"></i>Details</button> 		
-								</a>
+						</a>
 		         </form>
 		        </div>
 		      </div>
-		      <!-- Card -->
-		    </div>
-		    <!-- Grid column -->
-		</c:forEach>	
+		    <!-- Card -->
+		   </div>
+		  <!-- Grid column -->
+	</c:forEach>	
 </div>
-
+</section>
 
 
 <br><br><br>
