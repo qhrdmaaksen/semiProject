@@ -94,10 +94,9 @@ public class MemberNewmemberController extends SuperClass{
 			isCheck = false  ;
 			}
 		System.out.println("비밀번호 잘 나오나? : " + bean.getPassword() + "/" + request.getParameter("password2"));
-		if( bean.equals(request.getParameter("password2"))){
+		if( !bean.getPassword().equals(request.getParameter("password2"))){
 			request.setAttribute( super.PREFIX + "password2", "비밀 번호가 일치하지 않습니다.");
 			isCheck = false  ;
-			//System.out.println(isCheck);
 		}
 		if( bean.getBirth() == null){
 			request.setAttribute( super.PREFIX + "birth", "생년월일을 형식에 맞게 작성 해 주세요.	");
