@@ -1,3 +1,14 @@
+<%@page import="utility.Paging"%>
+<%@page import="DAO.ProductDAO"%>
+
+
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ include file="./../common/nav.jsp"%>
+
+
+
+
+
 <!DOCTYPE html>
 <head>
 <meta charset="utf-8">
@@ -60,7 +71,16 @@
 <br><br>
 
 <br><br>
-
+   <div>
+                    <div class="def-number-input number-input safari_only mb-0 w-100">
+                      <button onclick="this.parentNode.querySelector('input[type=number]').stepDown()"
+                        class="minus"></button>
+                      <input class="quantity" min="0" name="quantity" value="1" type="number">
+                      <button onclick="this.parentNode.querySelector('input[type=number]').stepUp()"
+                        class="plus"></button>
+                    </div>
+                  </div>
+                </div>
 <br><br>
 
 <br><br>
