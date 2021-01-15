@@ -78,6 +78,7 @@ public class MemberModifyController extends SuperClass{
 		bean.setPicture(per.getPicture());
 		
 		
+		
 		/*
 		 * if( request.getParameter("level") != null ||
 		 * request.getParameter("level").equals("") == false ){
@@ -87,9 +88,8 @@ public class MemberModifyController extends SuperClass{
 		 * Integer.parseInt( request.getParameter("point") )); } if(
 		 * request.getParameter("picture") != null ||
 		 * request.getParameter("picture").equals("") == false ){
-		 * bean.setPicture(request.getParameter("picture"));
-		 
-		}*/
+		 * bean.setPicture(request.getParameter("picture")); }
+		 */
 		
 		System.out.println("여기까지 왔니? " +  bean );
 		System.out.println("이름이 왜? " + request.getParameter("name"));
