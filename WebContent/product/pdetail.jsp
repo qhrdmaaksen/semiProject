@@ -133,8 +133,10 @@
 				$("[data-id=productprice]").each(function() {
 					$(this).text(price * e.target.value + "원");
 				});
-				let price2 = parseInt("${bean.productprice}");
+				let price2 = parseInt("${bean.productprice * 0.8}");
 				$("[data-id=productprice2]").text(price2 * e.target.value +"원");
+				let price3 = parseInt("${bean.productprice * 0.7}");
+				$("[data-id=productprice3]").text(price3 * e.target.value +"원")
 			})
 		});
 	</script>
@@ -217,10 +219,13 @@
 							<td class="list-group-item" data-id="productprice">${bean.productprice}원</td>
 							
 							<td class="list-group-item">일반 회원 판매 가격 : </td>
-							<td class="list-group-item" data-id="productprice">${bean.productprice}원</td>
-							
+							<td class="list-group-item" data-id="productprice2">
+								<fmt:formatNumber value="${bean.productprice * 0.8}" pattern="##########"/>원
+							</td>
 							<td class="list-group-item">구독 회원 가격 : </td>
-							<td class="list-group-item" data-id="productprice2">${bean.productprice}원</td>
+							<td class="list-group-item" data-id="productprice3">
+								<fmt:formatNumber value="${bean.productprice * 0.7}" pattern="##########"/>원
+							</td>
 							
 							<td class="list-group-item">내일 토요일 12-19 도착 예정</td>
 							<td class="list-group-item">내일 토요일 12-19 도착 예정</td>
@@ -291,7 +296,7 @@
 				aria-controls="배송/교환/반품 안내" aria-selected="false">배송/교환/반품 안내</a></li>
 		</ul>
 	</div>
-	<div class="tab-content">
+	<div class="tab-content" style="padding-bottom: 10%;">
 		<div id="prod-detail" align="center" class="container tab-pane active"
 			role="tabpanel" aria-labelledby="prod-contents01">
 			<img id="img0" title="홍삼" width="50%" height="50%"
