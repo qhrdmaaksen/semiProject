@@ -54,6 +54,7 @@
     }
 	</style>
 	<script type="text/javascript">
+		var totalprice = parseInt("${bean.productprice}");
 		function imageZoom() {
 			$("#myarea").zoom();
 		}
@@ -69,9 +70,8 @@
 			target.innerHTML = imgInfo;
 			imageZoom();
 		}
-	</script>
-	<script type="text/javascript">
 		$(document).ready(function() {
+			var price = parseInt("${bean.productprice}");
  			 $.ajax({
  				url:"${pageContext.request.contextPath}/dodamdodam?command=preview",
  				type:"get",
@@ -103,11 +103,14 @@
 			$("input[name='delivery']").change(function() {
 				if($(this).prop("checked")){
 					$("#inHere").css("display", "block");
-					$('#buy-qty').val(0);
-					$('#buy-qty').trigger("change");
+					$('#buy-qty').css("display", "none");
+					$('#buy-qty2').css("display", "none");
+					$("#productprice").text("월간 " + Math.floor(price * 0.8).format() + "원");
+					totalprice = Math.floor(price * 0.8);
 				}else {
 					$("#inHere").css("display", "none");
-					$('#buy-qty').val(1);
+					$('#buy-qty').css("display", "block");
+					$('#buy-qty2').css("display", "block");
 					$('#buy-qty').trigger("change");
 				}
 			});
@@ -129,58 +132,61 @@
 				}	
 			});
 			$("#buy-qty").on('change',function(e) {
-				let price = parseInt("${bean.productprice}");
-				$("[data-id=productprice]").each(function() {
-					$(this).text(price * e.target.value + "원");
-				});
-				let price2 = parseInt("${bean.productprice * 0.8}");
-				$("[data-id=productprice2]").text(price2 * e.target.value +"원");
-				let price3 = parseInt("${bean.productprice * 0.7}");
-				$("[data-id=productprice3]").text(price3 * e.target.value +"원")
-			})
+				if(${sessionScope.loginfo==null}){
+					$("#productprice").text(Math.floor(price * e.target.value).format() + "원");
+					totalprice = Math.floor(price * e.target.value);
+				}else {
+					$("#productprice").text(Math.floor(price * e.target.value * 0.8).format() + "원");
+					totalprice = Math.floor(price * e.target.value * 0.8);
+				}
+			});
+			$("#month1").on("click", function() {
+				$("#productprice").text("월간 " + Math.floor(price * 0.8).format() + "원");
+				totalprice = Math.floor(price * 0.8);
+			});
+			$("#month2").on("click", function() {
+				$("#productprice").text("월간 " + Math.floor(price * 0.7).format() + "원");
+				totalprice = Math.floor(price * 0.7);
+			});
+			$("#month3").on("click", function() {
+				$("#productprice").text("월간 " + Math.floor(price * 0.7).format() + "원");
+				totalprice = Math.floor(price * 0.7);
+			});
+			$("#month4").on("click", function() {
+				$("#productprice").text("월간 " + Math.floor(price * 0.7).format() + "원");
+				totalprice = Math.floor(price * 0.7);
+			});
+			$("#month5").on("click", function() {
+				$("#productprice").text("월간 " + Math.floor(price * 0.7).format() + "원");
+				totalprice = Math.floor(price * 0.7);
+			});
+			$("#month6").on("click", function() {
+				$("#productprice").text("월간 " + Math.floor(price * 0.7).format() + "원");
+				totalprice = Math.floor(price * 0.7);
+			});
 		});
-	</script>
-		<script type="text/javascript">
-		var id = "${id}";
-		var password = "${password}";
-		console.log("id : "+id);
-		console.log("password : "+ password)
-		if(id != null && 
-		   password !=null &&
-		   id != "" &&
-		   password != "" &&
-		   id != undefined &&
-		   password != undefined)
-		{
-			//session 등록
-			location.href = "pdetail.jsp";
-		}else{
-			//location.href = "melogin.jsp";
-		}
-		//alert("로그아웃 되었습니다.");
-		//location.href="http://localhost:8989/SemiProject/dodamdodam?command=melogin";                                    // 로그아웃 페이지로 이동
+		
 		function deliverynone(none){
 			$("#inHere").css("display", "none");
 			$("input:radio[value='정기 배송']").removeAttr("checked");
 		};
-		function onemonth(){
-			
-		}
-		function twomonth(){
-			
-		}
-		function threemonth(){
-			
-		}
-		function fourmonth(){
-			
-		}
-		function fivemonth(){
-			
-		}
-		function sixmonth(){
-			
-		}
+		
+		Number.prototype.format = function(){
+		    if(this==0) return 0;
+		 
+		    var reg = /(^[+-]?\d+)(\d{3})/;
+		    var n = (this + '');
+		 
+		    while (reg.test(n)) n = n.replace(reg, '$1' + ',' + '$2');
+		 
+		    return n;
+		};
+		String.prototype.format = function(){
+		    var num = parseFloat(this);
+		    if( isNaN(num) ) return "0";
+		 
+		    return num.format();
+		};
 	</script>
 </head>
 <body>
@@ -209,76 +215,102 @@
 			<div class="col-md-6 text-center">
 				<h2>상품 가격 상세보기</h2>
 				<div class="text-center" style="height: 100%;">
-					<table border="1" style="width: 100%; height: 100%;"
-						class="text-left">
-						<tr style="height: 100%" align="center">
-							<td class="list-group-item" style="font-size: 12">상품명(번호)</td>
-							<td class="list-group-item" style="font-size: 12">${bean.productname}(${bean.productcode})</td>
-							
-							<td class="list-group-item">시중 판매 가격 : </td>
-							<td class="list-group-item" data-id="productprice">${bean.productprice}원</td>
-							
-							<td class="list-group-item">일반 회원 판매 가격 : </td>
-							<td class="list-group-item" data-id="productprice2">
-								<fmt:formatNumber value="${bean.productprice * 0.8}" pattern="##########"/>원
-							</td>
-							<td class="list-group-item">구독 회원 가격 : </td>
-							<td class="list-group-item" data-id="productprice3">
-								<fmt:formatNumber value="${bean.productprice * 0.7}" pattern="##########"/>원
-							</td>
-							
-							<td class="list-group-item">내일 토요일 12-19 도착 예정</td>
-							<td class="list-group-item">내일 토요일 12-19 도착 예정</td>
-							<td class="list-group-item">구매 수량
-								<div class="col-sm-6">
-									<input id="buy-qty" type="number"
-										class="form-control mypopover" title="수량 입력란" value="1" min="1"
-										data-content="구매하고자 하는 수량을 정수로 입력하세요." >
-								</div>
-							</td>
-							<td class="list-group-item" align="center"><input id="delivery-select" type="checkbox"
-								name="delivery" value="정기 배송">&nbsp;&nbsp;정기 배송 선택
-								<div id="inHere" style="display: none;">
-									<table>
-										<tr>
-											<td>
-												<button type='button' onclick="onemonth()">1개월 정기</button>
-											</td>
-											<td>
-												<button type='button' onclick="twomonth()">2개월 정기</button>
-											</td>
-											<td>
-												<button type='button' onclick="threemonth()">3개월 정기</button>
-											</td>
-										</tr>
-										<tr>
-											<td>
-												<button type='button' onclick="fourmonth()">4개월 정기</button>
-											</td>
-											<td>
-												<button type='button' onclick="fivemonth()">5개월 정기</button>
-											</td>
-											<td>
-												<button type='button' onclick="sixmonth()">6개월 정기</button>
-											</td>
-										</tr>
-									</table>
-								</div>
-							</td>
-							<td class="list-group-item">
-								<input type="submit" style="width: 80%; color: blue; background: white; border: 1; border-color: blue; font: bold;"
-									name="goMall" value="장바구니 담기" onclick="location.href='http://localhost:8989/SemiProject/dodamdodam?command=mallcartlist'">
-							</td>
-							<td class="list-group-item">
-								<input type="submit" style="width: 80%; color: white; background: blue;"
-									name="gopayment" value="바로 구매 >" onclick="location.href='http://localhost:8989/SemiProject/product/payment.jsp?'">
-							</td>
-						</tr>
-					</table>
+					<form id="product-form" action="<%=YesForm%>" method="post">
+						<table border="1" style="width: 100%; height: 100%;"
+							class="text-left">
+							<tr style="height: 100%" align="center">
+								<td class="list-group-item" style="font-size: 12">상품명</td>
+								<td class="list-group-item" style="font-size: 12">${bean.productname}</td>
+								
+								<td class="list-group-item">판매 가격</td>
+								<td class="list-group-item" id="productprice">
+									<c:if test="${sessionScope.loginfo == null}">
+										<fmt:formatNumber value="${bean.productprice}" pattern="#,###"/>원
+									</c:if>
+									<c:if test="${sessionScope.loginfo != null}">
+										<fmt:formatNumber value="${bean.productprice*0.8}" pattern="#,###"/>원
+									</c:if>
+								</td>
+								
+								<td class="list-group-item">도착 예정일</td>
+								<td class="list-group-item">내일 토요일 12-19 도착 예정</td>
+								<td class="list-group-item" id="buy-qty2">구매 수량
+									<div class="col-sm-6">
+										<input id="buy-qty" type="number"
+											class="form-control mypopover" title="수량 입력란" value="1" min="1"
+											data-content="구매하고자 하는 수량을 정수로 입력하세요." >
+									</div>
+								</td>
+								<td class="list-group-item" align="center"><input id="delivery-select" type="checkbox"
+									name="delivery" value="정기 배송">&nbsp;&nbsp;정기 배송 선택
+									<div id="inHere" style="display: none;">
+										<table>
+											<tr>
+												<td>
+													<label><input type="radio" name="reguler_month" value="1" style="display: none;">
+														<span id="month1" class="month_button">1개월 정기</span>
+													</label>
+												</td>
+												<td>
+													<label><input type="radio" name="reguler_month" value="2" style="display: none;">
+														<span id="month2" class="month_button">2개월 정기</span>
+													</label>
+												</td>
+												<td>
+													<label><input type="radio" name="reguler_month" value="3" style="display: none;">
+														<span id="month3" class="month_button">3개월 정기</span>
+													</label>
+												</td>
+											</tr>
+											<tr>
+												<td>
+													<label><input type="radio" name="reguler_month" value="4" style="display: none;">
+														<span id="month4" class="month_button">4개월 정기</span>
+													</label>
+												</td>
+												<td>
+													<label><input type="radio" name="reguler_month" value="5" style="display: none;">
+														<span id="month5" class="month_button">5개월 정기</span>
+													</label>
+												</td>
+												<td>
+													<label><input type="radio" name="reguler_month" value="6" style="display: none;">
+														<span id="month6" class="month_button">6개월 정기</span>
+													</label>
+												</td>
+											</tr>
+										</table>
+									</div>
+								</td>
+								<td class="list-group-item">
+									<button type="button" style="width: 80%; color: blue; background: white; border: 1; border-color: blue; font: bold;"
+										name="goMall" onclick="goCart();">장바구니 담기</button>
+								</td>
+								<td class="list-group-item">
+									<button type="button" style="width: 80%; color: white; background: blue;"
+										name="gopayment" onclick="goPay();">바로 구매</button>
+								</td>
+							</tr>
+						</table>
+					</form>
 				</div>
 			</div>
 		</div>
 	</div>
+	<script>
+		function goCart(){
+			var command = '<input name="command" value="mallcartlist" style="display: none;">';
+			$("#product-form").append(command);
+			$("#product-form").submit();
+		};
+		
+		function goPay(){
+			var command = '<input name="command" value="payment">';
+			$("#product-form").append(command);
+			$("#product-form").append("<input type='text' id='totalprice' name='totalprice' value='" + totalprice + "'>");
+			$("#product-form").submit();
+		};
+	</script>
 	<div class="container mt-3">
 		<ul class="nav nav-tabs" id="myTab" role="tablist"
 			style="margin-top: 15%;">

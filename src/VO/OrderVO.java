@@ -4,13 +4,13 @@ import java.util.Date;
 
 public class OrderVO {
 	
-	private int ordernumber;
+	private int ordernumber;//주문번호
 	private String id;
 	private int seq_add;
 	private int seq_pay;
-	private int shippingstatus;
-	private String invoice;
-	private String orderdate;
+	private int shippingstatus;//배송상태
+	private String invoice;//송장번호
+	private String orderdate; //주문일
 	
 	public OrderVO() {
 	}
