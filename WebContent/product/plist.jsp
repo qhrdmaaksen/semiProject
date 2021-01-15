@@ -87,9 +87,15 @@
  		<a href="<%=NoForm%>pcategorylist&mode=immunity&${requestScope.parameters}"> 
 					<i class="fas fa-street-view" style='font-size:36px'></i>
 						</a> 
-		</div>																									
-  
-</div>
+		</div>		
+		
+	<div class="container" style="margin-top:20px;">														
+ 		<a href="<%=NoForm%>pcategorylist&mode=immunity&${requestScope.parameters}"> 
+					<i class="fas fa-street-view" style='font-size:36px'></i>
+						</a> 
+		</div>																								
+  </div>	
+
 
 
 
@@ -108,13 +114,12 @@
 <c:forEach var="bean" items="${requestScope.lists}">
     <!-- Grid column -->
     <div class="col-md-3 mb-3">
- 
       <!-- Card -->
       <div class="">
 
           <a href="#!">
             <div class="mask">
-            <a href="<%=NoForm%>pdetail&productcode=${bean.productcode}&${requestScope.parameters}">		  	
+            <a href="<%=NoForm%>pdetail&productcode=${bean.productcode}&${requestScope.parameters}">	
             <img src="${applicationScope.uploadedPath}/${bean.images}"
 										class="img-fluid w-100" width="200" height="300"
 										alt="${bean.images}" >
@@ -158,21 +163,14 @@
              <!-- <button type="button" class="btn btn-light btn-sm mr-1 mb-2"><i
               class="fas fa-info-circle pr-2"></i>Details</button>     -->     
          </form>
-         
-    
         </div>
-
       </div>
       <!-- Card -->
-
-
     </div>
     <!-- Grid column -->
-
 </c:forEach>
 
 </div>
-
 </section>
 
 <br><br><br>
