@@ -157,7 +157,7 @@
 		</div>
 				<br><br>
 		<address class="fooeraddress">
-			<div class="cs"><h4 align="center">고객센터</h4>
+			<div class="cs"><h4 align="center">문의 사항</h4>
 				<p align="center">
 					<span>고객문의: <a href="mailto:rlaalsdn8@gmail.com">rlaalsdn8@gmail.com</a>
 					<span>전화: <a href="tel://010-9255-9798">010-9255-9798</a></span>

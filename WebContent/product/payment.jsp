@@ -86,7 +86,7 @@
 					<tr align="center">
 						<th style="background: #f0f0f5; font-weight: bold;">이메일
 						</th>
-						<td><%-- ${sessionScope.loginfo.email} --%>
+						<td>${sessionScope.loginfo.email}
 						</td>
 					</tr>
 					<tr align="center">
@@ -127,7 +127,7 @@
 						</tr>
 						<tr align="center">
 							<th style="background: #f0f0f5; font-weight: bold;">배송주소</th>
-							<td align="center"><%-- ${sessionScope.loginfo.address1} ${sessionScope.loginfo.address2} --%></td>
+							<td align="center">${bean.address1}</td>
 						</tr>
 						<tr align="center">
 							<th style="background: #f0f0f5; font-weight: bold;">연락처</th>
@@ -190,11 +190,11 @@
 			<table id="payinfotable" style="margin: 8px 0px 0px; font:12px 돋움, Dotum, sans-serif;">
 				<tr align="center">
 					<th>총 상품가격</th>
-					<td>120,000원</td>
+					<td>${bean.productprice}원</td>
 				</tr>
 				<tr align="center">
 					<th>할인 쿠폰</th>
-					<td>0원</td>
+					<td>${coupon.kind==1}</td>
 				</tr>
 				<tr align="center">
 					<th>배송비</th>
