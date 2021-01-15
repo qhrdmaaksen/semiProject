@@ -95,11 +95,11 @@
   	<h3>Product List</h3>
   </div>
 
-<div>
+
 
 <!--Section: Block Content-->
 <section>
-
+<div>
   <!-- Grid row -->
   <div class="row">
 		<c:forEach var="bean" items="${requestScope.lists}">
@@ -113,21 +113,18 @@
             		<img src="${applicationScope.uploadedPath}/${bean.images}"
 										class="img-fluid w-100" width="200" height="300"
 										alt="${bean.images}" >
-		              <!-- <div class="mask rgba-black-slight"></div> -->
 		         	 </a> 
 		          </div> 
-		
 		        <div class="text-center pt-3">
 		          <h5>${bean.productname}</h5>
-		          <!-- <p class="mb-2 text-muted text-uppercase small">Shirts</p> -->
 		          <hr>
 		          <h6 class="mb-3">
 		            <span class="text-danger mr-1">
 		            ￦<fmt:formatNumber value="${bean.productprice*0.8}" pattern="###,###"/>
 		            </span>
-		            <span class="text-grey">
+		            <span class="text-grey"><s>
 		            ￦<fmt:formatNumber value="${bean.productprice}" pattern="###,###"/>
-		            </span>
+		            </s></span>
 		          </h6>
 		          <%-- <h6 class="mb-3">${bean.productprice}</h6> --%>
 		         		 <form class="form-inline" role="form" method="post" action="<%=YesForm%>">
@@ -153,54 +150,37 @@
 		  <!-- Grid column -->
 	</c:forEach>	
 </div>
-</section>
 
 
 <br><br><br>
 
-
-
-<table>
-	<tr>
-		<td colspan="12" align="center">
-			<form class="form-inline" role="form" name="myform" action="<%=YesForm%>" method="get">
-				<input type="hidden" name="command" value="pcategorylist">
-				<!-- <div class="form-group">
-					<select class="form-control" name="mode" id="mode">
-						<option value="all" selected="selected">-- 선택하세요---------
-						<option value="productname">상품명
-						<option value="company">제조회사									
-						<option value="category">카테고리									
-					</select>
-				</div> -->
-				<div class="form-group">
-					<input type="text" class="form-control btn-xs" name="keyword"
-						id="keyword" placeholder="검색 키워드">
-				</div>
-				
-					<button class="btn btn-default btn-warning" type="submit" onclick="search();">검색</button>
-					<button class="btn btn-default btn-warning" type="button" onclick="searchAll();">전체 검색</button>
-			
-			<p class="form-control-static">${requestScope.pagingStatus}</p>
-			</form>
-		</td>
-		
-	</tr>
-	<tr>
-		<td>
-				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	<table>
+		<tr>
+			<td colspan="12" align="center">
+				<form class="form-inline" role="form" name="myform" action="<%=YesForm%>" method="get">
+					<input type="hidden" name="command" value="pcategorylist">
+					<div class="form-group">
+						<input type="text" class="form-control btn-xs" name="keyword"
+							id="keyword" placeholder="검색 키워드">
+					</div>
+				<button class="btn btn-default btn-warning" type="submit" onclick="search();">검색</button>
+				<p class="form-control-static">${requestScope.pagingStatus}</p>
+				</form>
+			</td>
+		</tr>
+		<tr>
+			<td>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 				<div align="center">
-			<footer>${requestScope.pagingHtml}</footer>
-		</div>		
-		</td>	
-	</tr>				
-</table>	
-		<br><br>
+					<footer>${requestScope.pagingHtml}</footer>
+				</div>		
+			</td>	
+		</tr>				
+	</table>	
 			
-	</div>		
-</section>	
+</div>		
+</section>
 
-<%-- ${requestScope.pagingHtml} --%>
 
 <br><br>
 	<script type="text/javascript">
