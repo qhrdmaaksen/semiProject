@@ -56,6 +56,15 @@
 		            red.send(error);
 		        })
 		});
+		function phonechange(){
+			
+		}
+	</script>
+	<script type="text/javascript">
+		$(dcument).ready(fucntion(){
+			
+		})
+	
 	</script>
 	<style type="text/css">
 		#payinfotable th{ font-weight: bold; padding: 7px 10px 7px 15px;}
@@ -65,7 +74,7 @@
 	</style>
 </head>
 <body>
-	<div class="container col-md-offset-<%=offset%> col-md-<%=content%>" style="padding-bottom: 10%;">
+	<div class="container col-md-offset-<%=offset%> col-md-<%=content%>" style="padding-bottom: 10%; width: 40%;">
 		<div class="ordTitle">
 			<h1>주문/결제</h1>
 			<hr style="border:none; border: 5px double orange;">
@@ -73,14 +82,15 @@
 				<span style="color: black;">"주문완료"</span>
 			</div>
 		</div>
-		<div data-component="customerinfo" align="left">
+		<div data-component="customerinfo">
 			<div class="customer_h2">
-				<h3 align="center">구매자 정보</h3>
-				<table id="paymemberinfo" style="padding: 10px 0px 10px 16px; font: 12px 돋움, Dotum, sans-werif;">
+				<h3 style="margin-left: 200px;" class="col-md-3">구매자 정보</h3>
+				<hr>
+				<table id="paymemberinfo" style="padding: 10px 0px 10px 16px; font: 12px 돋움, Dotum, sans-werif; white-space: nowrap; width: 100%;" >
 					<tr align="center">
 						<th style="background: #f0f0f5; font-weight: bold;">이름
 						</th>
-						<td>${sessionScope.loginfo.name}(${sessionScope.loginfo.id})님
+						<td align="center">${sessionScope.loginfo.name}(${sessionScope.loginfo.id})님
 						</td>
 					</tr>
 					<tr align="center">
@@ -91,20 +101,23 @@
 					</tr>
 					<tr align="center">
 						<th style="background: #f0f0f5; font-weight: bold;">휴대폰 번호</th>
-						<td>
+						<td class="col-md-4">
 							<input type="text" name="phonenum" value="${sessionScope.loginfo.phone}">
 						</td>
-						<td>
-							<button type="button" style="background: white;">수정</button>
+						<td class="col-md-4">
+							<button type="button" class="btn btn-warning btn-sm">
+								<a style="color: white;" href="http://localhost:8989/SemiProject/dodamdodam?command=memodify">수정
+								</a>
+							</button>
 						</td>
-						<td>쿠폰/티켓정보는 구매한 분의 번호로 전송됩니다.<br>*인증 번호를 못 받았다면, 010-9255-979 번호 차단 및 스팸 설정을 확인해 주세요.</td>
 					</tr>
 				</table>
 			</div>
 		</div>
+		<hr>
 		<div data-component="deleveryaddress">
 			<div>
-				<h3 style="padding: 0px 0px 0px 2px; margin: 30px 0px 8px;">받는사람 정보
+				<h3 style="padding: 0px 0px 0px 2px; margin: 30px 0px 8px; margin-left: 200px;">받는사람 정보
 					<span>
 						<button type="button" name="deliverychange" 
 							style="margin: 0px 0px 0px 5px; padding: 4px 8px; font: 11px 돋움, Dotum, sans-serif; background: white;">
@@ -112,7 +125,8 @@
 						</button>
 					</span>
 				</h3>
-				<table id="deliverytable" style="padding: 10px 0px 10px 16px; font: 12px 돋움, Dotum, sans-werif;">
+				<hr>
+				<table id="deliverytable" style="padding: 10px 0px 10px 16px; font: 12px 돋움, Dotum, sans-werif; white-space: nowrap; width: 100%;">
 					<tbody>
 						<tr align="center">
 							<th style="background: #f0f0f5; font-weight: bold;">이름
@@ -120,7 +134,7 @@
 							<td align="center">${sessionScope.loginfo.name}
 							</td>
 							<td>
-								<button type="button" name="basedelivery" style="background: white;">
+								<button class="col-md-6" type="button" name="basedelivery" style="background: white;">
 									기본배송지
 								</button>
 							</td>
@@ -137,15 +151,15 @@
 				</table>
 			</div>
 			<div style="margin: 8px 0px 0px; font:12px 돋움, Dotum, sans-serif;">
-				<div style="font: 18px; margin: 20px 0px 9px; font-weight: bold;">
+				<div style="font: 18px; margin: 20px 0px 9px; font-weight: bold; margin-left: 200px;">
 					배송 1건 중 1
 				</div>
-				<hr>
+				<hr style="border: none;">
 				<div style="padding: 10px 15px 10px 20px; background: #EEEEEE;">
 					<strong>1/29</strong>
 					<span>도착 예정</span>
 				</div>
-				<hr>
+				<hr style="border: none;">
 				<div>
 						<span>${bean.productname}</span>
 					<p align="right"><span>수량 1개 / <span>무료 배송</span></span></p>
@@ -157,15 +171,23 @@
 			</div>
 			<div>
 				<h3 align="center">결제 정보</h3>
+				<hr>
 			</div>
 			<table id="payinfotable" style="margin: 8px 0px 0px; font:12px 돋움, Dotum, sans-serif;">
+				<tbody align="center">
 				<tr align="center">
 					<th>총 상품가격</th>
 					<td>${bean.productprice}원</td>
 				</tr>
 				<tr align="center">
 					<th>할인 쿠폰</th>
-					<td>${coupon.kind==1}</td>
+					<td align="center">
+						${coupon.kind==1}
+						<button style="float: right;" type="button"  class="btn btn-warning btn-sm"> 
+							<a style="color: white;" href="http://localhost:8989/SemiProject/dodamdodam?command=coupon">쿠폰 선택
+							</a>
+						</button>
+					</td>
 				</tr>
 				<tr align="center">
 					<th>배송비</th>
@@ -186,54 +208,40 @@
 						</strong>
 					</td>
 				</tr>
+				
 				<tr align="center">
 					<th>결제방법</th>
-					<td style="padding: 4px 0px 0px;">
-						<input type="radio" name="" value="">&nbsp;계좌이체
+					<td style="padding: 4px 0px 0px; float: right;">
 						<input type="radio" name="" value="">&nbsp;신용/체크카드
-						<input type="radio" name="" value="" checked="checked">&nbsp;휴대폰
 						<input type="radio" name="" value="">&nbsp;무통장입금(가상계좌)
-						<div style="margin: -2px 0px 0px; padding: 10px; background: #F4F6FA" align="left">
-							<ul>
-								<li>
-									<div>
-										<label style="font-weight: bold;">통신사 종류</label>
-										<select>
-											<option value="" selected="selected">선택하세요.</option>
-											<option value="SKT">SKT</option>
-											<option value="KT">KT</option>
-											<option value="LG">LG</option>
-										</select>
-									</div>
-								</li>
-							</ul>
-						</div>
-						<div>
+						<div align="center">
 							<input type="checkbox" checked="checked">선택한 결제수단 및 휴대번호로 향후 결제 이용에 동의합니다(선택)
 						</div>
 					</td>
 				</tr>
+				</tbody>
 			</table>
 		</div>
+		<br><br><br>
 		<div style="margin: 0px 0px 10px; font:12px 돋움, Dotum, sans-serif;">
 			<div>
 				<span>개인정보 제공안내</span>
-				<button type="button" style="background: white;">보기</button>
-			</div>
+				<button type="button" style="background: white; float: right;">보기</button>
+			</div><br>
 		</div>
 		<div style="margin: 0px 0px 10px; font:12px 돋움, Dotum, sans-serif;">
 			<div>
 				<span>구매조건 확인 및 결제대행 서비스 약관 동의</span>
-				<button type="button" style="background: white;">보기</button>
-			</div>
+				<button type="button" style="background: white; float: right;">보기</button>
+			</div><br>
 		</div>
 		<div style="margin: 10px 0px 0px; font:12px 돋움, Dotum, sans-serif;">
 			<p>
         		* 개별 판매자가 등록한 마켓플레이스(오픈마켓) 상품에 대한 광고, 상품주문, 배송 및 환불의 의무와 책임은 각 판매자가 부담하고, 이에 대하여 쿠팡은 통신판매중개자로서 통신판매의 당사자가 아니므로 일체 책임을 지지 않습니다.
-			</p>
+			</p><br>
 		</div>
-		<div align="center"style="margin: 15px 0px; font:12px 돋움, Dotum, sans-serif;">
-			위 주문 내용을 확인 하였으며, 회원 본인은 결제에 동의합니다.
+		<div align="center"style="margin: 15px 0px; font:12px 돋움, Dotum, sans-serif; ">
+			위 주문 내용을 확인 하였으며, 회원 본인은 결제에 동의합니다.<br>
 		</div>
 		<div align="center">
 			<button class="btn btn-primary" type="button">결제 하기</button>
