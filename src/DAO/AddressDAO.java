@@ -278,7 +278,7 @@ public class AddressDAO  extends SuperDAO {
 
 
 
-	public List<AddressVo> SelectDataList(int beginRow, int endRow, String mode, String keyword) {
+	public List<AddressVo> SelectDataList(String id, int beginRow, int endRow, String mode, String keyword) {
 		Connection conn = null ;
 		PreparedStatement pstmt = null ;
 		ResultSet rs = null ;
@@ -286,6 +286,7 @@ public class AddressDAO  extends SuperDAO {
 		int cnt = -99999;
 	      String sql = " select \"seq_add\", \"id\", \"shippingname\", \"name\", \"address1\", \"address2\", \"phone\" " ;
 	      sql += " from \"ADDRESSES\" " ;
+	      sql += " where \"id\" = ? ";
 	      
 			/*
 			 * if(mode.equalsIgnoreCase("all")== false) { sql+= " where " + mode +
@@ -305,6 +306,7 @@ public class AddressDAO  extends SuperDAO {
 			 * pstmt.setInt(1, beginRow); pstmt.setInt(2, endRow);
 			 */
 			
+			pstmt.setString(1, id);
 			
 			
 			rs = pstmt.executeQuery() ;			

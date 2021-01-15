@@ -32,6 +32,7 @@ boList=board.BoardListController
 bbsdetailview=board.BoardDetailViewController
 boDelete=board.BoardDeleteController
 boUpdate=board.BoardUpdateController
+comment=board.commentInsertController
 #### Product Section #################################
 preview_delete=product.PreviewDeleteController
 preview=product.PreviewController

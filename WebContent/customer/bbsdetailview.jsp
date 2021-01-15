@@ -86,7 +86,8 @@
 			location.href='<%=NoForm%>boList&${requestScope.parameters}';
 			//alert('${requestScope.parameter}') ;
 		}
-
+	
+		
 		
 		function addNewItem(cnum, id, content, postdate) {
 			/* 댓글 1개를 추가해 주는 함수 */
@@ -189,7 +190,9 @@
 			
 		});	
 		
-
+		function writeForm(){
+			location.href='<%=NoForm%>comment';
+	}
 		
 		
 	</script>
@@ -208,19 +211,15 @@
 			</div>
 			<div class="panel-body">
 				
+
 					
-					
-			
 				<div class="col-sm-<%=rightside%> col-sm-<%=rightside%>">
 					<table class="table table-hover table-condensed">
 						<tr>
-							<td width="25%" align="center">글 번호</td>
-							<td width="75%" align="left">${bean.no}</td>
-						</tr>						
-						<tr>
 							<td width="25%" align="center">작성자</td>
 							<td width="75%" align="left">${bean.id}</td>
-						</tr>
+						</tr>					
+						
 						<tr>
 							<td width="25%" align="center">제목</td>
 							<td width="75%" align="left">${bean.title}</td>
@@ -265,7 +264,7 @@
 						<td width="50%" align="center">
 						<c:if test="${sessionScope.loginfo.id == bean.id}">
 						<a href="<%=NoForm%>boDelete&no=${bean.no}&${requestScope.parameters}">
-								삭제
+								<button>삭제</button>
 							</a>
 						</c:if>
 						<c:if test="${sessionScope.loginfo.id != bean.id}">
@@ -278,7 +277,8 @@
 						<td width="50%" align="left">
 						<c:if test="${sessionScope.loginfo.id == bean.id}">
 								<a href="<%=NoForm%>boUpdate&no=${bean.no}&${requestScope.parameters}">
-									수정
+								
+								<button>수정</button>
 								</a>
 						</c:if>
 						
@@ -292,38 +292,47 @@
 				</table>
 			</div>
 			<!-- 댓글 영역 -->
-			<div class="col-sm-12">					
-				<ul id="comment_list">
-					<!-- 여기에 동적 생성 요소가 들어가게 됩니다. -->
-				</ul>
-				<div id="comment_write">
-					<form id="comment_form" action="loginProc.jsp" method="post" role="form" class="form-horizontal" >
-						<div class="form-group">
-							<label for="writer" class="col-xs-3 col-lg-3 control-label">작성자</label>
-							<div class="col-xs-4 col-lg-4">
-								<input type="hidden" name="no" value="${bean.no}" />
-								<input type="text" name="id" id="id" class="form-control" > 
-							</div>
+				<hr>
+				
+				<form class="form-inline" role="form" name="myform" action="<%=YesForm%>" method="get">
+					<input type="hidden" name="command" value="comment">
+					<div class="form-group">
+					<input type="hidden" name="no" id="no" value="${bean.no}">
+					</div>
+				<a href="<%=NoForm%>comment&no=${bean.no}&${requestScope.parameters}">
+									<button>댓글달기</button>
+								</a>
+									
+					<input type="hidden" name="comment" value="comment">
+					<div class="form-group">
+							<input type="hidden" name="no" id="no"
+								value="${bean.no}">
 						</div>
-						<div class="form-group">
-							<label for="content" class="col-xs-3 col-lg-3 control-label">덧글 내용</label>
-							<div class="col-xs-9 col-lg-9">
-								<textarea name="content" rows="3" cols="50" id="content" ></textarea> 
-							</div>
-						</div>
-						<div class="form-group">
-							<div class="col-xs-offset-3 col-xs-2 col-lg-2">
-								<button type="submit" class="btn btn-info">
-									저장하기
-								</button> 
-							</div>
-						</div>	        		
-					</form>
+					</div>
+				
+				</form>
+				<table class="table table-condensed">
+						<thead>
+							<tr>
+								<th class="text-center">작성자</th>
+								<th class="text-center">댓글</th>
+							</tr>
+						</thead>
+						<tbody>
+							<c:forEach items="${requestScope.comment}" var="bean">
+								<tr class="record">
+									<td align="center">${bean.id}</td>
+									<td align="center">${bean.comment}</td>
+								</tr>
+							</c:forEach>
+						
+						</tbody>
+						
+					</table>
 				</div>
 			</div>
 
 		</div>
-	</div>
 	<script>
 		$(document).ready(function() {
 			$('[data-toggle="popover"]').popover();

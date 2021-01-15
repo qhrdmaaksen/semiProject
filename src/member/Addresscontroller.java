@@ -11,6 +11,7 @@ import DAO.AddressDAO;
 import DAO.BoardDAO;
 import VO.AddressVo;
 import VO.BbsPostVo;
+import VO.MemberVO;
 import common.SuperClass;
 import utility.FlowParameters;
 import utility.Paging;
@@ -52,7 +53,14 @@ public class Addresscontroller extends SuperClass {
 						parameters.getMode(),
 						parameters.getKeyword());
 		
+		MemberVO loginfo = (MemberVO)super.session.getAttribute("loginfo");
+		
+		String id = loginfo.getId();
+		
+		System.out.println(id);
+		
 		List<AddressVo> lists = dao.SelectDataList(
+				id,
 				pageInfo.getBeginRow(),
 				pageInfo.getEndRow(),
 				parameters.getMode(),
