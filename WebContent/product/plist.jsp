@@ -47,11 +47,12 @@
 
 <div class="w3-sidebar w3-bar-block w3-yellow w3-xxlarge" style="width:70px; align-content: center;">
 
-
+	
 	<div class="container">
- 		<a href="<%=NoForm%>pcategorylist&mode=eyes&${requestScope.parameters}"> 
-					<i class="fas fa-eye" style='font-size:36px;'></i>
-						</a> 		
+ 		<a href="<%=NoForm%>pcategorylist&mode=eyes&${requestScope.parameters}"
+ 				 data-toggle="tooltip" title="눈!!!!!"> 
+						<i class="fas fa-eye" style='font-size:36px;'></i>
+					</a>
 		</div>	
 	<div class="container">
  		<a href="<%=NoForm%>pcategorylist&mode=bloodcirculation&${requestScope.parameters}"> 
@@ -88,12 +89,13 @@
 					<i class="fas fa-street-view" style='font-size:36px'></i>
 						</a> 
 		</div>		
-		
-	<div class="container" style="margin-top:20px;">														
- 		<a href="<%=NoForm%>pcategorylist&mode=immunity&${requestScope.parameters}"> 
-					<i class="fas fa-street-view" style='font-size:36px'></i>
-						</a> 
-		</div>																								
+	<c:if test="${whologin == 2}">
+		<div class="container" style="margin-top:20px;">														
+	 		<a href="<%=NoForm%>pcategorylist&mode=immunity&${requestScope.parameters}"> 
+						<i class='fas fa-barcode' style='font-size:36px'></i>
+							</a> 
+			</div>	
+	</c:if>																								
   </div>	
 
 
