@@ -186,27 +186,27 @@
               </thead>
               <tbody>
               
-              <c:forEach items="${sessionScope.shoplists}" var="shopinfo">
+              <c:forEach items="${sessionScope.Rshoplists}" var="Rshopinfo">
                 <tr>
                   <th scope="row" class="border-0">
                     <div class="p-2">
                      <c:if test="${applicationScope.debugMode == true}">
-								이미지 경로<br>${applicationScope.uploadedPath}/${shopinfo.images}
+								이미지 경로<br>${applicationScope.uploadedPath}/${Rshopinfo.images}
 							</c:if>
-							<img src="${applicationScope.uploadedPath}/${shopinfo.images}" alt="" width="70" class="img-fluid rounded shadow-sm">
+							<img src="${applicationScope.uploadedPath}/${Rshopinfo.images}" alt="" width="70" class="img-fluid rounded shadow-sm">
                       <div class="ml-3 d-inline-block align-middle">
                         <h5 class="mb-0"> <a href="#" class="text-dark d-inline-block align-middle">
-                        ${shopinfo.productname}</a></h5>
+                        ${Rshopinfo.productname}</a></h5>
                         <span class="text-muted font-weight-normal font-italic d-block">Category: Watches</span>
                       </div>
                     </div>
                   </th>
                   <td class="border-0 align-middle"><strong>
-					￦<fmt:formatNumber value="${shopinfo.productprice * 0.8}" pattern="###,###"/>
+					￦<fmt:formatNumber value="${Rshopinfo.productprice * 0.8}" pattern="###,###"/>
 					</strong></td>
-                  <td class="border-0 align-middle"><strong>${shopinfo.qty}</strong></td>
+                  <td class="border-0 align-middle"><strong>${Rshopinfo.months}</strong></td>
                   <td class="border-0 align-middle">
-                  <a href="<%=NoForm%>mallcartdelete&productcode=${shopinfo.productcode}" type="button" class="card-link-secondary small text-uppercase mr-3"><i
+                  <a href="<%=NoForm%>mallcartdelete&productcode=${Rshopinfo.productcode}" type="button" class="card-link-secondary small text-uppercase mr-3"><i
                         class="fas fa-trash-alt mr-1"></i>
 								Delete
 							</a>
@@ -239,23 +239,23 @@
             <p class="font-italic mb-4">총 구매금액이 50,000원 이상 일 경우 배송비가 부과되지 않습니다.</p>
             <ul class="list-unstyled mb-4">
               <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">Pre-discount totalamount </strong><strong>
-              	￦<fmt:formatNumber value="${sessionScope.totalAmount}" pattern="###,###"/>
+              	￦<fmt:formatNumber value="${sessionScope.RtotalAmount}" pattern="###,###"/>
               	</strong></li>
               <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted"><i class='fas fa-shipping-fast'></i>  Shipping and handling</strong>
               <strong>
-          		<c:if test="${sessionScope.totalAmount*0.8>=50000}">
+          		<c:if test="${sessionScope.RtotalAmount*0.8>=50000}">
           		<span class="text-grey"><s>
             ￦<fmt:formatNumber value="3000" pattern="###,###"/>
             	</s></span>
             ￦<fmt:formatNumber value="0" pattern="###,###"/>
               </c:if>
-              <c:if test="${sessionScope.totalAmount*0.8 < 50000}"> ￦<fmt:formatNumber value="3000" pattern="###,###"/></c:if>
+              <c:if test="${sessionScope.RtotalAmount*0.8 < 50000}"> ￦<fmt:formatNumber value="3000" pattern="###,###"/></c:if>
               	</strong></li>
               <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">Discount</strong><strong id="red">
-              	￦<fmt:formatNumber value="${sessionScope.totalAmount*(1-0.8)}" pattern="###,###"/>
+              	￦<fmt:formatNumber value="${sessionScope.RtotalAmount*(1-0.8)}" pattern="###,###"/>
               	</strong></li>
               <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">Total</strong>
-                <h5 class="font-weight-bold">￦<fmt:formatNumber value="${sessionScope.totalAmount*0.8}" pattern="###,###"/></h5>
+                <h5 class="font-weight-bold">￦<fmt:formatNumber value="${sessionScope.RtotalAmount*0.8}" pattern="###,###"/></h5>
               </li>
             </ul><a href="#" class="btn btn-dark rounded-pill py-2 btn-block">Procceed to checkout</a>
           </div>
