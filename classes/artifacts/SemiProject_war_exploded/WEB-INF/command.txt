@@ -4,6 +4,7 @@ survey=common.ServeyController
 payOk=common.test
 #### Member Section ##################################
 melogin=member.MemberLoginController
+melogout=member.MemberLogoutController
 mypage=member.MemberMypageController
 newmember=member.MemberNewmemberController
 coupon=member.MyCouponController
@@ -32,6 +33,7 @@ boList=board.BoardListController
 bbsdetailview=board.BoardDetailViewController
 boDelete=board.BoardDeleteController
 boUpdate=board.BoardUpdateController
+comment=board.commentInsertController
 #### Product Section #################################
 preview_delete=product.PreviewDeleteController
 preview=product.PreviewController

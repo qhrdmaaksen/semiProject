@@ -43,38 +43,52 @@
 
 
 
-<div class="w3-sidebar w3-bar-block w3-yellow w3-xxlarge" style="width:70px">
+<div class="w3-sidebar w3-bar-block w3-yellow w3-xxlarge" style="width:70px; align-content: center;">
 
 
- <a href="<%=NoForm%>pcategorylist&mode=eyes&${requestScope.parameters}"> 
-							<i class="fa fa-home"></i>
+	<div class="container">
+ 		<a href="<%=NoForm%>pcategorylist&mode=eyes&${requestScope.parameters}"> 
+					<i class="fas fa-eye" style='font-size:36px;'></i>
+						</a> 		
+		</div>	
+	<div class="container">
+ 		<a href="<%=NoForm%>pcategorylist&mode=bloodcirculation&${requestScope.parameters}"> 
+							<i class='fas fa-retweet' style='font-size:36px'></i>
+						</a>
+		</div>	
+	<div class="container">						 
+		 <a href="<%=NoForm%>pcategorylist&mode=digestiveapparatus&${requestScope.parameters}"> 
+					<i class='fas fa-lungs-virus' style='font-size:36px'></i>
 						</a> 
- <a href="<%=NoForm%>pcategorylist&mode=bloodcirculation&${requestScope.parameters}"> 
-							<i class="fa fa-home"></i>
+		</div>	
+	<div class="container">												
+ 		<a href="<%=NoForm%>pcategorylist&mode=skin&${requestScope.parameters}"> 
+					<i class="far fa-smile-beam"></i>
+						</a>
+		</div>	
+	<div class="container">						
+ 		<a href="<%=NoForm%>pcategorylist&mode=fatigue&${requestScope.parameters}"> 
+					<i class='fas fa-child' style='font-size:36px'></i>
+						</a>
+		</div>	
+	<div class="container">						 				
+ 		<a href="<%=NoForm%>pcategorylist&mode=joint&${requestScope.parameters}"> 
+					<i class='fas fa-bone' style='font-size:36px'></i>
+						</a>
+		</div>	
+	<div class="container">								
+ 		<a href="<%=NoForm%>pcategorylist&mode=hair&${requestScope.parameters}"> 
+					<i class='fab fa-keybase' style='font-size:36px'></i>
 						</a> 
- <a href="<%=NoForm%>pcategorylist&mode=digestiveapparatus&${requestScope.parameters}"> 
-							<i class="fa fa-home"></i>
-						</a> 						
- <a href="<%=NoForm%>pcategorylist&mode=skin&${requestScope.parameters}"> 
-							<i class="fa fa-home"></i>
-						</a> 						
- <a href="<%=NoForm%>pcategorylist&mode=eyes&${requestScope.parameters}"> 
-							<i class="fa fa-home"></i>
+		</div>	
+	<div class="container">														
+ 		<a href="<%=NoForm%>pcategorylist&mode=immunity&${requestScope.parameters}"> 
+					<i class="fas fa-street-view" style='font-size:36px'></i>
 						</a> 
- <a href="<%=NoForm%>pcategorylist&mode=fatigue&${requestScope.parameters}"> 
-							<i class="fa fa-home"></i>
-						</a> 				
- <a href="<%=NoForm%>pcategorylist&mode=joint&${requestScope.parameters}"> 
-							<i class="fa fa-home"></i>
-						</a> 								
- <a href="<%=NoForm%>pcategorylist&mode=hair&${requestScope.parameters}"> 
-							<i class="fa fa-home"></i>
-						</a> 								
- <a href="<%=NoForm%>pcategorylist&mode=immunity&${requestScope.parameters}"> 
-							<i class="fa fa-home"></i>
-						</a> 																					
+		</div>																									
   
 </div>
+
 
 
   <div class="container text-#8B4513 py-5 text-center">
@@ -83,38 +97,26 @@
 
 
 
-<div>
-
 <!--Section: Block Content-->
 <section>
-
+<div>
   <!-- Grid row -->
   <div class="row">
-  
-  
 		<c:forEach var="bean" items="${requestScope.lists}">
 		    <!-- Grid column -->
 		    <div class="col-md-3 mb-3">
-		 
 		      <!-- Card -->
 		      <div class="">
-		
-		             <a href="#!">
-            <div class="mask">
-            	<a href="<%=NoForm%>pdetail&productcode=${bean.productcode}&${requestScope.parameters}">		  	
+		        <!-- <a href="#!"> -->
+           		 <div class="mask">
+            		<a href="<%=NoForm%>pdetail&productcode=${bean.productcode}&${requestScope.parameters}">		  	
             		<img src="${applicationScope.uploadedPath}/${bean.images}"
 										class="img-fluid w-100" width="200" height="300"
 										alt="${bean.images}" >
-		              <div class="mask rgba-black-slight"></div>
-		            </a>
-		       </div>
-		        
-		
+		         	 </a> 
+		          </div> 
 		        <div class="text-center pt-3">
-		
 		          <h5>${bean.productname}</h5>
-		          <p class="mb-2 text-muted text-uppercase small">Shirts</p>
-		
 		          <hr>
 		          <h6 class="mb-3">
 		            <span class="text-danger mr-1">
@@ -135,68 +137,50 @@
 								<button type="submit" class="btn btn-primary btn-sm mr-1 mb-2">Add to cart</button>
 							</form>
 					<form class="form-inline" role="form" name="myform" action="<%=YesForm%>" method="post">
-					
-						<input type="hidden" name="command" value="pdetail">
+					  <input type="hidden" name="command" value="pdetail">
 						<a href="<%=NoForm%>pdetail&productcode=${bean.productcode}&${requestScope.parameters}">
 							<button type="button" class="btn btn-light btn-sm mr-1 mb-2">
 							<i class="fas fa-info-circle pr-2"></i>Details</button> 		
-								</a>
+						</a>
 		         </form>
 		        </div>
 		      </div>
-		      <!-- Card -->
-		    </div>
-		    <!-- Grid column -->
-		</c:forEach>	
+		    <!-- Card -->
+		   </div>
+		  <!-- Grid column -->
+	</c:forEach>	
 </div>
-
 
 
 <br><br><br>
 
-
-
-<table>
-	<tr>
-		<td colspan="12" align="center">
-			<form class="form-inline" role="form" name="myform" action="<%=YesForm%>" method="get">
-				<input type="hidden" name="command" value="pcategorylist">
-				<!-- <div class="form-group">
-					<select class="form-control" name="mode" id="mode">
-						<option value="all" selected="selected">-- 선택하세요---------
-						<option value="productname">상품명
-						<option value="company">제조회사									
-						<option value="category">카테고리									
-					</select>
-				</div> -->
-				<div class="form-group">
-					<input type="text" class="form-control btn-xs" name="keyword"
-						id="keyword" placeholder="검색 키워드">
-				</div>
-				
-					<button class="btn btn-default btn-warning" type="submit" onclick="search();">검색</button>
-					<button class="btn btn-default btn-warning" type="button" onclick="searchAll();">전체 검색</button>
-			
-			<p class="form-control-static">${requestScope.pagingStatus}</p>
-			</form>
-		</td>
-		
-	</tr>
-	<tr>
-		<td>
-				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	<table>
+		<tr>
+			<td colspan="12" align="center">
+				<form class="form-inline" role="form" name="myform" action="<%=YesForm%>" method="get">
+					<input type="hidden" name="command" value="pcategorylist">
+					<div class="form-group">
+						<input type="text" class="form-control btn-xs" name="keyword"
+							id="keyword" placeholder="검색 키워드">
+					</div>
+				<button class="btn btn-default btn-warning" type="submit" onclick="search();">검색</button>
+				<p class="form-control-static">${requestScope.pagingStatus}</p>
+				</form>
+			</td>
+		</tr>
+		<tr>
+			<td>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 				<div align="center">
-			<footer>${requestScope.pagingHtml}</footer>
-		</div>		
-		</td>	
-	</tr>				
-</table>	
-		<br><br>
+					<footer>${requestScope.pagingHtml}</footer>
+				</div>		
+			</td>	
+		</tr>				
+	</table>	
 			
-	</div>		
-</section>	
+</div>		
+</section>
 
-<%-- ${requestScope.pagingHtml} --%>
 
 <br><br>
 	<script type="text/javascript">
