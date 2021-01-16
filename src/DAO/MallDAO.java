@@ -261,6 +261,50 @@ public class MallDAO extends SuperDAO{
 		return bean  ;
 	}
 
+	public List<OrderVO> OrderMalldetail(String id) {
+		Connection conn = null ;
+		PreparedStatement pstmt = null ;
+		ResultSet rs = null ;	
+		
+		String sql = "select * from orders " ;
+		sql += " where \"id\" = ? order by \"orderdate\" desc  " ;
+		
+		List<OrderVO> lists = new ArrayList<OrderVO>() ;
+		
+		try {
+			conn = super.getConnection() ;	
+			pstmt = conn.prepareStatement(sql) ;
+			pstmt.setString( 1, id ); 
+			rs = pstmt.executeQuery() ; 
+			while ( rs.next()) {
+				OrderVO bean = new OrderVO() ; 
+				bean.setId(rs.getString("id"));
+				bean.setInvoice(rs.getString("invoice"));
+				bean.setOrderdate(String.valueOf(rs.getString("orderdate")));
+				bean.setSeq_add(rs.getInt("seq_add"));
+				bean.setSeq_pay(rs.getInt("seq_pay"));
+				bean.setOrdernumber(rs.getInt("ordernumber"));
+				bean.setShippingstatus(rs.getInt("shippingstatus"));
+				
+				
+				lists.add( bean ) ; 
+			}
+			
+		} catch (SQLException e) {			
+			e.printStackTrace();
+		} finally{
+			try {
+				if( rs != null){ rs.close(); } 
+				if( pstmt != null){ pstmt.close(); } 
+				if(conn != null) {conn.close();}
+			} catch (Exception e2) {
+				e2.printStackTrace(); 
+			}
+		} 		
+		return lists  ;
+	}
+	}
+
 	
 	
 	
@@ -349,4 +393,3 @@ public class MallDAO extends SuperDAO{
 	 * return lists; }
 	 */
 	
-}

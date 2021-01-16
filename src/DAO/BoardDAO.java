@@ -226,7 +226,7 @@ public class BoardDAO  extends SuperDAO {
 }
 
 	public int UpdateReadhit(int num) {
-		String sql = " update \"bbs_post\" set likenumber = likenumber + 1 ";
+		String sql = " update bbs_post set \"likenumber\" = \"likenumber\" + 1 ";
 		sql += " where \"seq_index\" = ? ";    
 		Connection conn = null ;
 		PreparedStatement pstmt = null ;
