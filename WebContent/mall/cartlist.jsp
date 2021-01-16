@@ -37,12 +37,27 @@
   	<h3><i class="fas fa-shopping-cart"></i>   Shopping Cart</h3>
   </div>
   <!-- End -->
+  
+<div class="container">
+  <!-- Nav tabs -->
+  <ul ul class="nav nav-pills nav-justified btn-warning" role="tablist">
+    <li class="nav-item">
+      <a class="nav-link active" data-toggle="tab" href="#home">Home</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" data-toggle="tab" href="#menu1">Menu 1</a>
+    </li>
+  </ul>
 
+  <!-- Tab panes -->
+  <div class="tab-content">
+    <div id="home" class="container tab-pane active"><br>
+      <h3>일반 주문</h3>
+     <br>
   <div class="pb-5">
     <div class="container">
       <div class="row">
         <div class="col-lg-12 p-5 bg-white rounded shadow-sm mb-5">
-
           <!-- Shopping cart table -->
           <div class="table-responsive">
             <table class="table">
@@ -92,15 +107,12 @@
                 </tr>
                 
               </c:forEach>  
-     
-                
               </tbody>
             </table>
           </div>
           <!-- End -->
         </div>
       </div>
-
       <div class="row py-5 p-4 bg-white rounded shadow-sm">
         <div class="col-lg-6">
           <div class="bg-light rounded-pill px-4 py-3 text-uppercase font-weight-bold">Coupon code</div>
@@ -143,9 +155,15 @@
           </div>
         </div>
       </div>
-
     </div>
   </div>
+	  </div>
+	    <div id="menu1" class="container tab-pane fade"><br>
+	      <h3>정기 주문</h3>
+	      <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+	    </div>
+	  </div>
+	</div>
 </div>
 </body>
 </html>
