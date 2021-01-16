@@ -36,6 +36,12 @@ public class MallCartListController extends SuperClass{
 			MyCartList mycart = (MyCartList)super.session.getAttribute("mycart") ;
 			MyCartList Rmycart = (MyCartList)super.session.getAttribute("Rmycart") ;
 			
+			if (mycart == null && Rmycart == null) {
+				message = "장바구니가 비어있습니다. 상품 목록 페이지로 갑니다." ;
+				super.setErrorMessage(message);
+				new PlistController().doGet(request, response);
+			} 
+			
 			if (mycart == null) {
 				
 				Map<Integer, Integer> Rmaplists = Rmycart.GetAllROrderLists() ;
