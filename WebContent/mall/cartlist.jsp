@@ -40,7 +40,7 @@
   
 <div class="container">
   <!-- Nav tabs -->
-  <ul ul class="nav nav-pills nav-justified btn-warning" role="tablist">
+  <ul ul class="nav nav-justified btn-light" role="tablist">
     <li class="nav-item">
       <a class="nav-link active" data-toggle="tab" href="#home">Home</a>
     </li>
