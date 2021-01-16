@@ -82,9 +82,6 @@ public class Addresscontroller extends SuperClass {
 		
 		//상세 보기, 수정 , 삭제, 답글 등의 링크에 사용될 parameter list 문자열 
 		request.setAttribute("parameters",parameters.toString());
-		
-		
-		
 		String gotopage = "";
 		if (request.getParameter("paymentshipping") == null) {
 			gotopage = "member/address.jsp";
@@ -92,17 +89,7 @@ public class Addresscontroller extends SuperClass {
 			gotopage = "/pay/payment.jsp";
 		}
 		System.out.println("gotopage : "+gotopage);
-		
-		
-		
 		super.GotoPage(gotopage);
-		
-		
-		
-		
-		
-		
-		
 	}
 	
 	@Override
@@ -113,22 +100,15 @@ public class Addresscontroller extends SuperClass {
 		if(this.validate(request)==true) {
 			gotopage = "";
 			super.GotoPage(gotopage);
-			
 		}else {
 			gotopage = "";
 			super.GotoPage(gotopage);
-			
 		}
-	
 	}
 	
 	@Override
 	public boolean validate(HttpServletRequest request) {
 		boolean isCheck = true ;
-		
-		
 		return super.validate(request);
 	}
-	
-	
 }
