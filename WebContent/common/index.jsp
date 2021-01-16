@@ -11,62 +11,16 @@
 <html>
 <head>
     <title>도담도담, 영양제 구독 사이트</title>
-    <style>
-        #go-survey {
-            margin-top: 30px;
-        }
-        /* Make the image fully responsive */
-        .carousel-inner img {
-            width: 100%;
-            height: 100%;
-        }
-        .gosurvey {
-            margin-top: 20px;
-        }
-        .top4 {
-            padding: 20px 200px;
-        }
-        .card {
-            margin-bottom: 20px;
-        }
-        .card-subject{
-            height: 50px;
-        }
-        .card-icon{
-            float: left;
-        }
-        .card-icons{
-            height: 40px;
-        }
-        .card-icon{
-            width: 34px;
-            height: 33px;
-            border-radius: 50%;
-            border: 2px solid #5a6268;
-            overflow: hidden;
-            margin-left: 5px;
-            float: left;
-        }
-        .card-icon:first-child{
-            margin-left: 0px;
-        }
-        .card-icon-img{
-            width: 30px;
-            height: 30px;
-        }
-    </style>
 </head>
 <body>
     <!-- 이 구역은 Carousel 영역 -->
     <div id="demo2" class="carousel slide" data-ride="carousel">
-
         <!-- Indicators -->
         <ul class="carousel-indicators">
             <li data-target="#demo2" data-slide-to="0" class="active"></li>
             <li data-target="#demo2" data-slide-to="1"></li>
             <li data-target="#demo2" data-slide-to="2"></li>
         </ul>
-
         <!-- The slideshow -->
         <div class="carousel-inner">
             <div class="carousel-item active">
@@ -91,7 +45,6 @@
                 </div>
             </div>
         </div>
-
         <!-- Left and right controls -->
         <a class="carousel-control-prev" href="#demo2" data-slide="prev">
             <span class="carousel-control-prev-icon"></span>
@@ -99,7 +52,6 @@
         <a class="carousel-control-next" href="#demo2" data-slide="next">
             <span class="carousel-control-next-icon"></span>
         </a>
-
     </div>
     <div class="jumbotron text-center gosurvey">
         <h1>건강 검진으로 필요한 영상소를 체크해보세요.</h1>
@@ -147,5 +99,6 @@
             </c:forEach>
         </div>
     </div>
+    <%@ include file="footer.jsp"%>
 </body>
 </html>

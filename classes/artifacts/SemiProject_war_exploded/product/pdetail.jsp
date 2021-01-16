@@ -19,11 +19,9 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 <%@ include file="../common/nav.jsp"%>
-	<script src="../js/jquery-3.5.1.min.js" type="text/javascript"></script>
-	<script	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-	<script src="../js/jquery.zoom.min.js"></script>
+	<script src="./js/jquery-3.5.1.min.js" type="text/javascript"></script>
+	<script src="./js/jquery.zoom.min.js"></script>
 	<script type="text/javascript" src="https://rawgit.com/jackmoore/autosize/master/dist/autosize.min.js"></script>
-	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
 	<link
 	    rel="stylesheet"
 	    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"
@@ -56,10 +54,10 @@
     }
 	</style>
 	<script type="text/javascript">
+		var totalprice = parseInt("${bean.productprice}");
 		function imageZoom() {
 			$("#myarea").zoom();
 		}
-	
 		function applyImage(srcimg) {
 			var mywidth = 340; /* form에 너비 높이들을 가져오는 문  */
 			var myheight = 450;
@@ -72,49 +70,48 @@
 			target.innerHTML = imgInfo;
 			imageZoom();
 		}
-	</script>
-	<script type="text/javascript">
 		$(document).ready(function() {
-// 			$.ajax({
-// 				url:"${pageContext.request.contextPath}/dodamdodam?command=preview",
-// 				type:"get",
-// 				success: (response) =>{
-// 					autosize($('textarea'));
+			var price = parseInt("${bean.productprice}");
+ 			 $.ajax({
+ 				url:"${pageContext.request.contextPath}/dodamdodam?command=preview",
+ 				type:"get",
+ 				success: (response) =>{
+ 					autosize($('textarea'));
 					
-// 					$("[id*=starGarde_]").each(function() {
+ 					$("[id*=starGarde_]").each(function() {
 						
-// 						var star = "☆";
-// 						var star2 = "★";
-// 						var grade = Number($(this).text()); // 별점 수
-// 						var starGrade  = ""; //최종 문자열
-						
-// 						//별점만큼 채워진별을 대입
-// 						for(var i = 0 ; i < grade; i++){
-// 							starGrade += star2;	
-// 						}
-						
-// 						// 5-별점 만큼 빈별을 대입
-// 						for(var i = 0 ;i < 5-grade; i++){
-// 							starGrade += star;
-// 						}
-// 						// 완성된 문자열을 대입
-// 						$(this).text(starGrade).css("color","red");
-// 					});
-					
-// 				},
-// 				error: () =>{
-// 					console.log("error")
-// 				}
-				
-			})
-			$("input[name='delivery']").click(function() {
-				var thisValue = $(this).val();
-				if (thisValue == "정기 배송") {
+ 						var star = "☆";
+ 						var star2 = "★";
+ 						var grade = Number($(this).text()); // 별점 수
+ 						var starGrade  = ""; //최종 문자열
+ 						//별점만큼 채워진별을 대입
+ 						for(var i = 0 ; i < grade; i++){
+ 							starGrade += star2;	
+ 						}
+ 						// 5-별점 만큼 빈별을 대입
+ 						for(var i = 0 ;i < 5-grade; i++){
+ 							starGrade += star;
+ 						}
+ 						// 완성된 문자열을 대입
+ 						$(this).text(starGrade).css("color","red");
+ 					});
+ 				},
+ 				error: () =>{
+ 					console.log("error")
+ 				}
+			});
+			$("input[name='delivery']").change(function() {
+				if($(this).prop("checked")){
 					$("#inHere").css("display", "block");
-					$('#buy-qty').val(0);
-				} else if (thisValue == false){
+					$('#buy-qty').css("display", "none");
+					$('#buy-qty2').css("display", "none");
+					$("#productprice").text("월간 " + Math.floor(price * 0.8).format() + "원");
+					totalprice = Math.floor(price * 0.8);
+				}else {
 					$("#inHere").css("display", "none");
-					$('#buy-qty').val(1);
+					$('#buy-qty').css("display", "block");
+					$('#buy-qty2').css("display", "block");
+					$('#buy-qty').trigger("change");
 				}
 			});
 			$('#star_grade a').click(function(){
@@ -129,30 +126,66 @@
 		         })
 		         return false;
 			});
-		})
-	</script>
-		<script type="text/javascript">
-		var id = "${id}";
-		var password = "${password}";
-		console.log("id : "+id);
-		console.log("password : "+ password)
-		if(id != null && 
-		   password !=null &&
-		   id != "" &&
-		   password != "" &&
-		   id != undefined &&
-		   password != undefined)
-		{
-			//session 등록
-			location.href = "pdetail.jsp";
-		}else{
-			//location.href = "melogin.jsp";
-		}
-		//alert("로그아웃 되었습니다.");
-		//location.href="http://localhost:8989/SemiProject/dodamdodam?command=melogin";                                    // 로그아웃 페이지로 이동
+			$("#buy-qty").on("click", function() {
+				if($("input[name='delivery']").prop("checked")){
+					$("input[name='delivery']").click();
+				}	
+			});
+			$("#buy-qty").on('change',function(e) {
+				if(${sessionScope.loginfo==null}){
+					$("#productprice").text(Math.floor(price * e.target.value).format() + "원");
+					totalprice = Math.floor(price * e.target.value);
+				}else {
+					$("#productprice").text(Math.floor(price * e.target.value * 0.8).format() + "원");
+					totalprice = Math.floor(price * e.target.value * 0.8);
+				}
+			});
+			$("#month1").on("click", function() {
+				$("#productprice").text("월간 " + Math.floor(price * 0.8).format() + "원");
+				totalprice = Math.floor(price * 0.8);
+			});
+			$("#month2").on("click", function() {
+				$("#productprice").text("월간 " + Math.floor(price * 0.7).format() + "원");
+				totalprice = Math.floor(price * 0.7);
+			});
+			$("#month3").on("click", function() {
+				$("#productprice").text("월간 " + Math.floor(price * 0.7).format() + "원");
+				totalprice = Math.floor(price * 0.7);
+			});
+			$("#month4").on("click", function() {
+				$("#productprice").text("월간 " + Math.floor(price * 0.7).format() + "원");
+				totalprice = Math.floor(price * 0.7);
+			});
+			$("#month5").on("click", function() {
+				$("#productprice").text("월간 " + Math.floor(price * 0.7).format() + "원");
+				totalprice = Math.floor(price * 0.7);
+			});
+			$("#month6").on("click", function() {
+				$("#productprice").text("월간 " + Math.floor(price * 0.7).format() + "원");
+				totalprice = Math.floor(price * 0.7);
+			});
+		});
+		
 		function deliverynone(none){
 			$("#inHere").css("display", "none");
 			$("input:radio[value='정기 배송']").removeAttr("checked");
+		};
+		
+		Number.prototype.format = function(){
+		    if(this==0) return 0;
+		 
+		    var reg = /(^[+-]?\d+)(\d{3})/;
+		    var n = (this + '');
+		 
+		    while (reg.test(n)) n = n.replace(reg, '$1' + ',' + '$2');
+		 
+		    return n;
+		};
+		String.prototype.format = function(){
+		    var num = parseFloat(this);
+		    if( isNaN(num) ) return "0";
+		 
+		    return num.format();
 		};
 	</script>
 </head>
@@ -182,62 +215,104 @@
 			<div class="col-md-6 text-center">
 				<h2>상품 가격 상세보기</h2>
 				<div class="text-center" style="height: 100%;">
-					<table border="1" style="width: 100%; height: 100%;"
-						class="text-left">
-						<tr style="height: 100%" align="center">
-							<td class="list-group-item" style="font-size: 12">탐 사 수</td>
-							<td class="list-group-item">시중 판매 가격 : 11,000 원</td>
-							<td class="list-group-item">일반 회원 판매 가격 : 10,000 원</td>
-							<td class="list-group-item">구독 회원 가격 : 9,000 원</td>
-							<td class="list-group-item">내일 토요일 12-19 도착 예정</td>
-							<td class="list-group-item">구매 수량
-								<div class="col-sm-6">
-									<input id="buy-qty" type="number"
-										class="form-control mypopover" title="수량 입력란" value="1" min="1"
-										data-content="구매하고자 하는 수량을 정수로 입력하세요." onclick="deliverynone()">
-								</div>
-							</td>
-							<td class="list-group-item" align="center"><input id="delivery-select" type="radio"
-								name="delivery" value="정기 배송">&nbsp;&nbsp;정기 배송 선택
-								<div id="inHere" style="display: none;">
-									<table>
-										<tr>
-											<td>
-												<button type='button'>1개월 정기</button>
-											</td>
-											<td>
-												<button type='button'>2개월 정기</button>
-											</td>
-											<td>
-												<button type='button'>3개월 정기</button>
-											</td>
-										</tr>
-										<tr>
-											<td>
-												<button type='button'>4개월 정기</button>
-											</td>
-											<td>
-												<button type='button'>5개월 정기</button>
-											</td>
-											<td>
-												<button type='button'>6개월 정기</button>
-											</td>
-										</tr>
-									</table>
-								</div>
-							</td>
-							<td class="list-group-item"><input type="button"
-								style="width: 80%; color: blue; background: white; border: 1; border-color: blue; font: bold;"
-								name="goMall" value="장바구니 담기"></td>
-							<td class="list-group-item"><input type="submit"
-								style="width: 80%; color: white; background: blue;"
-								name="gopayment" value="바로 구매 >" onclick="location.href='http://localhost:8989/SemiProject/product/payment.jsp'"></td>
-						</tr>
-					</table>
+					<form id="product-form" action="<%=YesForm%>" method="post">
+						<table border="1" style="width: 100%; height: 100%;"
+							class="text-left">
+							<tr style="height: 100%" align="center">
+								<td class="list-group-item" style="font-size: 12">상품명</td>
+								<td class="list-group-item" style="font-size: 12">${bean.productname}</td>
+								
+								<td class="list-group-item">판매 가격</td>
+								<td class="list-group-item" id="productprice">
+									<c:if test="${sessionScope.loginfo == null}">
+										<fmt:formatNumber value="${bean.productprice}" pattern="#,###"/>원
+									</c:if>
+									<c:if test="${sessionScope.loginfo != null}">
+										<fmt:formatNumber value="${bean.productprice*0.8}" pattern="#,###"/>원
+									</c:if>
+								</td>
+								
+								<td class="list-group-item">도착 예정일</td>
+								<td class="list-group-item">내일 토요일 12-19 도착 예정</td>
+								<td class="list-group-item" id="buy-qty2">구매 수량
+									<div class="col-sm-6">
+										<input id="buy-qty" type="number"
+											class="form-control mypopover" title="수량 입력란" value="1" min="1"
+											data-content="구매하고자 하는 수량을 정수로 입력하세요." >
+									</div>
+								</td>
+								<td class="list-group-item" align="center"><input id="delivery-select" type="checkbox"
+									name="delivery" value="정기 배송">&nbsp;&nbsp;정기 배송 선택
+									<div id="inHere" style="display: none;">
+										<table>
+											<tr>
+												<td>
+													<label><input type="radio" name="reguler_month" value="1" style="display: none;">
+														<span id="month1" class="month_button">1개월 정기</span>
+													</label>
+												</td>
+												<td>
+													<label><input type="radio" name="reguler_month" value="2" style="display: none;">
+														<span id="month2" class="month_button">2개월 정기</span>
+													</label>
+												</td>
+												<td>
+													<label><input type="radio" name="reguler_month" value="3" style="display: none;">
+														<span id="month3" class="month_button">3개월 정기</span>
+													</label>
+												</td>
+											</tr>
+											<tr>
+												<td>
+													<label><input type="radio" name="reguler_month" value="4" style="display: none;">
+														<span id="month4" class="month_button">4개월 정기</span>
+													</label>
+												</td>
+												<td>
+													<label><input type="radio" name="reguler_month" value="5" style="display: none;">
+														<span id="month5" class="month_button">5개월 정기</span>
+													</label>
+												</td>
+												<td>
+													<label><input type="radio" name="reguler_month" value="6" style="display: none;">
+														<span id="month6" class="month_button">6개월 정기</span>
+													</label>
+												</td>
+											</tr>
+										</table>
+									</div>
+								</td>
+								<td class="list-group-item">
+									<button type="button" style="width: 80%; color: blue; background: white; border: 1; border-color: blue; font: bold;"
+										name="goMall" onclick="goCart();">장바구니 담기</button>
+								</td>
+								<td class="list-group-item">
+									<button type="button" style="width: 80%; color: white; background: blue;"
+										name="gopayment" onclick="goPay();">바로 구매</button>
+								</td>
+							</tr>
+						</table>
+					</form>
 				</div>
 			</div>
 		</div>
 	</div>
+	<script>
+		function goCart(){
+			var command = '<input name="command" value="mallcartlist" style="display: none;">';
+			$("#product-form").append(command);
+			$("#product-form").submit();
+		};
+		
+		function goPay(){
+			var command = '<input name="command" value="payment">';
+			$("#product-form").attr("method","get");
+			$("#product-form").append(command);
+			$("#product-form").append("<input type='text' id='totalprice' name='totalprice' value='" + totalprice + "'>");
+			$("#product-form").append("<input type='text' name='paymentshipping' value='gotoshipping'>"); 
+			$("#product-form").submit();
+		};
+	</script>
 	<div class="container mt-3">
 		<ul class="nav nav-tabs" id="myTab" role="tablist"
 			style="margin-top: 15%;">
@@ -255,7 +330,7 @@
 				aria-controls="배송/교환/반품 안내" aria-selected="false">배송/교환/반품 안내</a></li>
 		</ul>
 	</div>
-	<div class="tab-content">
+	<div class="tab-content" style="padding-bottom: 10%;">
 		<div id="prod-detail" align="center" class="container tab-pane active"
 			role="tabpanel" aria-labelledby="prod-contents01">
 			<img id="img0" title="홍삼" width="50%" height="50%"
@@ -326,25 +401,17 @@
 								<td><textarea readonly="readonly" style="overflow: visible; resize: both;">${fn:replace(item.content, replaceChar,replaceChar)}</textarea></td>
 								<td>${item.postdate}</td>
 								<td id="starGarde_${i.index}">${item.grade}</td>
-								<td>${bean.update}</td>
-								<td>${bean.delete}</td>
 								<td>
-									<c:if test=" ${whologin == 1}${whologin == 2}">
-										<a href="previewupdate.jsp?seq_review=${bean.no}&${requestScope.parameters}">
+									<c:if test="${whologin == 1 || whologin == 2}">
+										<a href="?command=previewupdate&seq_review=${item.reviewno}&${requestScope.parameters}">
 											수정 </a>
 									</c:if> 
-									<c:if test=" ${whologin == 1}${whologin == 2}">
-									수정
-									</c:if>
 								</td>
 								<td>
-									<c:if test="${whologin == 1}${whologin == 2}">
-										<a href="pdetaildelete&no=${bean.no}&${requestScope.parameters}">
+									<c:if test="${whologin == 1 || whologin == 2}">
+										<a href="?command=preview_delete&seq_review=${item.reviewno}&${requestScope.parameters}">
 											삭제 </a>
 									</c:if> 
-									<c:if test=" ${whologin == 1}${whologin == 2}">
-										삭제
-									</c:if>
 								</td>
 							</tr>
 						</c:forEach>
@@ -384,8 +451,8 @@
 												&nbsp;</label>
 											<div class="col-sm-12">
 												<textarea name="content" id="content" rows="5" cols=""
-													placeholder="글 내용" class="form-control">${bean.content}</textarea>
-												<span class="err">${errcontent}</span>
+													placeholder="글 내용" class="form-control"></textarea>
+												<span class="err"></span>
 											</div>
 											<br>
 											<div class="col-sm-6">
@@ -527,5 +594,6 @@
 	<br>
 	<br>
 	<br>
+<%@ include file="../common/footer.jsp" %>
 </body>
 </html>

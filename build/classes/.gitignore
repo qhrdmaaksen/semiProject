@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 /CS/
 /DAO/
 /Mall/
@@ -5,6 +6,18 @@
 /board/
 /common/
 /member/
+<<<<<<< HEAD
+/CS/
+/DAO/
+/VO/
+/board/
+/product/
+=======
 /product/
 /shopping/
 /utility/
+=======
+/member/
+>>>>>>> 5d9271a50d2c5f957e5d351147120dd4ad4fcb4f
+>>>>>>> 1953387111131603aa0ca536660455e68b84b93e
+/payments/

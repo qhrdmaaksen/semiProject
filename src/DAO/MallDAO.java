@@ -11,6 +11,7 @@ import java.util.Set;
 
 import VO.MemberVO;
 import VO.OrderVO;
+import VO.OrderdetailVO;
 import VO.ProductVO;
 
 public class MallDAO extends SuperDAO{
@@ -181,22 +182,23 @@ public class MallDAO extends SuperDAO{
 		return lists  ;
 	}
 
-	public OrderVO SelectDataByPk(String oid) {
+	public OrderVO SelectDataByPk(String id) {
 		Connection conn = null ;
 		PreparedStatement pstmt = null ;
 		ResultSet rs = null ;	
 		
 		String sql = "select * from orders " ;  
-		sql += " where id = ? " ; 
+		sql += " where \"id\" = ? " ; 
 
 		OrderVO bean = null ;
 		try {
 			conn = super.getConnection() ;		
 			pstmt = this.conn.prepareStatement(sql) ;			
-			pstmt.setString( 1, oid  ); 
+			pstmt.setString( 1 , id  ); 
 			
 			rs = pstmt.executeQuery() ;			
 			if ( rs.next() ) {
+				bean = new OrderVO();								
 				bean.setId(rs.getString("id"));
 				bean.setInvoice(rs.getString("invoice"));
 				bean.setOrderdate(String.valueOf(rs.getString("orderdate")));
@@ -220,6 +222,48 @@ public class MallDAO extends SuperDAO{
 		return bean  ;
 	}
 
+	public OrderdetailVO SelectDataByPk(int ordernumber) {
+		Connection conn = null ;
+		PreparedStatement pstmt = null ;
+		ResultSet rs = null ;	
+		
+		String sql = "select * from detail_order " ;  
+		sql += " where \"ordernumber\" = ? " ; 
+
+		OrderdetailVO bean = null ;
+		try {
+			conn = super.getConnection() ;		
+			pstmt = this.conn.prepareStatement(sql) ;			
+			pstmt.setInt( 1 , ordernumber  ); 
+			
+			rs = pstmt.executeQuery() ;			
+			if ( rs.next() ) {
+				bean = new OrderdetailVO();								
+				bean.setAmount(rs.getInt("amount"));
+				bean.setOrdernumber(rs.getInt("ordernumber"));
+				bean.setProductcode(rs.getInt("productcode"));
+				bean.setQty(rs.getInt("qty"));
+				
+				
+			}
+			
+		} catch (SQLException e) {			
+			e.printStackTrace();
+		} finally{
+			try {
+				if( rs != null){ rs.close(); } 
+				if( pstmt != null){ pstmt.close(); } 
+				if(conn != null) {conn.close();}
+			} catch (Exception e2) {
+				e2.printStackTrace(); 
+			}
+		} 		
+		return bean  ;
+	}
+
+	
+	
+	
 	/*
 	 * public void InsertCartData(MemberVO mem, Map<Integer, Integer> maplist) { //
 	 * mem 객체는 로그인한 고객의 정보입니다. // maplist 는 카트에 담겨 있는 나의 쇼핑 정보 입니다. Connection conn

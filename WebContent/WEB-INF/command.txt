@@ -1,6 +1,7 @@
 #### Main Section ####################################
 index=common.IndexController
 survey=common.ServeyController
+payOk=common.test
 #### Member Section ##################################
 melogin=member.MemberLoginController
 melogout=member.MemberLogoutController
@@ -32,11 +33,11 @@ boList=board.BoardListController
 bbsdetailview=board.BoardDetailViewController
 boDelete=board.BoardDeleteController
 boUpdate=board.BoardUpdateController
+comment=board.commentInsertController
 #### Product Section #################################
 preview_delete=product.PreviewDeleteController
 preview=product.PreviewController
 pdetail=product.PdetailController
-
 previewupdate=product.PreviewUpdateController
 plist=product.PlistController
 pdelete=product.PdeleteController
@@ -47,4 +48,6 @@ mallcartlist=Mall.MallCartListController
 mallcartdelete=Mall.MallCartDeleteItemController
 mallhistory=Mall.MallHistoryController
 mallDetail=Mall.MallDetailController
-
+#### Payment Section ###############################
+payment=member.Addresscontroller
+paymentaddaddr=payments.PaymentShippingController

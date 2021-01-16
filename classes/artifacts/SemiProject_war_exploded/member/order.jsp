@@ -30,10 +30,10 @@
 						<tbody>
 							<c:forEach items="${requestScope.lists}" var="shopinfo">
 								<tr class="record">
-									<td align="center">${shopinfo.oid}</td>
+									<td align="center">${shopinfo.id}</td>
 									<td align="center">${shopinfo.orderdate}</td>
 									<td align="center">
-										<a href="<%=NoForm%>mallDetail&oid=${shopinfo.oid}">상세 보기</a></td>
+										<a href="<%=NoForm%>mallDetail&id=${shopinfo.id}">상세 보기</a></td>
 								</tr>
 							</c:forEach>
 						</tbody>

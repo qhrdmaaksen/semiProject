@@ -1,3 +1,96 @@
+/*A B C D E F G H I J K L N M O P Q R S T U V W X Y Z*/
+#footer{
+    padding: 0px;
+}
+#footercol2{
+    padding: 35px 0px 0px 125px;
+    font-size: 16px;
+}
+#footercol3{
+    padding: 30px 0px 0px 70px;
+    font-size: 15px;
+}
+#footercol4{
+    padding-top: 30px;
+    font-size: 15px;
+}
+#footerlogo {
+    width: 100%;
+}
+#footermenu{
+    width:100%;
+    border-top: 1px solid gray;
+    border-bottom: 1px solid gray;
+    height:50px;
+    padding: 0px;
+    margin: 20px 0px 0px;
+    font-size: 13px ;
+}
+#footermenu a{
+    text-decoration: none;
+    color : black;
+}
+#footermenu a:hover{
+    color: red;
+}
+#footermenu li{
+    list-style: none;
+}
+#f_right_menu{
+    float: right;
+    padding: 10px 30px 0px 0px;
+}
+#f_right_menu li{
+    float: left;
+    padding: 1px 15px ;
+}
+#f_left_menu{
+    float: left;
+    padding-top: 12px;
+    font: 16px sans-serif, 돋움;
+}
+#go-survey {
+    margin-top: 30px;
+}
+#nav {
+    height: 65px;
+}
+#nav_ul{
+    position: absolute;
+    right: 40px;
+}
+.card {
+    margin-bottom: 20px;
+}
+.card-subject{
+    height: 50px;
+}
+.card-icon{
+    float: left;
+}
+.card-icons{
+    height: 40px;
+}
+.card-icon{
+    width: 34px;
+    height: 33px;
+    border-radius: 50%;
+    border: 2px solid #5a6268;
+    overflow: hidden;
+    margin-left: 5px;
+    float: left;
+}
+.card-icon:first-child{
+    margin-left: 0px;
+}
+.card-icon-img{
+    width: 30px;
+    height: 30px;
+}
+.carousel-inner img {
+    width: 100%;
+    height: 550px;
+}
 .coupons {
     float: left;
     margin-top: 20px;
@@ -5,4 +98,49 @@
 .coupons_tabs {
     border: 1px solid rgb(217,217,217);
     border-bottom: 2px solid rgb(61,130,247);
+}
+.err{
+    font-size : 10pt;
+    color:red;
+    font-weight: bolder;
+}
+.footercol{
+    width: 25%;
+    font-size: 14px;
+    border-right: 1px solid gray;
+}
+.footercol span{
+    display: block;
+    margin-bottom: 5px;
+}
+.footercol4_subject{
+    padding-left: 40px;
+    font-size: 25px;
+    float: left;
+}
+.footercol:last-child{
+    border-right: 0px;
+}
+.footer_con{
+    padding-left: 185px;
+}
+.footer_tel{
+    padding-left: 216px;
+}
+.f_menu_link{
+    padding: 5px 10px;
+}
+.gosurvey {
+     margin-top: 40px;
+}
+.icon {
+    width: 25px;
+    height: 25px;
+    margin-right: 0%;
+}
+.nav-item{
+    float: right;
+}
+.top4 {
+    padding: 50px 200px;
 }

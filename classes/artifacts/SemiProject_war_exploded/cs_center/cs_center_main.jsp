@@ -26,9 +26,9 @@ int mysearch = 2;
 		src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 	<script type="text/javascript">
 	
-		function getaskedlist (seq) {
+		function getaskedlist (seq, askedmode="all", askedkeyword="") {
 			$.ajax({
-				url:"/SemiProject/dodamdodam?command=cs_center_main_asked&pageNumber="+seq+"&pageSize=10&mode=all&keyword=",
+				url:"/SemiProject/dodamdodam?command=cs_center_main_asked&pageNumber="+seq+"&pageSize=10&mode="+askedmode+"&keyword="+askedkeyword,
 				type:"get",
 				success: (response) => {
 					var tableForm ="";
@@ -38,14 +38,14 @@ int mysearch = 2;
 							<tr>
 								<td align="center">
 									<a
-									href="#" onclick="loginCheck(\${arr.seq_index})">
+									href="#" onclick="askedloginCheck(\${arr.seq_index})">
 										\${arr.title}
 									</a>
 								</td>
 								<td>
 									<c:if test="${whologin == 2}">
 										<a
-											href="<%=NoForm%>notice_update&seq_index=\${arr.seq_index}&${parameters}">
+											href="<%=NoForm%>asked_update&seq_index=\${arr.seq_index}&${parameters}">
 											수정 
 										</a>
 									</c:if>
@@ -53,7 +53,7 @@ int mysearch = 2;
 								<td>
 									<c:if test="${whologin == 2}">
 										<a
-											href="<%=NoForm %>notice_delete&seq_index=\${arr.seq_index}&${parameters}">
+											href="<%=NoForm %>asked_delete&seq_index=\${arr.seq_index}&${parameters}">
 											삭제 
 										</a>
 									</c:if>
@@ -62,18 +62,28 @@ int mysearch = 2;
 						`
 						
 					}
-					$("#askedbody").html("").html(tableForm); 
+					$("#askedbody").html(tableForm); 
 				},error: () => {
 					
 				}
 			})
 		}
-		$('#mode option').each(function(index) {
-			if ($(this).val() == '${requestScope.mode}') {
-				$(this).attr('selected', 'selected');
-			}
-		});
-		$('#keyword').val('${requestScope.keyword}');
+		function search() {
+			var mode = $("#mode").val();
+			var keyword = $("#keyword").val();
+			location.href = "/SemiProject/dodamdodam?command=cs_center_main&pageNumber=1&pageSize=10&mode="+mode+"&keyword="+keyword;
+		}
+		function searchAll() {
+			location.href = "/SemiProject/dodamdodam?command=cs_center_main&pageNumber=1&pageSize=10&mode=all&keyword=";
+		}
+		function askedsearch() {
+			var askedmode = $("#askedmode").val();
+			var askedkeyword = $("#askedkeyword").val();
+			getaskedlist(1,askedmode,askedkeyword);
+		}
+		function askedsearchAll() {
+			location.href = "/SemiProject/dodamdodam?command=cs_center_main&pageNumber=1&pageSize=10&mode=all&keyword=";
+		}
 		function writeForm(){
 			location.href='<%=NoForm%>notice_insert';
 		}
@@ -142,7 +152,7 @@ int mysearch = 2;
 		</ul>
 		<!-- Tab panes -->
 		<div class="tab-content">
-			<div id="home" class="container tab-pane active">
+			<div id="home" class="container tab-pane active" style="padding-bottom: 10%;">
 				<br>
 				<table class="table table-striped table-hover">
 					<thead class="container">
@@ -181,13 +191,11 @@ int mysearch = 2;
 					</c:forEach>
 					<tr>
 						<td colspan="2" align="center">
-							<form action="<%=YesForm%>" class="form-inline" name="myform"
-								method="get">
+							<form class="form-inline" name="myform" onsubmit="return false;">
 								<input type="hidden" name="command" value="cs_center_main">
 								<div class="form-group">
 									<select class="form-control" name="mode" id="mode">
-										<option value="all" selected="selected">-- 선택하세요 --
-										<option value="title">제목
+										<option value="title" selected="selected">제목
 										<option value="content">글 내용
 									</select>
 								</div>
@@ -195,10 +203,10 @@ int mysearch = 2;
 									<input type="text" class="form-control btn-xs" name="keyword"
 										id="keyword" placeholder="검색 키워드">
 								</div>
-								<button class="btn btn-default btn-warning" type="submit"
-									onclick="search();">검색</button>
 								<button class="btn btn-default btn-warning" type="button"
-									onclick="searchAll();">전체 검색</button>
+									onclick="search()">검색</button>
+								<button class="btn btn-default btn-warning" type="button"
+									onclick="searchAll()">전체 검색</button>
 								<c:if test="${whologin == 2}">
 									<button class="btn btn-default btn-warning" type="button"
 										onclick="writeForm();">글 쓰기</button>
@@ -254,13 +262,11 @@ int mysearch = 2;
 					</tbody>
 					<tr>
 						<td colspan="2" align="center">
-							<form action="<%=YesForm%>" class="form-inline" name="myform"
-								method="get">
+							<form class="form-inline" name="myform" onsubmit="return false;">
 								<input type="hidden" name="command" value="cs_center_main_asked">
 								<div class="form-group">
 									<select class="form-control" name="askedmode" id="askedmode">
-										<option value="all" selected="selected">-- 선택하세요 --
-										<option value="title">제목
+										<option value="title" selected="selected">제목
 										<option value="content">글 내용
 									</select>
 								</div>
@@ -268,7 +274,7 @@ int mysearch = 2;
 									<input type="text" class="form-control btn-xs" name="askedkeyword"
 										id="askedkeyword" placeholder="검색 키워드">
 								</div>
-								<button class="btn btn-default btn-warning" type="submit"
+								<button class="btn btn-default btn-warning" type="button"
 									onclick="askedsearch();">검색</button>
 								<button class="btn btn-default btn-warning" type="button"
 									onclick="askedsearchAll();">전체 검색</button>
@@ -277,18 +283,17 @@ int mysearch = 2;
 										onclick="askedwriteForm();">글 쓰기</button>
 								</c:if>
 								<div style="float: right; margin-top: 2%;" class="col-md-4">
-									<p class="form-control-static">${askedpagingStatus}</p>
+									<p class="form-control-static">${requestScope.askedpagingStatus}</p>
 								</div>
 							</form>
 						</td>
 					</tr>
 				</table>
-				<div align="right" style="float: right;" class="container col-md-6">
+				<div align="center" style="float: left;margin-bottom: 2%;" class="container col-md-12">
 					<div>
 						<c:forEach begin="1" end="${(askedlists.size() / 10) +1 }" varStatus="i">
 							<a id="pagingnumcolor" href="#" onclick="getaskedlist(${i.index})">${i.index}</a>
 						</c:forEach>
-					
 					</div>
 				</div>
 			</div>
@@ -2722,7 +2727,7 @@ int mysearch = 2;
 					</div>
 				</div>
 			</div>
-			<div id="menu3" class="container tab-pane fade">
+			<div id="menu3" class="container tab-pane fade" style="padding-bottom: 15%;">
 				<br>
 				<h2 align="center">(주)도담도담</h2>
 				<hr style="border: none; border: 5px double orange;">
@@ -3030,12 +3035,12 @@ int mysearch = 2;
 				<hr style="border: none; border: 5px double orange;">
 				<address>
 					<p align="center">
-						<span>고객문의: <a href="mailto:rlaalsdn8@gmail.com">rlaalsdn8@gmail.com</a></span>
-						<span>전화: <a href="tel://010-9255-9798">010-9255-9798</a></span>
+						<span>고객 문의 email address : <a href="mailto:rlaalsdn8@gmail.com">rlaalsdn8@gmail.com</a></span><br><br><br>
+						<span>고객 문의 전화 tell : <a href="tel://010-9255-9798">010-9255-9798</a></span><br><br><br>
 					</p>
 					<p align="center">
-						<span>제휴문의: <a href="mailto:rlaalsdn8@naver.com">rlaalsdn8@naver.com</a></span>
-						<span>전화: <a href="tel://010-9255-9798">010-9255-9798</a></span>
+						<span>제휴문의 email address : <a href="mailto:rlaalsdn8@naver.com">rlaalsdn8@naver.com</a></span><br><br><br>
+						<span>제휴 문의 전화 tell : <a href="tel://010-9255-9798">010-9255-9798</a></span><br><br><br>
 					</p>
 					<p align="center">
 						<span>문자 상담: <a href="sms:010-9255-9798">010-9255-9798</a></span>
@@ -3044,5 +3049,6 @@ int mysearch = 2;
 			</div>
 		</div>
 	</div>
+<%@ include file="../common/footer.jsp" %>
 </body>
 </html>
