@@ -35,25 +35,21 @@
 			<div class="panel-body">
 				<form class="form-horizontal" role="form" action="<%=YesForm%>" method="post">
 					<input type="hidden" name="command" value="previewupdate">
-					<input type="hidden" name="pageNumber" value="${param.pageNumber}">
-					<input type="hidden" name="pageSize" value="${param.pageSize}">
-					<input type="hidden" name="mode" value="${param.mode}">
-					<input type="hidden" name="keyword" value="${param.keyword}">
 					<div class="form-group">
 						<label class="control-label col-sm-<%=formleft%>" for="no">글번호</label>
 						<div class="col-sm-<%=formright%>">
 							<input type="text" class="form-control" name="fakeno" id="fakeno"								
-								placeholder="글번호" value="${bean.no}" disabled="disabled">
-							<input type="hidden" name="no" id="no" value="${bean.no}">
+								placeholder="글번호" value="${bean.reviewno}" disabled="disabled">
+							<input type="hidden" name="reviewno" id="no" value="${bean.reviewno}">
 						</div>
 					</div>
 					<div class="form-group">
 						<label class="control-label col-sm-<%=formleft%>" for="writer">작성자</label>
 						<div class="col-sm-<%=formright%>">
 							<input type="text" class="form-control" name="fakewriter" id="fakewriter"								
-								placeholder="작성자" value="${bean.writer}" disabled="disabled">
-							<input type="hidden" name="writer" id="writer" value="${bean.writer}">
-							<span class="err">${errwriter}</span>							 
+								placeholder="작성자" value="${bean.id}" disabled="disabled">
+							<input type="hidden" name="id" id="writer" value="${bean.id}">
+							<span class="err">${errid}</span>							 
 						</div>
 					</div>					
 					<div class="form-group">
@@ -68,9 +64,9 @@
 						<label class="control-label col-sm-<%=formleft%>" for="regdate">작성	일자
 						</label>
 						<div class="col-sm-<%=formright%>">
-							<input type="datetime" class="form-control" name="regdate"
-								id="regdate" placeholder="작성 일자" value="${bean.regdate}">
-							<span class="err">${errregdate}
+							<input type="datetime" class="form-control" name="postdate"
+								id="regdate" placeholder="작성 일자" value="${bean.postdate}">
+							<span class="err">${errpostdate}
 							</span>
 						</div>
 					</div>	

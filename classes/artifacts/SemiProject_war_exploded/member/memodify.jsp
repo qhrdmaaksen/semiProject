@@ -23,32 +23,35 @@
   <h3>도담도담 회원 정보 수정</h3>
   
 	<form class="was-validated" role="form" name="myform" action="<%=YesForm%>"  method="post">
-					<input type="hidden" name="command" value="memodify">					
+					<input type="hidden" name="command" value="memodify">
+					<c:if test="${requestScope.bean.point} == null" >
+					<input type="hidden" name="point" value="0" >
+					</c:if>					
   
     <div class="form-group">
       <label for="id">UserID:</label>
 				<input type="text" name="fakeid" id="fakeid" class="form-control" 
-	            				placeholder="아이디" disabled="disabled" value="${requestScope.bean.id}" > 
+	            		placeholder="아이디" disabled="disabled" value="${requestScope.bean.id}" > 
 		<input type="hidden" name="id" id="id" value="${requestScope.bean.id}" >
     </div>
     
     
-    <div class="form-group">
+<div class="form-group">
       <label for="password">Password:</label>
      	<input type="password" name="password" id="password"
 			class="form-control" placeholder="비밀 번호"
 			value="" required>
+		<span class="err">${errpassword}</span>	
 		<div class="valid-feedback">영문/숫자 포함 6자리 이상이어야 합니다.(최대 15자) </div> 
-		 <div class="invalid-feedback"><span class="err">${errpassword}</span></div>
-			    </div>
+		 <div class="invalid-feedback">비밀번호를 작성 해 주세요.</div>
+	 </div>
 
 	<div class="form-group">
 		<input type="password" name="password2" id="password2"
 			class="form-control" placeholder="비밀 번호 확인" 
 			value="" required>
 		<div class="valid-feedback">상기 비밀번호와 동일하게 작성 해 주세요. </div> 
-		 <div class="invalid-feedback">비밀번호를 작성 해 주세요.</div>
-		 <!-- onkeyup="checkpw();" -->
+		 <div class="invalid-feedback"><span class="err">${errpassword2}</span></div>
     </div>
     
     <div class="form-group">
@@ -59,7 +62,6 @@
 			  <div class="invalid-feedback">성함을 작성 해 주세요</div>
     </div>
     
-    
     <div class="form-group">
       <label for="birth">UserBirthday:</label>
       <input type="date" name="birth" id="birth"
@@ -69,7 +71,6 @@
 			  <div class="invalid-feedback">생일을 작성 해 주세요</div>
     </div>
     
-    
     <div class="form-group">
       <label for="phone">UserHphone:</label>
       <input type="number" class="form-control" id="phone" placeholder="휴대폰 번호" name="phone" required>
@@ -78,20 +79,15 @@
 			  <div class="invalid-feedback">휴대폰 번호를 작성 해 주세요</div>
     </div>
 
-       
    <div class="form-group">
 		<button type="submit" class="btn btn-outline-warning btn-lg" onclick="return checkForm();">
-		<b>회원 정보 수정</b></button>
+			<b>회원 정보 수정</b></button>
 		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 		<button type="reset"  class="btn btn-outline-danger btn-sm">취소</button>
 	</div>
-    
-    
-    
   </form>
 </div>
-</div>
-</div>
+
    
 </body>
 </html>

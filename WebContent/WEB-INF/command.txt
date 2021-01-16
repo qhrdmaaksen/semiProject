@@ -1,8 +1,10 @@
 #### Main Section ####################################
 index=common.IndexController
 survey=common.ServeyController
+payOk=common.test
 #### Member Section ##################################
 melogin=member.MemberLoginController
+melogout=member.MemberLogoutController
 mypage=member.MemberMypageController
 newmember=member.MemberNewmemberController
 coupon=member.MyCouponController
@@ -13,6 +15,7 @@ point=member.MyPointController
 address=member.Addresscontroller
 addaddress=member.Addaddresscontroller
 meZipcheck=member.MemberZipchekcontroller
+melogout=member.MemberLogoutController
 #### CS-Center Section ###############################
 cs_center_main=CS.NoticeListController
 cs_center_main_asked=CS.AskedListController
@@ -30,6 +33,7 @@ boList=board.BoardListController
 bbsdetailview=board.BoardDetailViewController
 boDelete=board.BoardDeleteController
 boUpdate=board.BoardUpdateController
+comment=board.commentInsertController
 #### Product Section #################################
 preview_delete=product.PreviewDeleteController
 preview=product.PreviewController

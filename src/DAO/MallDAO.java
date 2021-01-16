@@ -11,6 +11,7 @@ import java.util.Set;
 
 import VO.MemberVO;
 import VO.OrderVO;
+import VO.OrderdetailVO;
 import VO.ProductVO;
 
 public class MallDAO extends SuperDAO{
@@ -181,21 +182,23 @@ public class MallDAO extends SuperDAO{
 		return lists  ;
 	}
 
-	public OrderVO SelectDataByPk(int oid) {
+	public OrderVO SelectDataByPk(String id) {
 		Connection conn = null ;
 		PreparedStatement pstmt = null ;
 		ResultSet rs = null ;	
 		
 		String sql = "select * from orders " ;  
-		sql += " where id = ?" ; 
+		sql += " where \"id\" = ? " ; 
 
 		OrderVO bean = null ;
 		try {
 			conn = super.getConnection() ;		
 			pstmt = this.conn.prepareStatement(sql) ;			
-			pstmt.setInt( 1, oid   ); 
+			pstmt.setString( 1 , id  ); 
+			
 			rs = pstmt.executeQuery() ;			
 			if ( rs.next() ) {
+				bean = new OrderVO();								
 				bean.setId(rs.getString("id"));
 				bean.setInvoice(rs.getString("invoice"));
 				bean.setOrderdate(String.valueOf(rs.getString("orderdate")));
@@ -219,130 +222,131 @@ public class MallDAO extends SuperDAO{
 		return bean  ;
 	}
 
-	public void InsertCartData(MemberVO mem, Map<Integer, Integer> maplist) {
-		// mem 객체는 로그인한 고객의 정보입니다. 
-		// maplist 는 카트에 담겨 있는 나의 쇼핑 정보 입니다. 
+	public OrderdetailVO SelectDataByPk(int ordernumber) {
 		Connection conn = null ;
 		PreparedStatement pstmt = null ;
+		ResultSet rs = null ;	
 		
-		
-		String sql = "";
-		
-		int cnt = -999;
-		
+		String sql = "select * from detail_order " ;  
+		sql += " where \"ordernumber\" = ? " ; 
+
+		OrderdetailVO bean = null ;
 		try {
-			conn = super.getConnection() ;
-			conn.setAutoCommit(false);
+			conn = super.getConnection() ;		
+			pstmt = this.conn.prepareStatement(sql) ;			
+			pstmt.setInt( 1 , ordernumber  ); 
 			
-			// 1. 장바구니 테이블에 남아있는 회원의 행(row)을 모두 제거합니다. 
-			sql = " delete from shoppinginfos ";
-			sql += " where mid = ? ";
-			pstmt = conn.prepareStatement(sql);
-			
-			pstmt.setString(1, mem.getId());
-			
-			
-			cnt = pstmt.executeUpdate();
-			if(pstmt != null ) {pstmt.close(); }
-			
-			//2. 반복문을 사용하여 테이블에 인서트 합니다. 
-			Set<Integer> keylist = maplist.keySet();
-			System.out.println("상품 개수 : " + keylist.size());
-			
-			System.out.println(keylist);
-			
-			for (Integer pnum : keylist) {
-				
-				sql = " insert into shoppinginfos(mid, pnum, pname, qty, price, image, point) " ;
-				sql += " values(?, ?, ?, ?, ?, ?, ?)" ;
-				pstmt = conn.prepareStatement(sql);
-				
-				int qty = maplist.get(pnum);
-				ProductDAO pdao = new ProductDAO(); 
-				ProductVO bean = pdao.SelectDataByPk(pnum);
-				
-				pstmt.setString(1, mem.getId());
-				pstmt.setInt(2, pnum);
-				pstmt.setString(3, bean.getName());
-				pstmt.setInt(4, qty);
-				pstmt.setInt(5, bean.getPrice());
-				pstmt.setString(6, bean.getImage());
-				pstmt.setInt(7, bean.getPoint());
-				
-				cnt = pstmt.executeUpdate();
-				if(pstmt != null ) {pstmt.close(); }
+			rs = pstmt.executeQuery() ;			
+			if ( rs.next() ) {
+				bean = new OrderdetailVO();								
+				bean.setAmount(rs.getInt("amount"));
+				bean.setOrdernumber(rs.getInt("ordernumber"));
+				bean.setProductcode(rs.getInt("productcode"));
+				bean.setQty(rs.getInt("qty"));
 				
 				
 			}
-
-			conn.commit();
-			System.out.println("장바구니 테이블에 저장 성공");
 			
-			
-		} catch (Exception e) {			
-			
-			try {
-				conn.rollback(); 
-			} catch (SQLException e2) {
-				e2.printStackTrace();
-			}	
+		} catch (SQLException e) {			
 			e.printStackTrace();
 		} finally{
 			try {
+				if( rs != null){ rs.close(); } 
 				if( pstmt != null){ pstmt.close(); } 
-				if(conn != null){conn.close();}
+				if(conn != null) {conn.close();}
 			} catch (Exception e2) {
 				e2.printStackTrace(); 
 			}
 		} 		
-	
+		return bean  ;
 	}
 
-	public List<ShoppingInfo> GetShoppingInfo(String id) {
-		List<ShoppingInfo> lists = new ArrayList<ShoppingInfo>();
-		
-		Connection conn = null ;
-		PreparedStatement pstmt = null ;
-		ResultSet rs = null;
-		
-		String sql = " select * from shoppinginfos ";
-		sql += " where mid = ? " ;
-		
-		try {
-			conn = super.getConnection();
-			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, id);
-			rs = pstmt.executeQuery();
-			
-			while(rs.next()) {
-				ShoppingInfo shop = new ShoppingInfo();
-				shop.setImage(rs.getString("image"));
-				shop.setMid(rs.getString("mid"));
-				shop.setPname(rs.getString("pname"));
-				shop.setPoint(rs.getInt("point"));
-				shop.setPrice(rs.getInt("price"));
-				shop.setQty(rs.getInt("qty"));
-				
-				lists.add(shop);
-				
-			}
-			
-			
-			
-		}catch (Exception e) {
-			e.printStackTrace();
-			}
-		finally {
-			try {
-				if(rs != null ) {rs.close();}
-				if(pstmt != null ) {pstmt.close();}
-				if(conn != null ) {conn.close();}
-			} catch (Exception e2) {
-				e2.printStackTrace();
-			}
-		}
-		
-		return lists;
-	}
+	
+	
+	
+	/*
+	 * public void InsertCartData(MemberVO mem, Map<Integer, Integer> maplist) { //
+	 * mem 객체는 로그인한 고객의 정보입니다. // maplist 는 카트에 담겨 있는 나의 쇼핑 정보 입니다. Connection conn
+	 * = null ; PreparedStatement pstmt = null ;
+	 * 
+	 * 
+	 * String sql = "";
+	 * 
+	 * int cnt = -999;
+	 * 
+	 * try { conn = super.getConnection() ; conn.setAutoCommit(false);
+	 * 
+	 * // 1. 장바구니 테이블에 남아있는 회원의 행(row)을 모두 제거합니다. sql =
+	 * " delete from shoppinginfos "; sql += " where mid = ? "; pstmt =
+	 * conn.prepareStatement(sql);
+	 * 
+	 * pstmt.setString(1, mem.getId());
+	 * 
+	 * 
+	 * cnt = pstmt.executeUpdate(); if(pstmt != null ) {pstmt.close(); }
+	 * 
+	 * //2. 반복문을 사용하여 테이블에 인서트 합니다. Set<Integer> keylist = maplist.keySet();
+	 * System.out.println("상품 개수 : " + keylist.size());
+	 * 
+	 * System.out.println(keylist);
+	 * 
+	 * for (Integer pnum : keylist) {
+	 * 
+	 * sql =
+	 * " insert into shoppinginfos(mid, pnum, pname, qty, price, image, point) " ;
+	 * sql += " values(?, ?, ?, ?, ?, ?, ?)" ; pstmt = conn.prepareStatement(sql);
+	 * 
+	 * int qty = maplist.get(pnum); ProductDAO pdao = new ProductDAO(); ProductVO
+	 * bean = pdao.SelectDataByPk(pnum);
+	 * 
+	 * pstmt.setString(1, mem.getId()); pstmt.setInt(2, pnum); pstmt.setString(3,
+	 * bean.getName()); pstmt.setInt(4, qty); pstmt.setInt(5, bean.getPrice());
+	 * pstmt.setString(6, bean.getImage()); pstmt.setInt(7, bean.getPoint());
+	 * 
+	 * cnt = pstmt.executeUpdate(); if(pstmt != null ) {pstmt.close(); }
+	 * 
+	 * 
+	 * }
+	 * 
+	 * conn.commit(); System.out.println("장바구니 테이블에 저장 성공");
+	 * 
+	 * 
+	 * } catch (Exception e) {
+	 * 
+	 * try { conn.rollback(); } catch (SQLException e2) { e2.printStackTrace(); }
+	 * e.printStackTrace(); } finally{ try { if( pstmt != null){ pstmt.close(); }
+	 * if(conn != null){conn.close();} } catch (Exception e2) {
+	 * e2.printStackTrace(); } }
+	 * 
+	 * }
+	 * 
+	 * public List<ShoppingInfo> GetShoppingInfo(String id) { List<ShoppingInfo>
+	 * lists = new ArrayList<ShoppingInfo>();
+	 * 
+	 * Connection conn = null ; PreparedStatement pstmt = null ; ResultSet rs =
+	 * null;
+	 * 
+	 * String sql = " select * from shoppinginfos "; sql += " where mid = ? " ;
+	 * 
+	 * try { conn = super.getConnection(); pstmt = conn.prepareStatement(sql);
+	 * pstmt.setString(1, id); rs = pstmt.executeQuery();
+	 * 
+	 * while(rs.next()) { ShoppingInfo shop = new ShoppingInfo();
+	 * shop.setImage(rs.getString("image")); shop.setMid(rs.getString("mid"));
+	 * shop.setPname(rs.getString("pname")); shop.setPoint(rs.getInt("point"));
+	 * shop.setPrice(rs.getInt("price")); shop.setQty(rs.getInt("qty"));
+	 * 
+	 * lists.add(shop);
+	 * 
+	 * }
+	 * 
+	 * 
+	 * 
+	 * }catch (Exception e) { e.printStackTrace(); } finally { try { if(rs != null )
+	 * {rs.close();} if(pstmt != null ) {pstmt.close();} if(conn != null )
+	 * {conn.close();} } catch (Exception e2) { e2.printStackTrace(); } }
+	 * 
+	 * return lists; }
+	 */
 	
 }

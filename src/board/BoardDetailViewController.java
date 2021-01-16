@@ -1,6 +1,7 @@
 package board;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -9,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import DAO.BoardDAO;
 import VO.BbsPostVo;
 import VO.MemberVO;
+import VO.commentVO;
 import common.SuperClass;
 import utility.FlowParameters;
 
@@ -20,6 +22,8 @@ public class BoardDetailViewController extends SuperClass {
 		
 		BoardDAO dao = new BoardDAO();
 		BbsPostVo bean = dao.SelctDataByPK(no);
+		List<commentVO> comment = dao.SelctDataByPK2(no);
+		
 		
 		System.out.println(bean );
 		
@@ -50,13 +54,10 @@ public class BoardDetailViewController extends SuperClass {
 			//login : 현재 접속한 사람의 정보를 저장하고 있는 객체입니다. 
 			MemberVO login = (MemberVO)super.session.getAttribute("loginfo") ;
 			
-			
-			if(!bean.getId().equals(login.getId())) {
-				dao.UpdateReadhit(no);
-				
-			}
+	
 			request.setAttribute("bean", bean);
 			request.setAttribute("parameters", parameters.toString());
+			request.setAttribute("comment", comment);
 			// 상세 보기 페이지로 이동
 			String gotopage = "customer/bbsdetailview.jsp";
 			super.GotoPage(gotopage);

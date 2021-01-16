@@ -1,3 +1,18 @@
+#nav {
+    height: 65px;
+}
+#nav_ul{
+    position: absolute;
+    right: 40px;
+}
+.nav-item{
+    float: right;
+}
+.err{
+    font-size : 10pt;
+    color:red;
+    font-weight: bolder;
+}
 .coupons {
     float: left;
     margin-top: 20px;
