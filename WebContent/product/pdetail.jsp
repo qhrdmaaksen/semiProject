@@ -306,8 +306,10 @@
 		
 		function goPay(){
 			var command = '<input name="command" value="payment">';
+			$("#product-form").attr("method","get");
 			$("#product-form").append(command);
 			$("#product-form").append("<input type='text' id='totalprice' name='totalprice' value='" + totalprice + "'>");
+			$("#product-form").append("<input type='text' name='paymentshipping' value='gotoshipping'>"); 
 			$("#product-form").submit();
 		};
 	</script>
