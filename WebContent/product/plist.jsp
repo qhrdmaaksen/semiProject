@@ -142,6 +142,7 @@
 								</div>
 								<button type="submit" class="btn btn-primary btn-sm mr-1 mb-2">Add to cart</button>
 							</form>
+							
 					<form class="form-inline" role="form" name="myform" action="<%=YesForm%>" method="post">
 					  <input type="hidden" name="command" value="pdetail">
 						<a href="<%=NoForm%>pdetail&productcode=${bean.productcode}&${requestScope.parameters}">
