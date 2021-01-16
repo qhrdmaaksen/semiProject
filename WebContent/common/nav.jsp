@@ -98,11 +98,10 @@
 		<ul class="navbar-nav">
 
 			<li class="nav-item">
-				<a class="nav-link" href="<%=NoForm%>survey">
-				추천 받기</a>
+				<a class="nav-link" href="<%=NoForm%>survey">추천 받기</a>
 			</li>
-			<li class="nav-item">
-				<a class="nav-link" href="<%=NoForm%>plist">제품 보기</a>
+		    <li class="nav-item dropdown">
+				<a class="nav-link" href="<%=NoForm%>plist">상품 보기</a>
 			</li>
 			<li class="nav-item">
 				<a class="nav-link" href="<%=NoForm%>mallcartlist">장바구니</a>
@@ -148,11 +147,11 @@
 							<a class="dropdown-item text-danger" href="<%=NoForm%>medelete&id=${sessionScope.loginfo.id}">회원 탈퇴</a>
 						</li>
 					</c:if>
-					<c:if test="${whologin == 2}">
+					<%-- <c:if test="${whologin == 2}">
 						<li>
 							<a class="dropdown-item" href="<%=NoForm%>melist">회원 목록 보기</a>
 						</li>
-					</c:if>
+					</c:if> --%>
 				</ul>
 			</li>
 		</ul>

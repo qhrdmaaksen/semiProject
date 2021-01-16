@@ -89,4 +89,13 @@ public class ProductVO {
     }
     public String getImages() {return images;}
     public void setImages(String images) {this.images = images;}
+	@Override
+	public String toString() {
+		return "ProductVO [productcode=" + productcode + ", productname=" + productname + ", productprice="
+				+ productprice + ", stock=" + stock + ", bloodcirculation=" + bloodcirculation + ", digestiveapparatus="
+				+ digestiveapparatus + ", skin=" + skin + ", eyes=" + eyes + ", fatigue=" + fatigue + ", joint=" + joint
+				+ ", hair=" + hair + ", immunity=" + immunity + ", images=" + images + "]";
+	}
+    
+    
 }

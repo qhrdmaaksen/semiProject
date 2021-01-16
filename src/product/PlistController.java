@@ -15,13 +15,14 @@ import utility.Paging;
 
 public class PlistController extends SuperClass{
 	String pageSize = "12";
+	String mode = "productname";
 	@Override
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		FlowParameters parameters 
 			= new FlowParameters(
 					request.getParameter("pageNumber"), 
 					pageSize, 
-					request.getParameter("mode"), 
+					mode, 
 					request.getParameter("keyword")) ;
 		
 		System.out.println(this.getClass() + " : " + parameters.toString());
@@ -42,7 +43,7 @@ public class PlistController extends SuperClass{
 				totalCount, 
 				myurl, 
 				parameters.getMode(), 
-				parameters.getKeyword()) ;
+				parameters.getKeyword() + "%") ;
 		
 		List<ProductVO> lists = dao.SelectDataList(
 				pageInfo.getBeginRow(), 
@@ -68,7 +69,8 @@ public class PlistController extends SuperClass{
 		request.setAttribute("parameters", parameters.toString());		
 		
 		super.doGet(request, response);
-		System.out.println("왜 안나와" + request.getAttribute("mode"));
+		System.out.println("모드는? : " + request.getAttribute("mode"));
+		System.out.println("키워드는? : " + request.getAttribute("keyword"));
 		String gotopage = "product/plist.jsp" ;
 		super.GotoPage(gotopage);
 	}

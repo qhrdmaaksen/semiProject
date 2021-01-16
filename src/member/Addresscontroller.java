@@ -11,6 +11,7 @@ import DAO.AddressDAO;
 import DAO.BoardDAO;
 import VO.AddressVo;
 import VO.BbsPostVo;
+import VO.MemberVO;
 import common.SuperClass;
 import utility.FlowParameters;
 import utility.Paging;
@@ -52,7 +53,14 @@ public class Addresscontroller extends SuperClass {
 						parameters.getMode(),
 						parameters.getKeyword());
 		
+		MemberVO loginfo = (MemberVO)super.session.getAttribute("loginfo");
+		
+		String id = loginfo.getId();
+		
+		System.out.println(id);
+		
 		List<AddressVo> lists = dao.SelectDataList(
+				id,
 				pageInfo.getBeginRow(),
 				pageInfo.getEndRow(),
 				parameters.getMode(),
@@ -62,7 +70,6 @@ public class Addresscontroller extends SuperClass {
 		
 		//바인딩해야 할 목록들 
 		request.setAttribute("lists", lists); // 게시물 목록
-		
 		System.out.println(lists +"입니다.");
 
 		// 페이징 관련 항목들
@@ -75,6 +82,8 @@ public class Addresscontroller extends SuperClass {
 		
 		//상세 보기, 수정 , 삭제, 답글 등의 링크에 사용될 parameter list 문자열 
 		request.setAttribute("parameters",parameters.toString());
+		
+		
 		
 		
 		
