@@ -17,52 +17,6 @@
 		int offset = 2; //오프 셋 
 		int content = twelve - 2 * offset; //12 - 2 * 오프셋
 	%>
-	<script>
-		IMP.init('자신의가맹점_키');
-		
-		IMP.request_pay({
-		    pg : 'inicis', // version 1.1.0부터 지원.
-		    pay_method : 'card',
-		    merchant_uid : 'merchant_' + new Date().getTime(),
-		    name : '주문명:결제테스트',
-		    amount : 14000, //판매 가격
-		    buyer_email : 'iamport@siot.do',
-		    buyer_name : '구매자이름',
-		    buyer_tel : '010-1234-5678',
-		    buyer_addr : '서울특별시 강남구 삼성동',
-		    buyer_postcode : '123-456'
-		}, function(rsp) {
-		    if ( rsp.success ) {
-		        var msg = '결제가 완료되었습니다.';
-		        msg += '고유ID : ' + rsp.imp_uid;
-		        msg += '상점 거래ID : ' + rsp.merchant_uid;
-		        msg += '결제 금액 : ' + rsp.paid_amount;
-		        msg += '카드 승인번호 : ' + rsp.apply_num;
-		    } else {
-		        var msg = '결제에 실패하였습니다.';
-		        msg += '에러내용 : ' + rsp.error_msg;
-		    }
-		    alert(msg);
-		});
-		var Iamport = require('iamport');
-		var iamport = new Iamport({
-		  impKey: '자신의_API_키',
-		  impSecret: '자신의_APIscret_키'
-		});
-		app.get('/payments/status/all',(req,res)=>{
-		        iamport.payment.getByStatus({
-		          payment_status: 'paid' 
-		        }).then(function(result){
-		            res.render('payments_list',{list:result.list});
-		        }).catch(function(error){
-		            console.log(error);
-		            red.send(error);
-		        })
-		});
-		function phonechange(){
-			
-		}
-	</script>
 	<script type="text/javascript">
 	  function sendaddshipping() {
 	        new daum.Postcode({
@@ -336,8 +290,8 @@
 				<tr align="center">
 					<th>결제방법</th>
 					<td style="padding: 4px 0px 0px; float: right;">
-						<input type="radio" name="" value="">&nbsp;신용/체크카드
-						<input type="radio" name="" value="">&nbsp;무통장입금(가상계좌)
+						<input type="radio" name="pymnt" value="card">&nbsp;신용/체크카드
+						<input type="radio" name="pymnt" value="banktrnsf">&nbsp;무통장입금(가상계좌)
 						<div align="center">
 							<input type="checkbox" checked="checked">&nbsp;선택한 결제수단 및 휴대번호로 향후 결제 이용에 동의합니다(선택)
 						</div>
