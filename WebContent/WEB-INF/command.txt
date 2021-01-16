@@ -1,6 +1,7 @@
 #### Main Section ####################################
 index=common.IndexController
 survey=common.ServeyController
+payOk=common.test
 #### Member Section ##################################
 melogin=member.MemberLoginController
 mypage=member.MemberMypageController

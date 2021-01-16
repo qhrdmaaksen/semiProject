@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+<%@ page language="java" contentType="text/html;charset=UTF-8"
     pageEncoding="UTF-8"%>
     
 <!DOCTYPE html>
@@ -33,22 +33,25 @@
 			font-size:13px;
 			width: 100%;
 			margin-left: 50px ;
-			margin-bottom: 50px;
+			margin-bottom: 2px;
 			text-align: justify;
-			line-height: 0.1em;
+			line-height: 0.0em;
 			column-count: 4;/*column-count==세로로 칸을 만들 수*/
 			column-gap: 50px;/* column-gap 칸막이와의 거리 */
-			column-rule: 3px solid #f0f0f5;/* 칸막이 지정 선 */
+			column-rule: 10px solid #ffc107;/* 칸막이 지정 선 */
 		}
 		#footermenu{
 			width:100%;
-			background-color: #f0f0f5;
+			background-color: #ffc107;
+			height:35px;
 			padding: 0px;
 			margin: 0px;
-			padding-top: 1%;
+			margin-top: 10px;
+			padding-top: 0.3%;
+			padding-bottom: 0%;
 			font-size: 13px ; 
 			border: 0px solid #darkgreen;
-			padding-left: 5%;
+			padding-left: 2%;
 		}
 		#footermenu li{
 			display: inline;
@@ -79,10 +82,15 @@
 			color: red;
 			font-size: 1.2em ;
 		}
+		#footerbody {
+			position: fixed;
+			bottom: 0;
+			background-color: white;
+		}
 	</style>
 </head>
 <body>
-	<footer>
+	<footer id="footerbody" style="width: 100%;">
 		<div class="contianer">
 			<div class="row" id="footermenu">
 				<div class='col'>
@@ -101,12 +109,12 @@
 							<li><a
 								href="https://www.instagram.com/explore/tags/%EC%98%81%EC%96%91%EC%A0%9C/"
 								target="_blank"> <img class="icon" alt="instgram"
-									src="../images/instagram-icon.png">
+									src="${pageContext.request.contextPath}/images/instagram-icon.png">
 							</a></li>
 							<li><a
 								href="https://www.facebook.com/%EC%98%81%EC%96%91%EC%A0%9C-%EA%B5%AC%EB%8F%85-%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8-106001111384695/?ref=page_internal"
 								target="_blank"> <img class="icon" alt="facebook"
-									src="../images/facebook_icon.png">
+									src="${pageContext.request.contextPath}/images/facebook_icon.png">
 							</a></li>
 						</ul>
 					</div>
@@ -117,7 +125,9 @@
 	<div id="cannanoogi">
 		<div class="footerdodam">
 			<div id="footerlogimage" align="center">
-				<img alt="도담도담" src="../images/logotest.png">
+				<a class="navbar-brand" href="http://localhost:8989/SemiProject/dodamdodam?command=index">
+					<img alt="도담도담로고" src="${pageContext.request.contextPath}/images/logosize.png" style="width: 200px;">
+				</a>
 			</div>
 			<h3 align="center" style="font: bolder;">회사명</h3>
 				<p align="center">
@@ -147,7 +157,7 @@
 		</div>
 				<br><br>
 		<address class="fooeraddress">
-			<div class="cs"><h4 align="center">고객센터</h4>
+			<div class="cs"><h4 align="center">문의 사항</h4>
 				<p align="center">
 					<span>고객문의: <a href="mailto:rlaalsdn8@gmail.com">rlaalsdn8@gmail.com</a>
 					<span>전화: <a href="tel://010-9255-9798">010-9255-9798</a></span>
