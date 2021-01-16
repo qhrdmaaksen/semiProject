@@ -11,10 +11,11 @@ import javax.servlet.http.HttpServletResponse;
 import DAO.MallDAO;
 import VO.MemberVO;
 import VO.OrderVO;
+import VO.RegularOrderVO;
 import common.SuperClass;
 import member.MemberLoginController;
 
-public class MallHistoryControllerDetail extends SuperClass{
+public class MallHistoryRegularController extends SuperClass{
 
 	@Override
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -28,20 +29,21 @@ public class MallHistoryControllerDetail extends SuperClass{
 			return ;
 		}else{ 
 			//orderlists : 로그인 된 사람의 이전 쇼핑 내역을 저장하고 있는 컬렉션
-			List<OrderVO> orderlists = new ArrayList<OrderVO>() ;
+			List<RegularOrderVO> orderlists = new ArrayList<RegularOrderVO>() ;
 			
 			MallDAO mdao = new MallDAO() ;
 			
 			// lists : 현재 로그인 한 사람의 쇼핑 주문 내역들을 담고 있는 컬렉션(최근 주문 내역이 먼저 나옴)
-			List<OrderVO> lists = mdao.OrderMalldetail(loginfo.getId()) ;
-				
-			request.setAttribute("lists", lists);
+			List<RegularOrderVO> lists = mdao.OrderMallRegular(loginfo.getId()) ;
+			
+			
+			request.setAttribute("legularlists", lists);
 			
 			if(lists.size() == 0) {
 				super.session.setAttribute("message", "이전 쇼핑 내역이 존재하지 않습니다.");	
 			}
 			
-			String gotopage = "member/order.jsp";  
+			String gotopage = "member/legularorder.jsp";  
 			super.GotoPage(gotopage);	
 		}			
 	}

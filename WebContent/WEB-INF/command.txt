@@ -48,8 +48,9 @@ mallcartadd=Mall.MallCartAddController
 mallcartlist=Mall.MallCartListController
 mallcartdelete=Mall.MallCartDeleteItemController
 mallhistory=Mall.MallHistoryController
+mallhistoryregular=Mall.MallHistoryRegularController
+mallDetailregular=Mall.MallRegularDetailController
 mallDetail=Mall.MallDetailController
-mallhistorydetail=Mall.MallHistoryControllerDetail
 #### Payment Section ###############################
 payment=member.Addresscontroller
 paymentaddaddr=payments.PaymentShippingController

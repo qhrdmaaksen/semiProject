@@ -9,10 +9,12 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import VO.DetailRegularorderVO;
 import VO.MemberVO;
 import VO.OrderVO;
 import VO.OrderdetailVO;
 import VO.ProductVO;
+import VO.RegularOrderVO;
 
 public class MallDAO extends SuperDAO{
 
@@ -261,15 +263,15 @@ public class MallDAO extends SuperDAO{
 		return bean  ;
 	}
 
-	public List<OrderVO> OrderMalldetail(String id) {
+	public List<RegularOrderVO> OrderMallRegular(String id) {
 		Connection conn = null ;
 		PreparedStatement pstmt = null ;
 		ResultSet rs = null ;	
 		
-		String sql = "select * from orders " ;
+		String sql = "select * from regular_order " ;
 		sql += " where \"id\" = ? order by \"orderdate\" desc  " ;
 		
-		List<OrderVO> lists = new ArrayList<OrderVO>() ;
+		List<RegularOrderVO> lists = new ArrayList<RegularOrderVO>() ;
 		
 		try {
 			conn = super.getConnection() ;	
@@ -277,10 +279,10 @@ public class MallDAO extends SuperDAO{
 			pstmt.setString( 1, id ); 
 			rs = pstmt.executeQuery() ; 
 			while ( rs.next()) {
-				OrderVO bean = new OrderVO() ; 
+				RegularOrderVO bean = new RegularOrderVO() ; 
 				bean.setId(rs.getString("id"));
 				bean.setInvoice(rs.getString("invoice"));
-				bean.setOrderdate(String.valueOf(rs.getString("orderdate")));
+				bean.setOrderdate(rs.getDate("orderdate"));
 				bean.setSeq_add(rs.getInt("seq_add"));
 				bean.setSeq_pay(rs.getInt("seq_pay"));
 				bean.setOrdernumber(rs.getInt("ordernumber"));
@@ -302,11 +304,129 @@ public class MallDAO extends SuperDAO{
 			}
 		} 		
 		return lists  ;
-	}
+
 	}
 
-	
-	
+	public DetailRegularorderVO SelectDataByPk2(int no) {
+		Connection conn = null ;
+		PreparedStatement pstmt = null ;
+		ResultSet rs = null ;	
+		
+		String sql = "select * from detail_regular_order " ;  
+		sql += " where \"ordernumber\" = ? " ; 
+
+		DetailRegularorderVO bean = null ;
+		try {
+			conn = super.getConnection() ;		
+			pstmt = this.conn.prepareStatement(sql) ;			
+			pstmt.setInt( 1 , no  ); 
+			
+			rs = pstmt.executeQuery() ;			
+			if ( rs.next() ) {
+				bean = new DetailRegularorderVO();								
+				bean.setAmount(rs.getInt("amount"));
+				bean.setOrdernumber(rs.getInt("ordernumber"));
+				bean.setProductcode(rs.getInt("productcode"));
+				bean.setQty(rs.getInt("qty"));
+				bean.setOrderclosing(rs.getDate("orderclosing"));
+				
+			}
+			
+		} catch (SQLException e) {			
+			e.printStackTrace();
+		} finally{
+			try {
+				if( rs != null){ rs.close(); } 
+				if( pstmt != null){ pstmt.close(); } 
+				if(conn != null) {conn.close();}
+			} catch (Exception e2) {
+				e2.printStackTrace(); 
+			}
+		} 		
+		return bean  ;
+	}
+
+	public RegularOrderVO SelectregularDataByPk2(String id) {
+		Connection conn = null ;
+		PreparedStatement pstmt = null ;
+		ResultSet rs = null ;	
+		
+		String sql = "select * from regular_order " ;  
+		sql += " where \"id\" = ? " ; 
+
+		RegularOrderVO bean = null ;
+		try {
+			conn = super.getConnection() ;		
+			pstmt = this.conn.prepareStatement(sql) ;			
+			pstmt.setString( 1 , id  ); 
+			
+			rs = pstmt.executeQuery() ;			
+			if ( rs.next() ) {
+				bean = new RegularOrderVO();								
+				bean.setId(rs.getString("id"));
+				bean.setInvoice(rs.getString("invoice"));
+				bean.setOrderdate(rs.getDate("orderdate"));
+				bean.setSeq_add(rs.getInt("seq_add"));
+				bean.setSeq_pay(rs.getInt("seq_pay"));
+				bean.setOrdernumber(rs.getInt("ordernumber"));
+				bean.setShippingstatus(rs.getInt("shippingstatus"));
+			}
+			
+		} catch (SQLException e) {			
+			e.printStackTrace();
+		} finally{
+			try {
+				if( rs != null){ rs.close(); } 
+				if( pstmt != null){ pstmt.close(); } 
+				if(conn != null) {conn.close();}
+			} catch (Exception e2) {
+				e2.printStackTrace(); 
+			}
+		} 		
+		return bean  ;
+}
+
+	public DetailRegularorderVO SelectRegularDataByPk(int ordernumber) {
+		Connection conn = null ;
+		PreparedStatement pstmt = null ;
+		ResultSet rs = null ;	
+		
+		String sql = "select * from \"DETAIL_REGULAR_ORDER\" " ;  
+		sql += " where \"ordernumber\" = ? " ; 
+
+		DetailRegularorderVO bean = null ;
+		try {
+			conn = super.getConnection() ;		
+			pstmt = this.conn.prepareStatement(sql) ;			
+			pstmt.setInt( 1 , ordernumber  ); 
+			
+			rs = pstmt.executeQuery() ;			
+			if ( rs.next() ) {
+				bean= new DetailRegularorderVO();
+				bean.setAmount(rs.getInt("amount"));
+				bean.setOrderclosing(rs.getDate("orderclosing"));
+				bean.setOrdernumber(rs.getInt("ordernumber"));
+				bean.setProductcode(rs.getInt("productcode"));
+				bean.setQty(rs.getInt("qty"));
+				
+				
+			}
+			
+		} catch (SQLException e) {			
+			e.printStackTrace();
+		} finally{
+			try {
+				if( rs != null){ rs.close(); } 
+				if( pstmt != null){ pstmt.close(); } 
+				if(conn != null) {conn.close();}
+			} catch (Exception e2) {
+				e2.printStackTrace(); 
+			}
+		} 		
+		return bean  ;
+	}
+}
+
 	
 	/*
 	 * public void InsertCartData(MemberVO mem, Map<Integer, Integer> maplist) { //

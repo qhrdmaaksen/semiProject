@@ -9,18 +9,20 @@ import javax.servlet.http.HttpServletResponse;
 
 import DAO.MallDAO;
 import DAO.ProductDAO;
+import VO.DetailRegularorderVO;
 import VO.MemberVO;
 import VO.OrderVO;
 import VO.OrderdetailVO;
 import VO.ProductVO;
+import VO.RegularOrderVO;
 
 
-public class MallDetailController extends common.SuperClass{
+public class MallRegularDetailController extends common.SuperClass{
 	@Override
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 			
 		String id = request.getParameter("id");
-	//	int productcode = 
+		//	int productcode = 
 		
 		System.out.println(id+"입니다");
 		
@@ -37,21 +39,24 @@ public class MallDetailController extends common.SuperClass{
 			ProductDAO pdao = new ProductDAO();
 			
 			//Order 주문 정보 가져 오기
-			OrderVO order = mdao.SelectDataByPk(id) ;
+			RegularOrderVO order = mdao.SelectregularDataByPk2(id) ;
+			
 			System.out.println(order);
 			
+			DetailRegularorderVO odetail = mdao.SelectRegularDataByPk(order.getOrdernumber());
 			
+			System.out.println(order.getOrdernumber()+"입니다.");
+			System.out.println(odetail);
+			
+			List<ProductVO> lists = pdao.SelectDataList(odetail.getProductcode());
 			// sql 문에 조인문을 쓰는 복합적인 메쏘드가 필요하기 떄문에 compositeDao 에 코딩했습니다. 
 			//lists : 해당 송장 번호에 대한 주문 상세 내역을 보여 주세요
 			
 			request.setAttribute( "order", order ); //주문 정보			
 			
-			System.out.println(order);
-			OrderdetailVO odetail = mdao.SelectDataByPk(order.getOrdernumber());
-			
 			request.setAttribute( "odetail", odetail ); // 디테일 오더 
 			
-			List<ProductVO> lists = pdao.SelectDataList(odetail.getProductcode());
+			System.out.println(odetail);
 					
 			request.setAttribute( "lists", lists ); //쇼핑 정보
 			
@@ -66,12 +71,10 @@ public class MallDetailController extends common.SuperClass{
 			}
 			
 			
+		
 			
 			
-			System.out.println(lists);
-			
-			
-			gotopage = "member/orderdetail.jsp";
+			gotopage = "member/legularorderdetail.jsp";
 			super.GotoPage(gotopage);	
 		}
 	}

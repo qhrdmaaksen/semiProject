@@ -454,7 +454,7 @@ public class ProductDAO extends SuperDAO{
 		}
 
 		
-		public List<ProductVO> SelectDataList(int ordernumber) {
+		public List<ProductVO> SelectDataList(int productcode) {
 			Connection conn = null ;
 			PreparedStatement pstmt = null ;
 			ResultSet rs = null ;
@@ -472,7 +472,7 @@ public class ProductDAO extends SuperDAO{
 				conn = super.getConnection() ;
 				pstmt = conn.prepareStatement(sql) ;
 				
-				pstmt.setInt(1, ordernumber);
+				pstmt.setInt(1, productcode);
 			
 			
 				
