@@ -42,10 +42,10 @@
   <!-- Nav tabs -->
   <ul ul class="nav nav-pills nav-justified btn-light" role="tablist">
     <li class="nav-item">
-      <a class="nav-link active" data-toggle="tab" href="#home">Home</a>
+      <a class="nav-link active" data-toggle="tab" href="#home">일반 상품 주문</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" data-toggle="tab" href="#menu1">Menu 1</a>
+      <a class="nav-link" data-toggle="tab" href="#menu1">정기 상품 주문</a>
     </li>
   </ul>
 
