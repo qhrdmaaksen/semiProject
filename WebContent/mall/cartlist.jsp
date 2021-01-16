@@ -40,7 +40,7 @@
   
 <div class="container">
   <!-- Nav tabs -->
-  <ul ul class="nav nav-justified btn-light" role="tablist">
+  <ul ul class="nav nav-pills nav-justified btn-light" role="tablist">
     <li class="nav-item">
       <a class="nav-link active" data-toggle="tab" href="#home">Home</a>
     </li>
@@ -202,7 +202,7 @@
                     </div>
                   </th>
                   <td class="border-0 align-middle"><strong>
-					￦<fmt:formatNumber value="${shopinfo.productprice}" pattern="###,###"/>
+					￦<fmt:formatNumber value="${shopinfo.productprice * 0.8}" pattern="###,###"/>
 					</strong></td>
                   <td class="border-0 align-middle"><strong>${shopinfo.qty}</strong></td>
                   <td class="border-0 align-middle">
@@ -212,7 +212,6 @@
 							</a>
                   <!-- <a href="#" class="text-dark"><i class="fa fa-trash"></i> </a>--></td>
                 </tr>
-                
               </c:forEach>  
               </tbody>
             </table>
