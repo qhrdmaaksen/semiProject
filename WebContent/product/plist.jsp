@@ -50,48 +50,48 @@
 	
 	<div class="container">
  		<a href="<%=NoForm%>pcategorylist&mode=eyes&${requestScope.parameters}"> 
-					<img src="./images/icon/icon_eyes.png" style="width: 42px;">
+					<img src="${pageContext.request.contextPath}/images/icon/icon_eyes.png" style="width: 42px;">
 						</a>
 		</div>	
 	<div class="container">
  		<a href="<%=NoForm%>pcategorylist&mode=bloodcirculation&${requestScope.parameters}"> 
-					<img src="./images/icon/icon_bloodcirculation.png" style="width: 42px;">
+					<img src="${pageContext.request.contextPath}/images/icon/icon_bloodcirculation.png" style="width: 42px;">
 						</a>
 		</div>	
 	<div class="container">						 
 		 <a href="<%=NoForm%>pcategorylist&mode=digestiveapparatus&${requestScope.parameters}"> 
-					<img src="./images/icon/icon_digestiveapparatus.png" style="width: 42px;">
+					<img src="${pageContext.request.contextPath}/images/icon/icon_digestiveapparatus.png" style="width: 42px;">
 						</a> 
 		</div>	
 	<div class="container">												
  		<a href="<%=NoForm%>pcategorylist&mode=skin&${requestScope.parameters}"> 
-					<img src="./images/icon/icon_skin.png" style="width: 42px;">
+					<img src="${pageContext.request.contextPath}/images/icon/icon_skin.png" style="width: 42px;">
 						</a>
 		</div>	
 	<div class="container">						
  		<a href="<%=NoForm%>pcategorylist&mode=fatigue&${requestScope.parameters}"> 
-					<img src="./images/icon/icon_fatigue.png" style="width: 42px;">
+					<img src="${pageContext.request.contextPath}/images/icon/icon_fatigue.png" style="width: 42px;">
 						</a>
 		</div>	
 	<div class="container">						 				
  		<a href="<%=NoForm%>pcategorylist&mode=joint&${requestScope.parameters}"> 
-					<img src="./images/icon/icon_joint.png" style="width: 42px;">
+					<img src="${pageContext.request.contextPath}/images/icon/icon_joint.png" style="width: 42px;">
 						</a>
 		</div>	
 	<div class="container">								
  		<a href="<%=NoForm%>pcategorylist&mode=hair&${requestScope.parameters}"> 
-					<img src="./images/icon/icon_hair.png" style="width: 42px;">
+					<img src="${pageContext.request.contextPath}/images/icon/icon_hair.png" style="width: 42px;">
 						</a> 
 		</div>	
 	<div class="container">														
  		<a href="<%=NoForm%>pcategorylist&mode=immunity&${requestScope.parameters}"> 
-					<img src="./images/icon/icon_immunity.png" style="width: 42px;">
+					<img src="${pageContext.request.contextPath}/images/icon/icon_immunity.png" style="width: 42px;">
 						</a> 
 		</div>		
 	<c:if test="${whologin == 2}">
 		<div class="container" style="margin-top:20px;">														
 	 		<a href="<%=NoForm%>pcategorylist&mode=immunity&${requestScope.parameters}"> 
-						<img src="./images/icon/icon_barcode.png" style="width: 42px;">
+						<img src="${pageContext.request.contextPath}/images/icon/icon_barcode.png" style="width: 42px;">
 							</a> 
 			</div>	
 	</c:if>																								
