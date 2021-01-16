@@ -28,6 +28,17 @@
 	  text: red;
 	}
 </style>
+<script type="text/javascript">
+
+$(document).ready(function () {
+	  $('.mdb-select').materialSelect();
+	  $('.select-wrapper.md-form.md-outline input.select-dropdown').bind('focus blur', function () {
+	    $(this).closest('.select-outline').find('label').toggleClass('active');
+	    $(this).closest('.select-outline').find('.caret').toggleClass('active');
+	  });
+	});
+
+</script>
 
 </head>
 <body>
@@ -204,7 +215,16 @@
                   <td class="border-0 align-middle"><strong>
 					￦<fmt:formatNumber value="${Rshopinfo.productprice * 0.8}" pattern="###,###"/>
 					</strong></td>
-                  <td class="border-0 align-middle"><strong>${Rshopinfo.months}</strong></td>
+                  <td class="border-0 align-middle"><strong>${Rshopinfo.months} 개월
+                    <div class="select-outline position-relative w-24">
+					    <select class="mdb-select md-form md-outline">
+					      <option value="" disabled selected>${Rshopinfo.months} 개월</option>
+					      <option value="1">1개월</option>
+					      <option value="2">2개월</option>
+					      <option value="3">3개월</option>
+					    </select>
+					  </div>
+                  </strong></td>
                   <td class="border-0 align-middle">
                   <a href="<%=NoForm%>mallcartdelete&productcode=${Rshopinfo.productcode}" type="button" class="card-link-secondary small text-uppercase mr-3"><i
                         class="fas fa-trash-alt mr-1"></i>
