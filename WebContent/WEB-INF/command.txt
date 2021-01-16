@@ -34,7 +34,6 @@ boUpdate=board.BoardUpdateController
 preview_delete=product.PreviewDeleteController
 preview=product.PreviewController
 pdetail=product.PdetailController
-
 previewupdate=product.PreviewUpdateController
 plist=product.PlistController
 pdelete=product.PdeleteController
@@ -45,4 +44,6 @@ mallcartlist=Mall.MallCartListController
 mallcartdelete=Mall.MallCartDeleteItemController
 mallhistory=Mall.MallHistoryController
 mallDetail=Mall.MallDetailController
-
+#### Payment Section ###############################
+payment=member.Addresscontroller
+paymentaddaddr=payments.PaymentShippingController

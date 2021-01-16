@@ -78,8 +78,13 @@ public class Addresscontroller extends SuperClass {
 		
 		
 		
-		
-		String gotopage = "member/address.jsp";
+		String gotopage = "";
+		if (request.getParameter("paymentshipping") == null) {
+			gotopage = "member/address.jsp";
+		} else {
+			gotopage = "/pay/payment.jsp";
+		}
+		System.out.println("gotopage : "+gotopage);
 		super.GotoPage(gotopage);
 		
 		
