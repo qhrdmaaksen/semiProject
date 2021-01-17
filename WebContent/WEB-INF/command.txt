@@ -51,3 +51,4 @@ mallDetail=Mall.MallDetailController
 #### Payment Section ###############################
 payment=member.Addresscontroller
 paymentaddaddr=payments.PaymentShippingController
+paymentcoupon=payments.CouponSelectController
