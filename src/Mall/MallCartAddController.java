@@ -55,7 +55,8 @@ public class MallCartAddController extends SuperClass{
 				
 				if (mycart == null) {
 					 mycart = new MyCartList() ;
-				} else if(Rmycart == null){
+				}
+				if(Rmycart == null){
 					Rmycart = new MyCartList() ;
 				}
 				
@@ -66,6 +67,8 @@ public class MallCartAddController extends SuperClass{
 				 */
 				 
 				if (this.qty == 0) {
+					System.out.println("왜 또 갑자기?" + productcode + "/" + this.months);
+					//System.out.println(Rmycart.toString());
 					Rmycart.AddROrder(productcode, this.months); // 카트에 담기
 					super.session.setAttribute("Rmycart", Rmycart);
 				} else if (this.months == 0){
