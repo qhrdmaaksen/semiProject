@@ -82,7 +82,6 @@ public class Addresscontroller extends SuperClass {
 		
 		//상세 보기, 수정 , 삭제, 답글 등의 링크에 사용될 parameter list 문자열 
 		request.setAttribute("parameters",parameters.toString());
-
 		String gotopage = "";
 		if (request.getParameter("paymentshipping") == null) {
 			gotopage = "member/address.jsp";
