@@ -13,7 +13,15 @@
 <head>
 <meta charset="UTF-8">
 <title>Shopping Cart</title>
-
+<script src="//code.jquery.com/jquery-3.3.1.min.js"></script>
+<script>
+			$( document ).ready( function() {
+				$( 'select.mdb-select' ).change( function() {
+					var jb = $( 'select.mdb-select' ).val();
+					alert( jb );
+				} );
+			} );
+</script>
 <script type="text/javascript">
 </script>
 
@@ -215,7 +223,10 @@ $(document).ready(function () {
                   <td class="border-0 align-middle"><strong>
 					￦<fmt:formatNumber value="${Rshopinfo.productprice * 0.8}" pattern="###,###"/>
 					</strong></td>
-                  <td class="border-0 align-middle"><strong>${Rshopinfo.months} 개월
+                  <td class="border-0 align-middle">
+                  <input type="text" name="ct_qty" id="ct_qty" value="1" readonly="readonly">
+
+                  ${Rshopinfo.months} 개월
                     <div class="select-outline position-relative w-24">
 					    <select class="mdb-select md-form md-outline">
 					      <option value="" disabled selected>${Rshopinfo.months} 개월</option>
@@ -224,7 +235,7 @@ $(document).ready(function () {
 					      <option value="3">3개월</option>
 					    </select>
 					  </div>
-                  </strong></td>
+                 </td>
                   <td class="border-0 align-middle">
                   <a href="<%=NoForm%>mallcartdelete&productcode=${Rshopinfo.productcode}" type="button" class="card-link-secondary small text-uppercase mr-3"><i
                         class="fas fa-trash-alt mr-1"></i>
