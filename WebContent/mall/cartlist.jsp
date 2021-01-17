@@ -118,8 +118,7 @@ $(document).ready(function () {
 					</strong></td>
                   <td class="border-0 align-middle"><strong>${shopinfo.qty}</strong></td>
                   <td class="border-0 align-middle">
-                  <a href="<%=NoForm%>mallcartdelete&productcode=${shopinfo.productcode}" type="button" class="card-link-secondary small text-uppercase mr-3"><i
-                        class="fas fa-trash-alt mr-1"></i>
+                  <a href="<%=NoForm%>mallcartdelete&productcode=${shopinfo.productcode}&qty=${shopinfo.qty}" type="button" class="card-link-secondary small text-uppercase mr-3">
 								Delete
 							</a>
                   <!-- <a href="#" class="text-dark"><i class="fa fa-trash"></i> </a>--></td>
@@ -237,8 +236,8 @@ $(document).ready(function () {
 					  </div>
                  </td>
                   <td class="border-0 align-middle">
-                  <a href="<%=NoForm%>mallcartdelete&productcode=${Rshopinfo.productcode}" type="button" class="card-link-secondary small text-uppercase mr-3"><i
-                        class="fas fa-trash-alt mr-1"></i>
+                  <a href="<%=NoForm%>mallcartdelete&productcode=${Rshopinfo.productcode}&months=${Rshopinfo.months}" 
+                  		type="button" class="card-link-secondary small text-uppercase mr-3">
 								Delete
 							</a>
                   <!-- <a href="#" class="text-dark"><i class="fa fa-trash"></i> </a>--></td>
