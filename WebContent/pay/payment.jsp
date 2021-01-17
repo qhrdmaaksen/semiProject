@@ -74,13 +74,61 @@
 	        }).open();
 	    }
 		$(document).ready(function() {
+			var monthVal = "${param.monthVal}";
+			
+			if(monthVal != ""){
+				$("#monthVal").text(monthVal + "개월 정기구매").css("font-weight", "bold");
+			}
+			
+			
+			
 			$("[name=addrlist]").click(function(e) {
 				var selectaddr = $(this).text();
 				$("#addrtext").text($(this).text());
 				$("#exampleModal").modal('hide');
 			});
+			$("[name=couponselect]").click(function(e){
+				var couponchoice = $(this).text() ;
+				var kind = $(this).data("kind");
+				$("#coupontext").text($(this).text());
+				
+				if("${param.buyCount}" != ""){
+					if(kind == 2){ //무료배송
+						var total = parseInt("${param.totalprice}");
+						console.log(total);
+						$("#shippingfee").text(0+"원");
+						$("#totalprice").text(total+"원");
+						
+						
+					}else {
+						var total = parseInt("${param.totalprice}");
+						var discount = parseFloat($(this).data("discount")).toFixed(1);
+						$("#shippingfee").text(2500+"원");
+						$("#totalprice").text((total - (total * discount) + 2500) + "원");
+						console.log(total);
+						console.log(total * discount)
+					}
+				}else {
+					if(kind == 2){ //무료배송
+						var total = parseInt("${param.totalprice * param.monthVal}");
+						$("#shippingfee").text(0+"원");
+						$("#totalprice").text(total+"원");
+						
+						
+					}else {
+						var total = parseInt("${param.totalprice * param.monthVal}"); // 정기구독 곱한 총가격
+						var discount = parseFloat($(this).data("discount")).toFixed(1); //할인율
+						$("#shippingfee").text(2500+"원"); // 배송비
+						$("#totalprice").text(parseInt(total - (total * discount) + 2500) + "원"); // 총 결제 금액
+					}
+				}
+				$("#couponselectbtn").modal('hide');
+				
+			});
 		});
-	
+			/* var str = ${couponitem.name};
+			var search = str.indexOf("무료");
+				$("#shippingfee").value(0); */
 	</script>
 	<style type="text/css">
 		#payinfotable th{ font-weight: bold; padding: 7px 10px 7px 15px;}
@@ -101,14 +149,14 @@
 				</div>
 				<div class="modal-body">
 					<div class="list-group">
-						<c:forEach items="${requestScope.soupons}" var="couponitem">
-							<button type="button" class="list-group-item list-group-item-action" aria-current="true" name="couponselect">
-								<span>${couponitem.usedcoupons}</span>
-								<span><fmt:formatNumber type="percent" maxIntegerDigits="3" value="${coupon.discount}"></fmt:formatNumber></span>
-								<c:if test="${coupon.kind==1}">
+						<c:forEach items="${coupons}" var="couponitem">
+							<button type="button" class="list-group-item list-group-item-action" aria-current="true" data-kind="${couponitem.kind}" data-discount="${couponitem.discount}" name="couponselect">
+								<span>${couponitem.name}</span>
+								<span><fmt:formatNumber type="percent" maxIntegerDigits="3" value="${couponitem.discount}"></fmt:formatNumber></span>
+								<c:if test="${couponitem.kind==1}">
                                     할인쿠폰
                                 </c:if>
-								<c:if test="${coupon.kind==2}">
+								<c:if test="${couponitem.kind==2}">
                                     배송비할인
                                 </c:if>
 							</button>
@@ -272,7 +320,7 @@
 				<hr style="border: none;">
 				<div>
 						<span>${bean.productname}</span>
-					<p align="right"><span>수량 1개 / <span>무료 배송</span></span></p>
+					<p align="right"><span id="monthVal">수량 ${param.buyCount}개 / <span>무료 배송</span></span></p>
 				</div>
 				<hr>
 				<div>
@@ -287,12 +335,21 @@
 				<tbody align="center">
 				<tr align="center">
 					<th>총 상품가격</th>
-					<td>${bean.productprice}원</td>
+					<c:choose>
+						<c:when test="${param.monthVal != null}">
+							<td>${param.totalprice * param.monthVal}원</td>
+						</c:when>
+						<c:otherwise>
+							<td>${param.totalprice}원</td>
+						</c:otherwise>
+					</c:choose>
 				</tr>
 				<tr align="center">
 					<th>할인 쿠폰</th>
-					<td align="center">
-						${couponitem.usedcoupons}
+					<td align="center" id="coupontext">
+						${couponitem.name}
+					</td>
+					<td>
 						<button style="float: right; font: 10px;" type="button"
 							 class="btn btn-outline-warning btn-sm" data-bs-toggle="modal" data-bs-target="#couponselectbtn"> 
 							<span>쿠폰 선택</span>
@@ -301,8 +358,8 @@
 				</tr>
 				<tr align="center">
 					<th>배송비</th>
-					<td>
-						<fmt:formatNumber value="${shipExpense}" pattern="###,###"/>원
+					<td id="shippingfee">
+						<fmt:formatNumber value="2500" pattern="###,###"/>원
 					</td>
 				</tr>
 				<tr align="center">
@@ -311,19 +368,21 @@
 				</tr>
 				<tr align="center">
 					<th>총 결제금액</th>
-					<td>
-						<c:set var="finalAmount" value="${totalAmount + shipExpense}" />
-						<strong>
-							<fmt:formatNumber value="${finalAmount}" pattern="###,###"/> 원
-						</strong>
-					</td>
+					<c:choose>
+						<c:when test="${param.monthVal != null}">
+							<td id="totalprice">${param.totalprice * param.monthVal + 2500}원</td>
+						</c:when>
+						<c:otherwise>
+							<td id="totalprice">${param.totalprice + 2500}원</td>
+						</c:otherwise>
+					</c:choose>
 				</tr>
 				
 				<tr align="center">
 					<th>결제방법</th>
 					<td style="padding: 4px 0px 0px; float: right;">
 						<input type="radio" name="pymnt" value="card" checked>&nbsp;신용/체크카드
-						<input type="radio" name="pymnt" value="banktrnsf">&nbsp;무통장입금(가상계좌)
+						<input id="virtualaccount" type="radio" name="pymnt" value="banktrnsf" onclick="gotovirtual()">&nbsp;무통장입금(가상계좌)
 						<div align="center">
 							<input id="agreecheck" type="checkbox" checked="checked">&nbsp;선택한 결제수단으로 향후 결제 이용에 동의합니다(선택)
 						</div>
@@ -433,10 +492,14 @@
         var b_name = "${sessionScope.loginfo.name}";
         var b_tel = $("#phonenum").val();
         var b_addr = $("#addrtext").text();
-
+        
         function requestPay() {
-        	if (${"#agreecheck"}.is(":checked")==false) {
-				alert('결제 이용 동의를 선택해주세요.')
+        	if ($("#agreecheck").is(":checked")==false) {
+				alert('결제 이용 동의를 선택해주세요.');
+				return false;
+			};
+			if ($("#virtualaccount").is(":checked")==true){
+				$(location).attr("href","http://localhost:8989/SemiProject/pay/virtualaccount.jsp");
 			};
         	console.log("결제 실행중");
         	var obj = document.getElementsByName("momentum");

@@ -32,18 +32,17 @@ public class CouponSelectController extends SuperClass{
 
 	        CouponDAO dao = new CouponDAO();
 	        session.setAttribute("cpnCount", dao.CountCoupons(tem.getId()));
-	        request.setAttribute("coupons", dao.SelectCoupons(tem.getId(),0, 0, 10));
-	        request.setAttribute("usedcoupons", dao.SelectCoupons(tem.getId(),1, 0, 10));
+	        request.setAttribute("coupons", dao.SelectCoupons(tem.getId(),0, 0, 10)); //미사용 쿠폰
+	        request.setAttribute("usedcoupons", dao.SelectCoupons(tem.getId(),1, 0, 10)); // 사용한 쿠폰
 
 	        super.doProcess(request, response);
 	        
 	        String gotopage = "";
 	        if (request.getParameter("couponselect") == null) {
-	        	super.GotoPage("/member/coupon.jsp");
+	        	super.GotoPage("/pay/payment.jsp");
 			} else {
-				super.GotoPage("/pay/payment.jsp");
+				super.GotoPage("/member/coupon.jsp");
 			}
-	        super.GotoPage(gotopage);
 	    }
 
 	    @Override

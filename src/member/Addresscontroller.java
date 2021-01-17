@@ -13,6 +13,7 @@ import VO.AddressVo;
 import VO.BbsPostVo;
 import VO.MemberVO;
 import common.SuperClass;
+import payments.CouponSelectController;
 import utility.FlowParameters;
 import utility.Paging;
 
@@ -85,11 +86,11 @@ public class Addresscontroller extends SuperClass {
 		String gotopage = "";
 		if (request.getParameter("paymentshipping") == null) {
 			gotopage = "member/address.jsp";
+			super.GotoPage(gotopage);
 		} else {
-			gotopage = "/pay/payment.jsp";
+			new CouponSelectController().doProcess(request, response);
+//			gotopage = "/pay/payment.jsp"; 
 		}
-		System.out.println("gotopage : "+gotopage);
-		super.GotoPage(gotopage);
 	}
 	
 	@Override

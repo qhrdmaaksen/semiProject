@@ -143,26 +143,32 @@
 			$("#month1").on("click", function() {
 				$("#productprice").text("월간 " + Math.floor(price * 0.8).format() + "원");
 				totalprice = Math.floor(price * 0.8);
+				$("#monthVal").val(1);
 			});
 			$("#month2").on("click", function() {
 				$("#productprice").text("월간 " + Math.floor(price * 0.7).format() + "원");
 				totalprice = Math.floor(price * 0.7);
+				$("#monthVal").val(2);
 			});
 			$("#month3").on("click", function() {
 				$("#productprice").text("월간 " + Math.floor(price * 0.7).format() + "원");
 				totalprice = Math.floor(price * 0.7);
+				$("#monthVal").val(3);
 			});
 			$("#month4").on("click", function() {
 				$("#productprice").text("월간 " + Math.floor(price * 0.7).format() + "원");
 				totalprice = Math.floor(price * 0.7);
+				$("#monthVal").val(4);
 			});
 			$("#month5").on("click", function() {
 				$("#productprice").text("월간 " + Math.floor(price * 0.7).format() + "원");
 				totalprice = Math.floor(price * 0.7);
+				$("#monthVal").val(5);
 			});
 			$("#month6").on("click", function() {
 				$("#productprice").text("월간 " + Math.floor(price * 0.7).format() + "원");
 				totalprice = Math.floor(price * 0.7);
+				$("#monthVal").val(6);
 			});
 		});
 		
@@ -190,6 +196,7 @@
 	</script>
 </head>
 <body>
+	<input type="hidden" id="monthVal" value="">
 	<div class="container">
 		<div class="row">
 			<div class="col-md-4">
@@ -303,6 +310,8 @@
 			$("#product-form").append(command);
 			$("#product-form").append("<input type='text' id='productcode' name='productcode' value='" + ${bean.productcode} + "'>");
 			$("#product-form").append("<input type='text' id='totalprice' name='totalprice' value='" + totalprice + "'>");
+			$("#product-form").append("<input type='text' id='stock' name='stock' value='${bean.stock}'>");
+			$("#product-form").append("<input type='text' id='qty' name='qty' value='"+$("#buy-qty").val()+"'>");
 			$("#product-form").submit();
 		};
 		
@@ -311,7 +320,14 @@
 			$("#product-form").attr("method","get");
 			$("#product-form").append(command);
 			$("#product-form").append("<input type='text' id='totalprice' name='totalprice' value='" + totalprice + "'>");
-			$("#product-form").append("<input type='text' name='paymentshipping' value='gotoshipping'>"); 
+			$("#product-form").append("<input type='text' name='paymentshipping' value='gotoshipping'>");
+			if($("#delivery-select:checked").length == 0){
+				var buyCount = $("#buy-qty").val();
+				$("#product-form").append("<input type='text' name='buyCount' value='"+buyCount+"'>"); 
+			}else {
+				var monthVal = $("#monthVal").val();
+				$("#product-form").append("<input type='text' name='monthVal' value='"+monthVal+"'>");
+			}
 			$("#product-form").submit();
 		};
 	</script>
