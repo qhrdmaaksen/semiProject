@@ -307,11 +307,18 @@
 	<script>
 		function goCart(){
 			var command = '<input name="command" value="mallcartadd" style="display: none;">';
+			alert("${bean.productcode}")
 			$("#product-form").append(command);
 			$("#product-form").append("<input type='text' id='productcode' name='productcode' value='" + ${bean.productcode} + "'>");
 			$("#product-form").append("<input type='text' id='totalprice' name='totalprice' value='" + totalprice + "'>");
-			$("#product-form").append("<input type='text' id='stock' name='stock' value='${bean.stock}'>");
-			$("#product-form").append("<input type='text' id='qty' name='qty' value='"+$("#buy-qty").val()+"'>");
+			$("#product-form").append("<input type='text' id='stock' name='stock' value='${bean.stock}'>"); 
+			if($("#delivery-select:checked").length == 0){
+				$("#product-form").append("<input type='text' id='qty' name='qty' value='"+$("#buy-qty").val()+"'>"); 
+			}else {
+				var monthVal = $("#monthVal").val();
+				console.log("monthVal : ",monthVal)
+				$("#product-form").append("<input type='text' name='months' value='"+monthVal+"'>"); 
+			}
 			$("#product-form").submit();
 		};
 		

@@ -68,6 +68,8 @@ public class MyCartList {
 		}
 	}
 	public void AddROrder(int productcode, int months) {
+		System.out.println("AddROrder productcode : " + productcode);
+		System.out.println("AddROrder months : " + months);
 		if (this.regulerlists.containsKey(productcode)) { // 동일 상품이 이미 있는 경우
 			int newmonths = this.regulerlists.get(productcode) + months ; 
 			System.out.println("여기 데이터 왔낭1");
