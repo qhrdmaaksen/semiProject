@@ -137,7 +137,7 @@
 									<input type="hidden" name="productcode" value="${bean.productcode}">
 									<input type="hidden" name="stock" value="${bean.stock}">
 									<input type="hidden" name="qty" value="1">         
-								<button type="submit" class="btn btn-warning btn-sm mr-1 mb-2">장바구니에 추가하기</button>
+								<button type="submit" class="btn btn-outline-info btn-sm mr-1 mb-2" >장바구니에 추가하기</button>
 							</form>
 							
 							<form class="form-inline" role="form" name="myform" action="<%=YesForm%>" method="post">
@@ -145,16 +145,16 @@
 									<input type="hidden" name="productcode" value="${bean.productcode}">
 									<input type="hidden" name="stock" value="${bean.stock}">
 									<input type="hidden" name="months" value="1">         
-								<button type="submit" class="btn btn-warning btn-sm mr-1 mb-2" style="100%">정기 구매 신청하기</button>
+								<button type="submit" class="btn btn-outline-info btn-sm mr-1 mb-2" >정기 구매 신청하기</button>
 		       		  		</form>
 					</div>		
-					<%-- <form class="form-inline" role="form" name="myform" action="<%=YesForm%>" method="post">
-					  <input type="hidden" name="command" value="pdetail">
-						<a href="<%=NoForm%>pdetail&productcode=${bean.productcode}&${requestScope.parameters}">
-							<button type="button" class="btn btn-light btn-sm mr-1 mb-2">
-							<i class="fas fa-info-circle pr-2"></i>Details</button> 		
-						</a>
-		       		  </form> --%>
+					<div> 		
+		       		  	<c:if test="${whologin == 2}">
+							<a href="<%=NoForm%>pdelete&productcode=${bean.productcode}&${requestScope.parameters}">		
+								<button type="submit" class="btn btn-outline-danger btn-sm">상품 삭제 하기</button>
+		       		  		</a>
+		       		  	</c:if>
+		       		  </div>
 		        </div>
 		      </div>
 		    <!-- Card -->
