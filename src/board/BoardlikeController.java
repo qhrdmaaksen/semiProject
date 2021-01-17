@@ -14,7 +14,7 @@ import VO.commentVO;
 import common.SuperClass;
 import utility.FlowParameters;
 
-public class BoardDetailViewController extends SuperClass {
+public class BoardlikeController extends SuperClass {
 
 	@Override
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -22,7 +22,6 @@ public class BoardDetailViewController extends SuperClass {
 		
 		BoardDAO dao = new BoardDAO();
 		BbsPostVo bean = dao.SelctDataByPK(no);
-		List<commentVO> comment = dao.SelctDataByPK2(no);
 		
 		
 		System.out.println(bean );
@@ -55,16 +54,14 @@ public class BoardDetailViewController extends SuperClass {
 			MemberVO login = (MemberVO)super.session.getAttribute("loginfo") ;
 			
 			
-			/*
-			 * if(!bean.getId().equals(login.getId())) { dao.UpdateReadhit(no);
-			 * 
-			 * }
-			 */
+			 if(!bean.getId().equals(login.getId())) { 
+				 dao.UpdateReadhit(no);
+			 
+			 }
 			 
 	
 			request.setAttribute("bean", bean);
 			request.setAttribute("parameters", parameters.toString());
-			request.setAttribute("comment", comment);
 			// 상세 보기 페이지로 이동
 			String gotopage = "customer/bbsdetailview.jsp";
 			super.GotoPage(gotopage);

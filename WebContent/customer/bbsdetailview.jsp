@@ -88,23 +88,22 @@
 		}
 	
 		
-		function like(){
-			
-			location.href='<%=NoForm%>like&${sessionScope.loginfo.id}&${bean.no}';
-
-		}
+	
 		
-<%-- 		$(function(){
+		/* $(function(){
 			// 추천버튼 클릭시(추천 추가 또는 추천 제거)
 			$("#like").click(function(){
-				<form class="form-inline" role="form" name="myform" action="<%=YesForm%>" method="get">
-				<input type="hidden" name="like" value="like">
-				<div class="form-group">
-				<input type="hidden" name="no" id="no" value="${bean.no}">
-				</div>
-			</form>
-			})  --%>
-			
+				$.ajax({
+					url: "/board/BoardlikeController.java",
+	                type: "get",
+	                data: {
+	                    no: ${bean.no},
+	                    id: ${sessionScope.loginfo.id}
+	                },
+	               
+				})
+			})
+		} */
 			
 		
 		function addNewItem(cnum, id, content, postdate) {
@@ -267,15 +266,14 @@
 					</table>
 				</div>
 				<hr>
-				<div class="col-sm-offset-5 col-sm-4">
-					<button class="btn btn-primary" onclick="gotoBack();">
-						돌아 가기</button>
-				</div>
+		
 				
 
 				<div class="col-sm-offset-5 col-sm-4">
+					<a href="<%=NoForm%>like&no=${bean.no}&${requestScope.parameters}">
 					<button class="btn btn-primary" onclick="like();">
 						게시물 좋아요</button>
+					</a>
 				</div>
 									
 				
