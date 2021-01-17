@@ -13,8 +13,17 @@
 <head>
 <meta charset="UTF-8">
 <title>Shopping Cart</title>
-
-
+<script src="//code.jquery.com/jquery-3.3.1.min.js"></script>
+<script>
+			$( document ).ready( function() {
+				$( 'select.mdb-select' ).change( function() {
+					var jb = $( 'select.mdb-select' ).val();
+					alert( jb );
+				} );
+			} );
+</script>
+<script type="text/javascript">
+</script>
 
 <style type="text/css">
 	body {
@@ -27,6 +36,17 @@
 	  text: red;
 	}
 </style>
+<script type="text/javascript">
+
+$(document).ready(function () {
+	  $('.mdb-select').materialSelect();
+	  $('.select-wrapper.md-form.md-outline input.select-dropdown').bind('focus blur', function () {
+	    $(this).closest('.select-outline').find('label').toggleClass('active');
+	    $(this).closest('.select-outline').find('.caret').toggleClass('active');
+	  });
+	});
+
+</script>
 
 </head>
 <body>
@@ -203,17 +223,15 @@
                   <td class="border-0 align-middle"><strong>
 					￦<fmt:formatNumber value="${Rshopinfo.productprice * 0.8}" pattern="###,###"/>
 					</strong></td>
-                  <td class="border-0 align-middle"><strong>${Rshopinfo.months}
-           <div class="d-flex flex-wrap">
-  <div class="select-outline position-relative w-24">
-    <select class="mdb-select md-form md-outline">
-      <option value="" disabled selected>0</option>
-      <option value="1">1개</option>
-      <option value="2">2개</option>
-      <option value="3">3개</option>
-    </select>
-  </div>
-</div>
+                  <td class="border-0 align-middle"><strong>${Rshopinfo.months} 개월
+                    <div class="select-outline position-relative w-24">
+					    <select class="mdb-select md-form md-outline">
+					      <option value="" disabled selected>${Rshopinfo.months} 개월</option>
+					      <option value="1">1개월</option>
+					      <option value="2">2개월</option>
+					      <option value="3">3개월</option>
+					    </select>
+					  </div>
                   </strong></td>
                   <td class="border-0 align-middle">
                   <a href="<%=NoForm%>mallcartdelete&productcode=${Rshopinfo.productcode}" type="button" class="card-link-secondary small text-uppercase mr-3"><i
@@ -276,93 +294,6 @@
 	  </div>
 	  </div>
 	</div>
-</div>
-
-<script type="text/javascript">
-
-$(document).ready(function () {
-	  $('.mdb-select').materialSelect();
-	  $('.select-wrapper.md-form.md-outline input.select-dropdown').bind('focus blur', function () {
-	    $(this).closest('.select-outline').find('label').toggleClass('active');
-	    $(this).closest('.select-outline').find('.caret').toggleClass('active');
-	  });
-	});
-	
-	
-	
-function change_qty2(t){ //var min_qty = '수량버튼'*1; 
-	var this_qty = $("#ct_qty").val()*1; 
-	var max_qty = '200'; 
-	// 현재 재고 
-	if(t=="a"){ 
-		this_qty = 2; 
-	 	return; } 
-	if(t=="b"){ 
-		this_qty = 3; 
-	 	return; }
-	if(t=="c"){ 
-		this_qty = 4; 
-	 	return; }
-	if(t=="d"){ 
-		this_qty = 5; 
-	 	return; }
-	if(t=="e"){ 
-		this_qty = 6; 
-	 	return; }
-	}else {
-		this_qty = 12; 
-	}
-	
-	
-	
-	
-/* function change_qty2(t){ //var min_qty = '수량버튼'*1; 
-var min_qty = 1; 
-var this_qty = $("#ct_qty").val()*1; 
-var max_qty = '200'; 
-// 현재 재고 
-if(t=="m"){ 
-	this_qty -= 1; 
-if(this_qty < min_qty){ //alert("최소구매수량 이상만 구매할 수 있습니다."); 
-alert("수량은 1개 이상 입력해 주십시오."); return; } } 
-else if(t=="p"){ this_qty += 1; 
-if(this_qty > max_qty){ alert("죄송합니다. 재고가 부족합니다."); return; } }
-} */
-
-</script>
-
-
-
-
-
-<div class="qty"> 
-	<div class="plus">
-		<a href="javascript:change_qty2('p')">
-		<img src="./images/logo.png" alt="+"></a>
-	</div> 
-		<input type="text" name="ct_qty" id="ct_qty" value="1" readonly="readonly"> 
-	<div class="minus"><a href="javascript:change_qty2('m')">
-		<img src="./images/logo.png" alt="-"></a>
-	</div> 
-</div>
-
-
-
-
-
-<div class="d-flex flex-wrap">
-  <div class="select-outline position-relative w-24">
-    <select class="mdb-select md-form md-outline">
-      <option  name="ct_qty" id="ct_qty" value="1" readonly="readonly">$(ct_qty)</option>
-      <a href="javascript:change_qty2('a')"><option value="2" >2개</option></a>
-      <option value="3" selected="javascript:change_qty2('b')">3개</option>
-      <option value="4" selected="javascript:change_qty2('c')">4개</option>
-      <option value="5" selected="javascript:change_qty2('d')">5개</option>
-      <option value="6" selected="javascript:change_qty2('e')">6개</option>
-     
-          
-    </select>
-  </div>
 </div>
 </body>
 </html>
