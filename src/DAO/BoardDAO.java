@@ -100,7 +100,7 @@ public class BoardDAO  extends SuperDAO {
 				bean.setId(rs.getString("id"));
 				bean.setLikenumber(rs.getInt("likenumber"));
 				bean.setNo(rs.getInt("seq_index"));
-				bean.setPostdate(String.valueOf(rs.getString("postdate")));
+				bean.setPostdate(rs.getDate("postdate"));
 				bean.setTitle(rs.getString("title"));
 				bean.setImage(rs.getString("image"));
 				
@@ -130,7 +130,7 @@ public class BoardDAO  extends SuperDAO {
 
 	public int InsertData(BbsPostVo bean) {
 		String sql = " insert into BBS_POST (\"seq_index\", \"id\", \"title\", \"content\", \"postdate\", \"likenumber\", \"image\" ) " ;
-		sql += " values(seq_BP_index.nextval,?,?,?,to_date(?, 'yyyy/MM/dd') , default, ? ) " ;
+		sql += " values(seq_BP_index.nextval,?,?,?, sysdate , default, ? ) " ;
 		Connection conn = null ;
 		PreparedStatement pstmt = null ;
 		int cnt = -999999 ;
@@ -143,8 +143,7 @@ public class BoardDAO  extends SuperDAO {
 			pstmt.setString(1, bean.getId());
 			pstmt.setString(2, bean.getTitle()); 
 			pstmt.setString(3, bean.getContent());
-			pstmt.setString(4, bean.getPostdate());
-			pstmt.setString(5, bean.getImage());
+			pstmt.setString(4, bean.getImage());
 			
 			cnt = pstmt.executeUpdate() ; 
 			conn.commit(); 
@@ -197,7 +196,7 @@ public class BoardDAO  extends SuperDAO {
 				bean.setId(rs.getString("id"));
 				bean.setLikenumber(rs.getInt("likenumber"));
 				bean.setNo(rs.getInt("seq_index"));
-				bean.setPostdate(String.valueOf(rs.getString("postdate")));
+				bean.setPostdate(rs.getDate("postdate"));
 				bean.setTitle(rs.getString("title"));
 				bean.setImage(rs.getString("image"));		
 				
@@ -226,7 +225,7 @@ public class BoardDAO  extends SuperDAO {
 }
 
 	public int UpdateReadhit(int num) {
-		String sql = " update bbs_post set \"likenumber\" = \"likenumber\" + 1 ";
+		String sql = " update \"BBS_POST\" set \"likenumber\" = \"likenumber\" + 1 ";
 		sql += " where \"seq_index\" = ? ";    
 		Connection conn = null ;
 		PreparedStatement pstmt = null ;
@@ -341,7 +340,7 @@ public class BoardDAO  extends SuperDAO {
 
 	public int InsertData(commentVO bean ,int seq) {
 		String sql = " insert into post_comments (\"seq_comment\", \"seq_index\", \"id\", \"commentdate\", \"comment\" ) " ;
-		sql += " values(seq_comment.nextval,?,?,to_date(?, 'yyyy/MM/dd') ,  ? ) " ;
+		sql += " values(seq_comment.nextval,?,?, sysdate ,  ? ) " ;
 		Connection conn = null ;
 		PreparedStatement pstmt = null ;
 		int cnt = -999999 ;
@@ -354,8 +353,7 @@ public class BoardDAO  extends SuperDAO {
 		
 			pstmt.setInt(1, seq);
 			pstmt.setString(2, bean.getId());
-			pstmt.setString(3, bean.getCommentdate());
-			pstmt.setString(4, bean.getComment());
+			pstmt.setString(3, bean.getComment());
 			
 			
 			cnt = pstmt.executeUpdate() ; 

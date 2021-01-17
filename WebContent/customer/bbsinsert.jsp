@@ -44,7 +44,6 @@
 							<span class="err">${errtitle}</span>
 						</div>
 					</div>
-					
 					<div class="form-group">
 						<label class="control-label col-sm-<%=formleft%>" for="image">사진</label>
 						<div class="col-sm-<%=formright%>">
@@ -64,15 +63,7 @@
 							<span class="err">${errcontent}</span>
 						</div>
 					</div>
-					<div class="form-group">
-						<label class="control-label col-sm-<%=formleft%>" for="postdate">작성
-							일자</label>
-						<div class="col-sm-<%=formright%>">
-							<input type="datetime" class="form-control" name="postdate"
-								id="postdate" placeholder="작성 일자" value="${bean.postdate}"> <span
-								class="err">${errpostdate}</span>
-						</div>
-					</div>
+					
 					<div class="form-group">
 						<div align="center" class="col-sm-offset-3 col-sm-6">
 							<button class="btn btn-default" type="submit">새글 쓰기</button>
