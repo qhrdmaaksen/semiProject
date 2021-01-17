@@ -46,7 +46,6 @@ public class commentInsertController extends SuperClass {
 		//bean.setNo(no); //�������� �ʿ� ����
 		
 		bean.setComment(request.getParameter("comment"));
-		bean.setCommentdate(request.getParameter("commentdate"));
 		bean.setId(request.getParameter("id"));
 		
 		
@@ -57,7 +56,7 @@ public class commentInsertController extends SuperClass {
 		if ( this.validate( request ) == false ) {			
 			request.setAttribute("bean", bean);
 			super.doPost(request, response);
-			String url = "/customer/bbs.jsp";
+			String url = "/customer/commentinsert.jsp";
 			super.GotoPage( url );
 //			super.GotoPage(this.getClass().toString(), "boInsertForm");
 		}else{

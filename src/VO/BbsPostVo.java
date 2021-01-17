@@ -1,14 +1,16 @@
 package VO;
 
+import java.util.Date;
+
 public class BbsPostVo {
 	
-	int no ; // 글 번호 
-	String id ; 
-	String title;
-	String content ;
-	String postdate ; 
-	int likenumber ; // 좋아요 수 
-	String image;
+	private int no ; // 글 번호 
+	private String id ; 
+	private String title;
+	private String content ;
+	private Date postdate ; 
+	private int likenumber ; // 좋아요 수 
+	private String image;
 	
 
 
@@ -88,7 +90,7 @@ public class BbsPostVo {
 
 
 
-	public String getPostdate() {
+	public Date getPostdate() {
 		return postdate;
 	}
 
@@ -96,7 +98,7 @@ public class BbsPostVo {
 
 
 
-	public void setPostdate(String postdate) {
+	public void setPostdate(Date postdate) {
 		this.postdate = postdate;
 	}
 

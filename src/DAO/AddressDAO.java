@@ -134,7 +134,7 @@ public class AddressDAO  extends SuperDAO {
 				bean.setId(rs.getString("id"));
 				bean.setLikenumber(rs.getInt("likenumber"));
 				bean.setNo(rs.getInt("no"));
-				bean.setPostdate(String.valueOf(rs.getString("postdate")));
+				bean.setPostdate(rs.getDate("postdate"));
 				bean.setTitle(rs.getString("title"));
 				bean.setImage(rs.getString("image"));		
 				

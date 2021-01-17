@@ -89,10 +89,7 @@ public class BoardUpdateController extends SuperClass {
 			request.setAttribute( super.PREFIX + "content", "글 내용은 5자리 이상 30자리 이하이어야 합니다.");
 			isCheck = false  ;
 		}
-		String regex = "\\d{4}[-/]\\d{2}[-/]\\d{2}" ;
-		if( bean.getPostdate() == null){
-			bean.setPostdate( "" );
-		}
+	
 		
 		return isCheck ;
 	}
