@@ -25,11 +25,9 @@ function writeForm(){
 </head>
 <body>
 <div class="container col-md-offset-<%=offset%> col-md-<%=content%>">
-			<form class="form-inline" role="form" name="myform" action="<%=YesForm%>" method="get">
-					<input type="hidden" name="command" value="address">
 		<div class="panel panel-primary">
 			<div class="panel-heading">
-				<h3 class="panel-title">${sessionScope.loginfo.name} 님의 배송지 관리</h3>
+				<h3 class="panel-title">${sessionScope.loginfo.name} 님의 이전 주문 내역</h3>
 			</div>
 			<div class="panel-body">
 				<div class="table-responsive">
@@ -38,31 +36,26 @@ function writeForm(){
 							<tr>
 								<th class="text-center">수령인</th>
 								<th class="text-center">전화번호</th>
-								<th class="text-center">배송주소</th>
+								<th class="text-center">배달지</th>
 							</tr>
 						</thead>
 						<tbody>
 							<c:forEach items="${requestScope.lists}" var="bean">
 								<tr class="record">
-									<td align="center">${bean.shippingname}</td>
+									<td align="center">${bean.name}</td>
 									<td align="center">${bean.phone}</td>
 									<td align="center">${bean.address1}</td>
 								</tr>
 							</c:forEach>
-						
 						</tbody>
-						
 					</table>
-						<button class="btn btn-default btn-info" type="button"
-								onclick="writeForm();"> 배송지 추가하기 </button>
 				</div>
 			</div>
 		</div>
-		
-		</form>
 	</div>
 	
-	
+		<button class="btn btn-default btn-info" type="button"
+								onclick="writeForm();"> 배송지 추가하기 </button>
 
 </body>
 </html>
