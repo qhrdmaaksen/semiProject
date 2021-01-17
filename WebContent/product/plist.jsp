@@ -119,7 +119,12 @@
 		         	 </a> 
 		          </div> 
 		        <div class="text-center pt-3">
-		          <h5>${bean.productname}</h5>
+		        <form class="form-inline" role="form" name="myform" action="<%=YesForm%>" method="post">
+					  <input type="hidden" name="command" value="pdetail">
+						<a href="<%=NoForm%>pdetail&productcode=${bean.productcode}&${requestScope.parameters}">
+							<h5>${bean.productname}</h5> 		
+						</a>
+		       		  </form>
 		          <hr>
 		        <h6 class="mb-3">
 		            <span class="text-danger mr-1">
@@ -130,29 +135,32 @@
 		            </s></span>
 		          </h6>
 		          <div>
+		          	<div>
 		         		 <form class="form-inline" role="form" method="post" action="<%=YesForm%>">
 									<input type="hidden" name="command" value="mallcartadd">
 									<input type="hidden" name="productcode" value="${bean.productcode}">
 									<input type="hidden" name="stock" value="${bean.stock}">
 									<input type="hidden" name="qty" value="1">         
-								<button type="submit" class="btn btn-warning btn-sm mr-1 mb-2">장바구니에 추가하기</button>
+								<button type="submit" class="btn btn-outline-info btn-sm mr-1 mb-2">장바구니에 추가하기</button>
 							</form>
-							
+					</div>
+					<div>		
 							<form class="form-inline" role="form" name="myform" action="<%=YesForm%>" method="post">
 									<input type="hidden" name="command" value="mallcartadd">
 									<input type="hidden" name="productcode" value="${bean.productcode}">
 									<input type="hidden" name="stock" value="${bean.stock}">
 									<input type="hidden" name="months" value="1">         
-								<button type="submit" class="btn btn-warning btn-sm mr-1 mb-2" style="100%">정기 구매 신청하기</button>
+								<button type="submit" class="btn btn-outline-info btn-sm mr-1 mb-2" style="align-content: center;">정기 구매 신청하기</button>
 		       		  		</form>
+		       		 </div>
+					<div> 		
+		       		  	<c:if test="${whologin == 2}">
+							<a href="<%=NoForm%>pdelete&productcode=${bean.productcode}&${requestScope.parameters}">		
+								<button type="submit" class="btn btn-outline-danger btn-sm">상품 삭제 하기</button>
+		       		  		</a>
+		       		  	</c:if>
+		       		  </div>
 					</div>		
-					<%-- <form class="form-inline" role="form" name="myform" action="<%=YesForm%>" method="post">
-					  <input type="hidden" name="command" value="pdetail">
-						<a href="<%=NoForm%>pdetail&productcode=${bean.productcode}&${requestScope.parameters}">
-							<button type="button" class="btn btn-light btn-sm mr-1 mb-2">
-							<i class="fas fa-info-circle pr-2"></i>Details</button> 		
-						</a>
-		       		  </form> --%>
 		        </div>
 		      </div>
 		    <!-- Card -->
