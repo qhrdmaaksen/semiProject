@@ -56,7 +56,7 @@
  	<div class="card" style="width: 18rem;"> 
  		<img src="${applicationScope.uploadedPath}/${bean.image}" class="card-img-top" alt="${bean.image}">
  	<div class="card-body"> 
- 		<h5 class="card-title">Card title</h5> 
+ 		<h5 class="card-title">${bean.title}</h5> 
  		<p class="card-text">${bean.id}</p>
  		
   		<a href="<%=NoForm%>bbsdetailview&no=${bean.no}&${requestScope.parameters}">

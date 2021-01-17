@@ -65,6 +65,7 @@ public class MallCartAddController extends SuperClass{
 				 * = new MyCartList() ; }
 				 */
 				 
+				System.out.println("qty : "+qty);
 				if (this.qty == 0) {
 					Rmycart.AddROrder(productcode, this.months); // 카트에 담기
 					super.session.setAttribute("Rmycart", Rmycart);

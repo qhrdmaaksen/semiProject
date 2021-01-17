@@ -82,30 +82,20 @@
 		}
 	</style>
 	<script type="text/javascript">
-		function gotoBack(){
-			location.href='<%=NoForm%>boList&${requestScope.parameters}';
+		
+	function gotoBack(){
+		location.href='<%=NoForm%>boList&${requestScope.parameters}';
+		//alert('${requestScope.parameter}') ;
+	}
+	
+		function like(){
+			
+			location.href='<%=NoForm%>like&${requestScope.parameters}';
 			//alert('${requestScope.parameter}') ;
 		}
 	
-		
-		function like(){
-			
-			location.href='<%=NoForm%>like&${sessionScope.loginfo.id}&${bean.no}';
+	
 
-		}
-		
-<%-- 		$(function(){
-			// 추천버튼 클릭시(추천 추가 또는 추천 제거)
-			$("#like").click(function(){
-				<form class="form-inline" role="form" name="myform" action="<%=YesForm%>" method="get">
-				<input type="hidden" name="like" value="like">
-				<div class="form-group">
-				<input type="hidden" name="no" id="no" value="${bean.no}">
-				</div>
-			</form>
-			})  --%>
-			
-			
 		
 		function addNewItem(cnum, id, content, postdate) {
 			/* 댓글 1개를 추가해 주는 함수 */
@@ -214,6 +204,7 @@
 		
 		
 	</script>
+	
 </head>
 <%
 	int myoffset = 2; //전체 외관의 옵셋
@@ -267,15 +258,14 @@
 					</table>
 				</div>
 				<hr>
-				<div class="col-sm-offset-5 col-sm-4">
-					<button class="btn btn-primary" onclick="gotoBack();">
-						돌아 가기</button>
-				</div>
+		
 				
 
 				<div class="col-sm-offset-5 col-sm-4">
-					<button class="btn btn-primary" onclick="like();">
+					<a href="<%=NoForm%>like&no=${bean.no}&${requestScope.parameters}">
+					<button class="btn btn-primary" >
 						게시물 좋아요</button>
+					</a>
 				</div>
 									
 				
@@ -342,6 +332,7 @@
 							<tr>
 								<th class="text-center">작성자</th>
 								<th class="text-center">댓글</th>
+								<th class="text-center">작성일자</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -349,6 +340,7 @@
 								<tr class="record">
 									<td align="center">${bean.id}</td>
 									<td align="center">${bean.comment}</td>
+									<td align="center">${bean.commentdate}</td>
 								</tr>
 							</c:forEach>
 						
