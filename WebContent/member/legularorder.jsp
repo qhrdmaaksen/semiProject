@@ -5,7 +5,7 @@
 	int offset = 3; //오프 셋 
 	int content = 10 * offset; //12 - 2 * 오프셋
 %>
-
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <html>
 <head>
 <meta charset="UTF-8">
@@ -23,18 +23,21 @@
 						<thead>
 							<tr>
 								<th class="text-center">이미지</th>
-								<th class="text-center">주문 일자</th>
+								<th class="text-center">구독 시작일</th>
+								<th class="text-center">구독 종료일</th>
 								<th class="text-center">상세 보기</th>
 							</tr>
 						</thead>
 						<tbody>
-							<c:forEach items="${requestScope.lists}" var="shopinfo">
+							<c:forEach items="${requestScope.legularlists}" var="shopinfo">
 								<tr class="record">
 									<td align="center"><img alt="${odetail.images}" width="45" height="45" 
 											src="${applicationScope.uploadedPath}/${odetail.images}"></td>
-									<td align="center">${shopinfo.orderdate}</td>
+									<td align="center"><fmt:formatDate value="${shopinfo.orderdate}" pattern="yyyy년 MM월 dd일" /></td>
+									<td align="center"><fmt:formatDate value="${odetail.orderclosing}" pattern="yyyy년 MM월 dd일" /></td>
+									
 									<td align="center">
-										<a href="<%=NoForm%>mallDetail&id=${shopinfo.id}">상세 보기</a></td>
+										<a href="<%=NoForm%>mallDetailregular&id=${shopinfo.id}">상세 보기</a></td>
 								</tr>
 							</c:forEach>
 						</tbody>

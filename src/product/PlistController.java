@@ -43,7 +43,7 @@ public class PlistController extends SuperClass{
 				totalCount, 
 				myurl, 
 				parameters.getMode(), 
-				parameters.getKeyword() + "%") ;
+				parameters.getKeyword()) ;
 		
 		List<ProductVO> lists = dao.SelectDataList(
 				pageInfo.getBeginRow(), 
@@ -58,8 +58,6 @@ public class PlistController extends SuperClass{
 		// 페이징 관련 항목들
 		request.setAttribute("pagingHtml", pageInfo.getPagingHtml());
 		request.setAttribute("pagingStatus", pageInfo.getPagingStatus());
-		System.out.println("pagingHtml : " + request.getParameter("pagingHtml"));
-		System.out.println("pagingStatus : " + request.getParameter("pagingStatus"));
 		
 		// 필드 검색과 관련된 항목들
 		request.setAttribute("mode", parameters.getMode());

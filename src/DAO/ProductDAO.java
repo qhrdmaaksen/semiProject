@@ -140,7 +140,6 @@ public class ProductDAO extends SuperDAO{
 			sql += " )  " ;
 			sql += " where ranking between ? and ? " ;
 			
-			System.out.println(sql);
 			List<ProductVO> lists = new ArrayList<ProductVO>();
 
 			try {

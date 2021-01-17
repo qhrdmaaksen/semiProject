@@ -88,6 +88,24 @@
 		}
 	
 		
+		function like(){
+			
+			location.href='<%=NoForm%>like&${sessionScope.loginfo.id}&${bean.no}';
+
+		}
+		
+<%-- 		$(function(){
+			// 추천버튼 클릭시(추천 추가 또는 추천 제거)
+			$("#like").click(function(){
+				<form class="form-inline" role="form" name="myform" action="<%=YesForm%>" method="get">
+				<input type="hidden" name="like" value="like">
+				<div class="form-group">
+				<input type="hidden" name="no" id="no" value="${bean.no}">
+				</div>
+			</form>
+			})  --%>
+			
+			
 		
 		function addNewItem(cnum, id, content, postdate) {
 			/* 댓글 1개를 추가해 주는 함수 */
@@ -254,6 +272,13 @@
 						돌아 가기</button>
 				</div>
 				
+
+				<div class="col-sm-offset-5 col-sm-4">
+					<button class="btn btn-primary" onclick="like();">
+						게시물 좋아요</button>
+				</div>
+									
+				
 				
 				<br><br><br>
 				
@@ -303,6 +328,7 @@
 									<button>댓글달기</button>
 								</a>
 									
+					
 					<input type="hidden" name="comment" value="comment">
 					<div class="form-group">
 							<input type="hidden" name="no" id="no"

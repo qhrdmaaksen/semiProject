@@ -299,8 +299,10 @@
 	</div>
 	<script>
 		function goCart(){
-			var command = '<input name="command" value="mallcartlist" style="display: none;">';
+			var command = '<input name="command" value="mallcartadd" style="display: none;">';
 			$("#product-form").append(command);
+			$("#product-form").append("<input type='text' id='productcode' name='productcode' value='" + ${bean.productcode} + "'>");
+			$("#product-form").append("<input type='text' id='totalprice' name='totalprice' value='" + totalprice + "'>");
 			$("#product-form").submit();
 		};
 		

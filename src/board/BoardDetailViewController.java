@@ -54,6 +54,11 @@ public class BoardDetailViewController extends SuperClass {
 			//login : 현재 접속한 사람의 정보를 저장하고 있는 객체입니다. 
 			MemberVO login = (MemberVO)super.session.getAttribute("loginfo") ;
 			
+			/*
+			 * if(!bean.getId().equals(login.getId())) { dao.UpdateReadhit(no);
+			 * 
+			 * }
+			 */
 	
 			request.setAttribute("bean", bean);
 			request.setAttribute("parameters", parameters.toString());
