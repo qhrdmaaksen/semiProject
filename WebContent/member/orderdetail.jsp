@@ -51,7 +51,7 @@
 							<c:set var="totalAmount" value="0" />
 							<c:forEach items="${requestScope.lists}" var="odetail">
 								<tr>
-									<td>${sessionScope.loginfo.name}</td>
+									<td>${odetail.productname}</td>
 									<td>
 										<img alt="${odetail.images}" width="45" height="45" 
 											src="${applicationScope.uploadedPath}/${odetail.images}">										

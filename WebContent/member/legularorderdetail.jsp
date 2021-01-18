@@ -50,9 +50,9 @@
 						</thead>
 						<tbody>
 							<c:set var="totalAmount" value="0" />
-							<c:forEach items="${requestScope.lists2}" var="odetail">
+							<c:forEach items="${requestScope.lists}" var="odetail">
 								<tr>
-									<td>${sessionScope.loginfo.name}</td>
+									<td>${odetail.productname}</td>
 									<td>
 										<img alt="${odetail.images}" width="45" height="45" 
 											src="${applicationScope.uploadedPath}/${odetail.images}">										
@@ -60,7 +60,9 @@
 							</c:forEach>
 							<c:forEach items="${requestScope.lists}" var="lists">
 								<tr>
-									<tr>								
+									<tr>
+									<td class="thick-line"></td>
+									<td class="thick-line"></td>								
 									<td class="text-center"><fmt:formatNumber
 											value="${lists.productprice}" pattern="###,###"/> 원</td>
 									<td class="text-center"><fmt:formatNumber
