@@ -1,9 +1,3 @@
-<%@page import="utility.Paging"%>
-<%@page import="DAO.ProductDAO"%>
-
-
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ include file="./../common/nav.jsp"%>
 
 
 
@@ -84,6 +78,31 @@
 <br><br>
 
 <br><br>
+
+<!-- Classic tabs -->
+<div class="classic-tabs">
+
+  <ul class="nav tabs-primary nav-justified" id="myTab" role="tablist">
+    <li class="nav-item">
+      <a class="nav-link active show" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Home</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Profile</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">Contact</a>
+    </li>
+  </ul>
+  <div class="tab-content" id="myTabContent">
+    <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab"> Nesciunt consequuntur possimus dignissimos enim atque dicta excepturi laudantium explicabo sit, reiciendis, quia dolorum obcaecati eum amet asperiores rerum, quibusdam deserunt rem!</div>
+    <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nesciunt consequuntur possimus dignissimos enim atque dicta excepturi laudantium explicabo sit.</div>
+    <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">Quia dolorum obcaecati eum amet asperiores rerum, quibusdam deserunt rem!</div>
+  </div>
+
+</div>
+<!-- Classic tabs -->
+
+
 
 </body>
 </html>

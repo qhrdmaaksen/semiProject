@@ -63,8 +63,7 @@ public class MallCartListController extends SuperClass{
 				
 				totalAmount += qty * productprice ;
 												
-				ShoppingInfo shopinfo = new ShoppingInfo() ;
-				
+				ShoppingInfo shopinfo = new ShoppingInfo();
 				shopinfo.setImages(bean.getImages());
 				shopinfo.setProductname(bean.getProductname()); 
 				shopinfo.setProductcode(productcode);
