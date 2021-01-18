@@ -83,7 +83,7 @@
 			<li class="nav-item">
 				<a class="nav-link" href="<%=NoForm%>mallcartlist">장바구니</a>
 			</li>
-			<c:if test="${whologin == 1}">
+			<c:if test="${whologin != 0}">
 				<li class="nav-item">
 					<a class="nav-link" href="<%=NoForm%>boList">고객포럼</a>
 				</li>
