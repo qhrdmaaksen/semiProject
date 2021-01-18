@@ -49,15 +49,6 @@
 							<span class="err">${errcomment}</span>
 						</div>
 					</div>
-					<div class="form-group">
-						<label class="control-label col-sm-<%=formleft%>" for="commentdate">작성
-							일자</label>
-						<div class="col-sm-<%=formright%>">
-							<input type="commentdate" class="form-control" name="commentdate"
-								id="commentdate" placeholder="작성 일자" value="${bean.commentdate}"> <span
-								class="err">${errcommentdate}</span>
-						</div>
-					</div>
 			
 					
 					

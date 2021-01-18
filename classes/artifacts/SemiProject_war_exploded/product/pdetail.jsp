@@ -143,26 +143,32 @@
 			$("#month1").on("click", function() {
 				$("#productprice").text("월간 " + Math.floor(price * 0.8).format() + "원");
 				totalprice = Math.floor(price * 0.8);
+				$("#monthVal").val(1);
 			});
 			$("#month2").on("click", function() {
 				$("#productprice").text("월간 " + Math.floor(price * 0.7).format() + "원");
 				totalprice = Math.floor(price * 0.7);
+				$("#monthVal").val(2);
 			});
 			$("#month3").on("click", function() {
 				$("#productprice").text("월간 " + Math.floor(price * 0.7).format() + "원");
 				totalprice = Math.floor(price * 0.7);
+				$("#monthVal").val(3);
 			});
 			$("#month4").on("click", function() {
 				$("#productprice").text("월간 " + Math.floor(price * 0.7).format() + "원");
 				totalprice = Math.floor(price * 0.7);
+				$("#monthVal").val(4);
 			});
 			$("#month5").on("click", function() {
 				$("#productprice").text("월간 " + Math.floor(price * 0.7).format() + "원");
 				totalprice = Math.floor(price * 0.7);
+				$("#monthVal").val(5);
 			});
 			$("#month6").on("click", function() {
 				$("#productprice").text("월간 " + Math.floor(price * 0.7).format() + "원");
 				totalprice = Math.floor(price * 0.7);
+				$("#monthVal").val(6);
 			});
 		});
 		
@@ -190,17 +196,18 @@
 	</script>
 </head>
 <body>
+	<input type="hidden" id="monthVal" value="">
 	<div class="container">
 		<div class="row">
 			<div class="col-md-4">
 				<h2 align="center">상품 이미지 상세보기</h2>
 				<div id="myarea">
 					<img class="img-thumbnail" alt="prod-img"
-						src="${pageContext.request.contextPath}/images/imsitest.png" width="400" height="600"
+						src="${pageContext.request.contextPath}/images/product/${bean.images}" width="400" height="600"
 						onmouseover="applyImage(this.src);">
 				</div>
 				<div align="center">
-					<img class="img-thumbnail" alt="a" src="${pageContext.request.contextPath}/images/imsitest01.png"
+					<img class="img-thumbnail" alt="a" src="${pageContext.request.contextPath}/images/product/${bean.images}"
 						width="70" height="130" onmouseover="applyImage(this.src);">
 					<!-- apply 함수한테 나의 이미지 경로를 알려줌? -->
 					<img class="img-thumbnail" alt="b" src="${pageContext.request.contextPath}/images/imsitest02.png"
@@ -220,7 +227,7 @@
 							class="text-left">
 							<tr style="height: 100%" align="center">
 								<td class="list-group-item" style="font-size: 12">상품명</td>
-								<td class="list-group-item" style="font-size: 12">${bean.productname}</td>
+								<td id="productname" class="list-group-item" style="font-size: 12">${bean.productname}</td>
 								
 								<td class="list-group-item">판매 가격</td>
 								<td class="list-group-item" id="productprice">
@@ -299,17 +306,36 @@
 	</div>
 	<script>
 		function goCart(){
-			var command = '<input name="command" value="mallcartlist" style="display: none;">';
+			var command = '<input name="command" value="mallcartadd" style="display: none;">';
 			$("#product-form").append(command);
+			$("#product-form").append("<input type='text' id='productcode' name='productcode' value='" + ${bean.productcode} + "'>");
+			$("#product-form").append("<input type='text' id='totalprice' name='totalprice' value='" + totalprice + "'>");
+			$("#product-form").append("<input type='text' id='stock' name='stock' value='${bean.stock}'>"); 
+			if($("#delivery-select:checked").length == 0){
+				$("#product-form").append("<input type='text' id='qty' name='qty' value='"+$("#buy-qty").val()+"'>"); 
+			}else {
+				var monthVal = $("#monthVal").val();
+				$("#product-form").append("<input type='text' name='months' value='"+monthVal+"'>"); 
+			}
 			$("#product-form").submit();
 		};
 		
 		function goPay(){
 			var command = '<input name="command" value="payment">';
-			$("#product-form").attr("method","get");
 			$("#product-form").append(command);
-			$("#product-form").append("<input type='text' id='totalprice' name='totalprice' value='" + totalprice + "'>");
-			$("#product-form").append("<input type='text' name='paymentshipping' value='gotoshipping'>"); 
+			$("#product-form").append("<input type='text' class='hidden_obj' id='productcode' name='productcode' value='" + ${bean.productcode} + "'>");
+			$("#product-form").append("<input type='text' class='hidden_obj' id='totalprice' name='totalprice' value='" + totalprice + "'>");
+			$("#product-form").append("<input type='text' class='hidden_obj' id='stock' name='stock' value='${bean.stock}'>");
+			$("#product-form").append("<input type='text' class='hidden_obj' name='directbuy' value='1'>");
+			if($("#delivery-select:checked").length == 0){
+				var buyCount = $("#buy-qty").val();
+				$("#product-form").append("<input type='text' class='hidden_obj' name='qty' value='"+buyCount+"'>");
+				$("#product-form").append("<input type='text' class='hidden_obj' name='reguler' value='-1'>");
+			}else {
+				var monthVal = $("#monthVal").val();
+				$("#product-form").append("<input type='text' class='hidden_obj' name='months' value='"+monthVal+"'>");
+				$("#product-form").append("<input type='text' class='hidden_obj' name='reguler' value='1'>");
+			}
 			$("#product-form").submit();
 		};
 	</script>
