@@ -73,7 +73,8 @@ public class BoardDAO  extends SuperDAO {
 	      sql += " from \"BBS_POST\" " ;
 	      
 	      if(mode.equalsIgnoreCase("all")== false) {
-	    	  sql+= " where " + mode + " like '"+ keyword +"%' " ; 
+	    	  sql+= " where " + "\""+mode+"\""+ " like '"+ keyword+ "' " ; 
+	    			  
 	    	  System.out.println(sql);
 	      }
 	      

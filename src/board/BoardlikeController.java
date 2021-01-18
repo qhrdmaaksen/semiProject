@@ -66,8 +66,9 @@ public class BoardlikeController extends SuperClass {
 			request.setAttribute("bean", bean);
 			request.setAttribute("parameters", parameters.toString());
 			// 상세 보기 페이지로 이동
-			String gotopage = "customer/bbsdetailview.jsp";
-			super.GotoPage(gotopage);
+			
+			new BoardListController().doGet(request, response);
+			
 			
 			//
 		} else {

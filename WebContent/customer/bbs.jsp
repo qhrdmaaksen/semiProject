@@ -77,8 +77,8 @@
 						<div class="form-group">
 							<select class="form-control" name="mode" id="mode">
 								<option value="all" selected="selected">-- 선택하세요---------
-								<option value="writer" >작성자
-								<option value="subject" >제목									
+								<option value="id" >작성자
+								<option value="title" >제목									
 								<option value="content" >글 내용									
 							</select>
 						</div>

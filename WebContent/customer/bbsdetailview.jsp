@@ -261,10 +261,12 @@
 		
 				
 				<div class="col-sm-offset-5 col-sm-4">
+					<c:if test="${sessionScope.loginfo.id != bean.id}">
 					<a href="<%=NoForm%>like&no=${bean.no}&${requestScope.parameters}">
 					<button class="btn btn-primary" >
 						게시물 좋아요</button>
 					</a>
+					</c:if>
 				</div>
 				
 				
