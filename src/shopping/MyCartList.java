@@ -3,9 +3,6 @@ package shopping;
 import java.util.HashMap;
 import java.util.Map;
 
-import javax.security.auth.message.callback.PrivateKeyCallback.Request;
-import javax.websocket.server.HandshakeRequest;
-
 // 나의 카트를 관리해주는 클래스(카트 관리자)
 public class MyCartList {
 	// orderlists : 카트에 담은 정보를 저장하고 있는 맵 컬렉션

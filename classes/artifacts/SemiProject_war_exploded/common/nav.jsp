@@ -91,9 +91,6 @@
 					<a class="nav-link" href="<%=NoForm%>boList">고객포럼</a>
 				</li>
 			</c:if>
-			<li class="nav-item">
-				<a class="nav-link" href="<%=NoForm%>cs_center_main">고객센터</a>
-			</li>
 			<li class="nav-item dropdown">
 				<c:if test="${whologin == 0}">
 					<ul class="nav justify-content-end">
@@ -120,6 +117,9 @@
 					</li>
 				</c:if>
 				</ul>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link" href="<%=NoForm%>cs_center_main">고객센터</a>
 			</li>
 		</ul>
 	</nav>

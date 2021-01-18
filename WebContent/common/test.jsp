@@ -18,7 +18,7 @@
         var IMP = window.IMP; // 생략해도 괜찮습니다.
         IMP.init("imp34864609"); // "imp00000000" 대신 발급받은 "가맹점 식별코드"를 사용합니다.
 
-        var merchant_uid = "ORD20180131-0000015";
+        var merchant_uid = "ORD20180131-0000765";
         var name = "홍길동 영양제";
         var amount = 39900;
         var email = "lomuhoe@gmail.com";
