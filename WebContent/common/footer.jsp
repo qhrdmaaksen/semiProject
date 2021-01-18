@@ -37,7 +37,7 @@
 				<div class="row">
 					<div class="footercol">
 						<a class="navbar-brand" href="/dodamdodam?command=index">
-							<img id="footerlogo" alt="도담도담로고" src="${pageContext.request.contextPath}/images/logosize.png">
+							<img id="footerlogo" alt="도담도담로고" src="${pageContext.request.contextPath}/images/logo2.jpg">
 						</a>
 					</div>
 					<div id="footercol2" class="footercol">
