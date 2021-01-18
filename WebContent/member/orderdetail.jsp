@@ -140,6 +140,21 @@
 					<table class="table table-bordered">
 						<tbody>
 							<tr>
+								<td class="text-center gr"><strong>배송상태</strong></td>
+								<c:if test="${order.shippingstatus=1}">
+								<td>배송중입니다.</td>
+								</c:if>
+								<c:if test="${order.shippingstatus=0}">
+								<td>배송준비중입니다.</td>
+								</c:if>
+								<c:if test="${order.shippingstatus=2}">
+								<td>배송예정입니다.</td>
+								</c:if>
+								<c:if test="${order.shippingstatus=3}">
+								<td>배송도착했습니다.</td>
+								</c:if>
+							</tr>
+							<tr>
 								<td class="text-center gr"><strong>받으시는 분</strong></td>
 								<td>${sessionScope.loginfo.name}(${sessionScope.loginfo.id})
 									님</td>
