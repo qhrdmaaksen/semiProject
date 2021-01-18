@@ -38,7 +38,7 @@ public class BoardListController extends SuperClass {
 						parameters.getKeyword() +"%");
 		
 		String contextPath = request.getContextPath();
-		String myurl = contextPath + "/Shopping?command=";
+		String myurl = contextPath + "/dodamdodam?command=";
 		
 		
 		Paging pageInfo = 

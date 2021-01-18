@@ -107,9 +107,7 @@
 <body>
 	<form id="myform" name="myform" class="form-horizontal" role="form"
 					action="<%=YesForm%>" method="post">
-					<input type="hidden" name="command" value="addaddress"> <input
-						type="text" name="isCheck" value="false"> <input
-						type="hidden" name="mpoint" value="5">
+					<input type="hidden" name="command" value="addaddress">
 					<div class="form-group">
 					
 						<label class="control-label col-sm-<%=formleft%>" for="writer">주문자</label>
@@ -175,7 +173,7 @@
 							</label>
 						<div class="col-xs-<%=formright%> col-lg-<%=formright%>">
 							<input type="text" name="sample4_jibunAddress" id="sample4_jibunAddress"
-								class="form-control" placeholder="지번주소" value="삼성 아파트">
+								class="form-control" placeholder="지번주소" value="">
 							<span class="err">${erraddress2}</span>
 						</div>
 					</div>

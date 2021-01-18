@@ -52,9 +52,8 @@ public class BoardlikeController extends SuperClass {
 			
 			//login : 현재 접속한 사람의 정보를 저장하고 있는 객체입니다. 
 			MemberVO login = (MemberVO)super.session.getAttribute("loginfo") ;
-			int likenumber = Integer.parseInt(request.getParameter("likenumber"));
 			
-			 if(!bean.getId().equals(login.getId())&& likenumber < likenumber+1) { 
+			 if(!bean.getId().equals(login.getId())) { 
 				 dao.UpdateReadhit(no);
 			 
 			 }
@@ -67,8 +66,9 @@ public class BoardlikeController extends SuperClass {
 			request.setAttribute("bean", bean);
 			request.setAttribute("parameters", parameters.toString());
 			// 상세 보기 페이지로 이동
-			String gotopage = "customer/bbsdetailview.jsp";
-			super.GotoPage(gotopage);
+			
+			new BoardListController().doGet(request, response);
+			
 			
 			//
 		} else {
