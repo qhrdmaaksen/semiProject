@@ -45,6 +45,7 @@ pdelete=product.PdeleteController
 pcategorylist=product.PcategorylistController
 #### Mall Section ######################################################
 mallcartadd=Mall.MallCartAddController
+mallcartmodify=Mall.MallCartModifyController
 mallcartlist=Mall.MallCartListController
 mallcartdelete=Mall.MallCartDeleteItemController
 mallhistory=Mall.MallHistoryController
