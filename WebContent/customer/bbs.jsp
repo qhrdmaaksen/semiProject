@@ -55,7 +55,7 @@
 	<div class="container"> 
 	<div class="row">
  	<div class="card" style="width: 18rem;"> 
- 		<img src="${applicationScope.uploadedPath}/${bean.image}" class="card-img-top" alt="${bean.image}">
+ 		<img src="${applicationScope.uploadedPath}/${bean.image}" class="card-img-top" alt="${bean.image}" width="200" height="300">
  	<div class="card-body"> 
  		<h5 class="card-title">${bean.title}</h5> 
  		<p class="card-text">${bean.id}</p>
