@@ -5,6 +5,26 @@
 	int offset = 3; //오프 셋 
 	int content = 10 * offset; //12 - 2 * 오프셋
 %>
+<c:set var="shippingstatus" value="0" />
+
+<c:if test="${not empty requestScope.order}">
+	<c:if test="${requestScope.order.shippingstatus == '0'}">
+		<!-- 배송준비중 -->
+		<c:set var="shippingstatus" value="0" />
+	</c:if>
+	<c:if test="${requestScope.order.shippingstatus == '1'}">
+		<!-- 배송중 -->
+		<c:set var="shippingstatus" value="1" />
+	</c:if>
+	<c:if test="${requestScope.order.shippingstatus == '2'}">
+		<!--배송예정 -->
+		<c:set var="shippingstatus" value="2" />
+	</c:if>
+	<c:if test="${requestScope.order.shippingstatus == '3'}">
+		<!-- 배송도착 -->
+		<c:set var="shippingstatus" value="3" />
+	</c:if>
+</c:if>
 
 <html>
 <head>
@@ -141,6 +161,21 @@
 				<div class="table-responsive">
 					<table class="table table-bordered">
 						<tbody>
+							<tr>
+								<td class="text-center gr"><strong>배송상태</strong></td>
+								<c:if test="${shippingstatus==1}">
+								<td>배송중입니다.</td>
+								</c:if>
+								<c:if test="${shippingstatus==0}">
+								<td>배송준비중입니다.</td>
+								</c:if>
+								<c:if test="${shippingstatus==2}">
+								<td>배송예정입니다.</td>
+								</c:if>
+								<c:if test="${shippingstatus==3}">
+								<td>배송도착했습니다.</td>
+								</c:if>
+							</tr>
 							<tr>
 								<td class="text-center gr"><strong>받으시는 분</strong></td>
 								<td>${sessionScope.loginfo.name}(${sessionScope.loginfo.id})

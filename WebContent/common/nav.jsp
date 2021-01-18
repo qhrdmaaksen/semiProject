@@ -64,6 +64,16 @@
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 	<%--아이콘 지정 따로 해주면 삭제해도됨--%>
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css?after" type="text/css">
+	
+	<style type="text/css">
+	body {
+	  background: #eecda3;
+	  background: -webkit-linear-gradient(to bottom, #FAEBD7, #DEB887);
+	  background: linear-gradient(to bottom, #FAEBD7, #DEB887);
+	  min-height: 100vh;
+	}
+	
+	</style>
 </head>
 <body>
 	<nav id="nav" class="navbar navbar-expand-sm bg-warning navbar-dark">
@@ -83,7 +93,7 @@
 			<li class="nav-item">
 				<a class="nav-link" href="<%=NoForm%>mallcartlist">장바구니</a>
 			</li>
-			<c:if test="${whologin == 1}">
+			<c:if test="${whologin != 0}">
 				<li class="nav-item">
 					<a class="nav-link" href="<%=NoForm%>boList">고객포럼</a>
 				</li>

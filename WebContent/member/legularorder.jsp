@@ -24,7 +24,6 @@
 							<tr>
 								<th class="text-center">이미지</th>
 								<th class="text-center">구독 시작일</th>
-								<th class="text-center">구독 종료일</th>
 								<th class="text-center">상세 보기</th>
 							</tr>
 						</thead>
@@ -34,7 +33,6 @@
 									<td align="center"><img alt="${odetail.images}" width="45" height="45" 
 											src="${applicationScope.uploadedPath}/${odetail.images}"></td>
 									<td align="center"><fmt:formatDate value="${shopinfo.orderdate}" pattern="yyyy년 MM월 dd일" /></td>
-									<td align="center"><fmt:formatDate value="${odetail.orderclosing}" pattern="yyyy년 MM월 dd일" /></td>
 									
 									<td align="center">
 										<a href="<%=NoForm%>mallDetailregular&id=${shopinfo.id}">상세 보기</a></td>
