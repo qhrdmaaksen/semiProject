@@ -27,8 +27,11 @@ public class PaymentController extends SuperClass{
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		MemberVO member = (MemberVO)session.getAttribute("loginfo");
+
+		System.out.println("directbuy : " + request.getParameter("directbuy"));
+		System.out.println("regular : " + request.getParameter("regular"));
 		if(request.getParameter("directbuy").equals("1")){
-			if(request.getParameter("reguler").equals("1")){
+			if(request.getParameter("regular").equals("1")){
 				List<RegulerShoppingInfo> Rshoplists = new ArrayList<RegulerShoppingInfo>();
 				RegulerShoppingInfo reguler = new RegulerShoppingInfo();
 				ProductDAO pdao = new ProductDAO();
@@ -52,7 +55,7 @@ public class PaymentController extends SuperClass{
 				request.setAttribute("productRLists", Rshoplists);
 				request.setAttribute("totalcount", Rshoplists.size());
 				request.setAttribute("totalprice", productprice);
-				request.setAttribute("reguler", "1");
+				request.setAttribute("regular", "1");
 			}else {
 				List<ShoppingInfo> lists = new ArrayList<ShoppingInfo>();
 				ShoppingInfo order = new ShoppingInfo();
@@ -71,11 +74,11 @@ public class PaymentController extends SuperClass{
 				request.setAttribute("productLists", lists);
 				request.setAttribute("totalcount", lists.size());
 				request.setAttribute("totalprice", productprice * Integer.parseInt(request.getParameter("qty")));
-				request.setAttribute("reguler", "-1");
+				request.setAttribute("regular", "-1");
 			}
 		}else {
 			if(request.getParameter("regular").equals("1")){
-				MyCartList Rmycart = (MyCartList)super.session.getAttribute("Rmycart") ;
+				MyCartList Rmycart = (MyCartList)session.getAttribute("Rmycart") ;
 
 				Map<Integer, Integer> Rmaplists = Rmycart.GetAllROrderLists() ;
 				Set<Integer> Rkeylist = Rmaplists.keySet() ;
@@ -112,9 +115,9 @@ public class PaymentController extends SuperClass{
 				request.setAttribute("productRLists", Rshoplists);
 				request.setAttribute("totalcount", Rshoplists.size());
 				request.setAttribute("totalprice", RtotalAmount);
-				request.setAttribute("reguler", "1");
+				request.setAttribute("regular", "1");
 			}else {
-				MyCartList mycart = (MyCartList)super.session.getAttribute("mycart");
+				MyCartList mycart = (MyCartList)session.getAttribute("mycart");
 
 				Map<Integer, Integer> maplists = mycart.GetAllOrderLists();
 				Set<Integer> keylist = maplists.keySet() ;
@@ -149,7 +152,7 @@ public class PaymentController extends SuperClass{
 				request.setAttribute("productLists", lists);
 				request.setAttribute("totalcount", lists.size());
 				request.setAttribute("totalprice", totalAmount);
-				request.setAttribute("reguler", "-1");
+				request.setAttribute("regular", "-1");
 			}
 		}
 

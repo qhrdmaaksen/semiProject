@@ -196,17 +196,17 @@
 	      	<form method="post" action="<%=YesForm%>?command=paymentaddaddr">
 	      		<input type="hidden" name="id" value="${loginfo.id}">
 	      		<input type="hidden" name="phone" value="${loginfo.phone}">
-				<c:if test="${requestScope.reguler==1}">
+				<c:if test="${requestScope.regular==1}">
 					<input type="hidden" name="productcode" value="${productRLists.get(0).getProductcode()}">
 					<input type="hidden" name="directbuy" value="${directbuy}">
 					<input type="hidden" name="months" value="${productRLists.get(0).getMonths()}">
-					<input type="hidden" name="reguler" value="1">
+					<input type="hidden" name="regular" value="1">
 				</c:if>
-				<c:if test="${requestScope.reguler==-1}">
+				<c:if test="${requestScope.regular==-1}">
 					<input type="hidden" name="productcode" value="${productLists.get(0).getProductcode()}">
 					<input type="hidden" name="directbuy" value="${directbuy}">
 					<input type="hidden" name="qty" value="${productLists.get(0).getQty()}">
-					<input type="hidden" name="reguler" value="-1">
+					<input type="hidden" name="regular" value="-1">
 				</c:if>
 				<div class="input-group mb-3">
 					<input type="text" name="shippingname" class="form-control" placeholder="배송지 이름" aria-label="배송지 이름" aria-describedby="basic-addon2">
@@ -327,12 +327,12 @@
 				</div>
 				<hr style="border: none;">
 				<div>
-					<c:if test="${requestScope.reguler==1}">
+					<c:if test="${requestScope.regular==1}">
 						<c:forEach var="product" items="${requestScope.productRLists}">
 							<span>${product.productname} // ${product.months}</span>
 						</c:forEach>
 					</c:if>
-					<c:if test="${requestScope.reguler==-1}">
+					<c:if test="${requestScope.regular==-1}">
 						<c:forEach var="product" items="${requestScope.productLists}">
 							<span>${product.productname} // ${product.qty}</span>
 						</c:forEach>
@@ -493,7 +493,7 @@
         var merchant_uid = today.getFullYear() + "" + today.getMonth() + "" + today.getDate() + "" + today.getHours() + "" + today.getMinutes() + "" + today.getSeconds();
         var list = new Array();
         
-        if(${reguler==-1}){
+        if(${regular==-1}){
         	for(var i=0 ; i<${totalcount} ; i++){
         		<%!int num1=0;%>
         		var product = new Object();

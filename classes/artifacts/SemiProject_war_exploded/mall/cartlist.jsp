@@ -7,18 +7,6 @@
 <head>
     <meta charset="UTF-8">
     <title>Shopping Cart</title>
-    <style type="text/css">
-        body {
-            background: #eecda3;
-            background: -webkit-linear-gradient(to bottom, #FAEBD7, #DEB887);
-            background: linear-gradient(to bottom, #FAEBD7, #DEB887);
-            min-height: 100vh;
-        }
-
-        .red {
-            text: red;
-        }
-    </style>
     <script type="text/javascript">
         $(document).ready(function () {
             $('.mdb-select').materialSelect();
@@ -29,7 +17,7 @@
         })
     </script>
 </head>
-<body>
+<body id="cartlist_body">
     <div class="px-4 px-lg-0">
         <!-- For demo purpose -->
         <div class="container text-#8B4513 py-5 text-center">
@@ -158,7 +146,7 @@
                                             </li>
                                             <li class="d-flex justify-content-between py-3 border-bottom">
                                                 <strong class="text-muted">Discount</strong>
-                                                <strong id="red">￦<fmt:formatNumber value="${sessionScope.totalAmount*(1-0.8)}" pattern="###,###"/></strong>
+                                                <strong class="red">￦<fmt:formatNumber value="${sessionScope.totalAmount*(1-0.8)}" pattern="###,###"/></strong>
                                             </li>
                                             <li class="d-flex justify-content-between py-3 border-bottom">
                                                 <strong class="text-muted">Total</strong>
@@ -311,20 +299,20 @@
         </div>
     </div>
     <script>
-        var command = "<input name='command' class='hidden_obj' value='payment'>";
-        var directbuy = "<input type='text' name='directbuy' class='hidden_obj' value='-1'>"
+        var command = "<input type='hidden' name='command' value='payment'>";
+        var directbuy = "<input type='hidden' name='directbuy' value='-1'>"
 
         function goOrder(){
             $("#order").append(command);
             $("#order").append(directbuy);
-            $("#order").append("<input type='text' name='regular' class='hidden_obj' value='-1'>");
+            $("#order").append("<input type='hidden' name='regular' value='-1'>");
             $("#order").submit();
         }
 
         function goReguler(){
             $("#reguler").append(command);
             $("#reguler").append(directbuy);
-            $("#reguler").append("<input type='text' name='regular' class='hidden_obj' value='1'>");
+            $("#reguler").append("<input type='hidden' name='regular' value='1'>");
             $("#reguler").submit();
         }
     </script>

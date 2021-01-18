@@ -15,7 +15,6 @@
 	//int content = twelve - label ; //우측의 내용 입력(input, select, textarea)의 너비
 %>
 
-
 <script type="text/javascript">
 	function writeForm(){
 			location.href='<%=NoForm%>boInsert';
@@ -47,14 +46,13 @@
 					<h2>게시물 목록</h2>
 				</form>
 			</div>
-			
 		<c:forEach var="bean" items="${requestScope.lists}">	
 	<table class="table table-striped table-hover">
 	<div class="container"> 
 	<div class="row">
  	<div class="col-3"> 
  	<div class="card" style="width: 18rem;"> 
- 		<img src="${applicationScope.uploadedPath}/${bean.image}" class="card-img-top" alt="${bean.image}">
+ 		<img src="./../upload/${bean.image}" class="card-img-top" alt="${bean.image}">
  	<div class="card-body"> 
  		<h5 class="card-title">${bean.title}</h5> 
  		<p class="card-text">${bean.id}</p>

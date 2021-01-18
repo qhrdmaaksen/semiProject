@@ -11,96 +11,6 @@
 <html>
 <head>
     <title>도담도담, 당신에게 맞는 약품을 찾아봐요</title>
-    <style>
-        dl, dt, dd, ul, ol, menu, li,th {list-style: none; margin: 0px; padding: 0px; font-weight: normal;}
-        #question-no {
-            font-weight: bold;
-            font-size: 16px;
-            color: rgb(158, 158, 158);
-        }
-        #question-content{
-            font-size: 20px;
-            font-weight: bold;
-            margin-bottom: 35px;
-        }
-        #answer{
-            height: 120px;
-            margin-bottom: 30px;
-        }
-        #checker_div{
-            width: 100%;
-            height: 360px;
-        }
-        #radio_ul{
-            height: 120px;
-        }
-        #checker_div{
-            background-image: url("./../images/00.png");
-        }
-        #button{
-            margin-bottom: 100px;
-        }
-        #button-style{
-            height: 50px;
-            font-size: 20px;
-            font-weight: bold;
-        }
-        .progress{
-            height: 12px;
-        }
-        .point{
-            margin-top: 50px;
-        }
-        .answer1{
-            width: 100%;
-            height: 38px;
-            padding: 6px 12px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
-            box-sizing: border-box;
-            margin-bottom: 5px;
-            font-size: 15px;
-            color: rgb(94, 94, 94);
-            border: 1px solid #ccc;
-            border-radius: 4px;
-        }
-        .radio_gender{
-            float: left;
-            text-align: center;
-            padding: 20px 0px 0px 30%;
-        }
-        .radio_div{
-            float: left;
-            text-align: center;
-            padding-left: 13%;
-        }
-        .radio_div:first-child{
-            padding-left: 4%;
-        }
-        .image-checker-ul{
-            width: 100%;
-            height: 160px;
-        }
-        .image-checkered{
-            width: 161px;
-            height: 161px;
-            float: left;
-            overflow: hidden;
-            border-radius: 50%;
-            margin-left: 22px;
-        }
-        .image-checkered:first-child{
-            margin-left: 0px;
-        }
-        .image-checker{
-            width: 160px;
-            height: 160px;
-            border-radius: 50%;
-            border: 2px solid #5a6268;
-            overflow: hidden;
-        }
-    </style>
 </head>
 <body>
     <div class="container point">
@@ -112,9 +22,9 @@
                         <div id="survey-progress" class="progress-bar" style="width:1%"></div>
                     </div>
                     <div id="question-no"></div>
-                    <div id="question-content"></div>
+                    <div id="survey-question-content"></div>
                     <div id="answer"></div>
-                    <div id="button"></div>
+                    <div id="survey-button"></div>
                 </form>
             </div>
             <div class="col-2"></div>
@@ -145,10 +55,10 @@
             }else {
                 tmp = '<button type="button" onclick="next' + num +'()" id="button-style" class="btn btn-primary btn-block">다음</button>'
             }
-            document.getElementById("button").innerHTML = tmp;
+            document.getElementById("survey-button").innerHTML = tmp;
         }
         function next0(){
-            document.getElementById("question-content").innerHTML = "이름과 성별을 입력해주세요.";
+            document.getElementById("survey-question-content").innerHTML = "이름과 성별을 입력해주세요.";
             questionInput();
             if(${empty sessionScope.loginfo}){
                 answer = '<input type="text" id="name" name="name" class="answer1" placeholder="이름">';
@@ -184,7 +94,7 @@
                 return false;
             }
             num++;
-            document.getElementById("question-content").innerHTML = "키와 몸무게를 입력해주세요.";
+            document.getElementById("survey-question-content").innerHTML = "키와 몸무게를 입력해주세요.";
             document.getElementById("survey-progress").style.width = "25%";
             questionInput();
             answer = '<input type="text" id="height" name="height" class="answer1" placeholder="키">'
@@ -204,7 +114,7 @@
             }
             weight = document.getElementById("answer").lastChild.value;
             num++;
-            document.getElementById("question-content").innerHTML = "평상시 운동량은 어느정도 입니까?";
+            document.getElementById("survey-question-content").innerHTML = "평상시 운동량은 어느정도 입니까?";
             document.getElementById("survey-progress").style.width = "50%";
             questionInput();
             answer = '<ul id="radio_ul">' +
@@ -232,7 +142,7 @@
                 return false;
             }
             num++;
-            document.getElementById("question-content").innerHTML = "평상시 불편하거나 신경쓰이는 신체부위가 있으면 체크해주세요.";
+            document.getElementById("survey-question-content").innerHTML = "평상시 불편하거나 신경쓰이는 신체부위가 있으면 체크해주세요.";
             document.getElementById("survey-progress").style.width = "75%";
             $("#answer").css("height", "680px");
             questionInput();
