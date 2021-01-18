@@ -287,7 +287,7 @@
                                             </li>
                                         </ul>
                                         <form id="reguler" action="<%=YesForm%>" method="post">
-                                            <button type="button" class="btn btn-dark rounded-pill py-2 btn-block"  onclick="goReguler()">Procceed to checkout(결제 페이지로 넘어갈 버튼)</button>
+                                            <button type="button" class="btn btn-dark rounded-pill py-2 btn-block"  onclick="goReguler()">Procceed to checkout</button>
                                         </form>
                                     </div>
                                 </div>
