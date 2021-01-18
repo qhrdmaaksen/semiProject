@@ -21,15 +21,12 @@ import common.SuperClass;
 import shopping.MyCartList;
 import shopping.RegulerShoppingInfo;
 import shopping.ShoppingInfo;
-import utility.FlowParameters;
-import utility.Paging;
 
 public class PaymentController extends SuperClass{
 	@Override
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		MemberVO member = (MemberVO)session.getAttribute("loginfo");
-		
 		if(request.getParameter("directbuy").isEmpty()){
 			if(request.getParameter("regular").equals("-1")){
 				MyCartList mycart = (MyCartList)super.session.getAttribute("mycart");
@@ -148,7 +145,6 @@ public class PaymentController extends SuperClass{
 				order.setProductprice(productprice);
 				order.setQty(Integer.parseInt(request.getParameter("qty")));
 				System.out.println("qty : " + Integer.parseInt(request.getParameter("qty")));
-				
 				lists.add(order);
 				request.setAttribute("lists", lists);
 				request.setAttribute("totalcount", lists.size());

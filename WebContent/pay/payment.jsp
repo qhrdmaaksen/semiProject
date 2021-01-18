@@ -313,12 +313,12 @@
 				<div>
 					<c:if test="${requestScope.reguler==1}">
 						<c:forEach var="product" items="${requestScope.Rshoplists}">
-							<span>${product.productname}</span>
+							<span>${product.productname} // ${product.months}</span>
 						</c:forEach>
 					</c:if>
 					<c:if test="${requestScope.reguler==-1}">
 						<c:forEach var="product" items="${requestScope.lists}">
-							<span>${product.productname}</span>
+							<span>${product.productname} // ${product.qty}</span>
 						</c:forEach>
 					</c:if>
 					<p align="right"><span id="monthVal">수량 ${requestScope.totalcount}개 / <span>무료 배송</span></span></p>
@@ -373,7 +373,7 @@
 					<th>총 결제금액</th>
 					<c:choose>
 						<c:when test="${requestScope.totalprice>50000}">
-							<td id="totalprice"></td>
+							<td id="totalprice">${requestScope.totalprice}</td>
 						</c:when>
 						<c:otherwise>
 							<td id="totalprice"><fmt:formatNumber value="${requestScope.totalprice + 2500}" pattern="#,###"/>원</td>
@@ -385,7 +385,7 @@
 					<th>결제방법</th>
 					<td style="padding: 4px 0px 0px; float: right;">
 						<input type="radio" name="pymnt" value="card" checked>&nbsp;신용/체크카드
-						<input id="virtualaccount" type="radio" name="pymnt" value="banktrnsf" onclick="gotovirtual()">&nbsp;무통장입금(가상계좌)
+						<input id="virtualaccount" type="radio" name="pymnt" value="banktrnsf">&nbsp;무통장입금(가상계좌)
 						<div align="center">
 							<input id="agreecheck" type="checkbox" checked="checked">&nbsp;선택한 결제수단으로 향후 결제 이용에 동의합니다(선택)
 						</div>
@@ -476,22 +476,40 @@
 
         var merchant_uid = today.getFullYear() + "" + today.getMonth() + "" + today.getDate() + "" + today.getHours() + "" + today.getMinutes() + "" + today.getSeconds();
         var list = new Array();
-        var ordertype = 1;
         
-        if(ordertype==1){
-        	var product = new Object();
-        	product.name = ${param.productname}
-        	product.amount =  ${param.totalprice}
-        	product.qty = ${param.buyCount};
-            list[0] = product;
+        if(${reguler==-1}){
+        	for(var i=0 ; i<${totalcount} ; i++){
+        		<%!int num1=0;%>
+        		var product = new Object();
+        		product.name = "${lists.get(num1).getProductname()}";
+        		product.price = "${lists.get(num1).getProductprice()*0.8}";
+        		product.qty = "${lists.get(num1).getQty()}";
+        		list.push(product);
+        		<%num1++;%>
+        	}
         }else {
-        	var product = new Object();
-        	product.name = ${param.productname}
-        	product.amount = ${param.totalprice}
-        	product.orderclosing = "2021-02-16";
-            list[0] = product;
+        	for(var i=0 ; i<${totalcount} ; i++){
+        		<%!int num2=0;%>
+        		var product = new Object();
+        		product.name = "${Rshoplists.get(num2).getProductname()}";
+        		if(${Rshoplists.get(0).getMonths()>1}){
+        			product.price = "${Rshoplists.get(num2).getProductprice()*0.7}";
+        		}else {
+        			product.price = "${Rshoplists.get(num2).getProductprice()*0.8}";
+        		}
+        		product.months = "${Rshoplists.get(0).getMonths()}";
+        		list.push(product);
+        		<%num2++;%>
+        	}
+        }
+        var p_name = null;
+        if(list.length > 1){
+        	p_name = list[0].name + "외" + (list.length-1) + "개";
+        }else {
+        	p_name = list[0].name;
         }
         
+        var totalprice = parseInt($("#totalprice").text().replace(",","").replace("원",""));
         var email = "";
         var b_name = "${sessionScope.loginfo.name}";
         var b_tel = $("#phonenum").val();
@@ -503,7 +521,7 @@
 				return false;
 			}
 			if($("#virtualaccount").is(":checked")==true){
-				var total = parseInt($("#totalprice").text()); 
+				var total = parseInt($("#totalprice").text().replace(",","").replace("원","")); 
 				$(location).attr("href","http://localhost:8989/SemiProject/pay/virtualaccount.jsp?totalprice="+total);
 			}
         	console.log("결제 실행중");
@@ -517,8 +535,8 @@
                 pay_method: "card",
                 merchant_uid: merchant_uid,
                 buyer_email: email,
-                name: product.name,
-                amount: product.amount,
+                name: p_name,
+                amount: totalprice,
                 buyer_name: b_name,
                 buyer_tel: b_tel,
                 buyer_addr: b_addr,
