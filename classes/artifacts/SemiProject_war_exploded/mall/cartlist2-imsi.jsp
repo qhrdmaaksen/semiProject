@@ -4,314 +4,148 @@
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
  <%@ include file="./../common/nav.jsp"%>
+ <%
+ 	double dis = 0.8;
+ 
+ %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Shopping Cart</title>
 
 <script type="text/javascript">
-	function cartEdit(num) { /* 해당 상품에 대한 주문 수량 수정 */
-		var stock = document.getElementById("stock").value;
-		location.href = "mallCartEdit.jsp?num=" + num + "&stock=" + stock;
-	}
 </script>
+
+<style type="text/css">
+	body {
+	  background: #eecda3;
+	  background: -webkit-linear-gradient(to bottom, #FAEBD7, #DEB887);
+	  background: linear-gradient(to bottom, #FAEBD7, #DEB887);
+	  min-height: 100vh;
+	}
+	.red{
+	  text: red;
+	}
+</style>
+
 </head>
-
 <body>
-
-<!--Section: Block Content-->
-<section>
-
-  <!--Grid row-->
-  <div class="row">
-
-    <!--Grid column-->
-    <div class="col-lg-8">
-
-      <!-- Card -->
-      <div class="mb-3">
-        <div class="pt-4 wish-list">
-
-          <h5 class="mb-4">Cart (<span>2</span> items)</h5>
-
-          <div class="row mb-4">
-          
-          <c:forEach items="${sessionScope.shoplists}" var="shopinfo">
-            <div class="col-md-5 col-lg-3 col-xl-3">
-
-                <a href="#!">
-                  <div class="mask">
-                  <c:if test="${applicationScope.debugMode == true}">
-								이미지 경로<br>${applicationScope.uploadedPath}/${shopinfo.images}
-							</c:if>
-							<img class="img-fluid w-100" src="${applicationScope.uploadedPath}/${shopinfo.images}" class="img-rounded">
-                   <!--  <img class="img-fluid w-100"
-                      src="https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Vertical/12.jpg"> -->
-                    <div class="mask rgba-black-slight"></div>
-                  </div>
-                </a>
-          
-            </div>
-            <div class="col-md-7 col-lg-9 col-xl-9">
-              <div>
-                <div class="d-flex justify-content-between">
-                  <div>
-                    <h5>${shopinfo.productname}</h5>
-                    <p class="mb-3 text-muted text-uppercase small">수량 : ${shopinfo.qty} </p>
-                    <p class="mb-3 text-muted text-uppercase small">${shopinfo.productprice}</p>
-                  </div>
-                  <div>
-                    <div class="def-number-input number-input safari_only mb-0 w-100">
-                      <button onclick="this.parentNode.querySelector('input[type=number]').stepDown()"
-                        class="minus decrease"></button>
-                      <input class="quantity" min="0" name="quantity" value="1" type="number">
-                      <button onclick="this.parentNode.querySelector('input[type=number]').stepUp()"
-                        class="plus increase"></button>
-                    </div>
-                    <small id="passwordHelpBlock" class="form-text text-muted text-center">
-                      (Note, 1 piece)
-                    </small>
-                  </div>
-                </div>
-                <div class="d-flex justify-content-between align-items-center">
-                  <div>
-                    <a href="<%=NoForm%>mallcartdelete&productcode=${shopinfo.productcode}" type="button" class="card-link-secondary small text-uppercase mr-3"><i
-                        class="fas fa-trash-alt mr-1"></i>
-								삭제
-							</a>
-                    <!-- <a href="#!" type="button" class="card-link-secondary small text-uppercase"><i
-                        class="fas fa-heart mr-1"></i> Move to wish list </a> -->
-                  </div>
-                  <p class="mb-0"><span><strong id="summary">
-                  ￦<fmt:formatNumber value="${bean.productprice}" pattern="###,###"/>
-                  </strong></span></p class="mb-0">
-                </div>
-              </div>
-            </div>
-            
-            </c:forEach>
-          </div>
-          
-          
-          
-          <!-- 
-          <hr class="mb-4">
-          <div class="row mb-4">
-            <div class="col-md-5 col-lg-3 col-xl-3">
-              <div class="view zoom overlay z-depth-1 rounded mb-3 mb-md-0">
-                <img class="img-fluid w-100"
-                  src="https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Vertical/13a.jpg" alt="Sample">
-                <a href="#!">
-                  <div class="mask">
-                    <img class="img-fluid w-100"
-                      src="https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Vertical/13.jpg">
-                    <div class="mask rgba-black-slight"></div>
-                  </div>
-                </a>
-              </div>
-            </div>
-            
-            
-            <div class="col-md-7 col-lg-9 col-xl-9">
-              <div>
-                <div class="d-flex justify-content-between">
-                  <div>
-                    <h5>Red hoodie</h5>
-                    <p class="mb-3 text-muted text-uppercase small">Shirt - red</p>
-                    <p class="mb-2 text-muted text-uppercase small">Color: red</p>
-                    <p class="mb-3 text-muted text-uppercase small">Size: M</p>
-                  </div>
-                  <div>
-                    <div class="def-number-input number-input safari_only mb-0 w-100">
-                      <button onclick="this.parentNode.querySelector('input[type=number]').stepDown()"
-                        class="minus"></button>
-                      <input class="quantity" min="0" name="quantity" value="1" type="number">
-                      <button onclick="this.parentNode.querySelector('input[type=number]').stepUp()"
-                        class="plus"></button>
-                    </div>
-                  </div>
-                </div>
-                <div class="d-flex justify-content-between align-items-center">
-                  <div>
-                    <a href="#!" type="button" class="card-link-secondary small text-uppercase mr-3"><i
-                        class="fas fa-trash-alt mr-1"></i> Remove item </a>
-                    <a href="#!" type="button" class="card-link-secondary small text-uppercase"><i
-                        class="fas fa-heart mr-1"></i> Move to wish list </a>
-                  </div>
-                  <p class="mb-0"><span><strong>$35.99</strong></span></p class="mb-0">
-                </div>
-              </div>-->
-            </div> 
-          </div>
-          <p class="text-primary mb-0"><i class="fas fa-info-circle mr-1"></i> Do not delay the purchase, adding
-            items to your cart does not mean booking them.</p>
-
-        </div>
-      </div>
-      <!-- Card -->
-      
-      
-      
-      
-    
-      
-      
-
-      <!-- Card -->
-      <div class="mb-3">
-        <div class="pt-4">
-
-          <h5 class="mb-4">Expected shipping delivery</h5>
-
-          <p class="mb-0"> Thu., 12.03. - Mon., 16.03.</p>
-        </div>
-      </div>
-      <!-- Card -->
-
-      <!-- Card -->
-      <div class="mb-3">
-        <div class="pt-4">
-
-          <h5 class="mb-4">We accept</h5>
-
-          <img class="mr-2" width="45px"
-            src="https://mdbootstrap.com/wp-content/plugins/woocommerce-gateway-stripe/assets/images/visa.svg"
-            alt="Visa">
-          <img class="mr-2" width="45px"
-            src="https://mdbootstrap.com/wp-content/plugins/woocommerce-gateway-stripe/assets/images/amex.svg"
-            alt="American Express">
-          <img class="mr-2" width="45px"
-            src="https://mdbootstrap.com/wp-content/plugins/woocommerce-gateway-stripe/assets/images/mastercard.svg"
-            alt="Mastercard">
-          <img class="mr-2" width="45px"
-            src="https://mdbootstrap.com/wp-content/plugins/woocommerce/includes/gateways/paypal/assets/images/paypal.png"
-            alt="PayPal acceptance mark">
-        </div>
-      </div>
-      <!-- Card -->
-
-    </div>
-    <!--Grid column-->
-
-    <!--Grid column-->
-    <div class="col-lg-4">
-
-      <!-- Card -->
-      <div class="mb-3">
-        <div class="pt-4">
-
-          <h5 class="mb-3">The total amount of</h5>
-
-          <ul class="list-group list-group-flush">
-            <li class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 pb-0">
-              Temporary amount
-              <span>$25.98</span>
-            </li>
-            <li class="list-group-item d-flex justify-content-between align-items-center px-0">
-              Shipping
-              <span>Gratis</span>
-            </li>
-            <li class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 mb-3">
-              <div>
-                <strong>The total amount of</strong>
-                <strong>
-                  <p class="mb-0">(including VAT)</p>
-                </strong>
-              </div>
-              <span><strong>$53.98</strong></span>
-            </li>
-          </ul>
-
-          <button type="button" class="btn btn-primary btn-block">go to checkout</button>
-
-        </div>
-      </div>
-      <!-- Card -->
-
-      <!-- Card -->
-      <div class="mb-3">
-        <div class="pt-4">
-
-          <a class="dark-grey-text d-flex justify-content-between" data-toggle="collapse" href="#collapseExample"
-            aria-expanded="false" aria-controls="collapseExample">
-            Add a discount code (optional)
-            <span><i class="fas fa-chevron-down pt-1"></i></span>
-          </a>
-
-          <div class="collapse" id="collapseExample">
-            <div class="mt-3">
-              <div class="md-form md-outline mb-0">
-                <input type="text" id="discount-code" class="form-control font-weight-light"
-                  placeholder="Enter discount code">
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <!-- Card -->
-
-    </div>
-    <!--Grid column-->
-
+<div class="px-4 px-lg-0">
+  <!-- For demo purpose -->
+  <div class="container text-#8B4513 py-5 text-center">
+  	<h3><i class="fas fa-shopping-cart"></i>   Shopping Cart</h3>
   </div>
-  <!-- Grid row -->
+  <!-- End -->
 
-</section>
-<!--Section: Block Content-->
+  <div class="pb-5">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12 p-5 bg-white rounded shadow-sm mb-5">
 
-
-
-
-	<%-- <div class="container col-sm-offset-<%=myoffset%> col-sm-<%=mywidth%>">
-		<div class="panel panel-default panel-primary">
-			<div class="panel-heading">
-				<h4>장바구니 보기</h4>
-			</div>
-			<table class="table table-striped table-hover">
-				<thead>
-					<tr>
-						<th class="text-center">번호</th>
-						<th class="text-center">상품명</th>
-						<th class="text-center">수량</th>
-						<th class="text-center">단가</th>
-						<th class="text-center">삭제</th>
-					</tr>
-				</thead>
-				<c:forEach items="${sessionScope.shoplists}" var="shopinfo">
-					<tr>
-						<td align="center" valign="middle">${shopinfo.productcode}</td>
-						<td align="center" valign="middle">
-							<c:if test="${applicationScope.debugMode == true}">
+          <!-- Shopping cart table -->
+          <div class="table-responsive">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th scope="col" class="border-0 bg-light">
+                    <div class="p-2 px-3 text-uppercase">Product</div>
+                  </th>
+                  <th scope="col" class="border-0 bg-light">
+                    <div class="py-2 text-uppercase">Price</div>
+                  </th>
+                  <th scope="col" class="border-0 bg-light">
+                    <div class="py-2 text-uppercase">Quantity</div>
+                  </th>
+                  <th scope="col" class="border-0 bg-light">
+                    <div class="py-2 text-uppercase">Remove</div>
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+              
+              <c:forEach items="${sessionScope.shoplists}" var="shopinfo">
+                <tr>
+                  <th scope="row" class="border-0">
+                    <div class="p-2">
+                     <c:if test="${applicationScope.debugMode == true}">
 								이미지 경로<br>${applicationScope.uploadedPath}/${shopinfo.images}
 							</c:if>
-							<img align="middle"
-								src="${applicationScope.uploadedPath}/${shopinfo.images}" class="img-rounded"
-								width="36" height="36"> <br>${shopinfo.productname}</td>
-						<td align="center">${shopinfo.qty} 개</td>
-						<td align="center"><fmt:formatNumber value="${shopinfo.productprice}" pattern="###,###"/> 원</td>
-						<td align="center"><fmt:formatNumber value="${shopinfo.qty * shopinfo.productprice}" pattern="###,###"/> 원</td>
-						<td align="center">
-							<a href="<%=NoForm%>mallcartdelete&productcode=${shopinfo.productcode}">
-								삭제
+							<img src="${applicationScope.uploadedPath}/${shopinfo.images}" alt="" width="70" class="img-fluid rounded shadow-sm">
+                      <div class="ml-3 d-inline-block align-middle">
+                        <h5 class="mb-0"> <a href="#" class="text-dark d-inline-block align-middle">
+                        ${shopinfo.productname}</a></h5>
+                        <span class="text-muted font-weight-normal font-italic d-block">Category: Watches</span>
+                      </div>
+                    </div>
+                  </th>
+                  <td class="border-0 align-middle"><strong>
+					￦<fmt:formatNumber value="${shopinfo.productprice}" pattern="###,###"/>
+					</strong></td>
+                  <td class="border-0 align-middle"><strong>${shopinfo.qty}</strong></td>
+                  <td class="border-0 align-middle">
+                  <a href="<%=NoForm%>mallcartdelete&productcode=${shopinfo.productcode}" type="button" class="card-link-secondary small text-uppercase mr-3"><i
+                        class="fas fa-trash-alt mr-1"></i>
+								Delete
 							</a>
-						</td> 
-					</tr>
-				</c:forEach>
-				<tr class="header">
-			<td colspan="4" align="center">
-				<a href="<%=NoForm%>plist">결재하기</a>
-				&nbsp;&nbsp; 
-				<a href="<%=NoForm%>plist">추가 주문</a>
-			</td>
-			<td colspan="4" align="center">
-				총 금액 : <fmt:formatNumber value="${sessionScope.totalAmount}" pattern="###,###"/> 원
-				&nbsp;
-				총 누적 포인트 : <fmt:formatNumber value="${sessionScope.totalAmount}" pattern="###,###"/> 원
-			</td>
-		</tr>
-			</table>
-		</div>
-	</div> --%>
+                  <!-- <a href="#" class="text-dark"><i class="fa fa-trash"></i> </a>--></td>
+                </tr>
+                
+              </c:forEach>  
+     
+                
+              </tbody>
+            </table>
+          </div>
+          <!-- End -->
+        </div>
+      </div>
+
+      <div class="row py-5 p-4 bg-white rounded shadow-sm">
+        <div class="col-lg-6">
+          <div class="bg-light rounded-pill px-4 py-3 text-uppercase font-weight-bold">Coupon code</div>
+          <div class="p-4">
+            <p class="font-italic mb-4">If you have a coupon code, please enter it in the box below</p>
+            <div class="input-group mb-4 border rounded-pill p-2">
+              <input type="text" placeholder="Apply coupon" aria-describedby="button-addon3" class="form-control border-0">
+              <div class="input-group-append border-0">
+                <button id="button-addon3" type="button" class="btn btn-dark px-4 rounded-pill"><i class="fa fa-gift mr-2"></i>Apply coupon</button>
+              </div>
+            </div>
+          </div>
+          
+        </div>
+        <div class="col-lg-6">
+          <div class="bg-light rounded-pill px-4 py-3 text-uppercase font-weight-bold">Order summary </div>
+          <div class="p-4">
+            <p class="font-italic mb-4">총 구매금액이 50,000원 이상 일 경우 배송비가 부과되지 않습니다.</p>
+            <ul class="list-unstyled mb-4">
+              <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">Pre-discount totalamount </strong><strong>
+              	￦<fmt:formatNumber value="${sessionScope.totalAmount}" pattern="###,###"/>
+              	</strong></li>
+              <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted"><i class='fas fa-shipping-fast'></i>  Shipping and handling</strong>
+              <strong>
+          		<c:if test="${sessionScope.totalAmount*0.8>=50000}">
+          		<span class="text-grey"><s>
+            ￦<fmt:formatNumber value="3000" pattern="###,###"/>
+            	</s></span>
+            ￦<fmt:formatNumber value="0" pattern="###,###"/>
+              </c:if>
+              <c:if test="${sessionScope.totalAmount*0.8 < 50000}"> ￦<fmt:formatNumber value="3000" pattern="###,###"/></c:if>
+              	</strong></li>
+              <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">Discount</strong><strong id="red">
+              	￦<fmt:formatNumber value="${sessionScope.totalAmount*(1-0.8)}" pattern="###,###"/>
+              	</strong></li>
+              <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">Total</strong>
+                <h5 class="font-weight-bold">￦<fmt:formatNumber value="${sessionScope.totalAmount*0.8}" pattern="###,###"/></h5>
+              </li>
+            </ul><a href="#" class="btn btn-dark rounded-pill py-2 btn-block">Procceed to checkout</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
 </body>
 </html>

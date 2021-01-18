@@ -84,7 +84,7 @@ public class MallCartListController extends SuperClass{
 				Map<Integer, Integer> maplists = mycart.GetAllOrderLists() ;
 				Set<Integer> keylist = maplists.keySet() ;
 				List<ShoppingInfo> shoplists = new ArrayList<ShoppingInfo>();
-				
+
 				int totalAmount = 0 ; // 총 판매 금액
 				
 				for(Integer productcode : keylist){ // productcode : 상품 번호
@@ -156,7 +156,6 @@ public class MallCartListController extends SuperClass{
 					shoplists.add(shopinfo) ;
 					System.out.println("이거 실행 되나?");
 				}
-				
 				for(Integer productcode : Rkeylist){ // productcode : 상품 번호
 					Integer months = Rmaplists.get(productcode) ; // 구매 개월 수 
 					
@@ -181,17 +180,13 @@ public class MallCartListController extends SuperClass{
 					Rshoplists.add(Rshopinfo) ;
 					System.out.println("R이거 실행 되나?");
 				}
-				
 				// 이번에 구매할 총 목록
 				super.session.setAttribute("shoplists", shoplists);
 				super.session.setAttribute("Rshoplists", Rshoplists);
 				super.session.setAttribute("totalAmount", totalAmount);
 				super.session.setAttribute("RtotalAmount", RtotalAmount);
-				
-				
 			}
 		}
-		
 		String gotopage = "mall/cartlist.jsp" ;
 		super.GotoPage(gotopage);
 	}

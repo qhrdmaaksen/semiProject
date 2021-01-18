@@ -6,23 +6,16 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <html>
 <head>
     <title>Title</title>
 </head>
 <body>
-    <p>time : <span id="time"></span></p>
-    <input type="button" id="execute" value="execute" />
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <input type="text" id="phonenum" name="phonenum" value="01045286862">
     <script>
-        $('#execute').click(function(){
-            $.ajax({
-                url:'./time.php',
-                success:function(data){
-                    $('#time').append(data);
-                }
-            })
-        })
+        console.log($("#phonenum").val());
+        alert($("#phonenum").val());
     </script>
 </body>
 </html>
