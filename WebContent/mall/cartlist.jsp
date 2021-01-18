@@ -4,10 +4,7 @@
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
  <%@ include file="./../common/nav.jsp"%>
- <%
- 	double dis = 0.8;
- 
- %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -333,15 +330,15 @@ $(document).ready(function () {
               <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted"><i class='fas fa-shipping-fast'></i>  Shipping and handling</strong>
               <strong>
           		<span class="text-grey"><s>
-            ￦<fmt:formatNumber value="3000" pattern="###,###"/>
+          		  ￦<fmt:formatNumber value="3000" pattern="###,###"/>
             	</s></span>
-            ￦<fmt:formatNumber value="0" pattern="###,###"/>
+          		  ￦<fmt:formatNumber value="0" pattern="###,###"/>
               	</strong></li>
-              <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">Discount</strong><strong id="discount">
-              	￦<fmt:formatNumber value="${sessionScope.RtotalAmount*(1-1)}" pattern="###,###"/>
+              <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">Discount</strong><strong>
+              	<h5 class="font-weight-bold">￦<fmt:formatNumber value="${sessionScope.RtotalAmount*0.2}" pattern="###,###"/></h5> 
               	</strong></li>
               <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">Total</strong>
-                <h5 class="font-weight-bold" id="productprice1" >￦<fmt:formatNumber value="${sessionScope.RtotalAmount}" pattern="###,###"/></h5>
+               <h5 class="font-weight-bold">￦<fmt:formatNumber value="${sessionScope.RtotalAmount*0.8}" pattern="###,###"/></h5> 
               </li>
             </ul><a href="#" class="btn btn-dark rounded-pill py-2 btn-block">Procceed to checkout(결제 페이지로 넘어갈 버튼)</a>
           </div>
