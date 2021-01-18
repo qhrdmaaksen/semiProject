@@ -203,11 +203,11 @@
 				<h2 align="center">상품 이미지 상세보기</h2>
 				<div id="myarea">
 					<img class="img-thumbnail" alt="prod-img"
-						src="${pageContext.request.contextPath}/images/imsitest.png" width="400" height="600"
+						src="${pageContext.request.contextPath}/images/product/${bean.images}" width="400" height="600"
 						onmouseover="applyImage(this.src);">
 				</div>
 				<div align="center">
-					<img class="img-thumbnail" alt="a" src="${pageContext.request.contextPath}/images/imsitest01.png"
+					<img class="img-thumbnail" alt="a" src="${pageContext.request.contextPath}/images/product/${bean.images}"
 						width="70" height="130" onmouseover="applyImage(this.src);">
 					<!-- apply 함수한테 나의 이미지 경로를 알려줌? -->
 					<img class="img-thumbnail" alt="b" src="${pageContext.request.contextPath}/images/imsitest02.png"
@@ -307,7 +307,6 @@
 	<script>
 		function goCart(){
 			var command = '<input name="command" value="mallcartadd" style="display: none;">';
-			alert("${bean.productcode}")
 			$("#product-form").append(command);
 			$("#product-form").append("<input type='text' id='productcode' name='productcode' value='" + ${bean.productcode} + "'>");
 			$("#product-form").append("<input type='text' id='totalprice' name='totalprice' value='" + totalprice + "'>");
@@ -316,7 +315,6 @@
 				$("#product-form").append("<input type='text' id='qty' name='qty' value='"+$("#buy-qty").val()+"'>"); 
 			}else {
 				var monthVal = $("#monthVal").val();
-				console.log("monthVal : ",monthVal)
 				$("#product-form").append("<input type='text' name='months' value='"+monthVal+"'>"); 
 			}
 			$("#product-form").submit();
@@ -324,23 +322,19 @@
 		
 		function goPay(){
 			var command = '<input name="command" value="payment">';
-			$("#product-form").attr("method","get");
 			$("#product-form").append(command);
 			//$("#product-form").append("<input type='text' id='productname' name='productname' value='" + ${productname} + "'>");
+			$("#product-form").append("<input type='text' id='productcode' name='productcode' value='" + ${bean.productcode} + "'>");
 			$("#product-form").append("<input type='text' id='totalprice' name='totalprice' value='" + totalprice + "'>");
-			$("#product-form").append("<input type='text' name='paymentshipping' value='gotoshipping'>");
-			$("#product-form").append("<input type='text' name='directbuy' value='directbuy'>");
-			if ("input[name='directbuy']"==null) {
-				
-			} else {
-
-			}
+			$("#product-form").append("<input type='text' id='stock' name='stock' value='${bean.stock}'>"); 
+			$("#product-form").append("<input type='text' name='directbuy' value='1'>");
 			if($("#delivery-select:checked").length == 0){
 				var buyCount = $("#buy-qty").val();
-				$("#product-form").append("<input type='text' name='buyCount' value='"+buyCount+"'>"); 
+				$("#product-form").append("<input type='text' name='qty' value='"+buyCount+"'>"); 
 			}else {
 				var monthVal = $("#monthVal").val();
-				$("#product-form").append("<input type='text' name='monthVal' value='"+monthVal+"'>");
+				$("#product-form").append("<input type='text' name='months' value='"+monthVal+"'>");
+				$("#product-form").append("<input type='text' name='qty' value='-1'>"); 
 			}
 			$("#product-form").submit();
 		};

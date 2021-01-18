@@ -74,11 +74,6 @@
 	        }).open();
 	    }
 		$(document).ready(function() {
-			var monthVal = "${param.monthVal}";
-			
-			if(monthVal != ""){
-				$("#monthVal").text(monthVal + "개월 정기구매").css("font-weight", "bold").css("font-size","20px").css("color","red");
-			}
 			
 			var productname = "${param.productname}";
 				console.log(productname);			
@@ -94,14 +89,14 @@
 				
 				if("${param.buyCount}" != ""){
 					if(kind == 2){ //무료배송
-						var total = parseInt("${param.totalprice}");
+						var total = parseInt("${totalprice}");
 						console.log(total);
 						$("#shippingfee").text(0+"원");
 						$("#totalprice").text(total+"원");
 						
 						
 					}else {
-						var total = parseInt("${param.totalprice}");
+						var total = parseInt("${totalprice}");
 						var discount = parseFloat($(this).data("discount")).toFixed(1);
 						$("#shippingfee").text(2500+"원");
 						$("#totalprice").text((total - (total * discount) + 2500) + "원");
@@ -110,13 +105,13 @@
 					}
 				}else {
 					if(kind == 2){ //무료배송
-						var total = parseInt("${param.totalprice * param.monthVal}");
+						var total = parseInt("${totalprice}");
 						$("#shippingfee").text(0+"원");
 						$("#totalprice").text(total+"원");
 						
 						
 					}else {
-						var total = parseInt("${param.totalprice * param.monthVal}"); // 정기구독 곱한 총가격
+						var total = parseInt("${totalprice}"); // 정기구독 곱한 총가격
 						var discount = parseFloat($(this).data("discount")).toFixed(1); //할인율
 						$("#shippingfee").text(2500+"원"); // 배송비
 						$("#totalprice").text(parseInt(total - (total * discount) + 2500) + "원"); // 총 결제 금액
@@ -146,15 +141,20 @@
 				</div>
 				<div class="modal-body">
 					<div class="list-group">
-						<c:forEach items="${coupons}" var="couponitem">
-							<button type="button" class="list-group-item list-group-item-action" aria-current="true" data-kind="${couponitem.kind}" data-discount="${couponitem.discount}" name="couponselect">
-								<span>${couponitem.name}</span>
-								<span><fmt:formatNumber type="percent" maxIntegerDigits="3" value="${couponitem.discount}"></fmt:formatNumber></span>
-								<c:if test="${couponitem.kind==1}">
-                                    할인쿠폰
+						<c:forEach items="${coupons}" var="coupon">
+							<button type="button" class="list-group-item list-group-item-action" aria-current="true" data-kind="${coupon.kind}" data-discount="${coupon.discount}" name="couponselect">
+								<c:if test="${coupon.kind==1}">
+                                    (할인쿠폰)
                                 </c:if>
-								<c:if test="${couponitem.kind==2}">
-                                    배송비할인
+								<c:if test="${coupon.kind==2}">
+                                    (배송비할인)
+                                </c:if>
+                                <span>${coupon.name}</span>
+                                <c:if test="${coupon.kind==1}">
+									<span><fmt:formatNumber type="percent" maxIntegerDigits="3" value="${coupon.discount}"></fmt:formatNumber></span>
+								</c:if>
+								<c:if test="${coupon.kind==2}">
+                                    배송비 전액
                                 </c:if>
 							</button>
 						</c:forEach>
@@ -175,10 +175,10 @@
 	      </div>
 	      <div class="modal-body">
 	         <div class="list-group">
-		         <c:forEach items="${lists}" var="item">
+		         <c:forEach items="${addressList}" var="addr">
 					<button type="button" class="list-group-item list-group-item-action" aria-current="true" name="addrlist">
-						<span>${item.address1}</span>
-						<span>${item.address2}</span>
+						<span>${addr.address1}</span>
+						<span>${addr.address2}</span>
 					</button>
 		         </c:forEach>
 			 </div>
@@ -286,21 +286,16 @@
 						<tr align="center">
 							<th style="background: #f0f0f5; font-weight: bold;">수령인
 							</th>
-							<td align="center">${lists[0].shippingname}
+							<td align="center">${address.shippingname}
 							</td>
-							<!-- <td>
-								<button class="col-md-6" type="button" name="basedelivery" style="background: white;">
-									기본배송지
-								</button>
-							</td> -->
 						</tr>
 						<tr align="center">
 							<th style="background: #f0f0f5; font-weight: bold;">배송주소</th>
-							<td align="center" id="addrtext">${lists[0].address1} ${lists[0].address2}</td>
+							<td align="center" id="addrtext">${address.address1} ${address.address2}</td>
 						</tr>
 						<tr align="center">
 							<th style="background: #f0f0f5; font-weight: bold;">연락처</th>
-							<td align="center">${sessionScope.loginfo.phone}</td>
+							<td align="center">${address.phone}</td>
 						</tr>
 					</tbody>
 				</table>
@@ -316,8 +311,17 @@
 				</div>
 				<hr style="border: none;">
 				<div>
-						<span>${bean.productname}</span>
-					<p align="right"><span id="monthVal">수량 ${param.buyCount}개 / <span>무료 배송</span></span></p>
+					<c:if test="${requestScope.reguler==1}">
+						<c:forEach var="product" items="${requestScope.Rshoplists}">
+							<span>${product.productname}</span>
+						</c:forEach>
+					</c:if>
+					<c:if test="${requestScope.reguler==-1}">
+						<c:forEach var="product" items="${requestScope.lists}">
+							<span>${product.productname}</span>
+						</c:forEach>
+					</c:if>
+					<p align="right"><span id="monthVal">수량 ${requestScope.totalcount}개 / <span>무료 배송</span></span></p>
 				</div>
 				<hr>
 				<div>
@@ -332,20 +336,9 @@
 			<input type="hidden" name="command" value="paymentval">	
 			<table id="payinfotable" style="margin: 8px 0px 0px; font:12px 돋움, Dotum, sans-serif;">
 				<tbody align="center">
-				<tr>
-					<th>상품명</th>
-						<td id="productname">${productname}</td>
-				</tr>
 				<tr align="center">
 					<th>총 상품가격</th>
-					<c:choose>
-						<c:when test="${param.monthVal != null}">
-							<td>${param.totalprice * param.monthVal}원</td>
-						</c:when>
-						<c:otherwise>
-							<td>${param.totalprice}원</td>
-						</c:otherwise>
-					</c:choose>
+					<td><fmt:formatNumber value="${requestScope.totalprice}" pattern="#,###"/>원</td>
 				</tr>
 				<tr align="center">
 					<th>할인 쿠폰</th>
@@ -362,7 +355,14 @@
 				<tr align="center">
 					<th>배송비</th>
 					<td id="shippingfee">
-						<fmt:formatNumber value="2500" pattern="###,###"/>원
+						<c:choose>
+							<c:when test="${requestScope.totalprice>50000}">
+								<fmt:formatNumber value="0" pattern="#,###"/>원
+							</c:when>
+							<c:otherwise>
+								<fmt:formatNumber value="2500" pattern="#,###"/>원
+							</c:otherwise>
+						</c:choose>
 					</td>
 				</tr>
 				<tr align="center">
@@ -372,11 +372,11 @@
 				<tr align="center">
 					<th>총 결제금액</th>
 					<c:choose>
-						<c:when test="${param.monthVal != null}">
-							<td id="totalprice">${param.totalprice * param.monthVal + 2500}원</td>
+						<c:when test="${requestScope.totalprice>50000}">
+							<td id="totalprice"></td>
 						</c:when>
 						<c:otherwise>
-							<td id="totalprice">${param.totalprice + 2500}원</td>
+							<td id="totalprice"><fmt:formatNumber value="${requestScope.totalprice + 2500}" pattern="#,###"/>원</td>
 						</c:otherwise>
 					</c:choose>
 				</tr>
@@ -501,11 +501,11 @@
         	if ($("#agreecheck").is(":checked")==false) {
 				alert('결제 이용 동의를 선택해주세요.');
 				return false;
-			};
-			if ($("#virtualaccount").is(":checked")==true){
+			}
+			if($("#virtualaccount").is(":checked")==true){
 				var total = parseInt($("#totalprice").text()); 
 				$(location).attr("href","http://localhost:8989/SemiProject/pay/virtualaccount.jsp?totalprice="+total);
-			};
+			}
         	console.log("결제 실행중");
         	var obj = document.getElementsByName("momentum");
         	if(obj.value == "banktrnsf"){

@@ -105,6 +105,50 @@ public class AddressDAO  extends SuperDAO {
 		}
 		return cnt ;
 }
+	
+	public AddressVo SelectDateByPK(String id) {
+		String sql = "select \"seq_add\", \"id\", \"shippingname\", \"name\", \"address1\", \"address2\", \"phone\" from ("
+				+ "select \"seq_add\", \"id\", \"shippingname\", \"name\", \"address1\", \"address2\", \"phone\", rank() over (order by \"seq_add\") ranking from ADDRESSES where \"id\"=? order by \"seq_add\""
+				+ ") where ranking in(1)";
+		
+		conn = null ;
+        PreparedStatement pstmt = null ;
+        ResultSet rs = null ;
+
+        AddressVo address = new AddressVo();
+        try {
+            conn = super.getConnection() ;
+            pstmt = conn.prepareStatement(sql) ;
+
+            pstmt.setString(1, id);
+
+            rs = pstmt.executeQuery() ;
+            while( rs.next() ){
+            	address.setId(rs.getString("id"));
+            	address.setShippingname(rs.getString("shippingname"));
+            	address.setName(rs.getString("name"));
+            	address.setAddress1(rs.getString("address1"));
+            	address.setAddress2(rs.getString("address2"));
+            	address.setPhone(rs.getInt("phone"));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            try {
+                conn.rollback();
+            } catch (Exception e2) {
+                e2.printStackTrace();
+            }
+        } finally{
+            try {
+                if(rs != null){ rs.close(); }
+                if(pstmt != null){ pstmt.close(); }
+                if(conn != null){conn.close();}
+            } catch (Exception e2) {
+                e2.printStackTrace();
+            }
+        }
+        return address ;
+	}
 
 	public BbsPostVo SelctDataByPK(int no) {
 		// 해당 게시물 번호의 Bean 객체를 구합니다. 
@@ -276,7 +320,54 @@ public class AddressDAO  extends SuperDAO {
 		return cnt ;
 }
 
+	public List<AddressVo> selectAllAddress(String id) {
+		Connection conn = null ;
+		PreparedStatement pstmt = null ;
+		ResultSet rs = null ;
+		
+		int cnt = -99999;
+	      String sql = " select * from \"ADDRESSES\" where \"id\"=? ";
+		List<AddressVo> lists = new ArrayList<AddressVo>();
 
+		try {
+			conn = super.getConnection() ;
+			pstmt = conn.prepareStatement(sql) ;
+			
+			pstmt.setString(1, id);
+			
+			rs = pstmt.executeQuery() ;			
+			while( rs.next() ){
+				AddressVo bean = new AddressVo();
+				bean.setAddress1(rs.getString("address1"));
+				bean.setAddress2(rs.getString("address2"));
+				bean.setId(rs.getString("id"));
+				bean.setName(rs.getString("name"));
+				bean.setPhone(rs.getInt("phone"));
+				bean.setShippingname(rs.getString("shippingname"));
+				
+				lists.add( bean ) ;
+			}
+		} catch (Exception e) {
+			SQLException err = (SQLException)e ;			
+			cnt = - err.getErrorCode() ;			
+			e.printStackTrace();
+			try {
+				conn.rollback(); 
+			} catch (Exception e2) {
+				e2.printStackTrace();
+			}
+		} finally{
+			try {
+				if(rs != null){ rs.close(); }
+				if(pstmt != null){ pstmt.close(); }
+				if(conn != null){conn.close();}
+			} catch (Exception e2) {
+				e2.printStackTrace(); 
+			}
+		}
+		
+		return lists ;
+}
 
 	public List<AddressVo> SelectDataList(String id, int beginRow, int endRow, String mode, String keyword) {
 		Connection conn = null ;
