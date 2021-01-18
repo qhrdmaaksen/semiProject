@@ -88,7 +88,7 @@
 		</div>		
 	<c:if test="${whologin == 2}">
 		<div class="container" style="margin-top:20px;">														
-	 		<a href="<%=NoForm%>pcategorylist&mode=immunity&${requestScope.parameters}"> 
+	 		<a href="<%=NoForm%>pnewproduct"> 
 						<img src="${pageContext.request.contextPath}/images/icon/icon_barcode.png" style="width: 42px;">
 							</a> 
 			</div>	
