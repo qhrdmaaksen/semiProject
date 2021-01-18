@@ -22,114 +22,106 @@
 <body>
 	<div class="container col-sm-offset-<%=myoffset%> col-sm-<%=mywidth%>">
 		<div class="panel panel-default panel-primary">
-			<div class="panel-heading"><h4>상품 등록</h4></div>
+		  <div class="container text-#8B4513 py-5 text-center">
+  				<h3>상품 등록 페이지</h3>
+  			</div>
 			<div class="panel-body">
 				<form class="form-horizontal" role="form" action="<%=YesForm%>" 
 					method="post" enctype="multipart/form-data">
 					<input type="hidden" name="command" value="pnewproduct"> 
+					
 					<div class="form-group">
-						<label class="control-label col-sm-<%=formleft%>" for="name">상품명</label>
+						<label class="control-label col-sm-<%=formleft%>" for="productname">상품명</label>
 						<div class="col-sm-<%=formright%>">
-							<input type="text" class="form-control" name="name" id="name"								
-								placeholder="상품명" value="${bean.name}">
-								<span class="err form-control-static">${errname}</span>
+							<input type="text" class="form-control" name="productname" id="productname"								
+								placeholder="상품명을 입력 해 주세요" value="${bean.productname}">
+								<span class="err form-control-static">${errproductname}</span>
 						</div>
-					</div>
 					<div class="form-group">
-						<label class="control-label col-sm-<%=formleft%>" for="company">제조 회사</label>
+						<label class="control-label col-sm-<%=formleft%>" for="productprice">상품 가격</label>
 						<div class="col-sm-<%=formright%>">
-							<input type="text" class="form-control" name="company" id="company"								
-								placeholder="제조 회사" value="${bean.company}">
-							<span class="err form-control-static">${errcompany}</span>								
+							<input type="text" class="form-control" name="productprice" id="productprice"								
+								placeholder="상품 가격을 입력 해 주세요" value="${bean.productprice}">
+								<span class="err form-control-static">${errproductprice}</span>
 						</div>
-					</div>					
-					<div class="form-group">
-						<label class="control-label col-sm-<%=formleft%>" for="image">이미지</label>
-						<div class="col-sm-<%=formright%>">
-							<input type="file" class="form-control" name="image"
-								id="image" placeholder="이미지를 넣어 주셔용^^">
-							<span class="err form-control-static">${errimage}</span>								
-						</div>
-					</div>
 					<div class="form-group">
 						<label class="control-label col-sm-<%=formleft%>" for="stock">재고</label>
 						<div class="col-sm-<%=formright%>">
-							<input type="number" class="form-control" name="stock"
-								id="stock" placeholder="재고 수량을 넣어 주셔용^^" value="${bean.stock}">
-							<span class="err form-control-static">${errstock}</span>								
+							<input type="text" class="form-control" name="stock" id="stock"								
+								placeholder="재고는 10개 이상 입력 해 주세요" value="${bean.stock}">
+								<span class="err form-control-static">${errstock}</span>
 						</div>
-					</div>	
 					<div class="form-group">
-						<label class="control-label col-sm-<%=formleft%>" for="price">단가</label>
+						<label class="control-label col-sm-<%=formleft%>" for="bloodcirculation">혈액 순환 지수</label>
 						<div class="col-sm-<%=formright%>">
-							<input type="number" class="form-control" name="price"
-								id="price" placeholder="단가 를 넣어 주셔용^^" value="${bean.price}">
-							<span class="err form-control-static">${errprice}</span>
+							<input type="text" class="form-control" name="bloodcirculation" id="bloodcirculation"								
+								placeholder="혈액순환 정도를 한자리 정수로 입력 해 주세요" value="${bean.bloodcirculation}">
+								<span class="err form-control-static">${errbloodcirculation}</span>
 						</div>
-					</div>
 					<div class="form-group">
-						<label for="category" class="col-xs-<%=formleft%> col-lg-<%=formleft%> control-label">카테고리</label>
-	        			<div class="col-xs-<%=formright%> col-lg-<%=formright%>">
-							<select class="form-control" name="category" id="category">
-								<option value="-" selected="selected">-- 선택하세요
-									---------
-								<c:if test="${bean.category == 'NORMAL'}">
-		        					<option value="NORMAL" selected="selected">NORMAL
-		        				</c:if>        			
-		            			<c:if test="${bean.category != 'NORMAL'}">
-		        					<option value="NORMAL">NORMAL
-		        				</c:if>										
-								<c:if test="${bean.category == 'HIT'}">
-		        					<option value="HIT" selected="selected">인기 상품
-		        				</c:if>        			
-		            			<c:if test="${bean.category != 'HIT'}">
-		        					<option value="HIT">인기 상품
-		        				</c:if>	 
-								<c:if test="${bean.category == 'NEW'}">
-		        					<option value="NEW" selected="selected">신상품
-		        				</c:if>        			
-		            			<c:if test="${bean.category != 'NEW'}">
-		        					<option value="NEW">신상품
-		        				</c:if>	
-								<c:if test="${bean.category == 'BEST'}">
-		        					<option value="BEST" selected="selected">베스트 상품
-		        				</c:if>        			
-		            			<c:if test="${bean.category != 'BEST'}">
-		        					<option value="BEST">베스트 상품
-		        				</c:if>
-							</select>
-							<span class="err form-control-static">${errcategory}</span>
- 	        			</div>
-	        		</div>					
-					<div class="form-group">
-						<label class="control-label col-sm-<%=formleft%>" for="contents">상품 설명</label>
+						<label class="control-label col-sm-<%=formleft%>" for="digestiveapparatus">소화 기관 지수</label>
 						<div class="col-sm-<%=formright%>">
-							<textarea name="contents" id="contents" rows="5" cols="" 
-								placeholder="상품 설명" class="form-control">${bean.contents}</textarea>
-							<span class="err form-control-static">${errcontents}</span>								
+							<input type="text" class="form-control" name="digestiveapparatus" id="digestiveapparatus"								
+								placeholder="소화 기관 지수를 한자리 정수로 입력 해 주세요" value="${bean.digestiveapparatus}">
+								<span class="err form-control-static">${errdigestiveapparatus}</span>
 						</div>
+					<div class="form-group">
+						<label class="control-label col-sm-<%=formleft%>" for="skin">피부 관련 지수</label>
+						<div class="col-sm-<%=formright%>">
+							<input type="text" class="form-control" name="skin" id="skin"								
+								placeholder="피부 관련 지수를 한자리 정수로 입력 해 주세요" value="${bean.name}">
+								<span class="err form-control-static">${errskin}</span>
+						</div>
+					<div class="form-group">
+						<label class="control-label col-sm-<%=formleft%>" for="eyes">눈 관련 지수</label>
+						<div class="col-sm-<%=formright%>">
+							<input type="text" class="form-control" name="eyes" id="eyes"								
+								placeholder="눈 관련 지수를 한자리 정수로 입력 해 주세요" value="${bean.eyes}">
+								<span class="err form-control-static">${erreyes}</span>
+						</div>
+					<div class="form-group">
+						<label class="control-label col-sm-<%=formleft%>" for="fatigue">피로에 좋은 정도</label>
+						<div class="col-sm-<%=formright%>">
+							<input type="text" class="form-control" name="fatigue" id="fatigue"								
+								placeholder="피로에 좋은 정도를 한자리 정수로 입력 해 주세요" value="${bean.fatigue}">
+								<span class="err form-control-static">${errfatigue}</span>
+						</div>
+					<div class="form-group">
+						<label class="control-label col-sm-<%=formleft%>" for="joint">관절에 좋은 정도</label>
+						<div class="col-sm-<%=formright%>">
+							<input type="text" class="form-control" name="joint" id="joint"								
+								placeholder="관절에 좋은 정도를 한자리 정수로 입력 해 주세요" value="${bean.joint}">
+								<span class="err form-control-static">${errjoint}</span>
+						</div>
+					<div class="form-group">
+						<label class="control-label col-sm-<%=formleft%>" for="hair">머리에 좋은 지수</label>
+						<div class="col-sm-<%=formright%>">
+							<input type="text" class="form-control" name="hair" id="hair"								
+								placeholder="머리에 좋은 지수를 한자리 정수로 입력 해 주세요" value="${bean.hair}">
+								<span class="err form-control-static">${errhair}</span>
+						</div>
+					<div class="form-group">
+						<label class="control-label col-sm-<%=formleft%>" for="immunity">면역력 지수</label>
+						<div class="col-sm-<%=formright%>">
+							<input type="text" class="form-control" name="immunity" id="immunity"								
+								placeholder="면역력 지수를 한자리 정수로 입력 해 주세요" value="${bean.immunity}">
+								<span class="err form-control-static">${errimmunity}</span>
+						</div>
+					<div class="form-group">
+						<label class="control-label col-sm-<%=formleft%>" for="images">상품 이미지</label>
+						<div class="col-sm-<%=formright%>">
+							<input type="file" class="form-control" name="images"
+								id="images" placeholder="이미지를 등록 해 주세요">
+							<span class="err form-control-static">${errimages}</span>								
+						</div>
+					
 					</div>					
-					<div class="form-group">
-						<label class="control-label col-sm-<%=formleft%>" for="point">포인트</label>
-						<div class="col-sm-<%=formright%>">
-							<input type="number" class="form-control" name="point"
-								id="point" placeholder="포인트 수량을 넣어 주셔용^^" value="${bean.point}">
-							<span class="err form-control-static">${errpoint}</span>								
-						</div>
-					</div>					
-					<div class="form-group">
-						<label class="control-label col-sm-<%=formleft%>" for="inputdate">입고 일자</label>
-						<div class="col-sm-<%=formright%>">
-							<input type="datetime" class="form-control" name="inputdate" id="inputdate"								
-								placeholder="입고 일자" value="${bean.inputdate}">
-								<span class="err form-control-static">${errinputdate}</span>
-						</div>
-					</div>					
-					<div class="form-group">
-						<div align="center" class="col-sm-offset-3 col-sm-6">
-							<button class="btn btn-default" type="submit">상품 등록</button>
-							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-							<button class="btn btn-default" type="reset">취소</button>
+				<div class="form-group" style="margin: 20px;">
+					<button type="submit" class="btn btn-outline-warning btn-lg">
+						<b>상품 등록</b></button>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					<button type="reset"  class="btn btn-outline-danger btn-sm">취소</button>
+				</div>
 						</div>
 					</div>
 				</form>
