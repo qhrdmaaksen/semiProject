@@ -14,14 +14,24 @@
 <meta charset="UTF-8">
 <title>Shopping Cart</title>
 <script src="//code.jquery.com/jquery-3.3.1.min.js"></script>
-<script>
+
+<!-- <script type="text/javascript">
+var totalprice = parseInt("${bean.productprice}");
+
 			$( document ).ready( function() {
+				var price = parseInt("${bean.productprice}");
+				alert( price );
+				
 				$( 'select.mdb-select' ).change( function() {
-					var jb = $( 'select.mdb-select' ).val();
-					alert( jb );
+					var price = $( 'select.mdb-select' ).val();
+					alert( price );
 				} );
 			} );
-</script>
+</script> -->
+
+
+
+
 <script type="text/javascript">
 </script>
 
@@ -45,6 +55,10 @@ $(document).ready(function () {
 	    $(this).closest('.select-outline').find('.caret').toggleClass('active');
 	  });
 	});
+
+
+	
+}
 
 </script>
 
@@ -195,16 +209,48 @@ $(document).ready(function () {
                     <div class="py-2 text-uppercase">Price</div>
                   </th>
                   <th scope="col" class="border-0 bg-light">
-                    <div class="py-2 text-uppercase">Quantity</div>
+                    <div class="py-2 text-uppercase">Months</div>
                   </th>
                   <th scope="col" class="border-0 bg-light">
                     <div class="py-2 text-uppercase">Remove</div>
                   </th>
                 </tr>
               </thead>
-              <tbody>
+              <tbody>	
               
               <c:forEach items="${sessionScope.Rshoplists}" var="Rshopinfo">
+              <script type="text/javascript">
+					//var totalprice = parseInt("${Rshopinfo.productprice}");
+		
+					$( document ).ready( function() {
+						var price = parseInt("${Rshopinfo.productprice}");
+						alert( price );
+						
+						$( 'select.mdb-select' ).change( function() {
+							var months = $( 'select.mdb-select' ).val();
+							alert( months + "개월" );
+							$("#totalprice").text((price)*months + "원");
+							$( 'input#months_2' ).val( months );
+							if (months >= 3 ) {
+								$("#productprice").text((price*0.7)*months + "원");
+								$("#productprice1").text((price*0.7)*months + "원");
+								$("#discount").text(parseInt((price*(1-0.7))*months) + "원");
+							}
+							if(months < 3 ){
+								$("#productprice").text((price*0.8)*months + "원");
+								$("#productprice1").text((price*0.8)*months + "원");
+								$("#discount").text(parseInt((price*(1-0.8))*months) + "원");
+							}
+							if(months == 1 ){
+								$("#productprice").text((price)*months + "원");
+								$("#productprice1").text((price)*months + "원");
+								$("#discount").text(parseInt((price*(1-1))*months) + "원");
+							}
+							
+							
+						} );
+					} );
+				</script>
                 <tr>
                   <th scope="row" class="border-0">
                     <div class="p-2">
@@ -219,19 +265,19 @@ $(document).ready(function () {
                       </div>
                     </div>
                   </th>
-                  <td class="border-0 align-middle"><strong>
-					￦<fmt:formatNumber value="${Rshopinfo.productprice * 0.8}" pattern="###,###"/>
+                  <td class="border-0 align-middle" id="productprice"><strong>
+					￦<fmt:formatNumber value="${Rshopinfo.productprice}" pattern="###,###"/>
 					</strong></td>
                   <td class="border-0 align-middle">
-                  <input type="text" name="ct_qty" id="ct_qty" value="1" readonly="readonly">
-
-                  ${Rshopinfo.months} 개월
                     <div class="select-outline position-relative w-24">
-					    <select class="mdb-select md-form md-outline">
-					      <option value="" disabled selected>${Rshopinfo.months} 개월</option>
-					      <option value="1">1개월</option>
-					      <option value="2">2개월</option>
-					      <option value="3">3개월</option>
+					    <select class="mdb-select md-form md-outline" >
+					      <option value="" disabled selected>선택</option>
+					      <option value="1"><span id="months1">1개월</span></option>
+					      <option value="2"><span id="months2">2개월</span></option>
+					      <option value="3"><span id="months3">3개월</span></option>
+					      <option value="4"><span id="months4">4개월</span></option>
+					      <option value="5"><span id="months5">5개월</span></option>
+					      <option value="6"><span id="months6">6개월</span></option>
 					    </select>
 					  </div>
                  </td>
@@ -266,26 +312,24 @@ $(document).ready(function () {
         <div class="col-lg-6">
           <div class="bg-light rounded-pill px-4 py-3 text-uppercase font-weight-bold">Order summary </div>
           <div class="p-4">
-            <p class="font-italic mb-4">총 구매금액이 50,000원 이상 일 경우 배송비가 부과되지 않습니다.</p>
+            <p class="font-italic mb-4">정기 배송의 경우 배송비가 부과되지 않습니다.</p>
             <ul class="list-unstyled mb-4">
-              <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">Pre-discount totalamount </strong><strong>
+              <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">Pre-discount totalamount </strong>
+              <strong id=totalprice>
               	￦<fmt:formatNumber value="${sessionScope.RtotalAmount}" pattern="###,###"/>
               	</strong></li>
               <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted"><i class='fas fa-shipping-fast'></i>  Shipping and handling</strong>
               <strong>
-          		<c:if test="${sessionScope.RtotalAmount*0.8>=50000}">
           		<span class="text-grey"><s>
             ￦<fmt:formatNumber value="3000" pattern="###,###"/>
             	</s></span>
             ￦<fmt:formatNumber value="0" pattern="###,###"/>
-              </c:if>
-              <c:if test="${sessionScope.RtotalAmount*0.8 < 50000}"> ￦<fmt:formatNumber value="3000" pattern="###,###"/></c:if>
               	</strong></li>
-              <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">Discount</strong><strong id="red">
-              	￦<fmt:formatNumber value="${sessionScope.RtotalAmount*(1-0.8)}" pattern="###,###"/>
+              <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">Discount</strong><strong id="discount">
+              	￦<fmt:formatNumber value="${sessionScope.RtotalAmount*(1-1)}" pattern="###,###"/>
               	</strong></li>
               <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">Total</strong>
-                <h5 class="font-weight-bold">￦<fmt:formatNumber value="${sessionScope.RtotalAmount*0.8}" pattern="###,###"/></h5>
+                <h5 class="font-weight-bold" id="productprice1" >￦<fmt:formatNumber value="${sessionScope.RtotalAmount}" pattern="###,###"/></h5>
               </li>
             </ul><a href="#" class="btn btn-dark rounded-pill py-2 btn-block">Procceed to checkout</a>
           </div>
