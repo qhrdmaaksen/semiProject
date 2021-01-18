@@ -4,9 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 
 import VO.ProductVO;
@@ -517,6 +515,56 @@ public class ProductDAO extends SuperDAO{
 			}
 			
 			return lists ;
+		}
+
+		public int InsertData(ProductVO bean) {
+			// 해당 Bean 객체를 사용하여 상품을 등록합니다.
+			System.out.println( this.getClass() + " : 상품을 등록합니다." ); 
+			String sql = " insert into products(\"productcode\", \"productname\" , \"productprice\", \"stock\" , \"eyes\" , \"bloodcirculation\", \"digestiveapparatus\", \"skin\", \"fatigue\" , \"joint\" , \"hair\" , \"immunity\" , \"images\") " ;
+			sql += " values(productCode.nextval, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? ) " ;
+			
+			Connection conn = null ;
+			PreparedStatement pstmt = null ;
+			
+			int cnt = -999999 ;
+			try {
+				conn = super.getConnection() ;
+				conn.setAutoCommit( false );
+				pstmt = conn.prepareStatement(sql) ;
+				
+				pstmt.setString(1, bean.getProductname());
+				pstmt.setInt(2, bean.getProductprice());
+				pstmt.setInt(3, bean.getStock());
+				pstmt.setInt(4, bean.getEyes());
+				pstmt.setInt(5, bean.getBloodCirculation());
+				pstmt.setInt(6, bean.getDigestiveapparatus());
+				pstmt.setInt(7, bean.getSkin());
+				pstmt.setInt(8, bean.getFatigue());
+				pstmt.setInt(9, bean.getJoint());
+				pstmt.setInt(10, bean.getHair());
+				pstmt.setInt(11, bean.getImmunity());
+				pstmt.setString(12, bean.getImages());
+				
+				cnt = pstmt.executeUpdate() ; 
+				conn.commit(); 
+			} catch (Exception e) {
+				SQLException err = (SQLException)e ;			
+				cnt = - err.getErrorCode() ;			
+				e.printStackTrace();
+				try {
+					conn.rollback(); 
+				} catch (Exception e2) {
+					e2.printStackTrace();
+				}
+			} finally{
+				try {
+					if( pstmt != null ){ pstmt.close(); }
+					if(conn != null){conn.close();}
+				} catch (Exception e2) {
+					e2.printStackTrace();
+				}
+			}
+			return cnt ;
 		}
 		
 		
