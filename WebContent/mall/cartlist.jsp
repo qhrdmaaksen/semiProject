@@ -33,6 +33,8 @@ var totalprice = parseInt("${bean.productprice}");
 
 
 <script type="text/javascript">
+
+
 </script>
 
 <style type="text/css">
@@ -219,8 +221,13 @@ $(document).ready(function () {
               <tbody>	
               
               <c:forEach items="${sessionScope.Rshoplists}" var="Rshopinfo">
-              <script type="text/javascript">
-					//var totalprice = parseInt("${Rshopinfo.productprice}");
+              <%-- <script type="text/javascript">
+              
+					<%! int i= 0;%>
+					<c:forEach ...>
+					<select id="months<%=i%>">
+					<%i++;%>
+					</c:forEach>
 		
 					$( document ).ready( function() {
 						var price = parseInt("${Rshopinfo.productprice}");
@@ -230,7 +237,7 @@ $(document).ready(function () {
 							var months = $( 'select.mdb-select' ).val();
 							alert( months + "개월" );
 							$("#totalprice").text((price)*months + "원");
-							$( 'input#months_2' ).val( months );
+							//$( 'input#months_2' ).val( months );
 							if (months >= 3 ) {
 								$("#productprice").text((price*0.7)*months + "원");
 								$("#productprice1").text((price*0.7)*months + "원");
@@ -250,7 +257,7 @@ $(document).ready(function () {
 							
 						} );
 					} );
-				</script>
+				</script> --%>
                 <tr>
                   <th scope="row" class="border-0">
                     <div class="p-2">
@@ -270,15 +277,20 @@ $(document).ready(function () {
 					</strong></td>
                   <td class="border-0 align-middle">
                     <div class="select-outline position-relative w-24">
-					    <select class="mdb-select md-form md-outline" >
-					      <option value="" disabled selected>선택</option>
-					      <option value="1"><span id="months1">1개월</span></option>
-					      <option value="2"><span id="months2">2개월</span></option>
-					      <option value="3"><span id="months3">3개월</span></option>
-					      <option value="4"><span id="months4">4개월</span></option>
-					      <option value="5"><span id="months5">5개월</span></option>
-					      <option value="6"><span id="months6">6개월</span></option>
-					    </select>
+                    <form class="form-inline" role="form" name="myform" action="<%=YesForm%>" method="post">
+						<input type="hidden" name="command" value="mallcartmodify">
+						 <input type="hidden" name="productcode" value="${Rshopinfo.productcode}"> 
+					    <select class="mdb-select md-form md-outline"  name="months">
+					      <option value="${Rshopinfo.months}" disabled selected>${Rshopinfo.months} 개월</option>
+					      <option value="1">1개월</option>
+					      <option value="2">2개월</option>
+					      <option value="3">3개월</option>
+					      <option value="4">4개월</option>
+					      <option value="5">5개월</option>
+					      <option value="6">6개월</option>
+					      </select>
+					      <button type="submit" class="btn btn-outline-info btn-sm mb-2" >수량 변경</button>
+					    </form>
 					  </div>
                  </td>
                   <td class="border-0 align-middle">
@@ -286,7 +298,7 @@ $(document).ready(function () {
                   		type="button" class="card-link-secondary small text-uppercase mr-3">
 								Delete
 							</a>
-                  <!-- <a href="#" class="text-dark"><i class="fa fa-trash"></i> </a>--></td>
+                 </td>
                 </tr>
               </c:forEach>  
               </tbody>
@@ -331,7 +343,7 @@ $(document).ready(function () {
               <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">Total</strong>
                 <h5 class="font-weight-bold" id="productprice1" >￦<fmt:formatNumber value="${sessionScope.RtotalAmount}" pattern="###,###"/></h5>
               </li>
-            </ul><a href="#" class="btn btn-dark rounded-pill py-2 btn-block">Procceed to checkout</a>
+            </ul><a href="#" class="btn btn-dark rounded-pill py-2 btn-block">Procceed to checkout(결제 페이지로 넘어갈 버튼)</a>
           </div>
         </div>
       </div>
