@@ -28,7 +28,7 @@ public class PaymentController extends SuperClass{
 		HttpSession session = request.getSession();
 		MemberVO member = (MemberVO)session.getAttribute("loginfo");
 		if(request.getParameter("directbuy").equals("1")){
-			if(request.getParameter("qty").equals("-1")){
+			if(request.getParameter("reguler").equals("1")){
 				List<RegulerShoppingInfo> Rshoplists = new ArrayList<RegulerShoppingInfo>();
 				RegulerShoppingInfo reguler = new RegulerShoppingInfo();
 				ProductDAO pdao = new ProductDAO();
@@ -74,44 +74,7 @@ public class PaymentController extends SuperClass{
 				request.setAttribute("reguler", "-1");
 			}
 		}else {
-			if(request.getParameter("regular").equals("-1")){
-				MyCartList mycart = (MyCartList)super.session.getAttribute("mycart");
-
-				Map<Integer, Integer> maplists = mycart.GetAllOrderLists();
-				Set<Integer> keylist = maplists.keySet() ;
-				List<ShoppingInfo> lists = new ArrayList<ShoppingInfo>();
-
-				int totalAmount = 0 ; // 총 판매 금액
-
-				for(Integer productcode : keylist){ // productcode : 상품 번호
-					Integer qty = maplists.get(productcode) ; // 구매 수량
-
-					ProductDAO pdao = new ProductDAO();
-
-					// 상품 번호 productcode에 대한 Bean 정보
-					ProductVO bean = pdao.SelectDataByPk(productcode) ;
-
-					int productprice = (int)(bean.getProductprice() * 0.8);
-					int point = bean.getProductprice();
-
-					totalAmount += qty * productprice ;
-
-					ShoppingInfo shopinfo = new ShoppingInfo() ;
-
-					shopinfo.setImages(bean.getImages());
-					shopinfo.setProductname(bean.getProductname());
-					shopinfo.setProductcode(productcode);
-					shopinfo.setPoint(point);
-					shopinfo.setProductprice(productprice);
-					shopinfo.setQty(qty);
-
-					lists.add(shopinfo) ;
-				}
-				request.setAttribute("productLists", lists);
-				request.setAttribute("totalcount", lists.size());
-				request.setAttribute("totalprice", totalAmount);
-				request.setAttribute("reguler", "-1");
-			}else {
+			if(request.getParameter("regular").equals("1")){
 				MyCartList Rmycart = (MyCartList)super.session.getAttribute("Rmycart") ;
 
 				Map<Integer, Integer> Rmaplists = Rmycart.GetAllROrderLists() ;
@@ -150,6 +113,43 @@ public class PaymentController extends SuperClass{
 				request.setAttribute("totalcount", Rshoplists.size());
 				request.setAttribute("totalprice", RtotalAmount);
 				request.setAttribute("reguler", "1");
+			}else {
+				MyCartList mycart = (MyCartList)super.session.getAttribute("mycart");
+
+				Map<Integer, Integer> maplists = mycart.GetAllOrderLists();
+				Set<Integer> keylist = maplists.keySet() ;
+				List<ShoppingInfo> lists = new ArrayList<ShoppingInfo>();
+
+				int totalAmount = 0 ; // 총 판매 금액
+
+				for(Integer productcode : keylist){ // productcode : 상품 번호
+					Integer qty = maplists.get(productcode) ; // 구매 수량
+
+					ProductDAO pdao = new ProductDAO();
+
+					// 상품 번호 productcode에 대한 Bean 정보
+					ProductVO bean = pdao.SelectDataByPk(productcode) ;
+
+					int productprice = (int)(bean.getProductprice() * 0.8);
+					int point = bean.getProductprice();
+
+					totalAmount += qty * productprice ;
+
+					ShoppingInfo shopinfo = new ShoppingInfo() ;
+
+					shopinfo.setImages(bean.getImages());
+					shopinfo.setProductname(bean.getProductname());
+					shopinfo.setProductcode(productcode);
+					shopinfo.setPoint(point);
+					shopinfo.setProductprice(productprice);
+					shopinfo.setQty(qty);
+
+					lists.add(shopinfo) ;
+				}
+				request.setAttribute("productLists", lists);
+				request.setAttribute("totalcount", lists.size());
+				request.setAttribute("totalprice", totalAmount);
+				request.setAttribute("reguler", "-1");
 			}
 		}
 

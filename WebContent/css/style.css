@@ -133,6 +133,9 @@
 .gosurvey {
      margin-top: 40px;
 }
+.hidden_obj{
+    display: none;
+}
 .icon {
     width: 25px;
     height: 25px;

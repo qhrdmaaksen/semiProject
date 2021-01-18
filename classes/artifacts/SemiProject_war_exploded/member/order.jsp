@@ -30,7 +30,8 @@
 						<tbody>
 							<c:forEach items="${requestScope.lists}" var="shopinfo">
 								<tr class="record">
-									<td align="center">${shopinfo.id}</td>
+									<td align="center"><img alt="${odetail.images}" width="45" height="45" 
+											src="${applicationScope.uploadedPath}/${odetail.images}"></td>
 									<td align="center">${shopinfo.orderdate}</td>
 									<td align="center">
 										<a href="<%=NoForm%>mallDetail&id=${shopinfo.id}">상세 보기</a></td>

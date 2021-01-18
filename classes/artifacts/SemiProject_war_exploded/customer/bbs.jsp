@@ -56,7 +56,7 @@
  	<div class="card" style="width: 18rem;"> 
  		<img src="${applicationScope.uploadedPath}/${bean.image}" class="card-img-top" alt="${bean.image}">
  	<div class="card-body"> 
- 		<h5 class="card-title">Card title</h5> 
+ 		<h5 class="card-title">${bean.title}</h5> 
  		<p class="card-text">${bean.id}</p>
  		
   		<a href="<%=NoForm%>bbsdetailview&no=${bean.no}&${requestScope.parameters}">
@@ -77,8 +77,8 @@
 						<div class="form-group">
 							<select class="form-control" name="mode" id="mode">
 								<option value="all" selected="selected">-- 선택하세요---------
-								<option value="writer" >작성자
-								<option value="subject" >제목									
+								<option value="id" >작성자
+								<option value="title" >제목									
 								<option value="content" >글 내용									
 							</select>
 						</div>
