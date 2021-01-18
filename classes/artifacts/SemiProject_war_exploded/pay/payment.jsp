@@ -11,58 +11,13 @@
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
 	<script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+	<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 	<%
 	pageContext.setAttribute("replaceChar", "\n");
 		int twelve = 12 ;
 		int offset = 2; //오프 셋 
 		int content = twelve - 2 * offset; //12 - 2 * 오프셋
 	%>
-	<script>
-		IMP.init('자신의가맹점_키');
-		
-		IMP.request_pay({
-		    pg : 'inicis', // version 1.1.0부터 지원.
-		    pay_method : 'card',
-		    merchant_uid : 'merchant_' + new Date().getTime(),
-		    name : '주문명:결제테스트',
-		    amount : 14000, //판매 가격
-		    buyer_email : 'iamport@siot.do',
-		    buyer_name : '구매자이름',
-		    buyer_tel : '010-1234-5678',
-		    buyer_addr : '서울특별시 강남구 삼성동',
-		    buyer_postcode : '123-456'
-		}, function(rsp) {
-		    if ( rsp.success ) {
-		        var msg = '결제가 완료되었습니다.';
-		        msg += '고유ID : ' + rsp.imp_uid;
-		        msg += '상점 거래ID : ' + rsp.merchant_uid;
-		        msg += '결제 금액 : ' + rsp.paid_amount;
-		        msg += '카드 승인번호 : ' + rsp.apply_num;
-		    } else {
-		        var msg = '결제에 실패하였습니다.';
-		        msg += '에러내용 : ' + rsp.error_msg;
-		    }
-		    alert(msg);
-		});
-		var Iamport = require('iamport');
-		var iamport = new Iamport({
-		  impKey: '자신의_API_키',
-		  impSecret: '자신의_APIscret_키'
-		});
-		app.get('/payments/status/all',(req,res)=>{
-		        iamport.payment.getByStatus({
-		          payment_status: 'paid' 
-		        }).then(function(result){
-		            res.render('payments_list',{list:result.list});
-		        }).catch(function(error){
-		            console.log(error);
-		            red.send(error);
-		        })
-		});
-		function phonechange(){
-			
-		}
-	</script>
 	<script type="text/javascript">
 	  function sendaddshipping() {
 	        new daum.Postcode({
@@ -119,13 +74,52 @@
 	        }).open();
 	    }
 		$(document).ready(function() {
+			
+			var productname = "${param.productname}";
+				console.log(productname);			
 			$("[name=addrlist]").click(function(e) {
-				var selectaddr = $(this).text();
-				$("#addrtext").text($(this).text());
+				$("#addrshippname").text($(this).children('.shippingname').text());
+				$("#addrname").text($(this).children('.payee').text());
+				$("#addrtext").text($(this).children('.address1n2').text());
 				$("#exampleModal").modal('hide');
 			});
+			$("[name=couponselect]").click(function(e){
+				var couponchoice = $(this).text() ;
+				var kind = $(this).data("kind");
+				$("#coupontext").text($(this).text());
+				
+				if("${param.buyCount}" != ""){
+					if(kind == 2){ //무료배송
+						var total = parseInt("${totalprice}");
+						console.log(total);
+						$("#shippingfee").text(0+"원");
+						$("#totalprice").text(total+"원");
+						
+						
+					}else {
+						var total = parseInt("${totalprice}");
+						var discount = parseFloat($(this).data("discount")).toFixed(1);
+						$("#shippingfee").text(2500+"원");
+						$("#totalprice").text((total - (total * discount) + 2500) + "원");
+						console.log(total);
+						console.log(total * discount)
+					}
+				}else {
+					if(kind == 2){ //무료배송
+						var total = parseInt("${totalprice}");
+						$("#shippingfee").text(0+"원");
+						$("#totalprice").text(total+"원");
+					}else {
+						var total = parseInt("${totalprice}"); // 정기구독 곱한 총가격
+						var discount = parseFloat($(this).data("discount")).toFixed(1); //할인율
+						$("#shippingfee").text(2500+"원"); // 배송비
+						$("#totalprice").text(parseInt(total - (total * discount) + 2500) + "원"); // 총 결제 금액
+					}
+				}
+				$("#couponselectbtn").modal('hide');
+				
+			});
 		});
-	
 	</script>
 	<style type="text/css">
 		#payinfotable th{ font-weight: bold; padding: 7px 10px 7px 15px;}
@@ -135,19 +129,55 @@
 	</style>
 </head>
 <body>
+	<div class="modal fade" id="couponselectbtn" data-bs-backdrop="static"
+		data-bs-keyboard="false" tabindex="-1"
+		aria-labelledby="staticBackdropLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="staticBackdropLabel">적용하실 쿠폰을 선택해주세요.</h5>
+					<button type="button" class="btn-close" data-bs-dismiss="modal"	aria-label="Close"></button>
+				</div>
+				<div class="modal-body">
+					<div class="list-group">
+						<c:forEach items="${coupons}" var="coupon">
+							<button type="button" class="list-group-item list-group-item-action" aria-current="true" data-kind="${coupon.kind}" data-discount="${coupon.discount}" name="couponselect">
+								<c:if test="${coupon.kind==1}">
+                                    (할인쿠폰)
+                                </c:if>
+								<c:if test="${coupon.kind==2}">
+                                    (배송비할인)
+                                </c:if>
+                                <span>${coupon.name}</span>
+                                <c:if test="${coupon.kind==1}">
+									<span><fmt:formatNumber type="percent" maxIntegerDigits="3" value="${coupon.discount}"></fmt:formatNumber></span>
+								</c:if>
+								<c:if test="${coupon.kind==2}">
+                                    배송비 전액
+                                </c:if>
+							</button>
+						</c:forEach>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary"	data-bs-dismiss="modal">닫기</button>
+				</div>
+			</div>
+		</div>
+	</div>
 	<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 	  <div class="modal-dialog modal-dialog-scrollable">
 	    <div class="modal-content">
 	      <div class="modal-header">
-	        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+	        <h5 class="modal-title" id="exampleModalLabel">배송지를 선택해주세요.</h5>
 	        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 	      </div>
 	      <div class="modal-body">
 	         <div class="list-group">
-		         <c:forEach items="${lists}" var="item">
+		         <c:forEach items="${addressList}" var="addr">
 					<button type="button" class="list-group-item list-group-item-action" aria-current="true" name="addrlist">
-						<span>${item.address1}</span>
-						<span>${item.address2}</span>
+						<span class="shippingname">${addr.shippingname}</span> / <span class="payee">${addr.name}</span>
+						<span class="address1n2">${addr.address1}</span>
 					</button>
 		         </c:forEach>
 			 </div>
@@ -159,16 +189,31 @@
 	  <div class="modal-dialog modal-dialog-scrollable">
 	    <div class="modal-content">
 	      <div class="modal-header">
-	        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+	        <h5 class="modal-title" id="exampleModalLabel">신규 배송지를 추가해주세요.</h5>
 	        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 	      </div>
 	      <div class="modal-body">
 	      	<form method="post" action="<%=YesForm%>?command=paymentaddaddr">
 	      		<input type="hidden" name="id" value="${loginfo.id}">
-	      		<input type="hidden" name="shippingname" value="${loginfo.name}">
-	      		<input type="hidden" name="name" value="${loginfo.name}">
 	      		<input type="hidden" name="phone" value="${loginfo.phone}">
-	      		<input type="hidden" name="paymentshipping" value="gotopayment">
+				<c:if test="${requestScope.regular==1}">
+					<input type="hidden" name="productcode" value="${productRLists.get(0).getProductcode()}">
+					<input type="hidden" name="directbuy" value="${directbuy}">
+					<input type="hidden" name="months" value="${productRLists.get(0).getMonths()}">
+					<input type="hidden" name="regular" value="1">
+				</c:if>
+				<c:if test="${requestScope.regular==-1}">
+					<input type="hidden" name="productcode" value="${productLists.get(0).getProductcode()}">
+					<input type="hidden" name="directbuy" value="${directbuy}">
+					<input type="hidden" name="qty" value="${productLists.get(0).getQty()}">
+					<input type="hidden" name="regular" value="-1">
+				</c:if>
+				<div class="input-group mb-3">
+					<input type="text" name="shippingname" class="form-control" placeholder="배송지 이름" aria-label="배송지 이름" aria-describedby="basic-addon2">
+				</div>
+				<div class="input-group mb-3">
+					<input type="text" name="name" class="form-control" placeholder="수취인" aria-label="수취인" aria-describedby="basic-addon2">
+				</div>
 		      	<div class="input-group mb-3">
 				  <input type="text" id="sample4_postcode" class="form-control" placeholder="우편번호" aria-label="우편번호" aria-describedby="basic-addon2">
 				  <button type="button" class="input-group-text" id="basic-addon2" onclick="sendaddshipping()">우편번호 찾기</button>
@@ -222,7 +267,7 @@
 					<tr align="center">
 						<th style="background: #f0f0f5; font-weight: bold;">휴대폰 번호</th>
 						<td class="col-md-4">
-							<input type="text" name="phonenum" value="${sessionScope.loginfo.phone}">
+							<input type="text" id="phonenum" name="phonenum" value="${sessionScope.loginfo.phone}">
 						</td>
 						<td class="col-md-4">
 							<button type="button" class="btn btn-warning btn-sm">
@@ -253,31 +298,25 @@
 				<table id="deliverytable" style="padding: 10px 0px 10px 16px; font: 12px 돋움, Dotum, sans-werif; white-space: nowrap; width: 100%;">
 					<tbody>
 						<tr align="center">
-							<th style="background: #f0f0f5; font-weight: bold;">배송지 이름
-							</th>
-							<td align="center">${lists[0].shippingname}
-							</td>
-							<!-- <td>
-								<button class="col-md-6" type="button" name="basedelivery" style="background: white;">
-									기본배송지
-								</button>
-							</td> -->
+							<th style="background: #f0f0f5; font-weight: bold;">배송지 이름</th>
+							<td align="center" id="addrshippname">${address.shippingname}</td>
+						</tr>
+						<tr align="center">
+							<th style="background: #f0f0f5; font-weight: bold;">수령인</th>
+							<td align="center" id="addrname">${address.name}</td>
 						</tr>
 						<tr align="center">
 							<th style="background: #f0f0f5; font-weight: bold;">배송주소</th>
-							<td align="center" id="addrtext">${lists[0].address1}${lists[0].address2}</td>
+							<td align="center" id="addrtext">${address.address1} ${address.address2}</td>
 						</tr>
 						<tr align="center">
 							<th style="background: #f0f0f5; font-weight: bold;">연락처</th>
-							<td align="center">${sessionScope.loginfo.phone}</td>
+							<td align="center">${address.phone}</td>
 						</tr>
 					</tbody>
 				</table>
 			</div>
 			<div style="margin: 8px 0px 0px; font:12px 돋움, Dotum, sans-serif;">
-				<div style="font: 18px; margin: 20px 0px 9px; font-weight: bold; margin-left: 200px;">
-					배송 1건 중 1
-				</div>
 				<hr style="border: none;">
 				<div style="padding: 10px 15px 10px 20px; background: #EEEEEE;">
 					<strong>1/29</strong>
@@ -285,8 +324,42 @@
 				</div>
 				<hr style="border: none;">
 				<div>
-						<span>${bean.productname}</span>
-					<p align="right"><span>수량 1개 / <span>무료 배송</span></span></p>
+					<c:if test="${requestScope.reguler==1}">
+						<table>
+							<c:forEach var="product" items="${requestScope.productRLists}">
+								<tr>
+									<td>
+									<img class="img-thumbnail" alt="prod-img" style="margin-top: 10px; margin-right: 0px;"
+										src="${pageContext.request.contextPath}/images/product/${product.images}" width="100" height="100">
+									</td>
+									<td>
+										<span style="padding-left:0px; font-size: 25px; color: blue;">${product.productname}</span>  
+									</td>
+									<td>
+										<span class="col-md-10" style="margin-bottom:10px; margin-left: 150px; font-size: 25px; color: red;">${product.months} 개월 정기구매</span>
+									</td>
+								</tr>
+							</c:forEach>
+						</table>
+					</c:if>
+					<c:if test="${requestScope.reguler==-1}">
+						<table>
+							<c:forEach var="product" items="${requestScope.productLists}">
+								<tr style="border-bottom: 1px solid #000000;">
+									<td>
+										<img class="img-thumbnail" alt="prod-img" style="margin-top: 10px; margin-right: 0px;" src="${pageContext.request.contextPath}/images/product/${product.images}" width="100" height="100">
+									</td>
+									<td id="product_lists">
+										<span style="padding-left: 0px; font-size: 25px; color: blue;">${product.productname}</span>
+									</td>
+									<td id="product_lists2">
+										<span class="col-md-10" style="margin-bottom:10px; margin-left: 150px; font-size: 25px; color: red;">${product.qty} 개</span>
+									</td>
+								</tr>
+							</c:forEach>
+						</table>
+					</c:if>
+					<p align="right"><span id="monthVal" style="font-weight: bolder; background-color: yellow; color: black;">상품 종류 ${requestScope.totalcount} 종류 </span></p>
 				</div>
 				<hr>
 				<div>
@@ -297,26 +370,37 @@
 				<h3 align="center">결제 정보</h3>
 				<hr>
 			</div>
+		<form method="get" action="<%=YesForm%>" >
+			<input type="hidden" name="command" value="paymentval">	
 			<table id="payinfotable" style="margin: 8px 0px 0px; font:12px 돋움, Dotum, sans-serif;">
 				<tbody align="center">
 				<tr align="center">
 					<th>총 상품가격</th>
-					<td>${bean.productprice}원</td>
+					<td><fmt:formatNumber value="${requestScope.totalprice}" pattern="#,###"/>원</td>
 				</tr>
 				<tr align="center">
 					<th>할인 쿠폰</th>
-					<td align="center">
-						${coupon.kind==1}
-						<button style="float: right; font: 10px;" type="button" class="btn btn-outline-warning btn-sm"> 
-							<a href="http://localhost:8989/SemiProject/dodamdodam?command=coupon">쿠폰 선택
-							</a>
+					<td align="center" id="coupontext">
+						${couponitem.name}
+					</td>
+					<td>
+						<button style="float: right; font: 10px;" type="button"
+							 class="btn btn-warning btn-sm" data-bs-toggle="modal" data-bs-target="#couponselectbtn"> 
+							<span>쿠폰 선택</span>
 						</button>
 					</td>
 				</tr>
 				<tr align="center">
 					<th>배송비</th>
-					<td>
-						<fmt:formatNumber value="${shipExpense}" pattern="###,###"/>원
+					<td id="shippingfee">
+						<c:choose>
+							<c:when test="${requestScope.totalprice>50000}">
+								<fmt:formatNumber value="0" pattern="#,###"/>원
+							</c:when>
+							<c:otherwise>
+								<fmt:formatNumber value="2500" pattern="#,###"/>원
+							</c:otherwise>
+						</c:choose>
 					</td>
 				</tr>
 				<tr align="center">
@@ -325,38 +409,89 @@
 				</tr>
 				<tr align="center">
 					<th>총 결제금액</th>
-					<td>
-						<c:set var="finalAmount" value="${totalAmount + shipExpense}" />
-						<strong>
-							<fmt:formatNumber value="${finalAmount}" pattern="###,###"/> 원
-						</strong>
-					</td>
+					<c:choose>
+						<c:when test="${requestScope.totalprice>50000}">
+							<td id="totalprice">${requestScope.totalprice}</td>
+						</c:when>
+						<c:otherwise>
+							<td id="totalprice"><fmt:formatNumber value="${requestScope.totalprice + 2500}" pattern="#,###"/>원</td>
+						</c:otherwise>
+					</c:choose>
 				</tr>
 				
 				<tr align="center">
 					<th>결제방법</th>
 					<td style="padding: 4px 0px 0px; float: right;">
-						<input type="radio" name="" value="">&nbsp;신용/체크카드
-						<input type="radio" name="" value="">&nbsp;무통장입금(가상계좌)
+						<input type="radio" name="pymnt" value="card" checked>&nbsp;신용/체크카드
+						<input id="virtualaccount" type="radio" name="pymnt" value="banktrnsf">&nbsp;무통장입금(가상계좌)
 						<div align="center">
-							<input type="checkbox" checked="checked">&nbsp;선택한 결제수단 및 휴대번호로 향후 결제 이용에 동의합니다(선택)
+							<input id="agreecheck" type="checkbox" checked="checked">&nbsp;선택한 결제수단으로 향후 결제 이용에 동의합니다(선택)
 						</div>
 					</td>
 				</tr>
 				</tbody>
 			</table>
+		</form>
 		</div>
 		<br><br><br>
 		<div style="margin: 0px 0px 10px; font:12px 돋움, Dotum, sans-serif;">
 			<div>
 				<span>개인정보 제공안내</span>
-				<button type="button" style="background: white; float: right;">보기</button>
+				 <a onfocus="blur()" onclick="this.innerHTML=(this.nextSibling.style.display=='none')?'[닫기]':'[열기]';
+				 this.nextSibling.style.display=(this.nextSibling.style.display=='none')?'block':'none';" href="javascript:void(0)" ;>[열기]</a><div style="DISPLAY: none">
+
+					<div class="agreements__content " data-agreements-content=""
+						style="display: block;">
+						<table class="agreements__content__table">
+							<thead>
+								<tr>
+									<th class="agreements__content__th" width="24%">제공받는자</th>
+									<th class="agreements__content__th" width="24%">제공목적</th>
+									<th class="agreements__content__th" width="24%">제공정보</th>
+									<th class="agreements__content__th">보유 및 이용기간</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td class="agreements__content__td"><span
+										class="agreements__content__td__em"
+										style="word-break: break-all">소니바리</span></td>
+									<td class="agreements__content__td"><span
+										class="agreements__content__td__em">서비스 제공, 사은행사,
+											구매자확인, 해피콜</span></td>
+									<td class="agreements__content__td">성명, 휴대전화번호(또는 안심번호),
+										배송지주소, 이메일<br>※ 구매자와 수취인이 다를 경우에는 수취인의 정보(해외 배송 상품은
+										개인통관고유부호 포함)가 제공될 수 있습니다.
+									</td>
+									<td class="agreements__content__td"><span
+										class="agreements__content__td__em">재화 또는 서비스의 제공 목적이
+											달성 된 후 파기</span> (단, 관계법령에 정해진 규정에 따라 법정기간 동안 보관)</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
 			</div><br>
 		</div>
 		<div style="margin: 0px 0px 10px; font:12px 돋움, Dotum, sans-serif;">
 			<div>
 				<span>구매조건 확인 및 결제대행 서비스 약관 동의</span>
-				<button type="button" style="background: white; float: right;">보기</button>
+				 <a onfocus="blur()" onclick="this.innerHTML=(this.nextSibling.style.display=='none')?'[닫기]':'[열기]';
+				 this.nextSibling.style.display=(this.nextSibling.style.display=='none')?'block':'none';" href="javascript:void(0)" ;>[열기]</a><div style="DISPLAY: none">
+				 
+				  <li>
+                ② 관련법령에 의한 정보보유
+                <br>
+                상법, 전자상거래 등에서의 소비자보호에 관한 법률, 전자금융거래법 등 관련법령의 규정에 의하여 보존할 필요가 있는 경우 회사는 관련법령에서 정한 일정한 기간 동안 정보를 보관합니다. 이 경우 회사는 보관하는 정보를 그 보관의 목적으로만 이용하며 보존기간은 아래와 같습니다.
+                <ol>
+                    <li>1) 계약 또는 청약철회 등에 관한 기록 : 보존기간: 5년 / 보존근거: 전자상거래 등에서의 소비자보호에 관한 법률</li>
+                    <li>2) 대금결제 및 재화 등의 공급에 관한 기록 : 보존기간: 5년 / 보존근거: 전자상거래 등에서의 소비자보호에 관한 법률 (단, 건당 거래 금액이 1만원 이하의 경우에는 1년간 보존 합니다).</li>
+                    <li>3) 소비자의 불만 또는 분쟁처리에 관한 기록 : 보존기간: 3년 / 보존근거: 전자상거래 등에서의 소비자보호에 관한 법률</li>
+                    <li>4) 전자금융거래에 관한 기록 : 보존기간: 5년 / 보존근거: 전자금융거래법</li>
+                    <li>5) 방문에 관한 기록 : 보존기간: 3개월 / 보존근거: 통신비밀보호법</li>
+                </ol>
+            </li>
+				</div>
 			</div><br>
 		</div>
 		<div style="margin: 10px 0px 0px; font:12px 돋움, Dotum, sans-serif;">
@@ -368,9 +503,110 @@
 			위 주문 내용을 확인 하였으며, 회원 본인은 결제에 동의합니다.<br>
 		</div>
 		<div align="center">
-			<button class="btn btn-primary" type="button">결제 하기</button>
+			<button class="btn btn-primary" type="button" onclick="requestPay()">결제 하기</button>
 		</div>
 	</div>
-<%@ include file="../common/footer.jsp" %>
+	<script>
+        var IMP = window.IMP; // 생략해도 괜찮습니다.
+        IMP.init("imp34864609"); // "imp00000000" 대신 발급받은 "가맹점 식별코드"를 사용합니다.
+        
+        var today = new Date();
+
+        var merchant_uid = today.getFullYear() + "" + today.getMonth() + "" + today.getDate() + "" + today.getHours() + "" + today.getMinutes() + "" + today.getSeconds();
+        var list = new Array();
+        
+        if(${regular==-1}){
+        	for(var i=0 ; i<${totalcount} ; i++){
+        		<%!int num1=0;%>
+        		var product = new Object();
+        		product.name = "${productLists.get(num1).getProductname()}";
+        		product.price = "${productLists.get(num1).getProductprice()*0.8}";
+        		product.qty = "${productLists.get(num1).getQty()}";
+        		list.push(product);
+        		<%num1++;%>
+        	}
+        }else {
+        	for(var i=0 ; i<${totalcount} ; i++){
+        		<%!int num2=0;%>
+        		var product = new Object();
+        		product.name = "${productRLists.get(num2).getProductname()}";
+        		if(${productRLists.get(0).getMonths()>1}){
+        			product.price = "${productRLists.get(num2).getProductprice()*0.7}";
+        		}else {
+        			product.price = "${productRLists.get(num2).getProductprice()*0.8}";
+        		}
+        		product.months = "${productRLists.get(0).getMonths()}";
+        		list.push(product);
+        		<%num2++;%>
+        	}
+        }
+        var p_name = null;
+        if(list.length > 1){
+        	p_name = list[0].name + "외" + (list.length-1) + "개";
+        }else {
+        	p_name = list[0].name;
+        }
+        
+        var totalprice = parseInt($("#totalprice").text().replace(",","").replace("원",""));
+        var email = "";
+        var b_name = "${sessionScope.loginfo.name}";
+        var b_tel = $("#phonenum").val();
+        var b_addr = $("#addrtext").text();
+        
+        function requestPay() {
+        	if ($("#agreecheck").is(":checked")==false) {
+				alert('결제 이용 동의를 선택해주세요.');
+				return false;
+			}
+			if($("#virtualaccount").is(":checked")==true){
+				var total = parseInt($("#totalprice").text().replace(",","").replace("원","")); 
+				$(location).attr("href","http://localhost:8989/SemiProject/pay/virtualaccount.jsp?totalprice="+total);
+			}
+        	console.log("결제 실행중");
+        	var obj = document.getElementsByName("momentum");
+        	if(obj.value == "banktrnsf"){
+        		// 여기에 나중에 계좌이체로 처리할 페이지로 이동하게끔 유도
+        	}
+            // IMP.request_pay(param, callback) 호출
+            IMP.request_pay({ // param
+                pg: "html5_inicis",
+                pay_method: "card",
+                merchant_uid: merchant_uid,
+                buyer_email: email,
+                name: p_name,
+                amount: totalprice,
+                buyer_name: b_name,
+                buyer_tel: b_tel,
+                buyer_addr: b_addr,
+            }, function (rsp) { // callback
+                if (rsp.success) { // 결제 성공 시: 결제 승인 또는 가상계좌 발급에 성공한 경우
+                    // jQuery로 HTTP 요청
+                    jQuery.ajax({
+                        url: "/dodamdodam?command=payOk", // 가맹점 서버
+                        method: "POST",
+                        contentType: "application/x-www-form-urlencoded; charset=utf-8",
+                        data: {
+                            imp_uid: rsp.imp_uid,
+                            merchant_uid: rsp.merchant_uid,
+                            name: name,
+                            amount: product.amount,
+                            buyer_email: email,
+                            buyer_name: b_name,
+                            buyer_tel: b_tel,
+                            buyer_addr: b_addr,
+                        },
+                        datatype: "json"
+                    }).done(function (data) {
+                        // 가맹점 서버 결제 API 성공시 로직
+                    	console.log("결제 성공");
+                    })
+                } else {
+                    alert("결제에 실패하였습니다. 에러 내용: " +  rsp.error_msg);
+                    console.log("결제 실패");
+                }
+            });
+        }
+    </script>
+	<%@ include file="../common/footer.jsp" %>
 </body>
 </html>

@@ -26,7 +26,7 @@ public class PaymentShippingController extends SuperClass{
 		int cnt = -99999 ; 			
 		cnt = bdao.InsertData(bean) ;
 		
-		new Addresscontroller().doGet(request, response);
+		new PaymentController().doPost(request, response);
 	}
 	@Override
 	public boolean validate(HttpServletRequest request) {

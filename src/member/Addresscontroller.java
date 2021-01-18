@@ -35,7 +35,6 @@ public class Addresscontroller extends SuperClass {
 		
 		// 파라미터 확인을 위한 출력
 		System.out.println(this.getClass()+ ":" + parameters.toString());
-//		int totalCount = 33;
 		int totalCount = 
 				dao.SelectTotalCount(
 						parameters.getMode(), 
@@ -71,7 +70,6 @@ public class Addresscontroller extends SuperClass {
 		
 		//바인딩해야 할 목록들 
 		request.setAttribute("lists", lists); // 게시물 목록
-		System.out.println(lists +"입니다.");
 
 		// 페이징 관련 항목들
 		request.setAttribute("pagingHtml", pageInfo.getPagingHtml());

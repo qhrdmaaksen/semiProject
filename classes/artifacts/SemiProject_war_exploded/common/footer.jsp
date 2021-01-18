@@ -5,7 +5,6 @@
 <html>
 <head>
 	<meta charset="UTF-8">
-	<title>dodamFooter</title>
 </head>
 <body>
 	<footer id="footer" class="container-fluid">

@@ -5,6 +5,26 @@
 	int offset = 3; //오프 셋 
 	int content = 10 * offset; //12 - 2 * 오프셋
 %>
+<c:set var="shippingstatus" value="0" />
+
+<c:if test="${not empty requestScope.order}">
+	<c:if test="${requestScope.order.shippingstatus == '0'}">
+		<!-- 배송준비중 -->
+		<c:set var="shippingstatus" value="0" />
+	</c:if>
+	<c:if test="${requestScope.order.shippingstatus == '1'}">
+		<!-- 배송중 -->
+		<c:set var="shippingstatus" value="1" />
+	</c:if>
+	<c:if test="${requestScope.order.shippingstatus == '2'}">
+		<!--배송예정 -->
+		<c:set var="shippingstatus" value="2" />
+	</c:if>
+	<c:if test="${requestScope.order.shippingstatus == '3'}">
+		<!-- 배송도착 -->
+		<c:set var="shippingstatus" value="3" />
+	</c:if>
+</c:if>
 
 <html>
 <head>
@@ -30,9 +50,9 @@
 						</thead>
 						<tbody>
 							<c:set var="totalAmount" value="0" />
-							<c:forEach items="${requestScope.lists2}" var="odetail">
+							<c:forEach items="${requestScope.lists}" var="odetail">
 								<tr>
-									<td>${sessionScope.loginfo.name}</td>
+									<td>${odetail.productname}</td>
 									<td>
 										<img alt="${odetail.images}" width="45" height="45" 
 											src="${applicationScope.uploadedPath}/${odetail.images}">										
@@ -40,7 +60,9 @@
 							</c:forEach>
 							<c:forEach items="${requestScope.lists}" var="lists">
 								<tr>
-									<tr>								
+									<tr>
+									<td class="thick-line"></td>
+									<td class="thick-line"></td>								
 									<td class="text-center"><fmt:formatNumber
 											value="${lists.productprice}" pattern="###,###"/> 원</td>
 									<td class="text-center"><fmt:formatNumber
@@ -143,16 +165,16 @@
 						<tbody>
 							<tr>
 								<td class="text-center gr"><strong>배송상태</strong></td>
-								<c:if test="${order.shippingstatus=1}">
+								<c:if test="${shippingstatus==1}">
 								<td>배송중입니다.</td>
 								</c:if>
-								<c:if test="${order.shippingstatus=0}">
+								<c:if test="${shippingstatus==0}">
 								<td>배송준비중입니다.</td>
 								</c:if>
-								<c:if test="${order.shippingstatus=2}">
+								<c:if test="${shippingstatus==2}">
 								<td>배송예정입니다.</td>
 								</c:if>
-								<c:if test="${order.shippingstatus=3}">
+								<c:if test="${shippingstatus==3}">
 								<td>배송도착했습니다.</td>
 								</c:if>
 							</tr>

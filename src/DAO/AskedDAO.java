@@ -77,7 +77,7 @@ public class AskedDAO extends SuperDAO{
 		PreparedStatement pstmt = null ; 
 		ResultSet rs = null ; 
 		
-		String sql = " select count(*) as cnt from customer_center_qna " ;
+		String sql = "select count(*) as cnt from customer_center_qna " ;
 		if (mode.equalsIgnoreCase("all") == false) {
 			sql += " where \"" + mode + "\" like '%" + keyword + "' " ;
 		}

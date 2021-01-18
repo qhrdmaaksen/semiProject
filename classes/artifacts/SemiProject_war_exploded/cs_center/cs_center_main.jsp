@@ -16,14 +16,6 @@ int mysearch = 2;
 	<title>cs_center</title>
 	<meta charset="UTF-8">
 	<%@ include file="../common/nav.jsp"%>
-	<link rel="stylesheet"
-		href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-	<script
-		src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-	<script
-		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-	<script
-		src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 	<script type="text/javascript">
 	
 		function getaskedlist (seq, askedmode="all", askedkeyword="") {
@@ -90,7 +82,7 @@ int mysearch = 2;
 		function loginCheck(seq_index) {
 			console.log("login check!");
 			console.log(${whologin});
-			if(${whologin} == 0){
+			if(${whologin==0}){
 				alert("로그인이 필요합니다");
 				return false;
 			}else {
@@ -110,7 +102,7 @@ int mysearch = 2;
 		function askedloginCheck(seq_index) {
 			console.log("login check!");
 			console.log(${whologin});
-			if(${whologin} == 0){
+			if(${whologin==0}){
 				//alert("로그인이 필요합니다");
 				return false;
 			}else {
@@ -152,64 +144,69 @@ int mysearch = 2;
 		</ul>
 		<!-- Tab panes -->
 		<div class="tab-content">
-			<div id="home" class="container tab-pane active" style="padding-bottom: 10%;">
-				<br>
+			<div id="home" class="container-fluid tab-pane active" style="padding-bottom: 10%;">
 				<table class="table table-striped table-hover">
-					<thead class="container">
+					<colgroup>
+						<col width="20%">
+						<col width="60%">
+						<col width="10%">
+						<col width="10%">
+					</colgroup>
+					<thead>
 						<tr>
-							<td class="col-md-2" align="center">제목</td>
-							<!-- <td class="col-md-4" align="right">작성 일자</td> -->
+							<td align="center">분류</td>
+							<c:if test="${whologin != 2}">
+								<td align="center" colspan="3">제목</td>
+							</c:if>
+							<c:if test="${whologin == 2}">
+								<td align="center">제목</td>
+								<td></td>
+								<td></td>
+							</c:if>
 						</tr>
 					</thead>
 					<c:forEach var="noticebean" items="${requestScope.lists}">
 						<tr>
-							<td align="center">
-							<%-- 	<c:forEach var="cnt" begin="1" end="${bean.depth}">
-								</c:forEach>  --%>
-								<a
-								href="#" onclick="loginCheck(${noticebean.seq_index})">
-									${noticebean.title} 
-								</a>
-							</td>
+							<td align="center">${noticebean.category}</td>
+							<c:if test="${whologin != 2}">
+								<td align="center" colspan="3">
+									<a href="#" onclick="loginCheck(${noticebean.seq_index})">${noticebean.title}</a>
+								</td>
+							</c:if>
+							<c:if test="${whologin == 2}">
+								<td align="center">
+									<a href="#" onclick="loginCheck(${noticebean.seq_index})">${noticebean.title}</a>
+								</td>
+							</c:if>
 							<td>
 								<c:if test="${whologin == 2}">
-									<a
-										href="<%=NoForm%>notice_update&seq_index=${noticebean.seq_index}&${requestScope.parameters}">
-										수정 
-									</a>
+									<a href="<%=NoForm%>notice_update&seq_index=${noticebean.seq_index}&${requestScope.parameters}">수정</a>
 								</c:if>
 							</td>
 							<td>
 								<c:if test="${whologin == 2}">
-									<a
-										href="<%=NoForm %>notice_delete&seq_index=${noticebean.seq_index}&${requestScope.parameters}">
-										삭제 
-									</a>
+									<a href="<%=NoForm %>notice_delete&seq_index=${noticebean.seq_index}&${requestScope.parameters}">삭제</a>
 								</c:if>
 							</td>
 						</tr>
 					</c:forEach>
 					<tr>
-						<td colspan="2" align="center">
+						<td colspan="4" align="center">
 							<form class="form-inline" name="myform" onsubmit="return false;">
 								<input type="hidden" name="command" value="cs_center_main">
 								<div class="form-group">
 									<select class="form-control" name="mode" id="mode">
-										<option value="title" selected="selected">제목
-										<option value="content">글 내용
+										<option value="title" selected="selected">제목</option>
+										<option value="content">글 내용</option>
 									</select>
 								</div>
 								<div class="form-group">
-									<input type="text" class="form-control btn-xs" name="keyword"
-										id="keyword" placeholder="검색 키워드">
+									<input type="text" class="form-control btn-xs" name="keyword" id="keyword" placeholder="검색 키워드">
 								</div>
-								<button class="btn btn-default btn-warning" type="button"
-									onclick="search()">검색</button>
-								<button class="btn btn-default btn-warning" type="button"
-									onclick="searchAll()">전체 검색</button>
+								<button class="btn btn-default btn-warning" type="button" onclick="search()">검색</button>
+								<button class="btn btn-default btn-warning" type="button" onclick="searchAll()">전체 검색</button>
 								<c:if test="${whologin == 2}">
-									<button class="btn btn-default btn-warning" type="button"
-										onclick="writeForm();">글 쓰기</button>
+									<button class="btn btn-default btn-warning" type="button" onclick="writeForm();">글 쓰기</button>
 								</c:if>
 								<div style="float: right; margin-top: 2%;" class="col-md-4">
 									<p class="form-control-static">${requestScope.pagingStatus}</p>
@@ -222,46 +219,56 @@ int mysearch = 2;
 				<div>${requestScope.pagingHtml}</div>
 			</div>
 			</div>
-			<div id="menu1" class="container tab-pane fade">
-				<br>
+			<div id="menu1" class="container-fluid tab-pane fade">
 				<table class="table table-striped table-hover">
-					<thead class="container">
+					<colgroup>
+						<col width="20%">
+						<col width="60%">
+						<col width="10%">
+						<col width="10%">
+					</colgroup>
+					<thead>
 						<tr>
-							<td class="col-md-2" align="center">제목</td>
+							<td align="center">분류</td>
+							<c:if test="${whologin != 2}">
+								<td align="center" colspan="3">제목</td>
+							</c:if>
+							<c:if test="${whologin == 2}">
+								<td align="center">제목</td>
+								<td></td>
+								<td></td>
+							</c:if>
 						</tr>
 					</thead>
 					<tbody id="askedbody">
 						<c:forEach var="bean" items="${askedlists}">
 							<tr>
-								<td align="center">
-								<%-- 	<c:forEach var="cnt" begin="1" end="${bean.depth}">
-									</c:forEach>  --%>
-									<a
-									href="#" onclick="askedloginCheck(${bean.seq_index})">
-										${bean.title} 
-									</a>
-								</td>
+								<td align="center">${bean.category}</td>
+								<c:if test="${whologin != 2}">
+									<td align="center" colspan="3">
+										<a href="#" onclick="askedloginCheck(${bean.seq_index})">${bean.title}</a>
+									</td>
+								</c:if>
+								<c:if test="${whologin == 2}">
+									<td align="center">
+										<a href="#" onclick="askedloginCheck(${bean.seq_index})">${bean.title}</a>
+									</td>
+								</c:if>
 								<td>
 									<c:if test="${whologin == 2}">
-										<a
-											href="<%=NoForm%>asked_update&seq_index=${bean.seq_index}&${requestScope.askedparameters}">
-											수정 
-										</a>
+										<a href="<%=NoForm%>asked_update&seq_index=${bean.seq_index}&${requestScope.askedparameters}">수정</a>
 									</c:if>
 								</td>
 								<td>
 									<c:if test="${whologin == 2}">
-										<a
-											href="<%=NoForm %>asked_delete&seq_index=${bean.seq_index}&${requestScope.askedparameters}">
-											삭제 
-										</a>
+										<a href="<%=NoForm %>asked_delete&seq_index=${bean.seq_index}&${requestScope.askedparameters}">삭제</a>
 									</c:if>
 								</td>
 							</tr>
 						</c:forEach>
 					</tbody>
 					<tr>
-						<td colspan="2" align="center">
+						<td colspan="4" align="center">
 							<form class="form-inline" name="myform" onsubmit="return false;">
 								<input type="hidden" name="command" value="cs_center_main_asked">
 								<div class="form-group">

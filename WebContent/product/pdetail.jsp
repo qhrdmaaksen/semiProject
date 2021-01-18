@@ -308,14 +308,14 @@
 		function goCart(){
 			var command = '<input name="command" value="mallcartadd" style="display: none;">';
 			$("#product-form").append(command);
-			$("#product-form").append("<input type='text' id='productcode' name='productcode' value='" + ${bean.productcode} + "'>");
-			$("#product-form").append("<input type='text' id='totalprice' name='totalprice' value='" + totalprice + "'>");
-			$("#product-form").append("<input type='text' id='stock' name='stock' value='${bean.stock}'>"); 
+			$("#product-form").append("<input type='hidden' id='productcode' name='productcode' value='" + ${bean.productcode} + "'>");
+			$("#product-form").append("<input type='hidden' id='totalprice' name='totalprice' value='" + totalprice + "'>");
+			$("#product-form").append("<input type='hidden' id='stock' name='stock' value='${bean.stock}'>");
 			if($("#delivery-select:checked").length == 0){
-				$("#product-form").append("<input type='text' id='qty' name='qty' value='"+$("#buy-qty").val()+"'>"); 
+				$("#product-form").append("<input type='hidden' id='qty' name='qty' value='"+$("#buy-qty").val()+"'>");
 			}else {
 				var monthVal = $("#monthVal").val();
-				$("#product-form").append("<input type='text' name='months' value='"+monthVal+"'>"); 
+				$("#product-form").append("<input type='hidden' type='text' name='months' value='"+monthVal+"'>");
 			}
 			$("#product-form").submit();
 		};
@@ -323,18 +323,18 @@
 		function goPay(){
 			var command = '<input name="command" value="payment">';
 			$("#product-form").append(command);
-			//$("#product-form").append("<input type='text' id='productname' name='productname' value='" + ${productname} + "'>");
-			$("#product-form").append("<input type='text' id='productcode' name='productcode' value='" + ${bean.productcode} + "'>");
-			$("#product-form").append("<input type='text' id='totalprice' name='totalprice' value='" + totalprice + "'>");
-			$("#product-form").append("<input type='text' id='stock' name='stock' value='${bean.stock}'>"); 
-			$("#product-form").append("<input type='text' name='directbuy' value='1'>");
+			$("#product-form").append("<input type='hidden' id='productcode' name='productcode' value='" + ${bean.productcode} + "'>");
+			$("#product-form").append("<input type='hidden' id='totalprice' name='totalprice' value='" + totalprice + "'>");
+			$("#product-form").append("<input type='hidden' id='stock' name='stock' value='${bean.stock}'>");
+			$("#product-form").append("<input type='hidden' name='directbuy' value='1'>");
 			if($("#delivery-select:checked").length == 0){
 				var buyCount = $("#buy-qty").val();
-				$("#product-form").append("<input type='text' name='qty' value='"+buyCount+"'>"); 
+				$("#product-form").append("<input type='hidden' name='qty' value='"+buyCount+"'>");
+				$("#product-form").append("<input type='hidden' name='regular' value='-1'>");
 			}else {
 				var monthVal = $("#monthVal").val();
-				$("#product-form").append("<input type='text' name='months' value='"+monthVal+"'>");
-				$("#product-form").append("<input type='text' name='qty' value='-1'>"); 
+				$("#product-form").append("<input type='hidden' name='months' value='"+monthVal+"'>");
+				$("#product-form").append("<input type='hidden' name='regular' value='1'>");
 			}
 			$("#product-form").submit();
 		};

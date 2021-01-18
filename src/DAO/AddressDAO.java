@@ -108,7 +108,7 @@ public class AddressDAO  extends SuperDAO {
 	
 	public AddressVo SelectDateByPK(String id) {
 		String sql = "select \"seq_add\", \"id\", \"shippingname\", \"name\", \"address1\", \"address2\", \"phone\" from ("
-				+ "select \"seq_add\", \"id\", \"shippingname\", \"name\", \"address1\", \"address2\", \"phone\", rank() over (order by \"seq_add\") ranking from ADDRESSES where \"id\"=? order by \"seq_add\""
+				+ "select \"seq_add\", \"id\", \"shippingname\", \"name\", \"address1\", \"address2\", \"phone\", rank() over (order by \"seq_add\" desc) ranking from ADDRESSES where \"id\"=? order by \"seq_add\""
 				+ ") where ranking in(1)";
 		
 		conn = null ;
