@@ -115,7 +115,7 @@
 		      <div class="">
            		 <div class="mask">
             		<a href="<%=NoForm%>pdetail&productcode=${bean.productcode}&${requestScope.parameters}">		  	
-            		<img src="${applicationScope.uploadedPath}/${bean.images}"
+            		<img src="${pageContext.request.contextPath}/images/product/${bean.images}"
 										class="img-fluid w-100" width="200" height="300"
 										alt="${bean.images}" >
 		         	 </a> 
