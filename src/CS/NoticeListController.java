@@ -79,8 +79,7 @@ public class NoticeListController extends SuperClass{
 		System.out.println(this.getClass() + " : " + askedparameters.toString());
 		int askedtotalCount
 			=	askeddao.SelectTotalCount(askedparameters.getMode(), askedparameters.getKeyword());
-		
-		
+
 		
 		System.out.println("askedtotalCount : "+askedtotalCount);
 		String askedcontextPath = request.getContextPath();
@@ -104,6 +103,7 @@ public class NoticeListController extends SuperClass{
 		request.setAttribute("askedlists", askedlists);
 		request.setAttribute("askedpagingHtml", askedpageInfo.getPagingHtml());
 		request.setAttribute("askedpagingStatus", askedpageInfo.getPagingStatus());
+		request.setAttribute("askedpagingNumber", askedparameters.getPageNumber()==null?1:askedparameters.getPageNumber());
 		request.setAttribute("askedmode", askedparameters.getMode());
 		request.setAttribute("askedkeyword", askedparameters.getKeyword());
 		request.setAttribute("askedparameters", askedparameters.toString());

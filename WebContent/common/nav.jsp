@@ -112,7 +112,7 @@
 					<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">${sessionScope.loginfo.name}님<b class="caret"></b></a>
 					<ul class="dropdown-menu">
 						<li>
-							<a class="dropdown-item" href="<%=NoForm%>mypage">마이 페이지</a>
+							<a class="dropdown-item" href="<%=NoForm%>point">마이 페이지</a>
 						</li>
 						<li>
 							<a class="dropdown-item" href="<%=NoForm%>melogout">로그 아웃</a>

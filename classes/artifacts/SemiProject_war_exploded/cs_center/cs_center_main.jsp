@@ -17,10 +17,11 @@ int mysearch = 2;
 	<meta charset="UTF-8">
 	<%@ include file="../common/nav.jsp"%>
 	<script type="text/javascript">
-	
 		function getaskedlist (seq, askedmode="all", askedkeyword="") {
+			$("a").removeClass('aksed_selected');
+			$('a[id="askedlist[' + seq + ']"').addClass('aksed_selected');
 			$.ajax({
-				url:"/SemiProject/dodamdodam?command=cs_center_main_asked&pageNumber="+seq+"&pageSize=10&mode="+askedmode+"&keyword="+askedkeyword,
+				url:"/dodamdodam?command=cs_center_main_asked&pageNumber="+seq+"&pageSize=10&mode="+askedmode+"&keyword="+askedkeyword,
 				type:"get",
 				success: (response) => {
 					var tableForm ="";
@@ -28,35 +29,33 @@ int mysearch = 2;
 						tableForm += 
 						`
 							<tr>
-								<td align="center">
-									<a
-									href="#" onclick="askedloginCheck(\${arr.seq_index})">
-										\${arr.title}
-									</a>
-								</td>
-								<td>
-									<c:if test="${whologin == 2}">
-										<a
-											href="<%=NoForm%>asked_update&seq_index=\${arr.seq_index}&${parameters}">
-											수정 
-										</a>
-									</c:if>
-								</td>
-								<td>
-									<c:if test="${whologin == 2}">
-										<a
-											href="<%=NoForm %>asked_delete&seq_index=\${arr.seq_index}&${parameters}">
-											삭제 
-										</a>
-									</c:if>
-								</td>
+								<td align="center">\${arr.category}</td>
+								<c:if test="${whologin != 2}">
+									<td align="center" colspan="3">
+										<a href="#" onclick="askedloginCheck(\${arr.seq_index})">\${arr.title}</a>
+									</td>
+								</c:if>
+								<c:if test="${whologin == 2}">
+									<td align="center">
+										<a href="#" onclick="askedloginCheck(\${arr.seq_index})">\${arr.title}</a>
+									</td>
+								</c:if>
+								<c:if test="${whologin == 2}">
+									<td>
+										<a href="<%=NoForm%>asked_update&seq_index=\${arr.seq_index}&${parameters}">수정</a>
+									</td>
+								</c:if>
+								<c:if test="${whologin == 2}">
+									<td>
+										<a href="<%=NoForm %>asked_delete&seq_index=\${arr.seq_index}&${parameters}">삭제</a>
+									</td>
+								</c:if>
 							</tr>
 						`
-						
 					}
 					$("#askedbody").html(tableForm); 
 				},error: () => {
-					
+
 				}
 			})
 		}
@@ -123,6 +122,10 @@ int mysearch = 2;
 			font-weight: bold;
 			font-size: 1.05em;
 		}
+		.aksed_selected{
+			color: red;
+			font-weight: bold;
+		}
 	</style>
 </head>
 <body>
@@ -148,9 +151,14 @@ int mysearch = 2;
 				<table class="table table-striped table-hover">
 					<colgroup>
 						<col width="20%">
-						<col width="60%">
-						<col width="10%">
-						<col width="10%">
+						<c:if test="${whologin != 2}">
+							<col>
+						</c:if>
+						<c:if test="${whologin == 2}">
+							<col width="60%">
+							<col width="10%">
+							<col width="10%">
+						</c:if>
 					</colgroup>
 					<thead>
 						<tr>
@@ -178,16 +186,16 @@ int mysearch = 2;
 									<a href="#" onclick="loginCheck(${noticebean.seq_index})">${noticebean.title}</a>
 								</td>
 							</c:if>
-							<td>
-								<c:if test="${whologin == 2}">
+							<c:if test="${whologin == 2}">
+								<td>
 									<a href="<%=NoForm%>notice_update&seq_index=${noticebean.seq_index}&${requestScope.parameters}">수정</a>
-								</c:if>
-							</td>
-							<td>
-								<c:if test="${whologin == 2}">
+								</td>
+							</c:if>
+							<c:if test="${whologin == 2}">
+								<td>
 									<a href="<%=NoForm %>notice_delete&seq_index=${noticebean.seq_index}&${requestScope.parameters}">삭제</a>
-								</c:if>
-							</td>
+								</td>
+							</c:if>
 						</tr>
 					</c:forEach>
 					<tr>
@@ -219,13 +227,18 @@ int mysearch = 2;
 				<div>${requestScope.pagingHtml}</div>
 			</div>
 			</div>
-			<div id="menu1" class="container-fluid tab-pane fade">
+			<div id="menu1" class="container-fluid tab-pane fade" style="padding-bottom: 10%;">
 				<table class="table table-striped table-hover">
 					<colgroup>
 						<col width="20%">
-						<col width="60%">
-						<col width="10%">
-						<col width="10%">
+						<c:if test="${whologin != 2}">
+							<col>
+						</c:if>
+						<c:if test="${whologin == 2}">
+							<col width="60%">
+							<col width="10%">
+							<col width="10%">
+						</c:if>
 					</colgroup>
 					<thead>
 						<tr>
@@ -254,16 +267,16 @@ int mysearch = 2;
 										<a href="#" onclick="askedloginCheck(${bean.seq_index})">${bean.title}</a>
 									</td>
 								</c:if>
-								<td>
-									<c:if test="${whologin == 2}">
+								<c:if test="${whologin == 2}">
+									<td>
 										<a href="<%=NoForm%>asked_update&seq_index=${bean.seq_index}&${requestScope.askedparameters}">수정</a>
-									</c:if>
-								</td>
-								<td>
-									<c:if test="${whologin == 2}">
+									</td>
+								</c:if>
+								<c:if test="${whologin == 2}">
+									<td>
 										<a href="<%=NoForm %>asked_delete&seq_index=${bean.seq_index}&${requestScope.askedparameters}">삭제</a>
-									</c:if>
-								</td>
+									</td>
+								</c:if>
 							</tr>
 						</c:forEach>
 					</tbody>
@@ -296,12 +309,21 @@ int mysearch = 2;
 						</td>
 					</tr>
 				</table>
-				<div align="center" style="float: left;margin-bottom: 2%;" class="container col-md-12">
-					<div>
+				<div align="right" style="float: right;" class="container col-md-6">
+					<ul class="pagination pagination-sm">
 						<c:forEach begin="1" end="${(askedlists.size() / 10) +1 }" varStatus="i">
-							<a id="pagingnumcolor" href="#" onclick="getaskedlist(${i.index})">${i.index}</a>
+							<c:if test="${askedpagingNumber == i.index}">
+								<li class="pagingnumcolor">
+									<a href="#" id="askedlist[${i.index}]" class="aksed_selected" onclick="getaskedlist(${i.index})">${i.index}</a>
+								</li>&nbsp;
+							</c:if>
+							<c:if test="${askedpagingNumber != i.index}">
+								<li class="pagingnumcolor">
+									<a href="#" id="askedlist[${i.index}]" onclick="getaskedlist(${i.index})">${i.index}</a>
+								</li>&nbsp;
+							</c:if>
 						</c:forEach>
-					</div>
+					</ul>
 				</div>
 			</div>
 			<div id="menu2" class="container tab-pane fade" align="center">

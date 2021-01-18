@@ -324,7 +324,7 @@
 				</div>
 				<hr style="border: none;">
 				<div>
-					<c:if test="${requestScope.reguler==1}">
+					<c:if test="${requestScope.regular==1}">
 						<table>
 							<c:forEach var="product" items="${requestScope.productRLists}">
 								<tr>
@@ -342,7 +342,7 @@
 							</c:forEach>
 						</table>
 					</c:if>
-					<c:if test="${requestScope.reguler==-1}">
+					<c:if test="${requestScope.regular==-1}">
 						<table>
 							<c:forEach var="product" items="${requestScope.productLists}">
 								<tr style="border-bottom: 1px solid #000000;">

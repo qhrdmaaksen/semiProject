@@ -11,9 +11,8 @@ section{ padding: 50px; }
     font-weight: bold;
 }
 #cartlist_body{
-    background: #eecda3;
-    background: -webkit-linear-gradient(to bottom, #FAEBD7, #DEB887);
-    background: linear-gradient(to bottom, #FAEBD7, #DEB887);
+    background: -webkit-linear-gradient(to bottom, #F8ECE0, #F5D0A9);
+    background: linear-gradient(to bottom, #F8ECE0, #F5D0A9);
     min-height: 100vh;
 }
 #checker_div{
