@@ -113,7 +113,7 @@
 		      <div class="">
            		 <div class="mask">
             		<a href="<%=NoForm%>pdetail&productcode=${bean.productcode}&${requestScope.parameters}">		  	
-            		<img src="${applicationScope.uploadedPath}/${bean.images}"
+            		<img src="${pageContext.request.contextPath}/images/product/${bean.images}"
 										class="img-fluid w-100" width="200" height="300"
 										alt="${bean.images}" >
 		         	 </a> 
@@ -149,7 +149,7 @@
 									<input type="hidden" name="command" value="mallcartadd">
 									<input type="hidden" name="productcode" value="${bean.productcode}">
 									<input type="hidden" name="stock" value="${bean.stock}">
-									<input type="hidden" name="months" value="1">         
+									<input type="hidden" name="months" value="1">
 								<button type="submit" class="btn btn-outline-info btn-sm mr-1 mb-2" >정기 구매 신청하기</button>
 		       		  		</form>
 		       		 </div>

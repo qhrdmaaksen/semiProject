@@ -105,157 +105,82 @@ public class AddressDAO  extends SuperDAO {
 		}
 		return cnt ;
 }
-
-	public BbsPostVo SelctDataByPK(int no) {
-		// 해당 게시물 번호의 Bean 객체를 구합니다. 
-		BbsPostVo bean = null ;
-		
-		String sql = " select * from \"BBS_POST\" ";
-		sql+= " where \"NO\" = ?" ;
 	
-				
-				Connection conn = null ;
-		PreparedStatement pstmt = null ;
-		ResultSet rs = null ;
+	public AddressVo SelectDateByPK(String id) {
+		String sql = "select \"seq_add\", \"id\", \"shippingname\", \"name\", \"address1\", \"address2\", \"phone\" from ("
+				+ "select \"seq_add\", \"id\", \"shippingname\", \"name\", \"address1\", \"address2\", \"phone\", rank() over (order by \"seq_add\") ranking from ADDRESSES where \"id\"=? order by \"seq_add\""
+				+ ") where ranking in(1)";
 		
-		try {
-			conn = super.getConnection() ;
-			pstmt = conn.prepareStatement(sql) ;
+		conn = null ;
+        PreparedStatement pstmt = null ;
+        ResultSet rs = null ;
 
-			
-			pstmt.setInt(1, no);
-			
-			rs = pstmt.executeQuery() ;
-			
-			while(rs.next()) {
-				bean = new BbsPostVo() ;
-				
-				bean.setContent(rs.getString("content"));
-				bean.setId(rs.getString("id"));
-				bean.setLikenumber(rs.getInt("likenumber"));
-				bean.setNo(rs.getInt("no"));
-				bean.setPostdate(rs.getDate("postdate"));
-				bean.setTitle(rs.getString("title"));
-				bean.setImage(rs.getString("image"));		
-				
-			}
-			
-			System.out.println("ok");
-		} catch (Exception e) {
-			SQLException err = (SQLException)e ;			
-			e.printStackTrace();
-			try {
-				conn.rollback(); 
-			} catch (Exception e2) {
-				e2.printStackTrace();
-			}
-		} finally {
-			try {
-				if(rs != null) {rs.close();}
-				if(pstmt != null) {pstmt.close();}
-				if(conn != null) {conn.close();}
-			} catch (Exception e2) {
-				e2.printStackTrace();
-			}
-		}
-		
-		return bean  ;
-}
+        AddressVo address = new AddressVo();
+        try {
+            conn = super.getConnection() ;
+            pstmt = conn.prepareStatement(sql) ;
 
-	public int UpdateReadhit(int num) {
-		String sql = " update \"bbs_post\" set likenumber = likenumber + 1 ";
-		sql += " where no = ? ";    
-		Connection conn = null ;
-		PreparedStatement pstmt = null ;
-		int cnt = -999999 ;
+            pstmt.setString(1, id);
 
-		try {
-			conn = super.getConnection() ;
-			pstmt = conn.prepareStatement(sql) ;
-
-			pstmt.setInt(1, num);
-			
-			cnt = pstmt.executeUpdate() ; 
-			conn.commit(); 
-
-		} catch (Exception e) {
-			SQLException err = (SQLException)e ;			
-			cnt = - err.getErrorCode() ;			
-			e.printStackTrace();
-			try {
-				conn.rollback(); 
-			} catch (Exception e2) {
-				e2.printStackTrace();
-			}
-		} finally{
-			try {
-				if(pstmt != null){pstmt.close();}
-				if(conn != null){conn.close();}
-			} catch (Exception e2) {
-				e2.printStackTrace();
-			}
-		}
-		return cnt ;
-}
-
-	public int DeleteData(int no) {
-		String sql = " delete from \"BBS_POST\" where no = ? " ;
-		
-		PreparedStatement pstmt = null ;
-		int cnt = -99999 ;
-		try {
-			if( conn == null ){ super.conn = super.getConnection() ; }
-			conn.setAutoCommit( false );
-			pstmt = super.conn.prepareStatement(sql) ;
-			
-			pstmt.setInt(1, no);
-			
-			cnt = pstmt.executeUpdate() ; 
-			conn.commit(); 
-		} catch (Exception e) {
-			SQLException err = (SQLException)e ;			
-			cnt = - err.getErrorCode() ;			
-			e.printStackTrace();
-			try {
-				conn.rollback(); 
-			} catch (Exception e2) {
-				e2.printStackTrace();
-			}
-		} finally{
-			try {
-				if( pstmt != null ){ pstmt.close(); }
-				super.closeConnection(); 
-			} catch (Exception e2) {
-				e2.printStackTrace();
-			}
-		}
-		return cnt ;
+            rs = pstmt.executeQuery() ;
+            while( rs.next() ){
+            	address.setId(rs.getString("id"));
+            	address.setShippingname(rs.getString("shippingname"));
+            	address.setName(rs.getString("name"));
+            	address.setAddress1(rs.getString("address1"));
+            	address.setAddress2(rs.getString("address2"));
+            	address.setPhone(rs.getInt("phone"));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            try {
+                conn.rollback();
+            } catch (Exception e2) {
+                e2.printStackTrace();
+            }
+        } finally{
+            try {
+                if(rs != null){ rs.close(); }
+                if(pstmt != null){ pstmt.close(); }
+                if(conn != null){conn.close();}
+            } catch (Exception e2) {
+                e2.printStackTrace();
+            }
+        }
+        return address ;
 	}
 
 
-	public int UpdateData(BbsPostVo bean) {
-		// 해당 게시물을 수정합니다. 
-		String sql = " update \"BBS_POST\" set ";
-		sql += " \"content\" = ?, \"likenumber\" = ?, \"title\" = ?, \"id\" = ?, \"IMAGE\" = ?  ";
-		sql += " where no = ? ";
+
+
+
+	public List<AddressVo> selectAllAddress(String id) {
 		Connection conn = null ;
 		PreparedStatement pstmt = null ;
-		int cnt = -999999 ;
+		ResultSet rs = null ;
+		
+		int cnt = -99999;
+	      String sql = " select * from \"ADDRESSES\" where \"id\"=? ";
+		List<AddressVo> lists = new ArrayList<AddressVo>();
 
 		try {
 			conn = super.getConnection() ;
 			pstmt = conn.prepareStatement(sql) ;
-
-			pstmt.setString(1, bean.getContent());
-			pstmt.setInt(2, bean.getLikenumber());
-			pstmt.setString(3, bean.getTitle());
-			pstmt.setString(4, bean.getId());
-			pstmt.setString(5, bean.getImage());
-			pstmt.setInt(6, bean.getNo());
 			
-			cnt = pstmt.executeUpdate() ; 
-			conn.commit(); 
-
+			pstmt.setString(1, id);
+			
+			rs = pstmt.executeQuery() ;			
+			while( rs.next() ){
+				AddressVo bean = new AddressVo();
+				bean.setAddress1(rs.getString("address1"));
+				bean.setAddress2(rs.getString("address2"));
+				bean.setId(rs.getString("id"));
+				bean.setName(rs.getString("name"));
+				bean.setPhone(rs.getInt("phone"));
+				bean.setShippingname(rs.getString("shippingname"));
+				
+				lists.add( bean ) ;
+			}
 		} catch (Exception e) {
 			SQLException err = (SQLException)e ;			
 			cnt = - err.getErrorCode() ;			
@@ -267,16 +192,16 @@ public class AddressDAO  extends SuperDAO {
 			}
 		} finally{
 			try {
-				if(pstmt != null){pstmt.close();}
+				if(rs != null){ rs.close(); }
+				if(pstmt != null){ pstmt.close(); }
 				if(conn != null){conn.close();}
 			} catch (Exception e2) {
-				e2.printStackTrace();
+				e2.printStackTrace(); 
 			}
 		}
-		return cnt ;
+		
+		return lists ;
 }
-
-
 
 	public List<AddressVo> SelectDataList(String id, int beginRow, int endRow, String mode, String keyword) {
 		Connection conn = null ;
