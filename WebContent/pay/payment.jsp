@@ -200,13 +200,12 @@
 					<input type="hidden" name="productcode" value="${productRLists.get(0).getProductcode()}">
 					<input type="hidden" name="directbuy" value="${directbuy}">
 					<input type="hidden" name="months" value="${productRLists.get(0).getMonths()}">
-					<input type="hidden" name="reguler" value="1">
+					<input type="hidden" name="qty" value="-1">
 				</c:if>
 				<c:if test="${requestScope.reguler==-1}">
 					<input type="hidden" name="productcode" value="${productLists.get(0).getProductcode()}">
 					<input type="hidden" name="directbuy" value="${directbuy}">
 					<input type="hidden" name="qty" value="${productLists.get(0).getQty()}">
-					<input type="hidden" name="reguler" value="-1">
 				</c:if>
 				<div class="input-group mb-3">
 					<input type="text" name="shippingname" class="form-control" placeholder="배송지 이름" aria-label="배송지 이름" aria-describedby="basic-addon2">
