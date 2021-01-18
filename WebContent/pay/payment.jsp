@@ -74,7 +74,14 @@
 	        }).open();
 	    }
 		$(document).ready(function() {
-			
+			console.log("login check!");
+			console.log(${whologin});
+			if(${whologin==0}){
+				alert("로그인이 필요합니다");
+				return false;
+			}else {
+				console.log("로그인되어있음");
+			}
 			var productname = "${param.productname}";
 				console.log(productname);			
 			$("[name=addrlist]").click(function(e) {
@@ -126,6 +133,11 @@
 		#paymemberinfo th{ padding: 7px 10px 7px 15px;}
 		#deliverytable th{ padding: 7px 10px 7px 15px;}
 		a { text-decoration:none ;} 
+		.prdst{
+			text-shadow: 0 0 3px #FF0000;
+			font-weight: bold;
+			font: sans-serif 돋움;
+		}
 	</style>
 </head>
 <body>
@@ -200,20 +212,13 @@
 					<input type="hidden" name="productcode" value="${productRLists.get(0).getProductcode()}">
 					<input type="hidden" name="directbuy" value="${directbuy}">
 					<input type="hidden" name="months" value="${productRLists.get(0).getMonths()}">
-<<<<<<< HEAD
-					<input type="hidden" name="qty" value="-1">
-=======
 					<input type="hidden" name="regular" value="1">
->>>>>>> b1416b7e53193d56a4d8a29930c2d423a9c95d8e
 				</c:if>
 				<c:if test="${requestScope.regular==-1}">
 					<input type="hidden" name="productcode" value="${productLists.get(0).getProductcode()}">
 					<input type="hidden" name="directbuy" value="${directbuy}">
 					<input type="hidden" name="qty" value="${productLists.get(0).getQty()}">
-<<<<<<< HEAD
-=======
 					<input type="hidden" name="regular" value="-1">
->>>>>>> b1416b7e53193d56a4d8a29930c2d423a9c95d8e
 				</c:if>
 				<div class="input-group mb-3">
 					<input type="text" name="shippingname" class="form-control" placeholder="배송지 이름" aria-label="배송지 이름" aria-describedby="basic-addon2">
@@ -331,36 +336,36 @@
 				</div>
 				<hr style="border: none;">
 				<div>
-					<c:if test="${requestScope.reguler==1}">
+					<c:if test="${requestScope.regular==1}">
 						<table>
 							<c:forEach var="product" items="${requestScope.productRLists}">
 								<tr>
 									<td>
-									<img class="img-thumbnail" alt="prod-img" style="margin-top: 10px; margin-right: 0px;"
+									<img class="img-thumbnail" alt="prod-img" style="margin-top: 10px; margin-bottom: 10px;"
 										src="${pageContext.request.contextPath}/images/product/${product.images}" width="100" height="100">
 									</td>
-									<td>
-										<span style="padding-left:0px; font-size: 25px; color: blue;">${product.productname}</span>  
+									<td class="prdst">
+										<span style="padding-left:10px; font-size: 20px; margin-left: 1px; margin-right: 158px;rgb">${product.productname}</span>  
 									</td>
 									<td>
-										<span class="col-md-10" style="margin-bottom:10px; margin-left: 150px; font-size: 25px; color: red;">${product.months} 개월 정기구매</span>
+										<span style="font-size: 15px; color: red;">${product.months} 개월 정기구매</span>
 									</td>
 								</tr>
 							</c:forEach>
 						</table>
 					</c:if>
-					<c:if test="${requestScope.reguler==-1}">
+					<c:if test="${requestScope.regular==-1}">
 						<table>
 							<c:forEach var="product" items="${requestScope.productLists}">
 								<tr style="border-bottom: 1px solid #000000;">
 									<td>
-										<img class="img-thumbnail" alt="prod-img" style="margin-top: 10px; margin-right: 0px;" src="${pageContext.request.contextPath}/images/product/${product.images}" width="100" height="100">
+										<img class="img-thumbnail" alt="prod-img" style="margin-top: 10px; margin-bottom: 10px;" src="${pageContext.request.contextPath}/images/product/${product.images}" width="100" height="100">
 									</td>
-									<td id="product_lists">
-										<span style="padding-left: 0px; font-size: 25px; color: blue;">${product.productname}</span>
+									<td  class="prdst"  id="product_lists">
+										<span style="padding-left:10px; font-size: 20px; margin-left: 1px; margin-right: 158px;">${product.productname}</span>
 									</td>
 									<td id="product_lists2">
-										<span class="col-md-10" style="margin-bottom:10px; margin-left: 150px; font-size: 25px; color: red;">${product.qty} 개</span>
+										<span style="font-size: 15px; color: red;">${product.qty} 개</span>
 									</td>
 								</tr>
 							</c:forEach>
