@@ -1,8 +1,6 @@
 package product;
 
 import java.io.IOException;
-import java.util.List;
-import java.util.regex.Pattern;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -13,14 +11,9 @@ import com.oreilly.servlet.MultipartRequest;
 import DAO.ProductDAO;
 import VO.ProductVO;
 import common.SuperClass;
-import mypkg.bean.Product;
-import mypkg.dao.ProductDao;
-import mypkg.product.ProductListController;
-import utility.FlowParameters;
-import utility.Paging;
 
 public class PNewPController extends SuperClass{
-private Product bean = null ;
+	private ProductVO bean = null ;
 	
 	@Override
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -34,34 +27,35 @@ private Product bean = null ;
 		// request 영역에 있는 업로드을 위한 객체 multi 정보를 읽어 들입니다.
 		MultipartRequest multi = (MultipartRequest)request.getAttribute("multi") ;
 		
-		bean = new Product();
+		bean = new ProductVO();
 		
 		//상품 번호는 시퀀스이므로 구할 수 없다.
 		//int num = Integer.parseInt(multi.getParameter("num"));		
-		System.out.println( "[" + multi.getParameter("category") + "]" );
 		if( multi.getParameter("stock") != null && multi.getParameter("stock").equals("") == false  ){
 			bean.setStock( Integer.parseInt( multi.getParameter("stock") ));	
 		}
-		if( multi.getParameter("point") != null && multi.getParameter("point").equals("") == false ){
-			bean.setPoint( Integer.parseInt( multi.getParameter("point") ));	
-		}		
-		if( multi.getParameter("price") != null && multi.getParameter("price").equals("") == false ){
-			bean.setPrice( Integer.parseInt( multi.getParameter("price") ));	
+		if( multi.getParameter("productprice") != null && multi.getParameter("productprice").equals("") == false ){
+			bean.setProductprice( Integer.parseInt( multi.getParameter("productprice") ));	
 		}
-		bean.setCategory(multi.getParameter("category"));		
-		bean.setCompany(multi.getParameter("company"));
-		bean.setContents(multi.getParameter("contents"));
-		bean.setImage( multi.getFilesystemName("image") );
-		bean.setInputdate(multi.getParameter("inputdate"));
-		bean.setName(multi.getParameter("name"));
-		
+		bean.setBloodCirculation(Integer.parseInt(multi.getParameter("bloodcirculation")));
+		bean.setDigestiveapparatus(Integer.parseInt(multi.getParameter("digestiveapparatus")));
+		bean.setEyes(Integer.parseInt(multi.getParameter("eyes")));
+		bean.setFatigue(Integer.parseInt(multi.getParameter("fatigue")));
+		bean.setHair(Integer.parseInt(multi.getParameter("hair")));
+		bean.setImmunity(Integer.parseInt(multi.getParameter("immunity")));
+		bean.setJoint(Integer.parseInt(multi.getParameter("joint")));
+		bean.setProductcode(Integer.parseInt(multi.getParameter("productcode")));
+		bean.setProductname(multi.getParameter("productname"));
+		bean.setSkin(Integer.parseInt(multi.getParameter("skin")));
+		bean.setImages(multi.getParameter("images"));
+	
 		// 상품 번호는 시퀀스로 처리합니다.
 		// bean.setNum(num);		 
 		
 		String gotopage = "";
 		if ( this.validate( request ) == true ) {
 			//DAO 객체를 생성한다.
-			ProductDao pdao = new ProductDao();
+			ProductDAO pdao = new ProductDAO();
 			
 			int cnt = -99999 ; 
 			
@@ -69,7 +63,7 @@ private Product bean = null ;
 			cnt = pdao.InsertData(bean) ;
 			
 			// 목록 보기로 리다이렉션시킵니다.
-			new ProductListController().doGet(request, response);			
+			new PlistController().doGet(request, response);			
 		}else{
 			request.setAttribute("bean", bean);
 			
@@ -82,26 +76,12 @@ private Product bean = null ;
 	@Override
 	public boolean validate(HttpServletRequest request) {
 		boolean isCheck = true ; //기본 값으로 true이고, 유효성 검사에 문제가 생기면 false으로 변경
-		/*
-		if( bean.getName().length() < 3 || bean.getName().length() > 15 ){
-			request.setAttribute( super.PREFIX + "name", "상품 이름은 3자리 이상 15자리 이하이어야 합니다.");
-			isCheck = false  ;
-		}
 		
-		if( bean.getCompany().length() < 3 || bean.getCompany().length() > 30 ){
-			request.setAttribute( super.PREFIX + "company", "제조 회사 이름은 3자리 이상 30자리 이하이어야 합니다.");
+		if( bean.getProductname().length() < 3 || bean.getProductname().length() > 30 ){
+			request.setAttribute( super.PREFIX + "name", "상품 이름은 3자리 이상 30자리 이하이어야 합니다.");
 			isCheck = false  ;
 		}
-		String regex = "\\d{4}[-/]\\d{2}[-/]\\d{2}" ;
-		if( bean.getInputdate() == null){
-			bean.setInputdate( "" );
-		}
-		boolean result = Pattern.matches(regex, bean.getInputdate());
-		if (result == false ) {
-			request.setAttribute( super.PREFIX + "inputdate", "입고 일자는 yyyy/MM/dd 또는 yyyy-MM-dd 형식으로 입력해 주세요.");
-			isCheck = false  ;
-		}	
-		if( bean.getImage() == null || bean.getImage() == "" ){
+		if( bean.getImages() == null || bean.getImages() == "" ){
 			request.setAttribute( super.PREFIX + "image", "이미지는 필수 입력 사항입니다.");
 			isCheck = false  ;
 		}		
@@ -110,18 +90,45 @@ private Product bean = null ;
 			request.setAttribute( super.PREFIX + "stock", "재고 수량은 최소 " + stock + "개 이상입니다.");
 			isCheck = false  ;
 		}		
-		if( bean.getPoint() < 5 || bean.getPoint() > 10 ){
-			request.setAttribute( super.PREFIX + "point", "포인트는 최소 5 이상 10 이하로 입력 하셔야 합니다.");
+		
+		if( bean.getBloodCirculation() >= 0 ){
+			request.setAttribute( super.PREFIX + "image", "이미지는 필수 입력 사항입니다.");
 			isCheck = false  ;
-		}
-		if( bean.getContents().length() < 5 || bean.getContents().length() > 255 ){
-			request.setAttribute( super.PREFIX + "contents", "상품에 대한 설명은 5자리 이상 255자리 이하이어야 합니다.");
+		}		
+		if( bean.getDigestiveapparatus() >= 0 ){
+			request.setAttribute( super.PREFIX + "image", "이미지는 필수 입력 사항입니다.");
 			isCheck = false  ;
-		} 
-		if( bean.getCategory().equals("-") == true ){
-			request.setAttribute( super.PREFIX + "category", "상품 카테고리를 선택해 주셔야 합니다.");
+		}		
+		if( bean.getEyes() >= 0 ){
+			request.setAttribute( super.PREFIX + "image", "이미지는 필수 입력 사항입니다.");
 			isCheck = false  ;
-		} */
+		}		
+		if( bean.getFatigue() >= 0 ){
+			request.setAttribute( super.PREFIX + "image", "이미지는 필수 입력 사항입니다.");
+			isCheck = false  ;
+		}		
+		if( bean.getHair() >= 0  ){
+			request.setAttribute( super.PREFIX + "image", "이미지는 필수 입력 사항입니다.");
+			isCheck = false  ;
+		}		
+		if( bean.getImmunity() >= 0 ){
+			request.setAttribute( super.PREFIX + "image", "이미지는 필수 입력 사항입니다.");
+			isCheck = false  ;
+		}		
+		if( bean.getJoint() >= 0){
+			request.setAttribute( super.PREFIX + "image", "이미지는 필수 입력 사항입니다.");
+			isCheck = false  ;
+		}		
+		if( bean.getSkin() >= 0){
+			request.setAttribute( super.PREFIX + "image", "이미지는 필수 입력 사항입니다.");
+			isCheck = false  ;
+		}		
+		if( bean.getProductprice() >= 0 ){
+			request.setAttribute( super.PREFIX + "image", "이미지는 필수 입력 사항입니다.");
+			isCheck = false  ;
+		}		
+		
+		
 		return isCheck ;
 	}
 }
