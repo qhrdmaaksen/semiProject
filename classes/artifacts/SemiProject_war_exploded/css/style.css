@@ -1,4 +1,29 @@
 /*A B C D E F G H I J K L N M O P Q R S T U V W X Y Z*/
+dl, dt, dd, ul, ol, menu, li,th {list-style: none; margin: 0px; padding: 0px; font-weight: normal;}
+section{ padding: 50px; }
+#answer{
+    height: 120px;
+    margin-bottom: 30px;
+}
+#button-style{
+    height: 50px;
+    font-size: 20px;
+    font-weight: bold;
+}
+#cartlist_body{
+    background: #eecda3;
+    background: -webkit-linear-gradient(to bottom, #FAEBD7, #DEB887);
+    background: linear-gradient(to bottom, #FAEBD7, #DEB887);
+    min-height: 100vh;
+}
+#checker_div{
+    width: 100%;
+    height: 360px;
+    background-image: url("./../images/00.png");
+}
+#cmpSrv{
+    margin-bottom: 30px;
+}
 #footer{
     padding: 0px;
 }
@@ -59,6 +84,41 @@
     position: absolute;
     right: 35px;
 }
+#question-content{
+    font-size: 20px;
+    font-weight: bold;
+    margin: 20px 0px;
+}
+#question-no {
+    font-weight: bold;
+    font-size: 16px;
+    color: rgb(158, 158, 158);
+}
+#radio_ul{
+    height: 120px;
+}
+#survey-button{
+    margin-bottom: 100px;
+}
+#survey-question-content{
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 35px;
+}
+.answer1{
+    width: 100%;
+    height: 38px;
+    padding: 6px 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+    box-sizing: border-box;
+    margin-bottom: 5px;
+    font-size: 15px;
+    color: rgb(94, 94, 94);
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
 .card {
     margin-bottom: 20px;
 }
@@ -86,6 +146,7 @@
 .card-icon-img{
     width: 30px;
     height: 30px;
+    background-color: white;
 }
 .carousel-inner img {
     width: 100%;
@@ -98,6 +159,9 @@
 .coupons_tabs {
     border: 1px solid rgb(217,217,217);
     border-bottom: 2px solid rgb(61,130,247);
+}
+.red {
+    text: red;
 }
 .err{
     font-size : 10pt;
@@ -141,8 +205,54 @@
     height: 25px;
     margin-right: 0%;
 }
+.image-checker{
+    width: 160px;
+    height: 160px;
+    border-radius: 50%;
+    border: 2px solid #5a6268;
+    overflow: hidden;
+}
+.image-checker-ul{
+    width: 100%;
+    height: 160px;
+}
+.image-checkered{
+    width: 161px;
+    height: 161px;
+    float: left;
+    overflow: hidden;
+    border-radius: 50%;
+    margin-left: 22px;
+}
+.image-checkered:first-child{
+    margin-left: 0px;
+}
 .nav-item{
     float: right;
+}
+.product-button{
+    background-color: #9fcdff;
+    padding: 5px 13px;
+    font-size: 15px;
+}
+.progress{
+    height: 12px;
+}
+.point{
+    margin-top: 50px;
+}
+.radio_div{
+    float: left;
+    text-align: center;
+    padding-left: 13%;
+}
+.radio_div:first-child{
+    padding-left: 4%;
+}
+.radio_gender{
+    float: left;
+    text-align: center;
+    padding: 20px 0px 0px 30%;
 }
 .top4 {
     padding: 50px 200px;

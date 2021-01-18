@@ -196,16 +196,24 @@
 	      	<form method="post" action="<%=YesForm%>?command=paymentaddaddr">
 	      		<input type="hidden" name="id" value="${loginfo.id}">
 	      		<input type="hidden" name="phone" value="${loginfo.phone}">
-				<c:if test="${requestScope.reguler==1}">
+				<c:if test="${requestScope.regular==1}">
 					<input type="hidden" name="productcode" value="${productRLists.get(0).getProductcode()}">
 					<input type="hidden" name="directbuy" value="${directbuy}">
 					<input type="hidden" name="months" value="${productRLists.get(0).getMonths()}">
+<<<<<<< HEAD
 					<input type="hidden" name="qty" value="-1">
+=======
+					<input type="hidden" name="regular" value="1">
+>>>>>>> b1416b7e53193d56a4d8a29930c2d423a9c95d8e
 				</c:if>
-				<c:if test="${requestScope.reguler==-1}">
+				<c:if test="${requestScope.regular==-1}">
 					<input type="hidden" name="productcode" value="${productLists.get(0).getProductcode()}">
 					<input type="hidden" name="directbuy" value="${directbuy}">
 					<input type="hidden" name="qty" value="${productLists.get(0).getQty()}">
+<<<<<<< HEAD
+=======
+					<input type="hidden" name="regular" value="-1">
+>>>>>>> b1416b7e53193d56a4d8a29930c2d423a9c95d8e
 				</c:if>
 				<div class="input-group mb-3">
 					<input type="text" name="shippingname" class="form-control" placeholder="배송지 이름" aria-label="배송지 이름" aria-describedby="basic-addon2">
@@ -514,7 +522,7 @@
         var merchant_uid = today.getFullYear() + "" + today.getMonth() + "" + today.getDate() + "" + today.getHours() + "" + today.getMinutes() + "" + today.getSeconds();
         var list = new Array();
         
-        if(${reguler==-1}){
+        if(${regular==-1}){
         	for(var i=0 ; i<${totalcount} ; i++){
         		<%!int num1=0;%>
         		var product = new Object();
