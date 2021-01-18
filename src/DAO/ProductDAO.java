@@ -522,16 +522,17 @@ public class ProductDAO extends SuperDAO{
 			System.out.println( this.getClass() + " : 상품을 등록합니다." ); 
 			String sql = " insert into products(\"productcode\", \"productname\" , \"productprice\", \"stock\" , \"eyes\" , \"bloodcirculation\", \"digestiveapparatus\", \"skin\", \"fatigue\" , \"joint\" , \"hair\" , \"immunity\" , \"images\") " ;
 			sql += " values(productCode.nextval, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? ) " ;
+			System.out.println("sql : " + sql);
 			
 			Connection conn = null ;
 			PreparedStatement pstmt = null ;
-			
 			int cnt = -999999 ;
 			try {
 				conn = super.getConnection() ;
-				conn.setAutoCommit( false );
+				//conn.setAutoCommit( false );
 				pstmt = conn.prepareStatement(sql) ;
 				
+				//System.out.println("bean.getStock() : " + bean.getStock());
 				pstmt.setString(1, bean.getProductname());
 				pstmt.setInt(2, bean.getProductprice());
 				pstmt.setInt(3, bean.getStock());
