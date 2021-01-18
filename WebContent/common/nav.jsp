@@ -63,10 +63,7 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 	<%--아이콘 지정 따로 해주면 삭제해도됨--%>
-	<script src='https://kit.fontawesome.com/a076d05399.js'></script>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
-	<link rel="stylesheet" href="./../css/style.css?after" type="text/css">
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css?after" type="text/css">
 </head>
 <body>
 	<nav id="nav" class="navbar navbar-expand-sm bg-warning navbar-dark">

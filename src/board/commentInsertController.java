@@ -46,7 +46,6 @@ public class commentInsertController extends SuperClass {
 		//bean.setNo(no); //�������� �ʿ� ����
 		
 		bean.setComment(request.getParameter("comment"));
-		bean.setCommentdate(request.getParameter("commentdate"));
 		bean.setId(request.getParameter("id"));
 		
 		
@@ -57,7 +56,7 @@ public class commentInsertController extends SuperClass {
 		if ( this.validate( request ) == false ) {			
 			request.setAttribute("bean", bean);
 			super.doPost(request, response);
-			String url = "/customer/bbs.jsp";
+			String url = "/customer/commentinsert.jsp";
 			super.GotoPage( url );
 //			super.GotoPage(this.getClass().toString(), "boInsertForm");
 		}else{
@@ -78,11 +77,6 @@ public class commentInsertController extends SuperClass {
 			final String PREFIX = "err" ;
 			boolean isCheck = true ; //기본 값으로 true이고, 유효성 검사에 문제가 생기면 false으로 변경
 	
-			if( bean.getComment().length() < 5 ||bean.getComment().length() > 30 ){
-				request.setAttribute( PREFIX + "content", "글 내용은 5자리 이상 30자리 이하이어야 합니다.");
-				isCheck = false  ;
-			}
-	 		
 			return isCheck ;
 	}
 	

@@ -56,7 +56,7 @@ public class CouponDAO extends SuperDAO{
         String sql = "SELECT * FROM (SELECT \"no\", \"name\", \"kind\", \"discount\", \"exp\", RANK() OVER(ORDER BY \"no\" DESC) AS rank FROM coupons WHERE \"id\" IN(?) AND \"use\" = ? ) WHERE rank BETWEEN ? AND ? ";
 
         List<CouponVO> lists = new ArrayList<CouponVO>();
-
+        System.out.println("id : "+id+",used : "+used+",beginRow : "+beginRow+ ",endRow : "+endRow);
         try {
             conn = super.getConnection() ;
             pstmt = conn.prepareStatement(sql) ;

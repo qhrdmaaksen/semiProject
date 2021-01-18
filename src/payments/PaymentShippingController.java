@@ -15,7 +15,6 @@ public class PaymentShippingController extends SuperClass{
 	@Override
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		AddressVo bean  = new AddressVo();
-		//bean.setNo(no); //�������� �ʿ� ����
 		bean.setAddress1(request.getParameter("sample4_roadAddress"));
 		bean.setAddress2(request.getParameter("sample4_jibunAddress"));
 		bean.setId(request.getParameter("id"));
@@ -25,7 +24,6 @@ public class PaymentShippingController extends SuperClass{
 		
 		AddressDAO bdao = new AddressDAO();			
 		int cnt = -99999 ; 			
-		//Bean ��ü�� �̿��Ͽ� �ش� �Խù��� �߰��Ѵ�.
 		cnt = bdao.InsertData(bean) ;
 		
 		new Addresscontroller().doGet(request, response);

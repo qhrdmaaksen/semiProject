@@ -16,6 +16,7 @@
 </script>
 </head>
 <body>
+<<<<<<< HEAD
 			<div class="container col-md-offset-<%=offset%> col-md-<%=content%>">
 				<form role="form" name="myform" action="<%=YesForm%>" method="get">
 					<input type="hidden" name="command" value="address">
@@ -48,9 +49,43 @@
 							</div>
 						</div>
 					</form>
+=======
+<div class="container col-md-offset-<%=offset%> col-md-<%=content%>">
+		<div class="panel panel-primary">
+			<div class="panel-heading">
+				<h3 class="panel-title">${sessionScope.loginfo.name} 님의 이전 주문 내역</h3>
+			</div>
+			<div class="panel-body">
+				<div class="table-responsive">
+					<table class="table table-condensed">
+						<thead>
+							<tr>
+								<th class="text-center">수령인</th>
+								<th class="text-center">전화번호</th>
+								<th class="text-center">배달지</th>
+							</tr>
+						</thead>
+						<tbody>
+							<c:forEach items="${requestScope.lists}" var="bean">
+								<tr class="record">
+									<td align="center">${bean.name}</td>
+									<td align="center">${bean.phone}</td>
+									<td align="center">${bean.address1}</td>
+								</tr>
+							</c:forEach>
+						</tbody>
+					</table>
+>>>>>>> 90c401e851b608dd304bd7bde66cc3a66760e2c2
 				</div>
 			</div>
 		</div>
 	</div>
+<<<<<<< HEAD
+=======
+	
+		<button class="btn btn-default btn-info" type="button"
+								onclick="writeForm();"> 배송지 추가하기 </button>
+
+>>>>>>> 90c401e851b608dd304bd7bde66cc3a66760e2c2
 </body>
 </html>

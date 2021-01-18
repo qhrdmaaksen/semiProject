@@ -46,10 +46,12 @@ public class MallDetailController extends common.SuperClass{
 			
 			request.setAttribute( "order", order ); //주문 정보			
 			
+			System.out.println(order);
+			OrderdetailVO odetail = mdao.SelectDataByPk(order.getOrdernumber());
 			
+			request.setAttribute( "odetail", odetail ); // 디테일 오더 
 			
-			
-			List<ProductVO> lists = pdao.SelectDataList(order.getOrdernumber());
+			List<ProductVO> lists = pdao.SelectDataList(odetail.getProductcode());
 					
 			request.setAttribute( "lists", lists ); //쇼핑 정보
 			
@@ -64,9 +66,7 @@ public class MallDetailController extends common.SuperClass{
 			}
 			
 			
-			OrderdetailVO odetail = mdao.SelectDataByPk(order.getOrdernumber());
 			
-			request.setAttribute( "odetail", odetail ); // 디테일 오더 
 			
 			System.out.println(lists);
 			

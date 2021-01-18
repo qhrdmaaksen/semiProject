@@ -13,6 +13,7 @@ import VO.AddressVo;
 import VO.BbsPostVo;
 import VO.MemberVO;
 import common.SuperClass;
+import payments.CouponSelectController;
 import utility.FlowParameters;
 import utility.Paging;
 
@@ -82,15 +83,14 @@ public class Addresscontroller extends SuperClass {
 		
 		//상세 보기, 수정 , 삭제, 답글 등의 링크에 사용될 parameter list 문자열 
 		request.setAttribute("parameters",parameters.toString());
-
 		String gotopage = "";
 		if (request.getParameter("paymentshipping") == null) {
 			gotopage = "member/address.jsp";
+			super.GotoPage(gotopage);
 		} else {
-			gotopage = "/pay/payment.jsp";
+			new CouponSelectController().doProcess(request, response);
+//			gotopage = "/pay/payment.jsp"; 
 		}
-		System.out.println("gotopage : "+gotopage);
-		super.GotoPage(gotopage);
 	}
 	
 	@Override

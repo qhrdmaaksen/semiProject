@@ -34,6 +34,7 @@ bbsdetailview=board.BoardDetailViewController
 boDelete=board.BoardDeleteController
 boUpdate=board.BoardUpdateController
 comment=board.commentInsertController
+like=board.BoardlikeController
 #### Product Section #################################
 preview_delete=product.PreviewDeleteController
 preview=product.PreviewController
@@ -44,10 +45,14 @@ pdelete=product.PdeleteController
 pcategorylist=product.PcategorylistController
 #### Mall Section ######################################################
 mallcartadd=Mall.MallCartAddController
+mallcartmodify=Mall.MallCartModifyController
 mallcartlist=Mall.MallCartListController
 mallcartdelete=Mall.MallCartDeleteItemController
 mallhistory=Mall.MallHistoryController
+mallhistoryregular=Mall.MallHistoryRegularController
+mallDetailregular=Mall.MallRegularDetailController
 mallDetail=Mall.MallDetailController
 #### Payment Section ###############################
 payment=member.Addresscontroller
 paymentaddaddr=payments.PaymentShippingController
+paymentcoupon=payments.CouponSelectController

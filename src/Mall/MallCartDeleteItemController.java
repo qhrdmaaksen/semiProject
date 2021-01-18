@@ -14,27 +14,27 @@ public class MallCartDeleteItemController extends SuperClass{
 	@Override
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		super.doGet(request, response);
-		
-		String gotopage = "" ;
-		
-		if (super.session.getAttribute("loginfo") == null) {			
-			gotopage = "member/login.jsp";
-			super.GotoPage(gotopage);
+
+			MyCartList mycart = (MyCartList)super.session.getAttribute("mycart") ;
+			MyCartList Rmycart = (MyCartList)super.session.getAttribute("Rmycart") ;
 			
-		} else {
-			MyCartList mycart = (MyCartList)session.getAttribute("mycart") ;
-			if ( mycart == null ) {
-				mycart = new MyCartList() ;
+			if (request.getParameter("qty") == null) {
+				int productcode = Integer.parseInt(request.getParameter("productcode")) ;
+				System.out.println(request.getParameter("months") + "/" + productcode);
+				Rmycart.DeleteROrder(productcode);
+				super.session.setAttribute("Rmycart", Rmycart);
+				//super.session.setAttribute("mycart", mycart);
+			} 
+			if (request.getParameter("months") == null){
+				int productcode = Integer.parseInt(request.getParameter("productcode")) ;
+				System.out.println(request.getParameter("qty"));
+				mycart.DeleteOrder(productcode); 
+				super.session.setAttribute("mycart", mycart);
+				//super.session.setAttribute("Rmycart", Rmycart);
 			}
 			
-			int productcode = Integer.parseInt(request.getParameter("productcode")) ;			
-			
-			mycart.DeleteOrder(productcode); 
-			session.setAttribute("mycart", mycart); 
 			new MallCartListController().doGet(request, response); 
-		}
 	}
-
 }
 
 

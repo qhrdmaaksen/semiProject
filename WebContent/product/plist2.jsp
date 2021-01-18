@@ -19,67 +19,110 @@
 	  min-height: 100vh;
 	}
 	section{
-	padding: 50px;
+	padding-left: 130px;
+	padding-right: 50px;
 	}
-
+	
 </style>
 
 	<script type="text/javascript">
 		function writeForm(){
 			location.href='<%=NoForm%>prInsert';
 		}
-		function search(){
-			if( $('#mode').val() == 'all' ){
-				alert('검색 목록을 선택해주세요') ;				
-			}
-		}
-		function searchAll(){
-			location.href='<%=NoForm%>plist';
-		}
-	
+
 	</script>
-
-
+	<script>
+		$(document).ready(function(){
+		  $('[data-toggle="tooltip"]').tooltip();   
+		});
+	</script>
+	
 </head>
-<body>
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<body >
 
 
+<div class="w3-sidebar w3-bar-block w3-yellow w3-xxlarge" style="width:70px; align-content: center;">
 
+	
+	<div class="container">
+ 		<a href="<%=NoForm%>pcategorylist&mode=eyes&${requestScope.parameters}"> 
+					<img src="${pageContext.request.contextPath}/images/icon/icon_eyes.png" style="width: 42px;">
+						</a>
+		</div>	
+	<div class="container">
+ 		<a href="<%=NoForm%>pcategorylist&mode=bloodcirculation&${requestScope.parameters}"> 
+					<img src="${pageContext.request.contextPath}/images/icon/icon_bloodcirculation.png" style="width: 42px;">
+						</a>
+		</div>	
+	<div class="container">						 
+		 <a href="<%=NoForm%>pcategorylist&mode=digestiveapparatus&${requestScope.parameters}"> 
+					<img src="${pageContext.request.contextPath}/images/icon/icon_digestiveapparatus.png" style="width: 42px;">
+						</a> 
+		</div>	
+	<div class="container">												
+ 		<a href="<%=NoForm%>pcategorylist&mode=skin&${requestScope.parameters}"> 
+					<img src="${pageContext.request.contextPath}/images/icon/icon_skin.png" style="width: 42px;">
+						</a>
+		</div>	
+	<div class="container">						
+ 		<a href="<%=NoForm%>pcategorylist&mode=fatigue&${requestScope.parameters}"> 
+					<img src="${pageContext.request.contextPath}/images/icon/icon_fatigue.png" style="width: 42px;">
+						</a>
+		</div>	
+	<div class="container">						 				
+ 		<a href="<%=NoForm%>pcategorylist&mode=joint&${requestScope.parameters}"> 
+					<img src="${pageContext.request.contextPath}/images/icon/icon_joint.png" style="width: 42px;">
+						</a>
+		</div>	
+	<div class="container">								
+ 		<a href="<%=NoForm%>pcategorylist&mode=hair&${requestScope.parameters}"> 
+					<img src="${pageContext.request.contextPath}/images/icon/icon_hair.png" style="width: 42px;">
+						</a> 
+		</div>	
+	<div class="container">														
+ 		<a href="<%=NoForm%>pcategorylist&mode=immunity&${requestScope.parameters}"> 
+					<img src="${pageContext.request.contextPath}/images/icon/icon_immunity.png" style="width: 42px;">
+						</a> 
+		</div>		
+	<c:if test="${whologin == 2}">
+		<div class="container" style="margin-top:20px;">														
+	 		<a href="<%=NoForm%>pcategorylist&mode=immunity&${requestScope.parameters}"> 
+						<img src="${pageContext.request.contextPath}/images/icon/icon_barcode.png" style="width: 42px;">
+							</a> 
+			</div>	
+	</c:if>																								
+  </div>	
 
 
   <div class="container text-#8B4513 py-5 text-center">
   	<h3>Product List</h3>
   </div>
 
-<div>
 
 <!--Section: Block Content-->
 <section>
-
+<div>
   <!-- Grid row -->
   <div class="row">
 		<c:forEach var="bean" items="${requestScope.lists}">
 		    <!-- Grid column -->
 		    <div class="col-md-3 mb-3">
-		 
 		      <!-- Card -->
 		      <div class="">
-		
-		          <a href="#!">
-		            <div class="mask">
-		            <img src="${applicationScope.uploadedPath}/${bean.images}"
-												class="img-fluid w-100" width="200" height="300"
-												alt="${bean.images}">
-		            
-		              <div class="mask rgba-black-slight"></div>
-		            </div>
-		          </a>
-		
+		        <!-- <a href="#!"> -->
+           		 <div class="mask">
+            		<a href="<%=NoForm%>pdetail&productcode=${bean.productcode}&${requestScope.parameters}">		  	
+            		<img src="${applicationScope.uploadedPath}/${bean.images}"
+										class="img-fluid w-100" width="200" height="300"
+										alt="${bean.images}" >
+		         	 </a> 
+		          </div> 
 		        <div class="text-center pt-3">
-		
 		          <h5>${bean.productname}</h5>
-		          <p class="mb-2 text-muted text-uppercase small">Shirts</p>
-		
 		          <hr>
 		          <h6 class="mb-3">
 		            <span class="text-danger mr-1">
@@ -99,117 +142,55 @@
 								</div>
 								<button type="submit" class="btn btn-primary btn-sm mr-1 mb-2">Add to cart</button>
 							</form>
-					<form class="form-inline" role="form" name="myform" action="<%=YesForm%>" method="post">
-					
-						<input type="hidden" name="command" value="pdetail">
+							
+							<form class="form-inline" role="form" name="myform" action="<%=YesForm%>" method="post">
+							 	<div class="form-group">
+									<input type="hidden" name="command" value="mallcartadd">
+									<input type="hidden" name="productcode" value="${bean.productcode}">
+									<input type="hidden" name="stock" value="${bean.stock}">
+									<input type="hidden" name="months" value="1">         
+								</div>
+								<button type="submit" class="btn btn-primary btn-sm mr-1 mb-2">Add to Rcart</button>
+		       		  		</form>
+							
+					<%-- <form class="form-inline" role="form" name="myform" action="<%=YesForm%>" method="post">
+					  <input type="hidden" name="command" value="pdetail">
 						<a href="<%=NoForm%>pdetail&productcode=${bean.productcode}&${requestScope.parameters}">
 							<button type="button" class="btn btn-light btn-sm mr-1 mb-2">
 							<i class="fas fa-info-circle pr-2"></i>Details</button> 		
-								</a>
-		         </form>
+						</a>
+		       		  </form> --%>
 		        </div>
 		      </div>
-		      <!-- Card -->
-		    </div>
-		    <!-- Grid column -->
-		</c:forEach>	
+		    <!-- Card -->
+		   </div>
+		  <!-- Grid column -->
+	</c:forEach>	
 </div>
 
-
-
-<br><br><br>
-
-
-
-<table>
-	<tr>
-		<td colspan="12" align="center">
-			<form class="form-inline" role="form" name="myform" action="<%=YesForm%>" method="get">
+	<table>
+		<tr>
+			<td colspan="12" align="center">
+				<form class="form-inline" role="form" name="myform" action="<%=YesForm%>" method="get">
 				<input type="hidden" name="command" value="plist">
-				<div class="form-group">
-					<select class="form-control" name="mode" id="mode">
-						<option value="all" selected="selected">-- 선택하세요---------
-						<option value="productname">상품명
-						<!-- <option value="company">제조회사									
-						<option value="category">카테고리				 -->					
-					</select>
-				</div>
-				<div class="form-group">
-					<input type="text" class="form-control btn-xs" name="keyword"
-						id="keyword" placeholder="검색 키워드">
-				</div>
-				
-					<button class="btn btn-default btn-warning" type="submit" onclick="search();">검색</button>
-					<button class="btn btn-default btn-warning" type="button" onclick="searchAll();">전체 검색</button>
-		</td>
-	</tr>
-	<tr>
-		<td>
-			<div class="container">
-			  <form action="/action_page.php">
-			
-			      <label class="form-check-label" for="radio1">
-			        <input type="radio" class="form-check-input" id="radio1" name="optradio" value="option1" checked>눈
-			      </label>
-			 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-			
-			      <label class="form-check-label" for="radio2">
-			        <input type="radio" class="form-check-input" id="radio2" name="optradio" value="option2">혈액순환
-			      </label>
-			   
-			 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-			       <label class="form-check-label" for="radio3">
-			        <input type="radio" class="form-check-input" id="radio3" name="optradio" value="option3">소화기관
-			      </label>
-			     
-			 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-			       <label class="form-check-label" for="radio4">
-			        <input type="radio" class="form-check-input" id="radio4" name="optradio" value="option4">피부
-			      </label>
-			      
-			 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-			       <label class="form-check-label" for="radio5">
-			        <input type="radio" class="form-check-input" id="radio5" name="optradio" value="option5">피로
-			      </label>
-			      
-			 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-			       <label class="form-check-label" for="radio6">
-			        <input type="radio" class="form-check-input" id="radio6" name="optradio" value="option6">관절
-			      </label>
-			      
-			 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-			       <label class="form-check-label" for="radio7">
-			        <input type="radio" class="form-check-input" id="radio7" name="optradio" value="option7">머릿결,손톱
-			      </label>
-			      
-			 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-			       <label class="form-check-label" for="radio8">
-			        <input type="radio" class="form-check-input" id="radio8" name="optradio" value="option8">면역
-			      </label>
-			   
-			    <button type="submit" class="btn btn-primary">Submit</button>
-			  </form>
-			</div>			
-					
-							
-				<c:if test="${whologin == 2}">
-					<button class="btn btn-default btn-info" type="button"
-						onclick="writeForm();">상품 등록</button>
-				</c:if>
-				<%-- 				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-					<p class="form-control-static">${requestScope.pagingStatus}</p> --%>
-			</form>
-		</td>
-	</tr>				
-</table>	
-		<br><br>
+					<div class="form-group">
+						<input type="text" class="form-control btn-xs" name="keyword"
+							id="keyword" placeholder="검색 키워드">
+					</div>
+				<button class="btn btn-default btn-warning" type="submit" onclick="search();">검색</button>
+				<p class="form-control-static">${requestScope.pagingStatus}</p>
+				</form>
+			</td>
+		</tr>
+		<tr>
+			<td>
 					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 				<div align="center">
-			<footer>${requestScope.pagingHtml}</footer>
-		</div>		
-	</div>		
-</section>	
-
+					<footer>${requestScope.pagingHtml}</footer>
+				</div>		
+			</td>	
+		</tr>				
+	</table>	
 
 <br><br>
 	<script type="text/javascript">
