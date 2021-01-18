@@ -260,14 +260,14 @@
 				<hr>
 		
 				
-
 				<div class="col-sm-offset-5 col-sm-4">
 					<a href="<%=NoForm%>like&no=${bean.no}&${requestScope.parameters}">
 					<button class="btn btn-primary" >
 						게시물 좋아요</button>
 					</a>
 				</div>
-									
+				
+				
 				
 				
 				<br><br><br>
