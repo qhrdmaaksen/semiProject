@@ -111,10 +111,15 @@
                             <button class="btn btn-default" type="submit">로그인</button>
                         </div>
                     </div>
+                    </form>
+                    
                     <div class="container-fluid">
                         <div class="row" >
                             <div class="col-sm-3" >
-                                <button class="button button4">회원가입</button>
+                                <button class="button button4">
+                                <a href="<%=NoForm%>newmember">
+                                회원가입</a>
+                                </button>
                             </div>
                             <div class="col-sm-3"> </div>
                             <div class="col-sm-3" >
@@ -126,8 +131,6 @@
                         </div>
                     </div>
                 </div>
-            </form>
         </div>
-    </div>
 </body>
 </html>

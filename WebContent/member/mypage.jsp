@@ -123,9 +123,9 @@
                 <div class="nav_boxes">
                     <ul class="nav_boxes_list">
                         <li class="nav_boxes_list_f">MY 쇼핑</li>
-                        <li class="nav_boxes_list_c"><a href="<%=NoForm%>mallhistory">주문목록/배송조회</li>
+                        <li class="nav_boxes_list_c"><a href="<%=NoForm%>mallhistory">주문목록/배송조회</a></li>
                         <li class="nav_boxes_list_c">교환/반품 내역</li>
-                        <li class="nav_boxes_list_c"><a href="<%=NoForm%>mallhistoryregular">정기배송 내역</li>
+                        <li class="nav_boxes_list_c"><a href="<%=NoForm%>mallhistoryregular">정기배송 내역</a></li>
                     </ul>
                 </div>
                 <div class="nav_boxes">
