@@ -49,7 +49,7 @@ public class MallCartListController extends SuperClass{
 				Map<Integer, Integer> Rmaplists = Rmycart.GetAllROrderLists() ;
 				Set<Integer> Rkeylist = Rmaplists.keySet() ;
 				List<RegulerShoppingInfo> Rshoplists = new ArrayList<RegulerShoppingInfo>();
-				
+				int totalAmount = 0 ;
 				int RtotalAmount = 0 ; // 총 정기 상품 판매 금액
 				
 				for(Integer productcode : Rkeylist){ // productcode : 상품 번호
@@ -57,11 +57,9 @@ public class MallCartListController extends SuperClass{
 					
 					ProductDAO pdao = new ProductDAO();
 					
-					// 상품 번호 productcode에 대한 Bean 정보
 					ProductVO bean = pdao.SelectDataByPk(productcode) ;
 					
 					int productprice = bean.getProductprice() ;
-					
 					RtotalAmount += months * productprice ;
 													
 					RegulerShoppingInfo Rshopinfo = new RegulerShoppingInfo() ;
@@ -69,7 +67,6 @@ public class MallCartListController extends SuperClass{
 					Rshopinfo.setImages(bean.getImages());
 					Rshopinfo.setProductname(bean.getProductname()); 
 					Rshopinfo.setProductcode(productcode);
-					//shopinfo.setPoint(point);
 					Rshopinfo.setProductprice(productprice); 
 					Rshopinfo.setMonths(months);  
 					
@@ -86,7 +83,7 @@ public class MallCartListController extends SuperClass{
 				List<ShoppingInfo> shoplists = new ArrayList<ShoppingInfo>();
 
 				int totalAmount = 0 ; // 총 판매 금액
-				
+				int RtotalAmount = 0 ;
 				for(Integer productcode : keylist){ // productcode : 상품 번호
 					Integer qty = maplists.get(productcode) ; // 구매 수량
 					
@@ -96,7 +93,6 @@ public class MallCartListController extends SuperClass{
 					ProductVO bean = pdao.SelectDataByPk(productcode) ;
 					
 					int productprice = bean.getProductprice() ;
-					int point = bean.getProductprice();
 					
 					totalAmount += qty * productprice ;
 													
@@ -105,7 +101,6 @@ public class MallCartListController extends SuperClass{
 					shopinfo.setImages(bean.getImages());
 					shopinfo.setProductname(bean.getProductname()); 
 					shopinfo.setProductcode(productcode);
-					shopinfo.setPoint(point);
 					shopinfo.setProductprice(productprice); 
 					shopinfo.setQty(qty);  
 					
@@ -130,17 +125,17 @@ public class MallCartListController extends SuperClass{
 				
 				int totalAmount = 0 ; // 총 판매 금액
 				int RtotalAmount = 0 ; // 총 정기 상품 판매 금액
+				//int Rtotaldis = 0; // 할인된 금액
+				//int RDisAfter = 0; // 할인 후 총 금액
 				
 				for(Integer productcode : keylist){ // productcode : 상품 번호
 					Integer qty = maplists.get(productcode) ; // 구매 수량
 					
 					ProductDAO pdao = new ProductDAO();
 					
-					// 상품 번호 productcode에 대한 Bean 정보
 					ProductVO bean = pdao.SelectDataByPk(productcode) ;
 					
 					int productprice = bean.getProductprice() ;
-					int point = bean.getProductprice();
 					
 					totalAmount += qty * productprice ;
 													
@@ -149,7 +144,6 @@ public class MallCartListController extends SuperClass{
 					shopinfo.setImages(bean.getImages());
 					shopinfo.setProductname(bean.getProductname()); 
 					shopinfo.setProductcode(productcode);
-					shopinfo.setPoint(point);
 					shopinfo.setProductprice(productprice); 
 					shopinfo.setQty(qty);  
 					
@@ -161,19 +155,25 @@ public class MallCartListController extends SuperClass{
 					
 					ProductDAO pdao = new ProductDAO();
 					
-					// 상품 번호 productcode에 대한 Bean 정보
 					ProductVO bean = pdao.SelectDataByPk(productcode) ;
 					
 					int productprice = bean.getProductprice() ;
-					
 					RtotalAmount += months * productprice ;
-													
+					/*
+					 * System.out.println("나오나 : " + RtotalAmount); if (months >= 3) { RDisAfter =
+					 * (int)(RtotalAmount* 0.7) ; } if(months < 3){ RDisAfter = (int)(RtotalAmount*
+					 * 0.8) ; }
+					 * 
+					 * if (months >= 3) { Rtotaldis = (int)(RtotalAmount* (1-0.7)) ; } if(months <
+					 * 3){ Rtotaldis = (int)(RtotalAmount* (1-0.8)) ; }
+					 */
+					
+					//System.out.println("나오나 : " + Rtotaldis + "/" + RDisAfter);								
 					RegulerShoppingInfo Rshopinfo = new RegulerShoppingInfo() ;
 					
 					Rshopinfo.setImages(bean.getImages());
 					Rshopinfo.setProductname(bean.getProductname()); 
 					Rshopinfo.setProductcode(productcode);
-					//shopinfo.setPoint(point);
 					Rshopinfo.setProductprice(productprice); 
 					Rshopinfo.setMonths(months);  
 					
@@ -185,8 +185,11 @@ public class MallCartListController extends SuperClass{
 				super.session.setAttribute("Rshoplists", Rshoplists);
 				super.session.setAttribute("totalAmount", totalAmount);
 				super.session.setAttribute("RtotalAmount", RtotalAmount);
+				
+				
 			}
 		}
+		
 		String gotopage = "mall/cartlist.jsp" ;
 		super.GotoPage(gotopage);
 	}

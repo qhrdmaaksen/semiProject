@@ -41,6 +41,7 @@ preview=product.PreviewController
 pdetail=product.PdetailController
 previewupdate=product.PreviewUpdateController
 plist=product.PlistController
+pnewproduct=product.PNewPController
 pdelete=product.PdeleteController
 pcategorylist=product.PcategorylistController
 #### Mall Section ######################################################
