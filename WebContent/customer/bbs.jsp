@@ -35,7 +35,8 @@
 		location.href='<%=NoForm%>boList';
 	}
 </script>
-
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 
 </head>
@@ -47,14 +48,14 @@
 					<h2>게시물 목록</h2>
 				</form>
 			</div>
-			
+	 <div class="row">		
+	 
 		<c:forEach var="bean" items="${requestScope.lists}">	
-	<table class="table table-striped table-hover">
+		 <div class="col-md-4 mb-4">
 	<div class="container"> 
 	<div class="row">
- 	<div class="col-3"> 
  	<div class="card" style="width: 18rem;"> 
- 		<img src="${applicationScope.uploadedPath}/${bean.image}" class="card-img-top" alt="${bean.image}">
+ 		<img src="${applicationScope.uploadedPath}/${bean.image}" class="card-img-top" alt="${bean.image}" width="200" height="300">
  	<div class="card-body"> 
  		<h5 class="card-title">${bean.title}</h5> 
  		<p class="card-text">${bean.id}</p>
@@ -64,12 +65,14 @@
 			</a>
   	</div> 
   	</div>
-
-  </div> 
   </div>
+  </div>
+  	</div>
 	</c:forEach>
-	
-	
+</div>
+
+
+	<table>
 		<tr>
 			<td colspan="10" align="center">
 				<form class="form-inline" role="form" name="myform" action="<%=YesForm%>" method="get">
