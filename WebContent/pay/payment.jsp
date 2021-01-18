@@ -77,11 +77,11 @@
 			var monthVal = "${param.monthVal}";
 			
 			if(monthVal != ""){
-				$("#monthVal").text(monthVal + "개월 정기구매").css("font-weight", "bold");
+				$("#monthVal").text(monthVal + "개월 정기구매").css("font-weight", "bold").css("font-size","20px").css("color","red");
 			}
 			
-			
-			
+			var productname = "${param.productname}";
+				console.log(productname);			
 			$("[name=addrlist]").click(function(e) {
 				var selectaddr = $(this).text();
 				$("#addrtext").text($(this).text());
@@ -126,9 +126,6 @@
 				
 			});
 		});
-			/* var str = ${couponitem.name};
-			var search = str.indexOf("무료");
-				$("#shippingfee").value(0); */
 	</script>
 	<style type="text/css">
 		#payinfotable th{ font-weight: bold; padding: 7px 10px 7px 15px;}
@@ -331,8 +328,14 @@
 				<h3 align="center">결제 정보</h3>
 				<hr>
 			</div>
+		<form method="get" action="<%=YesForm%>" >
+			<input type="hidden" name="command" value="paymentval">	
 			<table id="payinfotable" style="margin: 8px 0px 0px; font:12px 돋움, Dotum, sans-serif;">
 				<tbody align="center">
+				<tr>
+					<th>상품명</th>
+						<td id="productname">${productname}</td>
+				</tr>
 				<tr align="center">
 					<th>총 상품가격</th>
 					<c:choose>
@@ -390,6 +393,7 @@
 				</tr>
 				</tbody>
 			</table>
+		</form>
 		</div>
 		<br><br><br>
 		<div style="margin: 0px 0px 10px; font:12px 돋움, Dotum, sans-serif;">
@@ -476,14 +480,14 @@
         
         if(ordertype==1){
         	var product = new Object();
-        	product.name = "홍길동 영양제";
-        	product.amount = 39900;
-        	product.qty = 1;
+        	product.name = ${param.productname}
+        	product.amount =  ${param.totalprice}
+        	product.qty = ${param.buyCount};
             list[0] = product;
         }else {
         	var product = new Object();
-        	product.name = "홍길동 영양제";
-        	product.amount = 39900;
+        	product.name = ${param.productname}
+        	product.amount = ${param.totalprice}
         	product.orderclosing = "2021-02-16";
             list[0] = product;
         }
@@ -499,7 +503,8 @@
 				return false;
 			};
 			if ($("#virtualaccount").is(":checked")==true){
-				$(location).attr("href","http://localhost:8989/SemiProject/pay/virtualaccount.jsp");
+				var total = parseInt($("#totalprice").text()); 
+				$(location).attr("href","http://localhost:8989/SemiProject/pay/virtualaccount.jsp?totalprice="+total);
 			};
         	console.log("결제 실행중");
         	var obj = document.getElementsByName("momentum");

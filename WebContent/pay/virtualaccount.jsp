@@ -10,7 +10,15 @@
 	 	function gotohome(){
 	 		$(location).attr("href","http://localhost:8989/SemiProject/dodamdodam?command=index");
 	 	}
+	 	function paypay(){
+	 		console.log("#paypay");
+	 	}
 	 </script>
+	<style>
+		ul {
+			list-style: none;
+		}
+	</style>
 </head>
 <body>
 	<div align="center" class="virtual-account-payment pay-type-content" data-controller="vaPayment" data-controller-data="{
@@ -44,9 +52,9 @@
             </div>
         </li>
         <li class="payBox-section  pay-type-section">
-            <span class="line-title">입금기한</span>
-
             <div class="line-data">
+            	<span id="paypay">총 결제 금액 : ${param.totalprice}원</span><br>
+	            <span class="line-title">입금기한 : </span>
                 <span class="depositDueTxt">2021년 01월 18일 08시 59분까지</span>
                 
             </div>
@@ -59,5 +67,6 @@
     	<button id="gohome" type="button" class="btn btn-primary" onclick="gotohome()">홈페이지로 돌아가기</button>
     </div>
 </div>
+<%@ include file="../common/footer.jsp" %>
 </body>
 </html>

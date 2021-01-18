@@ -227,7 +227,7 @@
 							class="text-left">
 							<tr style="height: 100%" align="center">
 								<td class="list-group-item" style="font-size: 12">상품명</td>
-								<td class="list-group-item" style="font-size: 12">${bean.productname}</td>
+								<td id="productname" class="list-group-item" style="font-size: 12">${bean.productname}</td>
 								
 								<td class="list-group-item">판매 가격</td>
 								<td class="list-group-item" id="productprice">
@@ -326,8 +326,15 @@
 			var command = '<input name="command" value="payment">';
 			$("#product-form").attr("method","get");
 			$("#product-form").append(command);
+			//$("#product-form").append("<input type='text' id='productname' name='productname' value='" + ${productname} + "'>");
 			$("#product-form").append("<input type='text' id='totalprice' name='totalprice' value='" + totalprice + "'>");
 			$("#product-form").append("<input type='text' name='paymentshipping' value='gotoshipping'>");
+			$("#product-form").append("<input type='text' name='directbuy' value='directbuy'>");
+			if ("input[name='directbuy']"==null) {
+				
+			} else {
+
+			}
 			if($("#delivery-select:checked").length == 0){
 				var buyCount = $("#buy-qty").val();
 				$("#product-form").append("<input type='text' name='buyCount' value='"+buyCount+"'>"); 
