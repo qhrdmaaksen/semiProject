@@ -78,8 +78,9 @@
 			var productname = "${param.productname}";
 				console.log(productname);			
 			$("[name=addrlist]").click(function(e) {
-				var selectaddr = $(this).text();
-				$("#addrtext").text($(this).text());
+				$("#addrshippname").text($(this).children('.shippingname').text());
+				$("#addrname").text($(this).children('.payee').text());
+				$("#addrtext").text($(this).children('.address1n2').text());
 				$("#exampleModal").modal('hide');
 			});
 			$("[name=couponselect]").click(function(e){
@@ -108,8 +109,6 @@
 						var total = parseInt("${totalprice}");
 						$("#shippingfee").text(0+"원");
 						$("#totalprice").text(total+"원");
-						
-						
 					}else {
 						var total = parseInt("${totalprice}"); // 정기구독 곱한 총가격
 						var discount = parseFloat($(this).data("discount")).toFixed(1); //할인율
@@ -177,8 +176,8 @@
 	         <div class="list-group">
 		         <c:forEach items="${addressList}" var="addr">
 					<button type="button" class="list-group-item list-group-item-action" aria-current="true" name="addrlist">
-						<span>${addr.address1}</span>
-						<span>${addr.address2}</span>
+						<span class="shippingname">${addr.shippingname}</span> / <span class="payee">${addr.name}</span>
+						<span class="address1n2">${addr.address1}</span>
 					</button>
 		         </c:forEach>
 			 </div>
@@ -196,10 +195,24 @@
 	      <div class="modal-body">
 	      	<form method="post" action="<%=YesForm%>?command=paymentaddaddr">
 	      		<input type="hidden" name="id" value="${loginfo.id}">
-	      		<input type="hidden" name="shippingname" value="${loginfo.name}">
-	      		<input type="hidden" name="name" value="${loginfo.name}">
 	      		<input type="hidden" name="phone" value="${loginfo.phone}">
-	      		<input type="hidden" name="paymentshipping" value="gotopayment">
+				<c:if test="${requestScope.reguler==1}">
+					<input type="hidden" name="productcode" value="${productRLists.get(0).getProductcode()}">
+					<input type="hidden" name="directbuy" value="${directbuy}">
+					<input type="hidden" name="months" value="${productRLists.get(0).getMonths()}">
+					<input type="hidden" name="qty" value="-1">
+				</c:if>
+				<c:if test="${requestScope.reguler==-1}">
+					<input type="hidden" name="productcode" value="${productLists.get(0).getProductcode()}">
+					<input type="hidden" name="directbuy" value="${directbuy}">
+					<input type="hidden" name="qty" value="${productLists.get(0).getQty()}">
+				</c:if>
+				<div class="input-group mb-3">
+					<input type="text" name="shippingname" class="form-control" placeholder="배송지 이름" aria-label="배송지 이름" aria-describedby="basic-addon2">
+				</div>
+				<div class="input-group mb-3">
+					<input type="text" name="name" class="form-control" placeholder="수취인" aria-label="수취인" aria-describedby="basic-addon2">
+				</div>
 		      	<div class="input-group mb-3">
 				  <input type="text" id="sample4_postcode" class="form-control" placeholder="우편번호" aria-label="우편번호" aria-describedby="basic-addon2">
 				  <button type="button" class="input-group-text" id="basic-addon2" onclick="sendaddshipping()">우편번호 찾기</button>
@@ -284,10 +297,12 @@
 				<table id="deliverytable" style="padding: 10px 0px 10px 16px; font: 12px 돋움, Dotum, sans-werif; white-space: nowrap; width: 100%;">
 					<tbody>
 						<tr align="center">
-							<th style="background: #f0f0f5; font-weight: bold;">수령인
-							</th>
-							<td align="center">${address.shippingname}
-							</td>
+							<th style="background: #f0f0f5; font-weight: bold;">배송지 이름</th>
+							<td align="center" id="addrshippname">${address.shippingname}</td>
+						</tr>
+						<tr align="center">
+							<th style="background: #f0f0f5; font-weight: bold;">수령인</th>
+							<td align="center" id="addrname">${address.name}</td>
 						</tr>
 						<tr align="center">
 							<th style="background: #f0f0f5; font-weight: bold;">배송주소</th>
@@ -312,12 +327,12 @@
 				<hr style="border: none;">
 				<div>
 					<c:if test="${requestScope.reguler==1}">
-						<c:forEach var="product" items="${requestScope.Rshoplists}">
+						<c:forEach var="product" items="${requestScope.productRLists}">
 							<span>${product.productname} // ${product.months}</span>
 						</c:forEach>
 					</c:if>
 					<c:if test="${requestScope.reguler==-1}">
-						<c:forEach var="product" items="${requestScope.lists}">
+						<c:forEach var="product" items="${requestScope.productLists}">
 							<span>${product.productname} // ${product.qty}</span>
 						</c:forEach>
 					</c:if>
@@ -481,9 +496,9 @@
         	for(var i=0 ; i<${totalcount} ; i++){
         		<%!int num1=0;%>
         		var product = new Object();
-        		product.name = "${lists.get(num1).getProductname()}";
-        		product.price = "${lists.get(num1).getProductprice()*0.8}";
-        		product.qty = "${lists.get(num1).getQty()}";
+        		product.name = "${productLists.get(num1).getProductname()}";
+        		product.price = "${productLists.get(num1).getProductprice()*0.8}";
+        		product.qty = "${productLists.get(num1).getQty()}";
         		list.push(product);
         		<%num1++;%>
         	}
@@ -491,13 +506,13 @@
         	for(var i=0 ; i<${totalcount} ; i++){
         		<%!int num2=0;%>
         		var product = new Object();
-        		product.name = "${Rshoplists.get(num2).getProductname()}";
-        		if(${Rshoplists.get(0).getMonths()>1}){
-        			product.price = "${Rshoplists.get(num2).getProductprice()*0.7}";
+        		product.name = "${productRLists.get(num2).getProductname()}";
+        		if(${productRLists.get(0).getMonths()>1}){
+        			product.price = "${productRLists.get(num2).getProductprice()*0.7}";
         		}else {
-        			product.price = "${Rshoplists.get(num2).getProductprice()*0.8}";
+        			product.price = "${productRLists.get(num2).getProductprice()*0.8}";
         		}
-        		product.months = "${Rshoplists.get(0).getMonths()}";
+        		product.months = "${productRLists.get(0).getMonths()}";
         		list.push(product);
         		<%num2++;%>
         	}

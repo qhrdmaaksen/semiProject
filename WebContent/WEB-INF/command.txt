@@ -54,7 +54,6 @@ mallhistoryregular=Mall.MallHistoryRegularController
 mallDetailregular=Mall.MallRegularDetailController
 mallDetail=Mall.MallDetailController
 #### Payment Section ###############################
-paymentval=payments.PaymentController
-payment=member.Addresscontroller
+payment=payments.PaymentController
 paymentaddaddr=payments.PaymentShippingController
 paymentcoupon=payments.CouponSelectController
