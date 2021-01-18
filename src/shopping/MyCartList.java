@@ -79,4 +79,17 @@ public class MyCartList {
 			System.out.println("여기 데이터 왔낭2");
 		}
 	}
+	
+	public void ModifyROrder(int productcode, int months) {
+		System.out.println("ModifyROrder productcode : " + productcode);
+		System.out.println("ModifyROrder months : " + months);
+		this.regulerlists.put(productcode, months) ;
+		System.out.println("여기 데이터 왔낭2");
+	}
+	
+	
+	
+	
+	
+	
 }
