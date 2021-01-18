@@ -61,11 +61,7 @@ public class MallCartAddController extends SuperClass{
 				}
 				
 				if (this.qty == 0) {
-					System.out.println("왜 또 갑자기?" + productcode + "/" + this.months);
-					//System.out.println(Rmycart.toString());
-					//System.out.println("qty : "+ this.qty);
-					//System.out.println("modths : " + this.months);
-					//System.out.println("productcode : "+productcode);
+					//System.out.println("왜 또 갑자기?" + productcode + "/" + this.months);
 					Rmycart.AddROrder(productcode, this.months); // 카트에 담기
 					super.session.setAttribute("Rmycart", Rmycart);
 				} else if (this.months == 0){
