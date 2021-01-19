@@ -52,6 +52,13 @@
     #star_grade a.on{
         color: red;
     }
+    .list-group-item{
+    	background-color: #FAEBD7;
+    }
+    .month_button:hover{
+    	color:white;
+    	cursor: pointer;	
+    }
 	</style>
 	<script type="text/javascript">
 		var totalprice = parseInt("${bean.productprice}");
@@ -193,6 +200,24 @@
 		 
 		    return num.format();
 		};
+		function monthaert1(){
+			alert(" 1 개월 정기 배송 선택 , 20% 할인");
+		}
+		function monthaert2(){
+			alert(" 2 개월 정기 배송 선택 , 30% 할인");
+		}
+		function monthaert3(){
+			alert(" 3 개월 정기 배송 선택 , 30% 할인");
+		}
+		function monthaert4(){
+			alert(" 4 개월 정기 배송 선택 , 30% 할인");
+		}
+		function monthaert5(){
+			alert(" 5 개월 정기 배송 선택 , 30% 할인");
+		}
+		function monthaert6(){
+			alert(" 6 개월 정기 배송 선택 , 30% 할인");
+		}
 	</script>
 </head>
 <body>
@@ -200,7 +225,7 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-md-4">
-				<h2 align="center">상품 이미지 상세보기</h2>
+				<h2 style="text-shadow: 0 0 3px #FF0000, 0 0 5px #0000FF;" align="center">상품 이미지 상세보기</h2>
 				<div id="myarea">
 					<img class="img-thumbnail" alt="prod-img"
 						src="${pageContext.request.contextPath}/images/product/${bean.images}" width="400" height="600"
@@ -220,69 +245,70 @@
 			</div>
 			<div class="col-md-2"></div>
 			<div class="col-md-6 text-center">
-				<h2>상품 가격 상세보기</h2>
+				<h2 style="text-shadow: 0 0 3px #FF0000, 0 0 5px #0000FF;">상품 가격 상세보기</h2>
 				<div class="text-center" style="height: 100%;">
 					<form id="product-form" action="<%=YesForm%>" method="post">
-						<table border="1" style="width: 100%; height: 100%;"
+						<table style="width: 100%; height: 100%;"
 							class="text-left">
 							<tr style="height: 100%" align="center">
-								<td class="list-group-item" style="font-size: 12">상품명</td>
-								<td id="productname" class="list-group-item" style="font-size: 12">${bean.productname}</td>
-								
-								<td class="list-group-item">판매 가격</td>
-								<td class="list-group-item" id="productprice">
-									<c:if test="${sessionScope.loginfo == null}">
-										<fmt:formatNumber value="${bean.productprice}" pattern="#,###"/>원
-									</c:if>
-									<c:if test="${sessionScope.loginfo != null}">
-										<fmt:formatNumber value="${bean.productprice*0.8}" pattern="#,###"/>원
-									</c:if>
-								</td>
-								
-								<td class="list-group-item">도착 예정일</td>
-								<td class="list-group-item">내일 토요일 12-19 도착 예정</td>
-								<td class="list-group-item" id="buy-qty2">구매 수량
-									<div class="col-sm-6">
-										<input id="buy-qty" type="number"
-											class="form-control mypopover" title="수량 입력란" value="1" min="1"
-											data-content="구매하고자 하는 수량을 정수로 입력하세요." >
-									</div>
-								</td>
-								<td class="list-group-item" align="center"><input id="delivery-select" type="checkbox"
+								<td>
+									<td class="list-group-item" style="font-size: 12;text-shadow: 0 0 3px #FF0000;font-weight: bold;font: sans-serif 돋움;">상품명</td>
+									<td id="productname" class="list-group-item" style="font-size: 12">${bean.productname}</td>
+									
+									<td style="text-shadow: 0 0 3px #FF0000;font-weight: bold;font: sans-serif 돋움;" class="list-group-item">판매 가격</td>
+									<td class="list-group-item" id="productprice">
+										<c:if test="${sessionScope.loginfo == null}">
+											<fmt:formatNumber value="${bean.productprice}" pattern="#,###"/>원
+										</c:if>
+										<c:if test="${sessionScope.loginfo != null}">
+											<fmt:formatNumber value="${bean.productprice*0.8}" pattern="#,###"/>원
+										</c:if>
+									</td>
+									
+									<td style="text-shadow: 0 0 3px #FF0000;font-weight: bold;font: sans-serif 돋움;" class="list-group-item">도착 예정일</td>
+									<td class="list-group-item">내일 토요일 12-19 도착 예정</td>
+									<td style="text-shadow: 0 0 3px #FF0000;font-weight: bold;font: sans-serif 돋움;" class="list-group-item" id="buy-qty2">구매 수량
+										<div class="col-sm-6">
+											<input id="buy-qty" type="number"
+												class="form-control mypopover" title="수량 입력란" value="1" min="1"
+												data-content="구매하고자 하는 수량을 정수로 입력하세요." >
+										</div>
+									</td>
+								<td style="text-shadow: 0 0 3px #FF0000;font-weight: bold;font: sans-serif 돋움;" class="list-group-item" align="center"><input id="delivery-select" type="checkbox"
 									name="delivery" value="정기 배송">&nbsp;&nbsp;정기 배송 선택
 									<div id="inHere" style="display: none;">
-										<table>
+										<table id="monthst">
 											<tr>
 												<td>
 													<label><input type="radio" name="reguler_month" value="1" style="display: none;">
-														<span id="month1" class="month_button">1개월 정기</span>
+														<span id="month1" class="month_button" onclick="monthaert1()">1개월 정기</span>
 													</label>
 												</td>
 												<td>
 													<label><input type="radio" name="reguler_month" value="2" style="display: none;">
-														<span id="month2" class="month_button">2개월 정기</span>
+														<span id="month2" class="month_button" onclick="monthaert2()">2개월 정기</span>
 													</label>
 												</td>
 												<td>
 													<label><input type="radio" name="reguler_month" value="3" style="display: none;">
-														<span id="month3" class="month_button">3개월 정기</span>
+														<span id="month3" class="month_button" onclick="monthaert3()">3개월 정기</span>
 													</label>
 												</td>
 											</tr>
 											<tr>
 												<td>
 													<label><input type="radio" name="reguler_month" value="4" style="display: none;">
-														<span id="month4" class="month_button">4개월 정기</span>
+														<span id="month4" class="month_button" onclick="monthaert4()">4개월 정기</span>
 													</label>
 												</td>
 												<td>
 													<label><input type="radio" name="reguler_month" value="5" style="display: none;">
-														<span id="month5" class="month_button">5개월 정기</span>
+														<span id="month5" class="month_button" onclick="monthaert5()">5개월 정기</span>
 													</label>
 												</td>
 												<td>
 													<label><input type="radio" name="reguler_month" value="6" style="display: none;">
-														<span id="month6" class="month_button">6개월 정기</span>
+														<span id="month6" class="month_button" onclick="monthaert6()">6개월 정기</span>
 													</label>
 												</td>
 											</tr>
@@ -321,6 +347,14 @@
 		};
 		
 		function goPay(){
+				console.log("login check!");
+				console.log(${whologin});
+				if(${whologin==0}){
+					alert("로그인이 필요합니다");
+					return false;
+				}else {
+					console.log("로그인되어있음");
+				}
 			var command = '<input name="command" value="payment">';
 			$("#product-form").append(command);
 			$("#product-form").append("<input type='hidden' id='productcode' name='productcode' value='" + ${bean.productcode} + "'>");
@@ -392,9 +426,9 @@
 			aria-labelledby="prod-review01">
 			<div class=" ">
 				<div class="panel panel-default panel-primary">
-					<div class="panel-heading">
+					<div class="panel-heading" style="float: right;">
 						<form class="form-inline" role="form">
-							<h3>리뷰 목록</h3>
+							<h3 style="text-shadow: 0 0 3px #FF0000, 0 0 5px #0000FF;fl">리뷰 목록</h3>
 						</form>
 					</div>
 					<table class="table table-striped table-hover">

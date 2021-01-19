@@ -107,7 +107,7 @@
                     } else {
                         var total = parseInt("${totalprice}").format();
                         var discount = parseFloat($(this).data("discount")).toFixed(1);
-                        if(${requestScope.totalprice<=50000}){
+                        if (${requestScope.totalprice<=50000}) {
                             $("#shippingfee").text("2,500원");
                         }
                         $("#totalprice").text((total - (total * discount) + 2500) + "원");
@@ -122,7 +122,7 @@
                     } else {
                         var total = parseInt("${totalprice}") // 정기구독 곱한 총가격
                         var discount = parseFloat($(this).data("discount")).toFixed(1); //할인율
-                        if(${requestScope.totalprice<=50000}){
+                        if (${requestScope.totalprice<=50000}) {
                             $("#shippingfee").text("2,500원");
                         }// 배송비
                         $("#totalprice").text(parseInt(total - (total * discount) + 2500).format() + "원"); // 총 결제 금액
@@ -324,17 +324,17 @@
         <div>
             <h3 style="padding: 0px 0px 0px 2px; margin: 30px 0px 8px; margin-left: 200px;">받는사람 정보
                 <span>
-						<button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal" id="shippingchange"
-                                class="btn btn-outline-primary btn-sm"
-                                style="margin: 0px 0px 0px 5px; padding: 4px 8px; font: 11px 돋움, Dotum, sans-serif;">
-								배송지 변경
-						</button>
-						<button type="button" data-bs-toggle="modal" data-bs-target="#addshipping"
-                                class="btn btn-outline-primary "
-                                style="margin: 0px 0px 0px 5px; padding: 4px 8px; font: 11px 돋움, Dotum, sans-serif;">
-								신규 배송지 추가
-						</button>
-					</span>
+                    <button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal" id="shippingchange"
+                            class="btn btn-outline-primary btn-sm"
+                            style="margin: 0px 0px 0px 5px; padding: 4px 8px; font: 11px 돋움, Dotum, sans-serif;">
+                            배송지 변경
+                    </button>
+                    <button type="button" data-bs-toggle="modal" data-bs-target="#addshipping"
+                            class="btn btn-outline-primary "
+                            style="margin: 0px 0px 0px 5px; padding: 4px 8px; font: 11px 돋움, Dotum, sans-serif;">
+                            신규 배송지 추가
+                    </button>
+                </span>
             </h3>
             <hr>
             <table id="deliverytable"
@@ -471,10 +471,14 @@
                     <th>총 결제금액</th>
                     <c:choose>
                         <c:when test="${requestScope.totalprice>50000}">
-                            <td id="totalprice"><fmt:formatNumber value="${requestScope.totalprice}" pattern="#,###"/>원</td>
+                            <td id="totalprice"><fmt:formatNumber value="${requestScope.totalprice}"
+                                                                  pattern="#,###"/>원
+                            </td>
                         </c:when>
                         <c:otherwise>
-                            <td id="totalprice"><fmt:formatNumber value="${requestScope.totalprice + 2500}" pattern="#,###"/>원</td>
+                            <td id="totalprice"><fmt:formatNumber value="${requestScope.totalprice + 2500}"
+                                                                  pattern="#,###"/>원
+                            </td>
                         </c:otherwise>
                     </c:choose>
                 </tr>
@@ -502,7 +506,6 @@
 				 this.nextSibling.style.display=(this.nextSibling.style.display=='none')?'block':'none';"
                href="javascript:void(0)" ;>[열기]</a>
             <div style="DISPLAY: none">
-
                 <div class="agreements__content " data-agreements-content=""
                      style="display: block;">
                     <table class="agreements__content__table">
@@ -606,7 +609,7 @@
         </c:forEach>
     }
     var p_name = null;
-    if (${productLists.size()>1}){
+    if (${productLists.size()>1}) {
         p_name = "${productLists.get(0).getProductname()} 외 ${(productLists.size()-1)}개";
     } else {
         p_name = "${productLists.get(0).getProductname()}";
@@ -666,7 +669,7 @@
                 }).done(function (data) {
                     // 가맹점 서버 결제 API 성공시 로직
                     alert("결제가 성공하였습니다.");
-                    location.href="<%=NoForm%>index";
+                    location.href = "<%=NoForm%>index";
                 })
             } else {
                 alert("결제에 실패하였습니다. 에러 내용: " + rsp.error_msg);
@@ -674,8 +677,9 @@
             }
         });
     }
-    Number.prototype.format = function(){
-        if(this==0) return 0;
+
+    Number.prototype.format = function () {
+        if (this == 0) return 0;
 
         var reg = /(^[+-]?\d+)(\d{3})/;
         var n = (this + '');
@@ -684,9 +688,9 @@
 
         return n;
     };
-    String.prototype.format = function(){
+    String.prototype.format = function () {
         var num = parseFloat(this);
-        if( isNaN(num) ) return "0";
+        if (isNaN(num)) return "0";
 
         return num.format();
     };
