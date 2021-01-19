@@ -10,6 +10,7 @@
         <element id="directory" name="lib">
           <element id="library" level="project" name="cos" />
           <element id="library" level="project" name="gson-2.8.5" />
+          <element id="library" level="project" name="commons-text-1.9" />
         </element>
       </element>
     </root>

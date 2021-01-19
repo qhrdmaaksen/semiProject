@@ -34,9 +34,4 @@ public class OrderdetailVO {
 		return "OrderdetailVO [ordernumber=" + ordernumber + ", productcode=" + productcode + ", qty=" + qty
 				+ ", amount=" + amount + "]";
 	}
-	
-	
-	
-	
-	
 }

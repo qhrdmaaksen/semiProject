@@ -8,9 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import DAO.AddressDAO;
-import DAO.BoardDAO;
-import VO.AddressVo;
-import VO.BbsPostVo;
+import VO.AddressVO;
 import VO.MemberVO;
 import common.SuperClass;
 import payments.CouponSelectController;
@@ -59,7 +57,7 @@ public class Addresscontroller extends SuperClass {
 		
 		System.out.println(id);
 		
-		List<AddressVo> lists = dao.SelectDataList(
+		List<AddressVO> lists = dao.SelectDataList(
 				id,
 				pageInfo.getBeginRow(),
 				pageInfo.getEndRow(),

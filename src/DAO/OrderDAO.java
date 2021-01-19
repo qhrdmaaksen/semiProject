@@ -1,7 +1,9 @@
 package DAO;
 
+import VO.OrderVO;
 import VO.ProductVO;
 
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
@@ -13,18 +15,12 @@ public class OrderDAO extends SuperDAO {
         PreparedStatement pstmt = null ;
         ResultSet rs = null ;
 
-        String sql = "SELECT * FROM ";
-        sql += "(SELECT \"productcode\", \"SUM\", DENSE_RANK() over (ORDER BY \"SUM\") AS \"RANK\" FROM ";
-        sql += "(SELECT \"productcode\", SUM(\"SUM\") AS SUM FROM( ";
-        sql += "SELECT \"productcode\",SUM(\"qty\") AS \"SUM\" FROM DETAIL_REGULAR_ORDER WHERE \"ordernumber\" IN ";
-        sql += "(SELECT \"ordernumber\" FROM REGULAR_ORDER WHERE \"orderdate\" BETWEEN ";
-        sql += "(SELECT TRUNC(TRUNC(SYSDATE, 'MM')-1, 'MM') FROM DUAL) AND (SELECT TRUNC(SYSDATE, 'MM')-1 FROM DUAL)) ";
-        sql += "GROUP BY \"productcode\" UNION ";
-        sql += "SELECT \"productcode\",SUM(\"qty\") AS \"SUM\" FROM DETAIL_ORDER WHERE \"ordernumber\" IN ";
-        sql += "(SELECT \"ordernumber\" FROM ORDERS WHERE \"orderdate\" BETWEEN ";
-        sql += "(SELECT TRUNC(TRUNC(SYSDATE, 'MM')-1, 'MM') FROM DUAL) AND (SELECT TRUNC(SYSDATE, 'MM')-1 FROM DUAL)) ";
-        sql += "GROUP BY \"productcode\") GROUP BY \"productcode\")) ";
-        sql += "WHERE RANK < 5";
+        String sql = "SELECT * FROM (" +
+                "SELECT \"productcode\", \"sum\", rank() over (order by \"sum\" desc) as \"ranking\" FROM (" +
+                "SELECT \"productcode\",SUM(\"qty\") AS \"sum\" FROM DETAIL_ORDER WHERE \"ordernumber\" IN (" +
+                "SELECT \"ordernumber\" FROM ORDERS WHERE \"orderdate\" BETWEEN (" +
+                "SELECT TRUNC(TRUNC(SYSDATE, 'MM')-1, 'MM') FROM DUAL) AND (" +
+                "SELECT TRUNC(SYSDATE, 'MM')-1 FROM DUAL))  GROUP BY \"productcode\")) WHERE \"ranking\" BETWEEN 1 AND 5";
 
         List<ProductVO> lists = new ArrayList<ProductVO>();
 
@@ -33,10 +29,10 @@ public class OrderDAO extends SuperDAO {
             pstmt = super.conn.prepareStatement(sql) ;
 
             rs = pstmt.executeQuery() ;
+            ProductDAO pdao = new ProductDAO();
             while (lists.size()<4){
                 rs.next();
-                System.out.println("productcode : " + rs.getInt("productcode"));
-                ProductVO product = SelectProduct(rs.getInt("productcode"));
+                ProductVO product = pdao.SelectDataByPk(rs.getInt("productcode"));
                 lists.add(product);
             }
         } catch (Exception e) {
@@ -58,37 +54,26 @@ public class OrderDAO extends SuperDAO {
         return lists ;
     }
 
-    public ProductVO SelectProduct(int productcode){
-        ProductVO product = new ProductVO();
-
-        String sql = "SELECT * FROM products WHERE \"productcode\" in(?)";
-
+    public void insertOrder(OrderVO order) {
+        String sql = "insert into ORDERS(\"ordernumber\", \"id\", \"seq_add\", \"paykind\", \"shippingstatus\", \"invoice\", \"orderdate\") values(?, ?, ?, ?, default, ?, ?)";
+        conn = null ;
         PreparedStatement pstmt = null ;
-        ResultSet rs = null ;
+        int cnt = -999999 ;
 
         try {
             conn = super.getConnection() ;
             pstmt = conn.prepareStatement(sql) ;
 
-            pstmt.setInt(1, productcode);
+            pstmt.setInt(1, order.getOrdernumber());
+            pstmt.setString(2, order.getId());
+            pstmt.setInt(3, order.getSeq_add());
+            pstmt.setInt(4, order.getPaykind());
+            pstmt.setString(5, order.getInvoice());
+            pstmt.setDate(6, new java.sql.Date(order.getOrderdate().getTime()));
 
-            rs = pstmt.executeQuery() ;
+            cnt = pstmt.executeUpdate() ;
+            conn.commit();
 
-            while(rs.next()) {
-                product.setProductcode(rs.getInt("productcode"));
-                product.setProductname(rs.getString("productname"));
-                product.setProductprice(rs.getInt("productprice"));
-                product.setStock(rs.getInt("stock"));
-                product.setEyes(rs.getInt("eyes"));
-                product.setBloodCirculation(rs.getInt("bloodcirculation"));
-                product.setDigestiveapparatus(rs.getInt("digestiveapparatus"));
-                product.setSkin(rs.getInt("skin"));
-                product.setFatigue(rs.getInt("fatigue"));
-                product.setJoint(rs.getInt("joint"));
-                product.setHair(rs.getInt("hair"));
-                product.setImmunity(rs.getInt("immunity"));
-                product.setImages(rs.getString("images"));
-            }
         } catch (Exception e) {
             e.printStackTrace();
             try {
@@ -96,16 +81,13 @@ public class OrderDAO extends SuperDAO {
             } catch (Exception e2) {
                 e2.printStackTrace();
             }
-        } finally {
+        } finally{
             try {
-                if(rs != null) {rs.close();}
-                if(pstmt != null) {pstmt.close();}
-                if(conn != null) {conn.close();}
+                if(pstmt != null){pstmt.close();}
+                if(conn != null){conn.close();}
             } catch (Exception e2) {
                 e2.printStackTrace();
             }
         }
-
-        return product  ;
     }
 }

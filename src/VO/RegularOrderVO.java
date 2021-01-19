@@ -7,7 +7,7 @@ public class RegularOrderVO {
 	private int ordernumber;//주문번호
 	private String id;
 	private int seq_add;
-	private int seq_pay;
+	private int paykind;
 	private int shippingstatus;//배송상태
 	private String invoice;//송장번호
 	private Date orderdate; //주문일
@@ -17,7 +17,7 @@ public class RegularOrderVO {
 
 	@Override
 	public String toString() {
-		return "OrderVO [ordernumber=" + ordernumber + ", id=" + id + ", seq_add=" + seq_add + ", seq_pay=" + seq_pay
+		return "OrderVO [ordernumber=" + ordernumber + ", id=" + id + ", seq_add=" + seq_add + ", paykind=" + paykind
 				+ ", shippingstatus=" + shippingstatus + ", invoice=" + invoice + ", orderdate=" + orderdate + "]";
 	}
 
@@ -45,12 +45,12 @@ public class RegularOrderVO {
 		this.seq_add = seq_add;
 	}
 
-	public int getSeq_pay() {
-		return seq_pay;
+	public int getPaykind() {
+		return paykind;
 	}
 
-	public void setSeq_pay(int seq_pay) {
-		this.seq_pay = seq_pay;
+	public void setPaykind(int paykind) {
+		this.paykind = paykind;
 	}
 
 

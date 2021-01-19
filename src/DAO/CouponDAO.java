@@ -1,6 +1,5 @@
 package DAO;
 
-import VO.AddressVo;
 import VO.CouponVO;
 
 import java.sql.Connection;

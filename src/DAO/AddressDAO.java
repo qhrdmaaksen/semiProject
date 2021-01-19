@@ -7,8 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import VO.AddressVo;
-import VO.BbsPostVo;
+import VO.AddressVO;
 
 
 public class AddressDAO  extends SuperDAO {
@@ -62,7 +61,7 @@ public class AddressDAO  extends SuperDAO {
 
 	
 
-	public int InsertData(AddressVo bean) {
+	public int InsertData(AddressVO bean) {
 		String sql = " insert into \"ADDRESSES\" (\"seq_add\", \"id\", \"shippingname\", \"name\", \"address1\", \"address2\", \"phone\" ) " ;
 		sql += " values(seq_BP_index.nextval,?,?,?,?,?,? ) " ;
 		Connection conn = null ;
@@ -79,7 +78,7 @@ public class AddressDAO  extends SuperDAO {
 			pstmt.setString(3, bean.getName());
 			pstmt.setString(4, bean.getAddress1());
 			pstmt.setString(5, bean.getAddress2());
-			pstmt.setInt(6, bean.getPhone());
+			pstmt.setString(6, bean.getPhone());
 			
 			
 			
@@ -106,7 +105,7 @@ public class AddressDAO  extends SuperDAO {
 		return cnt ;
 }
 	
-	public AddressVo SelectDateByPK(String id) {
+	public AddressVO SelectDateByPK(String id) {
 		String sql = "select \"seq_add\", \"id\", \"shippingname\", \"name\", \"address1\", \"address2\", \"phone\" from ("
 				+ "select \"seq_add\", \"id\", \"shippingname\", \"name\", \"address1\", \"address2\", \"phone\", rank() over (order by \"seq_add\" desc) ranking from ADDRESSES where \"id\"=? order by \"seq_add\""
 				+ ") where ranking in(1)";
@@ -115,7 +114,7 @@ public class AddressDAO  extends SuperDAO {
         PreparedStatement pstmt = null ;
         ResultSet rs = null ;
 
-        AddressVo address = new AddressVo();
+        AddressVO address = new AddressVO();
         try {
             conn = super.getConnection() ;
             pstmt = conn.prepareStatement(sql) ;
@@ -124,12 +123,13 @@ public class AddressDAO  extends SuperDAO {
 
             rs = pstmt.executeQuery() ;
             while( rs.next() ){
+            	address.setSeq_add(rs.getInt("seq_add"));
             	address.setId(rs.getString("id"));
             	address.setShippingname(rs.getString("shippingname"));
             	address.setName(rs.getString("name"));
             	address.setAddress1(rs.getString("address1"));
             	address.setAddress2(rs.getString("address2"));
-            	address.setPhone(rs.getInt("phone"));
+            	address.setPhone(rs.getString("phone"));
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -154,14 +154,14 @@ public class AddressDAO  extends SuperDAO {
 
 
 
-	public List<AddressVo> selectAllAddress(String id) {
+	public List<AddressVO> selectAllAddress(String id) {
 		Connection conn = null ;
 		PreparedStatement pstmt = null ;
 		ResultSet rs = null ;
 		
 		int cnt = -99999;
 	      String sql = " select * from \"ADDRESSES\" where \"id\"=? ";
-		List<AddressVo> lists = new ArrayList<AddressVo>();
+		List<AddressVO> lists = new ArrayList<AddressVO>();
 
 		try {
 			conn = super.getConnection() ;
@@ -171,12 +171,13 @@ public class AddressDAO  extends SuperDAO {
 			
 			rs = pstmt.executeQuery() ;			
 			while( rs.next() ){
-				AddressVo bean = new AddressVo();
+				AddressVO bean = new AddressVO();
+				bean.setSeq_add(rs.getInt("seq_add"));
 				bean.setAddress1(rs.getString("address1"));
 				bean.setAddress2(rs.getString("address2"));
 				bean.setId(rs.getString("id"));
 				bean.setName(rs.getString("name"));
-				bean.setPhone(rs.getInt("phone"));
+				bean.setPhone(rs.getString("phone"));
 				bean.setShippingname(rs.getString("shippingname"));
 				
 				lists.add( bean ) ;
@@ -203,7 +204,7 @@ public class AddressDAO  extends SuperDAO {
 		return lists ;
 }
 
-	public List<AddressVo> SelectDataList(String id, int beginRow, int endRow, String mode, String keyword) {
+	public List<AddressVO> SelectDataList(String id, int beginRow, int endRow, String mode, String keyword) {
 		Connection conn = null ;
 		PreparedStatement pstmt = null ;
 		ResultSet rs = null ;
@@ -220,7 +221,7 @@ public class AddressDAO  extends SuperDAO {
 			 * sql += " ) " ; sql += " where ranking between ?  and ?  " ;
 			 */
 	      
-		List<AddressVo> lists = new ArrayList<AddressVo>();
+		List<AddressVO> lists = new ArrayList<AddressVO>();
 
 		try {
 			conn = super.getConnection() ;
@@ -236,12 +237,12 @@ public class AddressDAO  extends SuperDAO {
 			
 			rs = pstmt.executeQuery() ;			
 			while( rs.next() ){
-				AddressVo bean = new AddressVo();
+				AddressVO bean = new AddressVO();
 				bean.setAddress1(rs.getString("address1"));
 				bean.setAddress2(rs.getString("address2"));
 				bean.setId(rs.getString("id"));
 				bean.setName(rs.getString("name"));
-				bean.setPhone(rs.getInt("phone"));
+				bean.setPhone(rs.getString("phone"));
 				bean.setSeq_add(rs.getInt("seq_add"));
 				bean.setShippingname(rs.getString("shippingname"));
 				

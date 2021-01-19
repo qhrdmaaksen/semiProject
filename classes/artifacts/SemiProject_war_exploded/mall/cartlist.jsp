@@ -16,6 +16,13 @@
             });
         })
     </script>
+    <style>
+        .nodiscount{
+            position: relative;
+            right: 71px;
+            bottom: 20px;
+        }
+    </style>
 </head>
 <body id="cartlist_body">
     <div class="px-4 px-lg-0">
@@ -83,7 +90,12 @@
                                                             </div>
                                                         </th>
                                                         <td class="border-0 align-middle">
-                                                            <strong>￦<fmt:formatNumber value="${shopinfo.productprice}" pattern="###,###"/></strong>
+                                                            <span class="text-danger mr-1 ">
+                                                                <strong>￦<fmt:formatNumber value="${shopinfo.productprice*0.8}" pattern="###,###"/></strong>
+                                                            </span>
+                                                            <span class="text-grey nodiscount"><s>
+                                                                ￦<fmt:formatNumber value="${shopinfo.productprice}" pattern="###,###"/>
+                                                            </s></span>
                                                         </td>
                                                         <td class="border-0 align-middle"><strong>${shopinfo.qty}</strong></td>
                                                         <td class="border-0 align-middle">
@@ -207,7 +219,19 @@
                                                             </div>
                                                         </th>
                                                         <td class="border-0 align-middle" id="productprice">
-                                                            <strong>￦<fmt:formatNumber value="${Rshopinfo.productprice}" pattern="###,###"/></strong>
+                                                            <c:if test="${Rshopinfo.months>1}">
+                                                                <span class="text-danger mr-1 ">
+                                                                    <strong>￦<fmt:formatNumber value="${Rshopinfo.productprice * 0.7}" pattern="###,###"/></strong>
+                                                                </span>
+                                                            </c:if>
+                                                            <c:if test="${Rshopinfo.months==1}">
+                                                                <span class="text-danger mr-1 ">
+                                                                    <strong>￦<fmt:formatNumber value="${Rshopinfo.productprice * 0.8}" pattern="###,###"/></strong>
+                                                                </span>
+                                                            </c:if>
+                                                            <span class="text-grey nodiscount"><s>
+                                                                ￦<fmt:formatNumber value="${Rshopinfo.productprice}" pattern="###,###"/>
+                                                            </s></span>
                                                         </td>
                                                         <td class="border-0 align-middle">
                                                             <div class="select-outline position-relative w-24">

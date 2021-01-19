@@ -9,12 +9,12 @@ import javax.servlet.http.HttpServletResponse;
 
 
 import DAO.AddressDAO;
-import VO.AddressVo;
+import VO.AddressVO;
 import common.SuperClass;
 
 public class Addaddresscontroller extends SuperClass {
 	
-	private AddressVo bean = null ;
+	private AddressVO bean = null ;
 	
 	
 	@Override
@@ -30,13 +30,13 @@ public class Addaddresscontroller extends SuperClass {
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {		
 	
-		bean  = new AddressVo();
+		bean  = new AddressVO();
 		//bean.setNo(no); //�������� �ʿ� ����
 		bean.setAddress1(request.getParameter("sample4_roadAddress"));
 		bean.setAddress2(request.getParameter("sample4_jibunAddress"));
 		bean.setId(request.getParameter("id"));
 		bean.setName(request.getParameter("name"));
-		bean.setPhone(Integer.parseInt(request.getParameter("phone")));
+		bean.setPhone(request.getParameter("phone"));
 		bean.setShippingname(request.getParameter("shippingname"));
 		
 		
