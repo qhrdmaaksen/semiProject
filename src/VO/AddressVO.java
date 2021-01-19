@@ -1,6 +1,6 @@
 package VO;
 
-public class AddressVo {
+public class AddressVO {
 
 	int seq_add ; 
 	String id ;
@@ -8,7 +8,7 @@ public class AddressVo {
 	String name;
 	String address1;
 	String address2;
-	int phone;
+	String phone;
 	
 	
 	public int getSeq_add() {
@@ -47,10 +47,10 @@ public class AddressVo {
 	public void setAddress2(String address2) {
 		this.address2 = address2;
 	}
-	public int getPhone() {
+	public String getPhone() {
 		return phone;
 	}
-	public void setPhone(int phone) {
+	public void setPhone(String phone) {
 		this.phone = phone;
 	}
 	@Override

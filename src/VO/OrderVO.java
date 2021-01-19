@@ -7,18 +7,25 @@ public class OrderVO {
 	private int ordernumber;//주문번호
 	private String id;
 	private int seq_add;
-	private int seq_pay;
+	private int paykind;
 	private int shippingstatus;//배송상태
 	private String invoice;//송장번호
-	private String orderdate; //주문일
+	private Date orderdate; //주문일
 	
 	public OrderVO() {
 	}
 
 	@Override
 	public String toString() {
-		return "OrderVO [ordernumber=" + ordernumber + ", id=" + id + ", seq_add=" + seq_add + ", seq_pay=" + seq_pay
-				+ ", shippingstatus=" + shippingstatus + ", invoice=" + invoice + ", orderdate=" + orderdate + "]";
+		return "OrderVO{" +
+				"ordernumber=" + ordernumber +
+				", id='" + id + '\'' +
+				", seq_add=" + seq_add +
+				", paykind=" + paykind +
+				", shippingstatus=" + shippingstatus +
+				", invoice='" + invoice + '\'' +
+				", orderdate=" + orderdate +
+				'}';
 	}
 
 	public int getOrdernumber() {
@@ -45,12 +52,12 @@ public class OrderVO {
 		this.seq_add = seq_add;
 	}
 
-	public int getSeq_pay() {
-		return seq_pay;
+	public int getPaykind() {
+		return paykind;
 	}
 
-	public void setSeq_pay(int seq_pay) {
-		this.seq_pay = seq_pay;
+	public void setPaykind(int paykind) {
+		this.paykind = paykind;
 	}
 
 
@@ -70,19 +77,11 @@ public class OrderVO {
 		this.invoice = invoice;
 	}
 
-	public String getOrderdate() {
+	public Date getOrderdate() {
 		return orderdate;
 	}
 
-	public void setOrderdate(String orderdate) {
+	public void setOrderdate(Date orderdate) {
 		this.orderdate = orderdate;
 	}
-	
-	
-	
-	
-	
-	
-	
-	
 }

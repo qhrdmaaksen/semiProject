@@ -38,5 +38,7 @@
     <orderEntry type="library" name="org.eclipse.jst.j2ee.internal.module.container" level="application" />
     <orderEntry type="library" name="cos" level="project" />
     <orderEntry type="library" name="gson-2.8.5" level="project" />
+    <orderEntry type="library" name="commons-text-1.9" level="project" />
+    <orderEntry type="library" name="json-20201115" level="project" />
   </component>
 </module>

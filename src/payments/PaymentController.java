@@ -14,7 +14,7 @@ import javax.servlet.http.HttpSession;
 import DAO.AddressDAO;
 import DAO.CouponDAO;
 import DAO.ProductDAO;
-import VO.AddressVo;
+import VO.AddressVO;
 import VO.MemberVO;
 import VO.ProductVO;
 import common.SuperClass;
@@ -157,7 +157,7 @@ public class PaymentController extends SuperClass{
 		}
 
 		AddressDAO addrdao = new AddressDAO();
-		AddressVo address = addrdao.SelectDateByPK(member.getId());
+		AddressVO address = addrdao.SelectDateByPK(member.getId());
 		request.setAttribute("address", address);
 		request.setAttribute("addressList", addrdao.selectAllAddress(member.getId()));
 		super.doPost(request, response);

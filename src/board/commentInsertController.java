@@ -28,7 +28,7 @@ public class commentInsertController extends SuperClass {
 		
 		request.setAttribute("seq_index", seq_index);
 		
-		String gotopage = "/customer/commentinsert.jsp";
+		String gotopage = "/customer/commentwrite.jsp";
 		super.GotoPage(gotopage);
 		
 	}
@@ -56,7 +56,7 @@ public class commentInsertController extends SuperClass {
 		if ( this.validate( request ) == false ) {			
 			request.setAttribute("bean", bean);
 			super.doPost(request, response);
-			String url = "/customer/commentinsert.jsp";
+			String url = "/customer/commentwrite.jsp";
 			super.GotoPage( url );
 //			super.GotoPage(this.getClass().toString(), "boInsertForm");
 		}else{

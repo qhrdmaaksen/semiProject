@@ -11,6 +11,25 @@
 <html>
 <head>
     <title>도담도담, 영양제 구독 사이트</title>
+    <style>
+        .carousel .carousel-item {
+            height: 550px;
+            background-color: #FFFFFF;
+        }
+        .carousel-item img {
+            position: absolute;
+            left:50%;
+            margin-left:-550px;
+            width: 1100px;
+            min-height: 550px;
+        }
+        .carousel-indicators li{
+            background-color: #ffc107;
+        }
+        .jumbotron{
+            background-color: #f8f9fa;
+        }
+    </style>
 </head>
 <body>
     <!-- 이 구역은 Carousel 영역 -->
@@ -24,24 +43,22 @@
         <!-- The slideshow -->
         <div class="carousel-inner">
             <div class="carousel-item active">
-                <img src="${pageContext.request.contextPath}/images/banner001.png" alt="test01" width="1100" height="500">
+                <img class="banner-image" src="${pageContext.request.contextPath}/images/banner001.png" alt="test01">
                 <div class="carousel-caption">
-                    <h3>테스트 이미지1</h3>
-                    <p>테스트중임</p>
+<%--                    <h3>테스트 이미지1</h3>--%>
+<%--                    <p>테스트중임</p>--%>
                 </div>
             </div>
             <div class="carousel-item">
-                <img src="https://www.w3schools.com/bootstrap4/chicago.jpg" alt="test02" width="1100" height="500">
+                <img class="banner-image" src="${pageContext.request.contextPath}/images/banner002.png" alt="test02">
                 <div class="carousel-caption">
-                    <h3>테스트 이미지2</h3>
-                    <p>테스트를 하고있음</p>
+<%--                    <h3>테스트 이미지2</h3>--%>
+<%--                    <p>테스트를 하고있음</p>--%>
                 </div>
             </div>
             <div class="carousel-item">
-                <img src="https://www.w3schools.com/bootstrap4/ny.jpg" alt="test03" width="1100" height="500">
+                <img class="banner-image" src="${pageContext.request.contextPath}/images/banner003.png" alt="test03">
                 <div class="carousel-caption">
-                    <h3>테스트 이미지3</h3>
-                    <p>토스트?</p>
                 </div>
             </div>
         </div>

@@ -160,9 +160,9 @@ public class MallDAO extends SuperDAO{
 				OrderVO bean = new OrderVO() ; 
 				bean.setId(rs.getString("id"));
 				bean.setInvoice(rs.getString("invoice"));
-				bean.setOrderdate(String.valueOf(rs.getString("orderdate")));
+				bean.setOrderdate(rs.getDate("orderdate"));
 				bean.setSeq_add(rs.getInt("seq_add"));
-				bean.setSeq_pay(rs.getInt("seq_pay"));
+				bean.setPaykind(rs.getInt("paykind"));
 				bean.setOrdernumber(rs.getInt("ordernumber"));
 				bean.setShippingstatus(rs.getInt("shippingstatus"));
 				
@@ -203,9 +203,9 @@ public class MallDAO extends SuperDAO{
 				bean = new OrderVO();								
 				bean.setId(rs.getString("id"));
 				bean.setInvoice(rs.getString("invoice"));
-				bean.setOrderdate(String.valueOf(rs.getString("orderdate")));
+				bean.setOrderdate(rs.getDate("orderdate"));
 				bean.setSeq_add(rs.getInt("seq_add"));
-				bean.setSeq_pay(rs.getInt("seq_pay"));
+				bean.setPaykind(rs.getInt("paykind"));
 				bean.setOrdernumber(rs.getInt("ordernumber"));
 				bean.setShippingstatus(rs.getInt("shippingstatus"));
 			}
@@ -284,7 +284,7 @@ public class MallDAO extends SuperDAO{
 				bean.setInvoice(rs.getString("invoice"));
 				bean.setOrderdate(rs.getDate("orderdate"));
 				bean.setSeq_add(rs.getInt("seq_add"));
-				bean.setSeq_pay(rs.getInt("seq_pay"));
+				bean.setPaykind(rs.getInt("paykind"));
 				bean.setOrdernumber(rs.getInt("ordernumber"));
 				bean.setShippingstatus(rs.getInt("shippingstatus"));
 				
@@ -367,7 +367,7 @@ public class MallDAO extends SuperDAO{
 				bean.setInvoice(rs.getString("invoice"));
 				bean.setOrderdate(rs.getDate("orderdate"));
 				bean.setSeq_add(rs.getInt("seq_add"));
-				bean.setSeq_pay(rs.getInt("seq_pay"));
+				bean.setPaykind(rs.getInt("paykind"));
 				bean.setOrdernumber(rs.getInt("ordernumber"));
 				bean.setShippingstatus(rs.getInt("shippingstatus"));
 			}

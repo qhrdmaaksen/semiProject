@@ -1,7 +1,6 @@
 #### Main Section ####################################
 index=common.IndexController
 survey=common.ServeyController
-payOk=common.test
 #### Member Section ##################################
 melogin=member.MemberLoginController
 melogout=member.MemberLogoutController
@@ -44,6 +43,7 @@ plist=product.PlistController
 pnewproduct=product.PNewPController
 pdelete=product.PdeleteController
 pcategorylist=product.PcategorylistController
+payprogress=product.PaymentProgressController
 #### Mall Section ######################################################
 mallcartadd=Mall.MallCartAddController
 mallcartmodify=Mall.MallCartModifyController
